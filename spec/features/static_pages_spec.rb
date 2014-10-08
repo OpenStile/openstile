@@ -1,24 +1,26 @@
 require 'rails_helper'
 
 describe "Static pages" do
+  subject { page }
+
   describe "Home page" do
-    it "should have content 'Explore Fashion Boutiques'" do
-      visit '/'
-      expect(page).to have_content('Explore Fashion Boutiques')
-    end
+    before {visit '/'}
+
+    it { should have_content('Explore Fashion Boutiques') }
+    it { should have_title('A Personalized way to Explore Local Fashion Boutiques | OpenStile') }
   end
 
-  describe "Our story page" do
-    it "should have content 'Our story'" do
-      visit '/our_story'
-      expect(page).to have_content('Our story')
-    end
+  describe "About page" do
+    before {visit '/about'}
+
+    it { should have_content('About us') }
+    it { should have_title('About | OpenStile') }
   end
 
   describe "Prelaunch page" do
-    it "should have content 'Sign up for when we launch'" do
-      visit '/prelaunch'
-      expect(page).to have_content('Sign up for when we launch')
-    end
+    before {visit '/prelaunch'}
+
+    it { should have_content('Sign up for when we launch') }
+    it { should have_title('Explore Washington DC Fashion Boutiques | OpenStile') }
   end
 end

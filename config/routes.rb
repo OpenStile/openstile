@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root  'static_pages#home'
 
-  get '/our_story'  =>  'static_pages#our_story'
+  get '/about'      =>  'static_pages#about'
   get '/prelaunch'  =>  'static_pages#prelaunch'
 
   # The priority is based upon order of creation: first created -> highest priority.
