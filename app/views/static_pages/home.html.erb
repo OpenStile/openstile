@@ -1,3 +1,40 @@
 <% provide(:title, 'A Personalized way to Explore Local Fashion Boutiques') %>
 
-<h1>A Personalized Way to Explore Fashion Boutiques</h1>
+<div class="top">
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="logo">
+            <h1><a href="#">OpenStile</a></h1>
+          </div>
+        </div>
+        <div class="navigation pull-right">
+          <%= link_to "Home", root_path %>
+          <%= link_to "About", about_path %>
+          <%= link_to "Blog", '#' %>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="hero inner-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="intro">
+            <h2>Welcome to OpenStile</h2><br />
+            <p>A Personalized Way to Explore Fashion Boutiques</p><br /> 
+            <%= link_to "Find your unique fit & fashion here!", prelaunch_path, class: "download"%><br />
+            <div class="applinks">
+              <a href="#"><i class="fa fa-android"></i></a>
+              <a href="#"><i class="fa fa-apple"></i></a>
+              <a href="#"><i class="fa fa-windows"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
