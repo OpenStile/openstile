@@ -162,7 +162,7 @@ hr{
 /* Header */
 
 header{
-	background-color:rgba(0,0,0,0.3);
+	background-color:rgba(0,0,0,1);
 	height:80px;
 	margin-bottom:15px;
 	border-bottom:1px solid #000;
@@ -223,6 +223,11 @@ header .navigation a:hover{
 	margin:0px auto;
 }
 
+.hero .intro {
+	background-color:rgba(0,0,0,0.75);
+  text-align: center;
+}
+
 .hero .intro h2{
 	color:#fff;
 	font-family: 'Open Sans', sans-serif;
@@ -235,8 +240,12 @@ header .navigation a:hover{
 }
 
 .hero .intro p{
-	color:#eee;
-	font-size:22px;
+	font-size:40px;
+	line-height:45px;
+	color:#fff;
+	font-family: 'Lobster Two', cursive;
+	margin-top:20px !important;
+	text-shadow:1px 1px 1px #777;
 }
 
 .hero .intro a.download{
