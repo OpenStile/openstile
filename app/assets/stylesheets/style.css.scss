@@ -946,7 +946,7 @@ header .navigation a:hover{
 /* Features */
 
 .features{
-	background:#eee url('../img/featureback1.png') repeat;
+	background:#eee asset_url('featureback1.png') repeat;
 	border-bottom:1px solid #ddd;
 }
 
@@ -993,6 +993,14 @@ header .navigation a:hover{
 	font-weight:normal;
 	font-style:italic;
 	font-family: 'Droid Serif', serif;
+}
+
+.features .service-item p{
+	color:#888 !important;
+	margin-top:10px;
+	font-size:14px;
+	line-height:24px;
+  text-align:center;
 }
 
 /* Features */
