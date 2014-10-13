@@ -154,6 +154,7 @@ hr{
 	background-size:cover;
 	background-position:center center;
 	border-bottom:1px solid #000;
+  min-height:350px;
 }
 
 .inner-page{
@@ -215,7 +216,6 @@ header .navigation a:hover{
 
 .hero{
 	padding-top:20px;
-	
 }
 
 .hero .inner-page{
@@ -231,6 +231,8 @@ header .navigation a:hover{
 .hero .intro {
 	background-color:rgba(0,0,0,0.75);
   text-align: center;
+	padding-top:20px;
+	padding-bottom:20px;
 }
 
 .hero .intro h2{
