@@ -134,6 +134,23 @@ hr{
   max-height: 999999px;
 }
 
+.page-title ul{
+  list-style:none;
+  max-height: 999999px;
+}
+
+.page-title li{
+	font-size:15px;
+	line-height:30px;
+	font-weight:normal;
+	color:#555;
+	font-family: 'Droid Serif', serif;
+	font-style:italic;
+	max-width:700px;
+	margin:0px auto;
+  max-height: 999999px;
+}
+
 /* block */
 
 .block{
@@ -248,7 +265,7 @@ header .navigation a:hover{
 }
 
 .hero .intro {
-	background-color:rgba(0,0,0,0.75);
+	background-color:rgba(0,0,0,0.6);
   text-align: center;
 	padding-top:20px;
 	padding-bottom:20px;
@@ -1021,6 +1038,15 @@ header .navigation a:hover{
 
 /* Features */
 
+/* Signup */
+
+.signup{
+	background:#eee asset_url('featureback1.png') repeat;
+	border-bottom:1px solid #ddd;
+}
+
+/* Signup */
+
 /* Shots */
 
 .shots hr{
@@ -1488,7 +1514,7 @@ div.ppt {
 
 footer{
 	padding-top:30px;
-	background:#000 url('../img/3.png') repeat;
+	background:#000;
 	color:#ccc;
 }
 

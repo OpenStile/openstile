@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="intro">
-            <h2>We're coming to Washington D.C.</h2>
+            <h2>We're coming to Washington D.C</h2>
           </div>
         </div>
       </div>
@@ -14,3 +14,38 @@
   </div>
 </div>
 
+<div class="signup block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title text-center">
+          <h3>Signup today for early access!</h3>
+          <div class="shopper_signup">
+            <p>Start discovering unique pieces that match your personal style.</p>
+            <a class="show_retailer_signup" href="#">Are you a local fashion retailer?</a>
+          </div>
+          <div class="retailer_signup">
+            <ul>
+              <li>Do you own a fashion boutique, fashion truck, or pop-up store in the D.C area?</li>
+              <li>Want to get out and sustain a buzz about your store?</li>
+              <li>Want a better way to bring in local shoppers?</li>
+            </ul>
+            <p style="font-weight:bold;">If yes, signup to be considered for OpenStile!</p>
+          </div>
+        </div>
+      </div>  
+    </div>  
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $(".shopper_signup").show();
+    $(".retailer_signup").hide();
+  });
+
+  $(".show_retailer_signup").click(function(){
+    $(".shopper_signup").hide();
+    $(".retailer_signup").show();
+  });
+</script>
