@@ -32,7 +32,7 @@ describe "Static pages" do
     before {visit '/prelaunch'}
 
     it_should_behave_like "static_page"
-    it { should have_content('Sign up for when we launch') }
+    it { should have_content("We're coming to Washington D.C") }
     it { should have_title('Explore Washington DC Fashion Boutiques | OpenStile') }
   end
 end

@@ -158,7 +158,7 @@ hr{
 	background-size:cover;
 	background-position:center center;
 	border-bottom:1px solid #000;
-  min-height:350px;
+  min-height:300px;
 }
 
 .prelaunch{
@@ -166,7 +166,15 @@ hr{
 	background-size:cover;
 	background-position:center center;
 	border-bottom:1px solid #000;
-  min-height:350px;
+  min-height:300px;
+}
+
+.prelaunch-small{
+	background:#555 asset_url('coming_to_dc.jpg') no-repeat;
+	background-size:cover;
+	background-position:center center;
+	border-bottom:1px solid #000;
+  min-height:175px;
 }
 
 .inner-page{
