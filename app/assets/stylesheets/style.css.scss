@@ -183,7 +183,8 @@ hr{
 	background-size:cover;
 	background-position:center center;
 	border-bottom:1px solid #000;
-  min-height:300px;
+  height:80vh;
+  max-height:600px;
 }
 
 .prelaunch-small{
@@ -271,6 +272,10 @@ header .navigation a:hover{
 	padding-bottom:20px;
 }
 
+.prelaunch .intro {
+  margin-top:10vh;
+}
+
 .hero .intro h2{
 	color:#fff;
 	font-family: 'Droid Serif', serif;
@@ -278,7 +283,21 @@ header .navigation a:hover{
 	font-weight:bold;
 	margin-top:20px !important;
 	margin-bottom:10px !important;
-	
+}
+
+.hero .intro a{
+  color:#fff;
+	font-size:15px;
+	font-weight:bold;
+}
+
+.hero .intro a:hover{
+	background:rgba(0,0,0,0.5);
+	-webkit-transition: background 1s ease;
+   -moz-transition: background 1s ease;
+   -o-transition: background 1s ease;
+   -ms-transition: background 1s ease;
+   transition: background 1s ease;
 }
 
 .hero .intro a.download{
@@ -343,6 +362,10 @@ header .navigation a:hover{
    -o-transition: background 1s ease;
    -ms-transition: background 1s ease;
    transition: background 1s ease;
+}
+
+.hero .intro #mc_embed_signup{
+  margin-bottom:20px;
 }
 
 /* Contact */
@@ -1043,10 +1066,6 @@ header .navigation a:hover{
 .signup{
 	background:#eee asset_url('featureback1.png') repeat;
 	border-bottom:1px solid #ddd;
-}
-
-.signup #mc_embed_signup{
-  margin-bottom:20px;
 }
 
 /* Signup */
