@@ -422,8 +422,9 @@ header .navigation a:hover{
 }
 
 .about-us .about-one-img{
-	width:130px;
+	width:300px;
 	float:left;
+  margin-right:20px;
 }
 
 .about-us .about-one-content{
@@ -438,10 +439,23 @@ header .navigation a:hover{
 }
 
 .about-us .about-one-item p{
-	margin:10px 20px 20px 20px !important;
+	margin:10px 20px 10px 20px !important;
 	font-size:15px;
 	line-height:26px;
 	color:#777;
+  max-height: 999999px;
+}
+
+.about-us .about-one-item ul{
+	margin:10px 20px 20px 20px !important;
+  max-height: 999999px;
+}
+
+.about-us .about-one-item li{
+	font-size:15px;
+	line-height:26px;
+	color:#777;
+  max-height: 999999px;
 }
 
 /* About Two */
