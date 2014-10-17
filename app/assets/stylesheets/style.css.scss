@@ -419,6 +419,7 @@ header .navigation a:hover{
 	background:#fff;
 	border:1px solid #e2e2e2;
 	padding:10px;
+  margin-bottom:30px;
 }
 
 .about-us .about-one-img{
@@ -461,46 +462,47 @@ header .navigation a:hover{
 /* About Two */
 
 .about-us .about-two{
-	padding:30px 30px 25px 30px;
-	margin-top:40px;
 	background:#fff;
 	border:1px solid #e2e2e2;
+	padding:10px;
+  margin-bottom:30px;
 }
 
-.about-us .about-two-item p span{
-	padding:0px 12px;
-	font-size:40px;
-	color:#fff;
-	margin-top:40px !important;
+.about-us .about-two-img{
+	width:200px;
+	float:right;
+  margin-left:20px;
 }
 
-.about-us .about-two-item p.bg-blue span{
-	background:#609cec;
+.about-us .about-two-content{
+	margin-left:110px;
 }
 
-.about-us .about-two-item p.bg-green span{
-	background:#51d466;
-}
-
-.about-us .about-two-item p.bg-purple span{
-	background:#cb79e6;
-}
-
-.about-us .about-two-item p.bg-lblue span{
-	background:#32c8de;
-}
-
-.about-us .about-two-item h5{
-	font-size:22px;
-	margin-bottom:10px !important;
-	margin-top:20px !important;
+.about-us .about-two-item h3{
+	font-size:30px;
+	color:#777;
 	font-weight:600;
-	color:#888;
+	margin:10px 20px 0px 20px !important;
 }
 
 .about-us .about-two-item p{
-	font-size:14px;
-	color:#888;
+	margin:10px 20px 10px 20px !important;
+	font-size:15px;
+	line-height:26px;
+	color:#777;
+  max-height: 999999px;
+}
+
+.about-us .about-two-item ul{
+	margin:10px 20px 20px 20px !important;
+  max-height: 999999px;
+}
+
+.about-us .about-two-item li{
+	font-size:15px;
+	line-height:26px;
+	color:#777;
+  max-height: 999999px;
 }
 
 
