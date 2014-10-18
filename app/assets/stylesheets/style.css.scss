@@ -174,7 +174,7 @@ hr{
 	background:#555 asset_url('hero_collage.jpg') no-repeat;
 	background-size:cover;
 	background-position:center center;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #fff;
   min-height:300px;
 }
 
@@ -182,14 +182,14 @@ hr{
 	background:#555 asset_url('hero_collage.jpg') no-repeat;
 	background-size:cover;
 	background-position:center center;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #fff;
 }
 
 .prelaunch{
 	background:#555 asset_url('coming_to_dc.jpg') no-repeat;
 	background-size:cover;
 	background-position:center center;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #fff;
   height:80vh;
   max-height:600px;
 }
@@ -201,9 +201,9 @@ hr{
 /* Header */
 
 header{
-	background-color:rgba(0,0,0,1);
+	background:#555 asset_url('footer.png') repeat;
 	height:80px;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #fff;
 }
 
 header .logo h1{
@@ -1543,7 +1543,7 @@ div.ppt {
 
 footer{
 	padding-top:30px;
-	background:#000;
+	background:#333 asset_url('footer.png') repeat;
 	color:#ccc;
 }
 
