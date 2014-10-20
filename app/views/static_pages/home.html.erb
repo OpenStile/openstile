@@ -7,7 +7,8 @@
         <div class="col-md-12">
           <div class="intro">
             <h2>A Personalized Way to Explore Fashion Boutiques.</h2><br /> 
-            <%= link_to "Find unique fit & fashion here!", "#", id: "go_to_signup", class: "download"%><br /><br />
+            <p>We're coming to Washington D.C</p>
+            <%= render "shopper_signup_form" %>
           </div>
         </div>
       </div>
@@ -153,10 +154,6 @@
   $(document).ready(function() {
     $(".shopper_signup").show();
     $(".retailer_signup").hide();
-  });
-
-  $("#go_to_signup").click(function(){
-    $('html, body').animate({scrollTop: $(".prelaunch").offset().top}, 2000);
   });
 
   $(".show_retailer_signup").click(function(){
