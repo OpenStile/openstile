@@ -24,7 +24,7 @@ describe "Static pages" do
     before {visit '/about'}
 
     it_should_behave_like "static_page"
-    it { should have_content('About us') }
+    it { should have_content('Our Story') }
     it { should have_title('About | OpenStile') }
   end
 
@@ -32,7 +32,7 @@ describe "Static pages" do
     before {visit '/retailer_info'}
 
     it_should_behave_like "static_page"
-    it { should have_content('OpenStile for Fashion Retailers') }
+    it { should have_content('Homegrown Fashion Retailers') }
     it { should have_title('Fashion Retailers Reach More Shoppers | OpenStile') }
   end
 end
