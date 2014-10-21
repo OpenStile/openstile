@@ -571,6 +571,29 @@ header .navigation a:hover{
 
 /* About US Ends */
 
+/* Retailer Info Starts */
+
+.retailer-info{
+	background:#eee asset_url('featureback1.png') repeat;
+	border-bottom:1px solid #ddd;
+}
+
+.retailer-info hr{
+	margin-top:0px;
+	margin-bottom:35px;
+}
+
+.retailer-info .retailer-info-content p{
+	font-size:20px;
+	line-height:28px;
+	font-weight:normal;
+	font-family: 'Droid Serif', serif;
+  margin-bottom:10px;
+  max-height: 999999px;
+}
+
+/* Retailer Info Ends */
+
 /* Blog Starts */
 
 /* Blog Item */
