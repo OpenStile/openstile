@@ -133,15 +133,11 @@
       <div class="row">
         <div class="col-md-12">
           <div class="intro">
-            <h2>Hey D.C. Stylistas.</h2>
+            <h2>Hey D.C Stylistas.</h2>
             <h2>We're coming to the Nation's Capital!</h2><br />
             <div class="shopper_signup">
               <%= render "shopper_signup_form" %>
-              <a class="show_retailer_signup" href="#">Are you a fashion retailer?<br />
-              Want to cut through to local shoppers?</a>
-            </div>
-            <div class="retailer_signup">
-              <%= render "retailer_signup_form" %>
+              <%= link_to "Are you a fashion retailer?", retailer_info_path %>
             </div>
           </div>
         </div>
@@ -149,16 +145,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  $(document).ready(function() {
-    $(".shopper_signup").show();
-    $(".retailer_signup").hide();
-  });
-
-  $(".show_retailer_signup").click(function(){
-    $(".shopper_signup").hide();
-    $(".retailer_signup").show();
-    $('html, body').animate({scrollTop: $(".prelaunch").offset().top}, 2000);
-  });
-</script>
