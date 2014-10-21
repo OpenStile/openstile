@@ -182,7 +182,7 @@ hr{
 	background:#555 asset_url('coming_to_dc.jpg') no-repeat;
 	background-size:cover;
 	background-position:center center;
-	border-bottom:1px solid #fff;
+	border-bottom:1px solid #000;
   height:80vh;
   max-height:600px;
 }
@@ -196,7 +196,7 @@ hr{
 header{
 	background:#555 asset_url('footer.png') repeat;
 	height:80px;
-	border-bottom:1px solid #fff;
+	border-bottom:1px solid #000;
 }
 
 header .logo h1{
