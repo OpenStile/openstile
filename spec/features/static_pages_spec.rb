@@ -10,6 +10,9 @@ describe "Static pages" do
     it { should have_link("Blog") }
 
     it { should have_xpath("//footer") }
+    it { should have_xpath("//a[contains(@href, 'https://twitter.com/OpenStile')]") }
+    it { should have_xpath("//a[contains(@href, 'https://www.facebook.com/openstile')]") }
+    it { should have_xpath("//a[contains(@href, 'http://instagram.com/openstile')]") }
   end
 
   describe "Home page" do
