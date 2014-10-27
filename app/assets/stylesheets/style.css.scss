@@ -613,6 +613,35 @@ header .navigation a:hover{
 
 /* Blog Item */
 
+.blog-thumbnails {
+  margin-top: 35px;
+}
+
+.blog-thumbnails .portfolio-item h3{
+	font-size:40px;
+	font-family: 'Open Sans', sans-serif;
+	line-height:50px;
+	margin-top:15px !important;
+}
+
+.blog-thumbnails .portfolio-item h3 a{
+	color:#666;
+}
+
+.blog-thumbnails .portfolio-item img{
+  margin-bottom:30px;
+}
+
+.blog-thumbnails .portfolio-item p{
+	font-size:20px;	
+	text-align:left;
+	line-height:28px;
+	font-family: 'Droid Serif', serif;
+	text-shadow:none;
+	color:#666;
+	margin-bottom:25px !important;
+}
+
 .blog hr{
 	border-top:1px solid #e2e2e2;
 }

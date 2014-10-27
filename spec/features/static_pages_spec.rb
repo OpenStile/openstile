@@ -6,8 +6,7 @@ describe "Static pages" do
   shared_examples "static_page" do
     it { should have_link("Home", href: root_path) }
     it { should have_link("About", href: about_path) }
-    #TODO add href for blog page
-    it { should have_link("Blog") }
+    it { should have_link("Blog", href: blog_path) }
 
     it { should have_xpath("//footer") }
     it { should have_xpath("//a[contains(@href, 'https://twitter.com/OpenStile')]") }
@@ -37,5 +36,13 @@ describe "Static pages" do
     it_should_behave_like "static_page"
     it { should have_content('Homegrown Fashion Retailers') }
     it { should have_title('Fashion Retailers Reach More Shoppers | OpenStile') }
+  end
+
+  describe "Blog page" do
+    before {visit '/blog'}
+
+    it_should_behave_like "static_page"
+    it { should have_content('OpenStile Blog') }
+    it { should have_title('Blog | OpenStile') }
   end
 end

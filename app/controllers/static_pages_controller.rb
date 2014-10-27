@@ -8,4 +8,7 @@ class StaticPagesController < ApplicationController
 
   def retailer_info
   end
+
+  def blog
+  end
 end
