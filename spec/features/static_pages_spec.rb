@@ -37,12 +37,4 @@ describe "Static pages" do
     it { should have_content('Homegrown Fashion Retailers') }
     it { should have_title('Fashion Retailers Reach More Shoppers | OpenStile') }
   end
-
-  describe "Blog page" do
-    before {visit '/blog'}
-
-    it_should_behave_like "static_page"
-    it { should have_content('OpenStile Blog') }
-    it { should have_title('Blog | OpenStile') }
-  end
 end

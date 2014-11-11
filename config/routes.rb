@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   get '/about'          =>  'static_pages#about'
   get '/retailer_info'  =>  'static_pages#retailer_info'
-  get '/blog'           =>  'static_pages#blog'
+
+  get '/blog'                       =>  'blog#index'
+  get '/blog/welcome-to-openstile'  =>  'blog#blog_01'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
