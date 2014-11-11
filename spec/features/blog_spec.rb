@@ -22,6 +22,7 @@ describe "Blog" do
     it { should have_title('Blog | OpenStile') }
 
     it { should have_xpath("//a[contains(@href, #{blog_welcome_to_openstile_path})]") }
+    it { should have_xpath("//a[contains(@href, #{blog_retailer_spotlight_tin_lizzy_path})]") }
   end
 
   describe "Welcome to OpenStile" do
@@ -29,6 +30,13 @@ describe "Blog" do
 
     it_should_behave_like "site_page"
     it { should have_title('Welcome to OpenStile | OpenStile') }
+  end
+
+  describe "Retailer Spotlight Tin Lizzy" do
+    before {visit '/blog/retailer-spotlight-tin-lizzy'}
+
+    it_should_behave_like "site_page"
+    it { should have_title('Retailer Spotlight Tin Lizzy | OpenStile') }
   end
 end
 

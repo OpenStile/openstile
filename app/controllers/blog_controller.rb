@@ -5,4 +5,7 @@ class BlogController < ApplicationController
 
   def blog_01
   end
+
+  def blog_02
+  end
 end
