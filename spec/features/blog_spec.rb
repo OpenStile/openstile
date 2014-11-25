@@ -23,6 +23,7 @@ describe "Blog" do
 
     it { should have_xpath("//a[contains(@href, #{blog_welcome_to_openstile_path})]") }
     it { should have_xpath("//a[contains(@href, #{blog_retailer_spotlight_tin_lizzy_path})]") }
+    it { should have_xpath("//a[contains(@href, #{blog_dressing_mommy_post_baby_phase_path})]") }
   end
 
   describe "Welcome to OpenStile" do
@@ -37,6 +38,13 @@ describe "Blog" do
 
     it_should_behave_like "site_page"
     it { should have_title('Retailer Spotlight Tin Lizzy | OpenStile') }
+  end
+
+  describe "Dressing Mommy Post Baby Phase" do
+    before {visit '/blog/dressing-mommy-post-baby-phase'}
+
+    it_should_behave_like "site_page"
+    it { should have_title('Dressing Mommy Post Baby Phase | OpenStile') }
   end
 end
 

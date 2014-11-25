@@ -8,4 +8,7 @@ class BlogController < ApplicationController
 
   def blog_02
   end
+
+  def blog_03
+  end
 end
