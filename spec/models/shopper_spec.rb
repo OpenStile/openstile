@@ -1,13 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Shopper, :type => :model do
-  before { @shopper = Shopper.new(first_name: "Jane", email: "jane@example.com") }
+  before { @shopper = Shopper.new(first_name: "Jane", email: "jane@example.com",
+                                  password: "foobar", password_confirmation: "foobar") }
 
   subject { @shopper }
 
   it { should respond_to :first_name }
   it { should respond_to :email }
   it { should respond_to :cell_phone }
+  it { should respond_to :password_digest }
   it { should be_valid }
 
   describe "when first name is not present" do
@@ -90,5 +92,10 @@ RSpec.describe Shopper, :type => :model do
         expect(@shopper).to be_valid
       end
     end
+  end
+
+  describe "when password is too short" do
+    before { @shopper.password = @shopper.password_confirmation = "a"*5 }
+    it { should_not be_valid }
   end
 end
