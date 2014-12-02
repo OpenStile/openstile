@@ -6,6 +6,7 @@ class ShoppersController < ApplicationController
   def create
     @shopper = Shopper.new(user_params)
     if @shopper.save
+      redirect_to style_profiles_edit_path
     else
       render 'new'
     end
