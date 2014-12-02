@@ -194,8 +194,9 @@ hr{
 /* Header */
 
 header{
-	background:#555 asset_url('footer.png') repeat;
+	background-color:rgba(0,0,0,0.3);
 	height:80px;
+	margin-bottom:15px;
 	border-bottom:1px solid #000;
 }
 
