@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   get '/blog/retailer-spotlight-tin-lizzy'  =>  'blog#blog_02'
   get '/blog/dressing-mommy-post-baby-phase'=>  'blog#blog_03'
 
+  get '/signup' =>  'shoppers#new'
+  resources :shoppers,  only: [:new, :create]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
