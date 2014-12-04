@@ -8,14 +8,8 @@
         <div class="col-md-12">
           <div class="intro">
             <h2>A Personalized Way to Explore Local Fashion Retailers.</h2><br /> 
-            <p>
-              Neighborhood boutiques sell the unique fashion you crave but it's a challenge
-              to explore these hidden gems. We make it easy to find your critical fit & fashion.
-            </p>
-            <p style="font-weight:bold;">
-              Signup for our Washington D.C launch.
-            </p>
-            <%= render "shopper_signup_form" %>
+            <%= link_to "Get Started", signup_path, id: "get-started", 
+                                                    class: "btn-default btn-lg" %>
           </div>
         </div>
       </div>
@@ -133,20 +127,15 @@
   </div>
 </div>
 
-<div class="prelaunch">
+<div class="bottom">
   <div class="hero inner-page">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="intro">
-            <h2>Hey D.C Stylistas! We're coming to the Nation's Capital.</h2>
-            <p>
-              Want to look your best and stand out from the crowd? Find the unique pieces that match your personal style.
-            </p><br />
-            <div class="shopper_signup">
-              <%= render "shopper_signup_form" %>
-              <%= link_to "Are you a fashion retailer? Click Here.", retailer_info_path %>
-            </div>
+            <h2>Ready to find unique pieces for your personal style?</h2><br />
+            <%= link_to "Get Started", signup_path, id: "get-started", 
+                                                    class: "btn-default btn-lg" %>
           </div>
         </div>
       </div>
