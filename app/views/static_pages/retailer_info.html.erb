@@ -1,16 +1,21 @@
 <% provide(:title, 'Fashion Retailers Reach More Shoppers') %>
 
-<%= render "shared/header" %>
-<div class="retailer-info block">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="page-title text-center">
-          <h3>We're crazy about Homegrown Fashion Retailers</h3>
-          <hr>
+<div class="retailer-top">
+  <%= render "shared/header" %>
+  <div class="hero inner-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="intro">
+            <h2>We're crazy about Homegrown Fashion Retailers.</h2><br /> 
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="retailer-info block">
+  <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="retailer-info-content">
@@ -39,14 +44,13 @@
   </div>
 </div>
 
-<div class="prelaunch">
+<div class="retailer-bottom">
   <div class="hero inner-page">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="intro">
-            <h2>We're coming to Washington D.C!</h2><br />
-            <p>Sign up for more information on becoming an OpenStile Retailer</p>
+            <h2>Ready for a better way to bring in customers?</h2><br />
             <div class="retailer_signup">
               <%= render "retailer_signup_form" %>
             </div>
