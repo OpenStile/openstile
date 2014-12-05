@@ -11,6 +11,8 @@ Designed by : http://responsivewebinc.com
 /* Droid Serif */
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
 
+@import 'bootstrap/glyphicons';
+
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
@@ -1668,6 +1670,11 @@ input {
     color: red;
     border: 1px solid red;
   }
+}
+
+.signup h4{
+  padding-bottom: 10px;
+  color: #a9a9a9;
 }
 
 /* Forms End */

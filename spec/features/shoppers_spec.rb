@@ -10,6 +10,19 @@ describe "Shopper pages" do
     it { should have_selector('h2', text: 'Create an account') }
     it { should have_title('Sign up | OpenStile') }
 
+    describe "cell phone help text", js: true do
+      let(:help_text) {"Standard messaging rates apply"}
+
+      it { should_not have_content(help_text) }
+
+      describe "after clicked" do
+        #using click 'showCellHelp' results in overlapping element error
+        before { find('#showCellHelp').trigger('click') }
+
+        it { should have_content(help_text) }
+      end
+    end
+
     describe "with invalid information" do
       it "should not create a shopper account" do
         expect { click_button submit }.not_to change(Shopper, :count)

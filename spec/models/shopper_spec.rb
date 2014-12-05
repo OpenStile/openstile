@@ -73,6 +73,11 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
+  describe "when cell phone is blank" do
+    before { @shopper.cell_phone = "" }
+    it { should be_valid }
+  end
+
   describe "when cell phone format is invalid" do
     it "should be invalid" do
       numbers = %w[123-aaa-5555 123-4563 123-456-789012]
