@@ -7,7 +7,7 @@ describe "Shopper pages" do
     before { visit signup_path }
     let(:submit) { "Sign up" }
 
-    it { should have_selector('h1', text: 'Create an account') }
+    it { should have_selector('h2', text: 'Create an account') }
     it { should have_title('Sign up | OpenStile') }
 
     describe "with invalid information" do

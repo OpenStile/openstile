@@ -15,7 +15,7 @@ class ShoppersController < ApplicationController
   private
 
     def user_params
-      params.require(:shopper).permit(:first_name, :email, :password, 
-                                      :password_confirmation)
+      params.require(:shopper).permit(:first_name, :email, :cell_phone,
+                                      :password, :password_confirmation)
     end
 end

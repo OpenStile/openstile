@@ -11,6 +11,17 @@ Designed by : http://responsivewebinc.com
 /* Droid Serif */
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
 
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+$state-danger-text: #ff0000;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 /* Basic CSS starts */
 
 body{
@@ -198,6 +209,14 @@ hr{
 
 .blog-top{
 	background:#555 asset_url('typing.jpg') no-repeat;
+	background-size:cover;
+	background-position:center center;
+	border-bottom:1px solid #fff;
+  min-height:300px;
+}
+
+.signup-top{
+	background:#555 asset_url('shawl_lady.jpg') no-repeat;
 	background-size:cover;
 	background-position:center center;
 	border-bottom:1px solid #fff;
@@ -1621,6 +1640,37 @@ footer .copy{
 }
 
 /* To Top Ends */
+
+/* Forms Begin */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: red;
+    border: 1px solid red;
+  }
+}
+
+/* Forms End */
 
 /* Responsive CSS */
 

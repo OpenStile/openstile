@@ -11,7 +11,8 @@ class Shopper < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 100 },
                                     format: { with: VALID_EMAIL_REGEX },
                                     uniqueness: { case_sensitive: false }
-  validates :cell_phone, format: { with: VALID_CELL_PHONE_REGEX }, unless: "cell_phone.nil?"
+  validates :cell_phone, format: { with: VALID_CELL_PHONE_REGEX, message: "must be 10 or 11 numeric digits." }, 
+                         unless: "cell_phone.nil?"
   validates :password,  length: { minimum: 6 }
 
   has_secure_password
