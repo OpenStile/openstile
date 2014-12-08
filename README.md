@@ -1,10 +1,7 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
-
+OpenStile is a personalized way to explore local fashion retailers. The instructions below detail how to install and contribute to the project.
 * Ruby version
 
 * System dependencies
