@@ -4,7 +4,7 @@ describe "Shopper pages" do
   subject { page }
 
   describe "Sign up page" do
-    before { visit signup_path }
+    before { visit new_shopper_registration_path }
     let(:submit) { "Sign up" }
 
     it { should have_selector('h2', text: 'Create an account') }
@@ -32,7 +32,7 @@ describe "Shopper pages" do
         before { click_button submit }
 
         it { should have_title('Sign up | OpenStile') }
-        it { should have_content('error') }
+        it { should have_content("Email can't be blank") }
       end
     end
 
@@ -41,8 +41,8 @@ describe "Shopper pages" do
         fill_in "First name", with: "Jane"
         fill_in "Email address",      with: "jane@example.com"
         fill_in "Cell phone number",  with: "(703) 555-5555"
-        fill_in "Password", with: "foobar"
-        fill_in "Confirm password", with: "foobar"
+        fill_in "Password", with: "foobarbaz"
+        fill_in "Confirm password", with: "foobarbaz"
       end
 
       it "should create a shopper account" do
