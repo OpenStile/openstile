@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   devise_for :shopper, path: '/shoppers', controllers: {
     sessions: 'shoppers/sessions',
     passwords: 'shoppers/passwords',
-    registrations: 'shoppers/registrations'} do
+    registrations: 'shoppers/registrations',
+    } do
 
     authenticated :user do
       root 'style_profiles/edit', as: :authenticated_root

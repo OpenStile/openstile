@@ -1,5 +1,6 @@
 class Shoppers::SessionsController < Devise::SessionsController
 # before_filter :configure_sign_in_params, only: [:create]
+# find this in GitHub: http://goo.gl/mEm3Y
 
   # GET /resource/sign_in
   # def new

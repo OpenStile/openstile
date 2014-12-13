@@ -1,6 +1,6 @@
 class Shopper < ActiveRecord::Base
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable, :recoverable,
+         :rememberable, :trackable, :validatable #, :confirmable,
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   VALID_CELL_PHONE_REGEX = /\A\d{10,11}\z/
@@ -18,6 +18,6 @@ class Shopper < ActiveRecord::Base
                                     uniqueness: { case_sensitive: false }
   validates :cell_phone, format: { with: VALID_CELL_PHONE_REGEX, message: "must be 10 or 11 numeric digits." }, 
                          unless: "cell_phone.nil? or cell_phone.empty?"
-  validates :password,  length: { minimum: 8 }
+  validates :password,  length: { minimum: 6 }
 
 end
