@@ -25,7 +25,7 @@ RSpec.describe Shoppers::RegistrationsController, :type => :controller do
       expect(response).to redirect_to(style_profiles_edit_path)
     end
 
-    it "should have a current_user" do
+    it "should have a current_shopper" do
       # note the fact that I removed the "validate_session" parameter
       # because this was a scaffold-generated controller
       expect(subject.current_shopper).to_not be_nil

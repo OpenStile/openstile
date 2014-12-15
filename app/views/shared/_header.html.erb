@@ -12,7 +12,7 @@
         <% if current_shopper.nil? %>
           <%= link_to "Log in", new_shopper_session_path %>
         <% else %>
-          <%= link_to "Log out", destroy_shopper_session_path %>
+          <%= link_to "Log out", destroy_shopper_session_path, :method => :delete %>
         <% end %>
       </div>
     </div>
