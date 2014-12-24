@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  authenticated :shopper do
+    root 'style_profiles#edit', as: :authenticated_root
+  end
+
   root  'static_pages#home'
   get 'style_profiles/edit'
 
@@ -15,15 +20,11 @@ Rails.application.routes.draw do
     passwords: 'shoppers/passwords',
     registrations: 'shoppers/registrations',
     } do
-
-    authenticated :user do
-      root 'style_profiles/edit', as: :authenticated_root
-    end
-
-    unauthenticated do
-      root 'static_pages#home', as: :unauthenticated_root
-    end
   end
+
+  # authenticated :shopper do
+  #   root 'style_profiles/edit', as: :authenticated_root
+  # end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

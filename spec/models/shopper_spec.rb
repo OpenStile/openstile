@@ -3,9 +3,8 @@ require 'spec_helper'
 
 RSpec.describe Shopper, :type => :model do
 
-  before(:each) do
-    @shopper = FactoryGirl.create(:shopper)
-  end
+  before { @shopper = Shopper.new(first_name: "Jane", email: "jane@example.com",
+                                  password: "foobar", password_confirmation: "foobar") }
 
   subject { @shopper }
 
@@ -56,22 +55,23 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  it "should reject duplicate email addresses" do
-    user_with_same_email = @shopper.dup
-    user_with_same_email.email = @shopper.email.upcase
-    expect(user_with_same_email.valid?).to be(false)
+  describe "when email is already taken" do
+    before do
+      user_with_same_email = @shopper.dup
+      user_with_same_email.email = @shopper.email.upcase
+      user_with_same_email.save
+    end
+
+    it { should_not be_valid }
   end
 
   describe "email with mixed case" do
-
-    before(:each) do
-      @shopper_with_mixed_cased_email = FactoryGirl.create(:shopper_with_mixed_cased_email)
-    end
-
     let(:mixed_case_email) { "FOO@BaR.com" }
 
     it "should be saved as lower case" do
-      expect(@shopper_with_mixed_cased_email.email).to eq(mixed_case_email.downcase)
+      @shopper.email = mixed_case_email
+      @shopper.save
+      expect(@shopper.reload.email).to eq(mixed_case_email.downcase)
     end
   end
 
@@ -85,36 +85,23 @@ RSpec.describe Shopper, :type => :model do
       numbers = %w[123-aaa-5555 123-4563 123-456-789012]
       numbers.each do |number|
         @shopper.cell_phone = number
-        @shopper.save
         expect(@shopper).not_to be_valid
       end
     end
   end
 
-  describe "when cell phone format is valid" do
+  context "when cell phone format is valid" do
     it "should be valid" do
       numbers = ['123-456-7890', '123.456.7890', '1234567890', 
                  '(123) 456-7890', '1-123-456-7890']
       numbers.each do |number|
         @shopper.cell_phone = number
-        @shopper.save
         expect(@shopper).to be_valid
       end
     end
   end
 
-  describe "when cell phone format is valid" do
-    it "should be format numbers and save them to the database" do
-      numbers = ['123-456-7890', '123.456.7890', '1234567890', '(123) 456-7890']
-      numbers.each do |number|
-        @shopper.cell_phone = number
-        @shopper.save
-        expect(@shopper.cell_phone).to eq('1234567890')
-      end
-    end
-  end
-
-  describe "when password is too short" do
+  context "when password is too short" do
     before { @shopper.password = @shopper.password_confirmation = "a"*5 }
     it { should_not be_valid }
   end

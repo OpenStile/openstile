@@ -7,7 +7,7 @@ class Shopper < ActiveRecord::Base
 
   # before_validation performs validation on create and modify
   # (object must be saved so that validation can be performed)
-  before_validation do
+  before_validation(on: :create) do
     cell_phone.gsub!(/[^0-9]/, "") if attribute_present?("cell_phone")
   end
   before_save { email.downcase! }                                    

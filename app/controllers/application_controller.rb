@@ -4,9 +4,5 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Force the user to redirect to the login page if the user was not logged in.
-  # before_action :authenticate_shopper!, :except=>[ 'static_pages#home']
-
-  def after_sign_in_path_for(resource_or_scope)
-    style_profiles_edit_path
-  end
+  before_action :authenticate_shopper!, :except=>[ 'static_pages#home']
 end
