@@ -180,7 +180,7 @@ hr{
 
 
 .top{
-	background:#555 asset_url('hipster_girl.jpg') no-repeat;
+	background:#555 asset_url('hipster_girl_2.jpg') no-repeat;
 	background-size:cover;
 	background-position:left center;
 	border-bottom:1px solid #fff;
@@ -274,6 +274,10 @@ header .navigation a:hover{
    -o-transition: background 1s ease;
    -ms-transition: background 1s ease;
    transition: background 1s ease;
+}
+
+header .navigation a.sign-up{
+	background-color:rgb(247,83,83);
 }
 
 /* Hero */
