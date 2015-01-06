@@ -5,6 +5,9 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.6'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
+
+gem 'bootstrap-glyphicons'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -25,7 +28,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+
+gem 'devise', '~> 3.4.1'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -35,19 +40,27 @@ gem 'spring',        group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'chili'
 
 group :development, :test do
+  gem "factory_girl_rails"
+  gem "faker"
   gem 'rspec-rails',  '~> 3.0.0'
   gem 'sqlite3'
 end
 
 group :test do
-  gem 'selenium-webdriver', '2.35.1'
   gem 'capybara', '~> 2.3.0'
+  gem 'poltergeist'
+  gem 'database_cleaner'
+  # gem 'email_spec'
 end
 
 group :production do
   gem 'pg', '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'newrelic_rpm'
+end
+group :chili do
+  gem 'sign_up_feature', path: 'lib/chili/sign_up_feature'
 end
