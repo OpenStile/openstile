@@ -40,6 +40,7 @@ gem 'devise', '~> 3.4.1'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'chili'
 
 group :development, :test do
   gem "factory_girl_rails"
@@ -59,4 +60,7 @@ group :production do
   gem 'pg', '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'newrelic_rpm'
+end
+group :chili do
+  gem 'sign_up_feature', path: 'lib/chili/sign_up_feature'
 end
