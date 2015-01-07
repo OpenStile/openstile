@@ -51,8 +51,6 @@ end
 group :test do
   gem 'capybara', '~> 2.3.0'
   gem 'poltergeist'
-  gem 'database_cleaner'
-  # gem 'email_spec'
 end
 
 group :production do

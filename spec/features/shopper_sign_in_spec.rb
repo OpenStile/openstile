@@ -17,15 +17,15 @@ describe 'Shopper sign in' do
     expect(page).to have_link('Log out')
   end
 
-  it 'changes the root_path to style_profiles#edit' do
-    expect(current_path).to eq('/style_profiles/edit')
-    expect(page).to have_title('Style Profile | OpenStile')
+  it 'renders the shoppers Style Feed' do
+    expect(current_path).to eq('/')
+    expect(page).to have_content('STYLEFEED!!!!!!!!!!!!!!!!!')
   end
 
   it 'does not allow an authenticated shopper to log in again' do
     visit '/shoppers/sign_in'
 
-    expect(current_path).to eq('/style_profiles/edit')
+    expect(current_path).to eq('/')
     expect(page).to have_content('You are already signed in.')
   end
 

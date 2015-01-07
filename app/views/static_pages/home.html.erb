@@ -3,9 +3,7 @@
 <% if !shopper_signed_in? %>
   <%= render partial: 'index_non_authenticated' %>
 <% else %>
-  <h3>You shouldn't see this.<h3>
-  <h3>Devise should route this to the authenticated_root_path.<h3>
-  <h3>I need to figure out why it's being such a bitch ass.<h3>
+  <%= render partial: 'signed_in_shopper' %>
 <% end %>
 
 <%= render "shared/google_analytics" %>

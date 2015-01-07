@@ -5,8 +5,6 @@ class Shopper < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   VALID_CELL_PHONE_REGEX = /\A\d{10,11}\z/
 
-  # before_validation performs validation on create and modify
-  # (object must be saved so that validation can be performed)
   before_validation(on: :create) do
     cell_phone.gsub!(/[^0-9]/, "") if attribute_present?("cell_phone")
   end

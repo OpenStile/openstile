@@ -23,10 +23,10 @@
           <%= render 'shared/error_messages', object: f.object %>
 
           <%= f.label :first_name %>
-          <%= f.text_field :first_name, class: "form-control" %>
+          <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
 
           <%= f.label :email, "Email address" %>
-          <%= f.text_field :email, autofocus: true, class: "form-control" %>
+          <%= f.text_field :email, class: "form-control" %>
 
           <%= f.label :cell_phone do %>
             Cell phone number 
@@ -66,5 +66,3 @@
     $("#cellHelp").removeClass("hidden");
   });  
 </script>
-
-<%= render "shoppers/shared/links" %>
