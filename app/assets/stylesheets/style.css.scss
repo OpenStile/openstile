@@ -11,6 +11,19 @@ Designed by : http://responsivewebinc.com
 /* Droid Serif */
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
 
+@import 'bootstrap/glyphicons';
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+$state-danger-text: #ff0000;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
 /* Basic CSS starts */
 
 body{
@@ -161,46 +174,76 @@ hr{
 
 /* Basic CSS ends */
 
-.container{
-	width:900px;
-}
-
 .tblue{
 	color:#69b8e5;
 }
 
 
 .top{
-	background:#555 asset_url('hero_collage.jpg') no-repeat;
+	background:#555 asset_url('hipster_girl_2.jpg') no-repeat;
 	background-size:cover;
-	background-position:50% 12%;
+	background-position:left center;
 	border-bottom:1px solid #fff;
-  min-height:500px;
+  min-height:600px;
 }
 
-.prelaunch{
+.bottom{
 	background:#555 asset_url('coming_to_dc.jpg') no-repeat;
 	background-size:cover;
-	background-position:center center;
+	background-position:center bottom;
 	border-bottom:1px solid #000;
-  height:80vh;
-  max-height:600px;
+  min-height:600px;
 }
 
-.inner-page{
-	padding-top:20px	!important;
-	padding-bottom:10px;
+.retailer-top{
+	background:#555 asset_url('clothes.jpg') no-repeat;
+	background-size:cover;
+	background-position:left 23%;
+	border-bottom:1px solid #fff;
+  min-height:300px;
 }
+
+.retailer-bottom{
+	background:#000;
+	border-bottom:1px solid #fff;
+  min-height:150px;
+}
+
+.blog-top{
+	background:#555 asset_url('typing.jpg') no-repeat;
+	background-size:cover;
+	background-position:center center;
+	border-bottom:1px solid #fff;
+  min-height:300px;
+}
+
+.signup-top{
+	background:#555 asset_url('shawl_lady.jpg') no-repeat;
+	background-size:cover;
+	background-position:center center;
+	border-bottom:1px solid #fff;
+  min-height:300px;
+}
+
+.about-top{
+	background:#555 asset_url('walking_away.jpg') repeat;
+	background-size:cover;
+	background-position:center center;
+	border-bottom:1px solid #fff;
+  min-height:300px;
+}
+
 /* Header */
 
 header{
-	background:#555 asset_url('footer.png') repeat;
+	background-color:rgba(0,0,0,0.7);
 	height:80px;
+	margin-bottom:15px;
 	border-bottom:1px solid #000;
 }
 
 header .logo h1{
-	font-size:55px;
+	font-size:40px;
 	line-height:45px;
 	color:#fff;
 	font-family: 'Lobster Two', cursive;
@@ -241,149 +284,52 @@ header .navigation a:hover{
    transition: background 1s ease;
 }
 
+header .navigation a.sign-up{
+	background-color:rgb(247,83,83);
+}
+
 /* Hero */
 
 .hero{
-	padding-top:20px;
+  padding-top:200px;
 }
 
-.hero .inner-page{
-	padding-bottom:30px;
-}
-
-.hero .shot img{
-	width:300px;
-	height:auto;
-	margin:0px auto;
+.retailer-bottom .hero{
+  padding-top:100px;
+  padding-bottom:100px;
 }
 
 .hero .intro {
-	background-color:rgba(0,0,0,0.6);
-  text-align: center;
 	padding-top:20px;
 	padding-bottom:20px;
+  text-align:center;
 }
 
-.prelaunch .intro {
-  margin-top:10vh;
-}
-
-.hero .intro h2{
+.hero .intro h2 {
 	color:#fff;
 	font-family: 'Droid Serif', serif;
-	font-size:40px;
+	font-size:35px;
 	font-weight:bold;
+  text-shadow: 2px 2px #000;
 	margin-top:20px !important;
 	margin-bottom:10px !important;
-}
-
-.hero .intro h3{
-	color:#fff;
-	font-family: 'Droid Serif', serif;
-	font-size:30px;
-	font-weight:bold;
-	margin-top:10px !important;
-	margin-bottom:10px !important;
+  max-height: 999999px;
 }
 
 .hero .intro a{
   color:#fff;
-	font-size:15px;
-	font-weight:bold;
-}
-
-.hero .intro a:hover{
-	background:rgba(0,0,0,0.5);
-	-webkit-transition: background 1s ease;
-   -moz-transition: background 1s ease;
-   -o-transition: background 1s ease;
-   -ms-transition: background 1s ease;
-   transition: background 1s ease;
-}
-
-.hero .intro a.download{
-	color:#fff;
-	display:inline-block;
-	text-decoration:none;
-	font-size:17px;
-	font-weight:bold;
-	padding:0px 25px;
-	border-radius:5px;
-	background:#39a5e2;
-	line-height:50px;
-	box-shadow: 0 2px 0 0 rgba(255,255,255,0.2) inset,0 2px 3px rgba(0,0,0,0.3);
-	-webkit-transition: background 1s ease;
-   -moz-transition: background 1s ease;
-   -o-transition: background 1s ease;
-   -ms-transition: background 1s ease;
-   transition: background 1s ease;
-   margin-top:2px !important;
-}
-
-.hero .intro a.download:hover{
-	background:#1c97dd;
-	-webkit-transition: background 1s ease;
-   -moz-transition: background 1s ease;
-   -o-transition: background 1s ease;
-   -ms-transition: background 1s ease;
-   transition: background 1s ease;
-}
-
-.hero .intro p{
-  color:#fff;
 	font-size:20px;
-	font-family: 'Droid Serif', serif;
-  margin-bottom:10px;
+	font-weight:bold;
   max-height: 999999px;
 }
 
-.hero .intro strong{
-	color:#fff;
-	font-size:15px;
-	margin-left:6px;
-}
-
-.hero .intro .applinks{
-	margin-top:15px;
-}
-
-.hero .intro .applinks a{
-	color:#fff;
-	text-decoration:none;
-	font-size:20px;
-	padding:10px 15px;
-	line-height:60px;
-	box-shadow:inset 0px 0px 3px #000;
-	margin-right:11px;
-	border-radius:40px;
-	background:rgba(0,0,0,0.3);
-	-webkit-transition: background 1s ease;
-   -moz-transition: background 1s ease;
-   -o-transition: background 1s ease;
-   -ms-transition: background 1s ease;
-   transition: background 1s ease;
-}
-
-.hero .intro .applinks a:hover{
-	background:rgba(0,0,0,0.5);
-	-webkit-transition: background 1s ease;
-   -moz-transition: background 1s ease;
-   -o-transition: background 1s ease;
-   -ms-transition: background 1s ease;
-   transition: background 1s ease;
-}
-
-.hero .intro #mc_embed_signup{
-  margin-bottom:20px;
-}
-
-.hero .intro #mc-embedded-subscribe{
+.hero .intro #get-started{
   color: #ffffff;
   background-color:#f75353;
   border-color:#f75353;
 }
 
-.hero .intro #mc-embedded-subscribe:hover{
+.hero .intro #get-started:hover{
   color: #ffffff;
   background-color: #f53232;
   border-color: #f53232;
@@ -1708,6 +1654,42 @@ footer .copy{
 }
 
 /* To Top Ends */
+
+/* Forms Begin */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: red;
+    border: 1px solid red;
+  }
+}
+
+.signup h4{
+  padding-bottom: 10px;
+  color: #a9a9a9;
+}
+
+/* Forms End */
 
 /* Responsive CSS */
 

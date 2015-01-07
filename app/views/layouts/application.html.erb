@@ -1,50 +1,53 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title><%= yield(:title) %> | OpenStile</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <%= favicon_link_tag 'dress.png' %>
+    <title><%= yield(:title) %> | OpenStile</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<header>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="logo">
-          <h1><a href="#">OpenStile</a></h1>
+    <%= yield %>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4  col-xs-6">
+            <div class="footer-link">
+              <h5>Contact us</h5>
+              <p>info@openstile.com</p><br>
+              <p>
+                1836 Independence Ave. SE, Suite 3<br>
+                Washington DC 20003
+              </p>
+            </div>
+          </div>
+          <div class="col-md-3  col-xs-6">
+            <div class="footer-link">
+              <h5>Learn more</h5>
+              <%= link_to "About", about_path %><br>
+              <%= link_to "Blog", blog_path %><br>
+              <%= link_to "Retailer Info", retailer_info_path %><br>
+            </div>
+          </div>
+        </div>
+        <div class="social text-center">
+          <a href="https://www.facebook.com/openstile" class="facebook"><i class="fa fa-facebook"></i></a>
+          <a href="https://twitter.com/OpenStile" class="twitter"><i class="fa fa-twitter"></i></a>
+          <a href="http://instagram.com/openstile" class="instagram"><i class="fa fa-instagram"></i></a>
+        </div>
+            
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+            <div class="copy text-center">
+              &copy; 2014 World Touch Technologies LLC
+            </div>
+          </div>
         </div>
       </div>
-      <div class="navigation pull-right">
-        <%= link_to "Home", root_path %>
-        <%= link_to "About", about_path %>
-        <%= link_to "Blog", blog_path %>
-      </div>
-    </div>
-  </div>
-</header>
-
-<%= yield %>
-
-<footer>
-  <div class="container">
-    <div class="social text-center">
-      <a href="https://www.facebook.com/openstile" class="facebook"><i class="fa fa-facebook"></i></a>
-      <a href="https://twitter.com/OpenStile" class="twitter"><i class="fa fa-twitter"></i></a>
-      <a href="http://instagram.com/openstile" class="instagram"><i class="fa fa-instagram"></i></a>
-    </div>
-        
-    <div class="row">
-      <div class="col-md-12">
-        <hr>
-        <div class="copy text-center">
-          &copy; 2015 OpenStile
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-</body>
+    </footer>
+  </body>
 </html>
