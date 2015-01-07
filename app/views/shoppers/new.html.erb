@@ -1,0 +1,65 @@
+<% provide(:title, 'Sign up') %>
+
+<div class="signup-top">
+  <%= render "shared/header" %>
+  <div class="hero inner-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="intro">
+            <h2>Create an account NOOOOOOOOOW!</h2><br /> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="signup block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-xs-6 col-md-offset-3 col-xs-offset-3">
+        <%= form_for(resource, as: resource_name, url: signup_path(resource_name)) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: "form-control" %>
+
+          <%= f.label :email, "Email address" %>
+          <%= f.text_field :email, class: "form-control" %>
+
+          <%= f.label :cell_phone do %>
+            Cell phone number 
+            <a id="showCellHelp" href="#">
+              <span class="glyphicon glyphicon-question-sign"></span>
+            </a>
+          <% end %>
+          <div id="cellHelp" class="hidden">
+            <h4> 
+              Providing your cell phone numbers allows OpenStile 
+              to send you text message reminders and notifications. 
+              Standard messaging rates apply.
+            </h4>
+          </div>
+          <%= f.text_field :cell_phone, class: "form-control" %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password, class: "form-control" %>
+
+          <%= f.label :password_confirmation, "Confirm password" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+
+          <%= f.submit "Sign up", 
+                        class: "col-md-2 col-xs-2 btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $("#showCellHelp").click(function() {
+    event.preventDefault();
+    $("#cellHelp").removeClass("hidden");
+  });  
+</script>
