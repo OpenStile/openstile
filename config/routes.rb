@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     } 
   devise_scope :shopper do
       get "/shoppers/registrations", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
-      put "/shoppers/registrations", :to => "shoppers/registrations#create", :as => 'shopper_registration'
+      post "/shoppers/registrations", :to => "shoppers/registrations#create", :as => 'shopper_registration'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
