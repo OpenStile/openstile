@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'style_profiles/edit'
 
   root  'static_pages#home'
+  get 'style_profiles/edit'
 
   get '/about'          =>  'static_pages#about'
   get '/retailer_info'  =>  'static_pages#retailer_info'
@@ -11,8 +11,13 @@ Rails.application.routes.draw do
   get '/blog/retailer-spotlight-tin-lizzy'  =>  'blog#blog_02'
   get '/blog/dressing-mommy-post-baby-phase'=>  'blog#blog_03'
 
-  get '/signup' =>  'shoppers#new'
-  resources :shoppers,  only: [:new, :create]
+  devise_for :shoppers, :skip => [:passwords, :registrations], path: '/shoppers', controllers: {
+    sessions: 'shoppers/sessions',
+    } 
+  devise_scope :shopper do
+      get "/shoppers/registrations", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
+      post "/shoppers/registrations", :to => "shoppers/registrations#create", :as => 'shopper_registration'
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

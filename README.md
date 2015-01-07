@@ -1,28 +1,29 @@
-== README
+# OpenStile
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Installation
 
-Things you may want to cover:
+1. Clone the repo
+    ```bash
+    $ git clone git@github.com:OpenStile/openstile.git
+    ```
 
-* Ruby version
+2. cd to the project directory and bundle install:
+    ```bash
+    $ cd openstile
+    $ bundle install
+    ```
 
-* System dependencies
+3. Run pending migrations:
+    ```bash
+    $ rake db:migrate RAILS_ENV=development
+    ```
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+4. Installing PhantomJS for testing. You can find instructions [here](https://github.com/teampoltergeist/poltergeist).
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+### Testing
+
+```bash
+$ cd openstile
+$ rspec spec/
+```

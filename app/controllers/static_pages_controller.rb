@@ -1,4 +1,6 @@
 class StaticPagesController < ApplicationController
+
+  skip_filter :authenticate_shopper!
   
   def home
   end

@@ -1,6 +1,8 @@
 require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Shopper, :type => :model do
+
   before { @shopper = Shopper.new(first_name: "Jane", email: "jane@example.com",
                                   password: "foobar", password_confirmation: "foobar") }
 
@@ -9,7 +11,7 @@ RSpec.describe Shopper, :type => :model do
   it { should respond_to :first_name }
   it { should respond_to :email }
   it { should respond_to :cell_phone }
-  it { should respond_to :password_digest }
+  it { should respond_to :encrypted_password }
   it { should be_valid }
 
   describe "when first name is not present" do
@@ -88,7 +90,7 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  describe "when cell phone format is valid" do
+  context "when cell phone format is valid" do
     it "should be valid" do
       numbers = ['123-456-7890', '123.456.7890', '1234567890', 
                  '(123) 456-7890', '1-123-456-7890']
@@ -99,7 +101,7 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  describe "when password is too short" do
+  context "when password is too short" do
     before { @shopper.password = @shopper.password_confirmation = "a"*5 }
     it { should_not be_valid }
   end

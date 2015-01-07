@@ -1,4 +1,7 @@
 class Shopper < ActiveRecord::Base
+  devise :database_authenticatable, :registerable, :recoverable,
+         :rememberable, :trackable, :validatable #, :confirmable,
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   VALID_CELL_PHONE_REGEX = /\A\d{10,11}\z/
 
@@ -15,5 +18,4 @@ class Shopper < ActiveRecord::Base
                          unless: "cell_phone.nil? or cell_phone.empty?"
   validates :password,  length: { minimum: 6 }
 
-  has_secure_password
 end
