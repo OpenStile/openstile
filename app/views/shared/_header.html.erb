@@ -1,0 +1,25 @@
+<div class="container">
+  <nav class="navbar-fixed-top">
+    <header>
+      <div class="col-md-6">
+        <div class="logo">
+          <h1><%= link_to "OpenStile", root_path %></h1>
+        </div>
+      </div>
+      <div class="navigation pull-right">
+        <% if current_shopper.nil? %>
+          <%= link_to "About", about_path %>
+          <%= link_to "Blog", blog_path %>
+          <%= link_to "Log in", new_shopper_session_path %>
+          <%= link_to "Sign up", new_shopper_registration_path, class: "sign-up" %>
+        <% else %>
+          <%= link_to "Style Feed", root_path %>
+          <%= link_to "Wish List", '#' %>
+          <%= link_to "Drop-ins", '#' %>
+          <%= link_to "Log out", destroy_shopper_session_path, :method => :delete %>
+        <% end %>
+      </div>
+    </header>
+    <%= bootstrap_flash %>
+  </nav>
+</div>

@@ -4,9 +4,10 @@ describe "Blog" do
   subject { page }
 
   shared_examples "site_page" do
-    it { should have_link("Home", href: root_path) }
+    it { should have_link("OpenStile", href: root_path) }
     it { should have_link("About", href: about_path) }
     it { should have_link("Blog", href: blog_path) }
+    it { should have_link("Log in") }
 
     it { should have_xpath("//footer") }
     it { should have_xpath("//a[contains(@href, 'https://twitter.com/OpenStile')]") }
