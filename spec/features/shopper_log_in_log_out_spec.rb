@@ -14,12 +14,10 @@ describe "Shopper log in and log out" do
 
       it "should take me back to log in and show me an error" do
         expect(page).to have_title('Log in | OpenStile')
-        #TODO test expected to fail until styling is present - I know failing tests bad!!!
         expect(page).to have_content("Invalid email or password")
       end
 
       it "should not log me in" do
-        #TODO test expected to fail until styling is present - I know failing tests bad!!!
         expect(page).to have_link('Log in')
         expect(page).to_not have_link('Log out')
       end
@@ -30,7 +28,7 @@ describe "Shopper log in and log out" do
         fill_in 'Email', with: shopper.email
         fill_in 'Password', with: shopper.password
  
-        click_button 'Log in'
+        click_button submit
       end
 
       it "should log me in" do
