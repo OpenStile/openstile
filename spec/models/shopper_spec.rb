@@ -14,27 +14,27 @@ RSpec.describe Shopper, :type => :model do
   it { should respond_to :encrypted_password }
   it { should be_valid }
 
-  describe "when first name is not present" do
+  context "when first name is not present" do
     before { @shopper.first_name = " " }
     it { should_not be_valid }
   end
 
-  describe "when first name is too long" do
+  context "when first name is too long" do
     before { @shopper.first_name = "a"*51 }
     it { should_not be_valid }
   end
 
-  describe "when email is not present" do
+  context "when email is not present" do
     before { @shopper.email = " " }
     it { should_not be_valid }
   end
 
-  describe "when email is too long" do
+  context "when email is too long" do
     before { @shopper.email = "#{'a'*100}@example.com"}
     it { should_not be_valid }
   end
 
-  describe "when email format is invalid" do
+  context "when email format is invalid" do
     it "should be invalid" do
       addresses = %w[user@foo,com user_at_foo.org example.user@foo. 
                      foo@bar_baz.com foo@bar+baz.com foo@bar..com]
@@ -45,7 +45,7 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  describe "when email format is valid" do
+  context "when email format is valid" do
     it "should be valid" do
       addresses = %w[user@foo.COM A_US-ER@f.b.org frst.lst@foo.jp a+b@baz.cn]
       addresses.each do |valid_address|
@@ -55,7 +55,7 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  describe "when email is already taken" do
+  context "when email is already taken" do
     before do
       user_with_same_email = @shopper.dup
       user_with_same_email.email = @shopper.email.upcase
@@ -65,7 +65,7 @@ RSpec.describe Shopper, :type => :model do
     it { should_not be_valid }
   end
 
-  describe "email with mixed case" do
+  context "email with mixed case" do
     let(:mixed_case_email) { "FOO@BaR.com" }
 
     it "should be saved as lower case" do
@@ -75,12 +75,12 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  describe "when cell phone is blank" do
+  context "when cell phone is blank" do
     before { @shopper.cell_phone = "" }
     it { should be_valid }
   end
 
-  describe "when cell phone format is invalid" do
+  context "when cell phone format is invalid" do
     it "should be invalid" do
       numbers = %w[123-aaa-5555 123-4563 123-456-789012]
       numbers.each do |number|

@@ -19,7 +19,7 @@ describe 'Shopper sign in' do
 
   it 'renders the shoppers Style Feed' do
     expect(current_path).to eq('/')
-    expect(page).to have_content('STYLEFEED!!!!!!!!!!!!!!!!!')
+    expect(page).to have_content('My Style Feed')
   end
 
   it 'does not allow an authenticated shopper to log in again' do
