@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209030914) do
+ActiveRecord::Schema.define(version: 20150108192522) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "shoppers", force: true do |t|
     t.string   "first_name"
@@ -34,6 +37,14 @@ ActiveRecord::Schema.define(version: 20141209030914) do
     t.string   "unconfirmed_email"
   end
 
-  add_index "shoppers", ["email"], name: "index_shoppers_on_email", unique: true
+  add_index "shoppers", ["email"], name: "index_shoppers_on_email", unique: true, using: :btree
+
+  create_table "style_profiles", force: true do |t|
+    t.integer  "shopper_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "style_profiles", ["shopper_id"], name: "index_style_profiles_on_shopper_id", using: :btree
 
 end

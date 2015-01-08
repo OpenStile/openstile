@@ -1,4 +1,6 @@
 class Shopper < ActiveRecord::Base
+  has_one :style_profile, dependent: :destroy
+
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable #, :confirmable,
 
@@ -9,6 +11,7 @@ class Shopper < ActiveRecord::Base
     cell_phone.gsub!(/[^0-9]/, "") if attribute_present?("cell_phone")
   end
   before_save { email.downcase! }                                    
+  after_save { create_style_profile }
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, length: { maximum: 100 },
