@@ -42,11 +42,12 @@ gem 'devise', '~> 3.4.1'
 # gem 'debugger', group: [:development, :test]
 gem 'chili'
 
+gem 'pg', '0.17.1'
+
 group :development, :test do
   gem "factory_girl_rails"
   gem "faker"
   gem 'rspec-rails',  '~> 3.0.0'
-  gem 'sqlite3'
 end
 
 group :test do
@@ -55,7 +56,6 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.17.1'
   gem 'rails_12factor', '0.0.2'
   gem 'newrelic_rpm'
 end
