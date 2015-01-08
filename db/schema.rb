@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108192522) do
+ActiveRecord::Schema.define(version: 20150108211321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bottom_sizes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dress_sizes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shoppers", force: true do |t|
     t.string   "first_name"
@@ -46,5 +58,11 @@ ActiveRecord::Schema.define(version: 20150108192522) do
   end
 
   add_index "style_profiles", ["shopper_id"], name: "index_style_profiles_on_shopper_id", using: :btree
+
+  create_table "top_sizes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
