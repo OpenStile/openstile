@@ -225,8 +225,17 @@ hr{
   min-height:300px;
 }
 
+
 .about-top{
 	background:#555 asset_url('walking_away.jpg') repeat;
+	background-size:cover;
+	background-position:center center;
+	border-bottom:1px solid #fff;
+  min-height:300px;
+}
+
+.signin-top{
+	background:#555 asset_url('hat_scarf.jpg') no-repeat;
 	background-size:cover;
 	background-position:center center;
 	border-bottom:1px solid #fff;
