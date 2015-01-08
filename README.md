@@ -12,7 +12,6 @@
     $ cd openstile
     $ bundle install
     ```
-
 3. Run pending migrations:
     ```bash
     $ rake db:migrate RAILS_ENV=development
