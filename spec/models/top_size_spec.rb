@@ -7,7 +7,8 @@ RSpec.describe TopSize, :type => :model do
   subject { @top_size }
 
   it { should respond_to :name }
-  it { should respond_to :style_profiles }
   it { should respond_to :category }
+  it { should respond_to :style_profiles }
+  it { should respond_to :retailers }
   it { should be_valid }
 end

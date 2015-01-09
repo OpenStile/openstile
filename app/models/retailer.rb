@@ -1,4 +1,5 @@
 class Retailer < ActiveRecord::Base
+  has_and_belongs_to_many :top_sizes
   
   validates :name, presence: true, length: { maximum: 50 } 
   validates :neighborhood, presence: true, length: { maximum: 50 } 
