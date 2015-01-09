@@ -1,6 +1,6 @@
-<div class="container">
-  <nav class="navbar-fixed-top">
-    <header>
+<header>
+  <div class="container">
+    <div class="row">
       <div class="col-md-6">
         <div class="logo">
           <h1><%= link_to "OpenStile", root_path %></h1>
@@ -19,7 +19,7 @@
           <%= link_to "Log out", destroy_shopper_session_path, :method => :delete %>
         <% end %>
       </div>
-    </header>
+    </div>
     <%= bootstrap_flash %>
-  </nav>
-</div>
+  </div>
+</header>

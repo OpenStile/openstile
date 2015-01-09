@@ -15,8 +15,8 @@ Rails.application.routes.draw do
     sessions: 'shoppers/sessions',
     } 
   devise_scope :shopper do
-      get "/shoppers/registrations", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
-      post "/shoppers/registrations", :to => "shoppers/registrations#create", :as => 'shopper_registration'
+      get "/shoppers/sign_up", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
+      post "/shoppers", :to => "shoppers/registrations#create", :as => 'shopper_registration'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
