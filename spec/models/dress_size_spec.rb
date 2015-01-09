@@ -7,5 +7,6 @@ RSpec.describe DressSize, :type => :model do
   subject { @dress_size }
 
   it { should respond_to :name }
+  it { should respond_to :style_profiles }
   it { should be_valid }
 end
