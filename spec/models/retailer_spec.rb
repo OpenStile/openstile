@@ -11,6 +11,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :neighborhood }
   it { should respond_to :description }
   it { should respond_to :top_sizes }
+  it { should respond_to :bottom_sizes }
   it { should be_valid }
 
   context "when name is not present" do
