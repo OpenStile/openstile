@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108211321) do
+ActiveRecord::Schema.define(version: 20150109115836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 20150108211321) do
 
   add_index "shoppers", ["email"], name: "index_shoppers_on_email", unique: true, using: :btree
 
+  create_table "style_profile_top_sizes", force: true do |t|
+    t.integer  "style_profile_id"
+    t.integer  "top_size_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "style_profile_top_sizes", ["style_profile_id"], name: "index_style_profile_top_sizes_on_style_profile_id", using: :btree
+  add_index "style_profile_top_sizes", ["top_size_id"], name: "index_style_profile_top_sizes_on_top_size_id", using: :btree
+
   create_table "style_profiles", force: true do |t|
     t.integer  "shopper_id"
     t.datetime "created_at"
@@ -58,6 +68,14 @@ ActiveRecord::Schema.define(version: 20150108211321) do
   end
 
   add_index "style_profiles", ["shopper_id"], name: "index_style_profiles_on_shopper_id", using: :btree
+
+  create_table "style_profiles_top_sizes", id: false, force: true do |t|
+    t.integer "style_profile_id", null: false
+    t.integer "top_size_id",      null: false
+  end
+
+  add_index "style_profiles_top_sizes", ["style_profile_id", "top_size_id"], name: "shopper_top_sizes_index", using: :btree
+  add_index "style_profiles_top_sizes", ["top_size_id", "style_profile_id"], name: "shoppers_for_a_top_size_index", using: :btree
 
   create_table "top_sizes", force: true do |t|
     t.string   "name"
