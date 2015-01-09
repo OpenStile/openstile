@@ -7,8 +7,15 @@ RSpec.describe StyleProfilesController, :type => :controller do
 
   context "when shopper is not signed in" do
     context "GET edit" do
-      it "redirects to signup" do
+      it "redirects to signin" do
         get :edit, {id: shopper.style_profile.id}
+        expect(response).to redirect_to(new_shopper_session_path)
+      end
+    end
+
+    context "PATCH update" do
+      it "redirects to signin" do
+        patch :update, {id: shopper.style_profile.id}
         expect(response).to redirect_to(new_shopper_session_path)
       end
     end
@@ -20,6 +27,13 @@ RSpec.describe StyleProfilesController, :type => :controller do
     context "GET edit" do
       it "redirects to root" do
         get :edit, {id: shopper.style_profile.id}
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "PATCH update" do
+      it "redirects to root" do
+        patch :update, {id: shopper.style_profile.id}
         expect(response).to redirect_to(root_path)
       end
     end

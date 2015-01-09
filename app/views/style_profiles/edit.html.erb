@@ -1,7 +1,48 @@
 <% provide(:title, 'Style Profile') %>
 
-<%= render "shared/header" %>
+<div class="style-profile-top">
+  <%= render "shared/header" %>
+  <div class="hero inner-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="intro">
+            <h2>Style Profile</h2><br /> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<div class="style-profile block">
+  <div class="container">
+    <div class="page-title text-center">
+      <p>
+        We'd like to get to know you!
+        Please take a few minutes to complete your personal Style Profile
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xs-6 col-md-offset-3 col-xs-offset-3">
+        <%= form_for @style_profile, url: {action: "update"} do |f| %>
+          
+          <div id="top_sizes">
+            <%= f.collection_check_boxes(:top_size_ids, TopSize.all, :id, :name) %>
+          </div>
 
-<h2>My Style Profile</h2>
-<p>Find me in app/views/style_profiles/edit.html.erb</p>
+          <div id="bottom_sizes">
+            <%= f.collection_check_boxes(:bottom_size_ids, TopSize.all, :id, :name) %>
+          </div>
+
+          <div id="dress_sizes">
+            <%= f.collection_check_boxes(:dress_size_ids, TopSize.all, :id, :name) %>
+          </div>
+
+          <%= f.submit 'Save and continue to Style Feed', 
+                        class: "col-md-6 col-xs-6 btn btn-large btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
