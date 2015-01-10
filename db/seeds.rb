@@ -18,11 +18,6 @@ end
   DressSize.find_or_create_by(name: size, category: "numeric")
 end
 
-["16", "18", "20"].each do |size|
-  BottomSize.find_or_create_by(name: size, category: "numeric")
-  DressSize.find_or_create_by(name: size, category: "numeric")
-end
-
 ("24".."34").each do |size|
   BottomSize.find_or_create_by(name: size, category: "inches")
 end
