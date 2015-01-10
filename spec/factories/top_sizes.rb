@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :top_size do
-    name "MyString"
+    name "Small"
+    category "alpha"
   end
 end

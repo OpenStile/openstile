@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-["XS", "Small", "Medium", "Large", "XL"].each do |size|
+["X-Small", "Small", "Medium", "Large", "X-Large"].each do |size|
   TopSize.find_or_create_by(name: size, category: "alpha")
   BottomSize.find_or_create_by(name: size, category: "alpha")
   DressSize.find_or_create_by(name: size, category: "alpha")

@@ -1706,6 +1706,76 @@ input {
   color: #a9a9a9;
 }
 
+.style-profile-form fieldset{
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid #a9a9a9;
+  padding-left: 50px;
+  margin-bottom: 30px;
+}
+
+.style-profile-form legend{
+  width:inherit; /* Or auto */
+  padding:0 10px; /* To give a bit of padding on the left and right */
+  border-bottom:none;
+	font-size:15px;
+	line-height:30px;
+	font-weight:normal;
+	color:#555;
+	font-family: 'Droid Serif', serif;
+	font-style:italic;
+	max-width:700px;
+  max-height: 999999px;
+}
+.style-profile-form h4{
+	font-size:15px;
+	line-height:30px;
+	font-weight:normal;
+	color:#555;
+	font-family: 'Droid Serif', serif;
+	font-style:italic;
+	max-width:700px;
+  max-height: 999999px;
+}
+.style-profile-form .sizes-block {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.alpha-sizes {
+  margin-top: 10px;
+}
+.alpha-sizes .checkbox-inline {
+  margin-left: 80px;
+  padding-left: 5px;
+}
+.alpha-sizes .checkbox-inline input{
+  margin-left: -50px;
+}
+.numeric-sizes {
+  margin-top: 10px;
+  margin-left: 24px;
+}
+.numeric-sizes .checkbox-inline {
+  margin-left: 40px;
+  padding-left: 5px;
+  min-width: 20px;
+}
+.numeric-sizes .checkbox-inline input{
+  margin-left: -20px;
+}
+.inch-sizes {
+  margin-top: 10px;
+  margin-left: 24px;
+}
+.inch-sizes .checkbox-inline {
+  margin-left: 40px;
+  padding-left: 5px;
+  min-width: 20px;
+}
+.inch-sizes .checkbox-inline input{
+  margin-left: -20px;
+}
 /* Forms End */
 
 /* Responsive CSS */

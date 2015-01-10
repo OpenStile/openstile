@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :dress_size do
-    name "MyString"
+    name "Small"
+    category "alpha"
   end
 end
