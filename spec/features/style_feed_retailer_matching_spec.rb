@@ -24,12 +24,7 @@ feature 'Style Feed retailer matching' do
 
   def given_i_am_a_logged_in_shopper
     @shopper = FactoryGirl.create(:shopper)
-
-    visit '/'
-    click_link 'Log in'
-    fill_in 'Email', with: @shopper.email
-    fill_in 'Password', with: @shopper.password
-    click_button 'Log in'
+    capybara_sign_in @shopper
   end
 
   def when_i_set_my_style_profile_sizes_to size_hash
@@ -44,7 +39,7 @@ feature 'Style Feed retailer matching' do
     within(:css, "div#dress_sizes") do
       check(size_hash[:dress_size])
     end
-    click_button 'Save and continue to Style Feed'
+    click_button style_profile_save 
 
     expect(page).to have_content('My Style Feed')
   end
