@@ -7,20 +7,19 @@ feature 'Style Feed retailer matching' do
     original_sizes = {top_size: "Small", bottom_size: "Small", dress_size: "Small"}
     new_sizes = {top_size: "Large", bottom_size: "Large", dress_size: "Large"}
 
-    retailer.top_sizes << FactoryGirl.create(:top_size, name: "Small")
-    retailer.bottom_sizes << FactoryGirl.create(:bottom_size, name: "Small")
-    retailer.dress_sizes << FactoryGirl.create(:dress_size, name: "Small")
+    FactoryGirl.create(:top_size, name: "Small")
+    FactoryGirl.create(:bottom_size, name: "Small")
+    FactoryGirl.create(:dress_size, name: "Small")
 
-    FactoryGirl.create(:top_size, name: "Large")
-    FactoryGirl.create(:bottom_size, name: "Large")
-    FactoryGirl.create(:dress_size, name: "Large")
+    retailer.top_sizes << FactoryGirl.create(:top_size, name: "Large")
+    retailer.bottom_sizes << FactoryGirl.create(:bottom_size, name: "Large")
+    retailer.dress_sizes << FactoryGirl.create(:dress_size, name: "Large")
 
     given_i_am_a_logged_in_shopper
     when_i_set_my_style_profile_sizes_to original_sizes
-    # Skip remaining steps until they're implemented
-    #then_my_style_feed_should_contain retailer
-    #when_i_set_my_style_profile_sizes_to new_sizes
-    #then_my_style_feed_should_not_contain retailer
+    then_my_style_feed_should_not_contain retailer
+    when_i_set_my_style_profile_sizes_to new_sizes
+    then_my_style_feed_should_contain retailer
   end
 
   def given_i_am_a_logged_in_shopper
