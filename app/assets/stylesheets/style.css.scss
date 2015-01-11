@@ -250,6 +250,14 @@ hr{
   min-height:300px;
 }
 
+.style-feed-top{
+	background:#555 asset_url('empty_hangers.jpg') no-repeat;
+	background-size:cover;
+	background-position:center 60%;
+	border-bottom:1px solid #fff;
+  min-height:100px;
+}
+
 /* Header */
 
 header{
@@ -1777,6 +1785,31 @@ input {
   margin-left: -20px;
 }
 /* Forms End */
+
+/* Style Feed Begins */
+
+.recommendation {
+  margin-top: 50px;
+}
+
+.recommendation .summary {
+  margin-top: 100px;
+  margin-bottom: 150px;
+  text-align: center;
+}
+
+.recommendation .summary h4{
+  margin-top: 10px;
+  color: #555;
+	font-style: italic;
+}
+
+.recommendation .img-responsive {
+  margin: 0 auto;
+}
+
+
+/* Style Feed Ends*/
 
 /* Responsive CSS */
 

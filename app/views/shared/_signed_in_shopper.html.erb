@@ -1,0 +1,45 @@
+<div class="style-feed-top">
+  <%= render "shared/header" %>
+  <div class="hero inner-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="intro">
+            <h2>My Style Feed</h2><br /> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="style-feed block">
+  <div class="container">
+    <div class="page-title text-center">
+      <p>
+        Check out these local retailers and items we suggest<br /> 
+        specifically for <span style="text-decoration: underline;">your</span> 
+        budget, body, and overall personal style!
+      </p>
+      <hr>
+    </div>
+    <% @recommendations.each_with_index do |recommendation, idx| %>
+      <div class="row">
+        <div class="recommendation">
+          <div class="col-md-5<%= ' col-md-push-7' if idx.odd? %> col-sm-12">
+            <img class="img-responsive" 
+                 src="http://placehold.it/500x500">
+          </div>
+          <div class="col-md-7<%= ' col-md-pull-5' if idx.odd? %> col-sm-12">
+            <div class="summary">
+              <h3><%= recommendation.name %></h3>
+              <h4><%= recommendation.neighborhood %></h4><br /><br />
+              <%= link_to 'Drop-in to browse store', '#', class: 'btn btn-lg btn-primary' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
