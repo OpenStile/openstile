@@ -13,6 +13,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :top_sizes }
   it { should respond_to :bottom_sizes }
   it { should respond_to :dress_sizes }
+  it { should respond_to :price_range }
   it { should be_valid }
 
   context "when name is not present" do
@@ -43,5 +44,20 @@ RSpec.describe Retailer, :type => :model do
   context "when description is too long" do
     before { @retailer.description = "a"*251 } 
     it { should_not be_valid }
+  end
+
+  describe "price range association" do
+    before { @retailer.save }
+
+    it "should create associated price range after create" do
+      expect(@retailer.price_range).to_not be_nil
+    end
+
+    it "should destroy associated price range" do
+      retailer_price_range = @retailer.price_range
+      @retailer.destroy
+      expect(retailer_price_range).to_not be_nil
+      expect(PriceRange.where(id: retailer_price_range.id)).to be_empty
+    end
   end
 end
