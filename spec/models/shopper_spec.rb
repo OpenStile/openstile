@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'spec_helper'
 
 RSpec.describe Shopper, :type => :model do
 
@@ -12,6 +11,7 @@ RSpec.describe Shopper, :type => :model do
   it { should respond_to :email }
   it { should respond_to :cell_phone }
   it { should respond_to :encrypted_password }
+  it { should respond_to :style_profile }
   it { should be_valid }
 
   context "when first name is not present" do
@@ -104,5 +104,20 @@ RSpec.describe Shopper, :type => :model do
   context "when password is too short" do
     before { @shopper.password = @shopper.password_confirmation = "a"*5 }
     it { should_not be_valid }
+  end
+
+  describe "style profile association" do
+    before { @shopper.save }
+
+    it "should create associated style profile after save" do
+      expect(@shopper.style_profile).to_not be_nil
+    end
+
+    it "should destroy associated style profile" do
+      shopper_style_profile = @shopper.style_profile
+      @shopper.destroy
+      expect(shopper_style_profile).to_not be_nil
+      expect(StyleProfile.where(id: shopper_style_profile.id)).to be_empty
+    end
   end
 end

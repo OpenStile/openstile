@@ -13,8 +13,7 @@
           <%= link_to "Log in", new_shopper_session_path %>
           <%= link_to "Sign up", new_shopper_registration_path, class: "sign-up" %>
         <% else %>
-          <%= link_to "Style Feed", root_path %>
-          <%= link_to "Wish List", '#' %>
+          <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile) %>
           <%= link_to "Drop-ins", '#' %>
           <%= link_to "Log out", destroy_shopper_session_path, :method => :delete %>
         <% end %>

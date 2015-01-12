@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   root  'static_pages#home'
-  get 'style_profiles/edit'
 
   get '/about'          =>  'static_pages#about'
   get '/retailer_info'  =>  'static_pages#retailer_info'
@@ -19,6 +18,7 @@ Rails.application.routes.draw do
       post "/shoppers", :to => "shoppers/registrations#create", :as => 'shopper_registration'
   end
 
+  resources :style_profiles, only: [:edit, :update]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

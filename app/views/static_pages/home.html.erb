@@ -3,7 +3,7 @@
 <% if !shopper_signed_in? %>
   <%= render partial: 'index_non_authenticated' %>
 <% else %>
-  <%= render partial: 'signed_in_shopper' %>
+  <%= render partial: 'shared/signed_in_shopper' %>
 <% end %>
 
 <%= render "shared/google_analytics" %>

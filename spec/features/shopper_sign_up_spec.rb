@@ -42,7 +42,7 @@ describe "Shopper sign up" do
 
         it "should take me to edit my Style Profile" do
           expect(page).to have_title('Style Profile | OpenStile')
-          expect(page).to have_selector('h2', text: 'My Style Profile')
+          expect(page).to have_selector('h2', text: 'Style Profile')
         end
       end
     end

@@ -12,7 +12,7 @@ skip_before_filter :authenticate_shopper!, :only => [:new,:create]
     @shopper = Shopper.new(user_params)
     if @shopper.save
       sign_in(@shopper)
-      redirect_to style_profiles_edit_path
+      redirect_to edit_style_profile_path(@shopper.style_profile)
     else
       render 'new'
     end
