@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150109162124) do
+ActiveRecord::Schema.define(version: 20150112161310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,20 @@ ActiveRecord::Schema.define(version: 20150109162124) do
 
   add_index "bottom_sizes_style_profiles", ["bottom_size_id", "style_profile_id"], name: "shoppers_for_a_bottom_size_index", using: :btree
   add_index "bottom_sizes_style_profiles", ["style_profile_id", "bottom_size_id"], name: "shopper_bottom_sizes_index", using: :btree
+
+  create_table "budgets", force: true do |t|
+    t.integer  "style_profile_id"
+    t.decimal  "top_min_price"
+    t.decimal  "top_max_price"
+    t.decimal  "bottom_min_price"
+    t.decimal  "bottom_max_price"
+    t.decimal  "dress_min_price"
+    t.decimal  "dress_max_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "budgets", ["style_profile_id"], name: "index_budgets_on_style_profile_id", using: :btree
 
   create_table "dress_sizes", force: true do |t|
     t.string   "name"
