@@ -6,5 +6,6 @@ RSpec.describe Look, :type => :model do
 
   subject { @look }
 
+  it { should respond_to :name }
   it { should be_valid }
 end
