@@ -2,8 +2,11 @@ require 'rails_helper'
 
 feature 'Style Feed retailer matching' do
   let(:retailer){ FactoryGirl.create(:retailer) }  
+  let(:shopper){ FactoryGirl.create(:shopper) }  
 
   scenario 'based on size' do
+    calibrate_shopper_and_retailer_except_for :size
+
     original_sizes = seed_sizes({top_size: "Small", bottom_size: "Small", dress_size: "Small"})
     new_sizes = seed_sizes({top_size: "Large", bottom_size: "Large", dress_size: "Large"})
 
@@ -17,6 +20,8 @@ feature 'Style Feed retailer matching' do
   end
 
   scenario 'based on budget' do
+    calibrate_shopper_and_retailer_except_for :budget
+
     original_budget = {top: "$50 - $100", bottom: "$50 - $100", dress: "$50 - $100"}
     new_budget = {top: "$150 - $200", bottom: "$150 - $200", dress: "$200 +"}
 
@@ -30,8 +35,7 @@ feature 'Style Feed retailer matching' do
   end
 
   def given_i_am_a_logged_in_shopper
-    @shopper = FactoryGirl.create(:shopper)
-    capybara_sign_in @shopper
+    capybara_sign_in shopper
   end
 
   def when_i_set_my_style_profile_sizes_to sizes
@@ -52,7 +56,17 @@ feature 'Style Feed retailer matching' do
   end
 
   def when_i_set_my_style_profile_budget_to budget
-    pending "Waiting to be implemented"
+    click_link 'Style Profile'
+
+    within(:css, "div#budgets") do
+      select(budget[:dress], from: "A dress:")
+      select(budget[:top], from: "A top or blouse:")
+      select(budget[:bottom], from: "A pair of pants or jeans:")
+    end
+
+    click_button style_profile_save 
+
+    expect(page).to have_content('My Style Feed')
   end
 
   def then_my_style_feed_should_contain recommendation
@@ -83,11 +97,28 @@ feature 'Style Feed retailer matching' do
     end
 
     def set_price_range_for_retailer price_ranges
-      retailer.price_range.top_min_price = price_ranges[:top][0] 
-      retailer.price_range.top_max_price = price_ranges[:top][1] 
-      retailer.price_range.bottom_min_price = price_ranges[:bottom][0] 
-      retailer.price_range.bottom_max_price = price_ranges[:bottom][1] 
-      retailer.price_range.dress_min_price = price_ranges[:dress][0] 
-      retailer.price_range.dress_max_price = price_ranges[:dress][1] 
+      retailer.price_range.update!({top_min_price: price_ranges[:top][0],
+                                    top_max_price: price_ranges[:top][1],
+                                    bottom_min_price: price_ranges[:bottom][0],
+                                    bottom_max_price: price_ranges[:bottom][1],
+                                    dress_min_price: price_ranges[:dress][0],
+                                    dress_max_price: price_ranges[:dress][1]})
+    end
+
+    def calibrate_shopper_and_retailer_except_for tested_property
+      unless tested_property == :size
+        shared_size = FactoryGirl.create(:top_size)
+        shopper.style_profile.top_sizes << shared_size
+        retailer.top_sizes << shared_size
+      end
+
+      unless tested_property == :budget
+        shopper.style_profile.budget.top_min_price = 50.00
+        retailer.price_range.top_min_price = 50.00
+        shopper.style_profile.budget.top_max_price = 100.00
+        retailer.price_range.top_max_price = 100.00
+        shopper.style_profile.budget.save
+        retailer.price_range.save
+      end
     end
 end
