@@ -8,6 +8,7 @@ RSpec.describe Look, :type => :model do
 
   it { should respond_to :name }
   it { should respond_to :look_tolerances }
+  it { should respond_to :retailers }
   it { should be_valid }
 
   describe "look tolerance association" do
