@@ -1,0 +1,47 @@
+<div id="top_sizes" class="sizes-block">
+  <h4>Top Sizes:</h4>
+  <div class="alpha-sizes">
+    <%= form_helper.collection_check_boxes(:top_size_ids, TopSize.where(category: "alpha"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+  <div class="numeric-sizes">
+    <%= form_helper.collection_check_boxes(:top_size_ids, TopSize.where(category: "numeric"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+</div>
+
+<div id="bottom_sizes" class="sizes-block">
+  <h4>Bottom Sizes:</h4>
+  <div class="inch-sizes">
+    <%= form_helper.collection_check_boxes(:bottom_size_ids, BottomSize.where(category: "inches"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+  <div class="alpha-sizes">
+    <%= form_helper.collection_check_boxes(:bottom_size_ids, BottomSize.where(category: "alpha"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+  <div class="numeric-sizes">
+    <%= form_helper.collection_check_boxes(:bottom_size_ids, BottomSize.where(category: "numeric"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+</div>
+
+<div id="dress_sizes" class="sizes-block">
+  <h4>Dress Sizes:</h4>
+  <div class="alpha-sizes">
+    <%= form_helper.collection_check_boxes(:dress_size_ids, DressSize.where(category: "alpha"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+  <div class="numeric-sizes">
+    <%= form_helper.collection_check_boxes(:dress_size_ids, DressSize.where(category: "numeric"), :id, :name) do |b| %>
+      <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
+    <% end %>
+  </div>
+</div>
+

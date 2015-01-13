@@ -28,58 +28,16 @@
         <%= form_for @style_profile, url: {action: "update"} do |f| %>
           <fieldset>  
             <legend>Sizes (select all that apply)</legend>
+            <%= render "sizes_fieldset", form_helper: f %>
+          </fieldset>  
 
-            <div id="top_sizes" class="sizes-block">
-              <h4>Top Sizes:</h4>
-              <div class="alpha-sizes">
-                <%= f.collection_check_boxes(:top_size_ids, TopSize.where(category: "alpha"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-              <div class="numeric-sizes">
-                <%= f.collection_check_boxes(:top_size_ids, TopSize.where(category: "numeric"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-            </div>
-
-            <div id="bottom_sizes" class="sizes-block">
-              <h4>Bottom Sizes:</h4>
-              <div class="inch-sizes">
-                <%= f.collection_check_boxes(:bottom_size_ids, BottomSize.where(category: "inches"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-              <div class="alpha-sizes">
-                <%= f.collection_check_boxes(:bottom_size_ids, BottomSize.where(category: "alpha"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-              <div class="numeric-sizes">
-                <%= f.collection_check_boxes(:bottom_size_ids, BottomSize.where(category: "numeric"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-            </div>
-
-            <div id="dress_sizes" class="sizes-block">
-              <h4>Dress Sizes:</h4>
-              <div class="alpha-sizes">
-                <%= f.collection_check_boxes(:dress_size_ids, DressSize.where(category: "alpha"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-              <div class="numeric-sizes">
-                <%= f.collection_check_boxes(:dress_size_ids, DressSize.where(category: "numeric"), :id, :name) do |b| %>
-                  <%= b.label(class: "checkbox-inline") { b.check_box + b.text } %>
-                <% end %>
-              </div>
-            </div>
-
+          <fieldset>  
+            <legend>Budget</legend>
+            <%= render "budget_fieldset", form_helper: f %>
           </fieldset>  
 
           <%= f.submit 'Save and continue to Style Feed', 
-                        class: "col-md-4 col-xs-4 btn btn-lg btn-primary center-block" %>
+                        class: "col-md-4 col-xs-6 btn btn-lg btn-primary center-block" %>
         <% end %>
       </div>
     </div>

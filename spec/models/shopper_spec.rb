@@ -109,7 +109,7 @@ RSpec.describe Shopper, :type => :model do
   describe "style profile association" do
     before { @shopper.save }
 
-    it "should create associated style profile after save" do
+    it "should create associated style profile after create" do
       expect(@shopper.style_profile).to_not be_nil
     end
 

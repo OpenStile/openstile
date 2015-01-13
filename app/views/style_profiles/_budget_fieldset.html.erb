@@ -1,0 +1,45 @@
+<div id="budgets">
+  <%= form_helper.fields_for :budget do |budget_form|%>
+
+    <h4>How much would you spend on the following?</h4><br />
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-1">
+        <%= budget_form.label :dress_range_string, "A dress:"%>
+      </div>
+      <div class="col-md-3 col-xs-4">
+        <%= budget_form.select(:dress_range_string, [["< $50", "< $50"],
+                                                   ["$50 - $100", "$50 - $100"],
+                                                   ["$100 - $150", "$100 - $150"],
+                                                   ["$150 - $200", "$150 - $200"],
+                                                   ["$200 +", "$200 +"]], {}, class: "form-control") %>
+      </div>                                                   
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-1">
+        <%= budget_form.label :top_range_string, "A top or blouse:"%>
+      </div>
+      <div class="col-md-3 col-xs-4">
+        <%= budget_form.select(:top_range_string, [["< $50", "< $50"],
+                                                 ["$50 - $100", "$50 - $100"],
+                                                 ["$100 - $150", "$100 - $150"],
+                                                 ["$150 - $200", "$150 - $200"],
+                                                 ["$200 +", "$200 +"]], {}, class: "form-control") %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2 col-md-offset-1">
+        <%= budget_form.label :bottom_range_string, "A pair of pants or jeans:"%>
+      </div>
+      <div class="col-md-3 col-xs-4">
+        <%= budget_form.select(:bottom_range_string, [["< $50", "< $50"],
+                                                    ["$50 - $100", "$50 - $100"],
+                                                    ["$100 - $150", "$100 - $150"],
+                                                    ["$150 - $200", "$150 - $200"],
+                                                    ["$200 +", "$200 +"]], {}, class: "form-control") %>
+      </div>
+    </div>
+  <% end %>
+</div>
