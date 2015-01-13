@@ -14,6 +14,8 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :bottom_sizes }
   it { should respond_to :dress_sizes }
   it { should respond_to :price_range }
+  it { should respond_to :look }
+  it { should respond_to :look_id }
   it { should respond_to :primary_look }
   it { should be_valid }
 
