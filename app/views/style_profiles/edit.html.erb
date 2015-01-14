@@ -23,28 +23,26 @@
         Please take a few minutes to complete your personal Style Profile
       </p>
     </div>
-    <div class="row">
-      <div class="style-profile-form">
-        <%= form_for @style_profile, url: {action: "update"} do |f| %>
-          <fieldset>  
-            <legend>Sizes (select all that apply)</legend>
-            <%= render "sizes_fieldset", form_helper: f %>
-          </fieldset>  
+    <div class="style-profile-form">
+      <%= form_for @style_profile, url: {action: "update"} do |f| %>
+        <fieldset>  
+          <legend>Sizes (select all that apply)</legend>
+          <%= render "sizes_fieldset", form_helper: f %>
+        </fieldset>  
 
-          <fieldset>  
-            <legend>Budget</legend>
-            <%= render "budget_fieldset", form_helper: f %>
-          </fieldset>  
+        <fieldset>  
+          <legend>Budget</legend>
+          <%= render "budget_fieldset", form_helper: f %>
+        </fieldset>  
 
-          <fieldset>  
-            <legend>Favorite Looks</legend>
-            <%= render "looks_fieldset", form_helper: f %>
-          </fieldset>  
+        <fieldset>  
+          <legend>Favorite Looks</legend>
+          <%= render "looks_fieldset", form_helper: f %>
+        </fieldset>  
 
-          <%= f.submit 'Save and continue to Style Feed', 
-                        class: "col-md-4 col-xs-6 btn btn-lg btn-primary center-block" %>
-        <% end %>
-      </div>
+        <%= f.submit 'Save and continue to Style Feed', 
+              class: "col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3 btn btn-lg btn-primary" %>
+      <% end %>
     </div>
   </div>
 </div>
