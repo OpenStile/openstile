@@ -6,5 +6,6 @@ FactoryGirl.define do
     description "The perfect blouse for every ocassion"
     web_link "http://see-this-blouse.com"
     price 9.99
+    retailer nil
   end
 end

@@ -5,6 +5,9 @@ class Retailer < ActiveRecord::Base
   has_one :price_range, dependent: :destroy
   belongs_to :look
   belongs_to :primary_look, class_name: "Look"
+  has_many :tops, dependent: :destroy
+  has_many :bottoms, dependent: :destroy
+  has_many :dresses, dependent: :destroy
 
   after_create{ create_price_range }
   

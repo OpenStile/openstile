@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114174623) do
+ActiveRecord::Schema.define(version: 20150114191059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,10 @@ ActiveRecord::Schema.define(version: 20150114174623) do
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "retailer_id"
   end
+
+  add_index "bottoms", ["retailer_id"], name: "index_bottoms_on_retailer_id", using: :btree
 
   create_table "budgets", force: true do |t|
     t.integer  "style_profile_id"
@@ -108,7 +111,10 @@ ActiveRecord::Schema.define(version: 20150114174623) do
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "retailer_id"
   end
+
+  add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
 
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"
@@ -231,6 +237,9 @@ ActiveRecord::Schema.define(version: 20150114174623) do
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "retailer_id"
   end
+
+  add_index "tops", ["retailer_id"], name: "index_tops_on_retailer_id", using: :btree
 
 end

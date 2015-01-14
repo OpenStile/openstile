@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Top, :type => :model do
-
-  before { @top = Top.new(name: "Green shirt", description: "A really cool shirt",
-                          web_link: "www.see_this_shirt.com", price: 55.00) }
+  let(:retailer){ FactoryGirl.create(:retailer) }
+  before { @top = retailer.tops.build(name: "Green shirt", description: "A really cool shirt",
+                                      web_link: "www.see_this_shirt.com", price: 55.00) }
   
   subject { @top }
 
@@ -12,6 +12,8 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :web_link }
   it { should respond_to :price }
   it { should respond_to :top_sizes }
+  it { should respond_to :retailer }
+  it { should respond_to :retailer_id }
   it { should be_valid }
 
   context "when name is not present" do
@@ -41,6 +43,11 @@ RSpec.describe Top, :type => :model do
 
   context "when web link is too long" do
     before { @top.web_link = "a"*101 } 
+    it { should_not be_valid }
+  end
+
+  context "when retailer id is not present" do
+    before { @top.retailer_id = nil }
     it { should_not be_valid }
   end
 end
