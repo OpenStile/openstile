@@ -10,6 +10,7 @@ RSpec.describe Bottom, :type => :model do
   it { should respond_to :name }
   it { should respond_to :description }
   it { should respond_to :web_link }
+  it { should respond_to :bottom_sizes }
   it { should be_valid }
 
   context "when name is not present" do
