@@ -34,6 +34,20 @@ feature 'Style Feed retailer matching' do
     then_my_style_feed_should_contain retailer
   end
 
+  scenario 'based on hated look' do
+    calibrate_shopper_and_retailer_except_for :hated_look
+
+    look = FactoryGirl.create(:look, name: "Bohemian Chic")
+    
+    set_retailer_primary_look look
+
+    given_i_am_a_logged_in_shopper
+    when_i_set_my_style_profile_feelings_for_a_look_as look, :hate
+    then_my_style_feed_should_not_contain retailer
+    when_i_set_my_style_profile_feelings_for_a_look_as look, :impartial
+    then_my_style_feed_should_contain retailer
+  end
+
   def given_i_am_a_logged_in_shopper
     capybara_sign_in shopper
   end
@@ -64,6 +78,26 @@ feature 'Style Feed retailer matching' do
       select(budget[:bottom], from: "A pair of pants or jeans:")
     end
 
+    click_button style_profile_save 
+
+    expect(page).to have_content('My Style Feed')
+  end
+
+  def when_i_set_my_style_profile_feelings_for_a_look_as look, partiality
+    click_link 'Style Profile'
+
+    within(:css, "div#look_#{look.id}") do
+      if partiality == :hate
+        choose "I hate it!"
+      end
+      if partiality == :impartial
+        choose "It's alright"
+      end
+      if partiality == :love
+        choose "I love it!"
+      end
+    end
+   
     click_button style_profile_save 
 
     expect(page).to have_content('My Style Feed')
@@ -105,6 +139,11 @@ feature 'Style Feed retailer matching' do
                                     dress_max_price: price_ranges[:dress][1]})
     end
 
+    def set_retailer_primary_look look
+      retailer.look = look
+      retailer.save
+    end
+
     def calibrate_shopper_and_retailer_except_for tested_property
       unless tested_property == :size
         shared_size = FactoryGirl.create(:top_size)
@@ -119,6 +158,11 @@ feature 'Style Feed retailer matching' do
         retailer.price_range.top_max_price = 100.00
         shopper.style_profile.budget.save
         retailer.price_range.save
+      end
+
+      unless tested_property == :hated_look
+        retailer.look_id = nil
+        retailer.save
       end
     end
 end

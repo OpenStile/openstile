@@ -32,6 +32,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'devise', '~> 3.4.1'
 
+gem 'jquery-turbolinks'
 # Use unicorn as the app server
 # gem 'unicorn'
 
