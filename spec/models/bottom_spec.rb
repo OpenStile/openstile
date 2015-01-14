@@ -13,12 +13,27 @@ RSpec.describe Bottom, :type => :model do
   it { should be_valid }
 
   context "when name is not present" do
-    before { @bottom.name = nil }
+    before { @bottom.name = " " }
     it { should_not be_valid }
   end
 
   context "when description is not present" do
-    before { @bottom.description = nil }
+    before { @bottom.description = " " }
+    it { should_not be_valid }
+  end
+
+  context "when name is too long" do
+    before { @bottom.name = "a"*101 } 
+    it { should_not be_valid }
+  end
+
+  context "when description is too long" do
+    before { @bottom.description = "a"*251 } 
+    it { should_not be_valid }
+  end
+
+  context "when web link is too long" do
+    before { @bottom.web_link = "a"*101 } 
     it { should_not be_valid }
   end
 end
