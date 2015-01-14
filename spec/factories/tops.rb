@@ -5,5 +5,6 @@ FactoryGirl.define do
     name "Emerald Green Blouse"
     description "The perfect blouse for every ocassion"
     web_link "http://see-this-blouse.com"
+    price 9.99
   end
 end

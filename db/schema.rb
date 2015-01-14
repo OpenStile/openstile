@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150114174623) do
     t.string   "name"
     t.string   "description"
     t.string   "web_link"
+    t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -104,6 +105,7 @@ ActiveRecord::Schema.define(version: 20150114174623) do
     t.string   "name"
     t.string   "description"
     t.string   "web_link"
+    t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -226,6 +228,7 @@ ActiveRecord::Schema.define(version: 20150114174623) do
     t.string   "name"
     t.string   "description"
     t.string   "web_link"
+    t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

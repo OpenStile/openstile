@@ -4,6 +4,7 @@ class CreateTops < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :web_link
+      t.decimal :price
 
       t.timestamps
     end

@@ -3,13 +3,14 @@ require 'rails_helper'
 RSpec.describe Dress, :type => :model do
   
   before { @dress = Dress.new(name: "Skinny Jeans", description: "A really cool pair of jeans",
-                              web_link: "www.see_this_dress.com") }
+                              web_link: "www.see_this_dress.com", price: 55.00) }
   
   subject { @dress }
 
   it { should respond_to :name }
   it { should respond_to :description }
   it { should respond_to :web_link }
+  it { should respond_to :price }
   it { should respond_to :dress_sizes }
   it { should be_valid }
 
@@ -20,6 +21,11 @@ RSpec.describe Dress, :type => :model do
 
   context "when description is not present" do
     before { @dress.description = " " }
+    it { should_not be_valid }
+  end
+
+  context "when price is not present" do
+    before { @dress.price = nil }
     it { should_not be_valid }
   end
 
