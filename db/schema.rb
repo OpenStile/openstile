@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114155511) do
+ActiveRecord::Schema.define(version: 20150114162425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,14 @@ ActiveRecord::Schema.define(version: 20150114155511) do
     t.datetime "updated_at"
     t.string   "category"
   end
+
+  create_table "top_sizes_tops", id: false, force: true do |t|
+    t.integer "top_id",      null: false
+    t.integer "top_size_id", null: false
+  end
+
+  add_index "top_sizes_tops", ["top_id", "top_size_id"], name: "sizes_for_a_top_index", using: :btree
+  add_index "top_sizes_tops", ["top_size_id", "top_id"], name: "tops_of_a_size_index", using: :btree
 
   create_table "tops", force: true do |t|
     t.string   "name"
