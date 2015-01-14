@@ -11,7 +11,7 @@ class StyleProfilesController < ApplicationController
       flash[:success] = "Your Style Profile has been updated!"
       redirect_to root_url
     else
-      flash[:error] = "Whoops! Something went wrong. Please try again"
+      flash[:danger] = "Whoops! Something went wrong. Please try again"
       render "edit"
     end
   end
@@ -25,6 +25,7 @@ class StyleProfilesController < ApplicationController
 
     def style_profile_params
       params.require(:style_profile).permit(top_size_ids: [], bottom_size_ids: [], dress_size_ids: [],
-                                            budget_attributes: [:top_range_string, :bottom_range_string, :dress_range_string])
+                                            budget_attributes: [:top_range_string, :bottom_range_string, :dress_range_string],
+                                            look_tolerances_attributes: [:id, :look_id, :tolerance])
     end
 end

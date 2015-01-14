@@ -1,0 +1,32 @@
+<div class="looks">
+  <h4>How do you feel about <span style="text-decoration: underline;">each</span> of the following looks?</h4><br />
+
+  <% Look.all.each do |look| %>
+    <div id=<%="look_#{look.id}"%> class="look">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
+          <img class="img-responsive" src="http://placehold.it/640x400">
+        </div>
+      </div>
+      <div class="row">
+        <%= form_helper.fields_for :look_tolerances, @style_profile.look_tolerances.find_or_create_by(look_id: look.id) do |look_tolerance_fields| %>
+          <div class="preference-selection">
+            <%= look_tolerance_fields.hidden_field(:look_id) %>
+            <div class="col-md-2 col-md-offset-2 text-center">
+              <%= look_tolerance_fields.label(:tolerance_1, "I hate it!") %>
+              <%= look_tolerance_fields.radio_button(:tolerance, 1) %>
+            </div>
+            <div class="col-md-2 text-center">
+              <%= look_tolerance_fields.label(:tolerance_5, "It's alright") %>
+              <%= look_tolerance_fields.radio_button(:tolerance, 5) %>
+            </div>
+            <div class="col-md-2 text-center">
+              <%= look_tolerance_fields.label(:tolerance_10, "I love it!") %>
+              <%= look_tolerance_fields.radio_button(:tolerance, 10) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

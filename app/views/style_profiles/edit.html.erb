@@ -36,6 +36,11 @@
             <%= render "budget_fieldset", form_helper: f %>
           </fieldset>  
 
+          <fieldset>  
+            <legend>Favorite Looks</legend>
+            <%= render "looks_fieldset", form_helper: f %>
+          </fieldset>  
+
           <%= f.submit 'Save and continue to Style Feed', 
                         class: "col-md-4 col-xs-6 btn btn-lg btn-primary center-block" %>
         <% end %>

@@ -84,7 +84,23 @@ feature 'Style Feed retailer matching' do
   end
 
   def when_i_set_my_style_profile_feelings_for_a_look_as look, partiality
-    pending "Waiting to be implemented"
+    click_link 'Style Profile'
+
+    within(:css, "div#look_#{look.id}") do
+      if partiality == :hate
+        choose "I hate it!"
+      end
+      if partiality == :impartial
+        choose "It's alright"
+      end
+      if partiality == :love
+        choose "I love it!"
+      end
+    end
+   
+    click_button style_profile_save 
+
+    expect(page).to have_content('My Style Feed')
   end
 
   def then_my_style_feed_should_contain recommendation
