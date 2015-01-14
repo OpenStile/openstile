@@ -7,4 +7,12 @@ class Bottom < ActiveRecord::Base
   validates :web_link, length: { maximum: 100 }
   validates :price, presence: true
   validates :retailer_id, presence: true
+
+  def self.within_budget budget, fuzz
+    if budget.bottom_min_price.nil? or budget.bottom_max_price.nil?
+      return none
+    end
+    where("price >= ? and price <= ?", budget.bottom_min_price - fuzz,
+                                       budget.bottom_max_price + fuzz)
+  end
 end
