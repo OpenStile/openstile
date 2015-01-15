@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Style Feed retailer matching' do
+feature 'Style Feed item matching' do
   let(:retailer){ FactoryGirl.create(:retailer) }  
   let(:top){ FactoryGirl.create(:top, retailer: retailer) }
   let(:bottom){ FactoryGirl.create(:bottom, retailer: retailer) }
@@ -33,11 +33,43 @@ feature 'Style Feed retailer matching' do
     then_my_style_feed_should_contain dress
   end
 
+  scenario 'based on budget' do
+    calibrate_shopper_and_top_except_for :budget
+    calibrate_shopper_and_bottom_except_for :budget
+    calibrate_shopper_and_dress_except_for :budget
+    
+    original_budget = {top: "$50 - $100", bottom: "$50 - $100", dress: "$50 - $100"}
+    new_budget = {top: "$150 - $200", bottom: "$150 - $200", dress: "$200 +"}
+
+    # Note a fuzz is used when evaluating price matches
+    set_prices_for_items 175.50
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_budget_to original_budget
+    then_my_style_feed_should_not_contain top
+    then_my_style_feed_should_not_contain bottom
+    then_my_style_feed_should_not_contain dress
+    when_i_set_my_style_profile_budget_to new_budget
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+  end
+
   private
     def set_sizes_for_items size_hash
       top.top_sizes << size_hash[:top_size]
       bottom.bottom_sizes << size_hash[:bottom_size]
       dress.dress_sizes << size_hash[:dress_size]
+    end
+
+    def set_prices_for_items price
+      top.price = price
+      bottom.price = price
+      dress.price = price
+
+      top.save
+      bottom.save
+      dress.save
     end
 
     def calibrate_shopper_and_top_except_for tested_property
@@ -74,7 +106,7 @@ feature 'Style Feed retailer matching' do
       unless tested_property == :size
         shared_size = FactoryGirl.create(:dress_size)
         shopper.style_profile.dress_sizes << shared_size
-        bottom.dress_sizes << shared_size
+        dress.dress_sizes << shared_size
       end
       unless tested_property == :budget
         shopper.style_profile.budget.dress_min_price = 50.00
