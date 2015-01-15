@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115015739) do
+ActiveRecord::Schema.define(version: 20150115180048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,17 @@ ActiveRecord::Schema.define(version: 20150115015739) do
   add_index "dresses", ["look_id"], name: "index_dresses_on_look_id", using: :btree
   add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
 
+  create_table "exposed_parts", force: true do |t|
+    t.integer  "part_id"
+    t.integer  "exposable_id"
+    t.string   "exposable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "exposed_parts", ["exposable_id", "exposable_type"], name: "index_exposed_parts_on_exposable_id_and_exposable_type", using: :btree
+  add_index "exposed_parts", ["part_id"], name: "index_exposed_parts_on_part_id", using: :btree
+
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"
     t.integer  "look_id"
@@ -132,6 +143,23 @@ ActiveRecord::Schema.define(version: 20150115015739) do
   add_index "look_tolerances", ["style_profile_id"], name: "index_look_tolerances_on_style_profile_id", using: :btree
 
   create_table "looks", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "part_exposure_tolerances", force: true do |t|
+    t.integer  "part_id"
+    t.integer  "style_profile_id"
+    t.integer  "tolerance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "part_exposure_tolerances", ["part_id"], name: "index_part_exposure_tolerances_on_part_id", using: :btree
+  add_index "part_exposure_tolerances", ["style_profile_id"], name: "index_part_exposure_tolerances_on_style_profile_id", using: :btree
+
+  create_table "parts", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

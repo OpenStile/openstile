@@ -26,3 +26,7 @@ end
  "Classic/Vintage", "Edgy/Rocker", "Romantic/Girly", "Glamorous/Diva"].each do |look|
   Look.find_or_create_by(name: look)
 end
+
+["Arms", "Back", "Cleavage", "Legs", "Midsection"].each do |part|
+  Part.find_or_create_by(name: part)
+end

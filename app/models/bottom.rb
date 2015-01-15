@@ -2,6 +2,7 @@ class Bottom < ActiveRecord::Base
   belongs_to :retailer
   belongs_to :look
   has_and_belongs_to_many :bottom_sizes
+  has_many :exposed_parts, as: :exposable, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 100 } 
   validates :description, presence: true, length: { maximum: 250 }
