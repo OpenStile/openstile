@@ -75,6 +75,49 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
+  scenario 'based on parts to cover' do
+    calibrate_shopper_and_top_except_for :part_coverage
+    calibrate_shopper_and_bottom_except_for :part_coverage
+    calibrate_shopper_and_dress_except_for :part_coverage
+
+    midsection = FactoryGirl.create(:part, name: "Midsection")
+    legs = FactoryGirl.create(:part, name: "Legs")
+
+    #TODO add exposed parts to articles
+    
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_coverage_preference_as [midsection, legs], :cover
+    then_my_style_feed_should_not_contain top
+    then_my_style_feed_should_not_contain bottom
+    then_my_style_feed_should_not_contain dress
+    when_i_set_my_style_profile_coverage_preference_as [midsection, legs], :impartial
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+  end
+
+  def when_i_set_my_style_profile_coverage_preference_as parts, tolerance
+    click_link 'Style Profile'
+ 
+    parts.each do |part|
+      within(:css, "div#part_#{part.id}") do
+        if tolerance == :cover
+          choose "Cover"
+        end
+        if tolerance == :impartial
+          choose "Mix it up"
+        end
+        if tolerance == :love
+          choose "Show off"
+        end
+      end
+    end
+ 
+    click_button style_profile_save 
+
+    expect(page).to have_content('My Style Feed')
+  end
+
   private
     def set_sizes_for_items size_hash
       top.top_sizes << size_hash[:top_size]
@@ -119,6 +162,9 @@ feature 'Style Feed item matching' do
         top.look_id = nil
         top.save
       end
+      unless tested_property == :part_coverage
+        shopper.style_profile.part_exposure_tolerances.delete_all
+      end
     end
 
     def calibrate_shopper_and_bottom_except_for tested_property
@@ -138,6 +184,9 @@ feature 'Style Feed item matching' do
         bottom.look_id = nil
         bottom.save
       end
+      unless tested_property == :part_coverage
+        shopper.style_profile.part_exposure_tolerances.delete_all
+      end
     end
 
     def calibrate_shopper_and_dress_except_for tested_property
@@ -156,6 +205,9 @@ feature 'Style Feed item matching' do
       unless tested_property == :hated_look
         dress.look_id = nil
         dress.save
+      end
+      unless tested_property == :part_coverage
+        shopper.style_profile.part_exposure_tolerances.delete_all
       end
     end
 end

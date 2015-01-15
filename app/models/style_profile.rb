@@ -9,6 +9,7 @@ class StyleProfile < ActiveRecord::Base
 
   accepts_nested_attributes_for :budget
   accepts_nested_attributes_for :look_tolerances
+  accepts_nested_attributes_for :part_exposure_tolerances
 
   after_create { create_budget }
 
