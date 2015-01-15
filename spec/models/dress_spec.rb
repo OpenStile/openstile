@@ -17,6 +17,7 @@ RSpec.describe Dress, :type => :model do
   it { should respond_to :retailer_id }
   it { should respond_to :look }
   it { should respond_to :look_id }
+  it { should respond_to :exposed_parts }
   it { should be_valid }
 
   context "when name is not present" do
@@ -52,5 +53,23 @@ RSpec.describe Dress, :type => :model do
   context "when retailer id is not present" do
     before { @dress.retailer_id = nil }
     it { should_not be_valid }
+  end
+
+  describe "exposed part association" do
+    before { @dress.save }
+
+    let(:part){ FactoryGirl.create(:part) }
+    let!(:exposed_part){ FactoryGirl.create(:exposed_part,
+                                            exposable: @dress,
+                                            part: part) }
+
+    it "should destroy associated exposed part" do
+      exposed_parts = @dress.exposed_parts.to_a
+      @dress.destroy
+      expect(exposed_parts).to_not be_empty
+      exposed_parts.each do |ep|
+        expect(ExposedPart.where(id: ep.id)).to be_empty
+      end
+    end
   end
 end
