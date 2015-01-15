@@ -12,7 +12,7 @@ feature 'Style Feed retailer matching' do
 
     set_sizes_for_retailer new_sizes
 
-    given_i_am_a_logged_in_shopper
+    given_i_am_a_logged_in_shopper shopper
     when_i_set_my_style_profile_sizes_to original_sizes
     then_my_style_feed_should_not_contain retailer
     when_i_set_my_style_profile_sizes_to new_sizes
@@ -27,7 +27,7 @@ feature 'Style Feed retailer matching' do
 
     set_price_range_for_retailer({top: ["200.00", "500.00"], bottom: ["300.00", "600.00"], dress: ["500.00", "1000.00"]})
 
-    given_i_am_a_logged_in_shopper
+    given_i_am_a_logged_in_shopper shopper
     when_i_set_my_style_profile_budget_to original_budget
     then_my_style_feed_should_not_contain retailer
     when_i_set_my_style_profile_budget_to new_budget
@@ -41,46 +41,11 @@ feature 'Style Feed retailer matching' do
     
     set_retailer_primary_look look
 
-    given_i_am_a_logged_in_shopper
+    given_i_am_a_logged_in_shopper shopper
     when_i_set_my_style_profile_feelings_for_a_look_as look, :hate
     then_my_style_feed_should_not_contain retailer
     when_i_set_my_style_profile_feelings_for_a_look_as look, :impartial
     then_my_style_feed_should_contain retailer
-  end
-
-  def given_i_am_a_logged_in_shopper
-    capybara_sign_in shopper
-  end
-
-  def when_i_set_my_style_profile_sizes_to sizes
-    click_link 'Style Profile'
-
-    within(:css, "div#top_sizes") do
-      check(sizes[:top_size].name)
-    end
-    within(:css, "div#bottom_sizes") do
-      check(sizes[:bottom_size].name)
-    end
-    within(:css, "div#dress_sizes") do
-      check(sizes[:dress_size].name)
-    end
-    click_button style_profile_save 
-
-    expect(page).to have_content('My Style Feed')
-  end
-
-  def when_i_set_my_style_profile_budget_to budget
-    click_link 'Style Profile'
-
-    within(:css, "div#budgets") do
-      select(budget[:dress], from: "A dress:")
-      select(budget[:top], from: "A top or blouse:")
-      select(budget[:bottom], from: "A pair of pants or jeans:")
-    end
-
-    click_button style_profile_save 
-
-    expect(page).to have_content('My Style Feed')
   end
 
   def when_i_set_my_style_profile_feelings_for_a_look_as look, partiality
@@ -101,16 +66,6 @@ feature 'Style Feed retailer matching' do
     click_button style_profile_save 
 
     expect(page).to have_content('My Style Feed')
-  end
-
-  def then_my_style_feed_should_contain recommendation
-    visit '/'
-    expect(page).to have_content(recommendation.name)
-  end
-
-  def then_my_style_feed_should_not_contain recommendation
-    visit '/'
-    expect(page).to_not have_content(recommendation.name)
   end
 
   private

@@ -21,3 +21,8 @@ end
 ("24".."34").each do |size|
   BottomSize.find_or_create_by(name: size, category: "inches")
 end
+
+["Bohemian Chic/Hipster", "Preppy", "Casual/Relaxed", 
+ "Classic/Vintage", "Edgy/Rocker", "Romantic/Girly", "Glamorous/Diva"].each do |look|
+  Look.find_or_create_by(name: look)
+end

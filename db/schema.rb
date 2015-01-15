@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113165839) do
+ActiveRecord::Schema.define(version: 20150114191059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20150113165839) do
     t.datetime "updated_at"
     t.string   "category"
   end
+
+  create_table "bottom_sizes_bottoms", id: false, force: true do |t|
+    t.integer "bottom_id",      null: false
+    t.integer "bottom_size_id", null: false
+  end
+
+  add_index "bottom_sizes_bottoms", ["bottom_id", "bottom_size_id"], name: "sizes_for_a_bottom_index", using: :btree
+  add_index "bottom_sizes_bottoms", ["bottom_size_id", "bottom_id"], name: "bottoms_of_a_size_index", using: :btree
 
   create_table "bottom_sizes_retailers", id: false, force: true do |t|
     t.integer "retailer_id",    null: false
@@ -38,6 +46,18 @@ ActiveRecord::Schema.define(version: 20150113165839) do
 
   add_index "bottom_sizes_style_profiles", ["bottom_size_id", "style_profile_id"], name: "shoppers_for_a_bottom_size_index", using: :btree
   add_index "bottom_sizes_style_profiles", ["style_profile_id", "bottom_size_id"], name: "shopper_bottom_sizes_index", using: :btree
+
+  create_table "bottoms", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "web_link"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "retailer_id"
+  end
+
+  add_index "bottoms", ["retailer_id"], name: "index_bottoms_on_retailer_id", using: :btree
 
   create_table "budgets", force: true do |t|
     t.integer  "style_profile_id"
@@ -60,6 +80,14 @@ ActiveRecord::Schema.define(version: 20150113165839) do
     t.string   "category"
   end
 
+  create_table "dress_sizes_dresses", id: false, force: true do |t|
+    t.integer "dress_id",      null: false
+    t.integer "dress_size_id", null: false
+  end
+
+  add_index "dress_sizes_dresses", ["dress_id", "dress_size_id"], name: "sizes_for_a_dress_index", using: :btree
+  add_index "dress_sizes_dresses", ["dress_size_id", "dress_id"], name: "dresses_of_a_size_index", using: :btree
+
   create_table "dress_sizes_retailers", id: false, force: true do |t|
     t.integer "retailer_id",   null: false
     t.integer "dress_size_id", null: false
@@ -75,6 +103,18 @@ ActiveRecord::Schema.define(version: 20150113165839) do
 
   add_index "dress_sizes_style_profiles", ["dress_size_id", "style_profile_id"], name: "shoppers_for_a_dress_size_index", using: :btree
   add_index "dress_sizes_style_profiles", ["style_profile_id", "dress_size_id"], name: "shopper_dress_sizes_index", using: :btree
+
+  create_table "dresses", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "web_link"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "retailer_id"
+  end
+
+  add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
 
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"
@@ -181,5 +221,25 @@ ActiveRecord::Schema.define(version: 20150113165839) do
     t.datetime "updated_at"
     t.string   "category"
   end
+
+  create_table "top_sizes_tops", id: false, force: true do |t|
+    t.integer "top_id",      null: false
+    t.integer "top_size_id", null: false
+  end
+
+  add_index "top_sizes_tops", ["top_id", "top_size_id"], name: "sizes_for_a_top_index", using: :btree
+  add_index "top_sizes_tops", ["top_size_id", "top_id"], name: "tops_of_a_size_index", using: :btree
+
+  create_table "tops", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "web_link"
+    t.decimal  "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "retailer_id"
+  end
+
+  add_index "tops", ["retailer_id"], name: "index_tops_on_retailer_id", using: :btree
 
 end

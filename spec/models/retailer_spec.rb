@@ -17,6 +17,9 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :look }
   it { should respond_to :look_id }
   it { should respond_to :primary_look }
+  it { should respond_to :tops }
+  it { should respond_to :bottoms }
+  it { should respond_to :dresses }
   it { should be_valid }
 
   context "when name is not present" do
@@ -61,6 +64,48 @@ RSpec.describe Retailer, :type => :model do
       @retailer.destroy
       expect(retailer_price_range).to_not be_nil
       expect(PriceRange.where(id: retailer_price_range.id)).to be_empty
+    end
+  end
+
+  describe "tops assocication" do
+    before { @retailer.save }
+    let!(:top) { FactoryGirl.create(:top, retailer: @retailer) }
+
+    it "should destroy associated tops" do
+      tops = @retailer.tops.to_a
+      @retailer.destroy
+      expect(tops).to_not be_empty
+      tops.each do |t|
+        expect(Top.where(id: t.id)).to be_empty
+      end
+    end
+  end
+
+  describe "bottoms assocication" do
+    before { @retailer.save }
+    let!(:bottom) { FactoryGirl.create(:bottom, retailer: @retailer) }
+
+    it "should destroy associated bottoms" do
+      bottoms = @retailer.bottoms.to_a
+      @retailer.destroy
+      expect(bottoms).to_not be_empty
+      bottoms.each do |b|
+        expect(Bottom.where(id: b.id)).to be_empty
+      end
+    end
+  end
+
+  describe "dresses assocication" do
+    before { @retailer.save }
+    let!(:dress) { FactoryGirl.create(:dress, retailer: @retailer) }
+
+    it "should destroy associated dresses" do
+      dresses = @retailer.dresses.to_a
+      @retailer.destroy
+      expect(dresses).to_not be_empty
+      dresses.each do |d|
+        expect(Dress.where(id: d.id)).to be_empty
+      end
     end
   end
 end
