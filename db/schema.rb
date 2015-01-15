@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115015739) do
+ActiveRecord::Schema.define(version: 20150115035538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,6 +132,12 @@ ActiveRecord::Schema.define(version: 20150115015739) do
   add_index "look_tolerances", ["style_profile_id"], name: "index_look_tolerances_on_style_profile_id", using: :btree
 
   create_table "looks", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parts", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
