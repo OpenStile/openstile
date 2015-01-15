@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150114191059) do
+ActiveRecord::Schema.define(version: 20150115015739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,8 +55,10 @@ ActiveRecord::Schema.define(version: 20150114191059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "retailer_id"
+    t.integer  "look_id"
   end
 
+  add_index "bottoms", ["look_id"], name: "index_bottoms_on_look_id", using: :btree
   add_index "bottoms", ["retailer_id"], name: "index_bottoms_on_retailer_id", using: :btree
 
   create_table "budgets", force: true do |t|
@@ -112,8 +114,10 @@ ActiveRecord::Schema.define(version: 20150114191059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "retailer_id"
+    t.integer  "look_id"
   end
 
+  add_index "dresses", ["look_id"], name: "index_dresses_on_look_id", using: :btree
   add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
 
   create_table "look_tolerances", force: true do |t|
@@ -238,8 +242,10 @@ ActiveRecord::Schema.define(version: 20150114191059) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "retailer_id"
+    t.integer  "look_id"
   end
 
+  add_index "tops", ["look_id"], name: "index_tops_on_look_id", using: :btree
   add_index "tops", ["retailer_id"], name: "index_tops_on_retailer_id", using: :btree
 
 end
