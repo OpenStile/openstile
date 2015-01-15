@@ -83,8 +83,8 @@ feature 'Style Feed item matching' do
     midsection = FactoryGirl.create(:part, name: "Midsection")
     legs = FactoryGirl.create(:part, name: "Legs")
 
-    #TODO add exposed parts to articles
-    
+    set_exposed_parts_for_items upper_body: midsection, lower_body: legs
+
     given_i_am_a_logged_in_shopper shopper
     when_i_set_my_style_profile_coverage_preference_as [midsection, legs], :cover
     then_my_style_feed_should_not_contain top
@@ -119,6 +119,13 @@ feature 'Style Feed item matching' do
   end
 
   private
+    def set_exposed_parts_for_items parts_hash
+      top.exposed_parts.create(part_id: parts_hash[:upper_body].id)
+      bottom.exposed_parts.create(part_id: parts_hash[:lower_body].id)
+      dress.exposed_parts.create(part_id: parts_hash[:upper_body].id)
+      dress.exposed_parts.create(part_id: parts_hash[:lower_body].id)
+    end
+
     def set_sizes_for_items size_hash
       top.top_sizes << size_hash[:top_size]
       bottom.bottom_sizes << size_hash[:bottom_size]
