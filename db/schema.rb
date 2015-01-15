@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115035538) do
+ActiveRecord::Schema.define(version: 20150115040626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,17 @@ ActiveRecord::Schema.define(version: 20150115035538) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "part_exposure_tolerances", force: true do |t|
+    t.integer  "part_id"
+    t.integer  "style_profile_id"
+    t.integer  "tolerance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "part_exposure_tolerances", ["part_id"], name: "index_part_exposure_tolerances_on_part_id", using: :btree
+  add_index "part_exposure_tolerances", ["style_profile_id"], name: "index_part_exposure_tolerances_on_style_profile_id", using: :btree
 
   create_table "parts", force: true do |t|
     t.string   "name"

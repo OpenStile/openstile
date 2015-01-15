@@ -15,6 +15,7 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :dress_sizes }
   it { should respond_to :budget }
   it { should respond_to :look_tolerances }
+  it { should respond_to :part_exposure_tolerances }
   it { should be_valid }
 
   context "when shopper id is not present" do
@@ -47,6 +48,22 @@ RSpec.describe StyleProfile, :type => :model do
       expect(look_tolerances).to_not be_empty
       look_tolerances.each do |lt|
         expect(LookTolerance.where(id: lt.id)).to be_empty
+      end
+    end
+  end
+
+  describe "part exposure association" do
+    let(:part){ FactoryGirl.create(:part) }
+    let!(:part_exposure_tolerance){ FactoryGirl.create(:part_exposure_tolerance, 
+                                                        style_profile: @style_profile, 
+                                                        part: part) }
+
+    it "should destroy associated part exposure tolerance" do
+      part_exposure_tolerances = @style_profile.part_exposure_tolerances.to_a
+      @style_profile.destroy
+      expect(part_exposure_tolerances).to_not be_empty
+      part_exposure_tolerances.each do |pt|
+        expect(PartExposureTolerance.where(id: pt.id)).to be_empty
       end
     end
   end
