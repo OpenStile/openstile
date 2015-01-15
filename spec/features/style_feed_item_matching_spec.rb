@@ -55,6 +55,26 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
+  scenario 'based on hated look' do
+    calibrate_shopper_and_top_except_for :hated_look
+    calibrate_shopper_and_bottom_except_for :hated_look
+    calibrate_shopper_and_dress_except_for :hated_look
+
+    look = FactoryGirl.create(:look, name: "Bohemian Chic")
+
+    set_primary_look_for_items look
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_look_as look, :hate
+    then_my_style_feed_should_not_contain top
+    then_my_style_feed_should_not_contain bottom
+    then_my_style_feed_should_not_contain dress
+    when_i_set_my_style_profile_feelings_for_a_look_as look, :impartial
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+  end
+
   private
     def set_sizes_for_items size_hash
       top.top_sizes << size_hash[:top_size]
@@ -66,6 +86,16 @@ feature 'Style Feed item matching' do
       top.price = price
       bottom.price = price
       dress.price = price
+
+      top.save
+      bottom.save
+      dress.save
+    end
+
+    def set_primary_look_for_items look
+      top.look = look
+      bottom.look = look
+      dress.look = look
 
       top.save
       bottom.save
@@ -85,6 +115,10 @@ feature 'Style Feed item matching' do
         top.price = 75.00
         top.save
       end
+      unless tested_property == :hated_look
+        top.look_id = nil
+        top.save
+      end
     end
 
     def calibrate_shopper_and_bottom_except_for tested_property
@@ -100,6 +134,10 @@ feature 'Style Feed item matching' do
         bottom.price = 75.00
         bottom.save
       end
+      unless tested_property == :hated_look
+        bottom.look_id = nil
+        bottom.save
+      end
     end
 
     def calibrate_shopper_and_dress_except_for tested_property
@@ -113,6 +151,10 @@ feature 'Style Feed item matching' do
         shopper.style_profile.budget.dress_max_price = 100.00
         shopper.style_profile.budget.save
         dress.price = 75.00
+        dress.save
+      end
+      unless tested_property == :hated_look
+        dress.look_id = nil
         dress.save
       end
     end

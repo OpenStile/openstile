@@ -14,6 +14,8 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :top_sizes }
   it { should respond_to :retailer }
   it { should respond_to :retailer_id }
+  it { should respond_to :look }
+  it { should respond_to :look_id }
   it { should be_valid }
 
   context "when name is not present" do

@@ -41,10 +41,9 @@ module RecommendationsHelper
   def matches_for_look style_profile
     retailers = Retailer.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).map(&:look_id))
 
-    # TODO Filter once item look association created
-    tops = Top.all
-    bottoms = Bottom.all
-    dresses = Dress.all
+    tops = Top.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).map(&:look_id))
+    bottoms = Bottom.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).map(&:look_id))
+    dresses = Dress.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).map(&:look_id))
     
     retailers + tops + bottoms + dresses
   end
