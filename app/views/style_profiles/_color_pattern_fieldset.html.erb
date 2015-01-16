@@ -1,0 +1,14 @@
+<div class="avoided-colors">
+  <h4>Are there any colors you avoid? (Select all that apply)</h4>
+  <div class="options">
+  <% Color.all.in_groups_of(6, false).each do |color_set| %>
+    <div class="row option-set">
+      <%= form_helper.collection_check_boxes(:avoided_color_ids, color_set, :id, :name) do |builder| %>
+        <div class="single-checkbox"> 
+          <%= builder.label(class: "checkbox-inline col-md-2 col-xs-2") { builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>
