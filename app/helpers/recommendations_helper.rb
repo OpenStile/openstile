@@ -7,9 +7,11 @@ module RecommendationsHelper
     retailer_budget_matches, item_budget_matches = matches_for_budget shopper.style_profile
     retailer_look_matches, item_look_matches = matches_for_look shopper.style_profile
     item_coverage_matches = matches_for_coverage shopper.style_profile
+    item_color_matches = matches_for_color shopper.style_profile
 
     retailer_recommendations = (retailer_size_matches & retailer_budget_matches & retailer_look_matches) 
-    item_recommendations = (item_size_matches & item_budget_matches & item_look_matches & item_coverage_matches) 
+    item_recommendations = (item_size_matches & item_budget_matches & item_look_matches & 
+                                                item_coverage_matches & item_color_matches) 
 
     retailer_recommendations + item_recommendations
   end
@@ -62,6 +64,14 @@ module RecommendationsHelper
     dresses = Dress.where.not(id: Dress.joins(:exposed_parts)
                                        .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
                                        .pluck(:id))
+
+    tops + bottoms + dresses
+  end
+
+  def matches_for_color style_profile
+    tops = Top.where.not(color_id: style_profile.avoided_color_ids)
+    bottoms = Bottom.where.not(color_id: style_profile.avoided_color_ids)
+    dresses = Dress.where.not(color_id: style_profile.avoided_color_ids)
 
     tops + bottoms + dresses
   end

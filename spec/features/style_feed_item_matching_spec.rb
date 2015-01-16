@@ -93,7 +93,7 @@ feature 'Style Feed item matching' do
 
     color = FactoryGirl.create(:color)
 
-    #TODO set as primary color for items
+    set_primary_color_for_items color
     
     given_i_am_a_logged_in_shopper shopper
     when_i_set_my_style_profile_avoided_colors color, :check
@@ -145,6 +145,16 @@ feature 'Style Feed item matching' do
   end
 
   private
+    def set_primary_color_for_items color
+      top.color = color
+      bottom.color = color
+      dress.color = color
+
+      top.save
+      bottom.save
+      dress.save
+    end
+
     def set_exposed_parts_for_items parts_hash
       top.exposed_parts.create(part_id: parts_hash[:upper_body].id)
       bottom.exposed_parts.create(part_id: parts_hash[:lower_body].id)
