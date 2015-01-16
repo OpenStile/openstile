@@ -1,6 +1,6 @@
 <div class="prints">
   <div class="row">
-    <div class="col-md-6 col-xs-6">
+    <div class="col-md-5 col-xs-5">
       <h4>How do you feel about the following?</h4>
     </div>
     <div class="col-md-2 col-xs-2 text-center">
@@ -16,13 +16,13 @@
   <div class="options">
     <% Print.all.each do |print| %>
       <div class="row print" id=<%= "print_#{print.id}"%>>
-        <div class="col-md-3 col-md-offset-2 col-xs-3 col-xs-offset-2">
+        <div class="col-md-5 col-xs-5">
           <h4><%= print.name %></h4>
         </div>
         <%= form_helper.fields_for :print_tolerances, 
             @style_profile.print_tolerances.find_or_create_by(print_id: print.id) do |tolerance_fields|%>  
           <%= tolerance_fields.hidden_field(:print_id) %>
-          <div class="col-md-2 col-md-offset-1 col-xs-2 col-xs-offset-1 text-center">
+          <div class="col-md-2 col-xs-2 text-center">
             <%= tolerance_fields.label(:tolerance_1, "Hate", class: "sr-only") %>
             <%= tolerance_fields.radio_button(:tolerance, 1) %>
           </div>
