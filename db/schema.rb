@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116195954) do
+ActiveRecord::Schema.define(version: 20150116203031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,10 +57,12 @@ ActiveRecord::Schema.define(version: 20150116195954) do
     t.integer  "retailer_id"
     t.integer  "look_id"
     t.integer  "color_id"
+    t.integer  "print_id"
   end
 
   add_index "bottoms", ["color_id"], name: "index_bottoms_on_color_id", using: :btree
   add_index "bottoms", ["look_id"], name: "index_bottoms_on_look_id", using: :btree
+  add_index "bottoms", ["print_id"], name: "index_bottoms_on_print_id", using: :btree
   add_index "bottoms", ["retailer_id"], name: "index_bottoms_on_retailer_id", using: :btree
 
   create_table "budgets", force: true do |t|
@@ -125,10 +127,12 @@ ActiveRecord::Schema.define(version: 20150116195954) do
     t.integer  "retailer_id"
     t.integer  "look_id"
     t.integer  "color_id"
+    t.integer  "print_id"
   end
 
   add_index "dresses", ["color_id"], name: "index_dresses_on_color_id", using: :btree
   add_index "dresses", ["look_id"], name: "index_dresses_on_look_id", using: :btree
+  add_index "dresses", ["print_id"], name: "index_dresses_on_print_id", using: :btree
   add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
 
   create_table "exposed_parts", force: true do |t|
@@ -310,10 +314,12 @@ ActiveRecord::Schema.define(version: 20150116195954) do
     t.integer  "retailer_id"
     t.integer  "look_id"
     t.integer  "color_id"
+    t.integer  "print_id"
   end
 
   add_index "tops", ["color_id"], name: "index_tops_on_color_id", using: :btree
   add_index "tops", ["look_id"], name: "index_tops_on_look_id", using: :btree
+  add_index "tops", ["print_id"], name: "index_tops_on_print_id", using: :btree
   add_index "tops", ["retailer_id"], name: "index_tops_on_retailer_id", using: :btree
 
 end
