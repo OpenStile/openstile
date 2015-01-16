@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116171926) do
+ActiveRecord::Schema.define(version: 20150116195954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,6 +199,23 @@ ActiveRecord::Schema.define(version: 20150116171926) do
   end
 
   add_index "price_ranges", ["retailer_id"], name: "index_price_ranges_on_retailer_id", using: :btree
+
+  create_table "print_tolerances", force: true do |t|
+    t.integer  "style_profile_id"
+    t.integer  "print_id"
+    t.integer  "tolerance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "print_tolerances", ["print_id"], name: "index_print_tolerances_on_print_id", using: :btree
+  add_index "print_tolerances", ["style_profile_id"], name: "index_print_tolerances_on_style_profile_id", using: :btree
+
+  create_table "prints", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "retailers", force: true do |t|
     t.string   "name"
