@@ -106,6 +106,24 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
+  scenario 'based on hated print' do
+    calibrate_shopper_and_items_except_for :hated_print
+
+    print = FactoryGirl.create(:print, name: "Animal Print")
+
+    set_primary_print_for_items print
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_print_as print, :hate
+    then_my_style_feed_should_not_contain top
+    then_my_style_feed_should_not_contain bottom
+    then_my_style_feed_should_not_contain dress
+    when_i_set_my_style_profile_feelings_for_a_print_as print, :impartial
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+  end
+
   def when_i_set_my_style_profile_coverage_preference_as parts, tolerance
     click_link 'Style Profile'
  
@@ -144,7 +162,34 @@ feature 'Style Feed item matching' do
     expect(page).to have_content('My Style Feed')
   end
 
+  def when_i_set_my_style_profile_feelings_for_a_print_as print, partiality
+    click_link 'Style Profile'
+
+    within(:css, "div#print_#{print.id}") do
+      if partiality == :hate
+        choose "Hate"
+      end
+      if partiality == :impartial
+        choose "Impartial"
+      end
+      if partiality == :love
+        choose "Love"
+      end
+    end
+ 
+    click_button style_profile_save 
+
+    expect(page).to have_content('My Style Feed')
+  end
+
+
   private
+    def set_primary_print_for_items print
+      top.update!(print_id: print.id)
+      bottom.update!(print_id: print.id)
+      dress.update!(print_id: print.id)
+    end
+
     def set_primary_color_for_items color
       top.color = color
       bottom.color = color
@@ -231,6 +276,20 @@ feature 'Style Feed item matching' do
         top.update!(color_id: indifferent_color.id)
         bottom.update!(color_id: nil)
         dress.update!(color_id: nil)
+      end
+
+      unless tested_property == :hated_print
+        bad_print = FactoryGirl.create(:print, name: "Print I don't like")
+        indifferent_print = FactoryGirl.create(:print, name: "Print I can take or leave")
+        shopper.style_profile.print_tolerances.create(print_id: indifferent_print.id, 
+                                                     tolerance: 5)
+        shopper.style_profile.print_tolerances.create(print_id: bad_print.id, 
+                                                     tolerance: 1)
+
+        # Ensure that items with non-hated prints or no print aren't filtered out                                                      
+        top.update!(print_id: indifferent_print.id)                                                     
+        bottom.update!(print_id: nil)                                                      
+        dress.update!(print_id: nil)                                                     
       end
     end
 

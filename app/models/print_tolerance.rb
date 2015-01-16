@@ -4,4 +4,8 @@ class PrintTolerance < ActiveRecord::Base
 
   validates :style_profile_id, presence: true
   validates :print_id, presence: true
+
+  def self.hated_prints_for style_profile_id
+    where(style_profile_id: style_profile_id, tolerance: 1)
+  end
 end
