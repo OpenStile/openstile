@@ -1,6 +1,7 @@
 class Top < ActiveRecord::Base
   belongs_to :retailer
   belongs_to :look
+  belongs_to :color
   has_and_belongs_to_many :top_sizes
   has_many :exposed_parts, as: :exposable, dependent: :destroy
 
