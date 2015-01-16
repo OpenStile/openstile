@@ -194,13 +194,43 @@ feature 'Style Feed item matching' do
       calibrate_shopper_and_dress_except_for tested_property
 
       unless tested_property == :hated_look
-        shopper.style_profile.look_tolerances.delete_all
+        bad_look = FactoryGirl.create(:look, name: "Look I don't like")
+        indifferent_look = FactoryGirl.create(:look, name: "Look I can take or leave")
+        shopper.style_profile.look_tolerances.create(look_id: indifferent_look.id, 
+                                                     tolerance: 5)
+        shopper.style_profile.look_tolerances.create(look_id: bad_look.id, 
+                                                     tolerance: 1)
+
+        # Ensure that items with non-hated looks or no look aren't filtered out                                                      
+        top.update!(look_id: indifferent_look.id)                                                     
+        bottom.update!(look_id: nil)                                                      
+        dress.update!(look_id: nil)                                                     
       end
+
       unless tested_property == :part_coverage
-        shopper.style_profile.part_exposure_tolerances.delete_all
+        part_to_cover = FactoryGirl.create(:part, name: "Part to cover")
+        part_i_show = FactoryGirl.create(:part, name: "Part I show")
+        shopper.style_profile.part_exposure_tolerances.create(part_id: part_to_cover.id,
+                                                              tolerance: 1)
+        shopper.style_profile.part_exposure_tolerances.create(part_id: part_i_show.id,
+                                                              tolerance: 5)
+
+        # Ensure that items exposing parts I don't mind showing or 
+        # that expose nothing aren't filtered out                                                      
+        top.exposed_parts.create(part_id: part_i_show.id)
+        bottom.exposed_parts.delete_all
+        dress.exposed_parts.delete_all
       end
+
       unless tested_property == :color_to_avoid
-        shopper.style_profile.hated_colors.delete_all
+        hated_color = FactoryGirl.create(:color, name: "Color I don't like")
+        indifferent_color = FactoryGirl.create(:color, name: "Color I don't hate")
+        shopper.style_profile.avoided_colors << hated_color
+
+        # Ensure that items with non-hated color or no primary color aren't filtered out                                                      
+        top.update!(color_id: indifferent_color.id)
+        bottom.update!(color_id: nil)
+        dress.update!(color_id: nil)
       end
     end
 
