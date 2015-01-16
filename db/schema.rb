@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116010839) do
+ActiveRecord::Schema.define(version: 20150116012346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,6 +137,16 @@ ActiveRecord::Schema.define(version: 20150116010839) do
 
   add_index "exposed_parts", ["exposable_id", "exposable_type"], name: "index_exposed_parts_on_exposable_id_and_exposable_type", using: :btree
   add_index "exposed_parts", ["part_id"], name: "index_exposed_parts_on_part_id", using: :btree
+
+  create_table "hated_colors", force: true do |t|
+    t.integer  "style_profile_id"
+    t.integer  "color_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
+  add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
 
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"

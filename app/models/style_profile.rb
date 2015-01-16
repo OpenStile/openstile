@@ -6,6 +6,7 @@ class StyleProfile < ActiveRecord::Base
   has_one :budget, dependent: :destroy
   has_many :look_tolerances, dependent: :destroy
   has_many :part_exposure_tolerances, dependent: :destroy
+  has_many :hated_colors, dependent: :destroy
 
   accepts_nested_attributes_for :budget
   accepts_nested_attributes_for :look_tolerances

@@ -16,6 +16,7 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :budget }
   it { should respond_to :look_tolerances }
   it { should respond_to :part_exposure_tolerances }
+  it { should respond_to :hated_colors }
   it { should be_valid }
 
   context "when shopper id is not present" do
@@ -64,6 +65,22 @@ RSpec.describe StyleProfile, :type => :model do
       expect(part_exposure_tolerances).to_not be_empty
       part_exposure_tolerances.each do |pt|
         expect(PartExposureTolerance.where(id: pt.id)).to be_empty
+      end
+    end
+  end
+
+  describe "hated colors association" do
+    let(:color){ FactoryGirl.create(:color) }
+    let!(:hated_color){ FactoryGirl.create(:hated_color,
+                                           style_profile: @style_profile,
+                                           color: color) }
+
+    it "should destroy associated hated color" do
+      hated_colors = @style_profile.hated_colors.to_a
+      @style_profile.destroy
+      expect(hated_colors).to_not be_empty
+      hated_colors.each do |hc|
+        expect(HatedColor.where(id: hc.id)).to be_empty
       end
     end
   end
