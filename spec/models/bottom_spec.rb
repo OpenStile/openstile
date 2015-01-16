@@ -18,6 +18,7 @@ RSpec.describe Bottom, :type => :model do
   it { should respond_to :look }
   it { should respond_to :look_id }
   it { should respond_to :exposed_parts }
+  it { should respond_to :color }
   it { should be_valid }
 
   context "when name is not present" do

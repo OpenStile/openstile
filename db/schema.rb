@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115180048) do
+ActiveRecord::Schema.define(version: 20150116171926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,8 +56,10 @@ ActiveRecord::Schema.define(version: 20150115180048) do
     t.datetime "updated_at"
     t.integer  "retailer_id"
     t.integer  "look_id"
+    t.integer  "color_id"
   end
 
+  add_index "bottoms", ["color_id"], name: "index_bottoms_on_color_id", using: :btree
   add_index "bottoms", ["look_id"], name: "index_bottoms_on_look_id", using: :btree
   add_index "bottoms", ["retailer_id"], name: "index_bottoms_on_retailer_id", using: :btree
 
@@ -74,6 +76,13 @@ ActiveRecord::Schema.define(version: 20150115180048) do
   end
 
   add_index "budgets", ["style_profile_id"], name: "index_budgets_on_style_profile_id", using: :btree
+
+  create_table "colors", force: true do |t|
+    t.string   "name"
+    t.string   "hexcode"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "dress_sizes", force: true do |t|
     t.string   "name"
@@ -115,8 +124,10 @@ ActiveRecord::Schema.define(version: 20150115180048) do
     t.datetime "updated_at"
     t.integer  "retailer_id"
     t.integer  "look_id"
+    t.integer  "color_id"
   end
 
+  add_index "dresses", ["color_id"], name: "index_dresses_on_color_id", using: :btree
   add_index "dresses", ["look_id"], name: "index_dresses_on_look_id", using: :btree
   add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
 
@@ -130,6 +141,16 @@ ActiveRecord::Schema.define(version: 20150115180048) do
 
   add_index "exposed_parts", ["exposable_id", "exposable_type"], name: "index_exposed_parts_on_exposable_id_and_exposable_type", using: :btree
   add_index "exposed_parts", ["part_id"], name: "index_exposed_parts_on_part_id", using: :btree
+
+  create_table "hated_colors", force: true do |t|
+    t.integer  "style_profile_id"
+    t.integer  "color_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
+  add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
 
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"
@@ -271,8 +292,10 @@ ActiveRecord::Schema.define(version: 20150115180048) do
     t.datetime "updated_at"
     t.integer  "retailer_id"
     t.integer  "look_id"
+    t.integer  "color_id"
   end
 
+  add_index "tops", ["color_id"], name: "index_tops_on_color_id", using: :btree
   add_index "tops", ["look_id"], name: "index_tops_on_look_id", using: :btree
   add_index "tops", ["retailer_id"], name: "index_tops_on_retailer_id", using: :btree
 

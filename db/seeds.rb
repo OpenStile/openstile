@@ -30,3 +30,9 @@ end
 ["Arms", "Back", "Cleavage", "Legs", "Midsection"].each do |part|
   Part.find_or_create_by(name: part)
 end
+
+["Beige", "Black", "Blue", "Brown", "Green", 
+ "Gray", "Navy", "Orange", "Pink", "Purple", 
+ "Red", "Teal", "White", "Yellow", "Gold", "Silver"].each do |color|
+  Color.find_or_create_by(name: color)
+end

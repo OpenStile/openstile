@@ -27,6 +27,7 @@ class StyleProfilesController < ApplicationController
       params.require(:style_profile).permit(top_size_ids: [], bottom_size_ids: [], dress_size_ids: [],
                                             budget_attributes: [:top_range_string, :bottom_range_string, :dress_range_string],
                                             look_tolerances_attributes: [:id, :look_id, :tolerance],
-                                            part_exposure_tolerances_attributes: [:id, :part_id, :tolerance])
+                                            part_exposure_tolerances_attributes: [:id, :part_id, :tolerance],
+                                            avoided_color_ids: [])
     end
 end

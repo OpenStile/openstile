@@ -1813,6 +1813,17 @@ input {
   transform: scale(1.5);
   -webkit-transform: scale(1.5);
 }
+.avoided-colors input[type="checkbox"] {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+}
+.avoided-colors .options {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.avoided-colors .option-set {
+  margin-bottom: 15px;
+}
 /* Forms End */
 
 /* Style Feed Begins */
