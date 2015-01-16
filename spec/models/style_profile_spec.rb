@@ -19,6 +19,7 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :hated_colors }
   it { should respond_to :avoided_colors }
   it { should respond_to :avoided_color_ids }
+  it { should respond_to :print_tolerances }
   it { should be_valid }
 
   context "when shopper id is not present" do
@@ -91,4 +92,21 @@ RSpec.describe StyleProfile, :type => :model do
       end
     end
   end
+
+  describe "print tolerance association" do
+    let(:print){ FactoryGirl.create(:print) }
+    let!(:print_tolerance){ FactoryGirl.create(:print_tolerance, 
+                               style_profile: @style_profile, 
+                               print: print) }
+
+    it "should destroy associated print tolerance" do
+      print_tolerances = @style_profile.print_tolerances.to_a
+      @style_profile.destroy
+      expect(print_tolerances).to_not be_empty
+      print_tolerances.each do |lt|
+        expect(PrintTolerance.where(id: lt.id)).to be_empty
+      end
+    end
+  end
+
 end

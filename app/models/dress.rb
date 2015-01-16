@@ -2,6 +2,7 @@ class Dress < ActiveRecord::Base
   belongs_to :retailer
   belongs_to :look
   belongs_to :color
+  belongs_to :print
   has_and_belongs_to_many :dress_sizes
   has_many :exposed_parts, as: :exposable, dependent: :destroy
 

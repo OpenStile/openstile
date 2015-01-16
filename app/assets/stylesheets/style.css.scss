@@ -1746,6 +1746,10 @@ input {
 	max-width:700px;
   max-height: 999999px;
 }
+.style-profile-form hr{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 .sizes-block input[type="checkbox"] {
   transform: scale(1.5);
   -webkit-transform: scale(1.5);
@@ -1803,7 +1807,7 @@ input {
   margin-bottom: 50px;
 }
 .body-coverage .parts {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 .body-coverage .part {
   padding-top: 15px;
@@ -1818,11 +1822,22 @@ input {
   -webkit-transform: scale(1.5);
 }
 .avoided-colors .options {
-  margin-top: 15px;
+  margin-top: 20px;
   margin-bottom: 15px;
 }
 .avoided-colors .option-set {
   margin-bottom: 15px;
+}
+.prints .options {
+  margin-top: 15px;
+}
+.prints .print {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.prints input[type="radio"] {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
 }
 /* Forms End */
 

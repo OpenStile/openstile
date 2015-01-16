@@ -36,3 +36,8 @@ end
  "Red", "Teal", "White", "Yellow", "Gold", "Silver"].each do |color|
   Color.find_or_create_by(name: color)
 end
+
+["Bold Patterns", "Bright Colors", "Florals", "Animal Prints",
+ "Leather", "Faux Leather", "Fur", "Faux Fur"].each do |print|
+  Print.find_or_create_by(name: print)
+end
