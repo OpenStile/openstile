@@ -1755,42 +1755,16 @@ input {
   -webkit-transform: scale(1.5);
 }
 .sizes-block {
-  margin-top: 30px;
   margin-bottom: 30px;
-}
-.alpha-sizes .checkbox-inline {
-  margin-left: 80px;
-  padding-left: 5px;
-}
-.alpha-sizes .checkbox-inline input{
-  margin-left: -50px;
-}
-.numeric-sizes .checkbox-inline {
-  margin-left: 40px;
-  padding-left: 5px;
-  min-width: 20px;
-}
-.numeric-sizes .checkbox-inline input{
-  margin-left: -20px;
-}
-.inch-sizes .checkbox-inline {
-  margin-left: 40px;
-  padding-left: 5px;
-  min-width: 20px;
-}
-.inch-sizes .checkbox-inline input{
-  margin-left: -20px;
 }
 .alpha-sizes {
   margin-top: 25px;
 }
 .numeric-sizes {
   margin-top: 25px;
-  margin-left: 24px;
 }
 .inch-sizes {
   margin-top: 25px;
-  margin-left: 24px;
 }
 .style-profile-form .look {
   margin-top: 30px; 
