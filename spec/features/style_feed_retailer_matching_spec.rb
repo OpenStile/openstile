@@ -96,8 +96,15 @@ feature 'Style Feed retailer matching' do
       end
 
       unless tested_property == :hated_look
-        retailer.look_id = nil
-        retailer.save
+        bad_look = FactoryGirl.create(:look, name: "Look I don't like")
+        indifferent_look = FactoryGirl.create(:look, name: "Look I can take or leave")
+        shopper.style_profile.look_tolerances.create(look_id: indifferent_look.id, 
+                                                     tolerance: 5)
+        shopper.style_profile.look_tolerances.create(look_id: bad_look.id, 
+                                                     tolerance: 1)
+
+        # Ensure that retailer with no look isn't filtered out                                                      
+        retailer.update!(look_id: nil)                                                      
       end
     end
 end
