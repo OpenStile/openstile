@@ -10,11 +10,25 @@ module RecommendationsHelper
     item_color_matches = matches_for_color shopper.style_profile
     item_print_matches = matches_for_print shopper.style_profile
 
-    retailer_recommendations = (retailer_size_matches & retailer_budget_matches & retailer_look_matches) 
-    item_recommendations = (item_size_matches & item_budget_matches & item_look_matches & 
+    retailer_matches = (retailer_size_matches & retailer_budget_matches & retailer_look_matches) 
+    item_matches = (item_size_matches & item_budget_matches & item_look_matches & 
                             item_coverage_matches & item_color_matches & item_print_matches) 
 
-    retailer_recommendations + item_recommendations
+    process_rankings(shopper.style_profile, (retailer_matches + item_matches))
+  end
+  
+  def process_rankings style_profile, recommendations
+    results = []
+    recommendations.each do |recommendation_object|
+      recommendation = {priority: 0, 
+                        justification: [], 
+                        object: recommendation_object}
+
+      recommendation = evaluate_body_shape recommendation, style_profile
+
+      results << recommendation
+    end
+    results.sort{|rec1, rec2| rec2[:priority] <=> rec1[:priority]}
   end
 
   def matches_for_size style_profile
@@ -83,5 +97,14 @@ module RecommendationsHelper
     dresses = Dress.where(print_id: nil) + Dress.where.not(print_id: PrintTolerance.hated_prints_for(style_profile.id).pluck(:print_id))
 
     tops + bottoms + dresses
+  end
+
+  def evaluate_body_shape recommendation, style_profile
+    return recommendation unless recommendation[:object].is_a? Retailer #temporary until body_shape added to items
+    if recommendation[:object].body_shape_id == style_profile.body_shape_id
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "Body Type"
+    end
+    recommendation
   end
 end
