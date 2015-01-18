@@ -20,6 +20,8 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :tops }
   it { should respond_to :bottoms }
   it { should respond_to :dresses }
+  it { should respond_to :body_shape_id }
+  it { should respond_to :body_shape }
   it { should be_valid }
 
   context "when name is not present" do
