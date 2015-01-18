@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116203031) do
+ActiveRecord::Schema.define(version: 20150118060034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "body_shapes", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "bottom_sizes", force: true do |t|
     t.string   "name"
@@ -228,8 +235,10 @@ ActiveRecord::Schema.define(version: 20150116203031) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "look_id"
+    t.integer  "body_shape_id"
   end
 
+  add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
   add_index "retailers", ["look_id"], name: "index_retailers_on_look_id", using: :btree
 
   create_table "retailers_top_sizes", id: false, force: true do |t|
@@ -277,8 +286,10 @@ ActiveRecord::Schema.define(version: 20150116203031) do
     t.integer  "shopper_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "body_shape_id"
   end
 
+  add_index "style_profiles", ["body_shape_id"], name: "index_style_profiles_on_body_shape_id", using: :btree
   add_index "style_profiles", ["shopper_id"], name: "index_style_profiles_on_shopper_id", using: :btree
 
   create_table "style_profiles_top_sizes", id: false, force: true do |t|

@@ -32,13 +32,19 @@
           </div>
           <div class="col-md-7<%= ' col-md-pull-5' if idx.odd? %> col-sm-12">
             <div class="summary">
-              <h3><%= recommendation.name %></h3><br />
-              <% if recommendation.is_a? Retailer %>
-                <h4><%= recommendation.neighborhood %></h4><br /><br />
+              <h3><%= recommendation[:object].name %></h3><br />
+              <% if recommendation[:object].is_a? Retailer %>
+                <h4><%= recommendation[:object].neighborhood %></h4><br />
+                <% unless recommendation[:justification].empty? %>
+                  <h4><%= "Retailer is recommended for your #{recommendation[:justification].sample}" %></h4><br />
+                <% end %>
                 <%= link_to 'Drop-in to browse store', '#', class: 'btn btn-lg btn-primary' %>
               <% else %>
-                <h4><%= recommendation.retailer.name %></h4>
-                <h4><%= "$%6.2f" % recommendation.price.to_f %></h4><br /><br />
+                <h4><%= recommendation[:object].retailer.name %></h4>
+                <h4><%= "$%6.2f" % recommendation[:object].price.to_f %></h4><br />
+                <% unless recommendation[:justification].empty? %>
+                  <h4><%= "Item is recommended for your #{recommendation[:justification].sample}" %></h4><br />
+                <% end %>
                 <%= link_to 'Drop-in to see item', '#', class: 'btn btn-lg btn-primary' %>
               <% end %>
             </div>

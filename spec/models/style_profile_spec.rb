@@ -20,6 +20,8 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :avoided_colors }
   it { should respond_to :avoided_color_ids }
   it { should respond_to :print_tolerances }
+  it { should respond_to :body_shape_id }
+  it { should respond_to :body_shape }
   it { should be_valid }
 
   context "when shopper id is not present" do

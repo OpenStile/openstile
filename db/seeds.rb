@@ -41,3 +41,16 @@ end
  "Leather", "Faux Leather", "Fur", "Faux Fur"].each do |print|
   Print.find_or_create_by(name: print)
 end
+
+[{name: 'Straight', 
+  description: 'Your bust and hips are basically the same size. Your waist is slightly smaller than your bust and hips.'},
+ {name: 'Pear', 
+  description: 'Your hips are larger than your bust, and your waist gradually slopes out to the hips.'},
+ {name: 'Hourglass', 
+  description: 'Your bust and hips are basically the same size and your waist is well defined.'},
+ {name: 'Apple', 
+  description: 'Your waist is larger than your bust and hips. Your hips are narrow compared to your shoulders.'},
+ {name: 'Inverted Triangle', 
+  description: 'Your bust is large, your hips are narrow and your waist is not very well defined.'}].each do |body_shape|
+  BodyShape.find_or_create_by(name: body_shape[:name], description: body_shape[:description])
+end

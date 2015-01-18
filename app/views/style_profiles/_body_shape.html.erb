@@ -1,0 +1,17 @@
+<div class="body-shape">
+  <h4>Which best describes your overall body shape?</h4>
+  <div class="row options">
+    <% BodyShape.all.each do |body_shape| %>
+      <div class="single-radio"> 
+        <%= label_tag :body_shape, class: "radio-inline col-md-6 col-xs-6" do %>
+          <%= form_helper.radio_button :body_shape_id, body_shape.id, class: "col-md-2 col-xs-2" %>
+          <div class="col-md-4 col-xs-4 text-justify">
+            <h4><b><%= body_shape.name %></b></h4>
+            <p><%= body_shape.description %></p>
+          </div>
+          <%= image_tag("body_shapes/#{body_shape.name.downcase.gsub(" ","-")}.jpg", class: "img-responsive col-md-6 col-xs-6")%>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
