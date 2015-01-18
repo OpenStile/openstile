@@ -1813,6 +1813,16 @@ input {
   transform: scale(1.5);
   -webkit-transform: scale(1.5);
 }
+.body-shape input[type="radio"] {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+}
+.body-shape .options {
+  margin-top: 25px;
+}
+.body-shape .radio-inline {
+  margin-bottom: 25px;
+}
 /* Forms End */
 
 /* Style Feed Begins */

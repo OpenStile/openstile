@@ -29,7 +29,7 @@ feature 'Style Feed retailer ranking' do
   def when_i_set_my_style_profile_body_shape_to body_shape
     click_link 'Style Profile'
 
-    within(:css, "div#body_shape") do
+    within(:css, "div.body-shape") do
       choose("style_profile_body_shape_id_#{body_shape.id}")
     end
  
