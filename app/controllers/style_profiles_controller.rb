@@ -30,6 +30,6 @@ class StyleProfilesController < ApplicationController
                                             look_tolerances_attributes: [:id, :look_id, :tolerance],
                                             print_tolerances_attributes: [:id, :print_id, :tolerance],
                                             part_exposure_tolerances_attributes: [:id, :part_id, :tolerance],
-                                            avoided_color_ids: [])
+                                            avoided_color_ids: [], special_consideration_ids: [])
     end
 end

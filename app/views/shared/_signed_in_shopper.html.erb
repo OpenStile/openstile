@@ -36,14 +36,14 @@
               <% if recommendation[:object].is_a? Retailer %>
                 <h4><%= recommendation[:object].neighborhood %></h4><br />
                 <% unless recommendation[:justification].empty? %>
-                  <h4><%= "Retailer is recommended for your #{recommendation[:justification].sample}" %></h4><br />
+                  <h4><%= "Retailer is recommended for #{recommendation[:justification].sample}" %></h4><br />
                 <% end %>
                 <%= link_to 'Drop-in to browse store', '#', class: 'btn btn-lg btn-primary' %>
               <% else %>
                 <h4><%= recommendation[:object].retailer.name %></h4>
                 <h4><%= "$%6.2f" % recommendation[:object].price.to_f %></h4><br />
                 <% unless recommendation[:justification].empty? %>
-                  <h4><%= "Item is recommended for your #{recommendation[:justification].sample}" %></h4><br />
+                  <h4><%= "Item is recommended for #{recommendation[:justification].sample}" %></h4><br />
                 <% end %>
                 <%= link_to 'Drop-in to see item', '#', class: 'btn btn-lg btn-primary' %>
               <% end %>

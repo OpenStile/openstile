@@ -1830,6 +1830,14 @@ input {
 .fit .selections {
   margin-top: 20px;
 }
+.considerations .options {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.considerations input[type="checkbox"] {
+  transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+}
 /* Forms End */
 
 /* Style Feed Begins */
