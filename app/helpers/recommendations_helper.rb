@@ -30,6 +30,7 @@ module RecommendationsHelper
       recommendation = evaluate_top_fit recommendation, style_profile
       recommendation = evaluate_bottom_fit recommendation, style_profile
       recommendation = evaluate_special_considerations recommendation, style_profile
+      recommendation = evaluate_parts_to_show_off recommendation, style_profile
 
       results << recommendation
     end
@@ -159,6 +160,19 @@ module RecommendationsHelper
   
     overlap.each do |id|
       recommendation[:justification] << SpecialConsideration.find(id).name
+    end
+    recommendation
+  end
+
+  def evaluate_parts_to_show_off recommendation, style_profile
+    return recommendation if recommendation[:object].is_a? Retailer
+
+    parts_to_flaunt_ids = PartExposureTolerance.parts_to_flaunt_for(style_profile).pluck(:part_id)
+    parts_exposed_ids = recommendation[:object].exposed_parts.pluck(:part_id)
+
+    unless (parts_to_flaunt_ids & parts_exposed_ids).empty?
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "your Preferred Fit"
     end
     recommendation
   end

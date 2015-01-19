@@ -124,28 +124,6 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  def when_i_set_my_style_profile_coverage_preference_as parts, tolerance
-    click_link 'Style Profile'
- 
-    parts.each do |part|
-      within(:css, "div#part_#{part.id}") do
-        if tolerance == :cover
-          choose "Cover"
-        end
-        if tolerance == :impartial
-          choose "Mix it up"
-        end
-        if tolerance == :love
-          choose "Show off"
-        end
-      end
-    end
- 
-    click_button style_profile_save 
-
-    expect(page).to have_content('My Style Feed')
-  end
-
   def when_i_set_my_style_profile_avoided_colors color, action
     click_link 'Style Profile'
 
