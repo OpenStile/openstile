@@ -114,6 +114,30 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "your Preferred Fit"
   end
 
+  scenario 'based on special considerations' do
+    baseline_calibration_for_shopper_and_retailers
+
+    original_consideration = FactoryGirl.create(:special_consideration, name:'Second-wear')
+    new_consideration = FactoryGirl.create(:special_consideration, name: 'Local designers')
+
+    retailer_one.special_considerations << new_consideration
+    retailer_two.special_considerations << original_consideration
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_consideration_as original_consideration, :important
+    when_i_set_my_style_profile_feelings_for_a_consideration_as new_consideration, :not_important
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_two, retailer_one
+    then_the_recommendation_should_be_for "Second-wear"
+    when_i_set_my_style_profile_feelings_for_a_consideration_as original_consideration, :not_important
+    when_i_set_my_style_profile_feelings_for_a_consideration_as new_consideration, :important
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_one, retailer_two
+    then_the_recommendation_should_be_for "Local designers"
+  end
+
   def when_i_set_my_style_profile_body_shape_to body_shape
     click_link 'Style Profile'
 
@@ -163,6 +187,22 @@ feature 'Style Feed retailer ranking' do
     end
 
     click_button style_profile_save 
+    expect(page).to have_content('My Style Feed')
+  end
+
+  def when_i_set_my_style_profile_feelings_for_a_consideration_as consideration, importance
+    click_link 'Style Profile'
+
+    within(:css, "div.considerations") do
+      if importance == :important
+        check(consideration.name)
+      end
+      if importance == :not_important
+        uncheck(consideration.name)
+      end
+    end
+
+    click_button style_profile_save
     expect(page).to have_content('My Style Feed')
   end
 
