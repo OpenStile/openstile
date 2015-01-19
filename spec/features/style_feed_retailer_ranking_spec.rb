@@ -140,31 +140,6 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "Local designers"
   end
 
-  def when_i_set_my_style_profile_height_to height
-    click_link 'Style Profile'
-
-    feet = height.first if height.match(/^\d\sfeet/)
-
-    within(:css, "div.height") do
-      select feet, from: 'feet'
-      select "0", from: 'inches'
-    end
-
-    click_button style_profile_save 
-    expect(page).to have_content('My Style Feed')
-  end
-
-  def when_i_set_my_style_profile_body_build_to build
-    click_link 'Style Profile'
-
-    within(:css, "div.body-build") do
-      select build, from: 'Build'
-    end
-
-    click_button style_profile_save 
-    expect(page).to have_content('My Style Feed')
-  end
-
   def when_i_set_my_style_profile_preferred_fit_as fit, type
     click_link 'Style Profile'
 
