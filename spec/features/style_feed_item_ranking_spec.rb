@@ -162,6 +162,34 @@ feature 'Style Feed item ranking' do
     then_the_recommendation_should_be_for "Local designers"
   end
 
+  scenario 'based on parts to show off' do
+    baseline_calibration_for_shopper_and_items
+
+    original_part = FactoryGirl.create(:part, name: "Legs")
+    new_part = FactoryGirl.create(:part, name: "Midsection")
+
+    top.exposed_parts.create!(part_id: new_part.id)
+    bottom.exposed_parts.create!(part_id: original_part.id)
+    dress.update!(exposed_part_ids: [])
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_coverage_preference_as [original_part], :flaunt
+    when_i_set_my_style_profile_coverage_preference_as [new_part], :impartial
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be bottom, top
+    then_the_recommendation_ordering_should_be bottom, dress
+    when_i_set_my_style_profile_coverage_preference_as [original_part], :impartial
+    when_i_set_my_style_profile_coverage_preference_as [new_part], :flaunt
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be top, bottom
+    then_the_recommendation_ordering_should_be top, dress
+    then_the_recommendation_should_be_for "your Preferred Fit"
+  end
+
   private
     def baseline_calibration_for_shopper_and_items
       shared_top_size = FactoryGirl.create(:top_size)

@@ -131,6 +131,28 @@ def when_i_set_my_style_profile_feelings_for_a_consideration_as consideration, i
   expect(page).to have_content('My Style Feed')
 end
 
+def when_i_set_my_style_profile_coverage_preference_as parts, tolerance
+  click_link 'Style Profile'
+ 
+  parts.each do |part|
+    within(:css, "div#part_#{part.id}") do
+      if tolerance == :cover
+        choose "Cover"
+      end
+      if tolerance == :impartial
+        choose "Mix it up"
+      end
+      if tolerance == :flaunt
+        choose "Show off"
+      end
+    end
+  end
+ 
+  click_button style_profile_save 
+
+  expect(page).to have_content('My Style Feed')
+end
+
 def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
   visit '/'
   expect(page.body.index(higher_ranking.name)).to be < (page.body.index(lower_ranking.name))
