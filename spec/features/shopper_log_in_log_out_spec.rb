@@ -32,7 +32,6 @@ describe "Shopper log in and log out" do
       end
 
       it "should log me in" do
-        expect(page).to have_content('Signed in successfully')
         expect(page).to have_link('Log out')
         expect(page).to_not have_link('Log in')
       end
