@@ -25,6 +25,7 @@ RSpec.describe Bottom, :type => :model do
   it { should respond_to :for_petite }
   it { should respond_to :for_tall }
   it { should respond_to :for_full_figured }
+  it { should respond_to :bottom_fit }
   it { should be_valid }
 
   context "when name is not present" do
