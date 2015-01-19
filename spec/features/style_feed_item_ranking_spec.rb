@@ -63,6 +63,34 @@ feature 'Style Feed item ranking' do
     then_the_recommendation_should_be_for "your Body Type"
   end
 
+  scenario 'based on favorite looks' do
+    baseline_calibration_for_shopper_and_items
+
+    original_look = FactoryGirl.create(:look, name: "Bohemian Chic")
+    new_look = FactoryGirl.create(:look, name: "Glamorous")
+    
+    top.update!(look_id: new_look.id)
+    bottom.update!(look_id: original_look.id)
+    dress.update!(look_id: nil)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_look_as original_look, :love
+    when_i_set_my_style_profile_feelings_for_a_look_as new_look, :impartial
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be bottom, top
+    then_the_recommendation_ordering_should_be bottom, dress
+    when_i_set_my_style_profile_feelings_for_a_look_as original_look, :impartial
+    when_i_set_my_style_profile_feelings_for_a_look_as new_look, :love
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be top, bottom
+    then_the_recommendation_ordering_should_be top, dress
+    then_the_recommendation_should_be_for "your Favorite Looks"
+  end
+
   private
     def baseline_calibration_for_shopper_and_items
       shared_top_size = FactoryGirl.create(:top_size)
