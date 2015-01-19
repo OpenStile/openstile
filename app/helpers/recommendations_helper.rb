@@ -105,7 +105,6 @@ module RecommendationsHelper
   end
 
   def evaluate_body_shape recommendation, style_profile
-    return recommendation unless recommendation[:object].is_a? Retailer #temporary until body_shape added to items
     return recommendation if style_profile.body_shape_id.nil?
     if recommendation[:object].body_shape_id == style_profile.body_shape_id
       recommendation[:priority] = recommendation[:priority] + 1

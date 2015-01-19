@@ -29,7 +29,8 @@ feature 'Style Feed retailer ranking' do
   scenario 'based on body height and build' do
     baseline_calibration_for_shopper_and_retailers
 
-    height = "5 feet"
+    original_height = "5 feet"
+    new_height = "6 feet"
     original_body_build = "Average"
     new_body_build = "Full-figured"
 
@@ -37,11 +38,12 @@ feature 'Style Feed retailer ranking' do
     retailer_two.update!(for_petite: true)
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_set_my_style_profile_height_to height
+    when_i_set_my_style_profile_height_to original_height
     when_i_set_my_style_profile_body_build_to original_body_build
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_two, retailer_one
+    when_i_set_my_style_profile_height_to new_height
     when_i_set_my_style_profile_body_build_to new_body_build
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
@@ -138,17 +140,6 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "Local designers"
   end
 
-  def when_i_set_my_style_profile_body_shape_to body_shape
-    click_link 'Style Profile'
-
-    within(:css, "div.body-shape") do
-      choose("style_profile_body_shape_id_#{body_shape.id}")
-    end
- 
-    click_button style_profile_save 
-    expect(page).to have_content('My Style Feed')
-  end
-
   def when_i_set_my_style_profile_height_to height
     click_link 'Style Profile'
 
@@ -204,16 +195,6 @@ feature 'Style Feed retailer ranking' do
 
     click_button style_profile_save
     expect(page).to have_content('My Style Feed')
-  end
-
-  def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
-    visit '/'
-    expect(page.body.index(higher_ranking.name)).to be < (page.body.index(lower_ranking.name))
-  end
-
-  def then_the_recommendation_should_be_for recommendation_string
-    visit '/'
-    expect(page).to have_content("is recommended for #{recommendation_string}")
   end
 
   private
