@@ -27,6 +27,8 @@ module RecommendationsHelper
       recommendation = evaluate_body_shape recommendation, style_profile
       recommendation = evaluate_body_build recommendation, style_profile
       recommendation = evaluate_favorite_looks recommendation, style_profile
+      recommendation = evaluate_top_fit recommendation, style_profile
+      recommendation = evaluate_bottom_fit recommendation, style_profile
 
       results << recommendation
     end
@@ -103,7 +105,7 @@ module RecommendationsHelper
 
   def evaluate_body_shape recommendation, style_profile
     return recommendation unless recommendation[:object].is_a? Retailer #temporary until body_shape added to items
-    return recommendation if (recommendation[:object].body_shape_id.nil? || style_profile.body_shape_id.nil?)
+    return recommendation if style_profile.body_shape_id.nil?
     if recommendation[:object].body_shape_id == style_profile.body_shape_id
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "Body Type"
@@ -127,6 +129,26 @@ module RecommendationsHelper
     if LookTolerance.favorite_looks_for(style_profile).pluck(:look_id).include?(recommendation[:object].look_id)
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "Favorite Looks"
+    end
+    recommendation
+  end
+
+  def evaluate_top_fit recommendation, style_profile
+    return recommendation unless recommendation[:object].is_a? Retailer #temporary until fit added to items
+    return recommendation if style_profile.top_fit.blank?
+    if (recommendation[:object].top_fit == style_profile.top_fit)
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "Preferred Fit"
+    end
+    recommendation
+  end
+
+  def evaluate_bottom_fit recommendation, style_profile
+    return recommendation unless recommendation[:object].is_a? Retailer #temporary until fit added to items
+    return recommendation if style_profile.bottom_fit.blank?
+    if (recommendation[:object].bottom_fit == style_profile.bottom_fit)
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "Preferred Fit"
     end
     recommendation
   end
