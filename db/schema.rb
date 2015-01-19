@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119164011) do
+ActiveRecord::Schema.define(version: 20150119174057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,14 @@ ActiveRecord::Schema.define(version: 20150119164011) do
   add_index "bottoms", ["look_id"], name: "index_bottoms_on_look_id", using: :btree
   add_index "bottoms", ["print_id"], name: "index_bottoms_on_print_id", using: :btree
   add_index "bottoms", ["retailer_id"], name: "index_bottoms_on_retailer_id", using: :btree
+
+  create_table "bottoms_special_considerations", id: false, force: true do |t|
+    t.integer "bottom_id",                null: false
+    t.integer "special_consideration_id", null: false
+  end
+
+  add_index "bottoms_special_considerations", ["bottom_id", "special_consideration_id"], name: "special_considerations_for_a_bottom_index", using: :btree
+  add_index "bottoms_special_considerations", ["special_consideration_id", "bottom_id"], name: "bottoms_for_a_special_consideration_index", using: :btree
 
   create_table "budgets", force: true do |t|
     t.integer  "style_profile_id"
@@ -154,6 +162,14 @@ ActiveRecord::Schema.define(version: 20150119164011) do
   add_index "dresses", ["look_id"], name: "index_dresses_on_look_id", using: :btree
   add_index "dresses", ["print_id"], name: "index_dresses_on_print_id", using: :btree
   add_index "dresses", ["retailer_id"], name: "index_dresses_on_retailer_id", using: :btree
+
+  create_table "dresses_special_considerations", id: false, force: true do |t|
+    t.integer "dress_id",                 null: false
+    t.integer "special_consideration_id", null: false
+  end
+
+  add_index "dresses_special_considerations", ["dress_id", "special_consideration_id"], name: "special_considerations_for_a_dress_index", using: :btree
+  add_index "dresses_special_considerations", ["special_consideration_id", "dress_id"], name: "dresses_for_a_special_consideration_index", using: :btree
 
   create_table "exposed_parts", force: true do |t|
     t.integer  "part_id"
@@ -311,6 +327,14 @@ ActiveRecord::Schema.define(version: 20150119164011) do
 
   add_index "special_considerations_style_profiles", ["special_consideration_id", "style_profile_id"], name: "style_profiles_for_a_special_consideration_index", using: :btree
   add_index "special_considerations_style_profiles", ["style_profile_id", "special_consideration_id"], name: "special_consideration_for_style_profile_index", using: :btree
+
+  create_table "special_considerations_tops", id: false, force: true do |t|
+    t.integer "top_id",                   null: false
+    t.integer "special_consideration_id", null: false
+  end
+
+  add_index "special_considerations_tops", ["special_consideration_id", "top_id"], name: "tops_for_a_special_consideration_index", using: :btree
+  add_index "special_considerations_tops", ["top_id", "special_consideration_id"], name: "special_considerations_for_a_top_index", using: :btree
 
   create_table "style_profile_top_sizes", force: true do |t|
     t.integer  "style_profile_id"

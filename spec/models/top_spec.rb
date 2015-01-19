@@ -25,6 +25,7 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :for_tall }
   it { should respond_to :for_full_figured }
   it { should respond_to :top_fit }
+  it { should respond_to :special_considerations }
   it { should be_valid }
 
   context "when name is not present" do

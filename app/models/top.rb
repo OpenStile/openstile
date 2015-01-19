@@ -5,6 +5,7 @@ class Top < ActiveRecord::Base
   belongs_to :print
   belongs_to :body_shape
   has_and_belongs_to_many :top_sizes
+  has_and_belongs_to_many :special_considerations
   has_many :exposed_parts, as: :exposable, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 100 } 

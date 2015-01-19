@@ -7,5 +7,9 @@ RSpec.describe SpecialConsideration, :type => :model do
   it { should respond_to :name }
   it { should respond_to :retailers }
   it { should respond_to :style_profiles }
+  it { should respond_to :tops }
+  it { should respond_to :bottoms }
+  it { should respond_to :dresses }
   it { should be_valid }
+
 end
