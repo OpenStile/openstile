@@ -19,4 +19,32 @@ class StyleProfile < ActiveRecord::Base
   after_create { create_budget }
 
   validates :shopper_id, presence: true
+
+  def is_petite?
+    return false if height_feet.nil? or height_inches.nil?
+    case
+    when height_feet < 5
+      return true
+    when height_feet > 5
+      return false
+    when height_feet == 5 && height_inches <= 4
+      return true 
+    else
+      return false
+    end
+  end
+
+  def is_tall?
+    return false if height_feet.nil? or height_inches.nil?
+    case
+    when height_feet > 5
+      return true
+    when height_feet < 5
+      return false
+    when height_feet == 5 && height_inches >= 9
+      return true
+    else
+      return false
+    end
+  end
 end

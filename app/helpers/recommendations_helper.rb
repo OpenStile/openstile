@@ -25,6 +25,7 @@ module RecommendationsHelper
                         object: recommendation_object}
 
       recommendation = evaluate_body_shape recommendation, style_profile
+      recommendation = evaluate_body_build recommendation, style_profile
 
       results << recommendation
     end
@@ -101,7 +102,20 @@ module RecommendationsHelper
 
   def evaluate_body_shape recommendation, style_profile
     return recommendation unless recommendation[:object].is_a? Retailer #temporary until body_shape added to items
+    return recommendation if (recommendation[:object].body_shape_id.nil? || style_profile.body_shape_id.nil?)
     if recommendation[:object].body_shape_id == style_profile.body_shape_id
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "Body Type"
+    end
+    recommendation
+  end
+
+  def evaluate_body_build recommendation, style_profile
+    return recommendation unless recommendation[:object].is_a? Retailer #temporary until build added to items
+    if (recommendation[:object].for_petite && style_profile.is_petite? || 
+        recommendation[:object].for_tall && style_profile.is_tall? ||
+        recommendation[:object].for_full_figured && style_profile.body_build == "Full-figured") 
+
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "Body Type"
     end
