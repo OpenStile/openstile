@@ -156,13 +156,12 @@ module RecommendationsHelper
 
   def evaluate_special_considerations recommendation, style_profile
     return recommendation unless recommendation[:object].is_a? Retailer #temporary until s.c added to items
-    SpecialConsideration.all.each do |consideration|
-      if style_profile.special_consideration_ids.include?(consideration.id) && 
-          recommendation[:object].special_consideration_ids.include?(consideration.id)
+    overlap = style_profile.special_consideration_ids & recommendation[:object].special_consideration_ids
 
-        recommendation[:priority] = recommendation[:priority] + 1
-        recommendation[:justification] << consideration.name
-      end
+    recommendation[:priority] = recommendation[:priority] + 1 unless overlap.empty?
+  
+    overlap.each do |id|
+      recommendation[:justification] << SpecialConsideration.find(id).name
     end
     recommendation
   end
