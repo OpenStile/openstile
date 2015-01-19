@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119130158) do
+ActiveRecord::Schema.define(version: 20150119143958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 20150119130158) do
     t.integer  "color_id"
     t.integer  "print_id"
     t.integer  "body_shape_id"
+    t.boolean  "for_petite"
+    t.boolean  "for_tall"
+    t.boolean  "for_full_figured"
   end
 
   add_index "bottoms", ["body_shape_id"], name: "index_bottoms_on_body_shape_id", using: :btree
@@ -138,6 +141,9 @@ ActiveRecord::Schema.define(version: 20150119130158) do
     t.integer  "color_id"
     t.integer  "print_id"
     t.integer  "body_shape_id"
+    t.boolean  "for_petite"
+    t.boolean  "for_tall"
+    t.boolean  "for_full_figured"
   end
 
   add_index "dresses", ["body_shape_id"], name: "index_dresses_on_body_shape_id", using: :btree
@@ -363,6 +369,9 @@ ActiveRecord::Schema.define(version: 20150119130158) do
     t.integer  "color_id"
     t.integer  "print_id"
     t.integer  "body_shape_id"
+    t.boolean  "for_petite"
+    t.boolean  "for_tall"
+    t.boolean  "for_full_figured"
   end
 
   add_index "tops", ["body_shape_id"], name: "index_tops_on_body_shape_id", using: :btree
