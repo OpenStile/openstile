@@ -72,6 +72,48 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "your Favorite Looks"
   end
 
+  scenario 'based on top fit' do
+    baseline_calibration_for_shopper_and_retailers
+
+    original_fit = 'Loose'
+    new_fit = 'Tight/Form-Fitting'
+
+    retailer_one.update!(top_fit: new_fit)
+    retailer_two.update!(top_fit: original_fit)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_preferred_fit_as original_fit, :top
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_two, retailer_one
+    when_i_set_my_style_profile_preferred_fit_as new_fit, :top
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_one, retailer_two
+    then_the_recommendation_should_be_for "your Preferred Fit"
+  end
+
+  scenario 'based on bottom fit' do
+    baseline_calibration_for_shopper_and_retailers
+
+    original_fit = 'Loose/Flowy'
+    new_fit = 'Tight/Skinny'
+
+    retailer_one.update!(bottom_fit: new_fit)
+    retailer_two.update!(bottom_fit: original_fit)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_preferred_fit_as original_fit, :bottom
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_two, retailer_one
+    when_i_set_my_style_profile_preferred_fit_as new_fit, :bottom
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_one, retailer_two
+    then_the_recommendation_should_be_for "your Preferred Fit"
+  end
+
   def when_i_set_my_style_profile_body_shape_to body_shape
     click_link 'Style Profile'
 
@@ -102,6 +144,22 @@ feature 'Style Feed retailer ranking' do
 
     within(:css, "div.body-build") do
       select build, from: 'Build'
+    end
+
+    click_button style_profile_save 
+    expect(page).to have_content('My Style Feed')
+  end
+
+  def when_i_set_my_style_profile_preferred_fit_as fit, type
+    click_link 'Style Profile'
+
+    within(:css, "div.fit") do
+      if type == :top
+        select fit, from: 'Top fit'
+      end
+      if type == :bottom
+        select fit, from: 'Bottom fit'
+      end
     end
 
     click_button style_profile_save 

@@ -1,41 +1,29 @@
-<div class="body-coverage">
-  <div class="row">
-    <div class="col-md-5 col-xs-5">
-      <h4>What do you show off and what do you cover up?</h4>
-    </div>
-    <div class="col-md-2 col-xs-2 text-center">
-      <h4>Keep it covered</h4>
-    </div>
-    <div class="col-md-2 col-xs-2 text-center">
-      <h4>I mix it up</h4>
-    </div>
-    <div class="col-md-2 col-xs-2 text-center">
-      <h4>Flaunt it!</h4>
-    </div>
-  </div>
-  <div class="parts">
-    <% Part.all.each do |part| %>
-      <div class="row part" id=<%= "part_#{part.id}"%>>
-        <div class="col-md-5 col-xs-5">
-          <h4><%= part.name %></h4>
+<div class="fit">
+  <h4>How do you (generally) like your tops and bottoms to fit?</h4>
+  <div class="selections">
+    <div class="row">
+      <div class="col-md-6 col-xs-6">
+        <div class="col-md-3 col-xs-3">
+          <%= form_helper.label :top_fit %>
         </div>
-        <%= form_helper.fields_for :part_exposure_tolerances, 
-            @style_profile.part_exposure_tolerances.find_or_create_by(part_id: part.id) do |tolerance_fields|%>  
-          <%= tolerance_fields.hidden_field(:part_id) %>
-          <div class="col-md-2 col-xs-2 text-center">
-            <%= tolerance_fields.label(:tolerance_1, "Cover", class: "sr-only") %>
-            <%= tolerance_fields.radio_button(:tolerance, 1) %>
-          </div>
-          <div class="col-md-2 col-xs-2 text-center">
-            <%= tolerance_fields.label(:tolerance_5, "Mix it up", class: "sr-only") %>
-            <%= tolerance_fields.radio_button(:tolerance, 5) %>
-          </div>
-          <div class="col-md-2 col-xs-2 text-center">
-            <%= tolerance_fields.label(:tolerance_10, "Show off", class: "sr-only") %>
-            <%= tolerance_fields.radio_button(:tolerance, 10) %>
-          </div>
-        <% end %>
+        <div class="col-md-9 col-xs-9">
+          <%= form_helper.select :top_fit,
+            ['Tight/Form-Fitting', 'Straight', 'Loose', 'Oversized'].map{|v| [v,v]},
+            {prompt: true}, class: "form-control" %>
+        </div>
       </div>
-    <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xs-6">
+        <div class="col-md-3 col-xs-3">
+          <%= form_helper.label :bottom_fit %>
+        </div>
+        <div class="col-md-9 col-xs-9">
+          <%= form_helper.select :bottom_fit,
+            ['Tight/Skinny', 'Straight', 'Loose/Flowy'].map{|v| [v,v]},
+            {prompt: true}, class: "form-control" %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
