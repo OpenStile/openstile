@@ -42,7 +42,7 @@ feature 'Style Feed retailer ranking' do
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_two, retailer_one
-    when_i_set_my_style_profile_body_shape_to new_body_shape
+    when_i_set_my_style_profile_body_build_to new_body_build
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_one, retailer_two
