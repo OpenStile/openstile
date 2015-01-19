@@ -153,7 +153,6 @@ module RecommendationsHelper
   end
 
   def evaluate_special_considerations recommendation, style_profile
-    return recommendation unless recommendation[:object].is_a? Retailer #temporary until s.c added to items
     overlap = style_profile.special_consideration_ids & recommendation[:object].special_consideration_ids
 
     recommendation[:priority] = recommendation[:priority] + 1 unless overlap.empty?
