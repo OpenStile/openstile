@@ -190,6 +190,34 @@ feature 'Style Feed item ranking' do
     then_the_recommendation_should_be_for "your Preferred Fit"
   end
 
+  scenario 'based on favortie prints' do
+    baseline_calibration_for_shopper_and_items
+
+    original_print = FactoryGirl.create(:print, name: "Animal Print")
+    new_print = FactoryGirl.create(:print, name: "Bold Patterns")
+
+    top.update!(print_id: new_print.id)
+    bottom.update!(print_id: original_print.id)
+    dress.update!(print_id: nil)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_print_as original_print, :love
+    when_i_set_my_style_profile_feelings_for_a_print_as new_print, :impartial
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be bottom, top
+    then_the_recommendation_ordering_should_be bottom, dress
+    when_i_set_my_style_profile_feelings_for_a_print_as original_print, :impartial
+    when_i_set_my_style_profile_feelings_for_a_print_as new_print, :love
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be top, bottom
+    then_the_recommendation_ordering_should_be top, dress
+    then_the_recommendation_should_be_for "your Preferred Prints and Patterns"
+  end
+
   private
     def baseline_calibration_for_shopper_and_items
       shared_top_size = FactoryGirl.create(:top_size)
