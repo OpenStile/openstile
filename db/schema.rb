@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119105243) do
+ActiveRecord::Schema.define(version: 20150119110706) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -246,6 +246,14 @@ ActiveRecord::Schema.define(version: 20150119105243) do
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
   add_index "retailers", ["look_id"], name: "index_retailers_on_look_id", using: :btree
 
+  create_table "retailers_special_considerations", id: false, force: true do |t|
+    t.integer "retailer_id",              null: false
+    t.integer "special_consideration_id", null: false
+  end
+
+  add_index "retailers_special_considerations", ["retailer_id", "special_consideration_id"], name: "special_considerations_for_a_retailer_index", using: :btree
+  add_index "retailers_special_considerations", ["special_consideration_id", "retailer_id"], name: "retailers_for_a_special_consideration_index", using: :btree
+
   create_table "retailers_top_sizes", id: false, force: true do |t|
     t.integer "retailer_id", null: false
     t.integer "top_size_id", null: false
@@ -282,6 +290,14 @@ ActiveRecord::Schema.define(version: 20150119105243) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "special_considerations_style_profiles", id: false, force: true do |t|
+    t.integer "special_consideration_id", null: false
+    t.integer "style_profile_id",         null: false
+  end
+
+  add_index "special_considerations_style_profiles", ["special_consideration_id", "style_profile_id"], name: "style_profiles_for_a_special_consideration_index", using: :btree
+  add_index "special_considerations_style_profiles", ["style_profile_id", "special_consideration_id"], name: "special_consideration_for_style_profile_index", using: :btree
 
   create_table "style_profile_top_sizes", force: true do |t|
     t.integer  "style_profile_id"
