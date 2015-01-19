@@ -99,6 +99,23 @@ def when_i_set_my_style_profile_body_build_to build
   expect(page).to have_content('My Style Feed')
 end
 
+def when_i_set_my_style_profile_preferred_fit_as fit, type
+  click_link 'Style Profile'
+
+  within(:css, "div.fit") do
+    if type == :top
+      select fit, from: 'Top fit'
+    end
+    if type == :bottom
+      select fit, from: 'Bottom fit'
+    end
+  end
+
+  click_button style_profile_save 
+  expect(page).to have_content('My Style Feed')
+end
+
+
 def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
   visit '/'
   expect(page.body.index(higher_ranking.name)).to be < (page.body.index(lower_ranking.name))

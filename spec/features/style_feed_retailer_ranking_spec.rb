@@ -140,22 +140,6 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "Local designers"
   end
 
-  def when_i_set_my_style_profile_preferred_fit_as fit, type
-    click_link 'Style Profile'
-
-    within(:css, "div.fit") do
-      if type == :top
-        select fit, from: 'Top fit'
-      end
-      if type == :bottom
-        select fit, from: 'Bottom fit'
-      end
-    end
-
-    click_button style_profile_save 
-    expect(page).to have_content('My Style Feed')
-  end
-
   def when_i_set_my_style_profile_feelings_for_a_consideration_as consideration, importance
     click_link 'Style Profile'
 
