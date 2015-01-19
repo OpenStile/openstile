@@ -62,3 +62,26 @@ def then_my_style_feed_should_contain recommendation
   visit '/'
   expect(page).to have_content(recommendation.name)
 end
+
+def when_i_set_my_style_profile_body_shape_to body_shape
+  click_link 'Style Profile'
+
+  within(:css, "div.body-shape") do
+    choose("style_profile_body_shape_id_#{body_shape.id}")
+  end
+ 
+  click_button style_profile_save 
+  expect(page).to have_content('My Style Feed')
+end
+
+def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
+  visit '/'
+  expect(page.body.index(higher_ranking.name)).to be < (page.body.index(lower_ranking.name))
+end
+
+def then_the_recommendation_should_be_for recommendation_string
+  visit '/'
+  expect(page).to have_content("is recommended for #{recommendation_string}")
+end
+
+
