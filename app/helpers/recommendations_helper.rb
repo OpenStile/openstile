@@ -133,7 +133,7 @@ module RecommendationsHelper
   end
 
   def evaluate_top_fit recommendation, style_profile
-    return recommendation unless recommendation[:object].is_a? Retailer #temporary until fit added to items
+    return recommendation if recommendation[:object].is_a? Bottom
     return recommendation if style_profile.top_fit.blank?
     if (recommendation[:object].top_fit == style_profile.top_fit)
       recommendation[:priority] = recommendation[:priority] + 1
@@ -143,7 +143,7 @@ module RecommendationsHelper
   end
 
   def evaluate_bottom_fit recommendation, style_profile
-    return recommendation unless recommendation[:object].is_a? Retailer #temporary until fit added to items
+    return recommendation if recommendation[:object].is_a? Top
     return recommendation if style_profile.bottom_fit.blank?
     if (recommendation[:object].bottom_fit == style_profile.bottom_fit)
       recommendation[:priority] = recommendation[:priority] + 1

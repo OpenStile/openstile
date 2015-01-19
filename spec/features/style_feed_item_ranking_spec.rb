@@ -91,6 +91,48 @@ feature 'Style Feed item ranking' do
     then_the_recommendation_should_be_for "your Favorite Looks"
   end
 
+  scenario 'based on top fit' do
+    baseline_calibration_for_shopper_and_items
+
+    original_fit = 'Loose'
+    new_fit = 'Tight/Form-Fitting'
+
+    top.update!(top_fit: new_fit)
+    dress.update!(top_fit: original_fit)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_preferred_fit_as original_fit, :top
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be dress, top
+    when_i_set_my_style_profile_preferred_fit_as new_fit, :top
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be top, dress
+    then_the_recommendation_should_be_for "your Preferred Fit"
+  end
+
+  scenario 'based on bottom fit' do
+    baseline_calibration_for_shopper_and_items
+
+    original_fit = 'Loose/Flowy'
+    new_fit = 'Tight/Skinny'
+
+    bottom.update!(bottom_fit: new_fit)
+    dress.update!(bottom_fit: original_fit)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_preferred_fit_as original_fit, :bottom
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be dress, bottom
+    when_i_set_my_style_profile_preferred_fit_as new_fit, :bottom
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be bottom, dress
+    then_the_recommendation_should_be_for "your Preferred Fit"
+  end
+
   private
     def baseline_calibration_for_shopper_and_items
       shared_top_size = FactoryGirl.create(:top_size)
