@@ -29,6 +29,7 @@ module RecommendationsHelper
       recommendation = evaluate_favorite_looks recommendation, style_profile
       recommendation = evaluate_top_fit recommendation, style_profile
       recommendation = evaluate_bottom_fit recommendation, style_profile
+      recommendation = evaluate_special_considerations recommendation, style_profile
 
       results << recommendation
     end
@@ -108,7 +109,7 @@ module RecommendationsHelper
     return recommendation if style_profile.body_shape_id.nil?
     if recommendation[:object].body_shape_id == style_profile.body_shape_id
       recommendation[:priority] = recommendation[:priority] + 1
-      recommendation[:justification] << "Body Type"
+      recommendation[:justification] << "your Body Type"
     end
     recommendation
   end
@@ -120,7 +121,7 @@ module RecommendationsHelper
         recommendation[:object].for_full_figured && style_profile.body_build == "Full-figured") 
 
       recommendation[:priority] = recommendation[:priority] + 1
-      recommendation[:justification] << "Body Type"
+      recommendation[:justification] << "your Body Type"
     end
     recommendation
   end
@@ -128,7 +129,7 @@ module RecommendationsHelper
   def evaluate_favorite_looks recommendation, style_profile
     if LookTolerance.favorite_looks_for(style_profile).pluck(:look_id).include?(recommendation[:object].look_id)
       recommendation[:priority] = recommendation[:priority] + 1
-      recommendation[:justification] << "Favorite Looks"
+      recommendation[:justification] << "your Favorite Looks"
     end
     recommendation
   end
@@ -138,7 +139,7 @@ module RecommendationsHelper
     return recommendation if style_profile.top_fit.blank?
     if (recommendation[:object].top_fit == style_profile.top_fit)
       recommendation[:priority] = recommendation[:priority] + 1
-      recommendation[:justification] << "Preferred Fit"
+      recommendation[:justification] << "your Preferred Fit"
     end
     recommendation
   end
@@ -148,7 +149,20 @@ module RecommendationsHelper
     return recommendation if style_profile.bottom_fit.blank?
     if (recommendation[:object].bottom_fit == style_profile.bottom_fit)
       recommendation[:priority] = recommendation[:priority] + 1
-      recommendation[:justification] << "Preferred Fit"
+      recommendation[:justification] << "your Preferred Fit"
+    end
+    recommendation
+  end
+
+  def evaluate_special_considerations recommendation, style_profile
+    return recommendation unless recommendation[:object].is_a? Retailer #temporary until s.c added to items
+    SpecialConsideration.all.each do |consideration|
+      if style_profile.special_consideration_ids.include?(consideration.id) && 
+          recommendation[:object].special_consideration_ids.include?(consideration.id)
+
+        recommendation[:priority] = recommendation[:priority] + 1
+        recommendation[:justification] << consideration.name
+      end
     end
     recommendation
   end
