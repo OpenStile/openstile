@@ -115,6 +115,21 @@ def when_i_set_my_style_profile_preferred_fit_as fit, type
   expect(page).to have_content('My Style Feed')
 end
 
+def when_i_set_my_style_profile_feelings_for_a_consideration_as consideration, importance
+  click_link 'Style Profile'
+
+  within(:css, "div.considerations") do
+    if importance == :important
+      check(consideration.name)
+    end
+    if importance == :not_important
+      uncheck(consideration.name)
+    end
+  end
+
+  click_button style_profile_save
+  expect(page).to have_content('My Style Feed')
+end
 
 def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
   visit '/'

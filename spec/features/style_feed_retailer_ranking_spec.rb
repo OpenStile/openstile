@@ -140,22 +140,6 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "Local designers"
   end
 
-  def when_i_set_my_style_profile_feelings_for_a_consideration_as consideration, importance
-    click_link 'Style Profile'
-
-    within(:css, "div.considerations") do
-      if importance == :important
-        check(consideration.name)
-      end
-      if importance == :not_important
-        uncheck(consideration.name)
-      end
-    end
-
-    click_button style_profile_save
-    expect(page).to have_content('My Style Feed')
-  end
-
   private
     def baseline_calibration_for_shopper_and_retailers
       shared_size = FactoryGirl.create(:top_size)

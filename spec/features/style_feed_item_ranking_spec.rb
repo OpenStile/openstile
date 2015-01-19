@@ -133,6 +133,35 @@ feature 'Style Feed item ranking' do
     then_the_recommendation_should_be_for "your Preferred Fit"
   end
 
+  scenario 'based on special considerations' do
+    baseline_calibration_for_shopper_and_items
+
+    original_consideration = FactoryGirl.create(:special_consideration, name:'Second-wear')
+    new_consideration = FactoryGirl.create(:special_consideration, name: 'Local designers')
+
+    top.special_considerations << new_consideration
+    bottom.special_considerations << original_consideration
+    dress.update!(special_consideration_ids: [])
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_consideration_as original_consideration, :important
+    when_i_set_my_style_profile_feelings_for_a_consideration_as new_consideration, :not_important
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be bottom, top
+    then_the_recommendation_ordering_should_be bottom, dress
+    then_the_recommendation_should_be_for "Second-wear"
+    when_i_set_my_style_profile_feelings_for_a_consideration_as original_consideration, :not_important
+    when_i_set_my_style_profile_feelings_for_a_consideration_as new_consideration, :important
+    then_my_style_feed_should_contain top
+    then_my_style_feed_should_contain bottom
+    then_my_style_feed_should_contain dress
+    then_the_recommendation_ordering_should_be top, bottom
+    then_the_recommendation_ordering_should_be top, dress
+    then_the_recommendation_should_be_for "Local designers"
+  end
+
   private
     def baseline_calibration_for_shopper_and_items
       shared_top_size = FactoryGirl.create(:top_size)
