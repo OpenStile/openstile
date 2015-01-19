@@ -26,6 +26,7 @@ module RecommendationsHelper
 
       recommendation = evaluate_body_shape recommendation, style_profile
       recommendation = evaluate_body_build recommendation, style_profile
+      recommendation = evaluate_favorite_looks recommendation, style_profile
 
       results << recommendation
     end
@@ -118,6 +119,14 @@ module RecommendationsHelper
 
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "Body Type"
+    end
+    recommendation
+  end
+
+  def evaluate_favorite_looks recommendation, style_profile
+    if LookTolerance.favorite_looks_for(style_profile).pluck(:look_id).include?(recommendation[:object].look_id)
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "Favorite Looks"
     end
     recommendation
   end

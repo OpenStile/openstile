@@ -8,4 +8,8 @@ class LookTolerance < ActiveRecord::Base
   def self.hated_looks_for style_profile_id
     where(style_profile_id: style_profile_id, tolerance: 1)
   end
+
+  def self.favorite_looks_for style_profile_id
+    where(style_profile_id: style_profile_id, tolerance: 10)
+  end
 end

@@ -49,6 +49,29 @@ feature 'Style Feed retailer ranking' do
     then_the_recommendation_should_be_for "your Body Type"
   end
 
+  scenario 'based on look' do
+    baseline_calibration_for_shopper_and_retailers
+
+    original_look = FactoryGirl.create(:look, name: "Bohemian Chic")
+    new_look = FactoryGirl.create(:look, name: "Glamorous")
+    
+    retailer_one.update!(look_id: new_look.id)
+    retailer_two.update!(look_id: original_look.id)
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_feelings_for_a_look_as original_look, :love
+    when_i_set_my_style_profile_feelings_for_a_look_as new_look, :impartial
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_two, retailer_one
+    when_i_set_my_style_profile_feelings_for_a_look_as original_look, :impartial
+    when_i_set_my_style_profile_feelings_for_a_look_as new_look, :love
+    then_my_style_feed_should_contain retailer_one
+    then_my_style_feed_should_contain retailer_two
+    then_the_recommendation_ordering_should_be retailer_one, retailer_two
+    then_the_recommendation_should_be_for "your Favorite Looks"
+  end
+
   def when_i_set_my_style_profile_body_shape_to body_shape
     click_link 'Style Profile'
 
