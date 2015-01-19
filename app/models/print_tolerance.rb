@@ -8,4 +8,8 @@ class PrintTolerance < ActiveRecord::Base
   def self.hated_prints_for style_profile_id
     where(style_profile_id: style_profile_id, tolerance: 1)
   end
+
+  def self.favorite_prints_for style_profile_id
+    where(style_profile_id: style_profile_id, tolerance: 10)
+  end
 end

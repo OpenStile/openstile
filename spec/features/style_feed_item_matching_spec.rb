@@ -140,27 +140,6 @@ feature 'Style Feed item matching' do
     expect(page).to have_content('My Style Feed')
   end
 
-  def when_i_set_my_style_profile_feelings_for_a_print_as print, partiality
-    click_link 'Style Profile'
-
-    within(:css, "div#print_#{print.id}") do
-      if partiality == :hate
-        choose "Hate"
-      end
-      if partiality == :impartial
-        choose "Impartial"
-      end
-      if partiality == :love
-        choose "Love"
-      end
-    end
- 
-    click_button style_profile_save 
-
-    expect(page).to have_content('My Style Feed')
-  end
-
-
   private
     def set_primary_print_for_items print
       top.update!(print_id: print.id)

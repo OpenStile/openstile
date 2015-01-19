@@ -31,6 +31,7 @@ module RecommendationsHelper
       recommendation = evaluate_bottom_fit recommendation, style_profile
       recommendation = evaluate_special_considerations recommendation, style_profile
       recommendation = evaluate_parts_to_show_off recommendation, style_profile
+      recommendation = evaluate_favorite_prints recommendation, style_profile
 
       results << recommendation
     end
@@ -173,6 +174,15 @@ module RecommendationsHelper
     unless (parts_to_flaunt_ids & parts_exposed_ids).empty?
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "your Preferred Fit"
+    end
+    recommendation
+  end
+
+  def evaluate_favorite_prints recommendation, style_profile
+    return recommendation if recommendation[:object].is_a? Retailer
+    if PrintTolerance.favorite_prints_for(style_profile).pluck(:print_id).include?(recommendation[:object].print_id)
+      recommendation[:priority] = recommendation[:priority] + 1
+      recommendation[:justification] << "your Preferred Prints and Patterns"
     end
     recommendation
   end
