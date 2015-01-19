@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150118224121) do
+ActiveRecord::Schema.define(version: 20150119092600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -239,6 +239,8 @@ ActiveRecord::Schema.define(version: 20150118224121) do
     t.boolean  "for_petite"
     t.boolean  "for_tall"
     t.boolean  "for_full_figured"
+    t.string   "top_fit"
+    t.string   "bottom_fit"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
@@ -293,6 +295,8 @@ ActiveRecord::Schema.define(version: 20150118224121) do
     t.integer  "height_feet"
     t.integer  "height_inches"
     t.string   "body_build"
+    t.string   "top_fit"
+    t.string   "bottom_fit"
   end
 
   add_index "style_profiles", ["body_shape_id"], name: "index_style_profiles_on_body_shape_id", using: :btree

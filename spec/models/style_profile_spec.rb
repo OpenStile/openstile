@@ -25,6 +25,8 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :height_feet }
   it { should respond_to :height_inches }
   it { should respond_to :body_build }
+  it { should respond_to :top_fit }
+  it { should respond_to :bottom_fit }
   it { should be_valid }
 
   context "when shopper id is not present" do
