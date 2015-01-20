@@ -45,9 +45,10 @@ gem 'chili'
 
 gem 'pg', '0.17.1'
 
+gem "faker"
+
 group :development, :test do
   gem "factory_girl_rails"
-  gem "faker"
   gem 'rspec-rails',  '~> 3.0.0'
 end
 
