@@ -58,3 +58,79 @@ end
 ['Eco-friendly', 'Local designers', 'Ethically-made', 'Second-wear'].each do |consideration|
   SpecialConsideration.find_or_create_by(name: consideration)
 end
+
+if ENV["demo_up"]
+  
+  ['aarti', 'nikki', 'sharon', 'hanna', 'ashley', 'elena', 'tammy'].each do |shopper|
+    if Shopper.find_by_email("#{shopper}@openstile.com").nil?
+      Shopper.create(first_name: shopper, email: "#{shopper}@openstile.com", 
+                     password: 'testopenstile', password_confirmation: 'testopenstile')
+    end
+  end
+
+  (1..10).each do |idx|
+    retailer = Retailer.create!(name: "#{Faker::Address.street_name} Boutique",
+                               neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
+                                              'Dupont Circle', 'Bethesda', 'Columbia Heights', 
+                                              'Mosaic District'].sample,
+                               description: 'This is a retailer created for OpenStile demo puposes.',
+                               look_id: Look.ids.sample,
+                               body_shape_id: BodyShape.ids.sample,
+                               top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
+                               bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
+                               special_consideration_ids: SpecialConsideration.ids.sample(2))
+    retailer.price_range.update!(top_min_price: 0, top_max_price: 500, 
+                                 bottom_min_price: 0, bottom_max_price: 500,
+                                 dress_min_price: 0, dress_max_price: 500) 
+    retailer.top_sizes << TopSize.all                                 
+    retailer.bottom_sizes << BottomSize.all                                 
+    retailer.dress_sizes << DressSize.all                                 
+
+    top = retailer.tops.create!(name: "#{Faker::Name.name} Designs Blouse",
+                                description: 'This is a blouse created for OpenStile demo purposes.',
+                                price: (30..70).to_a.sample,
+                                look_id: Look.ids.sample,
+                                print_id: Print.ids.sample,
+                                color_id: Color.ids.sample,
+                                body_shape_id: BodyShape.ids.sample,
+                                for_petite: idx.even?,
+                                top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
+                                special_consideration_ids: [SpecialConsideration.ids.sample])
+    top.top_sizes << TopSize.all
+    top.exposed_parts.create(part_id: Part.find_by_name(['Midsection','Arms','Back','Cleavage'].sample))
+
+    bottom = retailer.bottoms.create!(name: "#{Faker::Name.name} Designs Pants",
+                                      description: 'This is a pair of pants created for OpenStile demo purposes.',
+                                      price: (50..150).to_a.sample,
+                                      look_id: Look.ids.sample,
+                                      print_id: Print.ids.sample,
+                                      color_id: Color.ids.sample,
+                                      body_shape_id: BodyShape.ids.sample,
+                                      for_petite: idx.even?,
+                                      bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
+                                      special_consideration_ids: [SpecialConsideration.ids.sample])
+    bottom.bottom_sizes << BottomSize.all
+
+    dress = retailer.dresses.create!(name: "#{Faker::Name.name} Designs Dress",
+                                     description: 'This is a dress created for OpenStile demo purposes.',
+                                     price: (75..200).to_a.sample,
+                                     look_id: Look.ids.sample,
+                                     print_id: Print.ids.sample,
+                                     color_id: Color.ids.sample,
+                                     body_shape_id: BodyShape.ids.sample,
+                                     for_petite: idx.even?,
+                                     top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
+                                     bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
+                                     special_consideration_ids: [SpecialConsideration.ids.sample])
+    dress.dress_sizes << DressSize.all
+  end
+end
+
+if ENV["demo_down"]
+  ['aarti', 'nikki', 'sharon', 'hanna', 'ashley', 'elena', 'tammy'].each do |shopper|
+    shopper = Shopper.find_by_email("#{shopper}@openstile.com")
+    shopper.destroy if shopper
+  end
+
+  Retailer.where(description: 'This is a retailer created for OpenStile demo puposes.').destroy_all
+end
