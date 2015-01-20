@@ -16,11 +16,20 @@
 <div class="style-feed block">
   <div class="container">
     <div class="page-title text-center">
-      <p>
-        Check out these local retailers and items we suggest<br /> 
-        specifically for <span style="text-decoration: underline;">your</span> 
-        budget, body, and overall personal style!
-      </p>
+      <% if @recommendations.empty? %>
+        <h3>*Hey there*</h3>
+        <p>
+          Looks like we don't have any recommendations for you as of yet.
+          Try answering a few questions in your Style Profile 
+          and check back to see what we find for you.
+        </p>
+      <% else %>
+        <p>
+          Check out these local retailers and items we suggest<br /> 
+          specifically for <span style="text-decoration: underline;">your</span> 
+          budget, body, and overall personal style!
+        </p>
+      <% end %>
       <hr>
     </div>
     <% @recommendations.each_with_index do |recommendation, idx| %>

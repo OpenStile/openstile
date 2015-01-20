@@ -28,7 +28,6 @@ describe "Shopper sign up" do
       before do
         fill_in "First name", with: "Jane"
         fill_in "Email address",      with: "jane@example.com"
-        fill_in "Cell phone number",  with: "(703) 555-5555"
         fill_in "Password", with: "foobarbaz"
         fill_in "Confirm password", with: "foobarbaz"
       end
