@@ -31,6 +31,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :online_presence }
   it { should respond_to :drop_in_availabilities }
   it { should respond_to :location }
+  it { should respond_to :drop_ins }
   it { should be_valid }
 
   context "when name is not present" do
@@ -160,6 +161,23 @@ RSpec.describe Retailer, :type => :model do
       @retailer.destroy
       expect(retailer_location).to_not be_nil
       expect(Location.where(id: retailer_location.id)).to be_empty
+    end
+  end
+
+  describe "drop ins assocication" do
+    before { @retailer.save }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:drop_in) { FactoryGirl.create(:drop_in, 
+                                        retailer: @retailer,
+                                        shopper: shopper) }
+
+    it "should destroy associated drop ins" do
+      drop_ins = @retailer.drop_ins.to_a
+      @retailer.destroy
+      expect(drop_ins).to_not be_empty
+      drop_ins.each do |d|
+        expect(DropIn.where(id: d.id)).to be_empty
+      end
     end
   end
 end

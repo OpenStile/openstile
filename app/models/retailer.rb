@@ -13,6 +13,7 @@ class Retailer < ActiveRecord::Base
   has_one :online_presence, dependent: :destroy
   has_many :drop_in_availabilities, dependent: :destroy
   has_one :location, as: :locatable, dependent: :destroy
+  has_many :drop_ins, dependent: :destroy
 
   after_create{ create_price_range }
   
