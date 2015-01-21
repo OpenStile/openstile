@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121013430) do
+ActiveRecord::Schema.define(version: 20150121023433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,6 +170,17 @@ ActiveRecord::Schema.define(version: 20150121013430) do
 
   add_index "dresses_special_considerations", ["dress_id", "special_consideration_id"], name: "special_considerations_for_a_dress_index", using: :btree
   add_index "dresses_special_considerations", ["special_consideration_id", "dress_id"], name: "dresses_for_a_special_consideration_index", using: :btree
+
+  create_table "drop_in_availabilities", force: true do |t|
+    t.integer  "retailer_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "bandwidth"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "drop_in_availabilities", ["retailer_id"], name: "index_drop_in_availabilities_on_retailer_id", using: :btree
 
   create_table "exposed_parts", force: true do |t|
     t.integer  "part_id"
