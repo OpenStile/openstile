@@ -8,6 +8,7 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    StreetAddress (1.0.6)
     actionmailer (4.1.6)
       actionpack (= 4.1.6)
       actionview (= 4.1.6)
@@ -197,6 +198,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  StreetAddress
   bcrypt (~> 3.1.7)
   bootstrap-glyphicons
   capybara (~> 2.3.0)

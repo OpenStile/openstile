@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121023433) do
+ActiveRecord::Schema.define(version: 20150121165328) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,17 @@ ActiveRecord::Schema.define(version: 20150121023433) do
 
   add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
   add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
+
+  create_table "locations", force: true do |t|
+    t.integer  "locatable_id"
+    t.string   "locatable_type"
+    t.string   "address"
+    t.string   "short_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
 
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"

@@ -16,6 +16,7 @@ RSpec.describe DropInAvailability, :type => :model do
   it { should respond_to :start_time }
   it { should respond_to :end_time }
   it { should respond_to :bandwidth }
+  it { should respond_to :location }
   it { should be_valid }
 
   describe "when retailer id is not present" do
@@ -46,5 +47,19 @@ RSpec.describe DropInAvailability, :type => :model do
   describe "when end time is earlier than start time" do
     before { @drop_in_availability.end_time = "2015-01-20 11:00:00" }
     it { should_not be_valid }
+  end
+
+  describe "location association" do
+    before { @drop_in_availability.save }
+    let!(:location){ 
+      FactoryGirl.create(:location, locatable: @drop_in_availability) 
+    }
+
+    it "should destroy associated location" do
+      drop_in_availability_location = @drop_in_availability.location
+      @drop_in_availability.destroy
+      expect(drop_in_availability_location).to_not be_nil
+      expect(Location.where(id: drop_in_availability_location.id)).to be_empty
+    end
   end
 end

@@ -30,6 +30,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :online_presence }
   it { should respond_to :drop_in_availabilities }
+  it { should respond_to :location }
   it { should be_valid }
 
   context "when name is not present" do
@@ -145,6 +146,20 @@ RSpec.describe Retailer, :type => :model do
       drop_in_availabilities.each do |d|
         expect(DropInAvailability.where(id: d.id)).to be_empty
       end
+    end
+  end
+
+  describe "location association" do
+    before { @retailer.save }
+    let!(:location){ 
+      FactoryGirl.create(:location, locatable: @retailer) 
+    }
+
+    it "should destroy associated location" do
+      retailer_location = @retailer.location
+      @retailer.destroy
+      expect(retailer_location).to_not be_nil
+      expect(Location.where(id: retailer_location.id)).to be_empty
     end
   end
 end
