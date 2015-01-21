@@ -28,6 +28,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :top_fit }
   it { should respond_to :bottom_fit }
   it { should respond_to :special_considerations }
+  it { should respond_to :online_presence }
   it { should be_valid }
 
   context "when name is not present" do
@@ -114,6 +115,20 @@ RSpec.describe Retailer, :type => :model do
       dresses.each do |d|
         expect(Dress.where(id: d.id)).to be_empty
       end
+    end
+  end
+
+  describe "online presence association" do
+    before { @retailer.save }
+    let!(:online_presence){ 
+      FactoryGirl.create(:online_presence, retailer: @retailer) 
+    }
+
+    it "should destroy associated online presence" do
+      retailer_online_presence = @retailer.online_presence
+      @retailer.destroy
+      expect(retailer_online_presence).to_not be_nil
+      expect(OnlinePresence.where(id: retailer_online_presence.id)).to be_empty
     end
   end
 end

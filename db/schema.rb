@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119174057) do
+ActiveRecord::Schema.define(version: 20150121013430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,18 @@ ActiveRecord::Schema.define(version: 20150119174057) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "online_presences", force: true do |t|
+    t.integer  "retailer_id"
+    t.string   "web_link"
+    t.string   "facebook_link"
+    t.string   "twitter_link"
+    t.string   "instagram_link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "online_presences", ["retailer_id"], name: "index_online_presences_on_retailer_id", using: :btree
 
   create_table "part_exposure_tolerances", force: true do |t|
     t.integer  "part_id"
