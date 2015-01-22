@@ -11,11 +11,19 @@ Rails.application.routes.draw do
   get '/blog/dressing-mommy-post-baby-phase'=>  'blog#blog_03'
 
   devise_for :shoppers, :skip => [:passwords, :registrations], path: '/shoppers', controllers: {
-    sessions: 'shoppers/sessions',
+    sessions: 'shoppers/sessions'
     } 
   devise_scope :shopper do
       get "/shoppers/sign_up", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
       post "/shoppers", :to => "shoppers/registrations#create", :as => 'shopper_registration'
+  end
+
+  devise_for :retail_users, :skip => [:passwords, :registrations], path: '/retail_users', controllers: {
+    sessions: 'retail_users/sessions'
+    } 
+  devise_scope :retail_user do
+      # get "/retail_users/sign_up", :to => "retail_users/registrations#new",   :as => 'new_retail_user_registration'
+      # post "/retail_users", :to => "retail_users/registrations#create", :as => 'retail_user_registration'
   end
 
   resources :style_profiles, only: [:edit, :update]
