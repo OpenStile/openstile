@@ -125,7 +125,12 @@ RSpec.describe Shopper, :type => :model do
   describe "drop ins assocication" do
     before { @shopper.save }
     let(:retailer){ FactoryGirl.create(:retailer) }
-    let!(:drop_in) { FactoryGirl.create(:drop_in, 
+    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
+                                                   retailer: retailer,
+                                                   start_time: DateTime.current,
+                                                   end_time: DateTime.current.advance(hours: 2)) }
+    let!(:drop_in) { FactoryGirl.create(:drop_in,
+                                        time: DateTime.current.advance(hours: 1),
                                         retailer: retailer,
                                         shopper: @shopper) }
 

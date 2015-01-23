@@ -20,4 +20,20 @@ class Retailer < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 } 
   validates :neighborhood, presence: true, length: { maximum: 50 } 
   validates :description, presence: true, length: { maximum: 250 } 
+
+  def available_for_drop_in_at datetime
+    future_availabilities = self.drop_in_availabilities.where("end_time > ?", DateTime.current)
+
+    future_availabilities.each do |availability|
+      if datetime > availability.start_time && datetime < availability.end_time
+        concurrent_drop_ins = drop_ins.where(time: datetime)
+        if concurrent_drop_ins.count >= availability.bandwidth
+          return false
+        end
+        return true
+      end
+    end
+
+    return false
+  end
 end
