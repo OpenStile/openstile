@@ -16,4 +16,8 @@ class DropIn < ActiveRecord::Base
       end
     end
   end
+
+  def self.upcoming_for shopper_id
+    where("shopper_id = ? and time > ?", shopper_id, DateTime.current)
+  end
 end

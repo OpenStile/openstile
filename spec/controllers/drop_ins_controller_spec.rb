@@ -14,5 +14,12 @@ RSpec.describe DropInsController, :type => :controller do
         expect(response).to redirect_to(new_shopper_session_path)
       end
     end
+
+    context "GET upcoming" do
+      it "redirects to signin" do
+        get :upcoming
+        expect(response).to redirect_to(new_shopper_session_path)
+      end
+    end
   end
 end

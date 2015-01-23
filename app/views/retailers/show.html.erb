@@ -48,6 +48,22 @@
             <%= f.hidden_field :retailer_id %>
 
             <div class="form-group">
+              <label class="col-md-1 col-xs-1 col-md-offset-4 col-xs-offset-4 control-label" 
+                     for="drop_in[selected_date]">Date</label>
+              <div class="col-md-4 col-xs-4">
+                <input id="drop_in[selected_date]" name="drop_in[selected_date]" class="form-control datepicker"></input>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-1 col-xs-1 col-md-offset-4 col-xs-offset-4 control-label"
+                     for="drop_in[selected_time]">Time</label>
+              <div class="col-md-4 col-xs-4">
+                <input id="drop_in[selected_time]" name="drop_in[selected_time]" class="form-control timepicker"></input>
+              </div>
+            </div>
+
+            <div class="form-group">
               <%= f.label :comment, "Comments", 
                           class: "col-md-1 col-xs-1 col-md-offset-4 col-xs-offset-4 control-label"%>
               <div class="col-md-4 col-xs-4">

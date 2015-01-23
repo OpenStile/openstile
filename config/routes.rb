@@ -22,7 +22,11 @@ Rails.application.routes.draw do
 
   resources :retailers, only: [:show]
 
-  resources :drop_ins, only: [:create]
+  resources :drop_ins, only: [:create] do
+    collection do
+      get :upcoming
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
