@@ -9,18 +9,23 @@ feature 'Shopper schedule drop in' do
                        start_time: DateTime.current,
                        end_time: DateTime.current.advance(hours: 5))
   }
+  let!(:location){ FactoryGirl.create(:location, 
+                                      locatable: retailer,
+                                      address: "3rd St. & Tingey, Washington, DC",
+                                      short_title: "Fashion Yards") }
 
   scenario 'to browse a store' do
     baseline_calibration_for_shopper_and_retailers
 
     date, time = parse_date_and_EST(DateTime.current.advance(hours: 1).change(minutes: 30) )
+    place = "3rd St. & Tingey, Washington, DC"
 
     given_i_am_a_logged_in_shopper shopper
     when_i_select_a_recommendation retailer
     when_i_attempt_to_schedule_with_invalid_options retailer
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
-    then_my_scheduled_drop_ins_should_be_updated_with_retailer retailer
+    then_my_scheduled_drop_ins_should_be_updated_with retailer, "Today", place
   end
 
   def when_i_select_a_recommendation recommendation
@@ -57,8 +62,10 @@ feature 'Shopper schedule drop in' do
     expect(page).to have_content('My Drop-Ins')
   end
 
-  def then_my_scheduled_drop_ins_should_be_updated_with_retailer retailer
-    skip
+  def then_my_scheduled_drop_ins_should_be_updated_with retailer, date, place
+    expect(page).to have_content(retailer.name)
+    expect(page).to have_content(date)
+    expect(page).to have_content(place)
   end
 
   private

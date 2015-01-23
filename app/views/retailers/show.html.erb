@@ -32,12 +32,6 @@
           </p>
         </div>
 
-        <div class="row location text-center">
-          <h4>
-            Your drop-in will take place at <%= @retailer.location.address unless @retailer.location.nil? %>
-          </h4>
-        </div>
-
         <div class="schedule">
           <%= form_for(@drop_in || current_shopper.drop_ins.build(retailer_id: @retailer.id), class: "form-horizontal") do |f| %>
             <div class="col-md-4 col-xs-4 col-md-offset-4 col-xs-offset-4 text-center">

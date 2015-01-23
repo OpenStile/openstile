@@ -258,6 +258,14 @@ hr{
   min-height:100px;
 }
 
+.my-drop-ins-top{
+	background:#555 asset_url('blouse_and_dress.jpg') no-repeat;
+	background-size:cover;
+	background-position:center 25%;
+	border-bottom:1px solid #fff;
+  min-height:100px;
+}
+
 /* Header */
 
 header{
@@ -1875,6 +1883,7 @@ input {
 .recommendation-details h2{
   font-size: 30px;
   color: #555;
+  max-height: 999999px;
 }
 
 .recommendation-details h4{
@@ -1889,6 +1898,7 @@ input {
 
 .recommendation-details p{
   font-size:18px;
+  max-height: 999999px;
 }
 
 /* Recommendation End */
@@ -1897,6 +1907,22 @@ input {
 
 .drop-in .title{
   margin-bottom: 20px;
+}
+
+.my-drop-ins h4{
+	font-size:20px;
+	line-height:30px;
+	font-weight:normal;
+	color:#555;
+	font-family: 'Droid Serif', serif;
+	font-style:italic;
+  max-height: 999999px;
+}
+
+.my-drop-ins .single-drop-in {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #555;
 }
 /* Drop-In Ends*/
 
