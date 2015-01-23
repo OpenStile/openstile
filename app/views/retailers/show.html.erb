@@ -14,10 +14,28 @@
         <h2><%= @retailer.neighborhood %></h2><br />
         <h4><%= @retailer.description %></h4>
         <hr>
-        <a href="#"><i class="fa fa-lg fa-link"></i></a>
-        <a href="#"><i class="fa fa-lg fa-facebook"></i></a>
-        <a href="#"><i class="fa fa-lg fa-twitter"></i></a>
-        <a href="#"><i class="fa fa-lg fa-instagram"></i></a>
+        <% if @retailer.online_presence %>
+          <% unless @retailer.online_presence.web_link.blank? %>
+            <a href=<%=@retailer.online_presence.web_link%> target='_blank'>
+              <i class="fa fa-lg fa-link"></i>
+            </a>
+          <% end %>
+          <% unless @retailer.online_presence.facebook_link.blank? %>
+            <a href=<%=@retailer.online_presence.facebook_link%> target='_blank'>
+              <i class="fa fa-lg fa-facebook"></i>
+            </a>
+          <% end %>
+          <% unless @retailer.online_presence.twitter_link.blank? %>
+            <a href=<%=@retailer.online_presence.twitter_link%> target='_blank'>
+              <i class="fa fa-lg fa-twitter"></i>
+            </a>
+          <% end %>
+          <% unless @retailer.online_presence.instagram_link.blank? %>
+            <a href=<%=@retailer.online_presence.instagram_link%> target='_blank'>
+              <i class="fa fa-lg fa-instagram"></i>
+            </a>
+          <% end %>
+        <% end %>
       </div>
     </div>
 
