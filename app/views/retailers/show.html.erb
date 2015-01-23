@@ -1,2 +1,70 @@
-<h1>Retailers#show</h1>
-<p>Find me in app/views/retailers/show.html.erb</p>
+<% provide(:title, @retailer.name) %>
+
+<%= render "shared/header" %>
+
+<div class="recommendation-details block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
+        <img class="img-responsive" src="http://placehold.it/400x500">
+      </div>
+      <div class="col-md-5 col-xs-5 text-center">
+        <hr>
+        <h1><%= @retailer.name %></h1><br />
+        <h2><%= @retailer.neighborhood %></h2><br />
+        <h4><%= @retailer.description %></h4>
+        <hr>
+        <a href="#"><i class="fa fa-lg fa-link"></i></a>
+        <a href="#"><i class="fa fa-lg fa-facebook"></i></a>
+        <a href="#"><i class="fa fa-lg fa-twitter"></i></a>
+        <a href="#"><i class="fa fa-lg fa-instagram"></i></a>
+      </div>
+    </div>
+
+    <% if shopper_signed_in? %>
+      <hr>
+      <div class="drop-in">
+        <div class="title row text-center">
+          <h2>Schedule a drop-in to browse this store</h2><br />
+          <p>
+            Based on your personal style we'll pick out a few items and outfits you're sure to love!
+            When you come in, just tell us your name.
+          </p>
+        </div>
+
+        <div class="row location text-center">
+          <h4>
+            Your drop-in will take place at <%= @retailer.location.address unless @retailer.location.nil? %>
+          </h4>
+        </div>
+
+        <div class="schedule">
+          <%= form_for(@drop_in || current_shopper.drop_ins.build(retailer_id: @retailer.id), class: "form-horizontal") do |f| %>
+            <div class="col-md-4 col-xs-4 col-md-offset-4 col-xs-offset-4 text-center">
+              <%= render 'shared/error_messages', object: f.object %>
+            </div>
+
+            <%= f.hidden_field :shopper_id %>
+            <%= f.hidden_field :retailer_id %>
+
+            <div class="form-group">
+              <%= f.label :comment, "Comments", 
+                          class: "col-md-1 col-xs-1 col-md-offset-4 col-xs-offset-4 control-label"%>
+              <div class="col-md-4 col-xs-4">
+                <%= f.text_area :comment, class: "form-control",
+                                          placeholder: "Are you looking for anything in particular or preparing for an event?",
+                                          size: "24x6"%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-2 col-xs-2 col-md-offset-5 col-xs-offset-5">
+                <%= f.submit 'Schedule', class: 'btn btn-lg btn-primary' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

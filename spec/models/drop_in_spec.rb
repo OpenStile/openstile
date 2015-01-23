@@ -14,6 +14,7 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :shopper_id }
   it { should respond_to :time }
   it { should respond_to :drop_in_items }
+  it { should respond_to :comment }
   it { should be_valid }
 
   context "when retailer id is not present" do
@@ -28,6 +29,11 @@ RSpec.describe DropIn, :type => :model do
 
   context "when time is not present" do
     before { @drop_in.time = " " }
+    it { should_not be_valid }
+  end
+
+  context "when comment is too long" do
+    before { @drop_in.comment = 'a'*251 }
     it { should_not be_valid }
   end
 

@@ -1697,6 +1697,7 @@ input {
   color: red;
   ul {
     color: red;
+    list-style-type: none;
     margin: 0 0 30px 0;
   }
 }
@@ -1862,8 +1863,42 @@ input {
   margin: 0 auto;
 }
 
-
 /* Style Feed Ends*/
+
+/* Recommendation Begins */
+
+.recommendation-details h1{
+  font-size: 40px;
+  font-weight: 800;  
+}
+
+.recommendation-details h2{
+  font-size: 30px;
+  color: #555;
+}
+
+.recommendation-details h4{
+	font-size:20px;
+	line-height:30px;
+	font-weight:normal;
+	color:#555;
+	font-family: 'Droid Serif', serif;
+	font-style:italic;
+  max-height: 999999px;
+}
+
+.recommendation-details p{
+  font-size:18px;
+}
+
+/* Recommendation End */
+
+/* Drop-In Begins */
+
+.drop-in .title{
+  margin-bottom: 20px;
+}
+/* Drop-In Ends*/
 
 /* Responsive CSS */
 

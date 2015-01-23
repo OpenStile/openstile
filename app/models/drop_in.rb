@@ -6,4 +6,5 @@ class DropIn < ActiveRecord::Base
   validates :retailer_id, presence: true
   validates :shopper_id, presence: true
   validates :time, presence: true
+  validates :comment, length: {maximum: 250}
 end
