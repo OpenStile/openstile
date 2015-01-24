@@ -1,0 +1,4 @@
+var $input = $('.datepicker').pickadate()
+var picker = $input.pickadate('picker')
+
+picker.set('disable', <%= [true] + @available_dates %>)

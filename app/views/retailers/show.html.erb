@@ -41,7 +41,7 @@
 
     <% if shopper_signed_in? %>
       <hr>
-      <div class="drop-in">
+      <div data-retailer-id=<%= @retailer.id %> class="drop-in">
         <div class="title row text-center">
           <h2>Schedule a drop-in to browse this store</h2><br />
           <p>

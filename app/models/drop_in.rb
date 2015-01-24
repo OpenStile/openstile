@@ -14,7 +14,7 @@ class DropIn < ActiveRecord::Base
 
   def retailer_available_for_drop_in
     unless retailer_id.nil? || time.nil?
-      unless Retailer.find(retailer_id).available_for_drop_in_at(time)
+      unless Retailer.find(retailer_id).available_for_drop_in?(time)
         errors.add(:time, "is not an available time slot for a drop in")
       end
     end

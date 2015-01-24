@@ -21,7 +21,7 @@ class Retailer < ActiveRecord::Base
   validates :neighborhood, presence: true, length: { maximum: 50 } 
   validates :description, presence: true, length: { maximum: 250 } 
 
-  def available_for_drop_in_at datetime
+  def available_for_drop_in? datetime
     future_availabilities = self.drop_in_availabilities.where("end_time > ?", DateTime.current)
 
     future_availabilities.each do |availability|
@@ -35,5 +35,16 @@ class Retailer < ActiveRecord::Base
     end
 
     return false
+  end
+
+  def get_available_drop_in_dates zero_index_month=false
+    ret = []
+    future_availabilities = self.drop_in_availabilities.where("end_time > ?", DateTime.current)
+    future_availabilities.each do |availability|
+      ary = availability.start_time.to_date.strftime("%Y-%-m-%d").split('-').map{|v| v.to_i}
+      ary[1] = ary[1] - 1 if zero_index_month
+      ret << ary
+    end
+    ret
   end
 end

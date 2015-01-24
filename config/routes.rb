@@ -20,7 +20,11 @@ Rails.application.routes.draw do
 
   resources :style_profiles, only: [:edit, :update]
 
-  resources :retailers, only: [:show]
+  resources :retailers, only: [:show] do
+    member do
+      get 'enable_available_dates'
+    end
+  end
 
   resources :drop_ins, only: [:create] do
     collection do
