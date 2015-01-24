@@ -60,20 +60,19 @@ end
 end
 
 if ENV["demo_up"]
-  
-  ['aarti', 'nikki', 'sharon', 'hanna', 'ashley', 'elena', 'tammy'].each do |shopper|
-    if Shopper.find_by_email("#{shopper}@openstile.com").nil?
-      Shopper.create(first_name: shopper, email: "#{shopper}@openstile.com", 
-                     password: 'testopenstile', password_confirmation: 'testopenstile')
-    end
+  if Shopper.find_by_email('demo@example.com').nil?
+    Shopper.create(first_name: 'Jane', email: 'demo@example.com',
+                   password: 'openstile', password_confirmation: 'openstile')
   end
 
-  (1..10).each do |idx|
+  (1..5).each do |idx|
     retailer = Retailer.create!(name: "#{Faker::Address.street_name} Boutique",
                                neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
-                                              'Dupont Circle', 'Bethesda', 'Columbia Heights', 
-                                              'Mosaic District'].sample,
-                               description: 'This is a retailer created for OpenStile demo puposes.',
+                                              'Dupont Circle', 'Columbia Heights'].sample,
+                               description: 'This is a retailer created for OpenStile demo puposes. ' +
+                                            'This retailer carries some of the best local designers in ' +
+                                            'Washington DC. Tons of new items added every week so check ' +
+                                            'back regularly!',
                                look_id: Look.ids.sample,
                                body_shape_id: BodyShape.ids.sample,
                                top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
@@ -82,6 +81,22 @@ if ENV["demo_up"]
     retailer.price_range.update!(top_min_price: 0, top_max_price: 500, 
                                  bottom_min_price: 0, bottom_max_price: 500,
                                  dress_min_price: 0, dress_max_price: 500) 
+
+    retailer.create_online_presence(web_link: 'http://google.com',
+                                    facebook_link: 'http://facebook.com',
+                                    twitter_link: 'http://twitter.com',
+                                    instagram_link: 'http://instagram.com')
+
+    retailer.create_location(address: "#{Faker::Address.street_address}, Washington, DC")
+
+    ["2015-01-24", "2015-01-25", "2015-01-26", "2015-01-24", "2015-01-28",
+     "2015-01-29", "2015-01-30", "2015-01-31", "2015-02-01", "2015-02-02"].each do |date|
+      
+      retailer.drop_in_availabilities.create!(start_time: "#{date} 09:00:00 -0500",
+                                              end_time: "#{date} 17:00:00 -0500",
+                                              bandwidth: 2)
+    end
+
     retailer.top_sizes << TopSize.all                                 
     retailer.bottom_sizes << BottomSize.all                                 
     retailer.dress_sizes << DressSize.all                                 
@@ -123,14 +138,15 @@ if ENV["demo_up"]
                                      bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
                                      special_consideration_ids: [SpecialConsideration.ids.sample])
     dress.dress_sizes << DressSize.all
+
   end
 end
 
 if ENV["demo_down"]
-  ['aarti', 'nikki', 'sharon', 'hanna', 'ashley', 'elena', 'tammy'].each do |shopper|
-    shopper = Shopper.find_by_email("#{shopper}@openstile.com")
-    shopper.destroy if shopper
+  demo_user = Shopper.find_by_email('demo@example.com')
+  unless demo_user.nil?
+    demo_user.destroy
   end
 
-  Retailer.where(description: 'This is a retailer created for OpenStile demo puposes.').destroy_all
+  Retailer.destroy_all
 end
