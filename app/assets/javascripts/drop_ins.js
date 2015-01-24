@@ -8,12 +8,25 @@ $(document).ready(function() {
     formatSubmit: 'yyyy-mm-dd',
     hiddenName: true,
     min: true,
-    disable: [true]
+    disable: [true],
+    onSet: function(context) {
+      if (this.get('value')){
+        $.ajax({
+          url: "/retailers/" + $('.drop-in').data("retailer-id") + "/enable_available_times",
+          data: {date: this.get('value')}
+        }).done(function (){
+          console.log("Available times enabled")
+        });
+      }
+    }
   })
 
   $('.timepicker').pickatime({
     formatSubmit: 'HH:i',
-    hiddenName: true
+    hiddenName: true,
+    min: [6,0],
+    max: [23,0],
+    disable: [true]
   })
 
   if ($('.drop-in').data('retailer-id') != null) {

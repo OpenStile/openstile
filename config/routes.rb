@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :retailers, only: [:show] do
     member do
       get 'enable_available_dates'
+      get 'enable_available_times'
     end
   end
 

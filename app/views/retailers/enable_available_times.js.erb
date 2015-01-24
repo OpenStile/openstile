@@ -1,0 +1,4 @@
+var $timeInput = $('.timepicker').pickatime()
+var picker = $timeInput.pickatime('picker')
+
+picker.set('disable', <%= [true] + @available_times %>)
