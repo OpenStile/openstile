@@ -28,6 +28,10 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :top_fit }
   it { should respond_to :bottom_fit }
   it { should respond_to :special_considerations }
+  it { should respond_to :online_presence }
+  it { should respond_to :drop_in_availabilities }
+  it { should respond_to :location }
+  it { should respond_to :drop_ins }
   it { should be_valid }
 
   context "when name is not present" do
@@ -113,6 +117,71 @@ RSpec.describe Retailer, :type => :model do
       expect(dresses).to_not be_empty
       dresses.each do |d|
         expect(Dress.where(id: d.id)).to be_empty
+      end
+    end
+  end
+
+  describe "online presence association" do
+    before { @retailer.save }
+    let!(:online_presence){ 
+      FactoryGirl.create(:online_presence, retailer: @retailer) 
+    }
+
+    it "should destroy associated online presence" do
+      retailer_online_presence = @retailer.online_presence
+      @retailer.destroy
+      expect(retailer_online_presence).to_not be_nil
+      expect(OnlinePresence.where(id: retailer_online_presence.id)).to be_empty
+    end
+  end
+
+  describe "drop in avalabilities assocication" do
+    before { @retailer.save }
+    let!(:drop_in_availability) { FactoryGirl.create(:drop_in_availability, 
+                                                      retailer: @retailer) }
+
+    it "should destroy associated drop in availabilities" do
+      drop_in_availabilities = @retailer.drop_in_availabilities.to_a
+      @retailer.destroy
+      expect(drop_in_availabilities).to_not be_empty
+      drop_in_availabilities.each do |d|
+        expect(DropInAvailability.where(id: d.id)).to be_empty
+      end
+    end
+  end
+
+  describe "location association" do
+    before { @retailer.save }
+    let!(:location){ 
+      FactoryGirl.create(:location, locatable: @retailer) 
+    }
+
+    it "should destroy associated location" do
+      retailer_location = @retailer.location
+      @retailer.destroy
+      expect(retailer_location).to_not be_nil
+      expect(Location.where(id: retailer_location.id)).to be_empty
+    end
+  end
+
+  describe "drop ins assocication" do
+    before { @retailer.save }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
+                                                   retailer: @retailer,
+                                                   start_time: DateTime.current,
+                                                   end_time: DateTime.current.advance(hours: 2)) }
+    let!(:drop_in) { FactoryGirl.create(:drop_in, 
+                                        time: DateTime.current.advance(hours: 1),
+                                        retailer: @retailer,
+                                        shopper: shopper) }
+
+    it "should destroy associated drop ins" do
+      drop_ins = @retailer.drop_ins.to_a
+      @retailer.destroy
+      expect(drop_ins).to_not be_empty
+      drop_ins.each do |d|
+        expect(DropIn.where(id: d.id)).to be_empty
       end
     end
   end

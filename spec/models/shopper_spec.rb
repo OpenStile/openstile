@@ -12,6 +12,7 @@ RSpec.describe Shopper, :type => :model do
   it { should respond_to :cell_phone }
   it { should respond_to :encrypted_password }
   it { should respond_to :style_profile }
+  it { should respond_to :drop_ins }
   it { should be_valid }
 
   context "when first name is not present" do
@@ -118,6 +119,28 @@ RSpec.describe Shopper, :type => :model do
       @shopper.destroy
       expect(shopper_style_profile).to_not be_nil
       expect(StyleProfile.where(id: shopper_style_profile.id)).to be_empty
+    end
+  end
+
+  describe "drop ins assocication" do
+    before { @shopper.save }
+    let(:retailer){ FactoryGirl.create(:retailer) }
+    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
+                                                   retailer: retailer,
+                                                   start_time: DateTime.current,
+                                                   end_time: DateTime.current.advance(hours: 2)) }
+    let!(:drop_in) { FactoryGirl.create(:drop_in,
+                                        time: DateTime.current.advance(hours: 1),
+                                        retailer: retailer,
+                                        shopper: @shopper) }
+
+    it "should destroy associated drop ins" do
+      drop_ins = @shopper.drop_ins.to_a
+      @shopper.destroy
+      expect(drop_ins).to_not be_empty
+      drop_ins.each do |d|
+        expect(DropIn.where(id: d.id)).to be_empty
+      end
     end
   end
 end

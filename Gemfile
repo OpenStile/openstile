@@ -47,6 +47,8 @@ gem 'pg', '0.17.1'
 
 gem "faker"
 
+gem 'StreetAddress', require: 'street_address'
+
 group :development, :test do
   gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'

@@ -19,6 +19,20 @@ Rails.application.routes.draw do
   end
 
   resources :style_profiles, only: [:edit, :update]
+
+  resources :retailers, only: [:show] do
+    member do
+      get 'enable_available_dates'
+      get 'enable_available_times'
+    end
+  end
+
+  resources :drop_ins, only: [:create] do
+    collection do
+      get :upcoming
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

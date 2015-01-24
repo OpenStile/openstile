@@ -27,6 +27,7 @@ RSpec.describe Bottom, :type => :model do
   it { should respond_to :for_full_figured }
   it { should respond_to :bottom_fit }
   it { should respond_to :special_considerations }
+  it { should respond_to :drop_in_items }
   it { should be_valid }
 
   context "when name is not present" do
@@ -78,6 +79,31 @@ RSpec.describe Bottom, :type => :model do
       expect(exposed_parts).to_not be_empty
       exposed_parts.each do |ep|
         expect(ExposedPart.where(id: ep.id)).to be_empty
+      end
+    end
+  end
+
+  describe "drop in item association" do
+    before { @bottom.save }
+    let!(:drop_in_availability) do 
+      FactoryGirl.create(:drop_in_availability,
+                         retailer: retailer,
+                         start_time: DateTime.current,
+                         end_time: DateTime.current.advance(hours: 2))
+    end
+    let(:drop_in){ FactoryGirl.create(:drop_in, 
+                                      retailer: retailer,
+                                      time: DateTime.current.advance(hours: 1)) }
+    let!(:drop_in_item){ FactoryGirl.create(:drop_in_item,
+                                            drop_in: drop_in,
+                                            reservable: @bottom)}
+
+    it "should destroy associated drop in items" do
+      drop_in_items = @bottom.drop_in_items.to_a
+      @bottom.destroy
+      expect(drop_in_items).to_not be_empty
+      drop_in_items.each do |d|
+        expect(DropInItem.where(id: d.id)).to be_empty
       end
     end
   end
