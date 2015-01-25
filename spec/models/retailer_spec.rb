@@ -1,9 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Retailer, :type => :model do
+  let(:location){ FactoryGirl.create(:location) }
   before { @retailer = Retailer.new(name: "ABC Boutique",
                                     neighborhood: "Petworth",
-                                    description: "Premier boutique in DC!") }
+                                    description: "Premier boutique in DC!",
+                                    location: location) }
 
   subject { @retailer }
 
@@ -30,8 +32,9 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :online_presence }
   it { should respond_to :drop_in_availabilities }
-  it { should respond_to :location }
   it { should respond_to :drop_ins }
+  it { should respond_to :location }
+  it { should respond_to :location_id }
   it { should be_valid }
 
   context "when name is not present" do
@@ -61,6 +64,11 @@ RSpec.describe Retailer, :type => :model do
 
   context "when description is too long" do
     before { @retailer.description = "a"*251 } 
+    it { should_not be_valid }
+  end
+
+  context "when location id is not present" do
+    before { @retailer.location_id = nil }
     it { should_not be_valid }
   end
 
@@ -147,20 +155,6 @@ RSpec.describe Retailer, :type => :model do
       drop_in_availabilities.each do |d|
         expect(DropInAvailability.where(id: d.id)).to be_empty
       end
-    end
-  end
-
-  describe "location association" do
-    before { @retailer.save }
-    let!(:location){ 
-      FactoryGirl.create(:location, locatable: @retailer) 
-    }
-
-    it "should destroy associated location" do
-      retailer_location = @retailer.location
-      @retailer.destroy
-      expect(retailer_location).to_not be_nil
-      expect(Location.where(id: retailer_location.id)).to be_empty
     end
   end
 

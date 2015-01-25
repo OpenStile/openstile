@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122195156) do
+ActiveRecord::Schema.define(version: 20150125060401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,8 +178,10 @@ ActiveRecord::Schema.define(version: 20150122195156) do
     t.integer  "bandwidth"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "location_id"
   end
 
+  add_index "drop_in_availabilities", ["location_id"], name: "index_drop_in_availabilities_on_location_id", using: :btree
   add_index "drop_in_availabilities", ["retailer_id"], name: "index_drop_in_availabilities_on_retailer_id", using: :btree
 
   create_table "drop_in_items", force: true do |t|
@@ -227,15 +229,11 @@ ActiveRecord::Schema.define(version: 20150122195156) do
   add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
 
   create_table "locations", force: true do |t|
-    t.integer  "locatable_id"
-    t.string   "locatable_type"
     t.string   "address"
     t.string   "short_title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "locations", ["locatable_id", "locatable_type"], name: "index_locations_on_locatable_id_and_locatable_type", using: :btree
 
   create_table "look_tolerances", force: true do |t|
     t.integer  "style_profile_id"
@@ -327,9 +325,11 @@ ActiveRecord::Schema.define(version: 20150122195156) do
     t.boolean  "for_full_figured"
     t.string   "top_fit"
     t.string   "bottom_fit"
+    t.integer  "location_id"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
+  add_index "retailers", ["location_id"], name: "index_retailers_on_location_id", using: :btree
   add_index "retailers", ["look_id"], name: "index_retailers_on_look_id", using: :btree
 
   create_table "retailers_special_considerations", id: false, force: true do |t|

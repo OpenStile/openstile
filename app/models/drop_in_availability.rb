@@ -1,6 +1,6 @@
 class DropInAvailability < ActiveRecord::Base
   belongs_to :retailer
-  has_one :location, as: :locatable, dependent: :destroy
+  belongs_to :location
   
   validate :start_and_end_time_on_same_day, 
            :end_time_after_start_time
@@ -8,6 +8,7 @@ class DropInAvailability < ActiveRecord::Base
   validates :start_time, presence: true
   validates :end_time, presence: true
   validates :bandwidth, presence: true
+  validates :location_id, presence: true
 
   def start_and_end_time_on_same_day
     unless start_time.nil? or end_time.nil?

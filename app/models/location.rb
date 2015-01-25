@@ -1,8 +1,8 @@
 class Location < ActiveRecord::Base
-  belongs_to :locatable, polymorphic: true
+  has_many :retailers
+  has_many :drop_in_availabilities
 
   validate :address_cannot_be_parsed
-  validates :locatable_id, presence: true
   validates :address, presence: true, length: { maximum: 100 }
   validates :short_title, length: { maximum: 100 }
 
