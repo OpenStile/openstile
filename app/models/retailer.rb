@@ -22,10 +22,8 @@ class Retailer < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 250 } 
 
   def available_for_drop_in? datetime
-    future_availabilities = self.drop_in_availabilities.where("end_time > ?", DateTime.current)
-
     future_availabilities.each do |availability|
-      if datetime > availability.start_time && datetime < availability.end_time
+      if datetime >= availability.start_time && datetime < availability.end_time
         concurrent_drop_ins = drop_ins.where(time: datetime)
         if concurrent_drop_ins.count >= availability.bandwidth
           return false
@@ -39,7 +37,6 @@ class Retailer < ActiveRecord::Base
 
   def get_available_drop_in_dates zero_index_month=false
     ret = []
-    future_availabilities = self.drop_in_availabilities.where("end_time > ?", DateTime.current)
     future_availabilities.each do |availability|
       ary = availability.start_time.to_date.strftime("%Y-%-m-%d").split('-').map{|v| v.to_i}
       ary[1] = ary[1] - 1 if zero_index_month
@@ -50,7 +47,6 @@ class Retailer < ActiveRecord::Base
 
   def get_available_drop_in_times_EST date_string
     ret = []
-    future_availabilities = self.drop_in_availabilities.where("end_time > ?", DateTime.current)
     matching_index = future_availabilities.index { |availability| 
       availability.start_time.at_beginning_of_day == DateTime.parse(date_string)
     }
@@ -84,4 +80,9 @@ class Retailer < ActiveRecord::Base
 
     ret
   end
+
+  private
+    def future_availabilities
+      self.drop_in_availabilities.where("end_time > ?", DateTime.current)
+    end
 end

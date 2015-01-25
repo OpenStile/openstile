@@ -185,4 +185,53 @@ RSpec.describe Retailer, :type => :model do
       end
     end
   end
+
+  describe "drop in availability helpers" do
+    before { @retailer.save }
+    let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9, offset: '-0500') }
+    let(:tomorrow_miday){ DateTime.current.advance(days: 1).change(hour: 12, offset: '-0500') }
+    let(:tomorrow_COB){ DateTime.current.advance(days: 1).change(hour: 17, offset: '-0500') }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
+                                          retailer: @retailer,
+                                          start_time: tomorrow_SOB,
+                                          end_time: tomorrow_COB,
+                                          bandwidth: 1) }
+    let!(:drop_in) { FactoryGirl.create(:drop_in,
+                                        time: tomorrow_miday,
+                                        retailer: @retailer,
+                                        shopper: shopper) }
+    
+    it "should return whether or not a retailer is available" do
+      expect(@retailer.available_for_drop_in? tomorrow_SOB).to eq(true) 
+      expect(@retailer.available_for_drop_in? tomorrow_miday).to eq(false)
+      expect(@retailer.available_for_drop_in? tomorrow_miday.advance(hours: 1)).to eq(true)
+      expect(@retailer.available_for_drop_in? tomorrow_COB).to eq(false)
+    end
+
+    it "should return the correct available dates" do
+      expect(@retailer.get_available_drop_in_dates(true).size).to eq(1)
+      expect(@retailer.get_available_drop_in_dates(true)[0][0]).to eq(tomorrow_SOB.year)
+      expect(@retailer.get_available_drop_in_dates(true)[0][1]).to eq(tomorrow_SOB.month - 1)
+      expect(@retailer.get_available_drop_in_dates(true)[0][2]).to eq(tomorrow_SOB.day)
+    end
+
+    it "should return the correct available times for a day" do
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y'))
+              .size).to eq(15)
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to include([9,0])
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to_not include([12,0])
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to include([12,30])
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to_not include([18,0])
+    end
+  end
 end
