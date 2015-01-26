@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Location, :type => :model do
   before { @location = Location.new(address: "301 Water St. SE, Washington, DC 20003",
+                                    neighborhood: "Navy Yard",
                                     short_title: "Fashion Yards") }
   subject { @location }
 
   it { should respond_to :address }
+  it { should respond_to :neighborhood }
   it { should respond_to :short_title }
   it { should respond_to :retailers }
   it { should respond_to :drop_in_availabilities }
@@ -18,6 +20,16 @@ RSpec.describe Location, :type => :model do
 
   context "when address is too long" do
     before { @location.address = "a"*101 }
+    it { should_not be_valid }
+  end
+
+  context "when neighborhood is not present" do
+    before { @location.neighborhood = " " }
+    it { should_not be_valid }
+  end
+
+  context "when neighborhood is too long" do
+    before { @location.neighborhood = "a"*51 }
     it { should_not be_valid }
   end
 

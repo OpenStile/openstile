@@ -18,7 +18,6 @@ class Retailer < ActiveRecord::Base
   after_create{ create_price_range }
   
   validates :name, presence: true, length: { maximum: 50 } 
-  validates :neighborhood, presence: true, length: { maximum: 50 } 
   validates :description, presence: true, length: { maximum: 250 } 
   validates :location_id, presence: true
 

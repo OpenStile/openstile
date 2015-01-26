@@ -3,14 +3,12 @@ require 'rails_helper'
 RSpec.describe Retailer, :type => :model do
   let(:location){ FactoryGirl.create(:location) }
   before { @retailer = Retailer.new(name: "ABC Boutique",
-                                    neighborhood: "Petworth",
                                     description: "Premier boutique in DC!",
                                     location: location) }
 
   subject { @retailer }
 
   it { should respond_to :name }
-  it { should respond_to :neighborhood }
   it { should respond_to :description }
   it { should respond_to :top_sizes }
   it { should respond_to :bottom_sizes }
@@ -44,16 +42,6 @@ RSpec.describe Retailer, :type => :model do
 
   context "when name is too long" do
     before { @retailer.name = "a"*51 } 
-    it { should_not be_valid }
-  end
-
-  context "when neighborhood is not present" do
-    before { @retailer.neighborhood = " " } 
-    it { should_not be_valid }
-  end
-
-  context "when neighborhood is too long" do
-    before { @retailer.neighborhood = "a"*51 } 
     it { should_not be_valid }
   end
 

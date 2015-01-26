@@ -43,7 +43,7 @@
             <div class="summary" id="recommendation_<%= recommendation[:object].id%>">
               <h3><%= recommendation[:object].name %></h3><br />
               <% if recommendation[:object].is_a? Retailer %>
-                <h4><%= recommendation[:object].neighborhood %></h4><br />
+                <h4><%= recommendation[:object].location.neighborhood %></h4><br />
                 <% unless recommendation[:justification].empty? %>
                   <h4><%= "Retailer is recommended for #{recommendation[:justification].sample}" %></h4><br />
                 <% end %>

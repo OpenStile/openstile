@@ -4,6 +4,7 @@ class Location < ActiveRecord::Base
 
   validate :address_cannot_be_parsed
   validates :address, presence: true, length: { maximum: 100 }
+  validates :neighborhood, presence: true, length: { maximum: 50 }
   validates :short_title, length: { maximum: 100 }
 
   def address_cannot_be_parsed
