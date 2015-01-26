@@ -13,4 +13,12 @@ class Location < ActiveRecord::Base
       errors.add(:address, error_string)
     end
   end
+
+  def stringify
+    unless short_title.blank?
+      "#{short_title} (#{address})"
+    else
+      address
+    end
+  end
 end

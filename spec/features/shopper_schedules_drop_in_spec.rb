@@ -3,22 +3,23 @@ require 'rails_helper'
 feature 'Shopper schedule drop in' do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
+  let(:pop_up_location){ FactoryGirl.create(:location, 
+                                  address: "1309 5th St. NE, Washington, DC 20002",
+                                  neighborhood: "NoMa",
+                                  short_title: "Crafty Bastards at Union Market") }
   let!(:drop_in_availability) { 
     FactoryGirl.create(:drop_in_availability,
                        retailer: retailer,
+                       location: pop_up_location,
                        start_time: DateTime.current,
                        end_time: DateTime.current.advance(hours: 5))
   }
-  let!(:location){ FactoryGirl.create(:location, 
-                                      locatable: retailer,
-                                      address: "3rd St. & Tingey, Washington, DC",
-                                      short_title: "Fashion Yards") }
 
   scenario 'to browse a store' do
     baseline_calibration_for_shopper_and_retailers
 
     date, time = parse_date_and_EST(DateTime.current.advance(hours: 1).change(minutes: 30) )
-    place = "3rd St. & Tingey, Washington, DC"
+    place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
     given_i_am_a_logged_in_shopper shopper
     when_i_select_a_recommendation retailer

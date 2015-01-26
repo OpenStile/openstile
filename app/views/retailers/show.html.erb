@@ -11,7 +11,7 @@
       <div class="col-md-5 col-xs-5 text-center">
         <hr>
         <h1><%= @retailer.name %></h1><br />
-        <h2><%= @retailer.neighborhood %></h2><br />
+        <h2><%= @retailer.location.neighborhood %></h2><br />
         <h4><%= @retailer.description %></h4>
         <hr>
         <% if @retailer.online_presence %>
