@@ -5,12 +5,13 @@ RSpec.describe DropIn, :type => :model do
   let(:retailer){ FactoryGirl.create(:retailer) }
   let!(:drop_in_availability) { 
     FactoryGirl.create(:drop_in_availability, 
-                       retailer_id: retailer.id,
-                       start_time: DateTime.current,
-                       end_time: DateTime.current.advance(hours: 3))
+                       retailer: retailer,
+                       start_time: tomorrow_morning,
+                       end_time: tomorrow_afternoon,
+                       bandwidth: 2)
   }
-  before { @drop_in = shopper.drop_ins.create(retailer_id: retailer.id,
-                                              time: DateTime.current.advance(hour: 1)) }
+  before { @drop_in = shopper.drop_ins.build(retailer_id: retailer.id,
+                                             time: tomorrow_mid_morning) }
 
   subject { @drop_in }
 
@@ -44,15 +45,8 @@ RSpec.describe DropIn, :type => :model do
   end
 
   context "when retailer unavailable" do
-    let!(:drop_in_availability){ 
-      FactoryGirl.create(:drop_in_availability, retailer: retailer,
-                                                start_time: DateTime.current.advance(days: 1),
-                                                end_time: DateTime.current.advance(days: 1, hours: 3),
-                                                bandwidth: 2) 
-    }  
-
     context "due to not accepting drop ins" do
-      before { @drop_in.time = DateTime.current.advance(days: 1, hours: 4) }
+      before { @drop_in.time = tomorrow_evening }
       it { should_not be_valid }
     end
     
@@ -60,12 +54,12 @@ RSpec.describe DropIn, :type => :model do
       let!(:drop_in1){ FactoryGirl.create(:drop_in, 
                                           shopper: FactoryGirl.create(:shopper),
                                           retailer: retailer,
-                                          time: DateTime.current.advance(days: 1, hours: 1).change(min: 0)) }
+                                          time: tomorrow_mid_morning.advance(hours: 1)) }
       let!(:drop_in2){ FactoryGirl.create(:drop_in, 
                                           shopper: FactoryGirl.create(:shopper),
                                           retailer: retailer,
-                                          time: DateTime.current.advance(days: 1, hours: 1).change(min: 0)) }
-      before { @drop_in.time = DateTime.current.advance(days: 1, hours: 1).change(min: 0) }
+                                          time: tomorrow_mid_morning.advance(hours: 1)) }
+      before { @drop_in.time = tomorrow_mid_morning.advance(hours: 1) }
       it { should_not be_valid }
     end
   end
