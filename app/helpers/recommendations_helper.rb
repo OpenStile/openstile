@@ -186,4 +186,14 @@ module RecommendationsHelper
     end
     recommendation
   end
+
+  def store_recommendation_of_interest recommendation
+    session[:return_to_rec] = "#{recommendation.class.to_s.downcase}_#{recommendation.id}" 
+  end
+
+  def retrieve_recommendation_of_interest_path
+    return_path = "#{root_path}##{session[:return_to_rec]}"
+    session.delete(:return_to_rec)
+    return_path
+  end
 end

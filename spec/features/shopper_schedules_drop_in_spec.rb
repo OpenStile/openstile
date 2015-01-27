@@ -32,7 +32,7 @@ feature 'Shopper schedule drop in' do
   def when_i_select_a_recommendation recommendation
     visit '/'
 
-    within(:css, "div#recommendation_#{recommendation.id}") do
+    within(:css, "div##{recommendation.class.to_s.downcase}_#{recommendation.id}") do
       click_link 'Drop-in'
     end
 
