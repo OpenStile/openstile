@@ -66,18 +66,22 @@ if ENV["demo_up"]
   end
 
   (1..5).each do |idx|
+    location = Location.create!(address: "#{Faker::Address.street_address}, Washington, DC",
+                                neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
+                                               'Dupont Circle', 'Columbia Heights'].sample)
+
     retailer = Retailer.create!(name: "#{Faker::Address.street_name} Boutique",
-                               neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
-                                              'Dupont Circle', 'Columbia Heights'].sample,
                                description: 'This is a retailer created for OpenStile demo puposes. ' +
                                             'This retailer carries some of the best local designers in ' +
                                             'Washington DC. Tons of new items added every week so check ' +
                                             'back regularly!',
+                               location: location,
                                look_id: Look.ids.sample,
                                body_shape_id: BodyShape.ids.sample,
                                top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
                                bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
                                special_consideration_ids: SpecialConsideration.ids.sample(2))
+
     retailer.price_range.update!(top_min_price: 0, top_max_price: 500, 
                                  bottom_min_price: 0, bottom_max_price: 500,
                                  dress_min_price: 0, dress_max_price: 500) 
@@ -87,13 +91,12 @@ if ENV["demo_up"]
                                     twitter_link: 'http://twitter.com',
                                     instagram_link: 'http://instagram.com')
 
-    retailer.create_location(address: "#{Faker::Address.street_address}, Washington, DC")
-
-    ["2015-01-24", "2015-01-25", "2015-01-26", "2015-01-24", "2015-01-28",
-     "2015-01-29", "2015-01-30", "2015-01-31", "2015-02-01", "2015-02-02"].each do |date|
+    ["2015-01-29", "2015-01-30", "2015-01-31", "2015-02-01", "2015-02-02",
+     "2015-02-04", "2015-02-05", "2015-02-07", "2015-02-08", "2015-02-09"].each do |date|
       
       retailer.drop_in_availabilities.create!(start_time: "#{date} 09:00:00 -0500",
                                               end_time: "#{date} 17:00:00 -0500",
+                                              location: location,
                                               bandwidth: 2)
     end
 

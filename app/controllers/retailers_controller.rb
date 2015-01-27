@@ -17,4 +17,12 @@ class RetailersController < ApplicationController
       format.js {}
     end
   end
+
+  def show_drop_in_location
+    @location = Retailer.find(params[:id])
+                        .get_drop_in_location(params[:date]).stringify
+    respond_to do |format|
+      format.js {}
+    end
+  end
 end

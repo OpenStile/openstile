@@ -25,8 +25,4 @@ class DropInAvailability < ActiveRecord::Base
       end
     end
   end
-
-  def self.corresponding_to_time_slot retailer_id, time
-    where("retailer_id = ? and start_time <= ? and end_time > ?", retailer_id, time, time)
-  end
 end

@@ -10,12 +10,19 @@ $(document).ready(function() {
     min: true,
     disable: [true],
     onSet: function(context) {
+      $('.schedule #location').empty();
       if (this.get('value')){
         $.ajax({
           url: "/retailers/" + $('.drop-in').data("retailer-id") + "/enable_available_times",
           data: {date: this.get('value')}
         }).done(function (){
           console.log("Available times enabled")
+        });
+        $.ajax({
+          url: "/retailers/" + $('.drop-in').data("retailer-id") + "/show_drop_in_location",
+          data: {date: this.get('value')}
+        }).done(function (){
+          console.log("Location rendered")
         });
       }
     }

@@ -45,6 +45,18 @@ class Retailer < ActiveRecord::Base
     ret
   end
 
+  def get_drop_in_location date_string
+    matching_index = future_availabilities.index { |availability| 
+      availability.start_time.at_beginning_of_day ==
+                DateTime.parse(date_string).at_beginning_of_day
+    }
+
+    availability = future_availabilities[matching_index]
+
+    return nil if availability.nil?
+    availability.location
+  end
+
   def get_available_drop_in_times_EST date_string
     ret = []
     matching_index = future_availabilities.index { |availability| 
