@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :drop_ins, only: [:create] do
+  resources :drop_ins, only: [:create, :destroy] do
     collection do
       get :upcoming
     end

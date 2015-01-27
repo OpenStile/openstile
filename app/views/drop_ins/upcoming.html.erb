@@ -18,20 +18,21 @@
 <div class="my-drop-ins block">
   <div class="container">
     <% @drop_ins.each_with_index do |drop_in, idx| %>
-      <div class="single-drop-in row">
-        <div class="col-md-10 col-xs-10 col-md-offset-1 col-xs-offset-1">
-          <div class="col-md-1 col-xs-1 text-center">
-            <a href="#"><i class="fa fa-lg fa-times"></i></a>
-          </div>
-          <div class="col-md-3 col-xs-3 text-center">
-            <h4><%= drop_in.colloquial_time %></h4>
-          </div>
-          <div class="col-md-4 col-xs-4 text-center">
-            <h4><%= link_to(drop_in.retailer.name, retailer_path(drop_in.retailer)) %></h4>
-          </div>
-          <div class="col-md-4 col-xs-4 text-center">
-            <h4><%= drop_in.retailer.get_drop_in_location(drop_in.time.to_s).stringify %></h4>
-          </div>
+      <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
+        <div class="col-md-1 col-xs-1 text-center">
+          <a id="cancel" data-confirm="Are you sure you want to remove this drop in?" 
+             data-method="delete" 
+             href=<%= drop_in_path(drop_in) %> 
+             rel="nofollow"><i class="fa custom-fa-lg fa-minus-circle"></i></a>
+        </div>
+        <div class="col-md-2 col-xs-2 text-center">
+          <h4><%= drop_in.colloquial_time %></h4>
+        </div>
+        <div class="col-md-4 col-xs-4 text-center">
+          <h4><%= link_to(drop_in.retailer.name, retailer_path(drop_in.retailer)) %></h4>
+        </div>
+        <div class="col-md-5 col-xs-5 text-center">
+          <h4><%= drop_in.retailer.get_drop_in_location(drop_in.time.to_s).stringify %></h4>
         </div>
       </div>
     <% end %>
