@@ -1,6 +1,7 @@
 class DropInsController < ApplicationController
 
   before_filter :authenticate_shopper!
+  before_action :correct_drop_in_shopper, only: [:destroy]
 
   def create
     retrieved_params = drop_in_params
@@ -27,11 +28,22 @@ class DropInsController < ApplicationController
     end
   end
 
+  def destroy
+    @drop_in.destroy
+    flash[:success] = "Drop in cancelled. Retailer will be notified"
+    redirect_to upcoming_drop_ins_path
+  end
+
   def upcoming
     @drop_ins = DropIn.upcoming_for current_shopper.id
   end
 
   private
+    def correct_drop_in_shopper
+      @drop_in = DropIn.find(params[:id])
+      redirect_to root_url unless (@drop_in.shopper == current_shopper)
+    end
+
     def drop_in_params
       params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
                                       :selected_date, :selected_time)

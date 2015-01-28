@@ -1906,12 +1906,22 @@ input {
   padding-right: 5px;
 }
 
+.schedule #location {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
 /* Recommendation End */
 
 /* Drop-In Begins */
 
 .drop-in .title{
   margin-bottom: 20px;
+}
+
+.drop-in hr{
+  margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .my-drop-ins h4{
@@ -1929,6 +1939,17 @@ input {
   padding-bottom: 10px;
   border: 1px solid #555;
 }
+
+.my-drop-ins .custom-fa-lg {
+  font-size: 2em;
+  line-height: 1em;
+  color: red;
+}
+
+.my-drop-ins .continue-browsing {
+  margin-top: 25px;
+}
+
 /* Drop-In Ends*/
 
 /* Responsive CSS */

@@ -6,5 +6,6 @@ FactoryGirl.define do
     start_time "2015-01-20 21:34:33"
     end_time "2015-01-20 22:34:33"
     bandwidth 1
+    location
   end
 end

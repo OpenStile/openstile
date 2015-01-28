@@ -1,6 +1,7 @@
 class RetailersController < ApplicationController
   def show
     @retailer = Retailer.find(params[:id])
+    store_recommendation_of_interest @retailer
   end
 
   def enable_available_dates
@@ -13,6 +14,14 @@ class RetailersController < ApplicationController
   def enable_available_times
     @available_times = Retailer.find(params[:id])
                                .get_available_drop_in_times_EST(params[:date])
+    respond_to do |format|
+      format.js {}
+    end
+  end
+
+  def show_drop_in_location
+    @location = Retailer.find(params[:id])
+                        .get_drop_in_location(params[:date]).stringify
     respond_to do |format|
       format.js {}
     end

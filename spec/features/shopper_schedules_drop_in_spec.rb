@@ -3,35 +3,36 @@ require 'rails_helper'
 feature 'Shopper schedule drop in' do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
+  let(:pop_up_location){ FactoryGirl.create(:location, 
+                                  address: "1309 5th St. NE, Washington, DC 20002",
+                                  neighborhood: "NoMa",
+                                  short_title: "Crafty Bastards at Union Market") }
   let!(:drop_in_availability) { 
     FactoryGirl.create(:drop_in_availability,
                        retailer: retailer,
-                       start_time: DateTime.current,
-                       end_time: DateTime.current.advance(hours: 5))
+                       location: pop_up_location,
+                       start_time: tomorrow_morning,
+                       end_time: tomorrow_evening)
   }
-  let!(:location){ FactoryGirl.create(:location, 
-                                      locatable: retailer,
-                                      address: "3rd St. & Tingey, Washington, DC",
-                                      short_title: "Fashion Yards") }
 
   scenario 'to browse a store' do
     baseline_calibration_for_shopper_and_retailers
 
-    date, time = parse_date_and_EST(DateTime.current.advance(hours: 1).change(minutes: 30) )
-    place = "3rd St. & Tingey, Washington, DC"
+    date, time = parse_date_and_EST(tomorrow_afternoon)
+    place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
     given_i_am_a_logged_in_shopper shopper
     when_i_select_a_recommendation retailer
     when_i_attempt_to_schedule_with_invalid_options retailer
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
-    then_my_scheduled_drop_ins_should_be_updated_with retailer, "Today", place
+    then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
   end
 
   def when_i_select_a_recommendation recommendation
     visit '/'
 
-    within(:css, "div#recommendation_#{recommendation.id}") do
+    within(:css, "div##{recommendation.class.to_s.downcase}_#{recommendation.id}") do
       click_link 'Drop-in'
     end
 

@@ -24,10 +24,11 @@ Rails.application.routes.draw do
     member do
       get 'enable_available_dates'
       get 'enable_available_times'
+      get 'show_drop_in_location'
     end
   end
 
-  resources :drop_ins, only: [:create] do
+  resources :drop_ins, only: [:create, :destroy] do
     collection do
       get :upcoming
     end

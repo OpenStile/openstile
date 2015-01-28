@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :retailer do
     name "Chic Boutique"
     description "Your one stop shop for all really cool dresses"
-    neighborhood "Capitol Hill"
+    location
   end
 end

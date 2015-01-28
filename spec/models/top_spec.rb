@@ -87,12 +87,12 @@ RSpec.describe Top, :type => :model do
     let!(:drop_in_availability) do 
       FactoryGirl.create(:drop_in_availability,
                          retailer: retailer,
-                         start_time: DateTime.current,
-                         end_time: DateTime.current.advance(hours: 2))
+                         start_time: tomorrow_morning,
+                         end_time: tomorrow_afternoon)
     end
     let(:drop_in){ FactoryGirl.create(:drop_in, 
                                       retailer: retailer,
-                                      time: DateTime.current.advance(hours: 1)) }
+                                      time: tomorrow_mid_morning) }
     let!(:drop_in_item){ FactoryGirl.create(:drop_in_item,
                                             drop_in: drop_in,
                                             reservable: @top)}

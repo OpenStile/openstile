@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Retailer, :type => :model do
+  let(:location){ FactoryGirl.create(:location) }
   before { @retailer = Retailer.new(name: "ABC Boutique",
-                                    neighborhood: "Petworth",
-                                    description: "Premier boutique in DC!") }
+                                    description: "Premier boutique in DC!",
+                                    location: location) }
 
   subject { @retailer }
 
   it { should respond_to :name }
-  it { should respond_to :neighborhood }
   it { should respond_to :description }
   it { should respond_to :top_sizes }
   it { should respond_to :bottom_sizes }
@@ -30,8 +30,9 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :online_presence }
   it { should respond_to :drop_in_availabilities }
-  it { should respond_to :location }
   it { should respond_to :drop_ins }
+  it { should respond_to :location }
+  it { should respond_to :location_id }
   it { should be_valid }
 
   context "when name is not present" do
@@ -44,16 +45,6 @@ RSpec.describe Retailer, :type => :model do
     it { should_not be_valid }
   end
 
-  context "when neighborhood is not present" do
-    before { @retailer.neighborhood = " " } 
-    it { should_not be_valid }
-  end
-
-  context "when neighborhood is too long" do
-    before { @retailer.neighborhood = "a"*51 } 
-    it { should_not be_valid }
-  end
-
   context "when description is not present" do
     before { @retailer.description = " " } 
     it { should_not be_valid }
@@ -61,6 +52,11 @@ RSpec.describe Retailer, :type => :model do
 
   context "when description is too long" do
     before { @retailer.description = "a"*251 } 
+    it { should_not be_valid }
+  end
+
+  context "when location id is not present" do
+    before { @retailer.location_id = nil }
     it { should_not be_valid }
   end
 
@@ -150,29 +146,15 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
-  describe "location association" do
-    before { @retailer.save }
-    let!(:location){ 
-      FactoryGirl.create(:location, locatable: @retailer) 
-    }
-
-    it "should destroy associated location" do
-      retailer_location = @retailer.location
-      @retailer.destroy
-      expect(retailer_location).to_not be_nil
-      expect(Location.where(id: retailer_location.id)).to be_empty
-    end
-  end
-
   describe "drop ins assocication" do
     before { @retailer.save }
     let(:shopper){ FactoryGirl.create(:shopper) }
     let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
                                                    retailer: @retailer,
-                                                   start_time: DateTime.current,
-                                                   end_time: DateTime.current.advance(hours: 2)) }
+                                                   start_time: tomorrow_morning,
+                                                   end_time: tomorrow_afternoon) }
     let!(:drop_in) { FactoryGirl.create(:drop_in, 
-                                        time: DateTime.current.advance(hours: 1),
+                                        time: tomorrow_mid_morning,
                                         retailer: @retailer,
                                         shopper: shopper) }
 
@@ -183,6 +165,55 @@ RSpec.describe Retailer, :type => :model do
       drop_ins.each do |d|
         expect(DropIn.where(id: d.id)).to be_empty
       end
+    end
+  end
+
+  describe "drop in availability helpers" do
+    before { @retailer.save }
+    let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9, offset: '-0500') }
+    let(:tomorrow_miday){ DateTime.current.advance(days: 1).change(hour: 12, offset: '-0500') }
+    let(:tomorrow_COB){ DateTime.current.advance(days: 1).change(hour: 17, offset: '-0500') }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
+                                          retailer: @retailer,
+                                          start_time: tomorrow_SOB,
+                                          end_time: tomorrow_COB,
+                                          bandwidth: 1) }
+    let!(:drop_in) { FactoryGirl.create(:drop_in,
+                                        time: tomorrow_miday,
+                                        retailer: @retailer,
+                                        shopper: shopper) }
+    
+    it "should return whether or not a retailer is available" do
+      expect(@retailer.available_for_drop_in? tomorrow_SOB).to eq(true) 
+      expect(@retailer.available_for_drop_in? tomorrow_miday).to eq(false)
+      expect(@retailer.available_for_drop_in? tomorrow_miday.advance(hours: 1)).to eq(true)
+      expect(@retailer.available_for_drop_in? tomorrow_COB).to eq(false)
+    end
+
+    it "should return the correct available dates" do
+      expect(@retailer.get_available_drop_in_dates(true).size).to eq(1)
+      expect(@retailer.get_available_drop_in_dates(true)[0][0]).to eq(tomorrow_SOB.year)
+      expect(@retailer.get_available_drop_in_dates(true)[0][1]).to eq(tomorrow_SOB.month - 1)
+      expect(@retailer.get_available_drop_in_dates(true)[0][2]).to eq(tomorrow_SOB.day)
+    end
+
+    it "should return the correct available times for a day" do
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y'))
+              .size).to eq(15)
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to include([9,0])
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to_not include([12,0])
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to include([12,30])
+      expect(@retailer
+              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .to_not include([18,0])
     end
   end
 end

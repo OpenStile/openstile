@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :location do
-    locatable nil
     address "301 Water St. SE, Washington, DC 20003"
+    neighborhood "Navy Yard"
     short_title "Fashion Yards"
   end
 end
