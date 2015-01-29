@@ -6,6 +6,6 @@ FactoryGirl.define do
     description "A flattering, form-fitting dress"
     web_link "http://see-this-dress.com"
     price 9.99
-    retailer nil
+    retailer
   end
 end
