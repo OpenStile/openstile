@@ -19,8 +19,12 @@ RSpec.describe DropInItem, :type => :model do
   it { should respond_to :reservable_id }
   it { should be_valid }
 
-  context "when drop in id is not present" do
-    before { @drop_in_item.drop_in_id = nil }
+  context "when drop in id is not present on update" do
+    before do 
+      @drop_in_item.save
+      @drop_in_item.drop_in_id = nil
+    end
+
     it { should_not be_valid }
   end
 

@@ -28,6 +28,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :tops, only: [:show]
+
+  resources :bottoms, only: [:show]
+
+  resources :dresses, only: [:show]
+
   resources :drop_ins, only: [:create, :destroy] do
     collection do
       get :upcoming

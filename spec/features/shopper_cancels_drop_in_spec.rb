@@ -23,7 +23,7 @@ feature 'Shopper modifies drop in' do
   end
 
   def given_my_upcoming_drop_ins_page_contains appointment
-    click_link 'Drop-ins'
+    click_link 'Scheduled Drop-ins'
 
     expect(page).to have_content(appointment.retailer.name)
     expect(page).to have_content(appointment.colloquial_time)

@@ -18,12 +18,22 @@ class DropInsController < ApplicationController
     if @drop_in.save 
       redirect_to upcoming_drop_ins_path
     else
-      @retailer = Retailer.find_by_id(retrieved_params[:retailer_id])
-      if @retailer 
+      recommendation = retrieve_recommendation_object
+      if recommendation.is_a? Retailer
+        @retailer = recommendation
         render 'retailers/show'
+      elsif recommendation.is_a? Top
+        @top = recommendation
+        render 'tops/show'
+      elsif recommendation.is_a? Bottom
+        @bottom = recommendation
+        render 'bottoms/show'
+      elsif recommendation.is_a? Dress
+        @dress = recommendation
+        render 'dresses/show'
       else
-        flash.now[:danger] = "There was an unexpected error scheduling your drop-in."
-        render 'static_pages/home'
+        flash[:danger] = "There was an unexpected error scheduling your drop-in."
+        redirect_to root_path
       end
     end
   end
@@ -46,6 +56,7 @@ class DropInsController < ApplicationController
 
     def drop_in_params
       params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
-                                      :selected_date, :selected_time)
+                          :selected_date, :selected_time,
+                          drop_in_items_attributes: [:reservable_id, :reservable_type])
     end
 end

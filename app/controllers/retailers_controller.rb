@@ -1,7 +1,7 @@
 class RetailersController < ApplicationController
   def show
     @retailer = Retailer.find(params[:id])
-    store_recommendation_of_interest @retailer
+    store_recommendation_show_url
   end
 
   def enable_available_dates

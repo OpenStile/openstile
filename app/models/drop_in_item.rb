@@ -3,7 +3,7 @@ class DropInItem < ActiveRecord::Base
   belongs_to :reservable, polymorphic: true
 
   validate :retailer_for_drop_in_and_item_match
-  validates :drop_in_id, presence: true
+  validates :drop_in_id, presence: true, on: :update
   validates :reservable_id, presence: true
 
   def retailer_for_drop_in_and_item_match

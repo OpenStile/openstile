@@ -180,7 +180,7 @@ end
 
 def then_the_recommendation_should_be_for recommendation_string
   visit '/'
-  expect(page).to have_content("is recommended for #{recommendation_string}")
+  expect(page).to have_content("Recommended for #{recommendation_string}")
 end
 
 
