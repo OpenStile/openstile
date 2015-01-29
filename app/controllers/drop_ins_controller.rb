@@ -22,6 +22,9 @@ class DropInsController < ApplicationController
       if recommendation.is_a? Retailer
         @retailer = recommendation
         render 'retailers/show'
+      elsif recommendation.is_a? Top
+        @top = recommendation
+        render 'tops/show'
       else
         flash.now[:danger] = "There was an unexpected error scheduling your drop-in."
         redirect_to root_path
@@ -47,6 +50,7 @@ class DropInsController < ApplicationController
 
     def drop_in_params
       params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
-                                      :selected_date, :selected_time)
+                          :selected_date, :selected_time,
+                          drop_in_items_attributes: [:reservable_id, :reservable_type])
     end
 end

@@ -12,6 +12,7 @@ class DropIn < ActiveRecord::Base
   validates :time, presence: true
   validates :comment, length: {maximum: 250}
 
+  accepts_nested_attributes_for :drop_in_items
   default_scope { order('time ASC') }
 
   def retailer_available_for_drop_in
