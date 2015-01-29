@@ -187,13 +187,39 @@ module RecommendationsHelper
     recommendation
   end
 
-  def store_recommendation_of_interest recommendation
-    session[:return_to_rec] = "#{recommendation.class.to_s.downcase}_#{recommendation.id}" 
+  def store_recommendation_show_url
+    session[:recommendation] = request.fullpath if request.get?
   end
 
-  def retrieve_recommendation_of_interest_path
-    return_path = "#{root_path}##{session[:return_to_rec]}"
-    session.delete(:return_to_rec)
+  def retrieve_recommendation_object
+    stored_url = session[:recommendation]
+    parts = stored_url.split('/')
+    case parts[1]
+    when 'tops'
+      return Top.find_by_id(parts[2])
+    when 'bottoms'
+      return Bottom.find_by_id(parts[2])
+    when 'dresses'
+      return Dress.find_by_id(parts[2])
+    when 'retailers'
+      return Retailer.find_by_id(parts[2])
+    else
+      return nil
+    end
+  end
+
+  def retrieve_recommendation_home_path
+    stored_url = session[:recommendation]
+    return_path = root_path
+    unless stored_url.nil?
+      parts = stored_url.split('/')
+      return_path = "#{return_path}##{parts[1]}_#{parts[2]}"
+    end
+    session.delete(:recommendation)
     return_path
+  end
+
+  def recommendation_string recommendation
+    "#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}"
   end
 end

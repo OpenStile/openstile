@@ -18,12 +18,13 @@ class DropInsController < ApplicationController
     if @drop_in.save 
       redirect_to upcoming_drop_ins_path
     else
-      @retailer = Retailer.find_by_id(retrieved_params[:retailer_id])
-      if @retailer 
+      recommendation = retrieve_recommendation_object
+      if recommendation.is_a? Retailer
+        @retailer = recommendation
         render 'retailers/show'
       else
         flash.now[:danger] = "There was an unexpected error scheduling your drop-in."
-        render 'static_pages/home'
+        redirect_to root_path
       end
     end
   end
