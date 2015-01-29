@@ -4,5 +4,8 @@
 <% elsif object.is_a? Top %>
   <%= link_to 'Drop-in to see item', top_path(object), 
                                      class: 'btn btn-lg btn-primary' %>
+<% elsif object.is_a? Bottom %>
+  <%= link_to 'Drop-in to see item', bottom_path(object), 
+                                     class: 'btn btn-lg btn-primary' %>
 <% else %>
 <% end %>

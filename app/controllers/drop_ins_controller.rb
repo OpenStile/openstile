@@ -25,8 +25,11 @@ class DropInsController < ApplicationController
       elsif recommendation.is_a? Top
         @top = recommendation
         render 'tops/show'
+      elsif recommendation.is_a? Bottom
+        @bottom = recommendation
+        render 'bottoms/show'
       else
-        flash.now[:danger] = "There was an unexpected error scheduling your drop-in."
+        flash[:danger] = "There was an unexpected error scheduling your drop-in."
         redirect_to root_path
       end
     end

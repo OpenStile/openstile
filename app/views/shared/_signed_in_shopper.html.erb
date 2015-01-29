@@ -49,7 +49,7 @@
                 <h4><%= "$%6.2f" % recommendation[:object].price.to_f %></h4><br />
               <% end %>
               <% unless recommendation[:justification].empty? %>
-                <h4><%= "Item is recommended for #{recommendation[:justification].sample}" %></h4><br />
+                <h4><%= "Recommended for #{recommendation[:justification].sample}" %></h4><br />
               <% end %>
               <%= render 'shared/drop_in_button', object: recommendation[:object] %>
             </div>
