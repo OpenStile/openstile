@@ -68,7 +68,7 @@ class Retailer < ActiveRecord::Base
 
     first_time_slot = availability.start_time
     if first_time_slot < DateTime.current
-      buffer = DateTime.current.advance(minutes: 15)
+      buffer = DateTime.current.advance(minutes: 30)
       if buffer.minute < 30
         first_time_slot = buffer.change(min: 30)
       else
