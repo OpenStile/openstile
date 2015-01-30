@@ -13,7 +13,7 @@ class RetailersController < ApplicationController
 
   def enable_available_times
     @available_times = Retailer.find(params[:id])
-                               .get_available_drop_in_times_EST(params[:date])
+                               .get_available_drop_in_times(params[:date])
     respond_to do |format|
       format.js {}
     end

@@ -5,7 +5,7 @@
     <div id=<%="look_#{look.id}"%> class="look">
       <div class="row">
         <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-          <img class="img-responsive center-block" src=<%="http://placehold.it/640x400&text=#{look.name}"%>>
+          <%= image_tag("looks/#{look.name.downcase}.jpg", class: "img-responsive center-block")%>
         </div>
       </div>
       <div class="row">

@@ -170,15 +170,15 @@ RSpec.describe Retailer, :type => :model do
 
   describe "drop in availability helpers" do
     before { @retailer.save }
-    let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9, offset: '-0500') }
-    let(:tomorrow_miday){ DateTime.current.advance(days: 1).change(hour: 12, offset: '-0500') }
-    let(:tomorrow_COB){ DateTime.current.advance(days: 1).change(hour: 17, offset: '-0500') }
+    let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9) }
+    let(:tomorrow_miday){ DateTime.current.advance(days: 1).change(hour: 12) }
+    let(:tomorrow_COB){ DateTime.current.advance(days: 1).change(hour: 17) }
     let(:shopper){ FactoryGirl.create(:shopper) }
-    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
-                                          retailer: @retailer,
-                                          start_time: tomorrow_SOB,
-                                          end_time: tomorrow_COB,
-                                          bandwidth: 1) }
+    let!(:tomorrow_availability){ FactoryGirl.create(:drop_in_availability,
+                                                      retailer: @retailer,
+                                                      start_time: tomorrow_SOB,
+                                                      end_time: tomorrow_COB,
+                                                      bandwidth: 1) }
     let!(:drop_in) { FactoryGirl.create(:drop_in,
                                         time: tomorrow_miday,
                                         retailer: @retailer,
@@ -200,20 +200,40 @@ RSpec.describe Retailer, :type => :model do
 
     it "should return the correct available times for a day" do
       expect(@retailer
-              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y'))
+              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y'))
               .size).to eq(15)
       expect(@retailer
-              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
               .to include([9,0])
       expect(@retailer
-              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
               .to_not include([12,0])
       expect(@retailer
-              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
               .to include([12,30])
       expect(@retailer
-              .get_available_drop_in_times_EST(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
               .to_not include([18,0])
+    end
+
+    context "when drop in is for today" do
+      let!(:today_availability){ FactoryGirl.create(:drop_in_availability,
+                                         retailer: @retailer,
+                                         start_time: DateTime.current.beginning_of_day,
+                                         end_time: DateTime.current.end_of_day,
+                                         bandwidth: 1) }
+
+      it "should return an appropriate buffer" do
+        first_available_time_array = 
+            @retailer.get_available_drop_in_times(DateTime.current.strftime('%B %e, %Y')).first
+
+        first_available_time = DateTime.current.change(hour: first_available_time_array[0],
+                                                       min: first_available_time_array[1])
+
+        buffered_time = DateTime.current.advance(minutes: 30)
+
+        expect(first_available_time).to be >= buffered_time
+      end
     end
   end
 end

@@ -7,6 +7,7 @@ class DropIn < ActiveRecord::Base
   has_many :drop_in_items, dependent: :destroy
 
   validate :retailer_available_for_drop_in, on: :create
+  validate :shopper_drop_in_at_same_time
   validates :retailer_id, presence: true
   validates :shopper_id, presence: true
   validates :time, presence: true
@@ -23,21 +24,36 @@ class DropIn < ActiveRecord::Base
     end
   end
 
+  def shopper_drop_in_at_same_time
+    unless shopper_id.nil? || time.nil?
+      same_time_drop_in = DropIn.where(shopper_id: shopper_id, time: time).first
+      unless same_time_drop_in.nil?
+        if same_time_drop_in.id != self.id
+          errors[:base] << "You have another drop-in scheduled at this time"
+        end
+      end
+    end
+  end
+
   def self.upcoming_for shopper_id
     where("shopper_id = ? and time > ?", shopper_id, DateTime.current)
   end
 
+  def self.upcoming_for_shopper_at_retailer shopper_id, retailer_id
+    where("shopper_id = ? and retailer_id = ? and time > ?", 
+                          shopper_id, retailer_id, DateTime.current)
+  end
+
   def colloquial_time
-    if time.beginning_of_day == DateTime.current.beginning_of_day
+    if time.to_date == DateTime.current.to_date
       date_string = "Today"
-    elsif time.beginning_of_day == DateTime.current.advance(days: 1).beginning_of_day
+    elsif time.to_date == DateTime.current.advance(days: 1).to_date
       date_string = "Tomorrow"
     else
       date_string = time.to_s(:month_slash_day)
     end
 
-    zone = "Eastern Time (US & Canada)"
-    time_string = ActiveSupport::TimeZone[zone].parse(time.to_s).to_s(:informal_time)
+    time_string = time.to_s(:informal_time)
 
     "#{date_string} @ #{time_string}".gsub(":00",'')
   end

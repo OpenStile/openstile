@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150126012938) do
+ActiveRecord::Schema.define(version: 20150130151646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20150126012938) do
     t.datetime "updated_at"
   end
 
+  add_index "drop_in_items", ["drop_in_id", "reservable_id", "reservable_type"], name: "unique_drop_in_items_index", unique: true, using: :btree
   add_index "drop_in_items", ["drop_in_id"], name: "index_drop_in_items_on_drop_in_id", using: :btree
   add_index "drop_in_items", ["reservable_id", "reservable_type"], name: "index_drop_in_items_on_reservable_id_and_reservable_type", using: :btree
 
@@ -205,6 +206,7 @@ ActiveRecord::Schema.define(version: 20150126012938) do
   end
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree
+  add_index "drop_ins", ["shopper_id", "time"], name: "index_drop_ins_on_shopper_id_and_time", unique: true, using: :btree
   add_index "drop_ins", ["shopper_id"], name: "index_drop_ins_on_shopper_id", using: :btree
 
   create_table "exposed_parts", force: true do |t|

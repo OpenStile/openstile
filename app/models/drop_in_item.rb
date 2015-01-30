@@ -4,7 +4,8 @@ class DropInItem < ActiveRecord::Base
 
   validate :retailer_for_drop_in_and_item_match
   validates :drop_in_id, presence: true, on: :update
-  validates :reservable_id, presence: true
+  validates :reservable_id, presence: true, 
+                            uniqueness: { scope: [:reservable_type, :drop_in_id] }
 
   def retailer_for_drop_in_and_item_match
     unless reservable_id.nil? or drop_in_id.nil?

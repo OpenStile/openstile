@@ -1,7 +1,7 @@
 class DropInsController < ApplicationController
 
   before_filter :authenticate_shopper!
-  before_action :correct_drop_in_shopper, only: [:destroy]
+  before_action :correct_drop_in_shopper, only: [:update, :destroy]
 
   def create
     retrieved_params = drop_in_params
@@ -16,6 +16,7 @@ class DropInsController < ApplicationController
     @drop_in = DropIn.new(retrieved_params)
 
     if @drop_in.save 
+      flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
       redirect_to upcoming_drop_ins_path
     else
       recommendation = retrieve_recommendation_object
@@ -35,6 +36,16 @@ class DropInsController < ApplicationController
         flash[:danger] = "There was an unexpected error scheduling your drop-in."
         redirect_to root_path
       end
+    end
+  end
+
+  def update
+    if @drop_in.update_attributes(drop_in_params)
+      flash[:success] = "Your drop-in was updated! The retailer will be notified."
+      redirect_to upcoming_drop_ins_path
+    else
+      flash[:danger] = "There was an unexpected error updating your drop-in."
+      redirect_to root_path
     end
   end
 

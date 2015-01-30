@@ -20,9 +20,16 @@
     </div>
 
     <% if shopper_signed_in? %>
-      <%= render 'shared/schedule_drop_in', retailer: @top.retailer, 
-                                            for_retailer: false,
-                                            item: @top %>
+      <% existing_drop_in = DropIn.upcoming_for_shopper_at_retailer(current_shopper.id, @top.retailer.id).first %>
+      <% if existing_drop_in.nil? %>
+        <%= render 'shared/schedule_drop_in', retailer: @top.retailer, 
+                                              for_retailer: false,
+                                              item: @top %>
+      <% else %>
+        <%= render 'shared/update_existing_drop_in', retailer: @top.retailer,
+                                                     drop_in: existing_drop_in,
+                                                     item: @top %>
+      <% end %>
     <% end %>
   </div>
 </div>

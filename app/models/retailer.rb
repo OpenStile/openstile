@@ -47,8 +47,7 @@ class Retailer < ActiveRecord::Base
 
   def get_drop_in_location date_string
     matching_index = future_availabilities.index { |availability| 
-      availability.start_time.at_beginning_of_day ==
-                DateTime.parse(date_string).at_beginning_of_day
+      availability.start_time.to_date == DateTime.parse(date_string).to_date
     }
 
     availability = future_availabilities[matching_index]
@@ -57,10 +56,10 @@ class Retailer < ActiveRecord::Base
     availability.location
   end
 
-  def get_available_drop_in_times_EST date_string
+  def get_available_drop_in_times date_string
     ret = []
     matching_index = future_availabilities.index { |availability| 
-      availability.start_time.at_beginning_of_day == DateTime.parse(date_string)
+      availability.start_time.to_date == DateTime.parse(date_string).to_date
     }
     
     return ret if matching_index.nil?
@@ -69,7 +68,7 @@ class Retailer < ActiveRecord::Base
 
     first_time_slot = availability.start_time
     if first_time_slot < DateTime.current
-      buffer = DateTime.current.advance(minutes: 15)
+      buffer = DateTime.current.advance(minutes: 30)
       if buffer.minute < 30
         first_time_slot = buffer.change(min: 30)
       else
@@ -81,9 +80,7 @@ class Retailer < ActiveRecord::Base
       concurrent_drop_ins = self.drop_ins.where(time: first_time_slot)
 
       unless concurrent_drop_ins.count >= availability.bandwidth
-        zone = "Eastern Time (US & Canada)"
-        time_string = ActiveSupport::TimeZone[zone]
-                          .parse(first_time_slot.to_s).strftime("%-H:%-M")
+        time_string = first_time_slot.strftime("%-H:%-M")
         ret << time_string.split(':').map{|v| v.to_i}
       end
 

@@ -1,0 +1,26 @@
+<div class="drop-in">
+  <hr>
+  <div class="row text-center">
+    <div class="col-md-10 col-xs-10 col-md-offset-1 col-xs-offset-1">
+      <h2>We see you have a drop-in scheduled for <%= retailer.name %><h2>
+      <br />
+      <p>
+        Would you like to us to pull this item in your size and put it on hold
+        for your drop in <%= drop_in.colloquial_time %>? (Guaranteed up to 2 days only)
+      </p>
+    </div>
+  </div>
+  <div class="row add-to-drop-in">
+    <div class="col-md-4 col-xs-4 col-md-offset-4 col-xs-offset-4">
+      <%= form_for(drop_in) do |f| %>
+        <%= f.fields_for :drop_in_items, 
+            f.object.drop_in_items.find_or_initialize_by(reservable: item) do |drop_in_item_fields| %>
+          <%= drop_in_item_fields.hidden_field :reservable_id %>
+          <%= drop_in_item_fields.hidden_field :reservable_type %>
+        <% end %>
+
+        <%= f.submit 'Yes, I want to see this item!', class: 'btn btn-lg btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>

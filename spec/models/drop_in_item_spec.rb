@@ -33,6 +33,13 @@ RSpec.describe DropInItem, :type => :model do
     it { should_not be_valid }
   end
 
+  context "when drop in item already exists for drop in and reservable" do
+    let!(:existing_drop){ FactoryGirl.create(:drop_in_item, 
+                                             drop_in: drop_in, 
+                                             reservable: top) }
+    it { should_not be_valid }
+  end
+
   context "when retailer id for item is not retailer id for drop in" do
     let(:wrong_retailer){ FactoryGirl.create(:retailer) }
     before { @drop_in_item.reservable.retailer_id = wrong_retailer.id }

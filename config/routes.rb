@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   resources :dresses, only: [:show]
 
-  resources :drop_ins, only: [:create, :destroy] do
+  resources :drop_ins, only: [:create, :update, :destroy] do
     collection do
       get :upcoming
     end
