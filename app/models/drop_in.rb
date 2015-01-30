@@ -33,16 +33,15 @@ class DropIn < ActiveRecord::Base
   end
 
   def colloquial_time
-    if time.beginning_of_day == DateTime.current.beginning_of_day
+    if time.to_date == DateTime.current.to_date
       date_string = "Today"
-    elsif time.beginning_of_day == DateTime.current.advance(days: 1).beginning_of_day
+    elsif time.to_date == DateTime.current.advance(days: 1).to_date
       date_string = "Tomorrow"
     else
       date_string = time.to_s(:month_slash_day)
     end
 
-    zone = "Eastern Time (US & Canada)"
-    time_string = ActiveSupport::TimeZone[zone].parse(time.to_s).to_s(:informal_time)
+    time_string = time.to_s(:informal_time)
 
     "#{date_string} @ #{time_string}".gsub(":00",'')
   end
