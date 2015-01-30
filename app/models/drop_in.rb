@@ -7,6 +7,7 @@ class DropIn < ActiveRecord::Base
   has_many :drop_in_items, dependent: :destroy
 
   validate :retailer_available_for_drop_in, on: :create
+  validate :shopper_drop_in_at_same_time
   validates :retailer_id, presence: true
   validates :shopper_id, presence: true
   validates :time, presence: true
@@ -19,6 +20,17 @@ class DropIn < ActiveRecord::Base
     unless retailer_id.nil? || time.nil?
       unless Retailer.find(retailer_id).available_for_drop_in?(time)
         errors.add(:time, "is not an available time slot for a drop in")
+      end
+    end
+  end
+
+  def shopper_drop_in_at_same_time
+    unless shopper_id.nil? || time.nil?
+      same_time_drop_in = DropIn.where(shopper_id: shopper_id, time: time).first
+      unless same_time_drop_in.nil?
+        if same_time_drop_in.id != self.id
+          errors[:base] << "You have another drop-in scheduled at this time"
+        end
       end
     end
   end

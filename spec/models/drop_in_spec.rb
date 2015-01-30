@@ -44,6 +44,14 @@ RSpec.describe DropIn, :type => :model do
     it { should_not be_valid }
   end
 
+  context "when shopper has another drop in at the same time" do
+    let!(:other_drop_in){ FactoryGirl.create(:drop_in, 
+                                             retailer: retailer,
+                                             shopper: shopper, 
+                                             time: tomorrow_mid_morning) }
+    it { should_not be_valid } 
+  end
+
   context "when retailer unavailable" do
     context "due to not accepting drop ins" do
       before { @drop_in.time = tomorrow_evening }
