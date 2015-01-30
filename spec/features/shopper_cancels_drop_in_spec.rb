@@ -22,13 +22,6 @@ feature 'Shopper modifies drop in' do
     then_my_upcoming_drop_ins_page_should_not_contain drop_in
   end
 
-  def given_my_upcoming_drop_ins_page_contains appointment
-    click_link 'Scheduled Drop-ins'
-
-    expect(page).to have_content(appointment.retailer.name)
-    expect(page).to have_content(appointment.colloquial_time)
-  end
-
   def when_i_cancel_and_confirm appointment
     within(:css, "div#drop_in_#{appointment.id}") do
       click_link 'cancel'

@@ -39,14 +39,28 @@ RSpec.describe DropInsController, :type => :controller do
         expect(response).to redirect_to(new_shopper_session_path)
       end
     end
+
+    context "PATCH update" do
+      it "redirects to signin" do
+        patch :update, {id: drop_in.id}
+        expect(response).to redirect_to(new_shopper_session_path)
+      end
+    end
   end
 
   context "when wrong shopper is signed in" do
     before { sign_in other_shopper }  
 
     context "DELETE destroy" do
-      it "redirects to signin" do
+      it "redirects to root path" do
         delete :destroy, {id: drop_in.id}
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context "PATCH update" do
+      it "redirects to root path" do
+        patch :update, {id: drop_in.id}
         expect(response).to redirect_to(root_path)
       end
     end

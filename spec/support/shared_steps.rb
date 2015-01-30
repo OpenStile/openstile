@@ -183,4 +183,11 @@ def then_the_recommendation_should_be_for recommendation_string
   expect(page).to have_content("Recommended for #{recommendation_string}")
 end
 
+def given_my_upcoming_drop_ins_page_contains appointment
+  click_link 'Scheduled Drop-ins'
+
+  expect(page).to have_content(appointment.retailer.name)
+  expect(page).to have_content(appointment.colloquial_time)
+end
+
 

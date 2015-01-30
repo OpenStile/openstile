@@ -77,6 +77,26 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_should_show_item_on_hold dress
   end
 
+  scenario 'to see an additional item' do
+    baseline_calibration_for_shopper_and_items
+
+    existing_drop_in = FactoryGirl.create(:drop_in, shopper: shopper,
+                                                    retailer: retailer,
+                                                    time: tomorrow_afternoon)
+    existing_drop_in_item = FactoryGirl.create(:drop_in_item, 
+                                               drop_in: existing_drop_in,
+                                               reservable: top)
+
+    given_i_am_a_logged_in_shopper shopper
+    given_my_upcoming_drop_ins_page_contains existing_drop_in
+    when_i_continue_browsing   
+    when_i_select_a_recommendation dress
+    then_i_should_see_i_have_an_existing_drop_in_scheduled existing_drop_in
+    when_i_add_item_to_existing_drop_in
+    then_my_scheduled_should_show_item_on_hold top
+    then_my_scheduled_should_show_item_on_hold dress
+  end
+
   def when_i_select_a_recommendation recommendation
     visit '/'
 
@@ -119,6 +139,23 @@ feature 'Shopper schedule drop in' do
 
   def then_my_scheduled_should_show_item_on_hold item
     expect(page).to have_content(item.name)
+  end
+
+  def when_i_continue_browsing
+    click_link 'Continue Browsing'
+
+    expect(page).to have_content('My Style Feed')
+  end
+
+  def then_i_should_see_i_have_an_existing_drop_in_scheduled appointment
+    expect(page).to have_content('We see you have a drop-in')
+    expect(page).to have_content(appointment.colloquial_time)
+  end
+
+  def when_i_add_item_to_existing_drop_in
+    click_button 'Yes, I want to see this item!'
+
+    expect(page).to have_content('My Drop-Ins')
   end
 
   private

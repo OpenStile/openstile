@@ -27,6 +27,11 @@ class DropIn < ActiveRecord::Base
     where("shopper_id = ? and time > ?", shopper_id, DateTime.current)
   end
 
+  def self.upcoming_for_shopper_at_retailer shopper_id, retailer_id
+    where("shopper_id = ? and retailer_id = ? and time > ?", 
+                          shopper_id, retailer_id, DateTime.current)
+  end
+
   def colloquial_time
     if time.beginning_of_day == DateTime.current.beginning_of_day
       date_string = "Today"
