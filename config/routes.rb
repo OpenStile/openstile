@@ -21,10 +21,6 @@ Rails.application.routes.draw do
   devise_for :retail_users, :skip => [:passwords, :registrations], path: '/retail_users', controllers: {
     sessions: 'retail_users/sessions'
     } 
-  devise_scope :retail_user do
-      # get "/retail_users/sign_up", :to => "retail_users/registrations#new",   :as => 'new_retail_user_registration'
-      # post "/retail_users", :to => "retail_users/registrations#create", :as => 'retail_user_registration'
-  end
 
   resources :style_profiles, only: [:edit, :update]
 
