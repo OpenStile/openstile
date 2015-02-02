@@ -1,5 +1,5 @@
 class Retailer < ActiveRecord::Base
-  has_many :retail_users, dependent: :destroy # I have no idea what I'm doing!
+  has_one :retail_user, dependent: :destroy
 
   has_and_belongs_to_many :top_sizes
   has_and_belongs_to_many :bottom_sizes
