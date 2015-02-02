@@ -57,7 +57,6 @@ end
 group :test do
   gem 'capybara', '~> 2.3.0'
   gem 'poltergeist'
-  gem 'shoulda-matchers', require: false
 end
 
 group :production do

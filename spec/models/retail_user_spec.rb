@@ -2,14 +2,11 @@ require 'rails_helper'
 
 RSpec.describe RetailUser, :type => :model do
 
-  let(:location){ FactoryGirl.create(:location) }
+  let(:retailer){ FactoryGirl.create(:retailer) }
   before do
-    @retailer = Retailer.new(name: "ABC Boutique",
-                                    location: location,
-                                    description: "Premier boutique in DC!")
-    @retailer.save
-    @retail_user = RetailUser.new(retailer: @retailer, email: "john@example.com",
-                                  password: "barbaz", password_confirmation: "barbaz")
+    @retail_user = retailer.build_retail_user(email: "john@example.com",
+                                              password: "barbaz",
+                                              password_confirmation: "barbaz")
   end
 
   subject { @retail_user }
@@ -18,12 +15,17 @@ RSpec.describe RetailUser, :type => :model do
     expect(FactoryGirl.build(:retail_user)).to be_valid
   end
 
-  it { should belong_to :retailer }
-  it { should validate_presence_of :retailer }
+  it { should respond_to :retailer_id }
+  it { should respond_to :retailer }
   it { should respond_to :email }
   it { should respond_to :cell_phone }
   it { should respond_to :encrypted_password }
   it { should be_valid }
+
+  context "when retailer is not present" do
+    before { @retail_user.retailer = nil }
+    it { should_not be_valid }
+  end
 
   context "when email is not present" do
     before { @retail_user.email = " " }
