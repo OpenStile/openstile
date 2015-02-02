@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe RetailUsers::SessionsController, :type => :controller do
-  # let(:retailer){ FactoryGirl.create(:retailer) }
   let(:retail_user){ FactoryGirl.create(:retail_user) }
   before {@request.env["devise.mapping"] = Devise.mappings[:retail_user]}
 
