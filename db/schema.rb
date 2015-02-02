@@ -316,7 +316,6 @@ ActiveRecord::Schema.define(version: 20150130151646) do
   end
 
   create_table "retail_users", force: true do |t|
-    t.string   "first_name"
     t.string   "email"
     t.string   "cell_phone"
     t.integer  "retailer_id"

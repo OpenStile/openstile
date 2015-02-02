@@ -1,7 +1,6 @@
 class AddRetailUser < ActiveRecord::Migration
   def change
     create_table :retail_users do |t|
-      t.string  :first_name
       t.string  :email
       t.string  :cell_phone
       t.integer :retailer_id

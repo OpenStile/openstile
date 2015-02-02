@@ -8,7 +8,7 @@ RSpec.describe RetailUser, :type => :model do
                                     location: location,
                                     description: "Premier boutique in DC!")
     @retailer.save
-    @retail_user = RetailUser.new(retailer: @retailer, first_name: "John", email: "john@example.com",
+    @retail_user = RetailUser.new(retailer: @retailer, email: "john@example.com",
                                   password: "barbaz", password_confirmation: "barbaz")
   end
 
@@ -20,21 +20,10 @@ RSpec.describe RetailUser, :type => :model do
 
   it { should belong_to :retailer }
   it { should validate_presence_of :retailer }
-  it { should respond_to :first_name }
   it { should respond_to :email }
   it { should respond_to :cell_phone }
   it { should respond_to :encrypted_password }
   it { should be_valid }
-
-  context "when first name is not present" do
-    before { @retail_user.first_name = " " }
-    it { should_not be_valid }
-  end
-
-  context "when first name is too long" do
-    before { @retail_user.first_name = "a"*51 }
-    it { should_not be_valid }
-  end
 
   context "when email is not present" do
     before { @retail_user.email = " " }

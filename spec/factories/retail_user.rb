@@ -3,7 +3,6 @@
 FactoryGirl.define do
   factory :retail_user do
     retailer
-    first_name         Faker::Name.first_name
     sequence(:email)   { |i| "random.person#{i}@openstile.com" }
     password "example!"
     password_confirmation "example!"
