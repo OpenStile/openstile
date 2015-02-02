@@ -1,4 +1,6 @@
 class Retailer < ActiveRecord::Base
+  has_one :retail_user, dependent: :destroy
+
   has_and_belongs_to_many :top_sizes
   has_and_belongs_to_many :bottom_sizes
   has_and_belongs_to_many :dress_sizes
@@ -18,7 +20,7 @@ class Retailer < ActiveRecord::Base
   after_create{ create_price_range }
   
   validates :name, presence: true, length: { maximum: 50 } 
-  validates :description, presence: true, length: { maximum: 250 } 
+  validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true
 
   def available_for_drop_in? datetime
