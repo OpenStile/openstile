@@ -319,7 +319,7 @@ ActiveRecord::Schema.define(version: 20150130151646) do
     t.string   "first_name"
     t.string   "email"
     t.string   "cell_phone"
-    t.string   "retailer_id"
+    t.integer  "retailer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password",     default: "", null: false
