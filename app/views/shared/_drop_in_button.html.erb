@@ -2,13 +2,13 @@
   <%= link_to 'Drop-in to browse store', retailer_path(object), 
                                          class: 'btn btn-lg btn-primary' %>
 <% elsif object.is_a? Top %>
-  <%= link_to 'Drop-in to see item', top_path(object), 
+  <%= link_to 'Drop-in to browse store', top_path(object), 
                                      class: 'btn btn-lg btn-primary' %>
 <% elsif object.is_a? Bottom %>
-  <%= link_to 'Drop-in to see item', bottom_path(object), 
+  <%= link_to 'Drop-in to browse store', bottom_path(object), 
                                      class: 'btn btn-lg btn-primary' %>
 <% elsif object.is_a? Dress %>
-  <%= link_to 'Drop-in to see item', dress_path(object), 
+  <%= link_to 'Drop-in to browse store', dress_path(object), 
                                      class: 'btn btn-lg btn-primary' %>
 <% else %>
 <% end %>
