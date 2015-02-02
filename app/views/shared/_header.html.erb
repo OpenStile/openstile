@@ -7,15 +7,20 @@
         </div>
       </div>
       <div class="navigation pull-right">
-        <% if current_shopper.nil? %>
+        <% if current_shopper.nil? && current_retail_user.nil? %>
           <%= link_to "About", about_path %>
           <%= link_to "Blog", blog_path %>
           <%= link_to "Log in", new_shopper_session_path %>
           <%= link_to "Sign up", new_shopper_registration_path, class: "sign-up" %>
         <% else %>
-          <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile) %>
-          <%= link_to "Scheduled Drop-ins", upcoming_drop_ins_path %>
-          <%= link_to "Log out", destroy_shopper_session_path, :method => :delete %>
+          <% if !current_shopper.nil? %>
+            <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile) %>
+            <%= link_to "Scheduled Drop-ins", upcoming_drop_ins_path %>
+            <%= link_to "Log out", destroy_shopper_session_path, :method => :delete %>
+          <% end %>
+          <% if !current_retail_user.nil? %>
+            <%= link_to "Log out", destroy_retail_user_session_path, :method => :delete %>
+          <% end %>
         <% end %>
       </div>
     </div>

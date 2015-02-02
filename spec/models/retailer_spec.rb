@@ -33,6 +33,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :drop_ins }
   it { should respond_to :location }
   it { should respond_to :location_id }
+  it { should respond_to :retail_user }
   it { should be_valid }
 
   context "when name is not present" do
@@ -165,6 +166,20 @@ RSpec.describe Retailer, :type => :model do
       drop_ins.each do |d|
         expect(DropIn.where(id: d.id)).to be_empty
       end
+    end
+  end
+
+  describe "retail user association" do
+    before { @retailer.save }
+    let!(:retail_user){ 
+      FactoryGirl.create(:retail_user, retailer: @retailer) 
+    }
+
+    it "should destroy associated retail user" do
+      retailer_user = @retailer.retail_user
+      @retailer.destroy
+      expect(retail_user).to_not be_nil
+      expect(RetailUser.where(id: retail_user.id)).to be_empty
     end
   end
 
