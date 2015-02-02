@@ -169,6 +169,20 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
+  describe "retail user association" do
+    before { @retailer.save }
+    let!(:retail_user){ 
+      FactoryGirl.create(:retail_user, retailer: @retailer) 
+    }
+
+    it "should destroy associated retail user" do
+      retailer_user = @retailer.retail_user
+      @retailer.destroy
+      expect(retail_user).to_not be_nil
+      expect(RetailUser.where(id: retail_user.id)).to be_empty
+    end
+  end
+
   describe "drop in availability helpers" do
     before { @retailer.save }
     let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9) }
