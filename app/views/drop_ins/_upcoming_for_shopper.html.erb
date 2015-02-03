@@ -1,0 +1,20 @@
+<div class="col-md-1 col-xs-1 text-center">
+  <a id="cancel" data-confirm="Are you sure you want to remove this drop in?" 
+     data-method="delete" 
+     href=<%= drop_in_path(drop_in) %> 
+     rel="nofollow"><i class="fa custom-fa-lg fa-minus-circle"></i></a>
+</div>
+<div class="col-md-3 col-xs-3 text-center">
+  <h4><%= drop_in.colloquial_time %></h4>
+</div>
+<div class="col-md-3 col-xs-3 text-center">
+  <h4><%= link_to(drop_in.retailer.name, retailer_path(drop_in.retailer)) %></h4>
+</div>
+<div class="col-md-5 col-xs-5 text-center">
+  <h4><%= drop_in.retailer.get_drop_in_location(drop_in.time.to_s).stringify %></h4>
+</div>
+<% drop_in.drop_in_items.each do |item| %>
+  <div class="col-md-12 col-xs-12 text-center">
+    <br /><p>We've noted you're interested in seeing the <%= item.reservable.name %></p>
+  </div>
+<% end %>

@@ -266,6 +266,14 @@ hr{
   min-height:100px;
 }
 
+.retailer-dashboard-top{
+	background:#555 asset_url('appointment_book.jpg') no-repeat;
+	background-size:cover;
+	background-position:center 65%;
+	border-bottom:1px solid #fff;
+  min-height:100px;
+}
+
 /* Header */
 
 header{
@@ -1956,6 +1964,21 @@ input {
 }
 
 /* Drop-In Ends*/
+
+/* Retailer Dashboard Begins */
+
+.retailer-dashboard h4{
+	font-size:20px;
+	line-height:30px;
+	font-weight:normal;
+	color:#555;
+	font-family: 'Droid Serif', serif;
+	font-style:italic;
+  max-height: 999999px;
+}
+
+/* Retailer Dashboard End */
+
 
 /* Responsive CSS */
 
