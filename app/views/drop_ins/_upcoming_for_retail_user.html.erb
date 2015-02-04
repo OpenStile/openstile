@@ -1,0 +1,20 @@
+<div class="col-md-12 col-xs-12 text-center">
+  <h4><%= drop_in.shopper.first_name %> is coming in <%= drop_in.colloquial_time %></h4>
+</div>
+<div class="col-md-12 col-xs-12 text-center">
+  <% unless drop_in.drop_in_items.empty? %>
+    <h4>
+      Items to pull: 
+      <%= drop_in.drop_in_items.map{|i| i.reservable.name }.join(', ')%>
+    </h4>
+  <% end %>
+</div>
+<div class="col-md-12 col-xs-12 text-center">
+  <h4><%= "Additional comments: \"#{drop_in.comment}\"" unless drop_in.comment.blank? %></h4>
+</div>
+<div class="synopsis">
+  <div class="col-md-12 col-xs-12 text-center">
+    <hr>
+    <p><%= drop_in.shopper.style_profile.synopsis %></p>
+  </div>
+</div>

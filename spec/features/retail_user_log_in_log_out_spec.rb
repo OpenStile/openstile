@@ -38,7 +38,7 @@ describe "Retail user log in and log out" do
       end
 
       it "should take me to the root page for Retail users" do
-        expect(page).to have_content('Retailer Home')
+        expect(page).to have_content('Retailer Dashboard')
       end
 
       describe "and I log out after being logged in" do

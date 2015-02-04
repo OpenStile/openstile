@@ -4,6 +4,7 @@ RSpec.describe DropInsController, :type => :controller do
   let(:other_shopper){ FactoryGirl.create(:shopper) }
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
+  let(:retail_user){ FactoryGirl.create(:retail_user) }
   let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
                                                   retailer: retailer,
                                                   start_time: tomorrow_morning,
@@ -62,6 +63,28 @@ RSpec.describe DropInsController, :type => :controller do
       it "redirects to root path" do
         patch :update, {id: drop_in.id}
         expect(response).to redirect_to(root_path)
+      end
+    end
+  end
+
+  context "when shopper is signed in" do
+    before { sign_in shopper }
+
+    context "GET upcoming" do
+      it "should return success" do
+        get :upcoming
+        expect(response).to be_success
+      end
+    end
+  end
+
+  context "when retail user is signed in" do
+    before { sign_in retail_user }
+
+    context "GET upcoming" do
+      it "should return success" do
+        get :upcoming
+        expect(response).to be_success
       end
     end
   end
