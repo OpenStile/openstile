@@ -21,6 +21,8 @@
       <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
         <% if current_shopper %>
           <%= render 'upcoming_for_shopper', drop_in: drop_in %>
+        <% elsif current_retail_user %>
+          <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
         <% end %>
       </div>
     <% end %>

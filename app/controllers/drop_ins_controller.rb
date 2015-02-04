@@ -1,6 +1,7 @@
 class DropInsController < ApplicationController
 
-  before_filter :authenticate_shopper!
+  before_filter :authenticate_shopper!, except: [:upcoming]
+  before_filter :authenticate_customer!, only: [:upcoming]
   before_action :correct_drop_in_shopper, only: [:update, :destroy]
 
   def create
@@ -56,7 +57,14 @@ class DropInsController < ApplicationController
   end
 
   def upcoming
-    @drop_ins = DropIn.upcoming_for current_shopper.id
+    if shopper_signed_in?
+      @drop_ins = DropIn.upcoming_for_shopper current_shopper.id
+    elsif retail_user_signed_in?
+      @drop_ins = DropIn.upcoming_for_retailer current_retail_user.retailer.id
+    else
+      flash[:danger] = "Unexpected error"
+      redirect_to root_path
+    end
   end
 
   private

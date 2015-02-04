@@ -220,8 +220,8 @@ RSpec.describe StyleProfile, :type => :model do
 
       it "should capture the fields in readable sentences" do
         expect(@style_profile.synopsis)
-          .to include("She loves the Glam Diva look" + 
-                      ", but hates the Bohemian Chic and Edgy Rocker looks.")
+          .to include("She loves the glam-diva look" + 
+                      ", but hates the bohemian-chic and edgy-rocker looks.")
       end
     end
 
@@ -302,7 +302,7 @@ RSpec.describe StyleProfile, :type => :model do
 
       it "should capture the fields in readable sentences" do
         expect(@style_profile.synopsis)
-          .to include("Lastly, she avoids the colors brown, orange.")
+          .to include("Lastly, she avoids the colors brown and orange.")
       end
     end
   end

@@ -81,6 +81,15 @@ class StyleProfile < ActiveRecord::Base
   end
 
   private
+    def readable_list list_of_strings
+      if list_of_strings.size <= 2
+        return list_of_strings.join(' and ')
+      else
+        list_of_strings[-1] = "and #{list_of_strings[-1]}"
+        return list_of_strings.join(', ')
+      end
+    end
+
     def synopsis_body_description
       ret = ""
       case
@@ -160,7 +169,7 @@ class StyleProfile < ActiveRecord::Base
       ret = ""
 
       unless self.special_considerations.empty?
-        ret << "#{self.special_considerations.map{|sc| sc.name.downcase}.join(' and ')} fashion"
+        ret << "#{readable_list(self.special_considerations.map{|sc| sc.name.downcase})} fashion"
       end
 
       ret
@@ -173,12 +182,12 @@ class StyleProfile < ActiveRecord::Base
       hated_looks = self.look_tolerances.where(tolerance: 1).map(&:look)
 
       unless loved_looks.empty?
-        ret << "loves the #{loved_looks.map{|l| l.name.gsub('_',' ').titleize}.join(' and ')}"
+        ret << "loves the #{readable_list(loved_looks.map{|l| l.name.gsub('_','-').downcase})}"
         ret << " #{loved_looks.count > 1 ? 'looks' : 'look'}"
       end
       unless hated_looks.empty?
         ret << ", but " unless ret.blank?
-        ret << "hates the #{hated_looks.map{|l| l.name.gsub('_',' ').titleize}.join(' and ')}"
+        ret << "hates the #{readable_list(hated_looks.map{|l| l.name.gsub('_','-').downcase})}"
         ret << " #{hated_looks.count > 1 ? 'looks' : 'look'}"
       end
 
@@ -202,11 +211,11 @@ class StyleProfile < ActiveRecord::Base
       parts_to_flaunt = self.part_exposure_tolerances.where(tolerance: 10).map(&:part)
 
       unless parts_to_cover.empty?
-        ret << "to cover her #{parts_to_cover.map{|p| p.name.downcase}.join(' and ')}"
+        ret << "to cover her #{readable_list(parts_to_cover.map{|p| p.name.downcase})}"
       end
       unless parts_to_flaunt.empty?
         ret << ", and " unless ret.blank?
-        ret << "to flaunt her #{parts_to_flaunt.map{|p| p.name.downcase}.join(' and ')}"
+        ret << "to flaunt her #{readable_list(parts_to_flaunt.map{|p| p.name.downcase})}"
       end
 
       ret
@@ -219,11 +228,11 @@ class StyleProfile < ActiveRecord::Base
       hated_prints = self.print_tolerances.where(tolerance: 1).map(&:print)
 
       unless loved_prints.empty?
-        ret << "loves #{loved_prints.map{|p| p.name.downcase}.join(' and ')}"
+        ret << "loves #{readable_list(loved_prints.map{|p| p.name.downcase})}"
       end
       unless hated_prints.empty?
         ret << ", but " unless ret.blank?
-        ret << "hates #{hated_prints.map{|p| p.name.downcase}.join(' and ')}"
+        ret << "hates #{readable_list(hated_prints.map{|p| p.name.downcase})}"
       end
 
       ret
@@ -234,7 +243,7 @@ class StyleProfile < ActiveRecord::Base
 
       colors = self.avoided_colors
       unless colors.empty?
-        ret << "the #{colors.count > 1 ? 'colors' : 'color'} #{colors.map{|c| c.name.downcase}.join(', ')}"
+        ret << "the #{colors.count > 1 ? 'colors' : 'color'} #{readable_list(colors.map{|c| c.name.downcase})}"
       end
 
       ret
