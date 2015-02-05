@@ -31,15 +31,6 @@ feature 'Retail user reviews drop in' do
     then_i_should_see_items_of_interest_for_shopper top.name
   end
 
-  def given_i_am_a_logged_in_retail_user retail_user
-    visit '/'
-    click_link 'Log in'
-    click_link 'Are you a retailer?'
-    fill_in 'Email', with: retail_user.email
-    fill_in 'Password', with: retail_user.password
-    click_button 'Log in'
-  end
-
   def when_i_view_my_upcoming_drop_ins
     click_link 'View your scheduled drop-ins'
 
