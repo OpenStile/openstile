@@ -14,7 +14,10 @@ feature 'Retail user manages drop in schedule' do
 
     given_shopper_fails_to_schedule_drop_in next_week, noon
     given_i_am_a_logged_in_retail_user retail_user
-    when_i_set_my_store_drop_in_availability next_week, morning, evening
+    when_i_go_to_manage_my_store_drop_in_availability
+    when_i_submit_with_invalid_options
+    then_my_availability_should_not_be_updated
+    when_i_set_my_drop_in_availability_with_valid_options next_week, morning, evening
     then_shopper_succeeds_to_schedule_drop_in next_week, noon
   end
 
@@ -32,11 +35,31 @@ feature 'Retail user manages drop in schedule' do
     expect(page).to have_content('not an available time slot')
   end
 
-  def when_i_set_my_store_drop_in_availability date, start_time, end_time
+  def when_i_go_to_manage_my_store_drop_in_availability
     click_link 'Dashboard'
     click_link 'Manage your drop-in availability'
-
     expect(page).to have_content('Drop-in Availability')
+  end
+
+  def when_i_submit_with_invalid_options
+    click_button 'Save'
+  end
+
+  def then_my_availability_should_not_be_updated
+    expect(page).to have_content('Drop-in Availability')
+    expect(page).to have_content('error')
+  end
+
+  def when_i_set_my_drop_in_availability_with_valid_options date, start_time, end_time
+    fill_in 'Date', with: date
+    choose 'status_on'
+    fill_in 'Start', with: start_time
+    fill_in 'End', with: end_time
+    fill_in 'How many shoppers at a time?', with: '2' 
+
+    click_button 'Save'
+
+    expect(page).to have_content('Your drop-in availability has been updated')
   end
 
   def then_shopper_succeeds_to_schedule_drop_in date, time
