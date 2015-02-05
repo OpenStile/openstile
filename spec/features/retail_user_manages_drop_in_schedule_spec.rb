@@ -33,6 +33,10 @@ feature 'Retail user manages drop in schedule' do
   end
 
   def when_i_set_my_store_drop_in_availability date, start_time, end_time
+    click_link 'Dashboard'
+    click_link 'Manage your drop-in availability'
+
+    expect(page).to have_content('Drop-in Availability')
   end
 
   def then_shopper_succeeds_to_schedule_drop_in date, time

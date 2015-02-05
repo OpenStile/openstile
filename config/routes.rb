@@ -44,6 +44,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :drop_in_availabilities, only: [:create] do
+    collection do
+      get :personal
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

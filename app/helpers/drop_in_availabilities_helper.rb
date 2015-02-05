@@ -1,0 +1,2 @@
+module DropInAvailabilitiesHelper
+end
