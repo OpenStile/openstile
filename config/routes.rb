@@ -26,8 +26,6 @@ Rails.application.routes.draw do
       put "/retail_users", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
   end
 
-  # resources :retail_users, only: [:update]
-  # resources :retail_users, :path => '/retail_users', :to => "retail_users/registrations#update", only: [:update]
   resources :retail_users, :path => '/retail_users', :to => "retail_users/registrations#edit" , only: [:edit]
 
   resources :style_profiles, only: [:edit, :update]

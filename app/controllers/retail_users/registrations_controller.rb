@@ -4,17 +4,29 @@ class RetailUsers::RegistrationsController < Devise::RegistrationsController
 
 # GET /resource/edit
   def edit
+    super
   end
 
   # PUT /resource/
   def update
-    super
+    if update_resource(current_retail_user, retail_user_password_update_params)
+      flash[:success] = "Your Password has been updated!"
+      sign_in(current_retail_user, :bypass => true)
+      redirect_to root_url
+    else
+      flash[:danger] = "Whoops! Something went wrong. Please try again"
+      render "edit"
+    end
   end
 
-  protected
+  private
 
   def after_resetting_password_path_for(retail_user)
     root_path
+  end
+
+  def retail_user_password_update_params
+    params.require(:retail_user).permit(:password, :password_confirmation, :current_password)
   end
 
 end
