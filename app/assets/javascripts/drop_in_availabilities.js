@@ -30,4 +30,11 @@ $(document).ready(function() {
       $('#date').prop('readonly', true);
     }
   })
+
+  $('.timepicker').pickatime({
+    formatSubmit: 'HH:i',
+    hiddenName: true,
+    min: [6,0],
+    max: [23,0]
+  })
 });

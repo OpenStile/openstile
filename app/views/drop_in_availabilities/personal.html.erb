@@ -56,11 +56,11 @@
 
         <%= label_tag :start_time, nil, class: "sr-only" %>
         <%= text_field_tag :start_time, nil, 
-                           class: "form-control", placeholder: "Start time" %>
+                           class: "form-control timepicker", placeholder: "Start time" %>
 
         <%= label_tag :end_time, nil, class: "sr-only" %>
         <%= text_field_tag :end_time, nil, 
-                           class: "form-control", placeholder: "End time" %>
+                           class: "form-control timepicker", placeholder: "End time" %>
 
         <%= label(:drop_in_availability, :bandwidth, 'How many shoppers at a time?') %>
         <%= number_field(:drop_in_availability, :bandwidth, in: 1..10, 
