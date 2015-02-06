@@ -18,6 +18,7 @@ function popSelectedDate() {
 $(document).ready(function() {
   $('#calendar').fullCalendar({
     fixedWeekCount: false,
+    eventBackgroundColor: '#428bca',
     header: {
       left: 'prev,next',
       center: 'title',
@@ -28,7 +29,13 @@ $(document).ready(function() {
       pushSelectedDate($(this));
       $('#date').val(date.format());
       $('#date').prop('readonly', true);
-    }
+    },
+    eventSources: [
+      {
+        url: '/retailers/' + $('#calendar').data("retailer-id") + "/scheduled_availabilities",
+        rendering: 'background'
+      }
+    ]
   })
 
   $('.timepicker').pickatime({

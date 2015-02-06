@@ -207,10 +207,13 @@ RSpec.describe Retailer, :type => :model do
     end
 
     it "should return the correct available dates" do
-      expect(@retailer.get_available_drop_in_dates(true).size).to eq(1)
-      expect(@retailer.get_available_drop_in_dates(true)[0][0]).to eq(tomorrow_SOB.year)
-      expect(@retailer.get_available_drop_in_dates(true)[0][1]).to eq(tomorrow_SOB.month - 1)
-      expect(@retailer.get_available_drop_in_dates(true)[0][2]).to eq(tomorrow_SOB.day)
+      expect(@retailer.get_available_drop_in_dates(:integer_array).size).to eq(1)
+      expect(@retailer.get_available_drop_in_dates(:integer_array)[0][0]).to eq(tomorrow_SOB.year)
+      expect(@retailer.get_available_drop_in_dates(:integer_array)[0][1]).to eq(tomorrow_SOB.month - 1)
+      expect(@retailer.get_available_drop_in_dates(:integer_array)[0][2]).to eq(tomorrow_SOB.day)
+      
+      expect(@retailer.get_available_drop_in_dates(:date_string).size).to eq(1)
+      expect(@retailer.get_available_drop_in_dates(:date_string).first).to eq(tomorrow_SOB.to_date.to_s)
     end
 
     it "should return the correct available times for a day" do

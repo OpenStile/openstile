@@ -37,12 +37,18 @@ class Retailer < ActiveRecord::Base
     return false
   end
 
-  def get_available_drop_in_dates zero_index_month=false
+  def get_available_drop_in_dates format=:integer_array
     ret = []
     future_availabilities.each do |availability|
-      ary = availability.start_time.to_date.strftime("%Y-%-m-%d").split('-').map{|v| v.to_i}
-      ary[1] = ary[1] - 1 if zero_index_month
-      ret << ary
+      case format
+      when :integer_array
+        ret << [availability.start_time.year, 
+                availability.start_time.month - 1, 
+                availability.start_time.day]
+      when :date_string
+        ret << availability.start_time.strftime("%Y-%m-%d")
+      else
+      end
     end
     ret
   end
