@@ -41,7 +41,7 @@ describe "Retail user resets password" do
 
       describe "and I enter valid credentials" do
 
-        it 'should allow me to edit my password' do
+        it 'should allow me to edit my password and maintain my user session' do
           fill_in 'Password', with: 'pass1234'
           fill_in 'Password confirmation', with: 'pass1234'
           fill_in 'Current password', with: 'barbaz'
