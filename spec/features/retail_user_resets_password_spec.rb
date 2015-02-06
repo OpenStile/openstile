@@ -42,9 +42,9 @@ describe "Retail user resets password" do
       describe "and I enter valid credentials" do
 
         it 'should allow me to edit my password and maintain my user session' do
-          fill_in 'Password', with: 'pass1234'
-          fill_in 'Password confirmation', with: 'pass1234'
           fill_in 'Current password', with: 'barbaz'
+          fill_in 'New password', with: 'pass1234'
+          fill_in 'Confirm new password', with: 'pass1234'
           click_button update
 
           expect(page).to have_content('Dashboard')
