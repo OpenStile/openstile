@@ -25,7 +25,7 @@ describe "Retail user resets password" do
         click_link "Reset Password"
       end
 
-      it "should navigate me to the reset password page for retail users" do
+      it "should take me to the reset password page for retail users" do
         expect(page).to have_title('Retailer Password Reset | OpenStile')
         expect(page).to have_content('Reset Your Password')
       end
@@ -33,12 +33,10 @@ describe "Retail user resets password" do
       describe "and I enter invalid credentials" do
         before { click_button update }
 
-        it "takes me back to reset password page and show me an error" do
+        it "should take me back to reset password page and show me an error" do
           expect(page).to have_title('Retailer Password Reset | OpenStile')
-          # expect(page).to have_content("Password is too short (minimum is 6 characters)")
-          # expect(page).to have_content("Current password can't be blank")
+          expect(page).to have_content("Whoops! Something went wrong. Please try again")
         end
-
       end
 
       describe "and I enter valid credentials" do

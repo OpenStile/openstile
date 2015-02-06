@@ -16,7 +16,7 @@ RSpec.describe RetailUsers::RegistrationsController, :type => :controller do
 
     context "PATCH update" do
       it "returns http success" do
-        patch :update, {id: retail_user.id}
+        patch :update, {id: retail_user.id, retail_user: {password: 'foobar', password_confirmation: 'foobar', current_password: 'whatevs'}}
         expect(response).to be_success
       end
     end
