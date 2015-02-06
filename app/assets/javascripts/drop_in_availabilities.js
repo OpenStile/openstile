@@ -38,7 +38,7 @@ $(document).ready(function() {
     ]
   })
 
-  $('.timepicker').pickatime({
+  $('.drop-in-availability .timepicker').pickatime({
     formatSubmit: 'HH:i',
     hiddenName: true,
     min: [6,0],
