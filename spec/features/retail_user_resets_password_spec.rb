@@ -35,7 +35,7 @@ describe "Retail user resets password" do
 
         it "should take me back to reset password page and show me an error" do
           expect(page).to have_title('Retailer Password Reset | OpenStile')
-          expect(page).to have_content("Whoops! Something went wrong. Please try again")
+          expect(page.text).to match(/1 error prohibited your password from being updated:|\d errors prohibited your password from being updated:/)
         end
       end
 

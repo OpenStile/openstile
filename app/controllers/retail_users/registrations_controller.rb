@@ -14,7 +14,6 @@ class RetailUsers::RegistrationsController < Devise::RegistrationsController
       sign_in(current_retail_user, :bypass => true)
       redirect_to root_url
     else
-      flash[:danger] = "Whoops! Something went wrong. Please try again"
       render "edit"
     end
   end
