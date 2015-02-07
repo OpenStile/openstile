@@ -13,7 +13,7 @@ class DropInAvailabilitiesController < ApplicationController
                              .drop_in_availabilities
                              .build(drop_in_availability_params.merge(start_and_end_params))
 
-    if @drop_in_availability.save
+    if !destroy_drop_in_availability? && @drop_in_availability.save
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     else
@@ -24,7 +24,11 @@ class DropInAvailabilitiesController < ApplicationController
   end
 
   def update
-    if @drop_in_availability.update(drop_in_availability_params.merge(start_and_end_params))
+    if destroy_drop_in_availability?
+      @drop_in_availability.destroy
+      flash[:success] = "Your drop-in availability has been updated"
+      redirect_to personal_drop_in_availabilities_path
+    elsif @drop_in_availability.update(drop_in_availability_params.merge(start_and_end_params))
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     else
@@ -46,6 +50,10 @@ class DropInAvailabilitiesController < ApplicationController
   private
     def drop_in_availability_params
       params.require(:drop_in_availability).permit(:bandwidth, :location_id)
+    end
+
+    def destroy_drop_in_availability?
+      params[:status] == "off"
     end
 
     def start_and_end_params
