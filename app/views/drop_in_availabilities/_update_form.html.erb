@@ -1,0 +1,47 @@
+<%= render 'shared/error_messages', object: drop_in_availability %>
+<%= form_tag drop_in_availability_path(drop_in_availability), 
+                                            method: 'put' do %>
+  <%= label_tag :date, nil, class: "sr-only" %>
+  <%= text_field_tag :date, nil, class: "form-control", 
+                                 placeholder: "Date",
+                                 value: date %>
+
+  <div class="choose-status">
+    <div class="status">
+      <label class="radio-inline col-md-6 col-xs-6">
+        <input class="col-md-2 col-xs-2" id="status_on" 
+               name="status", type="radio", value="on">
+        Accepting drop-ins
+      </label>
+    </div>
+    <div class="status">
+      <label class="radio-inline col-md-6 col-xs-6">
+        <input class="col-md-2 col-xs-2" id="status_off" 
+               name="status", type="radio", value="off">
+        Not accepting drop-ins
+      </label>
+    </div>
+  </div>
+
+  <div id="status-on-options">
+    <%= label_tag :start_time, nil, class: "sr-only" %>
+    <%= text_field_tag :start_time, nil, 
+                       class: "form-control timepicker", 
+                       placeholder: "Start time"%>
+
+    <%= label_tag :end_time, nil, class: "sr-only" %>
+    <%= text_field_tag :end_time, nil, 
+                       class: "form-control timepicker", 
+                       placeholder: "End time"%>
+
+    <%= label(:drop_in_availability, :bandwidth, 'How many shoppers at a time?') %>
+    <%= number_field(:drop_in_availability, :bandwidth, in: 1..10, 
+                                            class: "form-control", 
+                                            value: drop_in_availability.bandwidth) %>
+
+    <%= hidden_field :drop_in_availability, :location_id, 
+                                   value: drop_in_availability.location.id %>
+  </div>
+  <%= submit_tag "Save", class: "btn btn-lg btn-primary col-md-6 col-xs-6"%>
+<% end %>
+

@@ -1,5 +1,6 @@
 class DropInAvailabilitiesController < ApplicationController
   before_filter :authenticate_retail_user!
+  before_action :correct_retail_user, only: [:update]
 
   def personal
     @date = ''
@@ -13,6 +14,17 @@ class DropInAvailabilitiesController < ApplicationController
                              .build(drop_in_availability_params.merge(start_and_end_params))
 
     if @drop_in_availability.save
+      flash[:success] = "Your drop-in availability has been updated"
+      redirect_to personal_drop_in_availabilities_path
+    else
+      flash[:danger] = "There was an error updating your availability. " +
+                       "Please make sure you select a date, start time, and end time"
+      redirect_to personal_drop_in_availabilities_path
+    end
+  end
+
+  def update
+    if @drop_in_availability.update(drop_in_availability_params.merge(start_and_end_params))
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     else
@@ -40,10 +52,20 @@ class DropInAvailabilitiesController < ApplicationController
       ret = {}
       unless params[:date].blank? || params[:start_time].blank?
         ret[:start_time] = "#{params[:date]} #{params[:start_time]} -0500"
+      else
+        ret[:start_time] = ''
       end
       unless params[:date].blank? || params[:end_time].blank?
         ret[:end_time] = "#{params[:date]} #{params[:end_time]} -0500"
+      else
+        ret[:end_time] = ''
       end
       ret
+    end
+
+    def correct_retail_user
+      @drop_in_availability = DropInAvailability.find(params[:id])
+      redirect_to root_url unless (@drop_in_availability.retailer.retail_user ==
+                                                          current_retail_user)
     end
 end

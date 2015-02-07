@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :drop_in_availabilities, only: [:create] do
+  resources :drop_in_availabilities, only: [:create, :update] do
     collection do
       get :personal
     end
