@@ -1,0 +1,12 @@
+test:
+  cloud_name: ENV['CLOUDINARY_TEST_CLOUD_NAME']
+  api_key: ENV['CLOUDINARY_TEST_API_KEY']
+  api_secret: ENV['CLOUDINARY_TEST_API_SECRET']
+  enhance_image_tag: true
+  static_image_support: false
+development:
+  cloud_name: ENV['CLOUDINARY_DEV_CLOUD_NAME']
+  api_key: ENV['CLOUDINARY_DEV_API_KEY']
+  api_secret: ENV['CLOUDINARY_DEV_API_SECRET']
+  enhance_image_tag: true
+  static_image_support: false
