@@ -274,6 +274,14 @@ hr{
   min-height:100px;
 }
 
+.drop-in-availability-top{
+	background:#555 asset_url('front_desk.jpg') no-repeat;
+	background-size:cover;
+	background-position:center 65%;
+	border-bottom:1px solid #fff;
+  min-height:100px;
+}
+
 /* Header */
 
 header{
@@ -1978,6 +1986,19 @@ input {
 }
 
 /* Retailer Dashboard End */
+
+/* Drop-In Availability Begins */
+
+.drop-in-availability .choose-status{
+  margin-bottom: 15px;
+  padding-bottom: 25px;
+}
+
+.drop-in-availability #calendar{
+  margin-bottom: 35px;
+}
+
+/* Drop-In Availability Ends */
 
 
 /* Responsive CSS */

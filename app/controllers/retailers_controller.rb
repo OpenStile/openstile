@@ -4,8 +4,15 @@ class RetailersController < ApplicationController
     store_recommendation_show_url
   end
 
+  def scheduled_availabilities
+    @available_dates = Retailer.find(params[:id]).get_available_drop_in_dates(:date_string)
+    respond_to do |format|
+      format.json {}
+    end
+  end
+
   def enable_available_dates
-    @available_dates = Retailer.find(params[:id]).get_available_drop_in_dates(true)
+    @available_dates = Retailer.find(params[:id]).get_available_drop_in_dates(:integer_array)
     respond_to do |format|
       format.js {}
     end

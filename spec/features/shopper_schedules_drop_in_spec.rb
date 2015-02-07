@@ -97,16 +97,6 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_should_show_item_on_hold dress
   end
 
-  def when_i_select_a_recommendation recommendation
-    visit '/'
-
-    within(:css, "div##{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
-      click_link 'Drop-in'
-    end
-
-    expect(page).to have_content(recommendation.description)
-  end
-
   def when_i_attempt_to_schedule_with_invalid_options recommendation
     within(:css, "div.schedule") do
       click_button 'Schedule'
