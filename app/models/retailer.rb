@@ -1,4 +1,6 @@
 class Retailer < ActiveRecord::Base
+  include ImageNames
+
   has_one :retail_user, dependent: :destroy
 
   has_and_belongs_to_many :top_sizes
@@ -96,16 +98,6 @@ class Retailer < ActiveRecord::Base
     end
 
     ret
-  end
-
-  def image_name
-    address = StreetAddress::US.parse(self.location.address)
-    state = address.state.gsub(' ','_')
-    city = address.city.gsub(' ','_')
-    name = self.name.gsub(' ','_')
-    image_name = ActiveSupport::Inflector.transliterate [state, city, name].join('_').downcase.gsub(/\s/,"_")
-    image_name = image_name.gsub(/([_@#!%()\-\'=;><,{}\~\[\]\.\:\/\?\"\*\^\$\+\-]+)/, '_').concat('.jpg')
-    image_name
   end
 
   private

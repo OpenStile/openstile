@@ -34,7 +34,6 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location }
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
-  it { should respond_to :image_name }
   it { should be_valid }
 
   context "when name is not present" do
@@ -193,7 +192,7 @@ RSpec.describe Retailer, :type => :model do
                                     location: @this_location)
              @this_retailer.save }
     it "should return the correct image name" do
-      expect(@this_retailer.image_name).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_.jpg")
+      expect(ImageNames.get_image_name(@this_retailer)).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_.jpg")
     end
   end
 

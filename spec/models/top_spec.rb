@@ -27,7 +27,6 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :top_fit }
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
-  it { should respond_to :image_name }
   it { should be_valid }
 
   context "when name is not present" do
@@ -104,6 +103,23 @@ RSpec.describe Top, :type => :model do
       expect(drop_in_items).to_not be_empty
       drop_in_items.each do |d|
         expect(DropInItem.where(id: d.id)).to be_empty
+      end
+    end
+
+    describe "image name helper" do
+      before { @this_location = Location.new(address: "301 Water St. SE, Washington, DC 20003",
+                                      neighborhood: "Navy Yard",
+                                      short_title: "Fashion Yards")
+               @this_location.save
+               @this_retailer = Retailer.new(name: "Elena's Boutique",
+                                      description: "Premier boutique in DC!",
+                                      location: @this_location)
+               @this_retailer.save
+               @this_top = @this_retailer.tops.create(name: "Fleece Tunic", description: "When you've utterly given up",
+                                              web_link: "www.see_this_tunic.com", price: 42.00) }
+
+      it "should return the correct image name" do
+        expect(ImageNames.get_image_name(@this_top)).to eq("dc_washington_elena_s_boutique_fleece_tunic.jpg")
       end
     end
   end

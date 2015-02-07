@@ -1,4 +1,6 @@
 class Top < ActiveRecord::Base
+  include ImageNames
+
   belongs_to :retailer
   belongs_to :look
   belongs_to :color
@@ -21,9 +23,5 @@ class Top < ActiveRecord::Base
     end
     where("price >= ? and price <= ?", budget.top_min_price - fuzz,
                                        budget.top_max_price + fuzz)
-  end
-
-  def image_name
-    # TODO: Parse image name and return it
   end
 end
