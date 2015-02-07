@@ -16,7 +16,9 @@ class DropInAvailabilitiesController < ApplicationController
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     else
-      render :personal
+      flash[:danger] = "There was an error updating your availability. " +
+                       "Please make sure you select a date, start time, and end time"
+      redirect_to personal_drop_in_availabilities_path
     end
   end
 

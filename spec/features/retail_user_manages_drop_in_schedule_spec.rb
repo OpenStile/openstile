@@ -47,7 +47,7 @@ feature 'Retail user manages drop in schedule' do
 
   def then_my_availability_should_not_be_updated
     expect(page).to have_content('Drop-in Availability')
-    expect(page).to have_content('error')
+    expect(page).to have_content('There was an error')
   end
 
   def when_i_set_my_drop_in_availability_with_valid_options date, start_time, end_time
