@@ -2,6 +2,7 @@ class DropInAvailabilitiesController < ApplicationController
   before_filter :authenticate_retail_user!
 
   def personal
+    @date = ''
     @drop_in_availability = DropInAvailability.new
   end
 
@@ -16,6 +17,15 @@ class DropInAvailabilitiesController < ApplicationController
       redirect_to personal_drop_in_availabilities_path
     else
       render :personal
+    end
+  end
+
+  def apply_form
+    @date = params[:date]
+    @drop_in_availability = 
+      DropInAvailability.for_retailer_on_date(current_retail_user.retailer.id, @date) || DropInAvailability.new
+    respond_to do |format|
+      format.js {}
     end
   end
 

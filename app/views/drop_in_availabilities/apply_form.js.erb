@@ -1,0 +1,11 @@
+$('#availability_form').empty();
+<% if @drop_in_availability.new_record? %>
+  $("<%= escape_javascript(render 'create_form', 
+                            drop_in_availability: @drop_in_availability, 
+                            date: @date) %>").appendTo('#availability_form');
+  $('#status_on').prop('checked', true);
+<% end %>
+
+setupTimepicker(); 
+setStatusOptions();
+$('.drop-in-availability .status input:radio').change(setStatusOptions);

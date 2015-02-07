@@ -15,6 +15,26 @@ function popSelectedDate() {
   selectedDate = null;
 }
 
+function setupTimepicker() {
+  $('.drop-in-availability .timepicker').pickatime({
+    formatSubmit: 'HH:i',
+    hiddenName: true,
+    min: [6,0],
+    max: [23,0]
+  })
+}
+
+function setStatusOptions() {
+  var checkedStatus = $('.drop-in-availability .status input:radio:checked')
+
+  if(checkedStatus.length > 0 && checkedStatus[0].value == "on"){
+    $('#status-on-options').show();
+  }
+  else {
+    $('#status-on-options').hide();
+  }
+}
+
 $(document).ready(function() {
   $('#calendar').fullCalendar({
     fixedWeekCount: false,
@@ -27,8 +47,12 @@ $(document).ready(function() {
     dayClick: function(date, jsEvent, view) {
       popSelectedDate();
       pushSelectedDate($(this));
-      $('#date').val(date.format());
-      $('#date').prop('readonly', true);
+      $.ajax({
+        url: "/drop_in_availabilities/apply_form",
+        data: {date: date.format()}
+      }).done(function (){
+        console.log("Availability form applied for date")
+      });
     },
     eventSources: [
       {
@@ -38,10 +62,8 @@ $(document).ready(function() {
     ]
   })
 
-  $('.drop-in-availability .timepicker').pickatime({
-    formatSubmit: 'HH:i',
-    hiddenName: true,
-    min: [6,0],
-    max: [23,0]
-  })
+  setupTimepicker(); 
+  setStatusOptions();
+  $('.drop-in-availability .status input:radio').change(setStatusOptions);
+
 });
