@@ -21,3 +21,9 @@
 
 en:
   hello: "Hello world"
+  errors:
+    messages:
+      not_saved:
+        retail_user_due_to_passwd:
+          one: "1 error prohibited your password from being updated:"
+          other: "%{count} errors prohibited your password from being updated:"

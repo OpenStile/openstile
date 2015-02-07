@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   devise_for :shoppers, :skip => [:passwords, :registrations], path: '/shoppers', controllers: {
     sessions: 'shoppers/sessions'
-    } 
+    }
   devise_scope :shopper do
       get "/shoppers/sign_up", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
       post "/shoppers", :to => "shoppers/registrations#create", :as => 'shopper_registration'
@@ -20,7 +20,11 @@ Rails.application.routes.draw do
 
   devise_for :retail_users, :skip => [:passwords, :registrations], path: '/retail_users', controllers: {
     sessions: 'retail_users/sessions'
-    } 
+    }
+  devise_scope :retail_user do
+      get "/retail_users/registrations", :to => "retail_users/registrations#edit",   :as => 'edit_retail_user_registration'
+      put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
+  end
 
   resources :style_profiles, only: [:edit, :update]
 
