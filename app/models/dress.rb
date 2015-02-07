@@ -17,6 +17,8 @@ class Dress < ActiveRecord::Base
   validates :price, presence: true
   validates :retailer_id, presence: true
 
+  mount_uploader :image, DressImageUploader
+
   def self.within_budget budget, fuzz
     if budget.dress_min_price.nil? or budget.dress_max_price.nil?
       return none

@@ -25,6 +25,8 @@ class Retailer < ActiveRecord::Base
   validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true
 
+  mount_uploader :image, RetailerImageUploader
+
   def available_for_drop_in? datetime
     future_availabilities.each do |availability|
       if datetime >= availability.start_time && datetime < availability.end_time

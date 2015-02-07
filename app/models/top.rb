@@ -17,6 +17,8 @@ class Top < ActiveRecord::Base
   validates :price, presence: true
   validates :retailer_id, presence: true
 
+  mount_uploader :image, TopImageUploader
+
   def self.within_budget budget, fuzz
     if budget.top_min_price.nil? or budget.top_max_price.nil?
       return none

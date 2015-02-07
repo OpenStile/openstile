@@ -17,6 +17,8 @@ class Bottom < ActiveRecord::Base
   validates :price, presence: true
   validates :retailer_id, presence: true
 
+  mount_uploader :image, BottomImageUploader
+
   def self.within_budget budget, fuzz
     if budget.bottom_min_price.nil? or budget.bottom_max_price.nil?
       return none
