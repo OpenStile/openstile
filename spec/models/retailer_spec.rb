@@ -184,6 +184,19 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
+  describe "image name helper" do
+    before { @location = Location.new(address: "301 Water St. SE, Washington, DC 20003",
+                                    neighborhood: "Navy Yard",
+                                    short_title: "Fashion Yards")
+             @retailer = Retailer.new(name: "ABC Boutique",
+                                    description: "Premier boutique in DC!",
+                                    location: location)
+             @retailer.save }
+    it "should return the correct image name" do
+      expect(@retailer.image_name).to eq('DC_Washington_ABC_Boutique.jpg')
+    end
+  end
+
   describe "drop in availability helpers" do
     before { @retailer.save }
     let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9) }

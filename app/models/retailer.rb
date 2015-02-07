@@ -99,7 +99,11 @@ class Retailer < ActiveRecord::Base
   end
 
   def image_name
-    # TODO: Parse image name and return it
+    address = StreetAddress::US.parse(self.location.address)
+    state = address.state.gsub(' ','_')
+    city = address.city.gsub(' ','_')
+    name = self.name.gsub(' ','_')
+    [state, city, name].join('_').concat('.jpg')
   end
 
   private
