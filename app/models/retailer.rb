@@ -103,7 +103,9 @@ class Retailer < ActiveRecord::Base
     state = address.state.gsub(' ','_')
     city = address.city.gsub(' ','_')
     name = self.name.gsub(' ','_')
-    [state, city, name].join('_').concat('.jpg')
+    image_name = ActiveSupport::Inflector.transliterate [state, city, name].join('_').downcase.gsub(/\s/,"_")
+    image_name = image_name.gsub(/([_@#!%()\-\'=;><,{}\~\[\]\.\:\/\?\"\*\^\$\+\-]+)/, '_').concat('.jpg')
+    image_name
   end
 
   private

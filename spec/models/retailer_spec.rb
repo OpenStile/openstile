@@ -185,15 +185,15 @@ RSpec.describe Retailer, :type => :model do
   end
 
   describe "image name helper" do
-    before { @location = Location.new(address: "301 Water St. SE, Washington, DC 20003",
+    before { @this_location = Location.new(address: "249 Water St. SE, New York, NY 20003",
                                     neighborhood: "Navy Yard",
                                     short_title: "Fashion Yards")
-             @retailer = Retailer.new(name: "ABC Boutique",
+             @this_retailer = Retailer.new(name: "Dr. Elena's Prélèvements Routine-Boutique \#7: wall·e!",
                                     description: "Premier boutique in DC!",
-                                    location: location)
-             @retailer.save }
+                                    location: @this_location)
+             @this_retailer.save }
     it "should return the correct image name" do
-      expect(@retailer.image_name).to eq('DC_Washington_ABC_Boutique.jpg')
+      expect(@this_retailer.image_name).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_.jpg")
     end
   end
 
