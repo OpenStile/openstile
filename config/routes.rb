@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
   end
 
+  devise_for :admins, only: [:sessions], controllers: {sessions: "admins/sessions"}
+
   resources :style_profiles, only: [:edit, :update]
 
   resources :retailers, only: [:show] do
