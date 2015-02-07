@@ -34,10 +34,10 @@
                        class: "form-control timepicker", 
                        placeholder: "End time"%>
 
-    <%= label(:drop_in_availability, :bandwidth, 'How many shoppers at a time?') %>
-    <%= number_field(:drop_in_availability, :bandwidth, in: 1..10, 
-                                            class: "form-control", 
-                                            value: drop_in_availability.bandwidth) %>
+    <%= label(:drop_in_availability, :bandwidth, 'How many shoppers can you handle?') %>
+    <%= select(:drop_in_availability, :bandwidth, 
+                                (1..5).map{|v| ["#{v} at a time", v.to_s]}, 
+                                class: "form-control") %>
 
     <%= hidden_field :drop_in_availability, :location_id, 
                                    value: drop_in_availability.location.id %>

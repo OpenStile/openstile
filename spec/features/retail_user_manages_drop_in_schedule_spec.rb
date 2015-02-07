@@ -55,7 +55,7 @@ feature 'Retail user manages drop in schedule' do
     choose 'status_on'
     fill_in 'Start', with: start_time
     fill_in 'End', with: end_time
-    fill_in 'How many shoppers at a time?', with: '2' 
+    select '2 at a time', from: 'How many shoppers can you handle?'
 
     click_button 'Save'
 
