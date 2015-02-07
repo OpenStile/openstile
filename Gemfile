@@ -45,13 +45,15 @@ gem 'chili'
 
 gem 'pg', '0.17.1'
 
-gem "faker"
-
 gem 'StreetAddress', require: 'street_address'
+
+gem 'cloudinary', '~> 1.0.81'
+gem 'carrierwave', '~> 0.10.0'
 
 group :development, :test do
   gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'
+  gem "faker"
 end
 
 group :test do
