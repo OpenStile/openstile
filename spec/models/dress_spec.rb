@@ -123,7 +123,7 @@ RSpec.describe Dress, :type => :model do
                                     retailer_id: @this_retailer_id) }
 
     it "should return the correct image name" do
-      expect(ImageNames.get_image_name(@this_dress)).to eq("dc_washington_elena_s_boutique_scandal_dress.jpg")
+      expect(ImageName.get_image_name(@this_dress)).to eq("dc_washington_elena_s_boutique_scandal_dress.jpg")
     end
   end
 end

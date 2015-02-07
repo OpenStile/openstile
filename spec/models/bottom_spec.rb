@@ -120,7 +120,7 @@ RSpec.describe Bottom, :type => :model do
                                               web_link: "www.see_these_jeans.com", price: 55.00) }
 
       it "should return the correct image name" do
-        expect(ImageNames.get_image_name(@this_bottom)).to eq("dc_washington_elena_s_boutique_boot_cut_jeans.jpg")
+        expect(ImageName.get_image_name(@this_bottom)).to eq("dc_washington_elena_s_boutique_boot_cut_jeans.jpg")
       end
     end
   end

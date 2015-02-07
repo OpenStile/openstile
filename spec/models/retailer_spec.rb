@@ -192,7 +192,7 @@ RSpec.describe Retailer, :type => :model do
                                     location: @this_location)
              @this_retailer.save }
     it "should return the correct image name" do
-      expect(ImageNames.get_image_name(@this_retailer)).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_.jpg")
+      expect(ImageName.get_image_name(@this_retailer)).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_.jpg")
     end
   end
 

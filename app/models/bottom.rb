@@ -1,5 +1,5 @@
 class Bottom < ActiveRecord::Base
-  include ImageNames
+  include ImageName
 
   belongs_to :retailer
   belongs_to :look
