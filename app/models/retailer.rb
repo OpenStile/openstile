@@ -98,6 +98,10 @@ class Retailer < ActiveRecord::Base
     ret
   end
 
+  def image_name
+    # TODO: Parse image name and return it
+  end
+
   private
     def future_availabilities
       self.drop_in_availabilities.where("end_time > ?", DateTime.current)

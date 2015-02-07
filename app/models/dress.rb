@@ -22,4 +22,8 @@ class Dress < ActiveRecord::Base
     where("price >= ? and price <= ?", budget.dress_min_price - fuzz,
                                        budget.dress_max_price + fuzz)
   end
+
+  def image_name
+    # TODO: Parse image name and return it
+  end
 end

@@ -29,6 +29,7 @@ RSpec.describe Dress, :type => :model do
   it { should respond_to :bottom_fit }
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
+  it { should respond_to :image_name }
   it { should be_valid }
 
   context "when name is not present" do

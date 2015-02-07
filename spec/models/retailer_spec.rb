@@ -34,6 +34,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location }
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
+  it { should respond_to :image_name }
   it { should be_valid }
 
   context "when name is not present" do
