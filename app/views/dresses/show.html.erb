@@ -23,7 +23,7 @@
     <% if shopper_signed_in? %>
       <% existing_drop_in = DropIn.upcoming_for_shopper_at_retailer(current_shopper.id, @dress.retailer.id).first %>
       <% if existing_drop_in.nil? %>
-        <%= render 'shared/schedule_drop_in', retailer: @dress.retailer, 
+        <%= render 'shared/schedule_drop_in', retailer: @dress.retailer,
                                               for_retailer: false,
                                               item: @dress %>
       <% else %>

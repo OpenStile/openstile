@@ -18,8 +18,8 @@ class Retailer < ActiveRecord::Base
   has_many :drop_ins, dependent: :destroy
 
   after_create{ create_price_range }
-  
-  validates :name, presence: true, length: { maximum: 50 } 
+
+  validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true
 
@@ -54,7 +54,7 @@ class Retailer < ActiveRecord::Base
   end
 
   def get_drop_in_location date_string
-    matching_index = future_availabilities.index { |availability| 
+    matching_index = future_availabilities.index { |availability|
       availability.start_time.to_date == DateTime.parse(date_string).to_date
     }
 
@@ -66,10 +66,10 @@ class Retailer < ActiveRecord::Base
 
   def get_available_drop_in_times date_string
     ret = []
-    matching_index = future_availabilities.index { |availability| 
+    matching_index = future_availabilities.index { |availability|
       availability.start_time.to_date == DateTime.parse(date_string).to_date
     }
-    
+
     return ret if matching_index.nil?
 
     availability = future_availabilities[matching_index]

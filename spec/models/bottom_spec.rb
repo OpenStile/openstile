@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Bottom, :type => :model do
-  
+
   let(:retailer){ FactoryGirl.create(:retailer) }
   before { @bottom = retailer.bottoms.build(name: "Skinny Jeans", description: "A really cool pair of jeans",
                                             web_link: "www.see_these_jeans.com", price: 55.00) }
-  
+
   subject { @bottom }
 
   it { should respond_to :name }
@@ -47,17 +47,17 @@ RSpec.describe Bottom, :type => :model do
   end
 
   context "when name is too long" do
-    before { @bottom.name = "a"*101 } 
+    before { @bottom.name = "a"*101 }
     it { should_not be_valid }
   end
 
   context "when description is too long" do
-    before { @bottom.description = "a"*251 } 
+    before { @bottom.description = "a"*251 }
     it { should_not be_valid }
   end
 
   context "when web link is too long" do
-    before { @bottom.web_link = "a"*101 } 
+    before { @bottom.web_link = "a"*101 }
     it { should_not be_valid }
   end
 
@@ -86,13 +86,13 @@ RSpec.describe Bottom, :type => :model do
 
   describe "drop in item association" do
     before { @bottom.save }
-    let!(:drop_in_availability) do 
+    let!(:drop_in_availability) do
       FactoryGirl.create(:drop_in_availability,
                          retailer: retailer,
                          start_time: tomorrow_morning,
                          end_time: tomorrow_afternoon)
     end
-    let(:drop_in){ FactoryGirl.create(:drop_in, 
+    let(:drop_in){ FactoryGirl.create(:drop_in,
                                       retailer: retailer,
                                       time: tomorrow_mid_morning) }
     let!(:drop_in_item){ FactoryGirl.create(:drop_in_item,

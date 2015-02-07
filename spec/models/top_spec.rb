@@ -4,7 +4,7 @@ RSpec.describe Top, :type => :model do
   let(:retailer){ FactoryGirl.create(:retailer) }
   before { @top = retailer.tops.build(name: "Green shirt", description: "A really cool shirt",
                                       web_link: "www.see_this_shirt.com", price: 55.00) }
-  
+
   subject { @top }
 
   it { should respond_to :name }
@@ -46,17 +46,17 @@ RSpec.describe Top, :type => :model do
   end
 
   context "when name is too long" do
-    before { @top.name = "a"*101 } 
+    before { @top.name = "a"*101 }
     it { should_not be_valid }
   end
 
   context "when description is too long" do
-    before { @top.description = "a"*251 } 
+    before { @top.description = "a"*251 }
     it { should_not be_valid }
   end
 
   context "when web link is too long" do
-    before { @top.web_link = "a"*101 } 
+    before { @top.web_link = "a"*101 }
     it { should_not be_valid }
   end
 
@@ -85,13 +85,13 @@ RSpec.describe Top, :type => :model do
 
   describe "drop in item association" do
     before { @top.save }
-    let!(:drop_in_availability) do 
+    let!(:drop_in_availability) do
       FactoryGirl.create(:drop_in_availability,
                          retailer: retailer,
                          start_time: tomorrow_morning,
                          end_time: tomorrow_afternoon)
     end
-    let(:drop_in){ FactoryGirl.create(:drop_in, 
+    let(:drop_in){ FactoryGirl.create(:drop_in,
                                       retailer: retailer,
                                       time: tomorrow_mid_morning) }
     let!(:drop_in_item){ FactoryGirl.create(:drop_in_item,
