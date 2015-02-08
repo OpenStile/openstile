@@ -26,7 +26,9 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :for_tall }
   it { should respond_to :for_full_figured }
   it { should respond_to :top_fit }
+  it { should respond_to :top_fit_id }
   it { should respond_to :bottom_fit }
+  it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
   it { should respond_to :online_presence }
   it { should respond_to :drop_in_availabilities }

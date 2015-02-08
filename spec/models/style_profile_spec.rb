@@ -26,7 +26,9 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :height_inches }
   it { should respond_to :body_build }
   it { should respond_to :top_fit }
+  it { should respond_to :top_fit_id }
   it { should respond_to :bottom_fit }
+  it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
   it { should be_valid }
 
@@ -227,8 +229,10 @@ RSpec.describe StyleProfile, :type => :model do
 
     context "when top and bottom fit are present" do
       before do
-        @style_profile.top_fit = 'Tight/Form-Fitting'
-        @style_profile.bottom_fit = 'Loose/Flowy'
+        @style_profile.top_fit = FactoryGirl.create(:top_fit, 
+                                    name: 'Tight/Form-Fitting')
+        @style_profile.bottom_fit = FactoryGirl.create(:bottom_fit, 
+                                              name: 'Loose/Flowy')
       end
 
       it "should capture the fields in readable sentences" do

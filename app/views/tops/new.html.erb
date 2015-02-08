@@ -118,7 +118,7 @@
 
           <%= f.label :top_fit %>
           <%= f.select :top_fit,
-            ['Tight/Form-Fitting', 'Straight', 'Loose', 'Oversized'].map{|v| [v,v]},
+            TopFit.all.map{|v| [v.name, v.id]},
             {prompt: true}, class: "form-control" %>
 
           <%= f.label :for_petite %>

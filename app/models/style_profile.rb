@@ -1,6 +1,8 @@
 class StyleProfile < ActiveRecord::Base
   belongs_to :shopper
   belongs_to :body_shape
+  belongs_to :top_fit
+  belongs_to :bottom_fit
   has_and_belongs_to_many :top_sizes
   has_and_belongs_to_many :bottom_sizes
   has_and_belongs_to_many :dress_sizes
@@ -197,9 +199,9 @@ class StyleProfile < ActiveRecord::Base
     def synopsis_fit
       ret = ""
 
-      ret << "her tops to be #{self.top_fit}" unless self.top_fit.blank?
-      ret << " and " unless ret.blank? || self.bottom_fit.blank?
-      ret << "her bottoms to be #{self.bottom_fit}" unless self.bottom_fit.blank?
+      ret << "her tops to be #{self.top_fit.name}" unless self.top_fit.nil?
+      ret << " and " unless ret.blank? || self.bottom_fit.nil?
+      ret << "her bottoms to be #{self.bottom_fit.name}" unless self.bottom_fit.nil?
 
       ret
     end

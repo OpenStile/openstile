@@ -25,7 +25,7 @@ class TopsController < ApplicationController
   def top_params
     params.require(:top).permit(:name, :description, :price, :web_link, :look_id, 
                                 :retailer_id, :print_id, :color_id, :body_shape_id, 
-                                :for_petite, :for_tall, :for_full_figured, :top_fit,
+                                :for_petite, :for_tall, :for_full_figured, :top_fit_id,
                                 top_size_ids: [], special_consideration_ids: [])  
   end
 end

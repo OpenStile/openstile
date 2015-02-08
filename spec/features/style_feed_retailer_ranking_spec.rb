@@ -77,18 +77,18 @@ feature 'Style Feed retailer ranking' do
   scenario 'based on top fit' do
     baseline_calibration_for_shopper_and_retailers
 
-    original_fit = 'Loose'
-    new_fit = 'Tight/Form-Fitting'
+    original_fit = FactoryGirl.create(:top_fit, name: 'Loose')
+    new_fit = FactoryGirl.create(:top_fit, name: 'Tight/Form-Fitting')
 
-    retailer_one.update!(top_fit: new_fit)
-    retailer_two.update!(top_fit: original_fit)
+    retailer_one.update!(top_fit_id: new_fit.id)
+    retailer_two.update!(top_fit_id: original_fit.id)
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_set_my_style_profile_preferred_fit_as original_fit, :top
+    when_i_set_my_style_profile_preferred_fit_as original_fit.name, :top
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_two, retailer_one
-    when_i_set_my_style_profile_preferred_fit_as new_fit, :top
+    when_i_set_my_style_profile_preferred_fit_as new_fit.name, :top
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_one, retailer_two
@@ -98,18 +98,18 @@ feature 'Style Feed retailer ranking' do
   scenario 'based on bottom fit' do
     baseline_calibration_for_shopper_and_retailers
 
-    original_fit = 'Loose/Flowy'
-    new_fit = 'Tight/Skinny'
+    original_fit = FactoryGirl.create(:bottom_fit, name: 'Loose/Flowy')
+    new_fit = FactoryGirl.create(:bottom_fit, name: 'Tight/Skinny')
 
-    retailer_one.update!(bottom_fit: new_fit)
-    retailer_two.update!(bottom_fit: original_fit)
+    retailer_one.update!(bottom_fit_id: new_fit.id)
+    retailer_two.update!(bottom_fit_id: original_fit.id)
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_set_my_style_profile_preferred_fit_as original_fit, :bottom
+    when_i_set_my_style_profile_preferred_fit_as original_fit.name, :bottom
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_two, retailer_one
-    when_i_set_my_style_profile_preferred_fit_as new_fit, :bottom
+    when_i_set_my_style_profile_preferred_fit_as new_fit.name, :bottom
     then_my_style_feed_should_contain retailer_one
     then_my_style_feed_should_contain retailer_two
     then_the_recommendation_ordering_should_be retailer_one, retailer_two

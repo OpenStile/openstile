@@ -9,6 +9,8 @@ class Retailer < ActiveRecord::Base
   belongs_to :look
   belongs_to :primary_look, class_name: "Look"
   belongs_to :location
+  belongs_to :top_fit
+  belongs_to :bottom_fit
   has_many :tops, dependent: :destroy
   has_many :bottoms, dependent: :destroy
   has_many :dresses, dependent: :destroy

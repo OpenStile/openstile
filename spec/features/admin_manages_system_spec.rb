@@ -15,6 +15,8 @@ feature 'Admin user manages system' do
   let!(:print){ FactoryGirl.create(:print, name: 'Animal Prints') }
   let!(:color){ FactoryGirl.create(:print, name: 'Green') }
   let!(:shape){ FactoryGirl.create(:body_shape, name: 'Hourglass') }
+  let!(:top_fit){ FactoryGirl.create(:top_fit, name: 'Oversized') }
+  let!(:bottom_fit){ FactoryGirl.create(:bottom_fit, name: 'Loose/Flowy') }
 
   scenario 'creates new retailer' do
     name = "ABC Boutique"
