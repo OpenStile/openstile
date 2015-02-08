@@ -18,7 +18,7 @@ module ImageName
       @concatenated_fields = [state, city, retailer_name, item_name].join('_')
     end
 
-    image_name = remove_spcial_characters(@concatenated_fields).concat('.jpg')
+    image_name = remove_spcial_characters(@concatenated_fields)
   end
 
   def self.remove_spcial_characters dirty_string
