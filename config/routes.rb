@@ -35,10 +35,11 @@ Rails.application.routes.draw do
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
+      get 'catalog'
     end
   end
 
-  resources :tops, only: [:show]
+  resources :tops, only: [:show, :new, :create]
 
   resources :bottoms, only: [:show]
 

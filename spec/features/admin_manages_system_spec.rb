@@ -9,6 +9,12 @@ feature 'Admin user manages system' do
   let!(:local_designers){ FactoryGirl.create(:special_consideration, name: 'Local designers') }
   let!(:size1){ FactoryGirl.create(:top_size, name: 'XS', category: 'alpha')}
   let!(:size2){ FactoryGirl.create(:top_size, name: '00', category: 'numeric')}
+  let!(:size3){ FactoryGirl.create(:bottom_size, name: 'XS', category: 'alpha')}
+  let!(:size4){ FactoryGirl.create(:dress_size, name: 'XS', category: 'alpha')}
+  let!(:look){ FactoryGirl.create(:look, name: 'Glam_Diva') }
+  let!(:print){ FactoryGirl.create(:print, name: 'Animal Prints') }
+  let!(:color){ FactoryGirl.create(:print, name: 'Green') }
+  let!(:shape){ FactoryGirl.create(:body_shape, name: 'Hourglass') }
 
   scenario 'creates new retailer' do
     name = "ABC Boutique"
@@ -20,6 +26,18 @@ feature 'Admin user manages system' do
     then_it_should_fail_to_add_retailer
     when_i_submit_with_valid_information name
     then_the_existing_retailers_page_should_contain_retailer name
+  end
+
+  scenario 'creates new top' do
+    top_name = "Multi-color Halter"
+    retailer = FactoryGirl.create(:retailer)
+
+    given_i_am_a_logged_in_admin admin
+    when_i_go_to_create_a_top_for_retailer retailer
+    when_i_submit_with_invalid_information
+    then_it_should_fail_to_add_top
+    when_i_submit_item_with_valid_information top_name, :top
+    then_the_retailers_catalog_page_should_contain retailer, top_name
   end
 
   def given_the_existing_retailers_page_is_empty
@@ -35,12 +53,27 @@ feature 'Admin user manages system' do
     expect(page).to have_content('Enter retailer information')
   end
 
+  def when_i_go_to_create_a_top_for_retailer retailer
+    click_link 'Manage retailers'
+
+    within(:css, "#retailer_#{retailer.id}") do
+      click_link 'Add top'
+    end
+
+    expect(page).to have_content('Enter top information')
+  end
+
   def when_i_submit_with_invalid_information
     click_button 'Add'
   end
 
   def then_it_should_fail_to_add_retailer
     expect(page).to have_content('Enter retailer information')
+    expect(page).to have_content('error')
+  end
+
+  def then_it_should_fail_to_add_top
+    expect(page).to have_content('Enter top information')
     expect(page).to have_content('error')
   end
 
@@ -71,9 +104,32 @@ feature 'Admin user manages system' do
     click_button 'Add'
   end
 
+  def when_i_submit_item_with_valid_information name, type
+    fill_in 'Name', with: name
+    fill_in 'Description', with: 'This is a test item created for demo purposes.'
+    fill_in 'Price', with: 59.99
+    fill_in 'Web link', with: 'http://example.com'
+    choose 'Glam_Diva'
+    choose 'Animal Prints'
+    choose 'Green'
+    choose 'Hourglass'
+    check 'For full-figured'
+    select 'Oversized', from: 'Top fit' unless type==:bottom
+    select 'Loose/Flowy', from: 'Bottom fit' unless type==:top
+    check 'Local designers'
+    check 'XS'
+
+    click_button 'Add'
+  end
+
   def then_the_existing_retailers_page_should_contain_retailer name
     expect(page).to have_content('OpenStile Retailers')
     expect(page).to have_content('Name')
+    expect(page).to have_content(name)
+  end
+
+  def then_the_retailers_catalog_page_should_contain retailer, name
+    expect(page).to have_content("#{retailer.name} Catalog")
     expect(page).to have_content(name)
   end
 end

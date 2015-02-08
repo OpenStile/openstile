@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
   include RecommendationsHelper
 
   devise_group :customer, contains: [:shopper, :retail_user]
+  devise_group :catalog_reviewer, contains: [:retail_user, :admin]
 end
