@@ -36,8 +36,12 @@
       <div class="row">
         <div class="recommendation">
           <div class="col-md-5<%= ' col-md-push-7' if idx.odd? %> col-sm-12">
-            <img class="img-responsive"
-                 src="http://placehold.it/500x500">
+              <% if recommendation[:object].image.nil? %>
+                <img class="img-responsive" src="http://placehold.it/400x500">
+              <% else %>
+                <%= cl_image_tag(recommendation[:object].image.name, :width=>400, :height=>500, :crop=>:fill, :gravity=>:face, :class => "img-responsive") %>
+              <% end %>
+            </div>
           </div>
           <div class="col-md-7<%= ' col-md-pull-5' if idx.odd? %> col-sm-12">
             <div class="summary" id=<%= recommendation_string(recommendation[:object]) %>>
