@@ -4,7 +4,7 @@ RSpec.describe PriceRange, :type => :model do
   let(:retailer){ FactoryGirl.create(:retailer) }
 
   before do
-    @price_range = retailer.price_range
+    @price_range = retailer.build_price_range()
   end
 
   subject { @price_range }
@@ -20,7 +20,10 @@ RSpec.describe PriceRange, :type => :model do
   it { should be_valid }
 
   context "when retailer id is not present" do
-    before { @price_range.retailer_id = nil }
+    before do 
+      @price_range.save
+      @price_range.retailer_id = nil
+    end
     it { should_not be_valid }
   end
 end

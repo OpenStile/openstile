@@ -5,6 +5,13 @@ def given_i_am_a_logged_in_shopper shopper
   capybara_sign_in shopper
 end
 
+def given_i_am_a_logged_in_admin admin_user
+  visit '/admins/sign_in'
+  fill_in 'Email', with: admin_user.email
+  fill_in 'Password', with: admin_user.password
+  click_button 'Log in'
+end
+
 def given_i_am_a_logged_in_retail_user retail_user
   if(page.has_link? 'Log out')
     click_link 'Log out'

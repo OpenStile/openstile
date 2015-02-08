@@ -26,7 +26,9 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :for_tall }
   it { should respond_to :for_full_figured }
   it { should respond_to :top_fit }
+  it { should respond_to :top_fit_id }
   it { should respond_to :bottom_fit }
+  it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
   it { should respond_to :online_presence }
   it { should respond_to :drop_in_availabilities }
@@ -63,10 +65,7 @@ RSpec.describe Retailer, :type => :model do
 
   describe "price range association" do
     before { @retailer.save }
-
-    it "should create associated price range after create" do
-      expect(@retailer.price_range).to_not be_nil
-    end
+    let!(:price_range){ FactoryGirl.create(:price_range, retailer: @retailer) }
 
     it "should destroy associated price range" do
       retailer_price_range = @retailer.price_range
@@ -245,12 +244,16 @@ RSpec.describe Retailer, :type => :model do
         first_available_time_array = 
             @retailer.get_available_drop_in_times(DateTime.current.strftime('%B %e, %Y')).first
 
-        first_available_time = DateTime.current.change(hour: first_available_time_array[0],
-                                                       min: first_available_time_array[1])
+        if DateTime.current.advance(hours: 1) > DateTime.current.end_of_day
+          expect(first_available_time_array).to be_nil
+        else
+          first_available_time = DateTime.current.change(hour: first_available_time_array[0],
+                                                         min: first_available_time_array[1])
 
-        buffered_time = DateTime.current.advance(minutes: 30)
+          buffered_time = DateTime.current.advance(minutes: 30)
 
-        expect(first_available_time).to be >= buffered_time
+          expect(first_available_time).to be >= buffered_time
+        end
       end
     end
   end

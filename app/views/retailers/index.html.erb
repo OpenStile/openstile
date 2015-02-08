@@ -1,0 +1,23 @@
+<%= provide(:title, 'Retailers') %>
+<%= render "shared/header" %>
+
+<div class="block">
+  <div class="container">
+    <div class="row text-center">
+      <h2>OpenStile Retailers</h2><br />
+    </div>
+
+    <% @retailers.each do |ret| %>
+      <div class="row" id="retailer_<%= ret.id %>">
+        <h3>
+          Name: <%= link_to ret.name, retailer_path(ret) %>
+          | <%= link_to 'Add top', new_top_path(retailer_id: ret.id) %>
+          | <%= link_to 'Add bottom', new_bottom_path(retailer_id: ret.id) %>
+          | <%= link_to 'Add dress', new_dress_path(retailer_id: ret.id) %>
+        </h3>
+      </div>
+    <% end %>
+    <br /><br />
+    <h3><%= link_to 'Add new retailer', new_retailer_path %></h3>
+  </div>
+</div>

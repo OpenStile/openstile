@@ -135,9 +135,8 @@ module RecommendationsHelper
   end
 
   def evaluate_top_fit recommendation, style_profile
-    return recommendation if recommendation[:object].is_a? Bottom
-    return recommendation if style_profile.top_fit.blank?
-    if (recommendation[:object].top_fit == style_profile.top_fit)
+    return recommendation if (style_profile.top_fit_id.nil? || recommendation[:object].is_a?(Bottom))
+    if recommendation[:object].top_fit_id == style_profile.top_fit_id
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "your Preferred Fit"
     end
@@ -145,9 +144,8 @@ module RecommendationsHelper
   end
 
   def evaluate_bottom_fit recommendation, style_profile
-    return recommendation if recommendation[:object].is_a? Top
-    return recommendation if style_profile.bottom_fit.blank?
-    if (recommendation[:object].bottom_fit == style_profile.bottom_fit)
+    return recommendation if (style_profile.bottom_fit_id.nil? || recommendation[:object].is_a?(Top))
+    if recommendation[:object].bottom_fit_id == style_profile.bottom_fit_id
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "your Preferred Fit"
     end

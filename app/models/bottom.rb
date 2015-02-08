@@ -4,6 +4,7 @@ class Bottom < ActiveRecord::Base
   belongs_to :color
   belongs_to :print
   belongs_to :body_shape
+  belongs_to :bottom_fit
   has_and_belongs_to_many :bottom_sizes
   has_and_belongs_to_many :special_considerations
   has_many :exposed_parts, as: :exposable, dependent: :destroy

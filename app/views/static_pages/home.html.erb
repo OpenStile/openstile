@@ -1,9 +1,11 @@
 <% provide(:title, 'A Personalized way to Explore Local Fashion Boutiques') %>
 
-<% if !shopper_signed_in? && !retail_user_signed_in? %>
+<% if !shopper_signed_in? && !retail_user_signed_in? && !admin_signed_in? %>
   <%= render partial: 'index_non_authenticated' %>
 <% else %>
-  <% if retail_user_signed_in? %>
+  <% if admin_signed_in? %>
+    <%= render partial: 'shared/signed_in_admin' %>
+  <% elsif retail_user_signed_in? %>
     <%= render partial: 'shared/signed_in_retail_user' %>
   <% else %>
     <%= render partial: 'shared/signed_in_shopper' %>

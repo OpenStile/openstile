@@ -83,6 +83,6 @@ feature 'Retail user manages drop in schedule' do
       retailer.top_sizes << shared_size
 
       shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00)
-      retailer.price_range.update!(top_min_price: 50.00, top_max_price: 100.00)
+      retailer.create_price_range!(top_min_price: 50.00, top_max_price: 100.00)
     end
 end

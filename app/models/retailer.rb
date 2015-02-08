@@ -9,6 +9,8 @@ class Retailer < ActiveRecord::Base
   belongs_to :look
   belongs_to :primary_look, class_name: "Look"
   belongs_to :location
+  belongs_to :top_fit
+  belongs_to :bottom_fit
   has_many :tops, dependent: :destroy
   has_many :bottoms, dependent: :destroy
   has_many :dresses, dependent: :destroy
@@ -17,8 +19,9 @@ class Retailer < ActiveRecord::Base
   has_many :drop_in_availabilities, dependent: :destroy
   has_many :drop_ins, dependent: :destroy
 
-  after_create{ create_price_range }
-  
+  accepts_nested_attributes_for :price_range
+  accepts_nested_attributes_for :online_presence
+
   validates :name, presence: true, length: { maximum: 50 } 
   validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true

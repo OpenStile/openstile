@@ -94,18 +94,18 @@ feature 'Style Feed item ranking' do
   scenario 'based on top fit' do
     baseline_calibration_for_shopper_and_items
 
-    original_fit = 'Loose'
-    new_fit = 'Tight/Form-Fitting'
+    original_fit = FactoryGirl.create(:top_fit, name: 'Loose')
+    new_fit = FactoryGirl.create(:top_fit, name: 'Tight/Form-Fitting')
 
-    top.update!(top_fit: new_fit)
-    dress.update!(top_fit: original_fit)
+    top.update!(top_fit_id: new_fit.id)
+    dress.update!(top_fit_id: original_fit.id)
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_set_my_style_profile_preferred_fit_as original_fit, :top
+    when_i_set_my_style_profile_preferred_fit_as original_fit.name, :top
     then_my_style_feed_should_contain top
     then_my_style_feed_should_contain dress
     then_the_recommendation_ordering_should_be dress, top
-    when_i_set_my_style_profile_preferred_fit_as new_fit, :top
+    when_i_set_my_style_profile_preferred_fit_as new_fit.name, :top
     then_my_style_feed_should_contain top
     then_my_style_feed_should_contain dress
     then_the_recommendation_ordering_should_be top, dress
@@ -115,18 +115,18 @@ feature 'Style Feed item ranking' do
   scenario 'based on bottom fit' do
     baseline_calibration_for_shopper_and_items
 
-    original_fit = 'Loose/Flowy'
-    new_fit = 'Tight/Skinny'
+    original_fit = FactoryGirl.create(:bottom_fit, name: 'Loose/Flowy')
+    new_fit = FactoryGirl.create(:bottom_fit, name: 'Tight/Skinny')
 
-    bottom.update!(bottom_fit: new_fit)
-    dress.update!(bottom_fit: original_fit)
+    bottom.update!(bottom_fit_id: new_fit.id)
+    dress.update!(bottom_fit_id: original_fit.id)
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_set_my_style_profile_preferred_fit_as original_fit, :bottom
+    when_i_set_my_style_profile_preferred_fit_as original_fit.name, :bottom
     then_my_style_feed_should_contain bottom
     then_my_style_feed_should_contain dress
     then_the_recommendation_ordering_should_be dress, bottom
-    when_i_set_my_style_profile_preferred_fit_as new_fit, :bottom
+    when_i_set_my_style_profile_preferred_fit_as new_fit.name, :bottom
     then_my_style_feed_should_contain bottom
     then_my_style_feed_should_contain dress
     then_the_recommendation_ordering_should_be bottom, dress

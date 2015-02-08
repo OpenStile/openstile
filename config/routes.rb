@@ -26,22 +26,25 @@ Rails.application.routes.draw do
       put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
   end
 
+  devise_for :admins, only: [:sessions], controllers: {sessions: "admins/sessions"}
+
   resources :style_profiles, only: [:edit, :update]
 
-  resources :retailers, only: [:show] do
+  resources :retailers, only: [:show, :index, :new, :create] do
     member do
       get 'scheduled_availabilities'
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
+      get 'catalog'
     end
   end
 
-  resources :tops, only: [:show]
+  resources :tops, only: [:show, :new, :create]
 
-  resources :bottoms, only: [:show]
+  resources :bottoms, only: [:show, :new, :create]
 
-  resources :dresses, only: [:show]
+  resources :dresses, only: [:show, :new, :create]
 
   resources :drop_ins, only: [:create, :update, :destroy] do
     collection do

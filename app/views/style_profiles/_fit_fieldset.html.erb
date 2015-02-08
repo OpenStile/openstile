@@ -4,11 +4,11 @@
     <div class="row">
       <div class="col-md-6 col-xs-6">
         <div class="col-md-3 col-xs-3">
-          <%= form_helper.label :top_fit %>
+          <%= form_helper.label :top_fit_id %>
         </div>
         <div class="col-md-9 col-xs-9">
-          <%= form_helper.select :top_fit,
-            ['Tight/Form-Fitting', 'Straight', 'Loose', 'Oversized'].map{|v| [v,v]},
+          <%= form_helper.select :top_fit_id,
+            TopFit.all.map{|v| [v.name, v.id] },
             {prompt: true}, class: "form-control" %>
         </div>
       </div>
@@ -16,11 +16,11 @@
     <div class="row">
       <div class="col-md-6 col-xs-6">
         <div class="col-md-3 col-xs-3">
-          <%= form_helper.label :bottom_fit %>
+          <%= form_helper.label :bottom_fit_id %>
         </div>
         <div class="col-md-9 col-xs-9">
-          <%= form_helper.select :bottom_fit,
-            ['Tight/Skinny', 'Straight', 'Loose/Flowy'].map{|v| [v,v]},
+          <%= form_helper.select :bottom_fit_id,
+            BottomFit.all.map{|v| [v.name, v.id] },
             {prompt: true}, class: "form-control" %>
         </div>
       </div>
