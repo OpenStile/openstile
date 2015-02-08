@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150207231549) do
+ActiveRecord::Schema.define(version: 20150208081503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 20150207231549) do
     t.boolean  "for_tall"
     t.boolean  "for_full_figured"
     t.string   "bottom_fit"
-    t.string   "image"
   end
 
   add_index "bottoms", ["body_shape_id"], name: "index_bottoms_on_body_shape_id", using: :btree
@@ -156,7 +155,6 @@ ActiveRecord::Schema.define(version: 20150207231549) do
     t.boolean  "for_full_figured"
     t.string   "top_fit"
     t.string   "bottom_fit"
-    t.string   "image"
   end
 
   add_index "dresses", ["body_shape_id"], name: "index_dresses_on_body_shape_id", using: :btree
@@ -231,6 +229,20 @@ ActiveRecord::Schema.define(version: 20150207231549) do
 
   add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
   add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
+
+  create_table "images", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "height"
+    t.string   "width"
+    t.string   "format"
+    t.string   "retailer_id"
+    t.string   "dress_id"
+    t.string   "top_id"
+    t.string   "bottom_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "locations", force: true do |t|
     t.string   "address"
@@ -351,7 +363,6 @@ ActiveRecord::Schema.define(version: 20150207231549) do
     t.string   "top_fit"
     t.string   "bottom_fit"
     t.integer  "location_id"
-    t.string   "image"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
@@ -483,7 +494,6 @@ ActiveRecord::Schema.define(version: 20150207231549) do
     t.boolean  "for_tall"
     t.boolean  "for_full_figured"
     t.string   "top_fit"
-    t.string   "image"
   end
 
   add_index "tops", ["body_shape_id"], name: "index_tops_on_body_shape_id", using: :btree
