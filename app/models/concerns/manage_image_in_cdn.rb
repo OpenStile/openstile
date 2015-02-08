@@ -1,4 +1,4 @@
-module ImageUploader
+module ManageImageInCDN
   extend ActiveSupport::Concern
 
   def self.upload(path_to_image, object_associated_with_image)
@@ -12,10 +12,10 @@ module ImageUploader
                                               format: result["format"])
   end
 
-  def self.delete_image
+  def self.delete_image image_obj
     if !self.image.nil?
-      Cloudinary::Uploader.destroy(@image, :invalidate => true)
-      self.image.destroy
+      Cloudinary::Uploader.destroy(image_obj.name), :invalidate => true)
+      image_obj.destroy
     end
   end
 end
