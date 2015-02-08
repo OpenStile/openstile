@@ -10,7 +10,8 @@
       <div class="row" id="retailer_<%= ret.id %>">
         <h3>
           Name: <%= link_to ret.name, retailer_path(ret) %> |
-          <%= link_to 'Add top', new_top_path(retailer_id: ret.id) %>
+          <%= link_to 'Add top', new_top_path(retailer_id: ret.id) %> |
+          <%= link_to 'Add bottom', new_bottom_path(retailer_id: ret.id) %> |
         </h3>
       </div>
     <% end %>

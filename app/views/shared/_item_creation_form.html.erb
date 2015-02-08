@@ -1,0 +1,147 @@
+<div class="block">
+  <div class="container">
+    <div class="row text-center">
+      <h2>Enter <%= object.class.to_s.downcase %> information</h2>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-md-6 col-xs-6 col-md-offset-3 col-xs-offset-3">
+        <%= form_for object, class: "form-horizontal" do |f| %>
+          <%= render 'shared/error_messages', object: object %>
+
+          <%= f.hidden_field :retailer_id %>
+
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+
+          <%= f.label :description %>
+          <%= f.text_area :description %>
+
+          <%= f.label :price %>
+          <%= f.text_area :price %>
+
+          <%= f.label :web_link %>
+          <%= f.text_field :web_link %>
+
+          <div class="looks">
+            <h4>Looks</h4>
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_radio_buttons(:look_id, 
+                              Look.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "radio-inline col-md-3 col-xs-3") { 
+                      builder.radio_button(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="prints">
+            <h4>Prints</h4>
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_radio_buttons(:print_id, 
+                              Print.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "radio-inline col-md-3 col-xs-3") { 
+                      builder.radio_button(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="colors">
+            <h4>Colors</h4>
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_radio_buttons(:color_id, 
+                              Color.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "radio-inline col-md-3 col-xs-3") { 
+                      builder.radio_button(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="body-shape">
+            <h4>Body Shape</h4>
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_radio_buttons(:body_shape_id, 
+                              BodyShape.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "radio-inline col-md-3 col-xs-3") { 
+                      builder.radio_button(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="special-considerations">
+            <h4>Considerations</h4>
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_check_boxes(:special_consideration_ids, 
+                              SpecialConsideration.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                      builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <br />
+
+          <div class="sizes">
+          <h4>Sizes: </h4>
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_check_boxes(size_collection, 
+                                size_model.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                      builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <% if object.respond_to? :top_fit %>
+            <%= f.label :top_fit %>
+            <%= f.select :top_fit,
+                TopFit.all.map{|v| [v.name, v.id]},
+                {prompt: true}, class: "form-control" %>
+          <% end %>
+
+          <% if object.respond_to? :bottom_fit %>
+            <%= f.label :bottom_fit %>
+            <%= f.select :bottom_fit,
+                BottomFit.all.map{|v| [v.name, v.id]},
+                {prompt: true}, class: "form-control" %>
+          <% end %>
+
+          <%= f.label :for_petite %>
+          <%= f.check_box :for_petite %>
+
+          <%= f.label :for_tall %>
+          <%= f.check_box :for_tall %>
+
+          <%= f.label :for_full_figured, 'For full-figured' %>
+          <%= f.check_box :for_full_figured %>
+
+          <%= f.submit 'Add' %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

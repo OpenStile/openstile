@@ -41,7 +41,7 @@ Rails.application.routes.draw do
 
   resources :tops, only: [:show, :new, :create]
 
-  resources :bottoms, only: [:show]
+  resources :bottoms, only: [:show, :new, :create]
 
   resources :dresses, only: [:show]
 
