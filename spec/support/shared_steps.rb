@@ -1,4 +1,7 @@
 def given_i_am_a_logged_in_shopper shopper
+  if(page.has_link? 'Log out')
+    click_link 'Log out'
+  end
   capybara_sign_in shopper
 end
 
@@ -6,7 +9,18 @@ def given_i_am_a_logged_in_admin admin_user
   visit '/admins/sign_in'
   fill_in 'Email', with: admin_user.email
   fill_in 'Password', with: admin_user.password
+  click_button 'Log in'
+end
 
+def given_i_am_a_logged_in_retail_user retail_user
+  if(page.has_link? 'Log out')
+    click_link 'Log out'
+  end
+  visit '/'
+  click_link 'Log in'
+  click_link 'Are you a retailer?'
+  fill_in 'Email', with: retail_user.email
+  fill_in 'Password', with: retail_user.password
   click_button 'Log in'
 end
 
@@ -196,6 +210,16 @@ def given_my_upcoming_drop_ins_page_contains appointment
 
   expect(page).to have_content(appointment.retailer.name)
   expect(page).to have_content(appointment.colloquial_time)
+end
+
+def when_i_select_a_recommendation recommendation
+  visit '/'
+
+  within(:css, "div##{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
+    click_link 'Drop-in'
+  end
+
+  expect(page).to have_content(recommendation.description)
 end
 
 

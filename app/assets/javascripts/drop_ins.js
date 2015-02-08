@@ -3,7 +3,7 @@
 
 $(document).ready(function() {
   
-  $('.datepicker').pickadate({
+  $('.schedule .datepicker').pickadate({
     format: 'dddd, mmmm d, yyyy',
     formatSubmit: 'yyyy-mm-dd',
     hiddenName: true,
@@ -28,7 +28,7 @@ $(document).ready(function() {
     }
   })
 
-  $('.timepicker').pickatime({
+  $('.schedule .timepicker').pickatime({
     formatSubmit: 'HH:i',
     hiddenName: true,
     min: [6,0],

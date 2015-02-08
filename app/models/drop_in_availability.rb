@@ -25,4 +25,12 @@ class DropInAvailability < ActiveRecord::Base
       end
     end
   end
+
+  def self.for_retailer_on_date retailer_id, date_string
+    date = DateTime.parse(date_string).change(offset: '-0500')
+    where("retailer_id = ? and start_time >= ? and end_time <= ?",
+                         retailer_id,
+                         date.at_beginning_of_day,
+                         date.at_end_of_day).first
+  end
 end

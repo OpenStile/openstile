@@ -32,6 +32,7 @@ Rails.application.routes.draw do
 
   resources :retailers, only: [:show, :index, :new, :create] do
     member do
+      get 'scheduled_availabilities'
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
@@ -50,6 +51,14 @@ Rails.application.routes.draw do
       get :upcoming
     end
   end
+
+  resources :drop_in_availabilities, only: [:create, :update] do
+    collection do
+      get :personal
+    end
+  end
+
+  get 'drop_in_availabilities/apply_form' => 'drop_in_availabilities#apply_form'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
