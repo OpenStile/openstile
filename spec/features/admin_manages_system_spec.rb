@@ -54,6 +54,18 @@ feature 'Admin user manages system' do
     then_the_retailers_catalog_page_should_contain retailer, bottom_name
   end
 
+  scenario 'creates new dress' do
+    dress_name = "Lace, Backless Mini"
+    retailer = FactoryGirl.create(:retailer)
+
+    given_i_am_a_logged_in_admin admin
+    when_i_go_to_create_a_dress_for_retailer retailer
+    when_i_submit_with_invalid_information
+    then_it_should_fail_to_add_dress
+    when_i_submit_item_with_valid_information dress_name, :dress
+    then_the_retailers_catalog_page_should_contain retailer, dress_name
+  end
+
   def given_the_existing_retailers_page_is_empty
     click_link 'Manage retailers'
 
@@ -75,6 +87,16 @@ feature 'Admin user manages system' do
     end
 
     expect(page).to have_content('Enter top information')
+  end
+
+  def when_i_go_to_create_a_dress_for_retailer retailer
+    click_link 'Manage retailers'
+
+    within(:css, "#retailer_#{retailer.id}") do
+      click_link 'Add dress'
+    end
+
+    expect(page).to have_content('Enter dress information')
   end
 
   def when_i_go_to_create_a_bottom_for_retailer retailer
@@ -103,6 +125,11 @@ feature 'Admin user manages system' do
 
   def then_it_should_fail_to_add_bottom
     expect(page).to have_content('Enter bottom information')
+    expect(page).to have_content('error')
+  end
+
+  def then_it_should_fail_to_add_dress
+    expect(page).to have_content('Enter dress information')
     expect(page).to have_content('error')
   end
 

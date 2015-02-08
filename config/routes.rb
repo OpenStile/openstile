@@ -43,7 +43,7 @@ Rails.application.routes.draw do
 
   resources :bottoms, only: [:show, :new, :create]
 
-  resources :dresses, only: [:show]
+  resources :dresses, only: [:show, :new, :create]
 
   resources :drop_ins, only: [:create, :update, :destroy] do
     collection do
