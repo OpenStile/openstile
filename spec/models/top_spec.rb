@@ -4,7 +4,7 @@ RSpec.describe Top, :type => :model do
   let(:retailer){ FactoryGirl.create(:retailer) }
   before { @top = retailer.tops.build(name: "Green shirt", description: "A really cool shirt",
                                       web_link: "www.see_this_shirt.com", price: 55.00) }
-  
+
   subject { @top }
 
   it { should respond_to :name }
@@ -27,6 +27,7 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :top_fit }
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
+  it { should respond_to :image }
   it { should be_valid }
 
   context "when name is not present" do
@@ -45,17 +46,17 @@ RSpec.describe Top, :type => :model do
   end
 
   context "when name is too long" do
-    before { @top.name = "a"*101 } 
+    before { @top.name = "a"*101 }
     it { should_not be_valid }
   end
 
   context "when description is too long" do
-    before { @top.description = "a"*251 } 
+    before { @top.description = "a"*251 }
     it { should_not be_valid }
   end
 
   context "when web link is too long" do
-    before { @top.web_link = "a"*101 } 
+    before { @top.web_link = "a"*101 }
     it { should_not be_valid }
   end
 
@@ -84,13 +85,13 @@ RSpec.describe Top, :type => :model do
 
   describe "drop in item association" do
     before { @top.save }
-    let!(:drop_in_availability) do 
+    let!(:drop_in_availability) do
       FactoryGirl.create(:drop_in_availability,
                          retailer: retailer,
                          start_time: tomorrow_morning,
                          end_time: tomorrow_afternoon)
     end
-    let(:drop_in){ FactoryGirl.create(:drop_in, 
+    let(:drop_in){ FactoryGirl.create(:drop_in,
                                       retailer: retailer,
                                       time: tomorrow_mid_morning) }
     let!(:drop_in_item){ FactoryGirl.create(:drop_in_item,
@@ -103,6 +104,23 @@ RSpec.describe Top, :type => :model do
       expect(drop_in_items).to_not be_empty
       drop_in_items.each do |d|
         expect(DropInItem.where(id: d.id)).to be_empty
+      end
+    end
+
+    describe "image name helper" do
+      before { @this_location = Location.new(address: "301 Water St. SE, Washington, DC 20003",
+                                      neighborhood: "Navy Yard",
+                                      short_title: "Fashion Yards")
+               @this_location.save
+               @this_retailer = Retailer.new(name: "Elena's Boutique",
+                                      description: "Premier boutique in DC!",
+                                      location: @this_location)
+               @this_retailer.save
+               @this_top = @this_retailer.tops.create(name: "Fleece Tunic", description: "When you've utterly given up",
+                                              web_link: "www.see_this_tunic.com", price: 42.00) }
+
+      it "should return the correct image name" do
+        expect(ImageName.get_image_name(@this_top)).to eq("dc_washington_elena_s_boutique_fleece_tunic")
       end
     end
   end

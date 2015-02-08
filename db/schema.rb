@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130151646) do
+ActiveRecord::Schema.define(version: 20150208081503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -229,6 +229,20 @@ ActiveRecord::Schema.define(version: 20150130151646) do
 
   add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
   add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
+
+  create_table "images", force: true do |t|
+    t.string   "name"
+    t.string   "url"
+    t.string   "height"
+    t.string   "width"
+    t.string   "format"
+    t.string   "retailer_id"
+    t.string   "dress_id"
+    t.string   "top_id"
+    t.string   "bottom_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "locations", force: true do |t|
     t.string   "address"

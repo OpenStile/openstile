@@ -1,0 +1,12 @@
+test:
+  cloud_name: YOURCLOUDNAMEGOESHERE
+  api_key: YOURAPIRKEYGOESHERE
+  api_secret: YOURAPISECRETGOESHERE
+  enhance_image_tag: true
+  static_image_support: false
+development:
+  cloud_name: YOURCLOUDNAMEGOESHERE
+  api_key: YOURAPIRKEYGOESHERE
+  api_secret: YOURAPISECRETGOESHERE
+  enhance_image_tag: true
+  static_image_support: false

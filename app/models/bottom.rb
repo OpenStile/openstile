@@ -1,4 +1,5 @@
 class Bottom < ActiveRecord::Base
+
   belongs_to :retailer
   belongs_to :look
   belongs_to :color
@@ -8,8 +9,9 @@ class Bottom < ActiveRecord::Base
   has_and_belongs_to_many :special_considerations
   has_many :exposed_parts, as: :exposable, dependent: :destroy
   has_many :drop_in_items, as: :reservable, dependent: :destroy
+  has_one :image, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 100 } 
+  validates :name, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 250 }
   validates :web_link, length: { maximum: 100 }
   validates :price, presence: true

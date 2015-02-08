@@ -6,7 +6,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
-        <img class="img-responsive" src="http://placehold.it/400x500">
+        <% if @top.image.nil? %>
+          <img class="img-responsive" src="http://placehold.it/400x500">
+        <% else %>
+          <%= cl_image_tag(@top.image.name, :width=>400, :height=>500, :crop=>:fill, :gravity=>:face, :class => "img-responsive") %>
+        <% end %>
+      </div>
       </div>
       <div class="col-md-5 col-xs-5 text-center">
         <hr>

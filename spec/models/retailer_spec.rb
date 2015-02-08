@@ -34,25 +34,26 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location }
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
+  it { should respond_to :image }
   it { should be_valid }
 
   context "when name is not present" do
-    before { @retailer.name = " " } 
+    before { @retailer.name = " " }
     it { should_not be_valid }
   end
 
   context "when name is too long" do
-    before { @retailer.name = "a"*51 } 
+    before { @retailer.name = "a"*51 }
     it { should_not be_valid }
   end
 
   context "when description is not present" do
-    before { @retailer.description = " " } 
+    before { @retailer.description = " " }
     it { should_not be_valid }
   end
 
   context "when description is too long" do
-    before { @retailer.description = "a"*251 } 
+    before { @retailer.description = "a"*251 }
     it { should_not be_valid }
   end
 
@@ -120,8 +121,8 @@ RSpec.describe Retailer, :type => :model do
 
   describe "online presence association" do
     before { @retailer.save }
-    let!(:online_presence){ 
-      FactoryGirl.create(:online_presence, retailer: @retailer) 
+    let!(:online_presence){
+      FactoryGirl.create(:online_presence, retailer: @retailer)
     }
 
     it "should destroy associated online presence" do
@@ -134,7 +135,7 @@ RSpec.describe Retailer, :type => :model do
 
   describe "drop in avalabilities assocication" do
     before { @retailer.save }
-    let!(:drop_in_availability) { FactoryGirl.create(:drop_in_availability, 
+    let!(:drop_in_availability) { FactoryGirl.create(:drop_in_availability,
                                                       retailer: @retailer) }
 
     it "should destroy associated drop in availabilities" do
@@ -154,7 +155,7 @@ RSpec.describe Retailer, :type => :model do
                                                    retailer: @retailer,
                                                    start_time: tomorrow_morning,
                                                    end_time: tomorrow_afternoon) }
-    let!(:drop_in) { FactoryGirl.create(:drop_in, 
+    let!(:drop_in) { FactoryGirl.create(:drop_in,
                                         time: tomorrow_mid_morning,
                                         retailer: @retailer,
                                         shopper: shopper) }
@@ -171,8 +172,8 @@ RSpec.describe Retailer, :type => :model do
 
   describe "retail user association" do
     before { @retailer.save }
-    let!(:retail_user){ 
-      FactoryGirl.create(:retail_user, retailer: @retailer) 
+    let!(:retail_user){
+      FactoryGirl.create(:retail_user, retailer: @retailer)
     }
 
     it "should destroy associated retail user" do
@@ -180,6 +181,33 @@ RSpec.describe Retailer, :type => :model do
       @retailer.destroy
       expect(retail_user).to_not be_nil
       expect(RetailUser.where(id: retail_user.id)).to be_empty
+    end
+  end
+
+  describe "retail user image" do
+    before { @retailer.save }
+    let!(:image){
+      FactoryGirl.create(:image, retailer: @retailer)
+    }
+
+    it "should destroy associated retail user" do
+      retailer_user = @retailer.image
+      @retailer.destroy
+      expect(image).to_not be_nil
+      expect(RetailUser.where(id: image.id)).to be_empty
+    end
+  end
+
+  describe "image name helper" do
+    before { @this_location = Location.new(address: "249 Water St. SE, New York, NY 20003",
+                                    neighborhood: "Navy Yard",
+                                    short_title: "Fashion Yards")
+             @this_retailer = Retailer.new(name: "Dr. Elena's Prélèvements Routine-Boutique \#7: wall·e!",
+                                    description: "Premier boutique in DC!",
+                                    location: @this_location)
+             @this_retailer.save }
+    it "should return the correct image name" do
+      expect(ImageName.get_image_name(@this_retailer)).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_")
     end
   end
 
@@ -198,9 +226,9 @@ RSpec.describe Retailer, :type => :model do
                                         time: tomorrow_miday,
                                         retailer: @retailer,
                                         shopper: shopper) }
-    
+
     it "should return whether or not a retailer is available" do
-      expect(@retailer.available_for_drop_in? tomorrow_SOB).to eq(true) 
+      expect(@retailer.available_for_drop_in? tomorrow_SOB).to eq(true)
       expect(@retailer.available_for_drop_in? tomorrow_miday).to eq(false)
       expect(@retailer.available_for_drop_in? tomorrow_miday.advance(hours: 1)).to eq(true)
       expect(@retailer.available_for_drop_in? tomorrow_COB).to eq(false)
@@ -242,7 +270,7 @@ RSpec.describe Retailer, :type => :model do
                                          bandwidth: 1) }
 
       it "should return an appropriate buffer" do
-        first_available_time_array = 
+        first_available_time_array =
             @retailer.get_available_drop_in_times(DateTime.current.strftime('%B %e, %Y')).first
 
         first_available_time = DateTime.current.change(hour: first_available_time_array[0],
