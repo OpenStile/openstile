@@ -50,6 +50,8 @@ gem 'StreetAddress', require: 'street_address'
 gem 'cloudinary', '~> 1.0.81'
 gem 'carrierwave', '~> 0.10.0'
 
+gem 'pry-rails', :group => :development
+
 group :development, :test do
   gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'
