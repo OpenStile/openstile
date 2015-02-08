@@ -1,0 +1,129 @@
+<%= render "shared/header" %>
+
+<div class="block">
+  <div class="container">
+    <div class="row text-center">
+      <h2>Enter retailer information</h2>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-md-6 col-xs-6 col-md-offset-3 col-xs-offset-3">
+        <%= form_for @retailer, class: "form-horizontal" do |f| %>
+          <%= render 'shared/error_messages', object: @retailer %>
+
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+
+          <%= f.label :location_id %>
+          <%= f.select :location_id, Location.all.map{|l| [l.address, l.id]}, 
+                                    {prompt: true} %>
+
+          <%= f.label :description %>
+          <%= f.text_area :description %>
+
+          <%= f.fields_for :online_presence, @retailer.build_online_presence do |op_form| %>
+            <%= op_form.label :web_link, 'Website' %>
+            <%= op_form.text_field :web_link %>
+
+            <%= op_form.label :facebook_link, 'Facebook' %>
+            <%= op_form.text_field :facebook_link %>
+
+            <%= op_form.label :instagram_link, 'Instagram' %>
+            <%= op_form.text_field :instagram_link %>
+
+            <%= op_form.label :twitter_link, 'Twitter' %>
+            <%= op_form.text_field :twitter_link %>
+          <% end %>
+
+          <div class="special-considerations">
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_check_boxes(:special_consideration_ids, 
+                              SpecialConsideration.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                      builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <br />
+          <%= f.fields_for :price_range, @retailer.build_price_range do |pr_form| %>
+            <%= pr_form.label :top_min_price %>
+            <%= pr_form.text_field :top_min_price %>
+            <%= pr_form.label :top_max_price %>
+            <%= pr_form.text_field :top_max_price %>
+            <%= pr_form.label :bottom_min_price %>
+            <%= pr_form.text_field :bottom_min_price %>
+            <%= pr_form.label :bottom_max_price %>
+            <%= pr_form.text_field :bottom_max_price %>
+            <%= pr_form.label :dress_min_price %>
+            <%= pr_form.text_field :dress_min_price %>
+            <%= pr_form.label :dress_max_price %>
+            <%= pr_form.text_field :dress_max_price %>
+          <% end %>
+
+          <h4>Top Sizes: </h4>
+          <div class="top-sizes">
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_check_boxes(:top_size_ids, 
+                                TopSize.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                      builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <h4>Bottom Sizes: </h4>
+          <div class="bottom-sizes">
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_check_boxes(:bottom_size_ids, 
+                                BottomSize.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                      builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <h4>Dress Sizes: </h4>
+          <div class="dress-sizes">
+            <div class="options row">
+              <div class="col-md-offest-1 col-xs-offset-1">
+                <%= f.collection_check_boxes(:dress_size_ids, 
+                                DressSize.all, :id, :name) do |builder| %>
+                  <div class="single-checkbox"> 
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                      builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <%= f.label :for_petite %>
+          <%= f.check_box :for_petite %>
+
+          <%= f.label :for_tall %>
+          <%= f.check_box :for_tall %>
+
+          <%= f.label :for_full_figured %>
+          <%= f.check_box :for_full_figured %>
+
+          <%= f.submit 'Add' %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

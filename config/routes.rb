@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
   resources :style_profiles, only: [:edit, :update]
 
-  resources :retailers, only: [:show] do
+  resources :retailers, only: [:show, :index, :new, :create] do
     member do
       get 'enable_available_dates'
       get 'enable_available_times'

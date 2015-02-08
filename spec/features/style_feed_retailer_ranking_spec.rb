@@ -148,7 +148,7 @@ feature 'Style Feed retailer ranking' do
       retailer_two.top_sizes << shared_size
 
       shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00)
-      retailer_one.price_range.update!(top_min_price: 50.00, top_max_price: 100.00)
-      retailer_two.price_range.update!(top_min_price: 50.00, top_max_price: 100.00)
+      retailer_one.create_price_range!(top_min_price: 50.00, top_max_price: 100.00)
+      retailer_two.create_price_range!(top_min_price: 50.00, top_max_price: 100.00)
     end
 end

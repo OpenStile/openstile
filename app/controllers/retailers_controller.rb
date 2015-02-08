@@ -1,7 +1,26 @@
 class RetailersController < ApplicationController
+  before_filter :authenticate_admin!, only: [:index, :new, :create]
   def show
     @retailer = Retailer.find(params[:id])
     store_recommendation_show_url
+  end
+
+  def index
+    @retailers = Retailer.all
+  end
+
+  def new
+    @retailer = Retailer.new
+  end
+
+  def create
+    @retailer = Retailer.new(retailer_params)
+    if @retailer.save
+      flash[:success] = "Retailer created"
+      redirect_to retailers_path
+    else
+      render 'new'
+    end
   end
 
   def enable_available_dates
@@ -26,4 +45,16 @@ class RetailersController < ApplicationController
       format.js {}
     end
   end
+
+  private
+    def retailer_params
+      params.require(:retailer).permit(:name, :location_id, :description, 
+                      special_consideration_ids: [], top_size_ids: [], 
+                      bottom_size_ids: [], dress_size_ids: [],
+                      price_range_attributes: [:top_min_price, :top_max_price,
+                                               :bottom_min_price, :bottom_max_price,
+                                               :dress_min_price, :dress_max_price],
+                      online_presence_attributes: [:web_link, :facebook_link, 
+                                                   :instagram_link, :twitter_link])
+    end
 end

@@ -1,7 +1,7 @@
 class PriceRange < ActiveRecord::Base
   belongs_to :retailer
 
-  validates :retailer_id, presence: true
+  validates :retailer_id, presence: true, on: :update
 
   def self.overlap_with_top_budget budget
     where("top_max_price >= ? and top_min_price <= ?", budget.top_min_price, budget.top_max_price)

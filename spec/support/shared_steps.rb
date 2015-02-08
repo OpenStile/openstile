@@ -2,6 +2,14 @@ def given_i_am_a_logged_in_shopper shopper
   capybara_sign_in shopper
 end
 
+def given_i_am_a_logged_in_admin admin_user
+  visit '/admins/sign_in'
+  fill_in 'Email', with: admin_user.email
+  fill_in 'Password', with: admin_user.password
+
+  click_button 'Log in'
+end
+
 def when_i_set_my_style_profile_sizes_to sizes
   click_link 'Style Profile'
 

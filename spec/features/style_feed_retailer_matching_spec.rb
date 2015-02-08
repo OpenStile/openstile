@@ -66,12 +66,12 @@ feature 'Style Feed retailer matching' do
     end
 
     def set_price_range_for_retailer price_ranges
-      retailer.price_range.update!({top_min_price: price_ranges[:top][0],
-                                    top_max_price: price_ranges[:top][1],
-                                    bottom_min_price: price_ranges[:bottom][0],
-                                    bottom_max_price: price_ranges[:bottom][1],
-                                    dress_min_price: price_ranges[:dress][0],
-                                    dress_max_price: price_ranges[:dress][1]})
+      retailer.create_price_range!({top_min_price: price_ranges[:top][0],
+                                   top_max_price: price_ranges[:top][1],
+                                   bottom_min_price: price_ranges[:bottom][0],
+                                   bottom_max_price: price_ranges[:bottom][1],
+                                   dress_min_price: price_ranges[:dress][0],
+                                   dress_max_price: price_ranges[:dress][1]})
     end
 
     def set_retailer_primary_look look
@@ -88,11 +88,9 @@ feature 'Style Feed retailer matching' do
 
       unless tested_property == :budget
         shopper.style_profile.budget.top_min_price = 50.00
-        retailer.price_range.top_min_price = 50.00
         shopper.style_profile.budget.top_max_price = 100.00
-        retailer.price_range.top_max_price = 100.00
+        retailer.create_price_range(top_min_price: 50.00, top_max_price: 100.00)
         shopper.style_profile.budget.save
-        retailer.price_range.save
       end
 
       unless tested_property == :hated_look
