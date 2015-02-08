@@ -1,7 +1,7 @@
 class Retailer < ActiveRecord::Base
-  include ImageName
 
   has_one :retail_user, dependent: :destroy
+  has_one :image, dependent: :destroy
 
   has_and_belongs_to_many :top_sizes
   has_and_belongs_to_many :bottom_sizes
@@ -24,8 +24,6 @@ class Retailer < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true
-
-  mount_uploader :image, RetailerImageUploader
 
   def available_for_drop_in? datetime
     future_availabilities.each do |availability|

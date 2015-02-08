@@ -184,6 +184,20 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
+  describe "retail user image" do
+    before { @retailer.save }
+    let!(:image){
+      FactoryGirl.create(:image, retailer: @retailer)
+    }
+
+    it "should destroy associated retail user" do
+      retailer_user = @retailer.image
+      @retailer.destroy
+      expect(image).to_not be_nil
+      expect(RetailUser.where(id: image.id)).to be_empty
+    end
+  end
+
   describe "image name helper" do
     before { @this_location = Location.new(address: "249 Water St. SE, New York, NY 20003",
                                     neighborhood: "Navy Yard",
@@ -193,7 +207,7 @@ RSpec.describe Retailer, :type => :model do
                                     location: @this_location)
              @this_retailer.save }
     it "should return the correct image name" do
-      expect(ImageName.get_image_name(@this_retailer)).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_.jpg")
+      expect(ImageName.get_image_name(@this_retailer)).to eq("ny_new_york_dr_elena_s_prelevements_routine_boutique_7_wall_e_")
     end
   end
 
