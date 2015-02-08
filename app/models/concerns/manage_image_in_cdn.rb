@@ -13,8 +13,8 @@ module ManageImageInCDN
   end
 
   def self.delete_image image_obj
-    if !self.image.nil?
-      Cloudinary::Uploader.destroy(image_obj.name), :invalidate => true)
+    if !image_obj.is_a? Image
+      Cloudinary::Uploader.destroy(image_obj.name, :invalidate => true)
       image_obj.destroy
     end
   end
