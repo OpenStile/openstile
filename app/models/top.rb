@@ -1,5 +1,4 @@
 class Top < ActiveRecord::Base
-  include ImageName
 
   belongs_to :retailer
   belongs_to :look
@@ -10,14 +9,13 @@ class Top < ActiveRecord::Base
   has_and_belongs_to_many :special_considerations
   has_many :exposed_parts, as: :exposable, dependent: :destroy
   has_many :drop_in_items, as: :reservable, dependent: :destroy
+  has_one :image, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 100 }
   validates :description, presence: true, length: { maximum: 250 }
   validates :web_link, length: { maximum: 100 }
   validates :price, presence: true
   validates :retailer_id, presence: true
-
-  mount_uploader :image, TopImageUploader
 
   def self.within_budget budget, fuzz
     if budget.top_min_price.nil? or budget.top_max_price.nil?
