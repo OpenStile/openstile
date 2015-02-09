@@ -36,6 +36,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location }
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
+  it { should respond_to :image_name }
   it { should be_valid }
 
   context "when name is not present" do
@@ -179,6 +180,16 @@ RSpec.describe Retailer, :type => :model do
       @retailer.destroy
       expect(retail_user).to_not be_nil
       expect(RetailUser.where(id: retail_user.id)).to be_empty
+    end
+  end
+
+  describe "image name helper" do
+    let(:location){ FactoryGirl.create(:location, 
+                                        address: "301 Water St. SE, Washington, DC 20003") }
+    let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
+
+    it "should return the correct image name" do
+      expect(retailer.image_name).to eq("dc_washington_elena_s_boutique")
     end
   end
 

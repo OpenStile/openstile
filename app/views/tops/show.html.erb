@@ -6,7 +6,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
-        <img class="img-responsive" src="http://placehold.it/400x500">
+        <%= image_tag("recommendations/#{@top.image_name}.jpg",
+                                          class: "img-responsive")%>
       </div>
       <div class="col-md-5 col-xs-5 text-center">
         <hr>

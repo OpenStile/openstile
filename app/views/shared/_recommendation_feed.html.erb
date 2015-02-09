@@ -2,8 +2,8 @@
   <div class="row">
     <div class="recommendation">
       <div class="col-md-5<%= ' col-md-push-7' if idx.odd? %> col-sm-12">
-        <img class="img-responsive" 
-             src="http://placehold.it/500x500">
+        <%= image_tag("recommendations/#{recommendation[:object].image_name}.jpg",
+                       class: "img-responsive")%>
       </div>
       <div class="col-md-7<%= ' col-md-pull-5' if idx.odd? %> col-sm-12">
         <div class="summary" id=<%= recommendation_string(recommendation[:object]) %>>

@@ -1,4 +1,6 @@
 class Dress < ActiveRecord::Base
+  include ImageName
+
   belongs_to :retailer
   belongs_to :look
   belongs_to :color

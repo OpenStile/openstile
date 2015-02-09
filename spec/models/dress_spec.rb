@@ -31,6 +31,7 @@ RSpec.describe Dress, :type => :model do
   it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
+  it { should respond_to :image_name }
   it { should be_valid }
 
   context "when name is not present" do
@@ -108,6 +109,17 @@ RSpec.describe Dress, :type => :model do
       drop_in_items.each do |d|
         expect(DropInItem.where(id: d.id)).to be_empty
       end
+    end
+  end
+
+  describe "image name helper" do
+    let(:location){ FactoryGirl.create(:location, 
+                                address: "301 Water St. SE, Washington, DC 20003") }
+    let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
+    let(:dress){ FactoryGirl.create(:dress, name: "Cool Dress", retailer: retailer) } 
+
+    it "should return the correct image name" do
+      expect(dress.image_name).to eq("dc_washington_elena_s_boutique_cool_dress")
     end
   end
 end
