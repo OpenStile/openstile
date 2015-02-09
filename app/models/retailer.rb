@@ -1,4 +1,6 @@
 class Retailer < ActiveRecord::Base
+  include ImageName
+
   has_one :retail_user, dependent: :destroy
 
   has_and_belongs_to_many :top_sizes
