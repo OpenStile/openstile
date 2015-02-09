@@ -59,6 +59,14 @@ end
   SpecialConsideration.find_or_create_by(name: consideration)
 end
 
+['Form-Fitting/Tight', 'Tailored/Fitted', 'Loose/Flowing', 'Oversized'].each do |fit|
+  TopFit.find_or_create_by(name: fit)
+end
+
+['Form-Fitting/Tight', 'Tailored/Fitted', 'Loose/Flowing'].each do |fit|
+  BottomFit.find_or_create_by(name: fit)
+end
+
 if ENV["demo_up"]
   if Shopper.find_by_email('demo@example.com').nil?
     Shopper.create(first_name: 'Jane', email: 'demo@example.com',
