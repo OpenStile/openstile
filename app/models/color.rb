@@ -4,5 +4,7 @@ class Color < ActiveRecord::Base
   has_many :bottoms
   has_many :dresses
 
+  has_and_belongs_to_many :outfits
+
   default_scope { order('name ASC') }
 end

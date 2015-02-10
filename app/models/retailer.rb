@@ -16,6 +16,7 @@ class Retailer < ActiveRecord::Base
   has_many :tops, dependent: :destroy
   has_many :bottoms, dependent: :destroy
   has_many :dresses, dependent: :destroy
+  has_many :outfits, dependent: :destroy
   has_and_belongs_to_many :special_considerations
   has_one :online_presence, dependent: :destroy
   has_many :drop_in_availabilities, dependent: :destroy
