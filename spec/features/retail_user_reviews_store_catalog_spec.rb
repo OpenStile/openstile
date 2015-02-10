@@ -6,6 +6,7 @@ feature 'Retailer user reviews store catalog' do
   let!(:top){ FactoryGirl.create(:top, retailer: retailer) }
   let!(:bottom){ FactoryGirl.create(:bottom, retailer: retailer) }
   let!(:dress){ FactoryGirl.create(:dress, retailer: retailer) }
+  let!(:outfit){ FactoryGirl.create(:outfit, retailer: retailer) }
 
   scenario 'to see offerings' do
     given_i_am_a_logged_in_retail_user retail_user
@@ -13,6 +14,7 @@ feature 'Retailer user reviews store catalog' do
     then_i_should_see_product top
     then_i_should_see_product bottom
     then_i_should_see_product dress
+    then_i_should_see_product outfit
     then_i_should_see_product retailer
   end
 

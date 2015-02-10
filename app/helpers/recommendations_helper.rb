@@ -3,18 +3,20 @@ module RecommendationsHelper
   ITEM_PRICE_RANGE_FUZZ = 50
   
   def process_recommendations shopper
-    retailer_size_matches, item_size_matches = matches_for_size shopper.style_profile
-    retailer_budget_matches, item_budget_matches = matches_for_budget shopper.style_profile
-    retailer_look_matches, item_look_matches = matches_for_look shopper.style_profile
-    item_coverage_matches = matches_for_coverage shopper.style_profile
-    item_color_matches = matches_for_color shopper.style_profile
-    item_print_matches = matches_for_print shopper.style_profile
+    retailer_size_matches, item_size_matches, outfit_size_matches = matches_for_size shopper.style_profile
+    retailer_budget_matches, item_budget_matches, outfit_budget_matches = matches_for_budget shopper.style_profile
+    retailer_look_matches, item_look_matches, outfit_look_matches = matches_for_look shopper.style_profile
+    item_coverage_matches, outfit_coverage_matches = matches_for_coverage shopper.style_profile
+    item_color_matches, outfit_color_matches = matches_for_color shopper.style_profile
+    item_print_matches, outfit_print_matches = matches_for_print shopper.style_profile
 
     retailer_matches = (retailer_size_matches & retailer_budget_matches & retailer_look_matches) 
     item_matches = (item_size_matches & item_budget_matches & item_look_matches & 
                             item_coverage_matches & item_color_matches & item_print_matches) 
+    outfit_matches = (outfit_size_matches & outfit_budget_matches & outfit_look_matches &
+                            outfit_coverage_matches & outfit_color_matches & outfit_print_matches)
 
-    process_rankings(shopper.style_profile, (retailer_matches + item_matches))
+    process_rankings(shopper.style_profile, (retailer_matches + item_matches + outfit_matches))
   end
   
   def process_rankings style_profile, recommendations
@@ -45,11 +47,13 @@ module RecommendationsHelper
 
     retailers = (top_sizes + bottom_sizes + dress_sizes).map(&:retailers).flatten.uniq
 
+    outfits = (top_sizes + bottom_sizes + dress_sizes).map(&:outfits).flatten.uniq
+   
     tops = top_sizes.map(&:tops).flatten.uniq
     bottoms = bottom_sizes.map(&:bottoms).flatten.uniq
     dresses = dress_sizes.map(&:dresses).flatten.uniq
     
-    [retailers, (tops + bottoms + dresses)]
+    [retailers, (tops + bottoms + dresses), outfits]
   end
 
   def matches_for_budget style_profile
@@ -63,7 +67,8 @@ module RecommendationsHelper
     bottoms = Bottom.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
     dresses = Dress.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
     
-    [retailers, (tops + bottoms + dresses)]
+    outfits = Outfit.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
+    [retailers, (tops + bottoms + dresses), outfits]
   end
 
   def matches_for_look style_profile
@@ -73,7 +78,9 @@ module RecommendationsHelper
     bottoms = Bottom.where(look_id: nil) + Bottom.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).pluck(:look_id))
     dresses = Dress.where(look_id: nil) + Dress.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).pluck(:look_id))
     
-    [retailers, (tops + bottoms + dresses)]
+    outfits = Outfit.where(look_id: nil) + Outfit.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).pluck(:look_id))
+
+    [retailers, (tops + bottoms + dresses), outfits]
   end
 
   def matches_for_coverage style_profile
@@ -86,8 +93,11 @@ module RecommendationsHelper
     dresses = Dress.where.not(id: Dress.joins(:exposed_parts)
                                        .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
                                        .pluck(:id))
+    outfits = Outfit.where.not(id: Outfit.joins(:exposed_parts)
+                                       .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
+                                       .pluck(:id))
 
-    tops + bottoms + dresses
+    [(tops + bottoms + dresses), outfits]
   end
 
   def matches_for_color style_profile
@@ -95,7 +105,9 @@ module RecommendationsHelper
     bottoms = Bottom.where(color_id: nil) + Bottom.where.not(color_id: style_profile.avoided_color_ids)
     dresses = Dress.where(color_id: nil) + Dress.where.not(color_id: style_profile.avoided_color_ids)
 
-    tops + bottoms + dresses
+    outfits = Outfit.where.not(id: style_profile.avoided_colors.map(&:outfits).flatten.map(&:id))
+
+    [(tops + bottoms + dresses), outfits]
   end
 
   def matches_for_print style_profile
@@ -103,7 +115,9 @@ module RecommendationsHelper
     bottoms = Bottom.where(print_id: nil) + Bottom.where.not(print_id: PrintTolerance.hated_prints_for(style_profile.id).pluck(:print_id))
     dresses = Dress.where(print_id: nil) + Dress.where.not(print_id: PrintTolerance.hated_prints_for(style_profile.id).pluck(:print_id))
 
-    tops + bottoms + dresses
+    outfits = Outfit.where.not(id: PrintTolerance.hated_prints_for(style_profile.id).map{|pt| pt.print.outfits}.flatten.map(&:id))
+
+    [(tops + bottoms + dresses), outfits]
   end
 
   def evaluate_body_shape recommendation, style_profile
@@ -178,7 +192,8 @@ module RecommendationsHelper
 
   def evaluate_favorite_prints recommendation, style_profile
     return recommendation if recommendation[:object].is_a? Retailer
-    if PrintTolerance.favorite_prints_for(style_profile).pluck(:print_id).include?(recommendation[:object].print_id)
+    if PrintTolerance.favorite_prints_for(style_profile).pluck(:print_id) & 
+                      get_single_or_collection_ids(recommendation[:object], :print_id)
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "your Preferred Prints and Patterns"
     end
@@ -220,4 +235,17 @@ module RecommendationsHelper
   def recommendation_string recommendation
     "#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}"
   end
+
+  private
+    def get_single_or_collection_ids object, singular_id_method
+      ret = []
+      plural_id_method = singular_id_method.to_s.pluralize.to_sym
+      if object.respond_to? singular_id_method
+        ret << object.send(singular_id_method)
+      end
+      if object.respond_to? plural_id_method 
+        ret = ret + object.send(plural_id_method)
+      end
+      ret
+    end
 end

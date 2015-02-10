@@ -75,6 +75,22 @@ def when_i_set_my_style_profile_feelings_for_a_look_as look, partiality
   expect(page).to have_content('My Style Feed')
 end
 
+def when_i_set_my_style_profile_avoided_colors color, action
+  click_link 'Style Profile'
+
+  within(:css, "div.avoided-colors") do
+    if action == :check
+      check(color.name)
+    elsif action == :uncheck
+      uncheck(color.name)
+    end
+  end
+
+  click_button style_profile_save 
+
+  expect(page).to have_content('My Style Feed')
+end
+
 def then_my_style_feed_should_not_contain recommendation
   visit '/'
   expect(page).to_not have_content(recommendation.name)

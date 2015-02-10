@@ -10,6 +10,9 @@
           <h3><%= recommendation[:object].name %></h3><br />
           <% if recommendation[:object].is_a? Retailer %>
             <h4><%= recommendation[:object].location.neighborhood %></h4><br />
+          <% elsif recommendation[:object].is_a? Outfit %>
+            <h4><%= recommendation[:object].retailer.name %></h4>
+            <h4><%= recommendation[:object].price_description %></h4><br />
           <% else %>
             <h4><%= recommendation[:object].retailer.name %></h4>
             <h4><%= "$%6.2f" % recommendation[:object].price.to_f %></h4><br />

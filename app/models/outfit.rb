@@ -22,4 +22,13 @@ class Outfit < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 100 } 
   validates :price_description, presence: true, length: { maximum: 100 } 
   validates :description, presence: true, length: { maximum: 250 } 
+
+  def self.within_budget budget, fuzz
+    if budget.top_max_price.nil? || budget.bottom_max_price.nil? || budget.dress_max_price.nil?
+      return none
+    end
+    average_ceiling = (budget.top_max_price + budget.bottom_max_price + 
+                       budget.dress_max_price)/3
+    where("average_price <= ?", average_ceiling + fuzz)
+  end
 end
