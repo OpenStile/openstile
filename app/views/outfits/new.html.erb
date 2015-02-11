@@ -147,13 +147,13 @@
             </div>
           </div>
 
-          <%= f.label :top_fit %>
-          <%= f.select :top_fit,
+          <%= f.label :top_fit_id %>
+          <%= f.select :top_fit_id,
                 TopFit.all.map{|v| [v.name, v.id]},
                 {prompt: true}, class: "form-control" %>
 
-          <%= f.label :bottom_fit %>
-          <%= f.select :bottom_fit,
+          <%= f.label :bottom_fit_id %>
+          <%= f.select :bottom_fit_id,
                 BottomFit.all.map{|v| [v.name, v.id]},
                 {prompt: true}, class: "form-control" %>
 
