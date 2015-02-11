@@ -3,21 +3,32 @@ require 'rails_helper'
 feature 'Shopper schedule drop in' do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
+
   let(:top){ FactoryGirl.create(:top, retailer: retailer) }
   let(:bottom){ FactoryGirl.create(:bottom, retailer: retailer) }
   let(:dress){ FactoryGirl.create(:dress, retailer: retailer) }
   let(:outfit){ FactoryGirl.create(:outfit, retailer: retailer) }
   let(:pop_up_location){ FactoryGirl.create(:location, 
+  let(:pop_up_location){ FactoryGirl.create(:location,
                                   address: "1309 5th St. NE, Washington, DC 20002",
                                   neighborhood: "NoMa",
                                   short_title: "Crafty Bastards at Union Market") }
-  let!(:drop_in_availability) { 
+  let!(:drop_in_availability) {
     FactoryGirl.create(:drop_in_availability,
                        retailer: retailer,
                        location: pop_up_location,
                        start_time: tomorrow_morning,
                        end_time: tomorrow_evening)
   }
+
+  before do
+    ActionMailer::Base.delivery_method = :test
+    ActionMailer::Base.deliveries = []
+    @retail_user = retailer.create_retail_user(retailer_id: retailer.id,
+                                              email: "john@example.com",
+                                              password: "barbaz",
+                                              password_confirmation: "barbaz")
+  end
 
   scenario 'to browse a store' do
     baseline_calibration_for_shopper_and_retailers
@@ -31,6 +42,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
+    then_i_and_the_retail_user_should_receive_an_email
   end
 
   scenario 'to see a top' do
@@ -45,6 +57,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with top.retailer, "Tomorrow", place
+    then_i_and_the_retail_user_should_receive_an_email
     then_my_scheduled_should_show_item_on_hold top
   end
 
@@ -60,6 +73,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with bottom.retailer, "Tomorrow", place
+    then_i_and_the_retail_user_should_receive_an_email
     then_my_scheduled_should_show_item_on_hold bottom
   end
 
@@ -75,6 +89,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with dress.retailer, "Tomorrow", place
+    then_i_and_the_retail_user_should_receive_an_email
     then_my_scheduled_should_show_item_on_hold dress
   end
 
@@ -100,13 +115,13 @@ feature 'Shopper schedule drop in' do
     existing_drop_in = FactoryGirl.create(:drop_in, shopper: shopper,
                                                     retailer: retailer,
                                                     time: tomorrow_afternoon)
-    existing_drop_in_item = FactoryGirl.create(:drop_in_item, 
+    existing_drop_in_item = FactoryGirl.create(:drop_in_item,
                                                drop_in: existing_drop_in,
                                                reservable: top)
 
     given_i_am_a_logged_in_shopper shopper
     given_my_upcoming_drop_ins_page_contains existing_drop_in
-    when_i_continue_browsing   
+    when_i_continue_browsing
     when_i_select_a_recommendation dress
     then_i_should_see_i_have_an_existing_drop_in_scheduled existing_drop_in
     when_i_add_item_to_existing_drop_in
@@ -221,7 +236,7 @@ feature 'Shopper schedule drop in' do
       zone = "Eastern Time (US & Canada)"
       est_datetime_string = ActiveSupport::TimeZone[zone]
                                           .parse(datetime_string).to_s
-        
+
       est_datetime_string.split(' ').first(2)
     end
 end

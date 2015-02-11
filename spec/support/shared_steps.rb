@@ -36,7 +36,7 @@ def when_i_set_my_style_profile_sizes_to sizes
   within(:css, "div#dress_sizes") do
     check(sizes[:dress_size].name)
   end
-  click_button style_profile_save 
+  click_button style_profile_save
 
   expect(page).to have_content('My Style Feed')
 end
@@ -50,7 +50,7 @@ def when_i_set_my_style_profile_budget_to budget
     select(budget[:bottom], from: "A pair of pants or jeans:")
   end
 
-  click_button style_profile_save 
+  click_button style_profile_save
 
   expect(page).to have_content('My Style Feed')
 end
@@ -69,8 +69,8 @@ def when_i_set_my_style_profile_feelings_for_a_look_as look, partiality
       choose "I love it!"
     end
   end
- 
-  click_button style_profile_save 
+
+  click_button style_profile_save
 
   expect(page).to have_content('My Style Feed')
 end
@@ -107,8 +107,8 @@ def when_i_set_my_style_profile_body_shape_to body_shape
   within(:css, "div.body-shape") do
     choose("style_profile_body_shape_id_#{body_shape.id}")
   end
- 
-  click_button style_profile_save 
+
+  click_button style_profile_save
   expect(page).to have_content('My Style Feed')
 end
 
@@ -122,7 +122,7 @@ def when_i_set_my_style_profile_height_to height
     select "0", from: 'inches'
   end
 
-  click_button style_profile_save 
+  click_button style_profile_save
   expect(page).to have_content('My Style Feed')
 end
 
@@ -133,7 +133,7 @@ def when_i_set_my_style_profile_body_build_to build
     select build, from: 'Build'
   end
 
-  click_button style_profile_save 
+  click_button style_profile_save
   expect(page).to have_content('My Style Feed')
 end
 
@@ -149,7 +149,7 @@ def when_i_set_my_style_profile_preferred_fit_as fit, type
     end
   end
 
-  click_button style_profile_save 
+  click_button style_profile_save
   expect(page).to have_content('My Style Feed')
 end
 
@@ -171,7 +171,7 @@ end
 
 def when_i_set_my_style_profile_coverage_preference_as parts, tolerance
   click_link 'Style Profile'
- 
+
   parts.each do |part|
     within(:css, "div#part_#{part.id}") do
       if tolerance == :cover
@@ -185,8 +185,8 @@ def when_i_set_my_style_profile_coverage_preference_as parts, tolerance
       end
     end
   end
- 
-  click_button style_profile_save 
+
+  click_button style_profile_save
 
   expect(page).to have_content('My Style Feed')
 end
@@ -205,8 +205,8 @@ def when_i_set_my_style_profile_feelings_for_a_print_as print, partiality
       choose "Love"
     end
   end
- 
-  click_button style_profile_save 
+
+  click_button style_profile_save
 
   expect(page).to have_content('My Style Feed')
 end
@@ -238,4 +238,9 @@ def when_i_select_a_recommendation recommendation
   expect(page).to have_content(recommendation.description)
 end
 
+def then_i_and_the_retail_user_should_receive_an_email
+  expect(ActionMailer::Base.deliveries.length).to eq(2)
+  expect(ActionMailer::Base.deliveries.first.to).to include(@retail_user.email)
+  expect(ActionMailer::Base.deliveries.second.to).to include(shopper.email)
+end
 
