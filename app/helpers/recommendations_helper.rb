@@ -192,8 +192,8 @@ module RecommendationsHelper
 
   def evaluate_favorite_prints recommendation, style_profile
     return recommendation if recommendation[:object].is_a? Retailer
-    if PrintTolerance.favorite_prints_for(style_profile).pluck(:print_id) & 
-                      get_single_or_collection_ids(recommendation[:object], :print_id)
+    unless (PrintTolerance.favorite_prints_for(style_profile).pluck(:print_id) & 
+            get_single_or_collection_ids(recommendation[:object], :print_id)).empty?
       recommendation[:priority] = recommendation[:priority] + 1
       recommendation[:justification] << "your Preferred Prints and Patterns"
     end
