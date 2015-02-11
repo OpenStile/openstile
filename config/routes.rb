@@ -46,6 +46,8 @@ Rails.application.routes.draw do
 
   resources :dresses, only: [:show, :new, :create]
 
+  resources :outfits, only: [:show]
+
   resources :drop_ins, only: [:create, :update, :destroy] do
     collection do
       get :upcoming

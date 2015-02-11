@@ -6,6 +6,7 @@ feature 'Shopper schedule drop in' do
   let(:top){ FactoryGirl.create(:top, retailer: retailer) }
   let(:bottom){ FactoryGirl.create(:bottom, retailer: retailer) }
   let(:dress){ FactoryGirl.create(:dress, retailer: retailer) }
+  let(:outfit){ FactoryGirl.create(:outfit, retailer: retailer) }
   let(:pop_up_location){ FactoryGirl.create(:location, 
                                   address: "1309 5th St. NE, Washington, DC 20002",
                                   neighborhood: "NoMa",
@@ -77,8 +78,24 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_should_show_item_on_hold dress
   end
 
+  scenario 'to see an outfit' do
+    baseline_calibration_for_shopper_and_outfits
+
+    date, time = parse_date_and_EST(tomorrow_afternoon)
+    place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_select_a_recommendation outfit
+    when_i_attempt_to_schedule_with_invalid_options outfit
+    then_i_should_not_be_taken_to_my_scheduled_drop_ins
+    when_i_attempt_to_schedule_with_valid_options date, time
+    then_my_scheduled_drop_ins_should_be_updated_with outfit.retailer, "Tomorrow", place
+    then_my_scheduled_should_show_item_on_hold outfit
+  end
+
   scenario 'to see an additional item' do
     baseline_calibration_for_shopper_and_items
+    baseline_calibration_for_shopper_and_outfits
 
     existing_drop_in = FactoryGirl.create(:drop_in, shopper: shopper,
                                                     retailer: retailer,
@@ -95,6 +112,13 @@ feature 'Shopper schedule drop in' do
     when_i_add_item_to_existing_drop_in
     then_my_scheduled_should_show_item_on_hold top
     then_my_scheduled_should_show_item_on_hold dress
+    when_i_continue_browsing   
+    when_i_select_a_recommendation outfit
+    then_i_should_see_i_have_an_existing_drop_in_scheduled existing_drop_in
+    when_i_add_item_to_existing_drop_in
+    then_my_scheduled_should_show_item_on_hold top
+    then_my_scheduled_should_show_item_on_hold dress
+    then_my_scheduled_should_show_item_on_hold outfit
   end
 
   def when_i_attempt_to_schedule_with_invalid_options recommendation
@@ -143,7 +167,7 @@ feature 'Shopper schedule drop in' do
   end
 
   def when_i_add_item_to_existing_drop_in
-    click_button 'Yes, I want to see this item!'
+    click_button 'Yes, I want to see this!'
 
     expect(page).to have_content('My Drop-Ins')
   end
@@ -177,6 +201,19 @@ feature 'Shopper schedule drop in' do
       top.update!(price: 75.00)
       bottom.update!(price: 75.00)
       dress.update!(price: 75.00)
+    end
+
+    def baseline_calibration_for_shopper_and_outfits
+      shared_top_size = FactoryGirl.create(:top_size)
+
+      shopper.style_profile.top_sizes << shared_top_size
+      outfit.top_sizes << shared_top_size
+
+      shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00,
+                                     bottom_min_price: 50.00, bottom_max_price: 100.00,
+                                     dress_min_price: 50.00, dress_max_price: 100.00)
+
+      outfit.update!(average_price: 75.00)
     end
 
     def parse_date_and_EST datetime

@@ -214,6 +214,8 @@ module RecommendationsHelper
       return Bottom.find_by_id(parts[2])
     when 'dresses'
       return Dress.find_by_id(parts[2])
+    when 'outfits'
+      return Outfit.find_by_id(parts[2])
     when 'retailers'
       return Retailer.find_by_id(parts[2])
     else

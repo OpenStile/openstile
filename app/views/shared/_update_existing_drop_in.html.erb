@@ -5,7 +5,8 @@
       <h2>We see you have a drop-in scheduled for <%= retailer.name %><h2>
       <br />
       <p>
-        If it's available would you like to us to pull this item
+        If it's available would you like to us to pull this 
+        <%= item.is_a?(Outfit) ? 'outfit' : 'item'%>
         for your drop in <%= drop_in.colloquial_time %>?
       </p>
     </div>
@@ -19,7 +20,7 @@
           <%= drop_in_item_fields.hidden_field :reservable_type %>
         <% end %>
 
-        <%= f.submit 'Yes, I want to see this item!', class: 'btn btn-lg btn-primary' %>
+        <%= f.submit 'Yes, I want to see this!', class: 'btn btn-lg btn-primary' %>
       <% end %>
     </div>
   </div>

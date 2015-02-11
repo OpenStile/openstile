@@ -11,5 +11,8 @@
 <% elsif object.is_a? Dress %>
   <%= link_to button_text, dress_path(object), 
                            class: 'btn btn-lg btn-primary' %>
+<% elsif object.is_a? Outfit %>
+  <%= link_to button_text, outfit_path(object), 
+                           class: 'btn btn-lg btn-primary' %>
 <% else %>
 <% end %>
