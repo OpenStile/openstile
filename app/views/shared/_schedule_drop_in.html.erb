@@ -9,11 +9,12 @@
           you're sure to love! When you come in, just tell us your name.
         </p>
       <% else %>
-        <h2>Like this item? Schedule a drop-in to see more from this store</h2><br />
+        <% type = item.is_a?(Outfit) ? 'outfit' : 'item' %>
+        <h2>Like this <%= type %>? Schedule a drop-in to see more from this store</h2><br />
         <p>
           Based on your personal style we'll pick out a few items and outfits 
-          you're sure to love! Also, if this item is still available, we'll pull it for you in your size.
-          When you come in, just tell us your name.
+          you're sure to love! Also, if this <%= type %> is still available, 
+          we'll pull it for you in your size. When you come in, just tell us your name.
         </p>
       <% end %>
     </div>

@@ -37,6 +37,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
   it { should respond_to :image_name }
+  it { should respond_to :outfits }
   it { should be_valid }
 
   context "when name is not present" do
@@ -180,6 +181,20 @@ RSpec.describe Retailer, :type => :model do
       @retailer.destroy
       expect(retail_user).to_not be_nil
       expect(RetailUser.where(id: retail_user.id)).to be_empty
+    end
+  end
+
+  describe "outfits association" do
+    before { @retailer.save }
+    let!(:outfit){ FactoryGirl.create(:outfit, retailer: @retailer) }
+
+    it "should destroy associated outfit" do
+      retailer_outfits = @retailer.outfits.to_a
+      @retailer.destroy
+      expect(retailer_outfits).to_not be_empty
+      retailer_outfits.each do |o|
+        expect(Outfit.where(id: o.id)).to be_empty
+      end
     end
   end
 

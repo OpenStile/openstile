@@ -124,22 +124,6 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  def when_i_set_my_style_profile_avoided_colors color, action
-    click_link 'Style Profile'
-
-    within(:css, "div.avoided-colors") do
-      if action == :check
-        check(color.name)
-      elsif action == :uncheck
-        uncheck(color.name)
-      end
-    end
-
-    click_button style_profile_save 
-
-    expect(page).to have_content('My Style Feed')
-  end
-
   private
     def set_primary_print_for_items print
       top.update!(print_id: print.id)

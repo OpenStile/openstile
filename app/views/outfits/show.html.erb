@@ -1,0 +1,36 @@
+<% provide(:title, @outfit.name) %>
+
+<%= render "shared/header" %>
+
+<div class="recommendation-details block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
+        <%= image_tag("recommendations/#{@outfit.image_name}.jpg",
+                                          class: "img-responsive")%>
+      </div>
+      <div class="col-md-5 col-xs-5 text-center">
+        <hr>
+        <h1><%= @outfit.name %></h1><br />
+        <h2><%= @outfit.price_description %></h2><br />
+        <h2><%= link_to @outfit.retailer.name, retailer_path(@outfit.retailer) %></h2><br />
+        <h4><%= @outfit.description %></h4>
+        <hr>
+      </div>
+    </div>
+
+    <% if shopper_signed_in? %>
+      <% existing_drop_in = DropIn.upcoming_for_shopper_at_retailer(current_shopper.id, @outfit.retailer.id).first %>
+      <% if existing_drop_in.nil? %>
+        <%= render 'shared/schedule_drop_in', retailer: @outfit.retailer, 
+                                              for_retailer: false,
+                                              item: @outfit %>
+      <% else %>
+        <%= render 'shared/update_existing_drop_in', retailer: @outfit.retailer,
+                                                     drop_in: existing_drop_in,
+                                                     item: @outfit %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+

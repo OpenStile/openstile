@@ -23,7 +23,7 @@
         recommendations.
       </p>
     </div>
-    <% collection = [@retailer] + @retailer.tops + 
+    <% collection = [@retailer] + @retailer.outfits + @retailer.tops + 
                     @retailer.bottoms + @retailer.dresses %>
     <%= render 'shared/recommendation_feed', 
                 list: collection.map{|rec| {object: rec, justification: []}} %>
