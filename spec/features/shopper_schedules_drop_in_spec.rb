@@ -8,7 +8,6 @@ feature 'Shopper schedule drop in' do
   let(:bottom){ FactoryGirl.create(:bottom, retailer: retailer) }
   let(:dress){ FactoryGirl.create(:dress, retailer: retailer) }
   let(:outfit){ FactoryGirl.create(:outfit, retailer: retailer) }
-  let(:pop_up_location){ FactoryGirl.create(:location, 
   let(:pop_up_location){ FactoryGirl.create(:location,
                                   address: "1309 5th St. NE, Washington, DC 20002",
                                   neighborhood: "NoMa",
