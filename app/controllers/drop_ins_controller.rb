@@ -16,11 +16,14 @@ class DropInsController < ApplicationController
 
     @drop_in = DropIn.new(retrieved_params)
 
-    if @drop_in.save 
+    recommendation = retrieve_recommendation_object
+    if @drop_in.save
+      retailer = @drop_in.retailer
+      RetailUserMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
+      ShopperMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
       flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
       redirect_to upcoming_drop_ins_path
     else
-      recommendation = retrieve_recommendation_object
       if recommendation.is_a? Retailer
         @retailer = recommendation
         render 'retailers/show'
@@ -51,6 +54,9 @@ class DropInsController < ApplicationController
   end
 
   def destroy
+    retailer = @drop_in.retailer
+    RetailUserMailer.drop_in_canceled_email(retailer, current_shopper, @drop_in).deliver
+    ShopperMailer.drop_in_canceled_email(retailer, current_shopper, @drop_in).deliver
     @drop_in.destroy
     flash[:success] = "Drop in cancelled. Retailer will be notified"
     redirect_to upcoming_drop_ins_path
