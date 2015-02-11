@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150210151604) do
+ActiveRecord::Schema.define(version: 20150211114221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20150210151604) do
     t.boolean  "for_tall"
     t.boolean  "for_full_figured"
     t.integer  "bottom_fit_id"
+    t.integer  "status"
   end
 
   add_index "bottoms", ["body_shape_id"], name: "index_bottoms_on_body_shape_id", using: :btree
@@ -204,6 +205,7 @@ ActiveRecord::Schema.define(version: 20150210151604) do
     t.boolean  "for_full_figured"
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
+    t.integer  "status"
   end
 
   add_index "dresses", ["body_shape_id"], name: "index_dresses_on_body_shape_id", using: :btree
@@ -333,6 +335,7 @@ ActiveRecord::Schema.define(version: 20150210151604) do
     t.decimal  "average_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status"
   end
 
   add_index "outfits", ["body_shape_id"], name: "index_outfits_on_body_shape_id", using: :btree
@@ -447,6 +450,7 @@ ActiveRecord::Schema.define(version: 20150210151604) do
     t.integer  "location_id"
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
+    t.integer  "status"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
@@ -588,6 +592,7 @@ ActiveRecord::Schema.define(version: 20150210151604) do
     t.boolean  "for_tall"
     t.boolean  "for_full_figured"
     t.integer  "top_fit_id"
+    t.integer  "status"
   end
 
   add_index "tops", ["body_shape_id"], name: "index_tops_on_body_shape_id", using: :btree

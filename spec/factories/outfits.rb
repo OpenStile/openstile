@@ -14,5 +14,6 @@ FactoryGirl.define do
     top_fit nil
     bottom_fit nil
     average_price "60.00"
+    status 1
   end
 end

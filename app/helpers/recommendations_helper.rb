@@ -22,6 +22,7 @@ module RecommendationsHelper
   def process_rankings style_profile, recommendations
     results = []
     recommendations.each do |recommendation_object|
+      next unless recommendation_object.live?
       recommendation = {priority: 0, 
                         justification: [], 
                         object: recommendation_object}

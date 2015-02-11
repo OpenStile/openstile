@@ -1,5 +1,6 @@
 class Bottom < ActiveRecord::Base
   include ImageName
+  include StatusLive
 
   belongs_to :retailer
   belongs_to :look

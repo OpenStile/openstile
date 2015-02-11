@@ -100,6 +100,15 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain outfit
   end
 
+  scenario 'when outfit is not live' do
+    calibrate_shopper_and_outfit_except_for :do_all
+
+    outfit.update!(status: 0)
+
+    given_i_am_a_logged_in_shopper shopper
+    then_my_style_feed_should_not_contain outfit
+  end
+
   private
     def calibrate_shopper_and_outfit_except_for tested_property
       unless tested_property == :hated_look

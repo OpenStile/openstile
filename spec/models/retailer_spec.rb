@@ -38,6 +38,8 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :retail_user }
   it { should respond_to :image_name }
   it { should respond_to :outfits }
+  it { should respond_to :status }
+  it { should respond_to :live? }
   it { should be_valid }
 
   context "when name is not present" do
@@ -195,6 +197,18 @@ RSpec.describe Retailer, :type => :model do
       retailer_outfits.each do |o|
         expect(Outfit.where(id: o.id)).to be_empty
       end
+    end
+  end
+
+  describe "status" do
+    context "when not set" do
+      before { @retailer.status = nil }
+      it { should_not be_live }
+    end
+
+    context "when it is 1" do
+      before { @retailer.status = 1 }
+      it { should be_live }
     end
   end
 

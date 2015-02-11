@@ -36,6 +36,8 @@ RSpec.describe Outfit, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
   it { should respond_to :image_name }
+  it { should respond_to :status }
+  it { should respond_to :live? }
   it { should be_valid }
 
   context "when retailer is not present" do
@@ -117,6 +119,26 @@ RSpec.describe Outfit, :type => :model do
       expect(exposed_parts).to_not be_empty
       exposed_parts.each do |ep|
         expect(ExposedPart.where(id: ep.id)).to be_empty
+      end
+    end
+  end
+
+  describe "status" do
+    before { @outfit.retailer.status = 1 }
+
+    context "when not set" do
+      before { @outfit.status = nil }
+      it { should_not be_live }
+    end
+
+    context "when it is 1" do
+      before { @outfit.status = 1 }
+
+      it { should be_live }
+
+      context "and retailer status not set to 1" do
+        before { @outfit.retailer.status = 0 }
+        it { should_not be_live }
       end
     end
   end
