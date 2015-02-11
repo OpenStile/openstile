@@ -13,10 +13,13 @@ feature 'Admin user manages system' do
   let!(:size4){ FactoryGirl.create(:dress_size, name: 'XS', category: 'alpha')}
   let!(:look){ FactoryGirl.create(:look, name: 'Glam_Diva') }
   let!(:print){ FactoryGirl.create(:print, name: 'Animal Prints') }
+  let!(:print2){ FactoryGirl.create(:print, name: 'Bold Patterns') }
   let!(:color){ FactoryGirl.create(:print, name: 'Green') }
+  let!(:color2){ FactoryGirl.create(:print, name: 'Brown') }
   let!(:shape){ FactoryGirl.create(:body_shape, name: 'Hourglass') }
   let!(:top_fit){ FactoryGirl.create(:top_fit, name: 'Oversized') }
   let!(:bottom_fit){ FactoryGirl.create(:bottom_fit, name: 'Loose/Flowy') }
+  let!(:midsection){ FactoryGirl.create(:part, name: 'Midsection') }
 
   scenario 'creates new retailer' do
     name = "ABC Boutique"
@@ -66,6 +69,18 @@ feature 'Admin user manages system' do
     then_the_retailers_catalog_page_should_contain retailer, dress_name
   end
 
+  scenario 'creates new outfit' do
+    name = "Checkered print skirt with satin blouse"
+    retailer = FactoryGirl.create(:retailer)
+
+    given_i_am_a_logged_in_admin admin
+    when_i_go_to_create_an_outfit_for_retailer retailer
+    when_i_submit_with_invalid_information
+    then_it_should_fail_to_add_outfit
+    when_i_submit_outfit_with_valid_information name
+    then_the_retailers_catalog_page_should_contain retailer, name
+  end
+
   def given_the_existing_retailers_page_is_empty
     click_link 'Manage retailers'
 
@@ -109,6 +124,16 @@ feature 'Admin user manages system' do
     expect(page).to have_content('Enter bottom information')
   end
 
+  def when_i_go_to_create_an_outfit_for_retailer retailer
+    click_link 'Manage retailers'
+
+    within(:css, "#retailer_#{retailer.id}") do
+      click_link 'Add outfit'
+    end
+
+    expect(page).to have_content('Enter outfit information')
+  end
+
   def when_i_submit_with_invalid_information
     click_button 'Add'
   end
@@ -130,6 +155,11 @@ feature 'Admin user manages system' do
 
   def then_it_should_fail_to_add_dress
     expect(page).to have_content('Enter dress information')
+    expect(page).to have_content('error')
+  end
+
+  def then_it_should_fail_to_add_outfit
+    expect(page).to have_content('Enter outfit information')
     expect(page).to have_content('error')
   end
 
@@ -174,6 +204,28 @@ feature 'Admin user manages system' do
     select 'Loose/Flowy', from: 'Bottom fit' unless type==:top
     check 'Local designers'
     check 'XS'
+
+    click_button 'Add'
+  end
+
+  def when_i_submit_outfit_with_valid_information name
+    fill_in 'Name', with: name
+    fill_in 'Description', with: 'This is an outfit created for demo purposes.'
+    fill_in 'Price description', with: 'Skirt $59.00 - Shirt $45.00'
+    fill_in 'Average price', with: 52.00
+    choose 'Glam_Diva'
+    check 'Animal Prints'
+    check 'Bold Patterns'
+    check 'Green'
+    check 'Brown'
+    choose 'Hourglass'
+    check 'For petite'
+    select 'Oversized', from: 'Top fit'
+    select 'Loose/Flowy', from: 'Bottom fit'
+    check 'Local designers'
+    within(:css, '.bottom-sizes') do
+      check 'XS'
+    end
 
     click_button 'Add'
   end
