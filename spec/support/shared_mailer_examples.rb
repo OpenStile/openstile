@@ -3,6 +3,7 @@ shared_examples "a_well_tested_mailer" do
   let(:full_subject) { "#{asserted_subject}" }
   let(:recipient) { "#{asserted_recipient}" }
   let(:mail_method) { asserted_mail_method }
+  let(:body) { asserted_body }
 
   it "renders the headers" do
     expect(mail_method.content_type).to start_with('multipart/alternative') #html / text support
@@ -20,8 +21,8 @@ shared_examples "a_well_tested_mailer" do
     expect(mail_method.to).to include(recipient)
   end
 
-  it "includes asserted_body in the body of the email" do
-    asserted_body.each do |content|
+  it "includes body in the body of the email" do
+    body.each do |content|
       expect(mail_method.body.encoded).to match(content)
     end
   end
