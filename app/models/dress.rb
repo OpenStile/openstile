@@ -24,7 +24,6 @@ class Dress < ActiveRecord::Base
     if budget.dress_min_price.nil? or budget.dress_max_price.nil?
       return none
     end
-    where("price >= ? and price <= ?", budget.dress_min_price - fuzz,
-                                       budget.dress_max_price + fuzz)
+    where("price >= ? and price <= ?", 0, budget.dress_max_price + fuzz)
   end
 end

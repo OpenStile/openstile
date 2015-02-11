@@ -23,7 +23,6 @@ class Bottom < ActiveRecord::Base
     if budget.bottom_min_price.nil? or budget.bottom_max_price.nil?
       return none
     end
-    where("price >= ? and price <= ?", budget.bottom_min_price - fuzz,
-                                       budget.bottom_max_price + fuzz)
+    where("price >= ? and price <= ?", 0, budget.bottom_max_price + fuzz)
   end
 end
