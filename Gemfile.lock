@@ -76,6 +76,7 @@ GEM
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
     erubis (2.7.0)
+    excon (0.44.1)
     execjs (2.2.1)
     factory_girl (3.5.0)
       activesupport (>= 3.0.0)
@@ -99,6 +100,9 @@ GEM
     libv8 (3.16.14.7)
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
+    mandrill-api (1.0.53)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
     mime-types (2.4.1)
     mini_portile (0.6.0)
     minitest (5.4.2)
@@ -214,6 +218,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
+  mandrill-api
   newrelic_rpm
   pg (= 0.17.1)
   poltergeist
