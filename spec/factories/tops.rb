@@ -7,5 +7,6 @@ FactoryGirl.define do
     web_link "http://see-this-blouse.com"
     price 9.99
     retailer
+    status 1
   end
 end

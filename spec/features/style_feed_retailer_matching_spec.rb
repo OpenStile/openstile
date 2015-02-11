@@ -48,6 +48,15 @@ feature 'Style Feed retailer matching' do
     then_my_style_feed_should_contain retailer
   end
 
+  scenario 'when retailer is not live' do
+    calibrate_shopper_and_retailer_except_for :do_all
+
+    retailer.update!(status: 0)
+
+    given_i_am_a_logged_in_shopper shopper
+    then_my_style_feed_should_not_contain retailer
+  end
+
   private
     
     def seed_sizes size_hash

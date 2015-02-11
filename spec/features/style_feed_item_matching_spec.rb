@@ -124,6 +124,19 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
+  scenario 'when items are not live' do
+    calibrate_shopper_and_items_except_for :do_all
+
+    top.update!(status: 0)
+    bottom.update!(status: 0)
+    dress.update!(status: 0)
+
+    given_i_am_a_logged_in_shopper shopper
+    then_my_style_feed_should_not_contain top
+    then_my_style_feed_should_not_contain bottom
+    then_my_style_feed_should_not_contain dress
+  end
+
   private
     def set_primary_print_for_items print
       top.update!(print_id: print.id)
