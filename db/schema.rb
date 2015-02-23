@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211114221) do
+ActiveRecord::Schema.define(version: 20150220053749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -226,12 +226,14 @@ ActiveRecord::Schema.define(version: 20150211114221) do
 
   create_table "drop_in_availabilities", force: true do |t|
     t.integer  "retailer_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.integer  "bandwidth"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
+    t.time     "start_time"
+    t.time     "end_time"
+    t.string   "frequency"
+    t.date     "template_date"
   end
 
   add_index "drop_in_availabilities", ["location_id"], name: "index_drop_in_availabilities_on_location_id", using: :btree

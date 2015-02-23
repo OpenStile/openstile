@@ -92,10 +92,8 @@ RSpec.describe Dress, :type => :model do
   describe "drop in item association" do
     before { @dress.save }
     let!(:drop_in_availability) do 
-      FactoryGirl.create(:drop_in_availability,
-                         retailer: retailer,
-                         start_time: tomorrow_morning,
-                         end_time: tomorrow_afternoon)
+      FactoryGirl.create(:standard_availability_for_tomorrow,
+                         retailer: retailer)
     end
     let(:drop_in){ FactoryGirl.create(:drop_in, 
                                       retailer: retailer,

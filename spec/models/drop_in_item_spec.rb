@@ -2,10 +2,8 @@ require 'rails_helper'
 
 RSpec.describe DropInItem, :type => :model do
   let(:retailer){ FactoryGirl.create(:retailer) }
-  let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
-                                                  retailer: retailer,
-                                                  start_time: tomorrow_morning,
-                                                  end_time: tomorrow_afternoon) }
+  let!(:drop_in_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
+                                                  retailer: retailer) }
   let(:drop_in){ FactoryGirl.create(:drop_in, retailer: retailer,
                                               time: tomorrow_mid_morning) }
   let(:top){ FactoryGirl.create(:top, retailer: retailer) }

@@ -12,17 +12,17 @@ def style_profile_save
 end
 
 def tomorrow_morning
-  DateTime.current.at_beginning_of_day.advance(days: 1)
+  DateTime.current.advance(days: 1).change(hour: 9)
 end
 
 def tomorrow_mid_morning
-  DateTime.current.at_beginning_of_day.advance(days: 1, hours: 1)
+  DateTime.current.advance(days: 1).change(hour: 10)
 end
 
 def tomorrow_afternoon
-  DateTime.current.at_midday.advance(days: 1)
+  DateTime.current.advance(days: 1).change(hour: 13)
 end
 
 def tomorrow_evening
-  DateTime.current.at_midday.advance(days: 1, hours: 2)
+  DateTime.current.advance(days: 1).change(hour: 17)
 end

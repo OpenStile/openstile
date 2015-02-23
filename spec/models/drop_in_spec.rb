@@ -4,11 +4,8 @@ RSpec.describe DropIn, :type => :model do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
   let!(:drop_in_availability) { 
-    FactoryGirl.create(:drop_in_availability, 
-                       retailer: retailer,
-                       start_time: tomorrow_morning,
-                       end_time: tomorrow_afternoon,
-                       bandwidth: 2)
+    FactoryGirl.create(:standard_availability_for_tomorrow, 
+                       retailer: retailer)
   }
   before { @drop_in = shopper.drop_ins.build(retailer_id: retailer.id,
                                              time: tomorrow_mid_morning) }
