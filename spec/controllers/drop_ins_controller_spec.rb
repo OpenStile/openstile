@@ -5,10 +5,8 @@ RSpec.describe DropInsController, :type => :controller do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
   let(:retail_user){ FactoryGirl.create(:retail_user) }
-  let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
-                                                  retailer: retailer,
-                                                  start_time: tomorrow_morning,
-                                                  end_time: tomorrow_evening) }
+  let!(:drop_in_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
+                                                  retailer: retailer)}
   let(:drop_in){ FactoryGirl.create(:drop_in,
                                     retailer: retailer,
                                     shopper: shopper,

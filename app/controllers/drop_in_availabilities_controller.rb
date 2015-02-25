@@ -11,7 +11,7 @@ class DropInAvailabilitiesController < ApplicationController
     @drop_in_availability = current_retail_user
                              .retailer
                              .drop_in_availabilities
-                             .build(drop_in_availability_params.merge(start_and_end_params))
+                             .build(drop_in_availability_params)
 
     if !destroy_drop_in_availability? && @drop_in_availability.save
       flash[:success] = "Your drop-in availability has been updated"
@@ -49,7 +49,8 @@ class DropInAvailabilitiesController < ApplicationController
 
   private
     def drop_in_availability_params
-      params.require(:drop_in_availability).permit(:bandwidth, :location_id)
+      params.require(:drop_in_availability).permit(:bandwidth, :frequency, :location_id, 
+                                                   :template_date, :start_time, :end_time)
     end
 
     def destroy_drop_in_availability?
