@@ -226,13 +226,20 @@ RSpec.describe Retailer, :type => :model do
       let!(:availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                retailer: @retailer)}
       it "should return the date" do
-        expect(@retailer.get_available_drop_in_dates(:integer_array).size).to eq(1)
-        expect(@retailer.get_available_drop_in_dates(:integer_array)[0][0]).to eq(1.day.from_now.year)
-        expect(@retailer.get_available_drop_in_dates(:integer_array)[0][1]).to eq(1.day.from_now.month - 1)
-        expect(@retailer.get_available_drop_in_dates(:integer_array)[0][2]).to eq(1.day.from_now.day)
+        returned_array_dates = @retailer.get_available_drop_in_dates(:integer_array, 
+                                                                1.day.from_now.beginning_of_month.to_date,
+                                                                1.day.from_now.end_of_month.to_date)
+
+        returned_string_dates = @retailer.get_available_drop_in_dates(:date_string, 
+                                                                1.day.from_now.beginning_of_month.to_date,
+                                                                1.day.from_now.end_of_month.to_date)
+        expect(returned_array_dates.size).to eq(1)
+        expect(returned_array_dates[0][0]).to eq(1.day.from_now.year)
+        expect(returned_array_dates[0][1]).to eq(1.day.from_now.month - 1)
+        expect(returned_array_dates[0][2]).to eq(1.day.from_now.day)
     
-        expect(@retailer.get_available_drop_in_dates(:date_string).size).to eq(1)
-        expect(@retailer.get_available_drop_in_dates(:date_string).first).to eq(1.day.from_now.to_date.to_s)
+        expect(returned_string_dates.size).to eq(1)
+        expect(returned_string_dates.first).to eq(1.day.from_now.to_date.to_s)
       end
     end
 

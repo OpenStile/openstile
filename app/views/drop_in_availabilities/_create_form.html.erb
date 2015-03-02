@@ -25,18 +25,21 @@
     <%= f.label :frequency %>
     <%= f.select :frequency, 
      [[DropInAvailability::ONE_TIME_FREQUENCY, DropInAvailability::ONE_TIME_FREQUENCY],
-      [DropInAvailability::WEEKLY_FREQUENCY, DropInAvailability::WEEKLY_FREQUENCY],
+      [(date.blank? ? "Weekly" : "Every #{DateTime.parse(date).strftime('%A')}"), 
+                                            DropInAvailability::WEEKLY_FREQUENCY],
       [DropInAvailability::DAILY_FREQUENCY, DropInAvailability::DAILY_FREQUENCY]],
       class: "form-control" %>
 
 
     <%= f.label :start_time, class: "sr-only" %>
     <%= f.text_field :start_time, class: "form-control timepicker", 
-                      placeholder: "Start time" %>
+                      placeholder: "Start time",
+                      value: '' %>
 
     <%= f.label :end_time, class: "sr-only" %>
     <%= f.text_field :end_time, class: "form-control timepicker", 
-                      placeholder: "End time" %>
+                      placeholder: "End time",
+                      value: '' %>
 
     <%= f.label :bandwidth, 'How many shoppers can you handle?' %>
     <%= f.select :bandwidth, (1..5).map{|v| ["#{v} at a time", v.to_s]}, 
@@ -45,6 +48,6 @@
     <%= f.hidden_field :location_id, 
                         value: current_retail_user.retailer.location.id %>
   </div>
-  <%= submit_tag "Save", class: "btn btn-lg btn-primary col-md-6 col-xs-6"%>
+  <%= submit_tag "Add", class: "btn btn-lg btn-primary col-md-6 col-xs-6"%>
 <% end %>
 

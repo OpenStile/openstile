@@ -69,8 +69,7 @@ class Retailer < ActiveRecord::Base
   end
 
   def get_drop_in_location date_string
-    parsed_date = DateTime.parse(date_string).to_date 
-    availability = drop_in_availabilities.order('created_at DESC').find{|a| a.covers_date? parsed_date }
+    availability = get_relevant_availability date_string 
     return nil if availability.nil?
     availability.location
   end
@@ -78,7 +77,7 @@ class Retailer < ActiveRecord::Base
   def get_available_drop_in_times date_string
     ret = []
     parsed_date = DateTime.parse(date_string).to_date 
-    availability = drop_in_availabilities.order('created_at DESC').find{|a| a.covers_date? parsed_date }
+    availability = get_relevant_availability date_string 
     return ret if availability.nil?
 
     start_time, end_time = availability.applied_start_and_end_times(parsed_date)
@@ -105,5 +104,10 @@ class Retailer < ActiveRecord::Base
     end
 
     ret
+  end
+
+  def get_relevant_availability date_string
+    parsed_date = DateTime.parse(date_string).to_date 
+    drop_in_availabilities.order('created_at DESC').find{|a| a.covers_date? parsed_date }
   end
 end

@@ -42,7 +42,7 @@ feature 'Retail user manages drop in schedule' do
   end
 
   def when_i_submit_with_invalid_options
-    click_button 'Save'
+    click_button 'Add'
   end
 
   def then_my_availability_should_not_be_updated
@@ -58,7 +58,7 @@ feature 'Retail user manages drop in schedule' do
     fill_in 'End', with: end_time
     select '2 at a time', from: 'How many shoppers can you handle?'
 
-    click_button 'Save'
+    click_button 'Add'
 
     expect(page).to have_content('Your drop-in availability has been updated')
   end

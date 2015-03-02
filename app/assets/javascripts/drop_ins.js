@@ -3,11 +3,14 @@
 
 $(document).ready(function() {
   
+  twoMonthsFromNow = new Date();
+  twoMonthsFromNow.setMonth(twoMonthsFromNow.getMonth() + 2);
   $('.schedule .datepicker').pickadate({
     format: 'dddd, mmmm d, yyyy',
     formatSubmit: 'yyyy-mm-dd',
     hiddenName: true,
     min: true,
+    max: twoMonthsFromNow,
     disable: [true],
     onSet: function(context) {
       $('.schedule #location').empty();

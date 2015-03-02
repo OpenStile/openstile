@@ -67,11 +67,23 @@ class DropInAvailability < ActiveRecord::Base
      end_time.to_datetime.change(year: date.year, month: date.month, day: date.day, offset: '-0500')]
   end
 
-  def self.for_retailer_on_date retailer_id, date_string
-    date = DateTime.parse(date_string).change(offset: '-0500')
-    where("retailer_id = ? and start_time >= ? and end_time <= ?",
-                         retailer_id,
-                         date.at_beginning_of_day,
-                         date.at_end_of_day).first
+  def series_text 
+    if frequency == WEEKLY_FREQUENCY
+      return "Every #{template_date.strftime('%A')}"
+    elsif frequency == DAILY_FREQUENCY
+      return "Everyday"
+    else
+      return ""
+    end
+  end
+
+  def turn_off_date_in_series date
+    DropInAvailability.create!(template_date: date,
+                               location: self.location,
+                               retailer: self.retailer,
+                               start_time: "00:00:00",
+                               end_time: "23:59:59",
+                               frequency: ONE_TIME_FREQUENCY,
+                               bandwidth: 0)
   end
 end
