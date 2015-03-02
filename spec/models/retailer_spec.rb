@@ -153,10 +153,8 @@ RSpec.describe Retailer, :type => :model do
   describe "drop ins assocication" do
     before { @retailer.save }
     let(:shopper){ FactoryGirl.create(:shopper) }
-    let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
-                                                   retailer: @retailer,
-                                                   start_time: tomorrow_morning,
-                                                   end_time: tomorrow_afternoon) }
+    let!(:drop_in_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
+                                                   retailer: @retailer) }
     let!(:drop_in) { FactoryGirl.create(:drop_in, 
                                         time: tomorrow_mid_morning,
                                         retailer: @retailer,
@@ -222,16 +220,90 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
+  describe "avaialable drop in dates" do
+    before { @retailer.save }
+    context "with a one-time availability" do
+      let!(:availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
+                                               retailer: @retailer)}
+      it "should return the date" do
+        returned_array_dates = @retailer.get_available_drop_in_dates(:integer_array, 
+                                                                1.day.from_now.beginning_of_month.to_date,
+                                                                1.day.from_now.end_of_month.to_date)
+
+        returned_string_dates = @retailer.get_available_drop_in_dates(:date_string, 
+                                                                1.day.from_now.beginning_of_month.to_date,
+                                                                1.day.from_now.end_of_month.to_date)
+        expect(returned_array_dates.size).to eq(1)
+        expect(returned_array_dates[0][0]).to eq(1.day.from_now.year)
+        expect(returned_array_dates[0][1]).to eq(1.day.from_now.month - 1)
+        expect(returned_array_dates[0][2]).to eq(1.day.from_now.day)
+    
+        expect(returned_string_dates.size).to eq(1)
+        expect(returned_string_dates.first).to eq(1.day.from_now.to_date.to_s)
+      end
+    end
+
+    context "with a weekly availability" do
+      let!(:availability){ FactoryGirl.create(:drop_in_availability,
+                                               template_date: "Sun, 01 Feb 2015",
+                                               start_time: "09:00:00",
+                                               end_time: "17:00:00",
+                                               frequency: "Weekly",
+                                               retailer: @retailer) }
+
+      it "should return all Sundays for the month" do
+        returned_dates = @retailer.get_available_drop_in_dates(:date_string, 
+                                                               DateTime.parse("2020-02-01").to_date,
+                                                               DateTime.parse("2020-02-28").to_date)
+        
+        expect(returned_dates).to eq(["2020-02-02", "2020-02-09", "2020-02-16", "2020-02-23"])
+      end
+    end
+
+    context "with a daily availability" do
+      let!(:availability){ FactoryGirl.create(:drop_in_availability,
+                                               template_date: DateTime.current.to_date,
+                                               start_time: "09:00:00",
+                                               end_time: "17:00:00",
+                                               frequency: "Daily",
+                                               created_at: 1.day.ago,
+                                               retailer: @retailer) }
+
+      it "should return everyday for the week" do
+        returned_dates = @retailer.get_available_drop_in_dates(:date_string, 
+                                                               1.day.from_now.to_date,
+                                                               8.days.from_now.to_date)
+        
+        expect(returned_dates.size).to eq(7)
+      end
+
+      context "with specific days turned off" do
+        let!(:off_availability){ FactoryGirl.create(:drop_in_availability,
+                                                    template_date: 2.days.from_now.to_date,
+                                                    frequency: "One-time",
+                                                    bandwidth: 0,
+                                                    created_at: 1.hour.ago,
+                                                    retailer: @retailer) }
+        it "should not return the off day for the week" do
+          returned_dates = @retailer.get_available_drop_in_dates(:date_string, 
+                                                               1.day.from_now.to_date,
+                                                               8.days.from_now.to_date)
+        
+          expect(returned_dates).to_not include(2.days.from_now.to_date.to_s)
+          expect(returned_dates.size).to eq(6)
+        end
+      end
+    end
+  end
+
   describe "drop in availability helpers" do
     before { @retailer.save }
     let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9) }
     let(:tomorrow_miday){ DateTime.current.advance(days: 1).change(hour: 12) }
     let(:tomorrow_COB){ DateTime.current.advance(days: 1).change(hour: 17) }
     let(:shopper){ FactoryGirl.create(:shopper) }
-    let!(:tomorrow_availability){ FactoryGirl.create(:drop_in_availability,
+    let!(:tomorrow_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                       retailer: @retailer,
-                                                      start_time: tomorrow_SOB,
-                                                      end_time: tomorrow_COB,
                                                       bandwidth: 1) }
     let!(:drop_in) { FactoryGirl.create(:drop_in,
                                         time: tomorrow_miday,
@@ -243,16 +315,6 @@ RSpec.describe Retailer, :type => :model do
       expect(@retailer.available_for_drop_in? tomorrow_miday).to eq(false)
       expect(@retailer.available_for_drop_in? tomorrow_miday.advance(hours: 1)).to eq(true)
       expect(@retailer.available_for_drop_in? tomorrow_COB).to eq(false)
-    end
-
-    it "should return the correct available dates" do
-      expect(@retailer.get_available_drop_in_dates(:integer_array).size).to eq(1)
-      expect(@retailer.get_available_drop_in_dates(:integer_array)[0][0]).to eq(tomorrow_SOB.year)
-      expect(@retailer.get_available_drop_in_dates(:integer_array)[0][1]).to eq(tomorrow_SOB.month - 1)
-      expect(@retailer.get_available_drop_in_dates(:integer_array)[0][2]).to eq(tomorrow_SOB.day)
-      
-      expect(@retailer.get_available_drop_in_dates(:date_string).size).to eq(1)
-      expect(@retailer.get_available_drop_in_dates(:date_string).first).to eq(tomorrow_SOB.to_date.to_s)
     end
 
     it "should return the correct available times for a day" do
@@ -276,8 +338,9 @@ RSpec.describe Retailer, :type => :model do
     context "when drop in is for today" do
       let!(:today_availability){ FactoryGirl.create(:drop_in_availability,
                                          retailer: @retailer,
-                                         start_time: DateTime.current.beginning_of_day,
-                                         end_time: DateTime.current.end_of_day,
+                                         template_date: DateTime.current.to_date,
+                                         start_time: "00:00:00",
+                                         end_time: "23:59:59",
                                          bandwidth: 1) }
 
       it "should return an appropriate buffer" do

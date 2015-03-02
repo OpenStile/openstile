@@ -1,5 +1,5 @@
 $('#availability_form').empty();
-<% if @drop_in_availability.new_record? %>
+<% if @drop_in_availability.new_record? or @drop_in_availability.bandwidth == 0 %>
   $("<%= escape_javascript(render 'create_form', 
                             drop_in_availability: @drop_in_availability, 
                             date: @date) %>").appendTo('#availability_form');
@@ -11,16 +11,6 @@ $('#availability_form').empty();
                             date: @date) %>").appendTo('#availability_form');
   $('#status_on').prop('checked', true);
   setupTimepicker(); 
-
-  var startTimeInput = $('.timepicker#start_time').pickatime();
-  var startPicker = startTimeInput.pickatime('picker');
-  startPicker.set('select', [<%= @drop_in_availability.start_time.hour %>,
-                             <%= @drop_in_availability.start_time.min %>]);
-
-  var endTimeInput = $('.timepicker#end_time').pickatime();
-  var endPicker = endTimeInput.pickatime('picker');
-  endPicker.set('select', [<%= @drop_in_availability.end_time.hour %>,
-                           <%= @drop_in_availability.end_time.min %>]);
 <% end %>
 
 setStatusOptions();

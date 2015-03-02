@@ -13,11 +13,9 @@ feature 'Shopper schedule drop in' do
                                   neighborhood: "NoMa",
                                   short_title: "Crafty Bastards at Union Market") }
   let!(:drop_in_availability) {
-    FactoryGirl.create(:drop_in_availability,
+    FactoryGirl.create(:standard_availability_for_tomorrow,
                        retailer: retailer,
-                       location: pop_up_location,
-                       start_time: tomorrow_morning,
-                       end_time: tomorrow_evening)
+                       location: pop_up_location)
   }
 
   before do

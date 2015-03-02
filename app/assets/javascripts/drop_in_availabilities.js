@@ -38,7 +38,6 @@ function setStatusOptions() {
 $(document).ready(function() {
   $('#calendar').fullCalendar({
     fixedWeekCount: false,
-    eventBackgroundColor: '#428bca',
     header: {
       left: 'prev,next',
       center: 'title',
@@ -57,7 +56,7 @@ $(document).ready(function() {
     eventSources: [
       {
         url: '/retailers/' + $('#calendar').data("retailer-id") + "/scheduled_availabilities",
-        rendering: 'background'
+        textColor: 'white'
       }
     ]
   })

@@ -30,14 +30,22 @@ class RetailersController < ApplicationController
   end
 
   def scheduled_availabilities
-    @available_dates = Retailer.find(params[:id]).get_available_drop_in_dates(:date_string)
+    @available_dates = Retailer.find(params[:id])
+                        .get_available_drop_in_dates(:date_string, 
+                                                     DateTime.parse(params[:start]).to_date,
+                                                     DateTime.parse(params[:end]).to_date)
     respond_to do |format|
       format.json {}
     end
   end
 
   def enable_available_dates
-    @available_dates = Retailer.find(params[:id]).get_available_drop_in_dates(:integer_array)
+    start_date = Date.current
+    end_date = Date.current.advance(months: 2)
+    @available_dates = Retailer.find(params[:id])
+                               .get_available_drop_in_dates(:integer_array,
+                                                            start_date,
+                                                            end_date)
     respond_to do |format|
       format.js {}
     end

@@ -6,10 +6,8 @@ feature 'Retail user reviews drop in' do
   let(:shopper){ FactoryGirl.create(:shopper, first_name: 'Jane') }
   let(:top){ FactoryGirl.create(:top, retailer: retailer) }
   let!(:drop_in_availability) { 
-    FactoryGirl.create(:drop_in_availability,
-                       retailer: retailer,
-                       start_time: tomorrow_morning,
-                       end_time: tomorrow_evening)
+    FactoryGirl.create(:standard_availability_for_tomorrow,
+                       retailer: retailer)
   }
   let!(:drop_in) {
     FactoryGirl.create(:drop_in,

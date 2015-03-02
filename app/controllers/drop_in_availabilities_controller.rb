@@ -11,7 +11,7 @@ class DropInAvailabilitiesController < ApplicationController
     @drop_in_availability = current_retail_user
                              .retailer
                              .drop_in_availabilities
-                             .build(drop_in_availability_params.merge(start_and_end_params))
+                             .build(drop_in_availability_params)
 
     if !destroy_drop_in_availability? && @drop_in_availability.save
       flash[:success] = "Your drop-in availability has been updated"
@@ -25,10 +25,20 @@ class DropInAvailabilitiesController < ApplicationController
 
   def update
     if destroy_drop_in_availability?
-      @drop_in_availability.destroy
+      if params[:update_focus] == 'series'
+        @drop_in_availability.destroy
+      elsif params[:update_focus] == 'single'
+        @drop_in_availability.turn_off_date_in_series(drop_in_availability_params[:template_date])
+      end
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
-    elsif @drop_in_availability.update(drop_in_availability_params.merge(start_and_end_params))
+    elsif params[:update_focus] == 'series' &&
+          @drop_in_availability.update(drop_in_availability_params)
+      flash[:success] = "Your drop-in availability has been updated"
+      redirect_to personal_drop_in_availabilities_path
+    elsif params[:update_focus] == 'single' &&
+          current_retail_user.retailer.drop_in_availabilities
+                .create(drop_in_availability_params.merge(frequency: DropInAvailability::ONE_TIME_FREQUENCY))
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     else
@@ -41,7 +51,7 @@ class DropInAvailabilitiesController < ApplicationController
   def apply_form
     @date = params[:date]
     @drop_in_availability = 
-      DropInAvailability.for_retailer_on_date(current_retail_user.retailer.id, @date) || DropInAvailability.new
+      current_retail_user.retailer.get_relevant_availability(@date) || DropInAvailability.new
     respond_to do |format|
       format.js {}
     end
@@ -49,26 +59,12 @@ class DropInAvailabilitiesController < ApplicationController
 
   private
     def drop_in_availability_params
-      params.require(:drop_in_availability).permit(:bandwidth, :location_id)
+      params.require(:drop_in_availability).permit(:bandwidth, :frequency, :location_id, 
+                                                   :template_date, :start_time, :end_time)
     end
 
     def destroy_drop_in_availability?
       params[:status] == "off"
-    end
-
-    def start_and_end_params
-      ret = {}
-      unless params[:date].blank? || params[:start_time].blank?
-        ret[:start_time] = "#{params[:date]} #{params[:start_time]} -0500"
-      else
-        ret[:start_time] = ''
-      end
-      unless params[:date].blank? || params[:end_time].blank?
-        ret[:end_time] = "#{params[:date]} #{params[:end_time]} -0500"
-      else
-        ret[:end_time] = ''
-      end
-      ret
     end
 
     def correct_retail_user

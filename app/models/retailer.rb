@@ -31,8 +31,8 @@ class Retailer < ActiveRecord::Base
   validates :location_id, presence: true
 
   def available_for_drop_in? datetime
-    future_availabilities.each do |availability|
-      if datetime >= availability.start_time && datetime < availability.end_time
+    drop_in_availabilities.order('created_at DESC').each do |availability|
+      if availability.covers_datetime? datetime
         concurrent_drop_ins = drop_ins.where(time: datetime)
         if concurrent_drop_ins.count >= availability.bandwidth
           return false
@@ -44,44 +44,45 @@ class Retailer < ActiveRecord::Base
     return false
   end
 
-  def get_available_drop_in_dates format=:integer_array
+  def get_available_drop_in_dates format=:integer_array, 
+                                  start_day=DateTime.current.at_beginning_of_month.to_date, 
+                                  end_day=DateTime.current.at_end_of_month.to_date
+
     ret = []
-    future_availabilities.each do |availability|
-      case format
-      when :integer_array
-        ret << [availability.start_time.year, 
-                availability.start_time.month - 1, 
-                availability.start_time.day]
-      when :date_string
-        ret << availability.start_time.strftime("%Y-%m-%d")
-      else
+    current_day = start_day
+    while(current_day < end_day) do
+      unless get_available_drop_in_times(current_day.to_s).empty?
+        case format
+        when :integer_array
+          ret << [current_day.year, 
+                  current_day.month - 1, 
+                  current_day.day]
+        when :date_string
+          ret << current_day.strftime("%Y-%m-%d")
+        else
+        end
       end
+
+      current_day = current_day.advance(days: 1)
     end
     ret
   end
 
   def get_drop_in_location date_string
-    matching_index = future_availabilities.index { |availability| 
-      availability.start_time.to_date == DateTime.parse(date_string).to_date
-    }
-
-    availability = future_availabilities[matching_index]
-
+    availability = get_relevant_availability date_string 
     return nil if availability.nil?
     availability.location
   end
 
   def get_available_drop_in_times date_string
     ret = []
-    matching_index = future_availabilities.index { |availability| 
-      availability.start_time.to_date == DateTime.parse(date_string).to_date
-    }
-    
-    return ret if matching_index.nil?
+    parsed_date = DateTime.parse(date_string).to_date 
+    availability = get_relevant_availability date_string 
+    return ret if availability.nil?
 
-    availability = future_availabilities[matching_index]
+    start_time, end_time = availability.applied_start_and_end_times(parsed_date)
 
-    first_time_slot = availability.start_time
+    first_time_slot = start_time
     if first_time_slot < DateTime.current
       buffer = DateTime.current.advance(minutes: 30)
       if buffer.minute < 30
@@ -91,7 +92,7 @@ class Retailer < ActiveRecord::Base
       end
     end
 
-    while (first_time_slot < availability.end_time) do
+    while (first_time_slot < end_time) do
       concurrent_drop_ins = self.drop_ins.where(time: first_time_slot)
 
       unless concurrent_drop_ins.count >= availability.bandwidth
@@ -105,8 +106,8 @@ class Retailer < ActiveRecord::Base
     ret
   end
 
-  private
-    def future_availabilities
-      self.drop_in_availabilities.where("end_time > ?", DateTime.current)
-    end
+  def get_relevant_availability date_string
+    parsed_date = DateTime.parse(date_string).to_date 
+    drop_in_availabilities.order('created_at DESC').find{|a| a.covers_date? parsed_date }
+  end
 end

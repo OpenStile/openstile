@@ -1,10 +1,9 @@
 <%= render 'shared/error_messages', object: drop_in_availability %>
-<%= form_tag drop_in_availability_path(drop_in_availability), 
-                                            method: 'put' do %>
-  <%= label_tag :date, nil, class: "sr-only" %>
-  <%= text_field_tag :date, nil, class: "form-control", 
-                                 placeholder: "Date",
-                                 value: date %>
+<%= form_for drop_in_availability do |f| %>
+  <%= f.label :template_date, class: "sr-only" %>
+  <%= f.text_field :template_date, class: "form-control", 
+                                   placeholder: "Date",
+                                   value: date %>
 
   <div class="choose-status">
     <div class="status">
@@ -23,25 +22,35 @@
     </div>
   </div>
 
+  <%= label_tag :update_focus, 'Make changes to:' %>
+  <% select_options = [['Just this date', 'single']] %>
+  <% unless drop_in_availability.series_text.blank? %>
+    <% select_options << ["Entire series (#{drop_in_availability.series_text})", 'series'] %>
+  <% end %>
+  <%= select_tag :update_focus, 
+                 options_for_select(select_options),
+                 class: "form-control" %>
+
   <div id="status-on-options">
-    <%= label_tag :start_time, nil, class: "sr-only" %>
-    <%= text_field_tag :start_time, nil, 
-                       class: "form-control timepicker", 
-                       placeholder: "Start time"%>
+    <%= f.label :start_time, class: "sr-only" %>
+    <%= f.text_field :start_time, 
+                      class: "form-control timepicker", 
+                      placeholder: "Start time",
+                      value: f.object.start_time.strftime('%l:%M %p').lstrip %>
 
-    <%= label_tag :end_time, nil, class: "sr-only" %>
-    <%= text_field_tag :end_time, nil, 
-                       class: "form-control timepicker", 
-                       placeholder: "End time"%>
+    <%= f.label :end_time, class: "sr-only" %>
+    <%= f.text_field :end_time,  
+                      class: "form-control timepicker", 
+                      placeholder: "End time",
+                      value: f.object.end_time.strftime('%l:%M %p').lstrip %>
 
-    <%= label(:drop_in_availability, :bandwidth, 'How many shoppers can you handle?') %>
-    <%= select(:drop_in_availability, :bandwidth, 
-                                (1..5).map{|v| ["#{v} at a time", v.to_s]}, 
-                                class: "form-control") %>
+    <%= f.label :bandwidth, 'How many shoppers can you handle?' %>
+    <%= f.select :bandwidth, (1..5).map{|v| ["#{v} at a time", v.to_s]}, 
+                             class: "form-control" %>
 
-    <%= hidden_field :drop_in_availability, :location_id, 
-                                   value: drop_in_availability.location.id %>
+    <%= f.hidden_field :location_id, 
+                        value: drop_in_availability.location.id %>
   </div>
-  <%= submit_tag "Save", class: "btn btn-lg btn-primary col-md-6 col-xs-6"%>
+  <%= f.submit "Update", class: "btn btn-lg btn-primary col-md-6 col-xs-6"%>
 <% end %>
 

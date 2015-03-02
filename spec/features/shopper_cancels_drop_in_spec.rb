@@ -4,11 +4,9 @@ feature 'Shopper modifies drop in' do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
   let!(:drop_in_availability) {
-    FactoryGirl.create(:drop_in_availability,
+    FactoryGirl.create(:standard_availability_for_tomorrow,
                        retailer: retailer,
-                       location: retailer.location,
-                       start_time: tomorrow_morning,
-                       end_time: tomorrow_evening)
+                       location: retailer.location)
   }
   let!(:drop_in){ FactoryGirl.create(:drop_in,
                                      shopper: shopper,
