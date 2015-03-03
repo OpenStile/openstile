@@ -53,7 +53,7 @@ gem "faker"
 
 gem 'StreetAddress', require: 'street_address'
 
-gem 'rack-reverse-proxy', require: 'rack/reverse_proxy'
+gem 'rack-reverse-proxy', require: 'rack/reverse_proxy', git: 'git://github.com/nextmat/rack-reverse-proxy', branch: 'content_length'
 
 group :development, :test do
   gem "factory_girl_rails"

@@ -15,18 +15,6 @@ describe "Blog" do
     it { should have_xpath("//a[contains(@href, 'http://instagram.com/openstile')]") }
   end
 
-  describe "Index" do
-    before {visit '/blog'}
-
-    it_should_behave_like "site_page"
-    it { should have_content('Blog') }
-    it { should have_title('Blog | OpenStile') }
-
-    it { should have_xpath("//a[contains(@href, #{blog_welcome_to_openstile_path})]") }
-    it { should have_xpath("//a[contains(@href, #{blog_retailer_spotlight_tin_lizzy_path})]") }
-    it { should have_xpath("//a[contains(@href, #{blog_dressing_mommy_post_baby_phase_path})]") }
-  end
-
   describe "Welcome to OpenStile" do
     before {visit '/blog/welcome-to-openstile'}
 

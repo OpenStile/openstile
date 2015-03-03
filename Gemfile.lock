@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/nextmat/rack-reverse-proxy
+  revision: 32b2c05bc72def6e3bde251187b0622d2da4647f
+  branch: content_length
+  specs:
+    rack-reverse-proxy (0.4.4)
+      rack (>= 1.0.0)
+
 PATH
   remote: lib/chili/sign_up_feature
   specs:
@@ -119,8 +127,6 @@ GEM
       websocket-driver (>= 0.2.0)
     polyglot (0.3.5)
     rack (1.5.2)
-    rack-reverse-proxy (0.4.4)
-      rack (>= 1.0.0)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.6)
@@ -224,7 +230,7 @@ DEPENDENCIES
   newrelic_rpm
   pg (= 0.17.1)
   poltergeist
-  rack-reverse-proxy
+  rack-reverse-proxy!
   rails (= 4.1.6)
   rails_12factor (= 0.0.2)
   rspec-rails (~> 3.0.0)
