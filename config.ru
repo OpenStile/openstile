@@ -11,4 +11,4 @@ use Rack::ReverseProxy do
   preserve_host: true
 end
 
-run Rails.application
+run Openstile::Application
