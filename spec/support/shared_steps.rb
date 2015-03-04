@@ -60,13 +60,13 @@ def when_i_set_my_style_profile_feelings_for_a_look_as look, partiality
 
   within(:css, "div#look_#{look.id}") do
     if partiality == :hate
-      choose "I hate it!"
+      select "I hate it!", from: 'Tolerance'
     end
     if partiality == :impartial
-      choose "It's alright"
+      select "It's alright", from: 'Tolerance'
     end
     if partiality == :love
-      choose "I love it!"
+      select "I love it!", from: 'Tolerance'
     end
   end
 
