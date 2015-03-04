@@ -36,6 +36,8 @@ RSpec.describe Outfit, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
   it { should respond_to :image_name }
+  it { should respond_to :logo_image_name }
+  it { should respond_to :summary }
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should be_valid }
@@ -149,7 +151,17 @@ RSpec.describe Outfit, :type => :model do
 
     it "should return the correct image name" do
       expect(outfit.image_name)
-        .to eq("dc_washington_elena_s_boutique_cool_skirt_with_fun_top")
+        .to eq("dc/washington/elena_s_boutique/cool_skirt_with_fun_top.jpg")
+    end
+
+    it "should return the correct logo image name" do
+      expect(outfit.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+    end
+  end
+
+  describe "summary helper" do
+    it "should give the name" do
+      expect(@outfit.summary).to eq('Really cool shirt and pants')  
     end
   end
 end

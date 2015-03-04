@@ -25,6 +25,6 @@ feature 'Retailer user reviews store catalog' do
   end
 
   def then_i_should_see_product recommendation
-    expect(page).to have_content(recommendation.name)
+    expect(page).to have_content(recommendation.summary)
   end
 end

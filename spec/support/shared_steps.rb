@@ -93,12 +93,12 @@ end
 
 def then_my_style_feed_should_not_contain recommendation
   visit '/'
-  expect(page).to_not have_content(recommendation.name)
+  expect(page).to_not have_content(recommendation.summary)
 end
 
 def then_my_style_feed_should_contain recommendation
   visit '/'
-  expect(page).to have_content(recommendation.name)
+  expect(page).to have_content(recommendation.summary)
 end
 
 def when_i_set_my_style_profile_body_shape_to body_shape
@@ -232,7 +232,7 @@ def when_i_select_a_recommendation recommendation
   visit '/'
 
   within(:css, "div##{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
-    click_link 'Drop-in'
+    click_link 'View more details'
   end
 
   expect(page).to have_content(recommendation.description)

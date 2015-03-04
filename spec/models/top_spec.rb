@@ -29,6 +29,8 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
   it { should respond_to :image_name }
+  it { should respond_to :logo_image_name }
+  it { should respond_to :summary }
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should be_valid }
@@ -136,7 +138,17 @@ RSpec.describe Top, :type => :model do
     let(:top){ FactoryGirl.create(:top, name: "Cool Blouse", retailer: retailer) } 
 
     it "should return the correct image name" do
-      expect(top.image_name).to eq("dc_washington_elena_s_boutique_cool_blouse")
+      expect(top.image_name).to eq("dc/washington/elena_s_boutique/cool_blouse.jpg")
+    end
+
+    it "should return the correct logo image name" do
+      expect(top.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+    end
+  end
+
+  describe "summary helper" do
+    it "should return name and price" do
+      expect(@top.summary).to eq("Green shirt - $55.00")
     end
   end
 end

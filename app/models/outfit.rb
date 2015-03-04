@@ -1,6 +1,7 @@
 class Outfit < ActiveRecord::Base
   include ImageName
   include StatusLive
+  include FeedSummary
 
   belongs_to :retailer
   belongs_to :look
