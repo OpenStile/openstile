@@ -2,6 +2,8 @@ module ImageName
   extend ActiveSupport::Concern
 
   def image_name
+    return 'sample_item' if Rails.env.development?
+
     address = ParseAddress.get_address self
     state = address.state.gsub(' ','_')
     city = address.city.gsub(' ','_')
