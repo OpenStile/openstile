@@ -35,7 +35,7 @@
       </ul>
 
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="recommended">
+        <div role="tabpanel" class="tab-pane fade in active" id="recommended">
           <div class="page-title text-center">
             <% if @recommendations.empty? %>
               <p>
@@ -54,9 +54,9 @@
           </div>
           <%= render 'shared/recommendation_feed', list: @recommendations %>
         </div>
-        <div role="tabpanel" class="tab-pane" id="all">
+        <div role="tabpanel" class="tab-pane fade" id="all">
         </div>
-        <div role="tabpanel" class="tab-pane" id="favorites">
+        <div role="tabpanel" class="tab-pane fade" id="favorites">
         </div>
       </div>
     </div>

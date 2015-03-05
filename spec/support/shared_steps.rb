@@ -213,7 +213,7 @@ end
 
 def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
   visit '/'
-  expect(page.body.index(higher_ranking.name)).to be < (page.body.index(lower_ranking.name))
+  expect(page.body.index(higher_ranking.summary)).to be < (page.body.index(lower_ranking.summary))
 end
 
 def then_the_recommendation_should_be_for recommendation_string
