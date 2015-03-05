@@ -15,24 +15,51 @@
 
 <div class="style-feed block">
   <div class="container">
-    <div class="page-title text-center">
-      <% if @recommendations.empty? %>
-        <h3>*Hey there*</h3>
-        <p>
-          Looks like we don't have any recommendations for you as of yet.
-          Try answering a few questions in your Style Profile 
-          and check back to see what we find for you.
-        </p>
-      <% else %>
-        <p>
-          Check out these local retailers and items we suggest<br /> 
-          specifically for <span style="text-decoration: underline;">your</span> 
-          budget, body, and overall personal style!
-        </p>
-      <% end %>
-      <hr>
+    <div role="tabpanel">
+      <ul class="nav nav-pills nav-justified" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#recommended" aria-controls="recommended" role="tab" data-toggle="tab">
+            Suggested for me
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#all" aria-controls="all" role="tab" data-toggle="tab">
+            All items
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#favorites" aria-controls="favorites" role="tab" data-toggle="tab">
+            My Favorites
+          </a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="recommended">
+          <div class="page-title text-center">
+            <% if @recommendations.empty? %>
+              <p>
+                Looks like we don't have any recommendations for you as of yet.
+                Try answering a few questions in your Style Profile 
+                and check back to see what we find for you.
+              </p>
+            <% else %>
+              <p>
+                Check out these items from local retailers that we suggest<br /> 
+                specifically for <span style="text-decoration: underline;">your</span> 
+                budget, body, and overall personal style!
+              </p>
+            <% end %>
+            <hr>
+          </div>
+          <%= render 'shared/recommendation_feed', list: @recommendations %>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="all">
+        </div>
+        <div role="tabpanel" class="tab-pane" id="favorites">
+        </div>
+      </div>
     </div>
-    <%= render 'shared/recommendation_feed', list: @recommendations %>
   </div>
 </div>
 
