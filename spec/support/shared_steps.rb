@@ -91,14 +91,34 @@ def when_i_set_my_style_profile_avoided_colors color, action
   expect(page).to have_content('My Style Feed')
 end
 
-def then_my_style_feed_should_not_contain recommendation
+def then_my_style_feed_should_not_contain recommendation, tab=:recommended
   visit '/'
-  expect(page).to_not have_content(recommendation.summary)
+
+  if tab == :recommended
+    click_link 'Suggested for me'
+  elsif tab == :all
+    click_link 'All items'
+  elsif tab == :favorites
+    click_link 'My favorites'
+  end
+
+  status = page.has_selector?('h3', text: recommendation.summary, visible: true)
+  expect(status).to be(false)
 end
 
-def then_my_style_feed_should_contain recommendation
+def then_my_style_feed_should_contain recommendation, tab=:recommended
   visit '/'
-  expect(page).to have_content(recommendation.summary)
+
+  if tab == :recommended
+    click_link 'Suggested for me'
+  elsif tab == :all
+    click_link 'All items'
+  elsif tab == :favorites
+    click_link 'My favorites'
+  end
+
+  status = page.has_selector?('h3', text: recommendation.summary, visible: true)
+  expect(status).to be(true)
 end
 
 def when_i_set_my_style_profile_body_shape_to body_shape
@@ -231,7 +251,7 @@ end
 def when_i_select_a_recommendation recommendation
   visit '/'
 
-  within(:css, "div##{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
+  within(:css, "div#recommendation_#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
     click_link 'View more details'
   end
 

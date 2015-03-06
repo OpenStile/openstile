@@ -10,7 +10,7 @@
     </div>
     <div class="row">
       <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
-        <div class="summary" id=<%= recommendation_string(recommendation[:object]) %>>
+        <div class="summary" id=<%= recommendation_string(recommendation[:object], tab) %>>
           <a href=<%= item_retailer_show_path(recommendation[:object])%> >
             <%= cl_image_tag(recommendation[:object].logo_image_name, 
                             class: "img-responsive",

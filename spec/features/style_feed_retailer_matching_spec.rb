@@ -4,7 +4,7 @@ feature 'Style Feed retailer matching' do
   let(:retailer){ FactoryGirl.create(:retailer) }  
   let(:shopper){ FactoryGirl.create(:shopper) }  
 
-  scenario 'based on size' do
+  scenario 'based on size', js: true do
     calibrate_shopper_and_retailer_except_for :size
 
     original_sizes = seed_sizes({top_size: "Small", bottom_size: "Small", dress_size: "Small"})
@@ -19,7 +19,7 @@ feature 'Style Feed retailer matching' do
     then_my_style_feed_should_contain retailer
   end
 
-  scenario 'based on budget' do
+  scenario 'based on budget', js: true do
     calibrate_shopper_and_retailer_except_for :budget
 
     original_budget = {top: "$50 - $100", bottom: "$50 - $100", dress: "$50 - $100"}
@@ -34,7 +34,7 @@ feature 'Style Feed retailer matching' do
     then_my_style_feed_should_contain retailer
   end
 
-  scenario 'based on hated look' do
+  scenario 'based on hated look', js: true do
     calibrate_shopper_and_retailer_except_for :hated_look
 
     look = FactoryGirl.create(:look, name: "Bohemian Chic")

@@ -7,7 +7,7 @@ feature 'Style Feed item matching' do
   let(:dress){ FactoryGirl.create(:dress, retailer: retailer) }
   let(:shopper){ FactoryGirl.create(:shopper) }  
 
-  scenario 'based on size' do
+  scenario 'based on size', js: true do
     calibrate_shopper_and_items_except_for :size
 
     original_sizes = {top_size: FactoryGirl.create(:top_size, name: "Small"), 
@@ -31,7 +31,7 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  scenario 'based on budget' do
+  scenario 'based on budget', js: true do
     calibrate_shopper_and_items_except_for :budget
     
     original_budget = {top: "$50 - $100", bottom: "$50 - $100", dress: "$50 - $100"}
@@ -51,7 +51,7 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  scenario 'based on hated look' do
+  scenario 'based on hated look', js: true do
     calibrate_shopper_and_items_except_for :hated_look
 
     look = FactoryGirl.create(:look, name: "Bohemian Chic")
@@ -69,7 +69,7 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  scenario 'based on parts to cover' do
+  scenario 'based on parts to cover', js: true do
     calibrate_shopper_and_items_except_for :hated_look
 
     midsection = FactoryGirl.create(:part, name: "Midsection")
@@ -88,7 +88,7 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  scenario 'based on colors to avoid' do
+  scenario 'based on colors to avoid', js: true do
     calibrate_shopper_and_items_except_for :color_to_avoid
 
     color = FactoryGirl.create(:color)
@@ -106,7 +106,7 @@ feature 'Style Feed item matching' do
     then_my_style_feed_should_contain dress
   end
 
-  scenario 'based on hated print' do
+  scenario 'based on hated print', js: true do
     calibrate_shopper_and_items_except_for :hated_print
 
     print = FactoryGirl.create(:print, name: "Animal Print")

@@ -16,7 +16,7 @@
 <div class="style-feed block">
   <div class="container">
     <div role="tabpanel">
-      <ul class="nav nav-pills nav-justified" role="tablist">
+      <ul class="nav nav-pills nav-justified" role="tablist" id="feedTab">
         <li role="presentation" class="active">
           <a href="#recommended" aria-controls="recommended" role="tab" data-toggle="tab">
             Suggested for me
@@ -52,9 +52,20 @@
             <% end %>
             <hr>
           </div>
-          <%= render 'shared/recommendation_feed', list: @recommendations %>
+          <%= render 'shared/recommendation_feed', list: @recommendations,
+                                                   tab: 'recommendation'%>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="all">
+          <div class="page-title text-center">
+            <p>
+              Want to see what's out there? Here are items from all of our 
+              OpenStile retailers ranked by their popularity.
+            </p>
+            <hr>
+          </div>
+          <%= render 'shared/recommendation_feed', 
+                 list: @ranked_items.map{|item| {object: item, justification: []}},
+                 tab: 'all'%>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="favorites">
         </div>

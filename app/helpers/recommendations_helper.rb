@@ -229,14 +229,14 @@ module RecommendationsHelper
     return_path = root_path
     unless stored_url.nil?
       parts = stored_url.split('/')
-      return_path = "#{return_path}##{parts[1]}_#{parts[2]}"
+      return_path = "#{return_path}#all_#{parts[1]}_#{parts[2]}"
     end
     session.delete(:recommendation)
     return_path
   end
 
-  def recommendation_string recommendation
-    "#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}"
+  def recommendation_string recommendation, category=''
+    "#{category}_#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}"
   end
 
   private
