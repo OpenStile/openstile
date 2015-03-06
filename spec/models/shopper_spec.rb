@@ -13,6 +13,7 @@ RSpec.describe Shopper, :type => :model do
   it { should respond_to :encrypted_password }
   it { should respond_to :style_profile }
   it { should respond_to :drop_ins }
+  it { should respond_to :favorites }
   it { should be_valid }
 
   context "when first name is not present" do
@@ -138,6 +139,23 @@ RSpec.describe Shopper, :type => :model do
       expect(drop_ins).to_not be_empty
       drop_ins.each do |d|
         expect(DropIn.where(id: d.id)).to be_empty
+      end
+    end
+  end
+
+  describe "favorties association" do
+    before { @shopper.save }
+    let(:outfit){ FactoryGirl.create(:outfit) }
+    let!(:favortie){ FactoryGirl.create(:favorite,
+                                        shopper: @shopper,
+                                        favoriteable: outfit) }
+
+    it "should destroy associated favorites" do
+      favorites = @shopper.favorites.to_a
+      @shopper.destroy
+      expect(favorites).to_not be_empty
+      favorites.each do |f|
+        expect(Favorite.where(id: f.id)).to be_empty
       end
     end
   end

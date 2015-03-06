@@ -13,6 +13,7 @@ class Top < ActiveRecord::Base
   has_and_belongs_to_many :special_considerations
   has_many :exposed_parts, as: :exposable, dependent: :destroy
   has_many :drop_in_items, as: :reservable, dependent: :destroy
+  has_many :favorites, as: :favoriteable, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 100 } 
   validates :description, presence: true, length: { maximum: 250 }

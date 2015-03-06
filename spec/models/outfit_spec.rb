@@ -40,6 +40,7 @@ RSpec.describe Outfit, :type => :model do
   it { should respond_to :summary }
   it { should respond_to :status }
   it { should respond_to :live? }
+  it { should respond_to :favorites }
   it { should be_valid }
 
   context "when retailer is not present" do
@@ -162,6 +163,23 @@ RSpec.describe Outfit, :type => :model do
   describe "summary helper" do
     it "should give the name" do
       expect(@outfit.summary).to eq('Really cool shirt and pants')  
+    end
+  end
+
+  describe "favorties association" do
+    before { @outfit.save }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:favortie){ FactoryGirl.create(:favorite,
+                                        shopper: shopper,
+                                        favoriteable: @outfit) }
+
+    it "should destroy associated favorites" do
+      favorites = @outfit.favorites.to_a
+      @outfit.destroy
+      expect(favorites).to_not be_empty
+      favorites.each do |f|
+        expect(Favorite.where(id: f.id)).to be_empty
+      end
     end
   end
 end

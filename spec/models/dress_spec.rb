@@ -36,6 +36,7 @@ RSpec.describe Dress, :type => :model do
   it { should respond_to :summary }
   it { should respond_to :status }
   it { should respond_to :live? }
+  it { should respond_to :favorites }
   it { should be_valid }
 
   context "when name is not present" do
@@ -152,6 +153,23 @@ RSpec.describe Dress, :type => :model do
   describe "summary helper" do
     it "should return name and price" do
       expect(@dress.summary).to eq("Wrap Dress - $55.00")
+    end
+  end
+
+  describe "favorties association" do
+    before { @dress.save }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:favortie){ FactoryGirl.create(:favorite,
+                                        shopper: shopper,
+                                        favoriteable: @dress) }
+
+    it "should destroy associated favorites" do
+      favorites = @dress.favorites.to_a
+      @dress.destroy
+      expect(favorites).to_not be_empty
+      favorites.each do |f|
+        expect(Favorite.where(id: f.id)).to be_empty
+      end
     end
   end
 end
