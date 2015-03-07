@@ -12,17 +12,26 @@ def style_profile_save
 end
 
 def tomorrow_morning
-  DateTime.current.advance(days: 1).change(hour: 9)
+  ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{1.day.from_now.change(hour: 9).to_s}")
 end
 
 def tomorrow_mid_morning
-  DateTime.current.advance(days: 1).change(hour: 10)
+  ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{1.day.from_now.change(hour: 10).to_s}")
+end
+
+def tomorrow_noon
+  ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{1.day.from_now.change(hour: 12).to_s}")
 end
 
 def tomorrow_afternoon
-  DateTime.current.advance(days: 1).change(hour: 13)
+  ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{1.day.from_now.change(hour: 13).to_s}")
 end
 
 def tomorrow_evening
-  DateTime.current.advance(days: 1).change(hour: 17)
+  ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{1.day.from_now.change(hour: 17).to_s}")
 end

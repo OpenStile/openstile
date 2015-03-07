@@ -14,7 +14,8 @@ feature 'Retail user reviews drop in' do
                        shopper: shopper,
                        retailer: retailer,
                        comment: 'I really need stuff for my Miami vacay',
-                       time: DateTime.current.advance(days: 1).change(hour: 10))
+                       time: ActiveSupport::TimeZone[Time.zone.name]
+                                .parse("#{1.day.from_now.change(hour: 10).to_s}"))
   }
   let!(:drop_in_item) { FactoryGirl.create(:drop_in_item, 
                                            drop_in: drop_in, 

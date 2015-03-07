@@ -10,8 +10,9 @@ class DropInsController < ApplicationController
     selected_date = retrieved_params.delete(:selected_date)
     selected_time = retrieved_params.delete(:selected_time)
     unless (selected_date.blank? || selected_time.blank?)
-      time_value = "#{selected_date} #{selected_time} -0500"
-      retrieved_params[:time] = time_value
+      datetime = ActiveSupport::TimeZone[Time.zone.name]
+                    .parse("#{selected_date} #{selected_time}")
+      retrieved_params[:time] = datetime
     end
 
     @drop_in = DropIn.new(retrieved_params)
