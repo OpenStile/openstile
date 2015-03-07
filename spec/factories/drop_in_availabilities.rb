@@ -11,9 +11,9 @@ FactoryGirl.define do
     location
 
     factory :standard_availability_for_tomorrow do
-      template_date DateTime.current.advance(days: 1).to_date
-      start_time "09:00:00 -0500"
-      end_time "17:00:00 -0500"
+      template_date 1.day.from_now.to_date
+      start_time "09:00:00"
+      end_time "17:00:00"
       bandwidth 2
     end
   end
