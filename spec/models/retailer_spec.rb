@@ -298,40 +298,37 @@ RSpec.describe Retailer, :type => :model do
 
   describe "drop in availability helpers" do
     before { @retailer.save }
-    let(:tomorrow_SOB){ DateTime.current.advance(days: 1).change(hour: 9) }
-    let(:tomorrow_miday){ DateTime.current.advance(days: 1).change(hour: 12) }
-    let(:tomorrow_COB){ DateTime.current.advance(days: 1).change(hour: 17) }
     let(:shopper){ FactoryGirl.create(:shopper) }
     let!(:tomorrow_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                       retailer: @retailer,
                                                       bandwidth: 1) }
     let!(:drop_in) { FactoryGirl.create(:drop_in,
-                                        time: tomorrow_miday,
+                                        time: tomorrow_noon,
                                         retailer: @retailer,
                                         shopper: shopper) }
     
     it "should return whether or not a retailer is available" do
-      expect(@retailer.available_for_drop_in? tomorrow_SOB).to eq(true) 
-      expect(@retailer.available_for_drop_in? tomorrow_miday).to eq(false)
-      expect(@retailer.available_for_drop_in? tomorrow_miday.advance(hours: 1)).to eq(true)
-      expect(@retailer.available_for_drop_in? tomorrow_COB).to eq(false)
+      expect(@retailer.available_for_drop_in? tomorrow_morning).to eq(true) 
+      expect(@retailer.available_for_drop_in? tomorrow_noon).to eq(false)
+      expect(@retailer.available_for_drop_in? tomorrow_noon.advance(hours: 1)).to eq(true)
+      expect(@retailer.available_for_drop_in? tomorrow_evening).to eq(false)
     end
 
     it "should return the correct available times for a day" do
       expect(@retailer
-              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y'))
+              .get_available_drop_in_times(1.day.from_now.strftime('%B %e, %Y'))
               .size).to eq(15)
       expect(@retailer
-              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(1.day.from_now.strftime('%B %e, %Y')))
               .to include([9,0])
       expect(@retailer
-              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(1.day.from_now.strftime('%B %e, %Y')))
               .to_not include([12,0])
       expect(@retailer
-              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(1.day.from_now.strftime('%B %e, %Y')))
               .to include([12,30])
       expect(@retailer
-              .get_available_drop_in_times(tomorrow_SOB.strftime('%B %e, %Y')))
+              .get_available_drop_in_times(1.day.from_now.strftime('%B %e, %Y')))
               .to_not include([18,0])
     end
 

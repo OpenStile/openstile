@@ -63,8 +63,8 @@ class DropInAvailability < ActiveRecord::Base
   end
 
   def applied_start_and_end_times date
-    [start_time.to_datetime.change(year: date.year, month: date.month, day: date.day, offset: '-0500'),
-     end_time.to_datetime.change(year: date.year, month: date.month, day: date.day, offset: '-0500')]
+    [ActiveSupport::TimeZone[Time.zone.name].parse("#{date.to_s} #{start_time.strftime('%H:%M:%S')}"),
+     ActiveSupport::TimeZone[Time.zone.name].parse("#{date.to_s} #{end_time.strftime('%H:%M:%S')}")]
   end
 
   def series_text 
