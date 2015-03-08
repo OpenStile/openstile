@@ -231,8 +231,8 @@ def when_i_set_my_style_profile_feelings_for_a_print_as print, partiality
   expect(page).to have_content('My Style Feed')
 end
 
-def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
-  visit '/'
+def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking, refresh=true
+  visit '/' if refresh
   expect(page.body.index(higher_ranking.summary)).to be < (page.body.index(lower_ranking.summary))
 end
 
