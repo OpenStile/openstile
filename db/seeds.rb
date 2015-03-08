@@ -22,7 +22,7 @@ end
   BottomSize.find_or_create_by(name: size, category: "inches")
 end
 
-["Bohemian_Chic_Hipster", "Preppy", "Casual_Relaxed", 
+["Bohemian_Chic_Hipster", "Preppy", "Casual_Relaxed",
  "Classic_Vintage", "Edgy_Rocker", "Glamorous_Diva"].each do |look|
   Look.find_or_create_by(name: look)
 end
@@ -31,8 +31,8 @@ end
   Part.find_or_create_by(name: part)
 end
 
-["Beige", "Black", "Blue", "Brown", "Green", 
- "Gray", "Navy", "Orange", "Pink", "Purple", 
+["Beige", "Black", "Blue", "Brown", "Green",
+ "Gray", "Navy", "Orange", "Pink", "Purple",
  "Red", "Teal", "White", "Yellow", "Gold", "Silver"].each do |color|
   Color.find_or_create_by(name: color)
 end
@@ -42,15 +42,15 @@ end
   Print.find_or_create_by(name: print)
 end
 
-[{name: 'Straight', 
+[{name: 'Straight',
   description: 'Your bust and hips are basically the same size. Your waist is slightly smaller than your bust and hips.'},
- {name: 'Pear', 
+ {name: 'Pear',
   description: 'Your hips are larger than your bust, and your waist gradually slopes out to the hips.'},
- {name: 'Hourglass', 
+ {name: 'Hourglass',
   description: 'Your bust and hips are basically the same size and your waist is well defined.'},
- {name: 'Apple', 
+ {name: 'Apple',
   description: 'Your waist is larger than your bust and hips. Your hips are narrow compared to your shoulders.'},
- {name: 'Inverted Triangle', 
+ {name: 'Inverted Triangle',
   description: 'Your bust is large, your hips are narrow and your waist is not very well defined.'}].each do |body_shape|
   BodyShape.find_or_create_by(name: body_shape[:name], description: body_shape[:description])
 end
@@ -70,7 +70,7 @@ end
 if ENV["demo_up"]
   (1..5).each do |idx|
     location = Location.create!(address: "#{Faker::Address.street_address}, Washington, DC",
-                                neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
+                                neighborhood: ['15th & U', 'Petworth', 'Capitol Hill',
                                                'Dupont Circle', 'Columbia Heights'].sample)
 
     retailer = Retailer.create!(name: "#{Faker::Address.street_name} Boutique",
@@ -82,13 +82,13 @@ if ENV["demo_up"]
                                look_id: Look.ids.sample,
                                body_shape_id: BodyShape.ids.sample,
                                top_fit_id: TopFit.ids.sample,
-                               bottom_fit_id: BottomFit.ids.sample, 
+                               bottom_fit_id: BottomFit.ids.sample,
                                special_consideration_ids: SpecialConsideration.ids.sample(2),
                                status: 1)
 
-    retailer.create_price_range(top_min_price: 0, top_max_price: 500, 
+    retailer.create_price_range(top_min_price: 0, top_max_price: 500,
                                 bottom_min_price: 0, bottom_max_price: 500,
-                                dress_min_price: 0, dress_max_price: 500) 
+                                dress_min_price: 0, dress_max_price: 500)
 
     retailer.create_online_presence(web_link: 'http://google.com',
                                     facebook_link: 'http://facebook.com',
@@ -102,9 +102,9 @@ if ENV["demo_up"]
                                             bandwidth: 2,
                                             location: location)
 
-    retailer.top_sizes << TopSize.all                                 
-    retailer.bottom_sizes << BottomSize.all                                 
-    retailer.dress_sizes << DressSize.all                                 
+    retailer.top_sizes << TopSize.all
+    retailer.bottom_sizes << BottomSize.all
+    retailer.dress_sizes << DressSize.all
 
     top = retailer.tops.create!(name: "#{Faker::Name.name} Designs Blouse",
                                 description: 'This is a blouse created for OpenStile demo purposes.',
@@ -130,7 +130,7 @@ if ENV["demo_up"]
                                       color_id: Color.ids.sample,
                                       body_shape_id: BodyShape.ids.sample,
                                       for_petite: idx.even?,
-                                      bottom_fit_id: BottomFit.ids.sample, 
+                                      bottom_fit_id: BottomFit.ids.sample,
                                       special_consideration_ids: [SpecialConsideration.ids.sample],
                                       status: 1)
     bottom.bottom_sizes << BottomSize.all
@@ -145,7 +145,7 @@ if ENV["demo_up"]
                                      body_shape_id: BodyShape.ids.sample,
                                      for_petite: idx.even?,
                                      top_fit_id: TopFit.ids.sample,
-                                     bottom_fit_id: BottomFit.ids.sample, 
+                                     bottom_fit_id: BottomFit.ids.sample,
                                      special_consideration_ids: [SpecialConsideration.ids.sample],
                                      status: 1)
     dress.dress_sizes << DressSize.all
