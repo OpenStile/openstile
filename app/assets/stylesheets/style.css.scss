@@ -1876,6 +1876,19 @@ input {
   margin-bottom: 15px;
 }
 
+.style-feed .custom-fa-lg {
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.fa-heart.favorite {
+  color: #428bca;
+}
+
+.fa-heart.nonFavorite {
+  color: #555;
+}
+
 .recommendation {
   margin-top: 50px;
 }

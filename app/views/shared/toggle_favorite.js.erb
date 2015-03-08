@@ -1,0 +1,12 @@
+var itemAllTab = $("div#<%= recommendation_string(@item, 'all') %> .like-toggle")
+var itemRecommendationTab = $("div#<%= recommendation_string(@item, 'recommendation') %> .like-toggle")
+var favoriteTab = $("div#favoriteList")
+
+itemAllTab.empty();
+$("<%= escape_javascript(render 'shared/like_toggle', object: @item) %>").appendTo(itemAllTab);
+
+itemRecommendationTab.empty();
+$("<%= escape_javascript(render 'shared/like_toggle', object: @item) %>").appendTo(itemRecommendationTab);
+
+favoriteTab.empty();
+$("<%= escape_javascript(render 'shared/favorite_list') %>").appendTo(favoriteTab);

@@ -15,6 +15,7 @@ class Dress < ActiveRecord::Base
   has_many :exposed_parts, as: :exposable, dependent: :destroy
   has_many :drop_in_items, as: :reservable, dependent: :destroy
   has_many :favorites, as: :favoriteable, dependent: :destroy
+  has_many :interested_shoppers, through: :favorites, source: :shopper
 
   validates :name, presence: true, length: { maximum: 100 } 
   validates :description, presence: true, length: { maximum: 250 }

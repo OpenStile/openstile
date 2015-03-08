@@ -91,8 +91,8 @@ def when_i_set_my_style_profile_avoided_colors color, action
   expect(page).to have_content('My Style Feed')
 end
 
-def then_my_style_feed_should_not_contain recommendation, tab=:recommended
-  visit '/'
+def then_my_style_feed_should_not_contain recommendation, tab=:recommended, refresh=true
+  visit '/' if refresh
 
   if tab == :recommended
     click_link 'Suggested for me'
@@ -106,8 +106,8 @@ def then_my_style_feed_should_not_contain recommendation, tab=:recommended
   expect(status).to be(false)
 end
 
-def then_my_style_feed_should_contain recommendation, tab=:recommended
-  visit '/'
+def then_my_style_feed_should_contain recommendation, tab=:recommended, refresh=true
+  visit '/' if refresh
 
   if tab == :recommended
     click_link 'Suggested for me'

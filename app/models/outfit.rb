@@ -12,6 +12,7 @@ class Outfit < ActiveRecord::Base
   has_many :drop_in_items, as: :reservable, dependent: :destroy
   has_many :exposed_parts, as: :exposable, dependent: :destroy
   has_many :favorites, as: :favoriteable, dependent: :destroy
+  has_many :interested_shoppers, through: :favorites, source: :shopper
 
   has_and_belongs_to_many :dress_sizes
   has_and_belongs_to_many :top_sizes

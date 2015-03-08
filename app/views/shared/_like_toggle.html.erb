@@ -1,0 +1,5 @@
+<a href=<%= item_favorite_toggle_path(object) %> data-remote="true" rel="nofollow">
+  <% favoriteStatus = object.interested_shoppers.include?(current_shopper) ? 
+                                             'favorite' : 'nonFavorite' %>
+  <i class="<%= "fa custom-fa-lg fa-heart #{favoriteStatus}" %>" ></i>
+</a>

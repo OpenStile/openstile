@@ -1,4 +1,5 @@
 class BottomsController < ApplicationController
+  include Favoriteable
   before_filter :authenticate_admin!, only: [:new, :create]
 
   def show

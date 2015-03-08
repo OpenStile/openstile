@@ -68,6 +68,16 @@
                  tab: 'all'%>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="favorites">
+          <div class="page-title text-center">
+            <p>
+              These are the featured items you've marked as favorites. Schedule a drop-in 
+              and our retailers will be sure to pull items like these just for you!
+            </p>
+            <hr>
+          </div>
+          <div id="favoriteList">
+            <%= render 'shared/favorite_list' %>
+          </div>
         </div>
       </div>
     </div>

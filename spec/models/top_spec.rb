@@ -34,6 +34,7 @@ RSpec.describe Top, :type => :model do
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should respond_to :favorites }
+  it { should respond_to :interested_shoppers }
   it { should be_valid }
 
   context "when name is not present" do
@@ -159,6 +160,11 @@ RSpec.describe Top, :type => :model do
     let!(:favortie){ FactoryGirl.create(:favorite,
                                         shopper: shopper,
                                         favoriteable: @top) }
+
+    it "should return interested shoppers" do
+      expect(@top.interested_shoppers.count).to be(1)
+      expect(@top.interested_shoppers).to include(shopper)
+    end
 
     it "should destroy associated favorites" do
       favorites = @top.favorites.to_a

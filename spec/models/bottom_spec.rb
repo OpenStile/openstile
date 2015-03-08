@@ -35,6 +35,7 @@ RSpec.describe Bottom, :type => :model do
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should respond_to :favorites }
+  it { should respond_to :interested_shoppers }
   it { should be_valid }
 
   context "when name is not present" do
@@ -160,6 +161,11 @@ RSpec.describe Bottom, :type => :model do
     let!(:favortie){ FactoryGirl.create(:favorite,
                                         shopper: shopper,
                                         favoriteable: @bottom) }
+
+    it "should return interested shoppers" do
+      expect(@bottom.interested_shoppers.count).to be(1)
+      expect(@bottom.interested_shoppers).to include(shopper)
+    end
 
     it "should destroy associated favorites" do
       favorites = @bottom.favorites.to_a

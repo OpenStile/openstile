@@ -5,4 +5,9 @@ module ItemsHelper
           Dress.all_live + Outfit.all_live 
   end
 
+  def item_favorite_toggle_path item
+    type = item.class.name.downcase
+    method = "toggle_favorite_#{type}_path"
+    send(method, item)
+  end
 end
