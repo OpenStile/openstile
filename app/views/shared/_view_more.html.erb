@@ -1,0 +1,39 @@
+<div class="view-more">
+  <div class="row text-center">
+    <br />
+    <h2>See more from <%= retailer.name %></h2>
+  </div>
+  <% item_sets = (retailer.tops + retailer.bottoms + 
+                  retailer.dresses + retailer.outfits)
+                  .shuffle.in_groups_of(4, false) %>
+  <% item_sets.each_with_index do |set, idx| %>
+    <br />
+    <div class="row <%= 'additional' if idx > 0 %>">
+      <% set.each do |item| %>
+        <a name="<%= item.image_alt_text %>" href=<%= item_show_path(item)%>>
+          <div class="col-md-3 col-xs-3">
+            <%= cl_image_tag(item.image_name, 
+                            alt: item.image_alt_text,
+                            class: "img-responsive") %>
+          </div>
+        </a>
+      <% end %>
+    </div>
+    <% if idx == 0 %>
+      <div class="row text-center">
+        <br />
+        <a id="additional" href="#">
+          <span class="glyphicon glyphicon-2x glyphicon-chevron-down"></span>
+        </a>
+      </div>
+    <% end %>
+    <% if idx == item_sets.count - 1 %>
+      <div class="row text-center">
+        <br />
+        <a id="less" href="#">
+          <span class="glyphicon glyphicon-2x glyphicon-chevron-up"></span>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+</div>

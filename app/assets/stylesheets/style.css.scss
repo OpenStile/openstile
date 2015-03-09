@@ -1876,7 +1876,7 @@ input {
   margin-bottom: 15px;
 }
 
-.fa-heart-lg {
+.style-feed .fa-heart-lg {
   font-size: 2em;
   line-height: 1em;
 }
@@ -1944,9 +1944,17 @@ input {
   padding-right: 5px;
 }
 
+.view-more {
+  margin-top: 30px;
+}
+
 .schedule #location {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.glyphicon-2x {
+  font-size: 38px;
 }
 
 /* Recommendation End */

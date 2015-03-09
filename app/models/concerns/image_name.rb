@@ -20,6 +20,10 @@ module ImageName
     "#{image_path_root}/#{leaf_name}.#{IMAGE_FILE_EXTENSION}"
   end
 
+  def image_alt_text
+    image_name.gsub(".#{IMAGE_FILE_EXTENSION}", '').gsub('/','_')
+  end
+
   def logo_image_name
     return 'sample_logo' if Rails.env.development?
     "#{image_path_root}/logo.#{IMAGE_FILE_EXTENSION}"

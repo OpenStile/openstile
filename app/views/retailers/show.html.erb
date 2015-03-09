@@ -18,7 +18,6 @@
         </a><br />
         <h2><%= @retailer.location.neighborhood %></h2><br />
         <h4><%= @retailer.description %></h4>
-        <hr>
         <% if @retailer.online_presence %>
           <% unless @retailer.online_presence.web_link.blank? %>
             <a href=<%=@retailer.online_presence.web_link%> target='_blank'>
@@ -41,8 +40,11 @@
             </a>
           <% end %>
         <% end %>
+        <hr>
       </div>
     </div>
+
+    <%= render 'shared/view_more', retailer: @retailer %>
 
     <% if shopper_signed_in? %>
       <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>
