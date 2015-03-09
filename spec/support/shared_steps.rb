@@ -97,7 +97,7 @@ def then_my_style_feed_should_not_contain recommendation, tab=:recommended, refr
   if tab == :recommended
     click_link 'Suggested for me'
   elsif tab == :all
-    click_link 'All items'
+    click_link 'All featured items'
   elsif tab == :favorites
     click_link 'My favorites'
   end
@@ -112,7 +112,7 @@ def then_my_style_feed_should_contain recommendation, tab=:recommended, refresh=
   if tab == :recommended
     click_link 'Suggested for me'
   elsif tab == :all
-    click_link 'All items'
+    click_link 'All featured items'
   elsif tab == :favorites
     click_link 'My favorites'
   end

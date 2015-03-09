@@ -17,7 +17,7 @@ feature 'Style Feed' do
   end
 
   def when_i_toggle_my_like_for_an_item_in_my_style_feed item, recommendation_string
-    click_link 'All items'
+    click_link 'All featured items'
     within :css, "div#all_#{recommendation_string} .like-toggle" do
       find('a').click
     end
