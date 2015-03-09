@@ -15,6 +15,7 @@ module Favoriteable
     end
 
     respond_to do |format|
+      format.html { render 'shared/item' }
       format.js { render 'shared/toggle_favorite' }
     end
   end

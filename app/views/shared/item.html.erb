@@ -5,10 +5,16 @@
 <div class="recommendation-details block">
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
+      <div class="col-md-5 col-xs-5">
         <%= cl_image_tag(@item.image_name, 
                          class: "img-responsive") %>
       </div>
+      <% if shopper_signed_in? %>
+        <div class="col-md-1 col-xs-1 like-toggle">
+          <%= render 'shared/like_toggle', object: @item,
+                                           with_ajax: false %>
+        </div>
+      <% end %>
       <div class="col-md-5 col-xs-5 text-center">
         <hr>
         <h1><%= @item.name %></h1><br />

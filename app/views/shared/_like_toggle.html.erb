@@ -1,5 +1,11 @@
-<a href=<%= item_favorite_toggle_path(object) %> data-remote="true" rel="nofollow">
+<% with_ajax = true if local_assigns[:with_ajax].nil? %>
+
+<% if with_ajax %>
+  <a href=<%= item_favorite_toggle_path(object) %> data-remote="true" rel="nofollow">
+<% else %>
+  <a href=<%= item_favorite_toggle_path(object) %> rel="nofollow">
+<% end %>
   <% favoriteStatus = object.interested_shoppers.include?(current_shopper) ? 
                                              'favorite' : 'nonFavorite' %>
-  <i class="<%= "fa custom-fa-lg fa-heart #{favoriteStatus}" %>" ></i>
+  <i class="<%= "fa fa-heart fa-heart-lg #{favoriteStatus}" %>" ></i>
 </a>
