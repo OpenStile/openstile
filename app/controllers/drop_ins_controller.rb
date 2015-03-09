@@ -28,21 +28,9 @@ class DropInsController < ApplicationController
       if recommendation.is_a? Retailer
         @retailer = recommendation
         render 'retailers/show'
-      elsif recommendation.is_a? Top
-        @top = recommendation
-        render 'tops/show'
-      elsif recommendation.is_a? Bottom
-        @bottom = recommendation
-        render 'bottoms/show'
-      elsif recommendation.is_a? Dress
-        @dress = recommendation
-        render 'dresses/show'
-      elsif recommendation.is_a? Outfit
-        @outfit = recommendation
-        render 'outfits/show'
       else
-        flash[:danger] = "There was an unexpected error scheduling your drop-in."
-        redirect_to root_path
+        @item = recommendation
+        render 'shared/item'
       end
     end
   end

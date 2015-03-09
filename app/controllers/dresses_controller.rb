@@ -3,8 +3,9 @@ class DressesController < ApplicationController
   before_filter :authenticate_admin!, only: [:new, :create]
 
   def show
-    @dress = Dress.find(params[:id])
+    @item = Dress.find(params[:id])
     store_recommendation_show_url
+    render 'shared/item'
   end
 
   def new
