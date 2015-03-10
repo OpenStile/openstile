@@ -1919,6 +1919,18 @@ input {
   float: none;
 }
 
+.recommendation-details #btn-drop-in {
+  color: #ffffff;
+  background-color:#f75353;
+  border-color:#f75353;
+}
+
+.recommendation-details #btn-drop-in:hover {
+  color: #ffffff;
+  background-color: #f53232;
+  border-color: #f53232;
+}
+
 .recommendation-details h1{
   font-size: 40px;
   font-weight: 800;  

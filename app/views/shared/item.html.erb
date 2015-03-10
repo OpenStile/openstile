@@ -23,6 +23,9 @@
                             class: "img-responsive center-block",
                             width: 200) %>
         </a><br />
+        <%= link_to('Book a drop-in!', "#drop-in", 
+                                        class: "btn btn-default", 
+                                        id: "btn-drop-in") if shopper_signed_in? %>
         <h4><%= @item.description %></h4>
         <hr>
       </div>
