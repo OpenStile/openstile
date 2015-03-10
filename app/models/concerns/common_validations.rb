@@ -22,4 +22,3 @@ module CommonValidations
     end
   end
 end
-
