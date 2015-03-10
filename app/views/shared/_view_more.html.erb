@@ -3,8 +3,8 @@
     <br />
     <h2>See more from <%= retailer.name %></h2>
   </div>
-  <% item_sets = (retailer.tops + retailer.bottoms + 
-                  retailer.dresses + retailer.outfits)
+  <% item_sets = (retailer.tops.all_live + retailer.bottoms.all_live + 
+                  retailer.dresses.all_live + retailer.outfits.all_live)
                   .shuffle.in_groups_of(4, false) %>
   <% item_sets.each_with_index do |set, idx| %>
     <br />
