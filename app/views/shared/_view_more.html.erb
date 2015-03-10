@@ -12,9 +12,10 @@
       <% set.each do |item| %>
         <a name="<%= item.image_alt_text %>" href=<%= item_show_path(item)%>>
           <div class="col-md-3 col-xs-3">
-            <%= cl_image_tag(item.image_name, 
-                            alt: item.image_alt_text,
-                            class: "img-responsive") %>
+            <%= cl_image_tag(item.image_name, width: 250, 
+                                  height: 250, crop: :thumb, 
+                                  gravity: :center,
+                                  alt: item.image_alt_text) %>
           </div>
         </a>
       <% end %>
