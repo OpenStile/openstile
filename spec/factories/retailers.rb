@@ -7,6 +7,6 @@ FactoryGirl.define do
     location
     status 1
     owner_name 'Michelle Obama'
-    phone '(202) 867-5309'
+    phone_number '(202) 867-5309'
   end
 end
