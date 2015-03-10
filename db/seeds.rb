@@ -84,7 +84,9 @@ if ENV["demo_up"]
                                top_fit_id: TopFit.ids.sample,
                                bottom_fit_id: BottomFit.ids.sample,
                                special_consideration_ids: SpecialConsideration.ids.sample(2),
-                               status: 1)
+                               status: 1,
+                               owner_name: Faker::Name.name,
+                               phone: Faker::Number.number(10))
 
     retailer.create_price_range(top_min_price: 0, top_max_price: 500,
                                 bottom_min_price: 0, bottom_max_price: 500,

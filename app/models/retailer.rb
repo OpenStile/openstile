@@ -2,6 +2,7 @@ class Retailer < ActiveRecord::Base
   include ImageName
   include StatusLive
   include FeedSummary
+  include Callable
 
   has_one :retail_user, dependent: :destroy
 
@@ -27,9 +28,10 @@ class Retailer < ActiveRecord::Base
   accepts_nested_attributes_for :price_range
   accepts_nested_attributes_for :online_presence
 
-  validates :name, presence: true, length: { maximum: 50 } 
+  validates :name, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true
+  validates :owner_name, presence: true, length: { maximum: 100 }
 
   def available_for_drop_in? datetime
     drop_in_availabilities.order('created_at DESC').each do |availability|
@@ -45,8 +47,8 @@ class Retailer < ActiveRecord::Base
     return false
   end
 
-  def get_available_drop_in_dates format=:integer_array, 
-                                  start_day=DateTime.current.at_beginning_of_month.to_date, 
+  def get_available_drop_in_dates format=:integer_array,
+                                  start_day=DateTime.current.at_beginning_of_month.to_date,
                                   end_day=DateTime.current.at_end_of_month.to_date
 
     ret = []
@@ -55,8 +57,8 @@ class Retailer < ActiveRecord::Base
       unless get_available_drop_in_times(current_day.to_s).empty?
         case format
         when :integer_array
-          ret << [current_day.year, 
-                  current_day.month - 1, 
+          ret << [current_day.year,
+                  current_day.month - 1,
                   current_day.day]
         when :date_string
           ret << current_day.strftime("%Y-%m-%d")
@@ -70,15 +72,15 @@ class Retailer < ActiveRecord::Base
   end
 
   def get_drop_in_location date_string
-    availability = get_relevant_availability date_string 
+    availability = get_relevant_availability date_string
     return nil if availability.nil?
     availability.location
   end
 
   def get_available_drop_in_times date_string
     ret = []
-    parsed_date = DateTime.parse(date_string).to_date 
-    availability = get_relevant_availability date_string 
+    parsed_date = DateTime.parse(date_string).to_date
+    availability = get_relevant_availability date_string
     return ret if availability.nil?
 
     start_time, end_time = availability.applied_start_and_end_times(parsed_date)
@@ -108,7 +110,7 @@ class Retailer < ActiveRecord::Base
   end
 
   def get_relevant_availability date_string
-    parsed_date = DateTime.parse(date_string).to_date 
+    parsed_date = DateTime.parse(date_string).to_date
     drop_in_availabilities.order('created_at DESC').find{|a| a.covers_date? parsed_date }
   end
 end
