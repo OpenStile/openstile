@@ -68,11 +68,6 @@ end
 end
 
 if ENV["demo_up"]
-  if Shopper.find_by_email('demo@example.com').nil?
-    Shopper.create(first_name: 'Jane', email: 'demo@example.com',
-                   password: 'openstile', password_confirmation: 'openstile')
-  end
-
   (1..5).each do |idx|
     location = Location.create!(address: "#{Faker::Address.street_address}, Washington, DC",
                                 neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
@@ -86,27 +81,26 @@ if ENV["demo_up"]
                                location: location,
                                look_id: Look.ids.sample,
                                body_shape_id: BodyShape.ids.sample,
-                               top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
-                               bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
-                               special_consideration_ids: SpecialConsideration.ids.sample(2))
+                               top_fit_id: TopFit.ids.sample,
+                               bottom_fit_id: BottomFit.ids.sample, 
+                               special_consideration_ids: SpecialConsideration.ids.sample(2),
+                               status: 1)
 
-    retailer.price_range.update!(top_min_price: 0, top_max_price: 500, 
-                                 bottom_min_price: 0, bottom_max_price: 500,
-                                 dress_min_price: 0, dress_max_price: 500) 
+    retailer.create_price_range(top_min_price: 0, top_max_price: 500, 
+                                bottom_min_price: 0, bottom_max_price: 500,
+                                dress_min_price: 0, dress_max_price: 500) 
 
     retailer.create_online_presence(web_link: 'http://google.com',
                                     facebook_link: 'http://facebook.com',
                                     twitter_link: 'http://twitter.com',
                                     instagram_link: 'http://instagram.com')
 
-    ["2015-01-29", "2015-01-30", "2015-01-31", "2015-02-01", "2015-02-02",
-     "2015-02-04", "2015-02-05", "2015-02-07", "2015-02-08", "2015-02-09"].each do |date|
-      
-      retailer.drop_in_availabilities.create!(start_time: "#{date} 09:00:00 -0500",
-                                              end_time: "#{date} 17:00:00 -0500",
-                                              location: location,
-                                              bandwidth: 2)
-    end
+    retailer.drop_in_availabilities.create!(template_date: Date.current,
+                                            start_time: "09:00:00",
+                                            end_time: "17:00:00",
+                                            frequency: "Daily",
+                                            bandwidth: 2,
+                                            location: location)
 
     retailer.top_sizes << TopSize.all                                 
     retailer.bottom_sizes << BottomSize.all                                 
@@ -121,8 +115,9 @@ if ENV["demo_up"]
                                 color_id: Color.ids.sample,
                                 body_shape_id: BodyShape.ids.sample,
                                 for_petite: idx.even?,
-                                top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
-                                special_consideration_ids: [SpecialConsideration.ids.sample])
+                                top_fit_id: TopFit.ids.sample,
+                                special_consideration_ids: [SpecialConsideration.ids.sample],
+                                status: 1)
     top.top_sizes << TopSize.all
     top.exposed_parts.create(part_id: Part.find_by_name(['Midsection','Arms','Back','Cleavage'].sample))
 
@@ -135,8 +130,9 @@ if ENV["demo_up"]
                                       color_id: Color.ids.sample,
                                       body_shape_id: BodyShape.ids.sample,
                                       for_petite: idx.even?,
-                                      bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
-                                      special_consideration_ids: [SpecialConsideration.ids.sample])
+                                      bottom_fit_id: BottomFit.ids.sample, 
+                                      special_consideration_ids: [SpecialConsideration.ids.sample],
+                                      status: 1)
     bottom.bottom_sizes << BottomSize.all
 
     dress = retailer.dresses.create!(name: "#{Faker::Name.name} Designs Dress",
@@ -148,19 +144,15 @@ if ENV["demo_up"]
                                      color_id: Color.ids.sample,
                                      body_shape_id: BodyShape.ids.sample,
                                      for_petite: idx.even?,
-                                     top_fit: ['Tight/Form-Fitting', 'Loose', 'Straight', 'Oversized'].sample,
-                                     bottom_fit: ['Tight/Skinny', 'Straight', 'Loose/Flowy'].sample, 
-                                     special_consideration_ids: [SpecialConsideration.ids.sample])
+                                     top_fit_id: TopFit.ids.sample,
+                                     bottom_fit_id: BottomFit.ids.sample, 
+                                     special_consideration_ids: [SpecialConsideration.ids.sample],
+                                     status: 1)
     dress.dress_sizes << DressSize.all
 
   end
 end
 
 if ENV["demo_down"]
-  demo_user = Shopper.find_by_email('demo@example.com')
-  unless demo_user.nil?
-    demo_user.destroy
-  end
-
   Retailer.destroy_all
 end

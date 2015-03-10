@@ -36,8 +36,12 @@ RSpec.describe Outfit, :type => :model do
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
   it { should respond_to :image_name }
+  it { should respond_to :logo_image_name }
+  it { should respond_to :summary }
   it { should respond_to :status }
   it { should respond_to :live? }
+  it { should respond_to :favorites }
+  it { should respond_to :interested_shoppers }
   it { should be_valid }
 
   context "when retailer is not present" do
@@ -149,7 +153,39 @@ RSpec.describe Outfit, :type => :model do
 
     it "should return the correct image name" do
       expect(outfit.image_name)
-        .to eq("dc_washington_elena_s_boutique_cool_skirt_with_fun_top")
+        .to eq("dc/washington/elena_s_boutique/cool_skirt_with_fun_top.jpg")
+    end
+
+    it "should return the correct logo image name" do
+      expect(outfit.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+    end
+  end
+
+  describe "summary helper" do
+    it "should give the name" do
+      expect(@outfit.summary).to eq('Really cool shirt and pants')  
+    end
+  end
+
+  describe "favorties association" do
+    before { @outfit.save }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:favortie){ FactoryGirl.create(:favorite,
+                                        shopper: shopper,
+                                        favoriteable: @outfit) }
+
+    it "should return interested shoppers" do
+      expect(@outfit.interested_shoppers.count).to be(1)
+      expect(@outfit.interested_shoppers).to include(shopper)
+    end
+
+    it "should destroy associated favorites" do
+      favorites = @outfit.favorites.to_a
+      @outfit.destroy
+      expect(favorites).to_not be_empty
+      favorites.each do |f|
+        expect(Favorite.where(id: f.id)).to be_empty
+      end
     end
   end
 end

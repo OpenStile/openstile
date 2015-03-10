@@ -1,0 +1,53 @@
+<% provide(:title, @item.name) %>
+
+<%= render "shared/header" %>
+
+<div class="recommendation-details block">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5 vcenter">
+        <%= cl_image_tag(@item.image_name, 
+                         class: "img-responsive") %>
+      </div>
+      <div class="col-md-5 col-xs-5 text-center vcenter">
+        <hr>
+        <h1><%= @item.name %>
+          <span>
+            <%= render('shared/like_toggle', object: @item, with_ajax: false) if shopper_signed_in? %>
+          </span>
+        </h1><br />
+        <h2><%= @item.is_a?(Outfit) ? @item.price_description : 
+                                     ("$%6.2f" % @item.price.to_f) %></h2><br />
+        <a href=<%= item_retailer_show_path(@item)%> >
+          <%= cl_image_tag(@item.logo_image_name, 
+                            class: "img-responsive center-block",
+                            width: 200) %>
+        </a><br />
+        <%= link_to('Book a drop-in!', "#drop-in", 
+                                        class: "btn btn-default", 
+                                        id: "btn-drop-in") if shopper_signed_in? %>
+        <h4><%= @item.description %></h4>
+        <hr>
+      </div>
+    </div>
+
+    <%= render 'shared/view_more', retailer: @item.retailer %>
+
+    <% if shopper_signed_in? %>
+      <% existing_drop_in = 
+          DropIn.upcoming_for_shopper_at_retailer(current_shopper.id, 
+                                                  @item.retailer.id).first %>
+      <% if existing_drop_in.nil? %>
+        <%= render 'shared/schedule_drop_in', retailer: @item.retailer, 
+                                              for_retailer: false,
+                                              item: @item %>
+      <% else %>
+        <%= render 'shared/update_existing_drop_in', retailer: @item.retailer,
+                                                     drop_in: existing_drop_in,
+                                                     item: @item %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+

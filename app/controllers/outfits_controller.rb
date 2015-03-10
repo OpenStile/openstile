@@ -1,9 +1,11 @@
 class OutfitsController < ApplicationController
+  include Favoriteable
   before_filter :authenticate_admin!, only: [:new, :create]
   
   def show
-    @outfit = Outfit.find(params[:id])
+    @item = Outfit.find(params[:id])
     store_recommendation_show_url
+    render 'shared/item'
   end
 
   def new

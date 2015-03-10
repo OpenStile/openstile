@@ -10,4 +10,14 @@ module StatusLive
       return true if self.status == 1
     end
   end
+
+  def self.included(base)
+    base.extend(ClassMethods)  
+  end
+
+  module ClassMethods
+    def all_live
+      where(status: 1)
+    end
+  end  
 end

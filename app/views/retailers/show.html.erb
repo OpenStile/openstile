@@ -5,16 +5,22 @@
 <div class="recommendation-details block">
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
-        <%= image_tag("recommendations/#{@retailer.image_name}.jpg",
-                                          class: "img-responsive")%>
+      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5 vcenter">
+        <%= cl_image_tag(@retailer.image_name, 
+                         class: "img-responsive") %>
       </div>
-      <div class="col-md-5 col-xs-5 text-center">
+      <div class="col-md-5 col-xs-5 text-center vcenter">
         <hr>
-        <h1><%= @retailer.name %></h1><br />
+        <a href=<%= item_retailer_show_path(@retailer)%> >
+          <%= cl_image_tag(@retailer.logo_image_name, 
+                            class: "img-responsive center-block",
+                            width: 200) %>
+        </a><br />
         <h2><%= @retailer.location.neighborhood %></h2><br />
+        <%= link_to('Book a drop-in!', "#drop-in", 
+                                        class: "btn btn-default", 
+                                        id: "btn-drop-in") if shopper_signed_in? %>
         <h4><%= @retailer.description %></h4>
-        <hr>
         <% if @retailer.online_presence %>
           <% unless @retailer.online_presence.web_link.blank? %>
             <a href=<%=@retailer.online_presence.web_link%> target='_blank'>
@@ -37,8 +43,11 @@
             </a>
           <% end %>
         <% end %>
+        <hr>
       </div>
     </div>
+
+    <%= render 'shared/view_more', retailer: @retailer %>
 
     <% if shopper_signed_in? %>
       <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>

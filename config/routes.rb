@@ -39,14 +39,20 @@ Rails.application.routes.draw do
       get 'catalog'
     end
   end
+  
+  concern :favoriteable do
+    member do
+      get 'toggle_favorite'
+    end
+  end
 
-  resources :tops, only: [:show, :new, :create]
+  resources :tops, only: [:show, :new, :create], concerns: :favoriteable
 
-  resources :bottoms, only: [:show, :new, :create]
+  resources :bottoms, only: [:show, :new, :create], concerns: :favoriteable
 
-  resources :dresses, only: [:show, :new, :create]
+  resources :dresses, only: [:show, :new, :create], concerns: :favoriteable
 
-  resources :outfits, only: [:show, :new, :create]
+  resources :outfits, only: [:show, :new, :create], concerns: :favoriteable
 
   resources :drop_ins, only: [:create, :update, :destroy] do
     collection do

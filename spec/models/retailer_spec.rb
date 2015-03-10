@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Retailer, :type => :model do
-  let(:location){ FactoryGirl.create(:location) }
+  let(:location){ FactoryGirl.create(:location,
+                                      neighborhood: "Shaw") }
   before { @retailer = Retailer.new(name: "ABC Boutique",
                                     description: "Premier boutique in DC!",
                                     location: location) }
@@ -37,9 +38,11 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
   it { should respond_to :image_name }
+  it { should respond_to :logo_image_name }
   it { should respond_to :outfits }
   it { should respond_to :status }
   it { should respond_to :live? }
+  it { should respond_to :summary }
   it { should be_valid }
 
   context "when name is not present" do
@@ -216,7 +219,17 @@ RSpec.describe Retailer, :type => :model do
     let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
 
     it "should return the correct image name" do
-      expect(retailer.image_name).to eq("dc_washington_elena_s_boutique")
+      expect(retailer.image_name).to eq("dc/washington/elena_s_boutique/storefront.jpg")
+    end
+
+    it "should return the correct logo image name" do
+      expect(retailer.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+    end
+  end
+
+  describe "summary string helper" do
+    it "should summarize the retailers neigborhood" do
+      expect(@retailer.summary).to eq("Located in the Shaw neighborhood")
     end
   end
 

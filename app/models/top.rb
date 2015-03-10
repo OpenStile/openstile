@@ -1,6 +1,7 @@
 class Top < ActiveRecord::Base
   include ImageName
   include StatusLive
+  include FeedSummary
 
   belongs_to :retailer
   belongs_to :look
@@ -12,6 +13,8 @@ class Top < ActiveRecord::Base
   has_and_belongs_to_many :special_considerations
   has_many :exposed_parts, as: :exposable, dependent: :destroy
   has_many :drop_in_items, as: :reservable, dependent: :destroy
+  has_many :favorites, as: :favoriteable, dependent: :destroy
+  has_many :interested_shoppers, through: :favorites, source: :shopper
 
   validates :name, presence: true, length: { maximum: 100 } 
   validates :description, presence: true, length: { maximum: 250 }

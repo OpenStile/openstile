@@ -11,6 +11,13 @@ RSpec.describe OutfitsController, :type => :controller do
         expect(response).to be_success
       end
     end
+
+    context "GET toggle_favorites" do
+      it "redirects shopper to signin" do
+        get :toggle_favorite, {id: outfit.id}
+        expect(response).to redirect_to(new_shopper_session_path)
+      end
+    end
   end
 
   context "when non-admin user is signed in" do

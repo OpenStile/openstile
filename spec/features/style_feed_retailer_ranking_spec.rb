@@ -1,8 +1,14 @@
 require 'rails_helper'
 
 feature 'Style Feed retailer ranking' do
-  let(:retailer_one){ FactoryGirl.create(:retailer, name: "Shop A") }
-  let(:retailer_two){ FactoryGirl.create(:retailer, name: "Shop B") }
+  let(:location_one){ FactoryGirl.create(:location, 
+                                 neighborhood: Faker::Address.city) }
+  let(:location_two){ FactoryGirl.create(:location, 
+                                 neighborhood: Faker::Address.city) }
+  let(:retailer_one){ FactoryGirl.create(:retailer, name: "Shop A",
+                                          location: location_one) }
+  let(:retailer_two){ FactoryGirl.create(:retailer, name: "Shop B",
+                                          location: location_two) }
   let(:shopper){ FactoryGirl.create(:shopper) }
   
   scenario 'based on body shape' do

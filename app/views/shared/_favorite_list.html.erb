@@ -1,0 +1,6 @@
+<%= render 'shared/recommendation_feed', 
+           list: current_shopper.favorites.map{|fav| 
+             {object: fav.favoriteable, justification: []}
+           },
+           tab: 'favorite' %>
+

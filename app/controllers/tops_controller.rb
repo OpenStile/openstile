@@ -1,9 +1,11 @@
 class TopsController < ApplicationController
+  include Favoriteable
   before_filter :authenticate_admin!, only: [:new, :create]
 
   def show
-    @top = Top.find(params[:id])
+    @item = Top.find(params[:id])
     store_recommendation_show_url
+    render 'shared/item'
   end
 
   def new

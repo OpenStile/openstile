@@ -1,0 +1,6 @@
+test:
+  cloud_name: 'openstile'
+development:
+  cloud_name: 'openstile'
+production:
+  cloud_name: 'openstile'

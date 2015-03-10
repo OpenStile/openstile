@@ -1863,13 +1863,39 @@ input {
 
 /* Style Feed Begins */
 
+.style-feed .nav-pills li{
+  font-size: 20px; 
+}
+
+.style-feed .nav {
+  margin-bottom: 25px;
+}
+
+.style-feed .page-title p{
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.style-feed .fa-heart-lg {
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.fa-heart.favorite {
+  color: #428bca;
+}
+
+.fa-heart.nonFavorite {
+  color: #555;
+}
+
 .recommendation {
   margin-top: 50px;
 }
 
 .recommendation .summary {
-  margin-top: 100px;
-  margin-bottom: 150px;
+  margin-top: 25px;
+  margin-bottom: 50px;
   text-align: center;
 }
 
@@ -1886,6 +1912,24 @@ input {
 /* Style Feed Ends*/
 
 /* Recommendation Begins */
+
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
+.recommendation-details #btn-drop-in {
+  color: #ffffff;
+  background-color:#f75353;
+  border-color:#f75353;
+}
+
+.recommendation-details #btn-drop-in:hover {
+  color: #ffffff;
+  background-color: #f53232;
+  border-color: #f53232;
+}
 
 .recommendation-details h1{
   font-size: 40px;
@@ -1918,9 +1962,17 @@ input {
   padding-right: 5px;
 }
 
+.view-more {
+  margin-top: 30px;
+}
+
 .schedule #location {
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.glyphicon-2x {
+  font-size: 38px;
 }
 
 /* Recommendation End */

@@ -1,6 +1,7 @@
 class Retailer < ActiveRecord::Base
   include ImageName
   include StatusLive
+  include FeedSummary
 
   has_one :retail_user, dependent: :destroy
 

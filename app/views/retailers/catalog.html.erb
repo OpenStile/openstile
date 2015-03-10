@@ -26,6 +26,7 @@
     <% collection = [@retailer] + @retailer.outfits + @retailer.tops + 
                     @retailer.bottoms + @retailer.dresses %>
     <%= render 'shared/recommendation_feed', 
-                list: collection.map{|rec| {object: rec, justification: []}} %>
+                list: collection.map{|rec| {object: rec, justification: []}},
+                tab: 'catalog' %>
   </div>
 </div>

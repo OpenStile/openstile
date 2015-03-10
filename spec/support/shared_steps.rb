@@ -91,14 +91,34 @@ def when_i_set_my_style_profile_avoided_colors color, action
   expect(page).to have_content('My Style Feed')
 end
 
-def then_my_style_feed_should_not_contain recommendation
-  visit '/'
-  expect(page).to_not have_content(recommendation.name)
+def then_my_style_feed_should_not_contain recommendation, tab=:recommended, refresh=true
+  visit '/' if refresh
+
+  if tab == :recommended
+    click_link 'Suggested for me'
+  elsif tab == :all
+    click_link 'All featured items'
+  elsif tab == :favorites
+    click_link 'My favorites'
+  end
+
+  status = page.has_selector?('h3', text: recommendation.summary, visible: true)
+  expect(status).to be(false)
 end
 
-def then_my_style_feed_should_contain recommendation
-  visit '/'
-  expect(page).to have_content(recommendation.name)
+def then_my_style_feed_should_contain recommendation, tab=:recommended, refresh=true
+  visit '/' if refresh
+
+  if tab == :recommended
+    click_link 'Suggested for me'
+  elsif tab == :all
+    click_link 'All featured items'
+  elsif tab == :favorites
+    click_link 'My favorites'
+  end
+
+  status = page.has_selector?('h3', text: recommendation.summary, visible: true)
+  expect(status).to be(true)
 end
 
 def when_i_set_my_style_profile_body_shape_to body_shape
@@ -211,9 +231,9 @@ def when_i_set_my_style_profile_feelings_for_a_print_as print, partiality
   expect(page).to have_content('My Style Feed')
 end
 
-def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking
-  visit '/'
-  expect(page.body.index(higher_ranking.name)).to be < (page.body.index(lower_ranking.name))
+def then_the_recommendation_ordering_should_be higher_ranking, lower_ranking, refresh=true
+  visit '/' if refresh
+  expect(page.body.index(higher_ranking.summary)).to be < (page.body.index(lower_ranking.summary))
 end
 
 def then_the_recommendation_should_be_for recommendation_string
@@ -231,8 +251,8 @@ end
 def when_i_select_a_recommendation recommendation
   visit '/'
 
-  within(:css, "div##{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
-    click_link 'Drop-in'
+  within(:css, "div#recommendation_#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
+    click_link 'View more details'
   end
 
   expect(page).to have_content(recommendation.description)

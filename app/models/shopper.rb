@@ -1,6 +1,7 @@
 class Shopper < ActiveRecord::Base
   has_one :style_profile, dependent: :destroy
   has_many :drop_ins, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   devise :database_authenticatable, :registerable, :recoverable,
          :rememberable, :trackable, :validatable #, :confirmable,

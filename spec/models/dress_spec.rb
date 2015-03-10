@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Dress, :type => :model do
   
   let(:retailer){ FactoryGirl.create(:retailer) }
-  before { @dress = retailer.dresses.build(name: "Skinny Jeans", description: "A really cool pair of jeans",
+  before { @dress = retailer.dresses.build(name: "Wrap Dress", description: "A really cool dress",
                                            web_link: "www.see_this_dress.com", price: 55.00) }
   
   subject { @dress }
@@ -31,9 +31,13 @@ RSpec.describe Dress, :type => :model do
   it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
   it { should respond_to :drop_in_items }
+  it { should respond_to :logo_image_name }
   it { should respond_to :image_name }
+  it { should respond_to :summary }
   it { should respond_to :status }
   it { should respond_to :live? }
+  it { should respond_to :favorites }
+  it { should respond_to :interested_shoppers }
   it { should be_valid }
 
   context "when name is not present" do
@@ -139,7 +143,39 @@ RSpec.describe Dress, :type => :model do
     let(:dress){ FactoryGirl.create(:dress, name: "Cool Dress", retailer: retailer) } 
 
     it "should return the correct image name" do
-      expect(dress.image_name).to eq("dc_washington_elena_s_boutique_cool_dress")
+      expect(dress.image_name).to eq("dc/washington/elena_s_boutique/cool_dress.jpg")
+    end
+
+    it "should return the correct logo image name" do
+      expect(dress.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+    end
+  end
+
+  describe "summary helper" do
+    it "should return name and price" do
+      expect(@dress.summary).to eq("Wrap Dress - $55.00")
+    end
+  end
+
+  describe "favorties association" do
+    before { @dress.save }
+    let(:shopper){ FactoryGirl.create(:shopper) }
+    let!(:favortie){ FactoryGirl.create(:favorite,
+                                        shopper: shopper,
+                                        favoriteable: @dress) }
+
+    it "should return interested shoppers" do
+      expect(@dress.interested_shoppers.count).to be(1)
+      expect(@dress.interested_shoppers).to include(shopper)
+    end
+
+    it "should destroy associated favorites" do
+      favorites = @dress.favorites.to_a
+      @dress.destroy
+      expect(favorites).to_not be_empty
+      favorites.each do |f|
+        expect(Favorite.where(id: f.id)).to be_empty
+      end
     end
   end
 end

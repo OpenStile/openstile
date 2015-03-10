@@ -1,26 +1,33 @@
 <% list.each_with_index do |recommendation, idx| %>
-  <div class="row">
-    <div class="recommendation">
-      <div class="col-md-5<%= ' col-md-push-7' if idx.odd? %> col-sm-12">
-        <%= image_tag("recommendations/#{recommendation[:object].image_name}.jpg",
-                       class: "img-responsive")%>
+  <div class="recommendation" id=<%= recommendation_string(recommendation[:object], tab) %>>
+    <div class="row">
+      <div class="col-md-8 col-sm-10 col-md-offset-2 col-sm-offset-1">
+        <a href=<%= item_show_path(recommendation[:object])%> >
+          <%= cl_image_tag(recommendation[:object].image_name, 
+                           class: "img-responsive") %>
+        </a>
       </div>
-      <div class="col-md-7<%= ' col-md-pull-5' if idx.odd? %> col-sm-12">
-        <div class="summary" id=<%= recommendation_string(recommendation[:object]) %>>
-          <h3><%= recommendation[:object].name %></h3><br />
-          <% if recommendation[:object].is_a? Retailer %>
-            <h4><%= recommendation[:object].location.neighborhood %></h4><br />
-          <% elsif recommendation[:object].is_a? Outfit %>
-            <h4><%= recommendation[:object].retailer.name %></h4>
-            <h4><%= recommendation[:object].price_description %></h4><br />
-          <% else %>
-            <h4><%= recommendation[:object].retailer.name %></h4>
-            <h4><%= "$%6.2f" % recommendation[:object].price.to_f %></h4><br />
-          <% end %>
+      <% if (shopper_signed_in? && recommendation[:object].respond_to?(:favorites)) %>
+        <div class="col-md-1 col-sm-1 like-toggle">
+          <%= render 'shared/like_toggle', object: recommendation[:object] %>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
+        <div class="summary">
+          <a href=<%= item_retailer_show_path(recommendation[:object])%> >
+            <%= cl_image_tag(recommendation[:object].logo_image_name, 
+                            class: "img-responsive",
+                            width: 200) %>
+          </a>
+          <br /><h3><%= recommendation[:object].summary %></h3><br />
           <% unless recommendation[:justification].empty? %>
             <h4><%= "Recommended for #{recommendation[:justification].sample}" %></h4><br />
           <% end %>
-          <%= render 'shared/drop_in_button', object: recommendation[:object] %>
+          
+          <%= link_to "View more details", item_show_path(recommendation[:object]),
+                                           class: 'btn btn-lg btn-primary' %>
         </div>
       </div>
     </div>
