@@ -7,7 +7,7 @@ RSpec.describe Retailer, :type => :model do
                                     description: "Premier boutique in DC!",
                                     location: location,
                                     owner_name: 'Seymour Butts',
-                                    phone: '571-555-5555') }
+                                    phone_number: '571-555-5555') }
 
   subject { @retailer }
 
@@ -46,7 +46,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :live? }
   it { should respond_to :summary }
   it { should respond_to :owner_name }
-  it { should respond_to :phone }
+  it { should respond_to :phone_number }
   it { should be_valid }
 
   context "when name is not present" do
@@ -229,28 +229,28 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
-  describe "phone" do
-    context "when phone is blank" do
-      before { @retailer.phone = "" }
+  describe "phone_number" do
+    context "when phone_number is blank" do
+      before { @retailer.phone_number = "" }
       it { should_not be_valid }
     end
 
-    context "when phone format is invalid" do
+    context "when phone_number format is invalid" do
       it "should be invalid" do
         numbers = %w[123-aaa-5555 123-4563 123-456-789012]
         numbers.each do |number|
-          @retailer.phone = number
+          @retailer.phone_number = number
           expect(@retailer).not_to be_valid
         end
       end
     end
 
-    context "when phone format is valid" do
+    context "when phone_number format is valid" do
       it "should be valid" do
         numbers = ['123-456-7890', '123.456.7890', '1234567890',
                    '(123) 456-7890', '1-123-456-7890']
         numbers.each do |number|
-          @retailer.phone = number
+          @retailer.phone_number = number
           expect(@retailer).to be_valid
         end
       end

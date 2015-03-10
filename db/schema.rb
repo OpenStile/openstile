@@ -466,7 +466,7 @@ ActiveRecord::Schema.define(version: 20150308211641) do
     t.integer  "bottom_fit_id"
     t.integer  "status"
     t.string   "owner_name"
-    t.string   "phone"
+    t.string   "phone_number"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
