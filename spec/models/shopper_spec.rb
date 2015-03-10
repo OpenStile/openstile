@@ -9,7 +9,7 @@ RSpec.describe Shopper, :type => :model do
 
   it { should respond_to :first_name }
   it { should respond_to :email }
-  it { should respond_to :cell_phone }
+  it { should respond_to :phone_number }
   it { should respond_to :encrypted_password }
   it { should respond_to :style_profile }
   it { should respond_to :drop_ins }
@@ -77,27 +77,27 @@ RSpec.describe Shopper, :type => :model do
     end
   end
 
-  context "when cell phone is blank" do
-    before { @shopper.cell_phone = "" }
+  context "when phone number is blank" do
+    before { @shopper.phone_number = "" }
     it { should be_valid }
   end
 
-  context "when cell phone format is invalid" do
+  context "when phone number format is invalid" do
     it "should be invalid" do
       numbers = %w[123-aaa-5555 123-4563 123-456-789012]
       numbers.each do |number|
-        @shopper.cell_phone = number
+        @shopper.phone_number = number
         expect(@shopper).not_to be_valid
       end
     end
   end
 
-  context "when cell phone format is valid" do
+  context "when phone number format is valid" do
     it "should be valid" do
       numbers = ['123-456-7890', '123.456.7890', '1234567890', 
                  '(123) 456-7890', '1-123-456-7890']
       numbers.each do |number|
-        @shopper.cell_phone = number
+        @shopper.phone_number = number
         expect(@shopper).to be_valid
       end
     end
