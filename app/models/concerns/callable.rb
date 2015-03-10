@@ -12,7 +12,7 @@ module Callable
 
     if self.inspect.include?('Retailer')
       validates :phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: "must be 10 or 11 numeric digits." }
-    elsif self.inspect.include?('Shopper')
+    elsif self.inspect.include?('Shopper') || self.inspect.include?('RetailUser')
       validates :phone_number, presence: true, format: { with: VALID_PHONE_NUMBER_REGEX, message: "must be 10 or 11 numeric digits." },
                          unless: "phone_number.nil? or phone_number.empty?"
     end
