@@ -1913,6 +1913,12 @@ input {
 
 /* Recommendation Begins */
 
+.vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
+}
+
 .recommendation-details h1{
   font-size: 40px;
   font-weight: 800;  

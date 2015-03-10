@@ -5,11 +5,11 @@
 <div class="recommendation-details block">
   <div class="container">
     <div class="row">
-      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5">
+      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5 vcenter">
         <%= cl_image_tag(@retailer.image_name, 
                          class: "img-responsive") %>
       </div>
-      <div class="col-md-5 col-xs-5 text-center">
+      <div class="col-md-5 col-xs-5 text-center vcenter">
         <hr>
         <a href=<%= item_retailer_show_path(@retailer)%> >
           <%= cl_image_tag(@retailer.logo_image_name, 
