@@ -4,7 +4,7 @@ class Shopper < ActiveRecord::Base
   has_many :favorites, dependent: :destroy
 
   devise :database_authenticatable, :registerable, :recoverable,
-         :rememberable, :trackable, :validatable #, :confirmable,
+         :rememberable, :trackable, :validatable, :confirmable
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
   VALID_CELL_PHONE_REGEX = /\A\d{10,11}\z/
