@@ -11,7 +11,7 @@ class ShopperMailer < ActionMailer::Base
     @greeting = "Hello #{shopper.first_name}"
     @shopper = shopper
     @drop_in = drop_in
-    mail to: @shopper.email, subject: 'You have scheduled a drop-in visit with an OpenStile retailer!'
+    mail to: @shopper.email, subject: "#{@retailer.name} is expecting you #{@drop_in.colloquial_time}"
   end
 
   def drop_in_canceled_email(retailer, shopper, drop_in)
@@ -19,6 +19,6 @@ class ShopperMailer < ActionMailer::Base
     @greeting = "Hello #{shopper.first_name}"
     @shopper = shopper
     @drop_in = drop_in
-    mail to: @shopper.email, subject: 'You have canceled a drop-in visit with an OpenStile retailer!'
+    mail to: @shopper.email, subject: "Your drop-in for #{@drop_in.colloquial_time} at #{@retailer.name} has been canceled"
   end
 end

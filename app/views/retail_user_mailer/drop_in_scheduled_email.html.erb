@@ -2,9 +2,14 @@
 
 <%= @greeting %>, </br>
 
-<%= @shopper.first_name %> scheduled a drop in for <%= @drop_in.colloquial_time %>. </br>
+<%= @shopper.first_name %> has scheduled a drop-in at your store for <%= @drop_in.colloquial_time %>. </br>
 
-Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </br>
+<% unless @drop_in.comment.nil? %>
+  Here is what she's looking for: </br>
+  <%= @drop_in.comment.to_s %> </br>
+<% end %>
+
+See more detail on this and all your other upcoming drop-ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </br>
 
 Sincerely, </br>
 

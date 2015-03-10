@@ -1,5 +1,15 @@
 <%= @greeting %>,\n
 
-You have scheduled a drop in with <%= @retailer.name %> for <%= @drop_in.colloquial_time %>.\n
+We've booked your drop-in at <%= @retailer.name %> for <%= @drop_in.colloquial_time %>.\n
+
+<%= @retailer.owner_name %> and her team are looking forward to your arrival!\n
+
+Should you need to contact them, please call <%= number_to_phone @retailer.phone_number %>.\n
 
 Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>.\n
+
+Hope to catch you another time!\n
+
+Sincerely,\n
+
+Your friends at OpenStile
