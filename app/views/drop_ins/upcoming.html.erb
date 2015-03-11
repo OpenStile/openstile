@@ -17,6 +17,48 @@
 
 <div class="my-drop-ins block">
   <div class="container">
+    <% if current_shopper && @drop_ins.empty? %>
+      <div class="row">
+        <div class="page-title text-center">
+          <h4>You and your style are unique... 
+          your shopping experience should be too!</h4>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 text-justified">
+          <p>
+            OpenStile drop-ins allow you to turn a regular ole' shopping 
+            trip into a fun indulgence.<br /><br />
+
+            Picture this: you walk into a chic boutique and the owner is 
+            super-excited to see you! She's been anticipating your arrival 
+            and already knows your budget, size, the looks you like, and that 
+            you're getting ready for your BFF's bachelorette weekend in Vegas. 
+            She has some outfits pulled and waiting, and is eager to make sure 
+            you leave with the perfect pieces that match your personal style.<br /><br />
+
+            This is the OpenStile experience, and we want you to have it!<br /><br />
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <% matching_retailer = retailer_recommendation_for(current_shopper) %>
+        <div class="page-title text-center">
+          <% if matching_retailer %>
+            <h4><%= current_shopper.first_name %>, 
+              based on your preferences we suggest booking a drop-in at:</h4><br />
+            <a href=<%= retailer_path(matching_retailer) %> >
+              <%= cl_image_tag(matching_retailer.logo_image_name, 
+                                class: "img-responsive center-block",
+                                width: 200,
+                                alt: 'retailer_logo') %>
+            </a><br />
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <% @drop_ins.each_with_index do |drop_in, idx| %>
       <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
         <% if current_shopper %>
@@ -28,7 +70,8 @@
     <% end %>
     <% if current_shopper %>
       <div class="continue-browsing">
-        <div class="col-md-4 col-xs-4">
+        <div class="col-md-4 col-xs-4 col-md-offset-2 col-xs-offset-1">
+          <br />
           <a class="btn btn-lg btn-primary" href=<%= retrieve_recommendation_home_path %>>
             <span class="glyphicon glyphicon-chevron-left"></span>  Continue Browsing
           </a>

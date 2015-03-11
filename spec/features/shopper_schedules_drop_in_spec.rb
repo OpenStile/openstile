@@ -26,7 +26,8 @@ feature 'Shopper schedule drop in' do
     place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_select_a_recommendation retailer
+    given_i_have_no_drop_ins_scheduled
+    when_i_click_on_the_suggested_retailer
     when_i_attempt_to_schedule_with_invalid_options retailer
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
@@ -123,6 +124,17 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_should_show_item_on_hold top
     then_my_scheduled_should_show_item_on_hold dress
     then_my_scheduled_should_show_item_on_hold outfit
+  end
+
+  def given_i_have_no_drop_ins_scheduled
+    click_link 'Scheduled Drop-ins'
+
+    expect(page)
+      .to have_content("regular ole' shopping trip into a fun indulgence")
+  end
+
+  def when_i_click_on_the_suggested_retailer
+    click_link "retailer_logo"
   end
 
   def when_i_attempt_to_schedule_with_invalid_options recommendation
