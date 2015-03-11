@@ -18,7 +18,7 @@ def given_i_am_a_logged_in_retail_user retail_user
   end
   visit '/'
   click_link 'Log in'
-  click_link 'Are you a retailer?'
+  click_link 'Switch to retailer log in'
   fill_in 'Email', with: retail_user.email
   fill_in 'Password', with: retail_user.password
   click_button 'Log in'

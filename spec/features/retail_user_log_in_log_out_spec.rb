@@ -5,7 +5,7 @@ describe "Retail user log in and log out" do
     before do
       visit root_path
       click_link 'Log in'
-      click_link 'Are you a retailer?'
+      click_link 'Switch to retailer log in'
     end
     let(:retail_user) { FactoryGirl.create(:retail_user) }
     let(:submit) { "Log in" }

@@ -23,6 +23,36 @@ describe "Shopper log in and log out" do
       end
     end
 
+    describe "and I ask to reset my password" do
+      before do
+        click_link 'Forgot password?'
+        fill_in 'Email', with: shopper.email
+      end
+    
+      it "should email me a link allowing me to reset my password" do
+        expect{click_button 'Send me reset password instructions'}
+                 .to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      describe "after submission" do
+        before { click_button 'Send me reset password instructions'}
+
+        it "should direct me to reset my password and log in" do
+          reset_link = ActionMailer::Base.deliveries.last.body
+                                         .match(/href=".*"/)[0]
+                                         .gsub('href=', '').gsub('"','')
+
+          visit reset_link
+          fill_in 'New password', with: 'newfoobar'
+          fill_in 'Confirm new password', with: 'newfoobar'
+          click_button 'Reset my password'
+
+          expect(page).to_not have_link('Log in')
+          expect(page).to have_link('Log out')
+        end
+      end
+    end
+
     describe "and I enter valid credentials" do
       before do
         fill_in 'Email', with: shopper.email
