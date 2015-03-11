@@ -18,6 +18,14 @@ module RecommendationsHelper
 
     process_rankings(shopper.style_profile, (retailer_matches + item_matches + outfit_matches))
   end
+
+  def retailer_recommendation_for shopper
+    prefs = shopper.style_profile
+    retailer_matches = (matches_for_size(prefs, true) &
+                        matches_for_budget(prefs, true) &
+                        matches_for_look(prefs, true))
+    retailer_matches.sample
+  end
   
   def process_rankings style_profile, recommendations
     results = []
@@ -41,7 +49,7 @@ module RecommendationsHelper
     results.sort{|rec1, rec2| rec2[:priority] <=> rec1[:priority]}
   end
 
-  def matches_for_size style_profile
+  def matches_for_size style_profile, retailer_only=false
     top_sizes = style_profile.top_sizes
     bottom_sizes = style_profile.bottom_sizes
     dress_sizes = style_profile.dress_sizes
@@ -54,10 +62,11 @@ module RecommendationsHelper
     bottoms = bottom_sizes.map(&:bottoms).flatten.uniq
     dresses = dress_sizes.map(&:dresses).flatten.uniq
     
+    return retailers if retailer_only
     [retailers, (tops + bottoms + dresses), outfits]
   end
 
-  def matches_for_budget style_profile
+  def matches_for_budget style_profile, retailer_only=false
     retailer_match_top_budget = PriceRange.overlap_with_top_budget(style_profile.budget).map(&:retailer).uniq
     retailer_match_bottom_budget = PriceRange.overlap_with_bottom_budget(style_profile.budget).map(&:retailer).uniq
     retailer_match_dress_budget = PriceRange.overlap_with_dress_budget(style_profile.budget).map(&:retailer).uniq
@@ -69,10 +78,12 @@ module RecommendationsHelper
     dresses = Dress.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
     
     outfits = Outfit.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
+
+    return retailers if retailer_only
     [retailers, (tops + bottoms + dresses), outfits]
   end
 
-  def matches_for_look style_profile
+  def matches_for_look style_profile, retailer_only=false
     retailers = Retailer.where(look_id: nil) + Retailer.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).pluck(:look_id))
 
     tops = Top.where(look_id: nil) + Top.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).pluck(:look_id))
@@ -81,6 +92,7 @@ module RecommendationsHelper
     
     outfits = Outfit.where(look_id: nil) + Outfit.where.not(look_id: LookTolerance.hated_looks_for(style_profile.id).pluck(:look_id))
 
+    return retailers if retailer_only
     [retailers, (tops + bottoms + dresses), outfits]
   end
 
