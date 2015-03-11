@@ -19,12 +19,13 @@ Rails.application.routes.draw do
     post "/shoppers",         :to => "shoppers/registrations#create", :as => 'shopper_registration'
   end
 
-  devise_for :retail_users, :skip => [:passwords, :registrations], path: '/retail_users', controllers: {
-    sessions: 'retail_users/sessions'
-    }
+  devise_for :retail_users, :skip => [:registrations], controllers: {
+    sessions: "retail_users/sessions",
+    passwords: "retail_users/passwords"
+  }
   devise_scope :retail_user do
-      get "/retail_users/registrations", :to => "retail_users/registrations#edit",   :as => 'edit_retail_user_registration'
-      put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
+    get "/retail_users/registrations", :to => "retail_users/registrations#edit",   :as => 'edit_retail_user_registration'
+    put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
   end
 
   devise_for :admins, only: [:sessions], controllers: {sessions: "admins/sessions"}
