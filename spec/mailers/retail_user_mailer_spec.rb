@@ -14,6 +14,7 @@ RSpec.describe RetailUserMailer, :type => :mailer do
                                    retailer: retailer,
                                    time: tomorrow_mid_morning,
                                    comment: 'I want this dress right now!')}
+  let!(:drop_in_item){ FactoryGirl.create(:drop_in_item, reservable: outfit, drop_in: drop_in) }
 
   before(:each) do
     @retail_user = retailer.create_retail_user(retailer_id: retailer.id,
@@ -28,6 +29,8 @@ RSpec.describe RetailUserMailer, :type => :mailer do
     let(:asserted_body) { ["#{greeting}", "#{shopper.first_name} has scheduled a drop-in at your store for #{drop_in.colloquial_time}",
                             "Here is what she's looking for",
                             "I want this dress right now!",
+                            "Foo",
+                            "#{drop_in.colloquial_time}",
                             "See more detail on this and all your other upcoming drop-ins on OpenStile"]}
     let(:asserted_recipient) { @retail_user.email }
     let(:asserted_subject) { "#{shopper.first_name} is coming in Tomorrow @ 10 AM" }

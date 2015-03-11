@@ -1,15 +1,17 @@
-<%= @greeting %>,\n
+<% cl_image_tag("blouse_and_dress.jpg") %>
 
-We've booked your drop-in at <%= @retailer.name %> for <%= @drop_in.colloquial_time %>.\n
+<%= @greeting %>, <%= "\n" %>
 
-<%= @retailer.owner_name %> and her team are looking forward to your arrival!\n
+We've booked your drop-in at <%= @retailer.name %> for <%= @drop_in.colloquial_time %>. <%= "\n" %>
 
-Should you need to contact them, please call <%= number_to_phone @retailer.phone_number %>.\n
+<%= @retailer.owner_name %> and her team are looking forward to your arrival! <%= "\n" %>
 
-Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>.\n
+Should you need to contact them, please call <%= number_to_phone @retailer.phone_number %>. <%= "\n" %>
 
-Hope to catch you another time!\n
+Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. <%= "\n" %>
 
-Sincerely,\n
+Hope to catch you another time! <%= "\n" %>
+
+Sincerely, <%= "\n" %>
 
 Your friends at OpenStile

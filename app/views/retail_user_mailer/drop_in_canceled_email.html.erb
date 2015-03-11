@@ -1,12 +1,14 @@
+<% cl_image_tag("blouse_and_dress.jpg") %>
+
 <p>
 
-<%= @greeting %>, </br>
+<%= @greeting %>, <%= "\n" %>
 
-Your drop in with <%= @shopper.first_name %> for <%= @drop_in.colloquial_time %> has been canceled. </br>
+Your drop in with <%= @shopper.first_name %> for <%= @drop_in.colloquial_time %> has been canceled. <%= "\n" %>
 
-Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </br>
+Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. <%= "\n" %>
 
-Sincerely, </br>
+Sincerely, <%= "\n" %>
 
 Your friends at OpenStile
 
