@@ -12,26 +12,20 @@ feature 'Shopper modifies drop in' do
                                      shopper: shopper,
                                      retailer: retailer,
                                      time: tomorrow_mid_morning) }
-  before do
-    ActionMailer::Base.delivery_method = :test
-    ActionMailer::Base.deliveries = []
-    @retail_user = retailer.create_retail_user(retailer_id: retailer.id,
-                                              email: "john@example.com",
-                                              password: "barbaz",
-                                              password_confirmation: "barbaz")
-  end
+  let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
 
   scenario 'by cancelling it' do
     given_i_am_a_logged_in_shopper shopper
     given_my_upcoming_drop_ins_page_contains drop_in
     when_i_cancel_and_confirm drop_in
     then_my_upcoming_drop_ins_page_should_not_contain drop_in
-    then_i_and_the_retail_user_should_receive_an_email
+    then_i_and_the_retail_user_should_receive_an_email shopper.email, retail_user.email
   end
 
   def when_i_cancel_and_confirm appointment
     within(:css, "div#drop_in_#{appointment.id}") do
-      click_link 'cancel'
+      expect{click_link 'cancel'}
+            .to change(ActionMailer::Base.deliveries, :count).by(2) 
     end
 
     expect(page).to have_content('Drop in cancelled')

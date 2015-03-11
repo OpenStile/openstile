@@ -10,20 +10,22 @@ Rails.application.routes.draw do
   get '/blog/retailer-spotlight-tin-lizzy'  =>  'blog#blog_02'
   get '/blog/dressing-mommy-post-baby-phase'=>  'blog#blog_03'
 
-  devise_for :shoppers, :skip => [:passwords, :registrations], path: '/shoppers', controllers: {
-    sessions: 'shoppers/sessions'
-    }
+  devise_for :shoppers, :skip => [:registrations], controllers: {
+    sessions: "shoppers/sessions",
+    passwords: "shoppers/passwords"
+  } 
   devise_scope :shopper do
-      get "/shoppers/sign_up", :to => "shoppers/registrations#new",   :as => 'new_shopper_registration'
-      post "/shoppers", :to => "shoppers/registrations#create", :as => 'shopper_registration'
+    get "/shoppers/sign_up",  :to => "shoppers/registrations#new",    :as => 'new_shopper_registration'
+    post "/shoppers",         :to => "shoppers/registrations#create", :as => 'shopper_registration'
   end
 
-  devise_for :retail_users, :skip => [:passwords, :registrations], path: '/retail_users', controllers: {
-    sessions: 'retail_users/sessions'
-    }
+  devise_for :retail_users, :skip => [:registrations], controllers: {
+    sessions: "retail_users/sessions",
+    passwords: "retail_users/passwords"
+  }
   devise_scope :retail_user do
-      get "/retail_users/registrations", :to => "retail_users/registrations#edit",   :as => 'edit_retail_user_registration'
-      put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
+    get "/retail_users/registrations", :to => "retail_users/registrations#edit",   :as => 'edit_retail_user_registration'
+    put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
   end
 
   devise_for :admins, only: [:sessions], controllers: {sessions: "admins/sessions"}

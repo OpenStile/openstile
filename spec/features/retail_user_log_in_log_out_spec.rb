@@ -5,7 +5,7 @@ describe "Retail user log in and log out" do
     before do
       visit root_path
       click_link 'Log in'
-      click_link 'Are you a retailer?'
+      click_link 'Switch to retailer log in'
     end
     let(:retail_user) { FactoryGirl.create(:retail_user) }
     let(:submit) { "Log in" }
@@ -21,6 +21,36 @@ describe "Retail user log in and log out" do
       it "should not log me in" do
         expect(page).to have_link('Log in')
         expect(page).to_not have_link('Log out')
+      end
+    end
+
+    describe "and I ask to reset my password" do
+      before do
+        click_link 'Forgot password?'
+        fill_in 'Email', with: retail_user.email
+      end
+    
+      it "should email me a link allowing me to reset my password" do
+        expect{click_button 'Send me reset password instructions'}
+                 .to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
+      describe "after submission" do
+        before { click_button 'Send me reset password instructions'}
+
+        it "should direct me to reset my password and log in" do
+          reset_link = ActionMailer::Base.deliveries.last.body
+                                         .match(/href=".*"/)[0]
+                                         .gsub('href=', '').gsub('"','')
+
+          visit reset_link
+          fill_in 'New password', with: 'newfoobar'
+          fill_in 'Confirm new password', with: 'newfoobar'
+          click_button 'Reset my password'
+
+          expect(page).to_not have_link('Log in')
+          expect(page).to have_link('Log out')
+        end
       end
     end
 

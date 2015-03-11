@@ -36,6 +36,11 @@ describe "Shopper sign up" do
         expect { click_button submit }.to change(Shopper, :count).by(1)
       end
 
+      it "should send a confirmation email" do
+        expect { click_button submit }
+                   .to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+
       describe "after submission" do
         before { click_button submit }
 

@@ -18,7 +18,7 @@ def given_i_am_a_logged_in_retail_user retail_user
   end
   visit '/'
   click_link 'Log in'
-  click_link 'Are you a retailer?'
+  click_link 'Switch to retailer log in'
   fill_in 'Email', with: retail_user.email
   fill_in 'Password', with: retail_user.password
   click_button 'Log in'
@@ -258,9 +258,11 @@ def when_i_select_a_recommendation recommendation
   expect(page).to have_content(recommendation.description)
 end
 
-def then_i_and_the_retail_user_should_receive_an_email
-  expect(ActionMailer::Base.deliveries.length).to eq(2)
-  expect(ActionMailer::Base.deliveries.first.to).to include(@retail_user.email)
-  expect(ActionMailer::Base.deliveries.second.to).to include(shopper.email)
+def then_i_and_the_retail_user_should_receive_an_email shopper_email, retail_user_email
+  count = ActionMailer::Base.deliveries.count
+  last_two_receipients = ActionMailer::Base.deliveries[count-2, count-1]
+                                                  .map(&:to).flatten
+  expect(last_two_receipients).to include(retail_user_email)
+  expect(last_two_receipients).to include(shopper_email)
 end
 

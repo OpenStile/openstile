@@ -17,15 +17,7 @@ feature 'Shopper schedule drop in' do
                        retailer: retailer,
                        location: pop_up_location)
   }
-
-  before do
-    ActionMailer::Base.delivery_method = :test
-    ActionMailer::Base.deliveries = []
-    @retail_user = retailer.create_retail_user(retailer_id: retailer.id,
-                                              email: "john@example.com",
-                                              password: "barbaz",
-                                              password_confirmation: "barbaz")
-  end
+  let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
 
   scenario 'to browse a store' do
     baseline_calibration_for_shopper_and_retailers
@@ -39,7 +31,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
-    then_i_and_the_retail_user_should_receive_an_email
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email 
   end
 
   scenario 'to see a top' do
@@ -54,7 +46,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with top.retailer, "Tomorrow", place
-    then_i_and_the_retail_user_should_receive_an_email
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
     then_my_scheduled_should_show_item_on_hold top
   end
 
@@ -70,7 +62,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with bottom.retailer, "Tomorrow", place
-    then_i_and_the_retail_user_should_receive_an_email
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
     then_my_scheduled_should_show_item_on_hold bottom
   end
 
@@ -86,7 +78,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with dress.retailer, "Tomorrow", place
-    then_i_and_the_retail_user_should_receive_an_email
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
     then_my_scheduled_should_show_item_on_hold dress
   end
 
@@ -151,7 +143,8 @@ feature 'Shopper schedule drop in' do
       fill_in 'Date', with: date
       fill_in 'Time', with: time
 
-      click_button 'Schedule'
+      expect{click_button 'Schedule'}
+            .to change(ActionMailer::Base.deliveries, :count).by(2) 
     end
 
     expect(page).to have_content('My Drop-Ins')
