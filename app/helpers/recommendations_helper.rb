@@ -24,7 +24,7 @@ module RecommendationsHelper
     retailer_matches = (matches_for_size(prefs, true) &
                         matches_for_budget(prefs, true) &
                         matches_for_look(prefs, true))
-    retailer_matches.sample
+    retailer_matches.keep_if{|r| r.live?}.sample
   end
   
   def process_rankings style_profile, recommendations

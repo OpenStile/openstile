@@ -24,6 +24,13 @@ def given_i_am_a_logged_in_retail_user retail_user
   click_button 'Log in'
 end
 
+def given_i_have_no_drop_ins_scheduled
+  click_link 'Scheduled Drop-ins'
+
+  expect(page)
+    .to have_content("regular ole' shopping trip into a fun indulgence")
+end
+
 def when_i_set_my_style_profile_sizes_to sizes
   click_link 'Style Profile'
 
