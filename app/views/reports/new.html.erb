@@ -1,0 +1,24 @@
+<%= provide(:title, 'Reports') %>
+<%= render 'shared/header' %>
+
+<div class="block">
+  <div class="container">
+    <div class="row text-center">
+      <h2>Generate an Activation Funnel Report</h2><br />
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_tag reports_path do %>
+          <%= label_tag(:start, "Start") %>
+          <%= date_field_tag(:start) %>
+
+          <%= label_tag(:end, "End") %>
+          <%= date_field_tag(:end) %>
+
+          <%= submit_tag("Generate report") %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

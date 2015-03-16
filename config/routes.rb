@@ -71,6 +71,8 @@ Rails.application.routes.draw do
 
   get 'drop_in_availabilities/apply_form' => 'drop_in_availabilities#apply_form'
 
+  resources :reports, only: [:new, :create]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
