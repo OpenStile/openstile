@@ -1,0 +1,64 @@
+<% provide(:title, 'The Experience') %>
+
+<div class="experience-top">
+  <%= render "shared/header" %>
+  <div class="hero inner-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="intro">
+            <h2>The OpenStile Experience</h2><br /> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="experience features block">
+  <div class="container">
+    <div class="row">
+      <div class="side-image col-md-6">
+        <%= image_tag("plaid_blazer.jpg", class: "img-responsive")%>
+      </div>
+      <div class="col-md-6">
+        <hr>
+          <div class="text-center">
+            <h4>OpenStile allows you to turn your run of the mill shopping trip 
+                into a memorable and enjoyable experience.</h4>
+          </div>
+          <div class="text-justify">
+            <p>
+              Picture this: you walk into a chic, off the beaten path boutique and the owner, 
+              who already knows your name is expecting to see you. She has been anticipating your arrival 
+              and already has a working knowledge of your budget, sizes and your taste for certain looks. 
+              Additionally, she also knows that you have a big girls' weekend in Vegas planned and you want 
+              that perfect outfit to steal the show. Once you arrive in the boutique, there is a dressing room prepped 
+              with a sexy black party dress and a cute strapless jumpsuit with all the accessories to match, 
+              which were selected based on the personalized style profile you created through OpenStile! 
+              OpenStile helps take the guess(WORK) out of shopping and makes it enjoyable for both retailer and consumer.  
+            </p>
+          </div>
+          <div class="text-center">
+            <h4>This is the OpenStile experience and we want you to have it!</h4>
+          </div>
+        <hr>
+        <div class="text-center">
+          <p>Check out these local stores offering the OpenStile experience</p>
+        </div><br /><br />
+        <% Retailer.all_live.each do |retailer| %>
+          <div class="col-md-4 col-xs-4">
+            <div id="<%= recommendation_string(retailer) %>">
+              <a href=<%= retailer_path(retailer) %> >
+                <%= cl_image_tag(retailer.logo_image_name, 
+                                  class: "img-responsive center-block",
+                                  width: 200,
+                                  alt: 'retailer_logo') %>
+              </a><br />
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

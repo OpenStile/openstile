@@ -234,6 +234,14 @@ hr{
   min-height:300px;
 }
 
+.experience-top{
+	background:#555 asset_url('street_view.jpg') repeat;
+	background-size:cover;
+	background-position:center bottom;
+	border-bottom:1px solid #fff;
+  min-height:300px;
+}
+
 .signin-top{
 	background:#555 asset_url('hat_scarf.jpg') no-repeat;
 	background-size:cover;
@@ -377,13 +385,13 @@ header .navigation .glyphicon{
   max-height: 999999px;
 }
 
-.hero .intro #get-started{
+.get-started{
   color: #ffffff;
   background-color:#f75353;
   border-color:#f75353;
 }
 
-.hero .intro #get-started:hover{
+.get-started:hover{
   color: #ffffff;
   background-color: #f53232;
   border-color: #f53232;
@@ -597,6 +605,20 @@ header .navigation .glyphicon{
 }
 
 /* About US Ends */
+
+
+/* Experiance Starts */
+
+.experience h4{
+  font-size: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.experience p{
+  font-size: 15px;
+}
+/* Experience Ends */
 
 /* Retailer Info Starts */
 
@@ -2281,4 +2303,7 @@ input {
 	}
 	
 
+  .experience .side-image img{
+    display: none;
+  }
 }

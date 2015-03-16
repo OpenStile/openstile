@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get '/about'          =>  'static_pages#about'
   get '/retailer_info'  =>  'static_pages#retailer_info'
+  get '/experience'     =>  'static_pages#experience'
 
   get '/blog' => redirect('/blog/')
   get '/blog/welcome-to-openstile'          =>  'blog#blog_01'
