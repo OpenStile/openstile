@@ -17,4 +17,7 @@ class StaticPagesController < ApplicationController
 
   def blog
   end
+
+  def experience
+  end
 end

@@ -52,5 +52,8 @@
     <% if shopper_signed_in? %>
       <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>
     <% end %>
+    <% if !shopper_signed_in? && !retail_user_signed_in? && !admin_signed_in? %>
+      <%= render 'shared/start_using_today_button' %>
+    <% end %>
   </div>
 </div>
