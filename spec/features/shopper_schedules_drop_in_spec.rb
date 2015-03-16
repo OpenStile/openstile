@@ -126,13 +126,6 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_should_show_item_on_hold outfit
   end
 
-  def given_i_have_no_drop_ins_scheduled
-    click_link 'Scheduled Drop-ins'
-
-    expect(page)
-      .to have_content("regular ole' shopping trip into a fun indulgence")
-  end
-
   def when_i_click_on_the_suggested_retailer
     click_link "retailer_logo"
   end
