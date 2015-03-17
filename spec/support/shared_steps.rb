@@ -6,6 +6,9 @@ def given_i_am_a_logged_in_shopper shopper
 end
 
 def given_i_am_a_logged_in_admin admin_user
+  if(page.has_link? 'Log out')
+    click_link 'Log out'
+  end
   visit '/admins/sign_in'
   fill_in 'Email', with: admin_user.email
   fill_in 'Password', with: admin_user.password

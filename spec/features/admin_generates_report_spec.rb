@@ -14,6 +14,28 @@ feature 'Admin user generates OpenStile report' do
     then_it_should_have_an_activation_count_of 25
   end
 
+  scenario 'with retention stats' do
+    out_of_range_shoppers = create_new_shoppers(1, 10.days.ago, true) 
+    in_range_shoppers = create_new_shoppers(3, 5.days.ago, true) 
+
+    given_shopper_logs_in out_of_range_shoppers[0]
+    given_shopper_logs_in in_range_shoppers[0]
+    given_shopper_logs_in in_range_shoppers[0]
+    given_shopper_logs_in in_range_shoppers[1]
+    given_i_am_a_logged_in_admin admin
+    when_i_generate_a_report 7.days.ago.strftime("%Y-%m-%d"), 
+                             Date.current.to_s
+    then_it_should_have_a_retention_count_of 2
+  end
+
+  def given_shopper_logs_in shopper
+    visit '/'
+    if page.has_link?('Log out')
+      click_link 'Log out'
+    end
+    capybara_sign_in shopper
+  end
+
   def when_i_generate_a_report start_report, end_report
     visit '/'
     click_link 'Generate report'
@@ -26,8 +48,35 @@ feature 'Admin user generates OpenStile report' do
     expect(page).to have_content("\"Activation\":#{count}")
   end
 
+  def then_it_should_have_a_retention_count_of count
+    expect(page).to have_content("\"Retention\":#{count}")
+  end
+
   private
-    def create_new_shoppers count, datetime
-      count.times{FactoryGirl.create(:shopper, created_at: datetime)}
+    def create_new_shoppers count, datetime, via_capybara=false
+      ret = []
+      unless via_capybara
+        count.times{ ret << FactoryGirl.create(:shopper, created_at: datetime)}
+      else
+        count.times do
+          email = Faker::Internet.email
+          visit '/'
+          click_link 'Sign up'
+          fill_in 'First name', with: Faker::Name.first_name
+          fill_in 'Email address', with: email 
+          fill_in 'Password', with: 'foobar' 
+          fill_in 'Confirm password', with: 'foobar' 
+          click_button 'Sign up'
+
+          click_link 'Log out'
+
+          last_added = Shopper.find_by_email(email)
+          last_added.update!(created_at: datetime, 
+                             password: 'foobar', 
+                             password_confirmation: 'foobar')
+          ret << last_added
+        end
+      end
+      ret
     end
 end
