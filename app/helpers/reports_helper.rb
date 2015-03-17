@@ -12,4 +12,12 @@ module ReportsHelper
                        "and current_sign_in_at < ?", 
                        2, datetime_start, datetime_end)
   end
+
+  def new_shoppers_booked_drop_in_between datetime_start, datetime_end
+    new_shoppers = shoppers_created_between datetime_start, datetime_end
+    shopper_ids_booked_drop_ins = DropIn.where("created_at > ? and created_at < ?", 
+                                                      datetime_start, datetime_end)
+                                                      .pluck(:shopper_id)
+    new_shoppers.where(id: shopper_ids_booked_drop_ins)
+  end
 end

@@ -13,6 +13,8 @@ class ReportsController < ApplicationController
     render json: {"Activation" => shoppers_created_between(report_start, 
                                                            report_end).count,
                   "Retention" => new_shoppers_logged_back_in_between(report_start, 
-                                                                     report_end).count}
+                                                                     report_end).count,
+                  "Revenue" => new_shoppers_booked_drop_in_between(report_start, 
+                                                                   report_end).count}
   end
 end

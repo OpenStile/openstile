@@ -28,6 +28,19 @@ feature 'Admin user generates OpenStile report' do
     then_it_should_have_a_retention_count_of 2
   end
 
+  scenario 'with revenue stats' do
+    out_of_range_shoppers = create_new_shoppers(1, 10.days.ago) 
+    in_range_shoppers = create_new_shoppers(3, 5.days.ago) 
+
+    book_drop_ins_for_shoppers(out_of_range_shoppers + in_range_shoppers)
+    in_range_shoppers[1].drop_ins.first.update(created_at: 1.day.from_now)
+
+    given_i_am_a_logged_in_admin admin
+    when_i_generate_a_report 7.days.ago.strftime("%Y-%m-%d"), 
+                             Date.current.to_s
+    then_it_should_have_a_revenue_count_of 2
+  end
+
   def given_shopper_logs_in shopper
     visit '/'
     if page.has_link?('Log out')
@@ -50,6 +63,10 @@ feature 'Admin user generates OpenStile report' do
 
   def then_it_should_have_a_retention_count_of count
     expect(page).to have_content("\"Retention\":#{count}")
+  end
+
+  def then_it_should_have_a_revenue_count_of count
+    expect(page).to have_content("\"Revenue\":#{count}")
   end
 
   private
@@ -78,5 +95,17 @@ feature 'Admin user generates OpenStile report' do
         end
       end
       ret
+    end
+
+    def book_drop_ins_for_shoppers shoppers
+      retailer = FactoryGirl.create(:retailer)
+      FactoryGirl.create(:standard_availability_for_tomorrow, 
+                          retailer: retailer,
+                          bandwidth: 5)
+
+      shoppers.each do |shopper|
+        FactoryGirl.create(:drop_in, time: tomorrow_noon, 
+                            shopper: shopper, retailer: retailer)
+      end
     end
 end
