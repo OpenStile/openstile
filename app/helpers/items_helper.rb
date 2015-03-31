@@ -4,6 +4,7 @@ module ItemsHelper
     ranking = Favorite.group(:favoriteable_id, :favoriteable_type)
                       .count.sort_by{|k,v| v}.reverse
     items = ranking.map{|entry| entry[0][1].constantize.find(entry[0][0])}
+    items.keep_if{|item| item.live? }
 
     items | (Top.all_live + Bottom.all_live + Dress.all_live + Outfit.all_live)
   end
