@@ -1,6 +1,6 @@
 <%= render 'shared/recommendation_feed', 
-           list: current_shopper.favorites.map{|fav| 
-             {object: fav.favoriteable, justification: []}
-           },
-           tab: 'favorite' %>
-
+      list: current_shopper.favorites.to_a
+            .keep_if{|fav| fav.favoriteable.live?}.map{|fav| 
+              {object: fav.favoriteable, justification: []}
+            },
+      tab: 'favorite' %>
