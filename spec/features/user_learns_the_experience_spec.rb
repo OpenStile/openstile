@@ -28,8 +28,7 @@ feature 'Learn about OpenStile' do
   end
 
   def then_i_should_read_about_how_OpenStile_works
-    expect(page).to have_content('run of the mill shopping trip into 
-                                  a memorable and enjoyable experience')
+    expect(page).to have_content('Shop like the V.I.P you are!')
   end
 
   def then_i_should_see_partner_stores stores

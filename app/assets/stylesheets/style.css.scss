@@ -622,6 +622,19 @@ header .navigation .glyphicon{
 .experience p{
   font-size: 15px;
 }
+
+.experience ul {
+  list-style-type: none;
+}
+
+.experience li {
+	font-size:20px;
+	line-height:26px;
+	font-weight:normal;
+  font-style:italic;
+  max-height: 999999px;
+}
+
 /* Experience Ends */
 
 /* Retailer Info Starts */

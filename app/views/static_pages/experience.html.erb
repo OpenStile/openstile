@@ -18,33 +18,31 @@
 <div class="experience features block">
   <div class="container">
     <div class="row">
-      <div class="side-image col-md-6">
+      <div class="col-md-6 col-xs-6">
         <%= image_tag("plaid_blazer.jpg", class: "img-responsive img-rounded")%>
       </div>
-      <div class="col-md-6">
-        <hr>
-          <div class="text-center">
-            <h4>OpenStile allows you to turn your run of the mill shopping trip 
-                into a memorable and enjoyable experience.</h4>
-          </div>
-          <div class="text-justify">
-            <p>
-              Picture this: you walk into a chic, off the beaten path boutique and the owner, 
-              who already knows your name is expecting to see you. She has been anticipating your arrival 
-              and already has a working knowledge of your budget, sizes and your taste for certain looks. 
-              Additionally, she also knows that you have a big girls' weekend in Vegas planned and you want 
-              that perfect outfit to steal the show. Once you arrive in the boutique, there is a dressing room prepped 
-              with a sexy black party dress and a cute strapless jumpsuit with all the accessories to match, 
-              which were selected based on the personalized style profile you created through OpenStile! 
-              OpenStile helps take the guess(WORK) out of shopping and makes it enjoyable for both retailer and consumer.  
-            </p>
-          </div>
-          <div class="text-center">
-            <h4>This is the OpenStile experience and we want you to have it!</h4>
-          </div>
+      <div class="col-md-6 col-xs-6">
+        <div class="text-center">
+          <h4>Shop like the V.I.P you are!</h4>
+        </div>
         <hr>
         <div class="text-center">
-          <p>Check out these local stores offering the OpenStile experience</p>
+          <p>When you shop with OpenStile, our stores will know:</p>
+          <br />
+          <ul>
+            <li>When you're coming in</li>
+            <li>What you do and don't like</li>
+            <li>What you're actively seeking</li>
+          </ul>
+          <br />
+          <p>
+            Powered by this knowledge they'll be able to pick out a few 
+            outfits ahead of time that you're sure to love! 
+          </p>
+        </div><br />
+        <hr>
+        <div class="text-center">
+          <p>Experience OpenStile at these local boutiques</p>
         </div><br /><br />
         <% Retailer.all_live.each do |retailer| %>
           <div class="col-md-4 col-xs-4">
@@ -58,6 +56,12 @@
             </div>
           </div>
         <% end %>
+        <div class="col-md-12 col-xs-12 text-center">
+          <br />
+          <% if !shopper_signed_in? && !retail_user_signed_in? && !admin_signed_in? %>
+            <%= render 'shared/start_using_today_button' %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
