@@ -16,7 +16,13 @@ module RecommendationsHelper
     outfit_matches = (outfit_size_matches & outfit_budget_matches & outfit_look_matches &
                             outfit_coverage_matches & outfit_color_matches & outfit_print_matches)
 
-    process_rankings(shopper.style_profile, (retailer_matches + item_matches + outfit_matches))
+    ranked_retailers = process_rankings(shopper.style_profile, retailer_matches.keep_if{|r| r.live?}) +
+                       (Retailer.all_live - retailer_matches).map{|r| {priority: -1, justification: [], object: r}}
+    ranked_features = process_rankings(shopper.style_profile, (item_matches + outfit_matches).keep_if{|f| f.live?}) +
+                       (Top.all_live + Dress.all_live + Bottom.all_live + Outfit.all_live - item_matches - outfit_matches)
+                          .map{|f| {priority: -1, justification: [], object: f}}
+    
+    [ranked_retailers, ranked_features]
   end
 
   def retailer_recommendation_for shopper
@@ -30,7 +36,6 @@ module RecommendationsHelper
   def process_rankings style_profile, recommendations
     results = []
     recommendations.each do |recommendation_object|
-      next unless recommendation_object.live?
       recommendation = {priority: 0, 
                         justification: [], 
                         object: recommendation_object}

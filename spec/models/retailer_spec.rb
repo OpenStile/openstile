@@ -229,7 +229,7 @@ RSpec.describe Retailer, :type => :model do
 
   describe "summary string helper" do
     it "should summarize the retailers neigborhood" do
-      expect(@retailer.summary).to eq("Located in the Shaw neighborhood")
+      expect(@retailer.summary).to eq("Shaw")
     end
   end
 

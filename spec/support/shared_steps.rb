@@ -101,34 +101,41 @@ def when_i_set_my_style_profile_avoided_colors color, action
   expect(page).to have_content('My Style Feed')
 end
 
-def then_my_style_feed_should_not_contain recommendation, tab=:recommended, refresh=true
+def when_i_view_featured_items_in_style_feed refresh=true
   visit '/' if refresh
 
-  if tab == :recommended
-    click_link 'Suggested for me'
-  elsif tab == :all
-    click_link 'All featured items'
-  elsif tab == :favorites
-    click_link 'My favorites'
-  end
-
-  status = page.has_selector?('h3', text: recommendation.summary, visible: true)
-  expect(status).to be(false)
+  click_link 'Featured items'
+  expect(page).to have_content('a sampling of what our retailers carry')
+  expect(page).to_not have_content('our retailers committed to offering')
+  expect(page).to_not have_content("you've marked as favorites")
 end
 
-def then_my_style_feed_should_contain recommendation, tab=:recommended, refresh=true
+def when_i_view_retailers_in_style_feed refresh=true
   visit '/' if refresh
 
-  if tab == :recommended
-    click_link 'Suggested for me'
-  elsif tab == :all
-    click_link 'All featured items'
-  elsif tab == :favorites
-    click_link 'My favorites'
-  end
+  click_link 'Our retailers'
+  expect(page).to have_content('our retailers committed to offering')
+  expect(page).to_not have_content('a sampling of what our retailers carry')
+  expect(page).to_not have_content("you've marked as favorites")
+end
 
+def when_i_view_favorites_in_style_feed refresh=true
+  visit '/' if refresh
+
+  click_link 'My favorites'
+  expect(page).to have_content("you've marked as favorites")
+  expect(page).to_not have_content('our retailers committed to offering')
+  expect(page).to_not have_content('a sampling of what our retailers carry')
+end
+
+def then_the_feed_should_contain recommendation
   status = page.has_selector?('h3', text: recommendation.summary, visible: true)
   expect(status).to be(true)
+end
+
+def then_the_feed_should_not_contain recommendation
+  status = page.has_selector?('h3', text: recommendation.summary, visible: true)
+  expect(status).to be(false)
 end
 
 def when_i_set_my_style_profile_body_shape_to body_shape
@@ -261,7 +268,9 @@ end
 def when_i_select_a_recommendation recommendation
   visit '/'
 
-  within(:css, "div#recommendation_#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
+  tab = recommendation.is_a?(Retailer) ? 'retailers' : 'featured'
+
+  within(:css, "div##{tab}_#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
     click_link 'View more details'
   end
 

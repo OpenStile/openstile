@@ -4,8 +4,7 @@ class StaticPagesController < ApplicationController
   
   def home
     if shopper_signed_in?
-      @recommendations = process_recommendations current_shopper  
-      @ranked_items = items_ranked_by_popularity
+      @retailers, @features = process_recommendations current_shopper
     end
   end
 

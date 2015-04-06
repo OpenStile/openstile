@@ -3,7 +3,7 @@ module FeedSummary
 
   def summary
     if self.is_a? Retailer
-      "Located in the #{location.neighborhood} neighborhood"
+      location.neighborhood
     elsif self.is_a? Outfit
       self.name
     else
