@@ -152,8 +152,8 @@ RSpec.describe Dress, :type => :model do
   end
 
   describe "summary helper" do
-    it "should return name and price" do
-      expect(@dress.summary).to eq("Wrap Dress - $55.00")
+    it "should return name" do
+      expect(@dress.summary).to eq("Wrap Dress")
     end
   end
 

@@ -14,7 +14,7 @@ module ImageName
   end
 
   def image_name
-    return 'sample_item' if Rails.env.development?
+    return 'sample_artifact' if Rails.env.development?
 
     leaf_name = self.respond_to?(:retailer) ? remove_special_characters(self.name) : 'storefront'
     "#{image_path_root}/#{leaf_name}.#{IMAGE_FILE_EXTENSION}"

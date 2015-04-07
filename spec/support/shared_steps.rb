@@ -271,7 +271,7 @@ def when_i_select_a_recommendation recommendation
   tab = recommendation.is_a?(Retailer) ? 'retailers' : 'featured'
 
   within(:css, "div##{tab}_#{recommendation.class.to_s.downcase.pluralize}_#{recommendation.id}") do
-    click_link 'View more details'
+    first(:link).click
   end
 
   expect(page).to have_content(recommendation.description)

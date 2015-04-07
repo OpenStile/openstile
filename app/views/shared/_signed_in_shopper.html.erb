@@ -45,20 +45,20 @@
             </p>
             <hr>
           </div>
-          <%= render 'shared/recommendation_feed', list: @retailers,
-                                                   tab: 'retailers' %>
+          <%= render 'shared/feed', list: @retailers,
+                                    tab: 'retailers' %>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="featured">
           <div class="page-title text-center">
             <p>
-              Fetaured items gives you a sampling of what our retailers 
-              carry. We've marked the ones recommended for <span style="text-decoration: underline;">your</span> 
+              Here is a sampling of what our retailers carry. We've marked the ones 
+              recommended for <span style="text-decoration: underline;">your</span> 
               budget, body, and style. Book a drop-in today and have pieces like
-              these hand-picked and awaiting your arrival.
+              these hand-picked and waiting for your arrival.
             </p>
             <hr>
           </div>
-          <%= render 'shared/recommendation_feed', 
+          <%= render 'shared/feed', 
                  list: @features,
                  tab: 'featured' %>
         </div>
