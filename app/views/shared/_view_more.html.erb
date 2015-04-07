@@ -3,9 +3,15 @@
     <br />
     <h2>See more from <%= retailer.name %></h2>
   </div>
-  <% item_sets = (retailer.tops.all_live + retailer.bottoms.all_live + 
-                  retailer.dresses.all_live + retailer.outfits.all_live)
-                  .shuffle.in_groups_of(4, false) %>
+  <% if admin_signed_in? || retail_user_signed_in? %>
+    <% item_sets = (retailer.tops + retailer.bottoms + 
+                    retailer.dresses + retailer.outfits)
+                    .shuffle.in_groups_of(4, false) %>
+  <% else %>
+    <% item_sets = (retailer.tops.all_live + retailer.bottoms.all_live + 
+                    retailer.dresses.all_live + retailer.outfits.all_live)
+                    .shuffle.in_groups_of(4, false) %>
+  <% end %>
   <% item_sets.each_with_index do |set, idx| %>
     <br />
     <div class="row <%= 'additional' if idx > 0 %>">

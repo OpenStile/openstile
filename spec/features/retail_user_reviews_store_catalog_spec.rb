@@ -15,7 +15,6 @@ feature 'Retailer user reviews store catalog' do
     then_i_should_see_product bottom
     then_i_should_see_product dress
     then_i_should_see_product outfit
-    then_i_should_see_product retailer
   end
 
   def when_i_visit_my_store_catalog retailer
