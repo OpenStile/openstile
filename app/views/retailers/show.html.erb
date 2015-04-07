@@ -7,6 +7,7 @@
     <div class="row">
       <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5 vcenter">
         <%= cl_image_tag(@retailer.image_name, 
+                         width: 400, height: 500, crop: :lpad,
                          class: "img-responsive") %>
       </div>
       <div class="col-md-5 col-xs-5 text-center vcenter">
@@ -16,7 +17,7 @@
                             class: "img-responsive center-block",
                             width: 200) %>
         </a><br />
-        <h2><%= @retailer.location.neighborhood %></h2><br />
+        <h3><%= @retailer.location.stringify %></h3><br />
         <%= link_to('Book a drop-in!', "#drop-in", 
                                         class: "btn btn-default", 
                                         id: "btn-drop-in") if shopper_signed_in? %>

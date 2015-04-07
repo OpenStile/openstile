@@ -1943,14 +1943,61 @@ input {
   text-align: center;
 }
 
-.recommendation .summary h4{
-  margin-top: 10px;
-  color: #555;
-	font-style: italic;
-}
-
 .recommendation .img-responsive {
   margin: 0 auto;
+}
+
+.feed-item {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+}
+
+img.feed-item-image {
+  opacity: 1;
+}
+
+span.feed-item-description {
+  position:absolute;
+  width:300px;
+  top:0;
+  opacity: 0;
+}
+
+span.feed-item-favorite {
+  position:absolute;
+  width:30px;
+  top:5px;
+  left:300px;
+}
+
+div.feed-item:hover span.feed-item-description {
+  opacity: 1;
+	-webkit-transition: background 1s ease;
+   -moz-transition: background 1s ease;
+   -o-transition: background 1s ease;
+   -ms-transition: background 1s ease;
+   transition: background 1s ease;
+}
+
+div.feed-item:hover img.feed-item-image {
+  opacity: 0.4;
+  -wekit-filter: blur(1px);
+}
+
+.feed-item-description h3{
+  margin-top: 10px;
+  font-size: 25px;
+  line-height: 30px;
+  color: black;
+}
+
+.feed-item-description h4{
+  margin-top: 10px;
+  font-size: 16px;
+  line-height: 20px;
+  color: black;
 }
 
 /* Style Feed Ends*/

@@ -18,13 +18,13 @@
     <div role="tabpanel">
       <ul class="nav nav-pills nav-justified" role="tablist" id="feedTab">
         <li role="presentation" class="active">
-          <a href="#recommended" aria-controls="recommended" role="tab" data-toggle="tab">
-            Suggested for me
+          <a href="#retailers" aria-controls="retailers" role="tab" data-toggle="tab">
+            Our retailers
           </a>
         </li>
         <li role="presentation">
-          <a href="#all" aria-controls="all" role="tab" data-toggle="tab">
-            All featured items
+          <a href="#featured" aria-controls="featured" role="tab" data-toggle="tab">
+            Featured items
           </a>
         </li>
         <li role="presentation">
@@ -35,46 +35,38 @@
       </ul>
 
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane fade in active" id="recommended">
-          <div class="page-title text-center">
-            <% if @recommendations.empty? %>
-              <p>
-                Looks like we don't have any recommendations for you as of yet.
-                Try answering a few questions in your Style Profile 
-                and check back to see what we find for you.
-              </p>
-            <% else %>
-              <p>
-                Check out these local shops and items hand-picked for 
-                <span style="text-decoration: underline;">your</span> budget, body, and style!
-                Like what you see? Wish stores had pieces like these pulled and waiting for you
-                whenever you go shopping? Well now you can! Schedule a drop-in today for a 
-                better way to shop fashion.
-              </p>
-            <% end %>
-            <hr>
-          </div>
-          <%= render 'shared/recommendation_feed', list: @recommendations,
-                                                   tab: 'recommendation'%>
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="all">
+        <div role="tabpanel" class="tab-pane fade in active" id="retailers">
           <div class="page-title text-center">
             <p>
-              Want to see what's out there? Here are all the featured pieces from our
-              neighborhood retailers. They're ranked by popularity so you can get a 
-              sense of what women in DC love!
+              Check out our retailers committed to offering you the OpenStile 
+              <%= link_to "shopping experience", experience_path %>. We've 
+              marked the ones recommended for <span style="text-decoration: underline;">your</span> 
+              budget, body, and style. Book a drop-in today!
             </p>
             <hr>
           </div>
-          <%= render 'shared/recommendation_feed', 
-                 list: @ranked_items.map{|item| {object: item, justification: []}},
-                 tab: 'all'%>
+          <%= render 'shared/feed', list: @retailers,
+                                    tab: 'retailers' %>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="featured">
+          <div class="page-title text-center">
+            <p>
+              Here is a sampling of what our retailers carry. We've marked the ones 
+              recommended for <span style="text-decoration: underline;">your</span> 
+              budget, body, and style. Book a drop-in today and have pieces like
+              these hand-picked and waiting for your arrival.
+            </p>
+            <hr>
+          </div>
+          <%= render 'shared/feed', 
+                 list: @features,
+                 tab: 'featured' %>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="favorites">
           <div class="page-title text-center">
             <p>
-              These are the featured items you've marked as favorites. Schedule a drop-in 
-              and our retailers will be sure to pull pieces like these just for you!
+              These are the featured items you've marked as favorites. When you book 
+              a drop-in we'll let our retailers know that this is the stuff you like.
             </p>
             <hr>
           </div>

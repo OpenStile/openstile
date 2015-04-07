@@ -2,23 +2,11 @@
   <hr>
   <div class="title row text-center">
     <div class="col-md-10 col-xs-10 col-md-offset-1 col-xs-offset-1">
-      <% if for_retailer %>
-        <h2>Schedule a drop-in to browse this store</h2><br />
-        <p>
-          Based on your personal style we'll pick out a few items and outfits 
-          you're sure to love! When you come in, just tell us your name.
-        </p>
-      <% else %>
-        <% type = item.is_a?(Outfit) ? 'outfit' : 'item' %>
-        <h2>Like this <%= type %>? Come in and see it!</h2><br />
-        <p>
-          OpenStile exposes you to great featured pieces from our neighborhood retailers. 
-          While we can't guarantee this item will still be available for your drop-in 
-          (due to fast-paced inventory turnover) we will try our darndest to make sure 
-          this is reserved in your size when you come in. Also, based on your personal 
-          style we'll pick out a few similar items and outfits you're sure to love!
-        </p>
-      <% end %>
+      <h2>Come in today - Just give us 30 min notice</h2><br />
+      <p>
+        Based on your personal preferences we'll pick out a few items and outfits 
+        you're sure to love!
+      </p>
     </div>
   </div>
 

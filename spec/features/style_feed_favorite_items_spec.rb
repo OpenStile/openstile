@@ -9,20 +9,17 @@ feature 'Style Feed' do
     old_favorite_outfit.interested_shoppers << shopper
 
     given_i_am_a_logged_in_shopper shopper
-    when_i_navigate_to_my_style_feed
-    then_my_style_feed_should_not_contain old_favorite_outfit, :favorites, false
-    then_my_style_feed_should_not_contain outfit, :favorites, false
+    when_i_view_favorites_in_style_feed
+    then_the_feed_should_not_contain old_favorite_outfit
+    then_the_feed_should_not_contain outfit
     when_i_toggle_my_like_for_an_item_in_my_style_feed outfit, "outfits_#{outfit.id}"
-    then_my_style_feed_should_contain outfit, :favorites, false
-  end
-
-  def when_i_navigate_to_my_style_feed
-    visit '/'
+    when_i_view_favorites_in_style_feed false
+    then_the_feed_should_contain outfit
   end
 
   def when_i_toggle_my_like_for_an_item_in_my_style_feed item, recommendation_string
-    click_link 'All featured items'
-    within :css, "div#all_#{recommendation_string} .like-toggle" do
+    click_link 'Featured items'
+    within :css, "div#featured_#{recommendation_string} .like-toggle" do
       find('a').click
     end
   end
