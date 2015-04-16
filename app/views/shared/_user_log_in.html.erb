@@ -17,21 +17,14 @@
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
       </div>
 
-      <% if devise_mapping.rememberable? -%>
-        <div class="field">
-          <input name="<%=type%>[remember_me]" type="hidden" value="0">
-          <label for="<%=type%>_remember_me">
-            <input id="<%=type%>_remember_me" name="<%=type%>[remember_me]" 
-                                              type="checkbox" value="1">
-            Remember me
-          </label>
-        </div><br />
-      <% end -%>
-
       <div class="actions">
-        <%= f.submit "Log in", class: "col-md-2 col-xs-4 btn btn-primary"%>
+        <%= f.submit "Log in", class: "btn btn-lg btn-primary"%>
       </div>
     <% end %>
+    <br />
+    <div class="text-center sign-up-link">
+      <%= link_to "Don't have an account? Join now.", new_shopper_registration_path %>
+    </div>
   </div>
 </div>
 

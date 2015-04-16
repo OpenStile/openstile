@@ -35,10 +35,16 @@ feature 'Shopper schedule drop in' do
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email 
   end
 
-  scenario 'from the third party scheduler widget' do
+  scenario 'sign in from the third party scheduler widget' do
     given_i_am_viewing_the_scheduler_widget_for retailer
     when_i_click_on_the_widget
     then_i_should_be_able_to_schedule_drop_in_upon_signin retailer
+  end
+
+  scenario 'sign up from the third party scheduler widget' do
+    given_i_am_viewing_the_scheduler_widget_for retailer
+    when_i_click_on_the_widget
+    then_i_should_be_able_to_schedule_drop_in_upon_signup retailer
   end
 
   scenario 'to see a top' do
@@ -147,6 +153,22 @@ feature 'Shopper schedule drop in' do
     fill_in 'Email', with: shopper.email
     fill_in 'Password', with: shopper.password
     click_button 'Log in'
+    expect(page).to have_content("Come see us at #{retailer.name} today!")
+
+    when_i_attempt_to_schedule_with_valid_options date, time
+    then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
+  end
+
+  def then_i_should_be_able_to_schedule_drop_in_upon_signup retailer
+    date, time = parse_date_and_EST(tomorrow_afternoon)
+    place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
+
+    click_link "Don't have an account? Join now."
+    fill_in "First name", with: "Jane"
+    fill_in "Email address", with: "jane@example.com"
+    fill_in "Password", with: "foobarbaz"
+    fill_in "Confirm password", with: "foobarbaz"
+    click_button 'Sign up'
     expect(page).to have_content("Come see us at #{retailer.name} today!")
 
     when_i_attempt_to_schedule_with_valid_options date, time
