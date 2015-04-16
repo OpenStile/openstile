@@ -1,5 +1,6 @@
 class DropInsController < ApplicationController
 
+  before_filter :store_shopper_location
   before_filter :authenticate_shopper!, except: [:upcoming]
   before_filter :authenticate_customer!, only: [:upcoming]
   before_action :correct_drop_in_shopper, only: [:update, :destroy]

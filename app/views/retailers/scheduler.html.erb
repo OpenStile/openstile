@@ -1,0 +1,4 @@
+<% provide(:title, @retailer.name) %>
+<%= render "shared/header" %>
+
+<%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>

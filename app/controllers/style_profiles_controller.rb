@@ -1,5 +1,6 @@
 class StyleProfilesController < ApplicationController
 
+  before_filter :store_shopper_location
   before_filter :authenticate_shopper!
   before_action :correct_style_profile_shopper
 
