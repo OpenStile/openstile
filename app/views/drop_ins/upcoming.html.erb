@@ -59,6 +59,16 @@
         </div>
       </div>
     <% end %>
+    <% if current_shopper %>
+      <div class="row text-center">
+        <h4>
+          Here are your upcoming drop-ins. Make sure your 
+          <%= link_to "style profile", edit_style_profile_path(current_shopper.style_profile) %>
+          is up to date before going in.
+        </h4>
+        <br /><br />
+      </div>
+    <% end %>
     <% @drop_ins.each_with_index do |drop_in, idx| %>
       <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
         <% if current_shopper %>
