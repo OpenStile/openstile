@@ -11,6 +11,7 @@
 
     <%= yield %>
 
+    <% unless(content_for?(:embeddable) && yield(:embeddable)) %>
     <footer>
       <div class="container">
         <div class="row">
@@ -49,5 +50,7 @@
         </div>
       </div>
     </footer>
+    <% end %>
+
   </body>
 </html>

@@ -2,6 +2,7 @@ module Favoriteable
   extend ActiveSupport::Concern
 
   included do
+    before_filter :store_shopper_location, only: [:toggle_favorite]
     before_filter :authenticate_shopper!, only: [:toggle_favorite]
   end
 

@@ -19,4 +19,9 @@ class StaticPagesController < ApplicationController
 
   def experience
   end
+
+  def decal
+    response.headers.delete('X-Frame-Options')
+    @retailer = Retailer.find(params[:retailer_id])
+  end
 end

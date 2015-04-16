@@ -18,4 +18,18 @@ class ApplicationController < ActionController::Base
         session[:logged_signin] = true 
       end
     end
+
+    def store_shopper_location
+      # store last url - this is needed for post-login redirect to whatever the user last visited.
+      return unless request.get? 
+      if (request.path != "/shoppers/sign_in" &&
+          request.path != "/shoppers/sign_up" &&
+          request.path != "/shoppers/password/new" &&
+          request.path != "/shoppers/password/edit" &&
+          request.path != "/shoppers/confirmation" &&
+          request.path != "/shoppers/sign_out" &&
+          !request.xhr?) # don't store ajax calls
+        session[:previous_url] = request.fullpath 
+      end
+    end
 end
