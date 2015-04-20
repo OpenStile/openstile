@@ -29,7 +29,6 @@ RSpec.describe RetailUserMailer, :type => :mailer do
     let(:asserted_body) { ["#{greeting}", "#{shopper.first_name} has scheduled a drop-in at your store for #{drop_in.colloquial_time}",
                             "Here is what she's looking for",
                             "I want this dress right now!",
-                            "Foo",
                             "#{drop_in.colloquial_time}",
                             "See more detail on this and all your other upcoming drop-ins on OpenStile"]}
     let(:asserted_recipient) { @retail_user.email }
