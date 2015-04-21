@@ -8,7 +8,7 @@
 
 <p> Shopper: <%= @shopper.first_name %> </p>
 
-<% unless @drop_in.comment.nil? %>
+<% unless @drop_in.comment.empty? %>
   <p> Here are her comments: </p>
   <p> <%= @drop_in.comment.to_s %>  </p>
   <% @drop_in.drop_in_items.each do |dii| %>
