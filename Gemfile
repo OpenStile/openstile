@@ -39,6 +39,8 @@ gem 'mandrill-api'
 gem 'roadie', '~> 3.0.4'
 gem 'roadie-rails'
 
+gem 'whenever', :require => false
+
 gem 'dotenv-rails', :groups => [:development, :test]
 # Use unicorn as the app server
 # gem 'unicorn'
