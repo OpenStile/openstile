@@ -67,7 +67,7 @@ class DropIn < ActiveRecord::Base
     impending_dropins = DropIn.where(:time => time_range)
 
     impending_dropins.each do |drop_in|
-      unless drop_in == true
+      unless drop_in.reminder_email_sent == true
         ShopperMailer.drop_in_reminder_email(Retailer.find_by_id(drop_in.retailer_id), Shopper.find_by_id(drop_in.shopper_id), drop_in).deliver
         RetailUserMailer.drop_in_reminder_email(Retailer.find_by_id(drop_in.retailer_id), Shopper.find_by_id(drop_in.shopper_id), drop_in).deliver
         drop_in.reminder_email_sent = true
