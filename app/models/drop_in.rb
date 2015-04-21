@@ -44,7 +44,7 @@ class DropIn < ActiveRecord::Base
   end
 
   def self.upcoming_for_shopper_at_retailer shopper_id, retailer_id
-    where("shopper_id = ? and retailer_id = ? and time > ?", 
+    where("shopper_id = ? and retailer_id = ? and time > ?",
                           shopper_id, retailer_id, DateTime.current)
   end
 
@@ -60,5 +60,15 @@ class DropIn < ActiveRecord::Base
     time_string = time.to_s(:informal_time)
 
     "#{date_string} @ #{time_string}".gsub(":00",'')
+  end
+
+  def self.reminder
+    time_range = Time.now..Time.now + 45.minutes
+    impending_dropins = DropIn.where(:time => time_range)
+
+    impending_dropins.each do |drop_in|
+      ShopperMailer.drop_in_reminder_email(Retailer.find_by_id(drop_in.retailer_id), Shopper.find_by_id(drop_in.shopper_id), drop_in).deliver
+      RetailUserMailer.drop_in_reminder_email(Retailer.find_by_id(drop_in.retailer_id), Shopper.find_by_id(drop_in.shopper_id), drop_in).deliver
+    end
   end
 end

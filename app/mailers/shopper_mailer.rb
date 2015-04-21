@@ -28,4 +28,12 @@ class ShopperMailer < ActionMailer::Base
     @drop_in = drop_in
     mail to: @shopper.email, subject: "Your drop-in for #{@drop_in.colloquial_time} at #{@retailer.name} has been canceled"
   end
+
+  def drop_in_reminder_email(retailer, shopper, drop_in )
+    @retailer = retailer
+    @greeting = "Hello #{shopper.first_name}"
+    @shopper = shopper
+    @drop_in = drop_in
+    mail to: @shopper.email, subject: "Reminder - You have an upcoming drop-in at #{@retailer.name}"
+  end
 end

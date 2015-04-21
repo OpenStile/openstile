@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="intro">
-                <h2>You've Scheduled a Drop-In!</h2><br />
+                <h2>You have an upcoming Drop-In!</h2><br />
               </div>
             </div>
           </div>
@@ -22,19 +22,20 @@
 
     <p> <%= @greeting %>, </p>
 
-    <p> We've booked your drop-in at <%= @retailer.name %> for <%= @drop_in.colloquial_time %>. </p>
+    <p> You have a drop in with <%= @retailer.name %> that's about to happen. Here are the details: </p>
 
-    <p> <%= @retailer.owner_name %> and her team are looking forward to your arrival! </p>
+    <p> Drop-in Time: <%= @drop_in.colloquial_time %> </p>
 
-    <p> Should you need to contact them, please call <%= number_to_phone @retailer.phone_number %>. </p>
+    <p> Retailer: <%= @retailer.name %> </p>
+
+    <p> Location: <%= @retailer.location.address %> (<%= @retailer.location.neighborhood %>) </p>
+
+    <p> Phone Number: <%= number_to_phone @retailer.phone_number %> </p>
 
     <p> Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </p>
 
     <p> Sincerely, </p>
 
     <p> Your friends at OpenStile </p>
-
-    <%= image_tag("blouse_and_dress.jpg", :alt => "home image", :width => 500, :height => 250, :title => "OpenStile")%>
   </body>
 </html>
-

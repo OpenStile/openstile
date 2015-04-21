@@ -1,0 +1,27 @@
+<% cl_image_tag("blouse_and_dress.jpg") %>
+
+<p> <%= @greeting %>,  </p>
+
+<p> You have a drop-in visit that's about to happen. Here are the details: </p>
+
+<p> Drop-in Time: <%= @drop_in.colloquial_time %> </p>
+
+<p> Shopper: <%= @shopper.first_name %> </p>
+
+<% unless @drop_in.comment.nil? %>
+  <p> Here are her comments: </p>
+  <p> <%= @drop_in.comment.to_s %>  </p>
+  <% @drop_in.drop_in_items.each do |dii| %>
+  <p> <%= cl_image_tag("#{dii.reservable_type.constantize.find_by_id(dii.reservable_id).image_name}",
+                    :alt => "dii.reservable_type.constantize.find_by_id(dii.reservable_id).image_name") %> </p>
+  <% end %>
+<% end %>
+
+<p> See more detail on this and all your other upcoming drop-ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </p>
+
+<p> Sincerely,  </p>
+
+Your friends at OpenStile
+
+
+

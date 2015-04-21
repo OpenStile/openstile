@@ -46,4 +46,17 @@ RSpec.describe RetailUserMailer, :type => :mailer do
     it_behaves_like "a_well_tested_mailer"
   end
 
+  describe "drop in reminder email" do
+    let(:asserted_mail_method) { RetailUserMailer.drop_in_reminder_email(retailer, shopper, drop_in) }
+    let(:asserted_greeting) { "Hello #{@retail_user.email}" }
+    let(:asserted_body) { ["#{greeting}", "You have a drop-in visit that's about to happen. Here are the details:",
+                            "Drop-in Time: #{drop_in.colloquial_time}",
+                            "Shopper: #{shopper.first_name}",
+                            "Here are her comments:",
+                            "I want this dress right now!",
+                            "See more detail on this and all your other upcoming drop-ins on OpenStile"]}
+    let(:asserted_recipient) { @retail_user.email }
+    let(:asserted_subject) { "Reminder - You have an upcoming drop-in with #{shopper.first_name} Tomorrow @ 10 AM" }
+    it_behaves_like "a_well_tested_mailer"
+  end
 end
