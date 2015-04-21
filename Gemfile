@@ -36,6 +36,9 @@ gem 'jquery-turbolinks'
 
 gem 'mandrill-api'
 
+gem 'roadie', '~> 3.0.4'
+gem 'roadie-rails'
+
 gem 'dotenv-rails', :groups => [:development, :test]
 # Use unicorn as the app server
 # gem 'unicorn'
