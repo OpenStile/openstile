@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310195556) do
+ActiveRecord::Schema.define(version: 20150421211403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,22 @@ ActiveRecord::Schema.define(version: 20150310195556) do
   add_index "colors_outfits", ["color_id", "outfit_id"], name: "index_colors_outfits_on_color_id_and_outfit_id", using: :btree
   add_index "colors_outfits", ["outfit_id", "color_id"], name: "index_colors_outfits_on_outfit_id_and_color_id", using: :btree
 
+  create_table "delayed_jobs", force: true do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
+
   create_table "dress_sizes", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -258,6 +274,7 @@ ActiveRecord::Schema.define(version: 20150310195556) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comment"
+    t.boolean  "reminder_email_sent", default: false
   end
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree
