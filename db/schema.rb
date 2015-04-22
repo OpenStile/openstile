@@ -149,22 +149,6 @@ ActiveRecord::Schema.define(version: 20150421211403) do
   add_index "colors_outfits", ["color_id", "outfit_id"], name: "index_colors_outfits_on_color_id_and_outfit_id", using: :btree
   add_index "colors_outfits", ["outfit_id", "color_id"], name: "index_colors_outfits_on_outfit_id_and_color_id", using: :btree
 
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
   create_table "dress_sizes", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
