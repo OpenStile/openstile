@@ -12,6 +12,14 @@ class DropIn < ActiveRecord::Base
   validates :shopper_id, presence: true
   validates :time, presence: true
   validates :comment, length: {maximum: 250}
+  validates :shopper_rating, numericality: { greater_than_or_equal_to: 1, 
+                                             less_than_or_equal_to: 5 }, 
+                             unless: "shopper_rating.blank?"
+  validates :retailer_rating, numericality: { greater_than_or_equal_to: 1, 
+                                             less_than_or_equal_to: 5 }, 
+                             unless: "retailer_rating.blank?"
+  validates :shopper_feedback, length: { maximum: 500 }
+  validates :retailer_feedback, length: { maximum: 500 }
 
   accepts_nested_attributes_for :drop_in_items
   default_scope { order('time ASC') }

@@ -19,6 +19,11 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :time }
   it { should respond_to :drop_in_items }
   it { should respond_to :comment }
+  it { should respond_to :shopper_rating }
+  it { should respond_to :retailer_rating }
+  it { should respond_to :shopper_feedback }
+  it { should respond_to :retailer_feedback }
+  it { should respond_to :sales_generated } 
   it { should be_valid }
 
   context "when retailer id is not present" do
@@ -38,6 +43,26 @@ RSpec.describe DropIn, :type => :model do
 
   context "when comment is too long" do
     before { @drop_in.comment = 'a'*251 }
+    it { should_not be_valid }
+  end
+
+  context "when shopper rating is out of range" do
+    before { @drop_in.shopper_rating = 6 }
+    it { should_not be_valid }
+  end
+
+  context "when retailer rating is out of range" do
+    before { @drop_in.retailer_rating = 6 }
+    it { should_not be_valid }
+  end
+
+  context "when shopper feedback is too long" do
+    before { @drop_in.shopper_feedback = 'a' * 501 }
+    it { should_not be_valid }
+  end
+
+  context "when retailer feedback is too long" do
+    before { @drop_in.retailer_feedback = 'a' * 501 }
     it { should_not be_valid }
   end
 
