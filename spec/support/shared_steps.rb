@@ -295,11 +295,7 @@ def given_the_scheduler_has_run_the_drop_in_reminder_job
 end
 
 def then_i_and_the_retail_user_should_receive_a_reminder_email retail_user_email, shopper_email, drop_in
-  count = ActionMailer::Base.deliveries.count
-  last_two_receipients = ActionMailer::Base.deliveries[count-2, count-1]
-                                                  .map(&:to).flatten
-  expect(last_two_receipients).to include(retail_user_email)
-  expect(last_two_receipients).to include(shopper_email)
+  then_i_and_the_retail_user_should_receive_an_email retail_user_email, shopper_email
   expect(DropIn.find_by_id(drop_in.id).reminder_email_sent).to be true
 end
 
