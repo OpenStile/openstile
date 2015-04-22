@@ -6,7 +6,7 @@ Drop-in Time: <%= @drop_in.colloquial_time %> <% "\n" %>
 
 Shopper: <%= @shopper.first_name %> <% "\n" %>
 
-<% unless @drop_in.comment.empty? %>
+<% unless @drop_in.comment.blank? %>
   Here is what she's looking for:  <% "\n" %>
   <%= @drop_in.comment.to_s %>  <% "\n" %>
   <% @drop_in.drop_in_items.each do |dii| %> <% "\n" %>
