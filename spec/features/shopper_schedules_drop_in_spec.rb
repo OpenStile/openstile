@@ -17,13 +17,6 @@ feature 'Shopper schedule drop in' do
                        retailer: retailer,
                        location: pop_up_location)
   }
-
-  let!(:drop_in_availability) {
-    FactoryGirl.create(:standard_availability_in_the_next_hour,
-                       retailer: retailer,
-                       location: pop_up_location)
-  }
-
   let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
 
   scenario 'to browse a store' do
@@ -143,16 +136,6 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_should_show_item_on_hold top
     then_my_scheduled_should_show_item_on_hold dress
     then_my_scheduled_should_show_item_on_hold outfit
-  end
-
-  scenario 'impending drop in' do
-
-    impending_drop_in = FactoryGirl.create(:drop_in, shopper: shopper,
-                                                    retailer: retailer,
-                                                    time: in_the_next_hour)
-
-    given_the_scheduler_has_run_the_drop_in_reminder_job
-    then_i_and_the_retail_user_should_receive_a_reminder_email retail_user.email, shopper.email, impending_drop_in
   end
 
   def given_i_am_viewing_the_scheduler_widget_for retailer

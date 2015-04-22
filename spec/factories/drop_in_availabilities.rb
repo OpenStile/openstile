@@ -19,8 +19,8 @@ FactoryGirl.define do
 
     factory :standard_availability_in_the_next_hour do
       template_date Time.now.to_date
-      start_time "#{Time.now.change(min: 0).to_s}"
-      end_time "#{(Time.now.change(min: 0) + 1.hour).to_s}"
+      start_time Time.now.change(min: 0).to_s
+      end_time (Time.now.change(min: 0) + 2.hour).to_s
       bandwidth 2
     end
   end
