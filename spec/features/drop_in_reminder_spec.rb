@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Shopper schedule drop in' do
+feature 'Drop in reminder' do
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
   let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
@@ -10,7 +10,7 @@ feature 'Shopper schedule drop in' do
                        retailer: retailer)
   }
 
-  scenario 'impending drop in' do
+  scenario 'shopper/retailer have an impending drop in' do
 
     # given_i_have_an_impending_drop_in
     impending_drop_in = FactoryGirl.create(:drop_in_scheduled_in_the_next_hour,
