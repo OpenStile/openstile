@@ -17,6 +17,13 @@ feature 'Shopper schedule drop in' do
                        retailer: retailer,
                        location: pop_up_location)
   }
+
+  let!(:drop_in_availability) {
+    FactoryGirl.create(:standard_availability_in_the_next_hour,
+                       retailer: retailer,
+                       location: pop_up_location)
+  }
+
   let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
 
   scenario 'to browse a store' do
@@ -32,7 +39,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
-    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email 
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
   end
 
   scenario 'sign in from the third party scheduler widget' do
@@ -129,13 +136,23 @@ feature 'Shopper schedule drop in' do
     when_i_add_item_to_existing_drop_in
     then_my_scheduled_should_show_item_on_hold top
     then_my_scheduled_should_show_item_on_hold dress
-    when_i_continue_browsing   
+    when_i_continue_browsing
     when_i_select_a_recommendation outfit
     then_i_should_see_i_have_an_existing_drop_in_scheduled existing_drop_in
     when_i_add_item_to_existing_drop_in
     then_my_scheduled_should_show_item_on_hold top
     then_my_scheduled_should_show_item_on_hold dress
     then_my_scheduled_should_show_item_on_hold outfit
+  end
+
+  scenario 'impending drop in' do
+
+    impending_drop_in = FactoryGirl.create(:drop_in, shopper: shopper,
+                                                    retailer: retailer,
+                                                    time: in_the_next_hour)
+
+    given_the_scheduler_has_run_the_drop_in_reminder_job
+    then_i_and_the_retail_user_should_receive_a_reminder_email retail_user.email, shopper.email, impending_drop_in
   end
 
   def given_i_am_viewing_the_scheduler_widget_for retailer
@@ -198,7 +215,7 @@ feature 'Shopper schedule drop in' do
       fill_in 'Time', with: time
 
       expect{click_button 'Schedule'}
-            .to change(ActionMailer::Base.deliveries, :count).by(2) 
+            .to change(ActionMailer::Base.deliveries, :count).by(2)
     end
 
     expect(page).to have_content('My Drop-Ins')

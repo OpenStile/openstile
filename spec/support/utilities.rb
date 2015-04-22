@@ -35,3 +35,14 @@ def tomorrow_evening
   ActiveSupport::TimeZone[Time.zone.name]
      .parse("#{1.day.from_now.change(hour: 17).to_s}")
 end
+
+def in_the_next_hour
+
+  if Time.now.min < 30
+    ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{Time.now.change(min: 30).to_s}")
+  else
+    ActiveSupport::TimeZone[Time.zone.name]
+     .parse("#{Time.now.change(hour: Time.now.hour + 1).to_s}")
+  end
+end
