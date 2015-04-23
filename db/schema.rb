@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306043146) do
+ActiveRecord::Schema.define(version: 20150421211403) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,6 +258,7 @@ ActiveRecord::Schema.define(version: 20150306043146) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "comment"
+    t.boolean  "reminder_email_sent", default: false
   end
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree
@@ -432,7 +433,7 @@ ActiveRecord::Schema.define(version: 20150306043146) do
 
   create_table "retail_users", force: true do |t|
     t.string   "email"
-    t.string   "cell_phone"
+    t.string   "phone_number"
     t.integer  "retailer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -465,6 +466,8 @@ ActiveRecord::Schema.define(version: 20150306043146) do
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
     t.integer  "status"
+    t.string   "owner_name"
+    t.string   "phone_number"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree
@@ -492,7 +495,7 @@ ActiveRecord::Schema.define(version: 20150306043146) do
   create_table "shoppers", force: true do |t|
     t.string   "first_name"
     t.string   "email"
-    t.string   "cell_phone"
+    t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "encrypted_password",     default: "", null: false

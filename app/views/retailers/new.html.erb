@@ -15,8 +15,14 @@
           <%= f.label :name %>
           <%= f.text_field :name %>
 
+          <%= f.label :owner_name %>
+          <%= f.text_field :owner_name %>
+
+          <%= f.label :phone_number %>
+          <%= f.text_field :phone_number %>
+
           <%= f.label :location_id %>
-          <%= f.select :location_id, Location.all.map{|l| [l.address, l.id]}, 
+          <%= f.select :location_id, Location.all.map{|l| [l.address, l.id]},
                                     {prompt: true} %>
 
           <%= f.label :description %>
@@ -39,10 +45,10 @@
           <div class="special-considerations">
             <div class="options row">
               <div class="col-md-offest-1 col-xs-offset-1">
-                <%= f.collection_check_boxes(:special_consideration_ids, 
+                <%= f.collection_check_boxes(:special_consideration_ids,
                               SpecialConsideration.all, :id, :name) do |builder| %>
-                  <div class="single-checkbox"> 
-                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                  <div class="single-checkbox">
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") {
                       builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
                   </div>
                 <% end %>
@@ -70,10 +76,10 @@
           <div class="top-sizes">
             <div class="options row">
               <div class="col-md-offest-1 col-xs-offset-1">
-                <%= f.collection_check_boxes(:top_size_ids, 
+                <%= f.collection_check_boxes(:top_size_ids,
                                 TopSize.all, :id, :name) do |builder| %>
-                  <div class="single-checkbox"> 
-                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                  <div class="single-checkbox">
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") {
                       builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
                   </div>
                 <% end %>
@@ -85,10 +91,10 @@
           <div class="bottom-sizes">
             <div class="options row">
               <div class="col-md-offest-1 col-xs-offset-1">
-                <%= f.collection_check_boxes(:bottom_size_ids, 
+                <%= f.collection_check_boxes(:bottom_size_ids,
                                 BottomSize.all, :id, :name) do |builder| %>
-                  <div class="single-checkbox"> 
-                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                  <div class="single-checkbox">
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") {
                       builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
                   </div>
                 <% end %>
@@ -100,10 +106,10 @@
           <div class="dress-sizes">
             <div class="options row">
               <div class="col-md-offest-1 col-xs-offset-1">
-                <%= f.collection_check_boxes(:dress_size_ids, 
+                <%= f.collection_check_boxes(:dress_size_ids,
                                 DressSize.all, :id, :name) do |builder| %>
-                  <div class="single-checkbox"> 
-                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") { 
+                  <div class="single-checkbox">
+                    <%= builder.label(class: "checkbox-inline col-md-3 col-xs-3") {
                       builder.check_box(class: "col-md-2 col-xs-2") + builder.text } %>
                   </div>
                 <% end %>

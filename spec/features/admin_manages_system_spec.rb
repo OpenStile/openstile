@@ -22,14 +22,16 @@ feature 'Admin user manages system' do
   let!(:midsection){ FactoryGirl.create(:part, name: 'Midsection') }
 
   scenario 'creates new retailer' do
-    name = "ABC Boutique"
+    name = 'ABC Boutique'
+    owner_name = 'Elvis Presley'
+    phone_number = '123-456-7890'
 
     given_i_am_a_logged_in_admin admin
     given_the_existing_retailers_page_is_empty
     when_i_go_to_add_a_retailer
     when_i_submit_with_invalid_information
     then_it_should_fail_to_add_retailer
-    when_i_submit_with_valid_information name
+    when_i_submit_with_valid_information name, owner_name, phone_number
     then_the_existing_retailers_page_should_contain_retailer name
   end
 
@@ -163,8 +165,10 @@ feature 'Admin user manages system' do
     expect(page).to have_content('error')
   end
 
-  def when_i_submit_with_valid_information name
+  def when_i_submit_with_valid_information(name, owner_name, phone_number)
     fill_in 'Name', with: name
+    fill_in 'Owner name', with: owner_name
+    fill_in 'Phone number', with: phone_number
     select '1836 Indy Ave. SE, Washington, DC', from: 'Location'
     fill_in 'Description', with: 'This is a test retailer created for demo purposes.'
     fill_in 'Website', with: 'http://google.com'

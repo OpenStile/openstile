@@ -6,7 +6,11 @@ shared_examples "a_well_tested_mailer" do
   let(:body) { asserted_body }
 
   it "renders the headers" do
-    expect(mail_method.content_type).to start_with('multipart/alternative') #html / text support
+    unless mail_method.attachments.empty?
+      expect(mail_method.content_type).to start_with('multipart/mixed') # ics support
+    else
+      expect(mail_method.content_type).to start_with('multipart/alternative') # html / text support
+    end
   end
 
   it "sets the correct subject" do

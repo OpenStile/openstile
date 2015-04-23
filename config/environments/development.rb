@@ -39,6 +39,8 @@ Rails.application.configure do
   # Precompile assets
   config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/
 
+  # config.action_mailer.asset_host = "http://localhost:3000/assets/"
+
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {

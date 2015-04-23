@@ -19,6 +19,7 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :time }
   it { should respond_to :drop_in_items }
   it { should respond_to :comment }
+  it { should respond_to :reminder_email_sent }
   it { should be_valid }
 
   context "when retailer id is not present" do

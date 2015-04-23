@@ -32,7 +32,8 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
-    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email 
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
   end
 
   scenario 'sign in from the third party scheduler widget' do
@@ -60,6 +61,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with top.retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
     then_my_scheduled_should_show_item_on_hold top
   end
 
@@ -76,6 +78,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with bottom.retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
     then_my_scheduled_should_show_item_on_hold bottom
   end
 
@@ -92,6 +95,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with dress.retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
     then_my_scheduled_should_show_item_on_hold dress
   end
 
@@ -129,7 +133,7 @@ feature 'Shopper schedule drop in' do
     when_i_add_item_to_existing_drop_in
     then_my_scheduled_should_show_item_on_hold top
     then_my_scheduled_should_show_item_on_hold dress
-    when_i_continue_browsing   
+    when_i_continue_browsing
     when_i_select_a_recommendation outfit
     then_i_should_see_i_have_an_existing_drop_in_scheduled existing_drop_in
     when_i_add_item_to_existing_drop_in
@@ -198,7 +202,7 @@ feature 'Shopper schedule drop in' do
       fill_in 'Time', with: time
 
       expect{click_button 'Schedule'}
-            .to change(ActionMailer::Base.deliveries, :count).by(2) 
+            .to change(ActionMailer::Base.deliveries, :count).by(2)
     end
 
     expect(page).to have_content('My Drop-Ins')

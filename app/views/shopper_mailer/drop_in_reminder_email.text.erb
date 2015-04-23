@@ -1,0 +1,17 @@
+<%= @greeting %>, <% "\n" %>
+
+You have a drop in with <%= @retailer.name %> that's about to happen. Here are the details: <% "\n" %>
+
+Drop-in Time: <%= @drop_in.colloquial_time %> <% "\n" %>
+
+Retailer: <%= @retailer.name %> <% "\n" %>
+
+Location: <%= @retailer.location.address %> (<%= @retailer.location.neighborhood %>) <% "\n" %>
+
+Phone Number: <%= number_to_phone @retailer.phone_number %> <% "\n" %>
+
+Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. <% "\n" %>
+
+Sincerely, <% "\n" %>
+
+Your friends at OpenStile <% "\n" %>

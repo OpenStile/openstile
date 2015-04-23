@@ -18,7 +18,7 @@ RSpec.describe RetailUser, :type => :model do
   it { should respond_to :retailer_id }
   it { should respond_to :retailer }
   it { should respond_to :email }
-  it { should respond_to :cell_phone }
+  it { should respond_to :phone_number }
   it { should respond_to :encrypted_password }
   it { should be_valid }
 
@@ -78,27 +78,27 @@ RSpec.describe RetailUser, :type => :model do
     end
   end
 
-  context "when cell phone is blank" do
-    before { @retail_user.cell_phone = "" }
+  context "when phone number is blank" do
+    before { @retail_user.phone_number = "" }
     it { should be_valid }
   end
 
-  context "when cell phone format is invalid" do
+  context "when phone number format is invalid" do
     it "should be invalid" do
       numbers = %w[123-aaa-5555 123-4563 123-456-789012]
       numbers.each do |number|
-        @retail_user.cell_phone = number
+        @retail_user.phone_number = number
         expect(@retail_user).not_to be_valid
       end
     end
   end
 
-  context "when cell phone format is valid" do
+  context "when phone number format is valid" do
     it "should be valid" do
       numbers = ['123-456-7890', '123.456.7890', '1234567890', 
                  '(123) 456-7890', '1-123-456-7890']
       numbers.each do |number|
-        @retail_user.cell_phone = number
+        @retail_user.phone_number = number
         expect(@retail_user).to be_valid
       end
     end

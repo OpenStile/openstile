@@ -5,7 +5,9 @@ RSpec.describe Retailer, :type => :model do
                                       neighborhood: "Shaw") }
   before { @retailer = Retailer.new(name: "ABC Boutique",
                                     description: "Premier boutique in DC!",
-                                    location: location) }
+                                    location: location,
+                                    owner_name: 'Seymour Butts',
+                                    phone_number: '571-555-5555') }
 
   subject { @retailer }
 
@@ -43,25 +45,27 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should respond_to :summary }
+  it { should respond_to :owner_name }
+  it { should respond_to :phone_number }
   it { should be_valid }
 
   context "when name is not present" do
-    before { @retailer.name = " " } 
+    before { @retailer.name = " " }
     it { should_not be_valid }
   end
 
   context "when name is too long" do
-    before { @retailer.name = "a"*51 } 
+    before { @retailer.name = "a"*51 }
     it { should_not be_valid }
   end
 
   context "when description is not present" do
-    before { @retailer.description = " " } 
+    before { @retailer.description = " " }
     it { should_not be_valid }
   end
 
   context "when description is too long" do
-    before { @retailer.description = "a"*251 } 
+    before { @retailer.description = "a"*251 }
     it { should_not be_valid }
   end
 
@@ -126,8 +130,8 @@ RSpec.describe Retailer, :type => :model do
 
   describe "online presence association" do
     before { @retailer.save }
-    let!(:online_presence){ 
-      FactoryGirl.create(:online_presence, retailer: @retailer) 
+    let!(:online_presence){
+      FactoryGirl.create(:online_presence, retailer: @retailer)
     }
 
     it "should destroy associated online presence" do
@@ -140,7 +144,7 @@ RSpec.describe Retailer, :type => :model do
 
   describe "drop in avalabilities assocication" do
     before { @retailer.save }
-    let!(:drop_in_availability) { FactoryGirl.create(:drop_in_availability, 
+    let!(:drop_in_availability) { FactoryGirl.create(:drop_in_availability,
                                                       retailer: @retailer) }
 
     it "should destroy associated drop in availabilities" do
@@ -158,7 +162,7 @@ RSpec.describe Retailer, :type => :model do
     let(:shopper){ FactoryGirl.create(:shopper) }
     let!(:drop_in_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                    retailer: @retailer) }
-    let!(:drop_in) { FactoryGirl.create(:drop_in, 
+    let!(:drop_in) { FactoryGirl.create(:drop_in,
                                         time: tomorrow_mid_morning,
                                         retailer: @retailer,
                                         shopper: shopper) }
@@ -175,8 +179,8 @@ RSpec.describe Retailer, :type => :model do
 
   describe "retail user association" do
     before { @retailer.save }
-    let!(:retail_user){ 
-      FactoryGirl.create(:retail_user, retailer: @retailer) 
+    let!(:retail_user){
+      FactoryGirl.create(:retail_user, retailer: @retailer)
     }
 
     it "should destroy associated retail user" do
@@ -213,8 +217,48 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
+  describe "owner" do
+    context "when first name is not present" do
+      before { @retailer.owner_name = " " }
+      it { should_not be_valid }
+    end
+
+    context "when first name is too long" do
+      before { @retailer.owner_name = "a"*101 }
+      it { should_not be_valid }
+    end
+  end
+
+  describe "phone_number" do
+    context "when phone_number is blank" do
+      before { @retailer.phone_number = "" }
+      it { should_not be_valid }
+    end
+
+    context "when phone_number format is invalid" do
+      it "should be invalid" do
+        numbers = %w[123-aaa-5555 123-4563 123-456-789012]
+        numbers.each do |number|
+          @retailer.phone_number = number
+          expect(@retailer).not_to be_valid
+        end
+      end
+    end
+
+    context "when phone_number format is valid" do
+      it "should be valid" do
+        numbers = ['123-456-7890', '123.456.7890', '1234567890',
+                   '(123) 456-7890', '1-123-456-7890']
+        numbers.each do |number|
+          @retailer.phone_number = number
+          expect(@retailer).to be_valid
+        end
+      end
+    end
+  end
+
   describe "image name helper" do
-    let(:location){ FactoryGirl.create(:location, 
+    let(:location){ FactoryGirl.create(:location,
                                         address: "301 Water St. SE, Washington, DC 20003") }
     let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
 
@@ -239,18 +283,18 @@ RSpec.describe Retailer, :type => :model do
       let!(:availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                retailer: @retailer)}
       it "should return the date" do
-        returned_array_dates = @retailer.get_available_drop_in_dates(:integer_array, 
+        returned_array_dates = @retailer.get_available_drop_in_dates(:integer_array,
                                                                 1.day.from_now.beginning_of_month.to_date,
                                                                 1.day.from_now.end_of_month.to_date)
 
-        returned_string_dates = @retailer.get_available_drop_in_dates(:date_string, 
+        returned_string_dates = @retailer.get_available_drop_in_dates(:date_string,
                                                                 1.day.from_now.beginning_of_month.to_date,
                                                                 1.day.from_now.end_of_month.to_date)
         expect(returned_array_dates.size).to eq(1)
         expect(returned_array_dates[0][0]).to eq(1.day.from_now.year)
         expect(returned_array_dates[0][1]).to eq(1.day.from_now.month - 1)
         expect(returned_array_dates[0][2]).to eq(1.day.from_now.day)
-    
+
         expect(returned_string_dates.size).to eq(1)
         expect(returned_string_dates.first).to eq(1.day.from_now.to_date.to_s)
       end
@@ -265,10 +309,10 @@ RSpec.describe Retailer, :type => :model do
                                                retailer: @retailer) }
 
       it "should return all Sundays for the month" do
-        returned_dates = @retailer.get_available_drop_in_dates(:date_string, 
+        returned_dates = @retailer.get_available_drop_in_dates(:date_string,
                                                                DateTime.parse("2020-02-01").to_date,
                                                                DateTime.parse("2020-02-28").to_date)
-        
+
         expect(returned_dates).to eq(["2020-02-02", "2020-02-09", "2020-02-16", "2020-02-23"])
       end
     end
@@ -283,10 +327,10 @@ RSpec.describe Retailer, :type => :model do
                                                retailer: @retailer) }
 
       it "should return everyday for the week" do
-        returned_dates = @retailer.get_available_drop_in_dates(:date_string, 
+        returned_dates = @retailer.get_available_drop_in_dates(:date_string,
                                                                1.day.from_now.to_date,
                                                                8.days.from_now.to_date)
-        
+
         expect(returned_dates.size).to eq(7)
       end
 
@@ -298,10 +342,10 @@ RSpec.describe Retailer, :type => :model do
                                                     created_at: 1.hour.ago,
                                                     retailer: @retailer) }
         it "should not return the off day for the week" do
-          returned_dates = @retailer.get_available_drop_in_dates(:date_string, 
+          returned_dates = @retailer.get_available_drop_in_dates(:date_string,
                                                                1.day.from_now.to_date,
                                                                8.days.from_now.to_date)
-        
+
           expect(returned_dates).to_not include(2.days.from_now.to_date.to_s)
           expect(returned_dates.size).to eq(6)
         end
@@ -319,9 +363,9 @@ RSpec.describe Retailer, :type => :model do
                                         time: tomorrow_noon,
                                         retailer: @retailer,
                                         shopper: shopper) }
-    
+
     it "should return whether or not a retailer is available" do
-      expect(@retailer.available_for_drop_in? tomorrow_morning).to eq(true) 
+      expect(@retailer.available_for_drop_in? tomorrow_morning).to eq(true)
       expect(@retailer.available_for_drop_in? tomorrow_noon).to eq(false)
       expect(@retailer.available_for_drop_in? tomorrow_noon.advance(hours: 1)).to eq(true)
       expect(@retailer.available_for_drop_in? tomorrow_evening).to eq(false)
@@ -354,7 +398,7 @@ RSpec.describe Retailer, :type => :model do
                                          bandwidth: 1) }
 
       it "should return an appropriate buffer" do
-        first_available_time_array = 
+        first_available_time_array =
             @retailer.get_available_drop_in_times(DateTime.current.strftime('%B %e, %Y')).first
 
         if DateTime.current.advance(hours: 1) > DateTime.current.end_of_day

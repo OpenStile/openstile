@@ -76,14 +76,14 @@ class RetailersController < ApplicationController
 
   private
     def retailer_params
-      params.require(:retailer).permit(:name, :location_id, :description, 
-                      :for_petite, :for_tall, :for_full_figured,
-                      special_consideration_ids: [], top_size_ids: [], 
+      params.require(:retailer).permit(:name, :owner_name, :phone_number, :location_id,
+                      :description, :for_petite, :for_tall, :for_full_figured,
+                      special_consideration_ids: [], top_size_ids: [],
                       bottom_size_ids: [], dress_size_ids: [],
                       price_range_attributes: [:top_min_price, :top_max_price,
                                                :bottom_min_price, :bottom_max_price,
                                                :dress_min_price, :dress_max_price],
-                      online_presence_attributes: [:web_link, :facebook_link, 
+                      online_presence_attributes: [:web_link, :facebook_link,
                                                    :instagram_link, :twitter_link])
     end
 

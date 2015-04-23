@@ -21,7 +21,7 @@ class DropInsController < ApplicationController
     recommendation = retrieve_recommendation_object
     if @drop_in.save
       retailer = @drop_in.retailer
-      RetailUserMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
+      RetailUserMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in, recommendation).deliver
       ShopperMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
       flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
       redirect_to upcoming_drop_ins_path

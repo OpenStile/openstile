@@ -2,10 +2,14 @@
 
 <p> <%= @greeting %>,  </p>
 
-<%= @shopper.first_name %> has scheduled a drop-in at your store for <%= @drop_in.colloquial_time %>.  </p>
+<p> You have a drop-in visit that's about to happen. Here are the details: </p>
 
-<% unless @drop_in.comment.nil? %>
-  <p> Here is what she's looking for:  </p>
+<p> Drop-in Time: <%= @drop_in.colloquial_time %> </p>
+
+<p> Shopper: <%= @shopper.first_name %> </p>
+
+<% unless @drop_in.comment.blank? %>
+  <p> Here are her comments: </p>
   <p> <%= @drop_in.comment.to_s %>  </p>
   <% @drop_in.drop_in_items.each do |dii| %>
   <p> <%= cl_image_tag("#{dii.reservable_type.constantize.find_by_id(dii.reservable_id).image_name}",

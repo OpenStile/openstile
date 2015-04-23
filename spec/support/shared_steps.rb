@@ -1,3 +1,7 @@
+require 'rake'
+
+load File.expand_path("../../../lib/tasks/scheduler.rake", __FILE__)
+
 def given_i_am_a_logged_in_shopper shopper
   if(page.has_link? 'Log out')
     click_link 'Log out'
@@ -277,7 +281,7 @@ def when_i_select_a_recommendation recommendation
   expect(page).to have_content(recommendation.description)
 end
 
-def then_i_and_the_retail_user_should_receive_an_email shopper_email, retail_user_email
+def then_i_and_the_retail_user_should_receive_an_email retail_user_email, shopper_email
   count = ActionMailer::Base.deliveries.count
   last_two_receipients = ActionMailer::Base.deliveries[count-2, count-1]
                                                   .map(&:to).flatten
@@ -285,3 +289,23 @@ def then_i_and_the_retail_user_should_receive_an_email shopper_email, retail_use
   expect(last_two_receipients).to include(shopper_email)
 end
 
+def given_the_scheduler_has_run_the_drop_in_reminder_job
+  Rake::Task.define_task(:environment)
+  Rake::Task['email_drop_in_reminder'].invoke
+end
+
+def then_i_and_the_retail_user_should_receive_a_reminder_email retail_user_email, shopper_email, drop_in
+  then_i_and_the_retail_user_should_receive_an_email retail_user_email, shopper_email
+  expect(DropIn.find_by_id(drop_in.id).reminder_email_sent).to be true
+end
+
+def then_the_email_should_have_an_ics_attachment
+  last_two_emails = ActionMailer::Base.deliveries.reverse[0..1]
+  last_two_emails.each do |mail|
+    attachment = mail.attachments[0]
+    expect(attachment).to_not be nil
+    expect(attachment).to be_a_kind_of(Mail::Part)
+    expect(attachment.content_type).to start_with('text/calendar;')
+    expect(attachment.filename).to eq('event.ics')
+  end
+end
