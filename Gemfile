@@ -36,6 +36,8 @@ gem 'jquery-turbolinks'
 
 gem 'mandrill-api'
 
+gem 'icalendar'
+
 gem 'roadie', '~> 3.0.4'
 gem 'roadie-rails'
 

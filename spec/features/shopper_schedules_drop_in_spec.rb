@@ -33,6 +33,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
   end
 
   scenario 'sign in from the third party scheduler widget' do
@@ -60,6 +61,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with top.retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
     then_my_scheduled_should_show_item_on_hold top
   end
 
@@ -76,6 +78,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with bottom.retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
     then_my_scheduled_should_show_item_on_hold bottom
   end
 
@@ -92,6 +95,7 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with dress.retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_the_email_should_have_an_ics_attachment
     then_my_scheduled_should_show_item_on_hold dress
   end
 
