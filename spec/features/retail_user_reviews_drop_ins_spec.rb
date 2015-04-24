@@ -27,7 +27,7 @@ feature 'Retail user reviews drop in' do
     then_i_should_see_a_scheduled_drop_in_for_shopper shopper.first_name, 'Tomorrow @ 10 AM'
     then_i_should_see_addtional_drop_in_comments drop_in
     then_i_should_see_a_synopsis_for_shopper shopper
-    then_i_should_see_items_of_interest_for_shopper top.name
+    then_i_should_see_items_of_interest_for_shopper top
   end
 
   def when_i_view_my_upcoming_drop_ins
@@ -37,7 +37,8 @@ feature 'Retail user reviews drop in' do
   end
 
   def then_i_should_see_a_scheduled_drop_in_for_shopper name, date_and_time
-    expect(page).to have_content("#{name} is coming in #{date_and_time}")
+    expect(page).to have_content(name)
+    expect(page).to have_content(date_and_time)
   end
 
   def then_i_should_see_addtional_drop_in_comments appointment
@@ -48,8 +49,7 @@ feature 'Retail user reviews drop in' do
     expect(page).to have_content(shopper.style_profile.synopsis)
   end
 
-  def then_i_should_see_items_of_interest_for_shopper item_name
-    expect(page).to have_content("Items to pull")
-    expect(page).to have_content(item_name)
+  def then_i_should_see_items_of_interest_for_shopper item
+    expect(page).to have_link(item.image_alt_text)
   end
 end

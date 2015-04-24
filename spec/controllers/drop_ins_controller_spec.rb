@@ -4,7 +4,11 @@ RSpec.describe DropInsController, :type => :controller do
   let(:other_shopper){ FactoryGirl.create(:shopper) }
   let(:shopper){ FactoryGirl.create(:shopper) }
   let(:retailer){ FactoryGirl.create(:retailer) }
-  let(:retail_user){ FactoryGirl.create(:retail_user) }
+  let(:other_retailer){ FactoryGirl.create(:retailer) }
+  let(:retail_user){ FactoryGirl.create(:retail_user,
+                                         retailer: retailer) }
+  let(:other_retail_user){ FactoryGirl.create(:retail_user,
+                                         retailer: other_retailer) }
   let!(:drop_in_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                   retailer: retailer)}
   let(:drop_in){ FactoryGirl.create(:drop_in,
@@ -72,6 +76,17 @@ RSpec.describe DropInsController, :type => :controller do
       it "should return success" do
         get :upcoming
         expect(response).to be_success
+      end
+    end
+  end
+
+  context "when wrong retail user is signed in" do
+    before { sign_in other_retail_user }  
+
+    context "PATCH update" do
+      it "redirects to root path" do
+        patch :update, {id: drop_in.id}
+        expect(response).to redirect_to(root_path)
       end
     end
   end

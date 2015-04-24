@@ -59,14 +59,19 @@
         </div>
       </div>
     <% end %>
-    <% if current_shopper && !@upcoming_drop_ins.empty? %>
+    <% unless @upcoming_drop_ins.empty? %>
       <div class="row text-center">
         <br /><br />
         <p>
-          Here are your upcoming drop-ins. Make sure your 
-          <%= link_to "style profile", edit_style_profile_path(current_shopper.style_profile) %>
-          is up to date before your visit.
+          Here are your upcoming drop-ins. 
         </p>
+        <% if current_shopper %>
+          <p>
+            Make sure your 
+            <%= link_to "style profile", edit_style_profile_path(current_shopper.style_profile) %>
+            is up to date before your visit.
+          </p>
+        <% end %>
         <br /><br />
       </div>
     <% end %>
@@ -80,7 +85,7 @@
       </div>
       <hr />
     <% end %>
-    <% if current_shopper && !@previous_drop_ins.empty? %>
+    <% unless @previous_drop_ins.empty? %>
       <div class="row text-center">
         <br /><br />
         <p>

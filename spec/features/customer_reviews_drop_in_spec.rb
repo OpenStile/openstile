@@ -23,7 +23,7 @@ feature 'Customer reviews drop in' do
     then_i_should_see_drop_in_successfully_reviewed drop_in, 4
   end
                                       
-  scenario 'on retailer side' do
+  scenario 'on retailer side',js: true do
     given_i_am_a_logged_in_retail_user retail_user
     when_i_navigate_to_my_drop_ins_as_retailer
     when_i_review_drop_in_as_retailer drop_in, '5 out of 5', 
@@ -49,7 +49,13 @@ feature 'Customer reviews drop in' do
   end
 
   def when_i_review_drop_in_as_retailer past_drop_in, rating, feedback, sales_amount
-    pending "Completion"
+    within(:css, "div#drop_in_#{past_drop_in.id}") do
+      click_link '[edit]'
+      select rating, from: 'Rating'
+      fill_in 'Feedback', with: feedback
+      fill_in 'How much did the shopper spend?', with: sales_amount
+      click_button 'Save'
+    end
   end
 
   def then_i_should_see_drop_in_successfully_reviewed past_drop_in, rating
