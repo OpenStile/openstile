@@ -205,7 +205,7 @@ feature 'Shopper schedule drop in' do
   end
 
   def then_my_scheduled_drop_ins_should_be_updated_with retailer, date, place
-    expect(page).to have_content(retailer.name)
+    expect(page).to have_link(retailer.name)
     expect(page).to have_content(date)
     expect(page).to have_content(place)
   end
@@ -215,7 +215,7 @@ feature 'Shopper schedule drop in' do
   end
 
   def when_i_continue_browsing
-    click_link 'Continue Browsing'
+    visit '/'
 
     expect(page).to have_content('My Style Feed')
   end

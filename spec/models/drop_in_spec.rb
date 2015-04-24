@@ -66,6 +66,16 @@ RSpec.describe DropIn, :type => :model do
     it { should_not be_valid }
   end
 
+  context "when sales generated is invalid format" do
+    it "should be invalid" do
+      amounts = ['One million dollars', '99.00.9999', '#$%^&!'] 
+      amounts.each do |invalid_amount|
+        @drop_in.sales_generated = invalid_amount
+        expect(@drop_in).not_to be_valid
+      end
+    end
+  end
+
   context "when shopper has another drop in at the same time" do
     let!(:other_drop_in){ FactoryGirl.create(:drop_in, 
                                              retailer: retailer,

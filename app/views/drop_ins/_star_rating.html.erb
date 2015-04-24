@@ -1,0 +1,5 @@
+<% (1..5).each do |idx| %>
+  <div class="star-rating col-md-1 col-xs-2">
+    <i class="fa fa-star fa-lg <%= ' fa-star-selected' if !rating.nil? && idx <= rating %>"></i>  
+  </div>
+<% end %>

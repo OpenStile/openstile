@@ -1,0 +1,40 @@
+<div class="edit-rating col-md-offset-1 col-xs-offset-1 col-md-1 col-xs-1 vcenter">
+  <%= link_to '[edit]', '#', data: {drop_in_id: drop_in.id } %>
+</div>
+<div class="col-md-3 col-xs-3 vcenter">
+  <a href=<%= retailer_path(drop_in.retailer) %> >
+    <%= cl_image_tag(drop_in.retailer.logo_image_name, 
+                      class: "img-responsive",
+                      width: 200) %>
+  </a>  
+</div>
+<div class="col-md-6 col-xs-6 vcenter">
+  <div class="rating-summary">
+    <div class="col-md-12 col-xs-12">
+      <h4><%= drop_in.colloquial_time %></h4>
+    </div>
+    <div class="col-md-12 col-xs-12">
+      <%= render 'star_rating', rating: drop_in.shopper_rating %>
+    </div>
+    <div class="col-md-12 col-xs-12">
+      <h4><%= drop_in.shopper_feedback %></h4>
+    </div>
+  </div>
+  <div class="rating-form">
+    <%= form_for(drop_in) do |f| %>
+      <div class="col-md-7 col-xs-12">
+        <%= f.label :shopper_rating, "Rating" %>
+        <%= f.select :shopper_rating, (1..5).map{|v| ["#{v} out of 5", v] }, 
+                      class: "form-control",
+                      prompt: true %>
+      </div>
+      <div class="col-md-7 col-xs-12">
+        <%= f.label :shopper_feedback, "Feedback" %>
+        <%= f.text_area :shopper_feedback, class: "form-control" %>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -38,7 +38,7 @@ class DropInsController < ApplicationController
 
   def update
     if @drop_in.update_attributes(drop_in_params)
-      flash[:success] = "Your drop-in was updated! The retailer will be notified."
+      flash[:success] = "Your drop-in was updated!"
       redirect_to upcoming_drop_ins_path
     else
       flash[:danger] = "There was an unexpected error updating your drop-in."
@@ -57,9 +57,11 @@ class DropInsController < ApplicationController
 
   def upcoming
     if shopper_signed_in?
-      @drop_ins = DropIn.upcoming_for_shopper current_shopper.id
+      @previous_drop_ins = DropIn.previous_for_shopper current_shopper.id
+      @upcoming_drop_ins = DropIn.upcoming_for_shopper current_shopper.id
     elsif retail_user_signed_in?
-      @drop_ins = DropIn.upcoming_for_retailer current_retail_user.retailer.id
+      @previous_drop_ins = DropIn.previous_for_retailer current_retail_user.retailer.id
+      @upcoming_drop_ins = DropIn.upcoming_for_retailer current_retail_user.retailer.id
     else
       flash[:danger] = "Unexpected error"
       redirect_to root_path
@@ -74,6 +76,7 @@ class DropInsController < ApplicationController
 
     def drop_in_params
       params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
+                          :shopper_rating, :shopper_feedback,
                           :selected_date, :selected_time,
                           drop_in_items_attributes: [:reservable_id, :reservable_type])
     end

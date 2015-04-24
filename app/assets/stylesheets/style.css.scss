@@ -2106,7 +2106,6 @@ div.feed-item:hover img.feed-item-image {
 .my-drop-ins .single-drop-in {
   padding-top: 10px;
   padding-bottom: 10px;
-  border: 1px solid #555;
 }
 
 .my-drop-ins .custom-fa-lg {
@@ -2117,6 +2116,15 @@ div.feed-item:hover img.feed-item-image {
 
 .my-drop-ins .continue-browsing {
   margin-top: 25px;
+}
+
+.my-drop-ins .fa-star-selected {
+  color: #e18728;
+}
+
+.my-drop-ins .star-rating {
+  padding-top: 10px; 
+  padding-bottom: 10px; 
 }
 
 /* Drop-In Ends*/

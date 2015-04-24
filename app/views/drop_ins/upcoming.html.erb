@@ -17,7 +17,7 @@
 
 <div class="my-drop-ins block">
   <div class="container">
-    <% if current_shopper && @drop_ins.empty? %>
+    <% if current_shopper && never_had_drop_in?(current_shopper) %>
       <div class="row">
         <div class="page-title text-center">
           <h4>You and your style are unique... 
@@ -59,17 +59,18 @@
         </div>
       </div>
     <% end %>
-    <% if current_shopper %>
+    <% if current_shopper && !@upcoming_drop_ins.empty? %>
       <div class="row text-center">
-        <h4>
+        <br /><br />
+        <p>
           Here are your upcoming drop-ins. Make sure your 
           <%= link_to "style profile", edit_style_profile_path(current_shopper.style_profile) %>
-          is up to date before going in.
-        </h4>
+          is up to date before your visit.
+        </p>
         <br /><br />
       </div>
     <% end %>
-    <% @drop_ins.each_with_index do |drop_in, idx| %>
+    <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>
       <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
         <% if current_shopper %>
           <%= render 'upcoming_for_shopper', drop_in: drop_in %>
@@ -77,16 +78,26 @@
           <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
         <% end %>
       </div>
+      <hr />
     <% end %>
-    <% if current_shopper %>
-      <div class="continue-browsing">
-        <div class="col-md-4 col-xs-4 col-md-offset-2 col-xs-offset-1">
-          <br />
-          <a class="btn btn-lg btn-primary" href=<%= retrieve_recommendation_home_path %>>
-            <span class="glyphicon glyphicon-chevron-left"></span>  Continue Browsing
-          </a>
-        </div>
+    <% if current_shopper && !@previous_drop_ins.empty? %>
+      <div class="row text-center">
+        <br /><br />
+        <p>
+          Here are your past drop-ins. Your feedback will help us improve the service! 
+        </p>
+        <br /><br />
       </div>
+    <% end %>
+    <% @previous_drop_ins.each_with_index do |drop_in, idx| %>
+      <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
+        <% if current_shopper %>
+          <%= render 'previous_for_shopper', drop_in: drop_in %>
+        <% elsif current_retail_user %>
+          <%= render 'previous_for_retail_user', drop_in: drop_in %>
+        <% end %>
+      </div>
+      <hr />
     <% end %>
   </div>
 </div>
