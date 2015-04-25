@@ -4,11 +4,18 @@
 </div>
 <div class="col-md-8 col-xs-8 vcenter">
   <% unless drop_in.comment.blank? %>
-    <h4>What she is seeking:</h4><br />
+    <h4>Purpose of drop-in:</h4><br />
     <p><%= drop_in.comment %></p><br />
   <% end %>
   <h4>Her preferences:</h4><br />
-  <p><%= drop_in.shopper.style_profile.synopsis %></p><br />
+  <%= link_to "Show details", "#", class: "show-preferences-link",
+                                   data: {drop_in_id: drop_in.id} %>
+  <div class="preferences-details">
+    <%= render 'shared/style_preferences', 
+                profile: drop_in.shopper.style_profile %>
+    <%= link_to "Hide details", "#", class: "hide-preferences-link",
+                                     data: {drop_in_id: drop_in.id} %>
+  </div>
   <% unless drop_in.drop_in_items.empty? && drop_in.shopper.favorites.empty? %>
     <h4>Items she likes:</h4><br />
     <% drop_in.drop_in_items.map(&:reservable).each do |item| %>

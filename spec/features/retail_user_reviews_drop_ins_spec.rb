@@ -4,6 +4,7 @@ feature 'Retail user reviews drop in' do
   let(:retailer){ FactoryGirl.create(:retailer) }
   let(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
   let(:shopper){ FactoryGirl.create(:shopper, first_name: 'Jane') }
+  let(:hourglass){ FactoryGirl.create(:body_shape, name: 'Hourglass') }
   let(:top){ FactoryGirl.create(:top, retailer: retailer) }
   let!(:drop_in_availability) { 
     FactoryGirl.create(:standard_availability_for_tomorrow,
@@ -22,11 +23,13 @@ feature 'Retail user reviews drop in' do
                                            reservable: top) }
 
   scenario 'that has yet to occur' do
+    shopper.style_profile.update(body_shape: hourglass)
+
     given_i_am_a_logged_in_retail_user retail_user
     when_i_view_my_upcoming_drop_ins
     then_i_should_see_a_scheduled_drop_in_for_shopper shopper.first_name, 'Tomorrow @ 10 AM'
     then_i_should_see_addtional_drop_in_comments drop_in
-    then_i_should_see_a_synopsis_for_shopper shopper
+    then_i_should_see_a_synopsis_for_shopper "hourglass shape"
     then_i_should_see_items_of_interest_for_shopper top
   end
 
@@ -45,8 +48,8 @@ feature 'Retail user reviews drop in' do
     expect(page).to have_content(appointment.comment)
   end
 
-  def then_i_should_see_a_synopsis_for_shopper shopper
-    expect(page).to have_content(shopper.style_profile.synopsis)
+  def then_i_should_see_a_synopsis_for_shopper preference 
+    expect(page).to have_content(preference)
   end
 
   def then_i_should_see_items_of_interest_for_shopper item
