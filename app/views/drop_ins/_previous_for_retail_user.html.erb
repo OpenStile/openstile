@@ -16,6 +16,16 @@
     <div class="edit-rating col-md-12 col-xs-12">
       <%= link_to '[edit]', '#', data: {drop_in_id: drop_in.id } %>
     </div>
+    <div class="col-md-12 col-xs-12">
+      <%= link_to "Show details", "#", class: "show-preferences-link",
+                                   data: {drop_in_id: drop_in.id} %>
+      <div class="preferences-details">
+        <%= render 'shared/style_preferences', 
+                    profile: drop_in.shopper.style_profile %>
+        <%= link_to "Hide details", "#", class: "hide-preferences-link",
+                                         data: {drop_in_id: drop_in.id} %>
+      </div>
+    </div>
   </div>
   <div class="rating-form">
     <%= form_for(drop_in) do |f| %>
