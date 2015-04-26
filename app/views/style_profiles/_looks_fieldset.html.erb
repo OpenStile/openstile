@@ -21,24 +21,21 @@
           </div>
         <% end %>
       </div>
+      <div class="row">
+        <div class="text-center col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+          <h4><%= "#{idx+1} out of #{Look.count}"%></h4>
+        </div>
+      </div>
       <div class="row look-toggle">
         <div class="col-md-4 col-md-offset-2 col-xs-6">
-          <% if idx == 0 %>
-            <a class="showPreviousLook btn btn-lg btn-primary pull-right" href="#">
-              Previous Look
-            </a>
-          <% else %>
+          <% unless idx == 0%>
             <a class="showPreviousLook btn btn-lg btn-primary pull-right" href="#">
               <span class="glyphicon glyphicon-chevron-left"></span>  Previous Look
             </a>
           <% end %>
         </div>
         <div class="col-md-4 col-xs-6">
-          <% if idx == Look.count - 1 %>
-            <a class="showNextLook btn btn-lg btn-primary pull-left" href="#">
-              Done
-            </a>
-          <% else %>
+          <% unless idx == Look.count - 1 %>
             <a class="showNextLook btn btn-lg btn-primary pull-left" href="#">
               Next Look  <span class="glyphicon glyphicon-chevron-right"></span>
             </a>
