@@ -63,13 +63,13 @@ class DropIn < ActiveRecord::Base
   end
 
   def self.reminder
-    time_range = Time.now..Time.now + 45.minutes
+    time_range = DateTime.current..DateTime.current + 45.minutes
     impending_dropins = DropIn.where(:time => time_range)
 
     impending_dropins.each do |drop_in|
       unless drop_in.reminder_email_sent == true
-        ShopperMailer.drop_in_reminder_email(Retailer.find_by_id(drop_in.retailer_id), Shopper.find_by_id(drop_in.shopper_id), drop_in).deliver
-        RetailUserMailer.drop_in_reminder_email(Retailer.find_by_id(drop_in.retailer_id), Shopper.find_by_id(drop_in.shopper_id), drop_in).deliver
+        ShopperMailer.drop_in_reminder_email(drop_in.retailer, drop_in.shopper, drop_in).deliver
+        RetailUserMailer.drop_in_reminder_email(drop_in.retailer, drop_in.shopper, drop_in).deliver
         drop_in.reminder_email_sent = true
         drop_in.save
       end

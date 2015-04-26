@@ -1,7 +1,6 @@
 class ShopperMailer < ActionMailer::Base
-  include Roadie::Rails::Automatic
 
-  default from: "no-reply@openstile.com", css: 'style.css'
+  default from: "no-reply@openstile.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -13,11 +12,6 @@ class ShopperMailer < ActionMailer::Base
     @greeting = "Hello #{shopper.first_name}"
     @shopper = shopper
     @drop_in = drop_in
-    # @stylesheets = %w[/assets/stylesheets/style.css.scss]
-    # attachments.inline['empty_hangers'] = {
-    #                             :content => File.read("#{Rails.root.to_s + '/app/assets/images/empty_hangers.jpg'}"),
-    #                             :mime_type => "image/jpg"
-    #                           }
 
     ical = create_ical_object drop_in, retailer
     attachments['event.ics'] = {:mime_type => 'text/calendar', :content => ical }

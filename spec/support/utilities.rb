@@ -38,11 +38,11 @@ end
 
 def in_the_next_hour
 
-  if Time.now.min < 30
+  if DateTime.current.min < 30
     ActiveSupport::TimeZone[Time.zone.name]
-     .parse("#{Time.now.change(min: 30).to_s}")
+     .parse("#{DateTime.current.change(min: 30).to_s}")
   else
     ActiveSupport::TimeZone[Time.zone.name]
-     .parse("#{Time.now.change(hour: Time.now.hour + 1).to_s}")
+     .parse("#{DateTime.current.change(hour: DateTime.current.hour + 1).to_s}")
   end
 end

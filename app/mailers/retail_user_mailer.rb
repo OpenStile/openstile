@@ -6,14 +6,11 @@ class RetailUserMailer < ActionMailer::Base
   #
   #   en.drop_in_scheduled_mailer.email.subject
   #
-  def drop_in_scheduled_email(retailer, shopper, drop_in, recommendation)
+  def drop_in_scheduled_email(retailer, shopper, drop_in)
     @retail_user = RetailUser.where(retailer_id: retailer.id).first
     @greeting = "Hello #{@retail_user.email}"
     @shopper = shopper
     @drop_in = drop_in
-    unless recommendation.is_a? Retailer
-      @recommendation = recommendation
-    end
     ical = create_ical_object drop_in, shopper, retailer
     attachments['event.ics'] = {:mime_type => 'text/calendar', :content => ical }
     mail to: @retail_user.email, subject: "#{@shopper.first_name} is coming in #{@drop_in.colloquial_time}"

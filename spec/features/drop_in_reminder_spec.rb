@@ -17,6 +17,9 @@ feature 'Drop in reminder' do
                                           retailer: retailer,
                                           shopper: shopper)
 
+    puts drop_in_availability.inspect
+    puts impending_drop_in.inspect
+
     given_the_scheduler_has_run_the_drop_in_reminder_job
     then_i_and_the_retail_user_should_receive_a_reminder_email retail_user.email, shopper.email, impending_drop_in
   end

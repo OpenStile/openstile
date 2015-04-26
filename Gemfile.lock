@@ -43,7 +43,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    addressable (2.3.8)
     arel (5.0.1.20140414130214)
     aws_cf_signer (0.1.3)
     bcrypt (3.1.10)
@@ -60,7 +59,6 @@ GEM
     chili (4.0.1)
       deface (~> 1.0.0)
       rails (>= 4.1)
-    chronic (0.10.2)
     cliver (0.3.2)
     cloudinary (1.0.81)
       aws_cf_signer
@@ -73,8 +71,6 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colorize (0.7.5)
-    css_parser (1.3.6)
-      addressable
     deface (1.0.1)
       colorize (>= 0.5.8)
       nokogiri (~> 1.6.0)
@@ -168,12 +164,6 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    roadie (3.0.4)
-      css_parser (~> 1.3.4)
-      nokogiri (~> 1.6.0)
-    roadie-rails (1.0.5)
-      railties (>= 3.0, < 4.3)
-      roadie (~> 3.0)
     rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.4)
@@ -225,8 +215,6 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     websocket-driver (0.4.0)
-    whenever (0.9.4)
-      chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -256,8 +244,6 @@ DEPENDENCIES
   rack-reverse-proxy!
   rails (= 4.1.6)
   rails_12factor (= 0.0.2)
-  roadie (~> 3.0.4)
-  roadie-rails
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
@@ -266,4 +252,3 @@ DEPENDENCIES
   therubyracer
   turbolinks
   uglifier (>= 1.3.0)
-  whenever

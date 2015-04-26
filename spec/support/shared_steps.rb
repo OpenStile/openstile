@@ -296,7 +296,7 @@ end
 
 def then_i_and_the_retail_user_should_receive_a_reminder_email retail_user_email, shopper_email, drop_in
   then_i_and_the_retail_user_should_receive_an_email retail_user_email, shopper_email
-  expect(DropIn.find_by_id(drop_in.id).reminder_email_sent).to be true
+  expect(drop_in.reminder_email_sent).to be true
 end
 
 def then_the_email_should_have_an_ics_attachment
