@@ -1,0 +1,55 @@
+<div class="col-md-3 col-xs-3 vcenter">
+  <h4><%= drop_in.shopper.first_name %></h4> 
+  <h4><%= drop_in.colloquial_time %></h4>
+</div>
+<div class="col-md-8 col-xs-8 vcenter">
+  <div class="rating-summary">
+    <div class="col-md-12 col-xs-12">
+      <%= render 'star_rating', rating: drop_in.retailer_rating %>
+    </div>
+    <div class="col-md-12 col-xs-12">
+      <h4>
+        <%= ("$%6.2f" % drop_in.sales_generated) unless drop_in.sales_generated.nil? %>
+      </h4>
+      <h4><%= drop_in.retailer_feedback %></h4>
+    </div>
+    <div class="edit-rating col-md-12 col-xs-12">
+      <%= link_to '[edit]', '#', data: {drop_in_id: drop_in.id } %>
+    </div>
+    <div class="col-md-12 col-xs-12">
+      <%= link_to "Show details", "#", class: "show-preferences-link",
+                                   data: {drop_in_id: drop_in.id} %>
+      <div class="preferences-details">
+        <%= render 'shared/style_preferences', 
+                    profile: drop_in.shopper.style_profile %>
+        <%= link_to "Hide details", "#", class: "hide-preferences-link",
+                                         data: {drop_in_id: drop_in.id} %>
+      </div>
+    </div>
+  </div>
+  <div class="rating-form">
+    <%= form_for(drop_in) do |f| %>
+      <div class="col-md-7 col-xs-12">
+        <%= f.label :retailer_rating, "Rating" %>
+        <%= f.select :retailer_rating, (1..5).map{|v| ["#{v} out of 5", v] }, 
+                      class: "form-control",
+                      prompt: true %>
+      </div>
+      <div class="col-md-7 col-xs-12">
+        <%= f.label :sales_generated, "How much did the shopper spend?" %>
+        <div class="input-group">
+          <span class="input-group-addon">$</span>
+          <%= f.text_field :sales_generated, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-7 col-xs-12">
+        <%= f.label :retailer_feedback, "Feedback" %>
+        <%= f.text_area :retailer_feedback, class: "form-control" %>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -19,7 +19,7 @@
           <% if !current_shopper.nil? %>
             <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile) %>
             <a href=<%=upcoming_drop_ins_path%>>
-              Scheduled Drop-ins
+              My Drop-ins
               <% if never_had_drop_in? current_shopper %>
                 <span class="glyphicon glyphicon-certificate"></span>
               <% end %>

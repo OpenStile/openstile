@@ -1,9 +1,10 @@
 class DropInsController < ApplicationController
 
   before_filter :store_shopper_location
-  before_filter :authenticate_shopper!, except: [:upcoming]
-  before_filter :authenticate_customer!, only: [:upcoming]
-  before_action :correct_drop_in_shopper, only: [:update, :destroy]
+  before_filter :authenticate_shopper!, except: [:upcoming, :update]
+  before_filter :authenticate_customer!, only: [:upcoming, :update]
+  before_action :correct_drop_in_customer, only: [:update]
+  before_action :correct_drop_in_shopper, only: [:destroy]
 
   def create
     retrieved_params = drop_in_params
@@ -38,7 +39,7 @@ class DropInsController < ApplicationController
 
   def update
     if @drop_in.update_attributes(drop_in_params)
-      flash[:success] = "Your drop-in was updated! The retailer will be notified."
+      flash[:success] = "Your drop-in was updated!"
       redirect_to upcoming_drop_ins_path
     else
       flash[:danger] = "There was an unexpected error updating your drop-in."
@@ -57,9 +58,11 @@ class DropInsController < ApplicationController
 
   def upcoming
     if shopper_signed_in?
-      @drop_ins = DropIn.upcoming_for_shopper current_shopper.id
+      @previous_drop_ins = DropIn.previous_for_shopper current_shopper.id
+      @upcoming_drop_ins = DropIn.upcoming_for_shopper current_shopper.id
     elsif retail_user_signed_in?
-      @drop_ins = DropIn.upcoming_for_retailer current_retail_user.retailer.id
+      @previous_drop_ins = DropIn.previous_for_retailer current_retail_user.retailer.id
+      @upcoming_drop_ins = DropIn.upcoming_for_retailer current_retail_user.retailer.id
     else
       flash[:danger] = "Unexpected error"
       redirect_to root_path
@@ -72,8 +75,21 @@ class DropInsController < ApplicationController
       redirect_to root_url unless (@drop_in.shopper == current_shopper)
     end
 
+    def correct_drop_in_customer
+      @drop_in = DropIn.find(params[:id])
+      if current_shopper
+        redirect_to root_url unless (@drop_in.shopper == current_shopper)
+      elsif current_retail_user
+        redirect_to root_url unless (@drop_in.retailer == current_retail_user.retailer)
+      else
+        redirect_to root_url
+      end
+    end
+
     def drop_in_params
       params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
+                          :shopper_rating, :shopper_feedback, :sales_generated,
+                          :retailer_rating, :retailer_feedback,
                           :selected_date, :selected_time,
                           drop_in_items_attributes: [:reservable_id, :reservable_type])
     end

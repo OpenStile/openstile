@@ -19,6 +19,11 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :time }
   it { should respond_to :drop_in_items }
   it { should respond_to :comment }
+  it { should respond_to :shopper_rating }
+  it { should respond_to :retailer_rating }
+  it { should respond_to :shopper_feedback }
+  it { should respond_to :retailer_feedback }
+  it { should respond_to :sales_generated } 
   it { should be_valid }
 
   context "when retailer id is not present" do
@@ -39,6 +44,36 @@ RSpec.describe DropIn, :type => :model do
   context "when comment is too long" do
     before { @drop_in.comment = 'a'*251 }
     it { should_not be_valid }
+  end
+
+  context "when shopper rating is out of range" do
+    before { @drop_in.shopper_rating = 6 }
+    it { should_not be_valid }
+  end
+
+  context "when retailer rating is out of range" do
+    before { @drop_in.retailer_rating = 6 }
+    it { should_not be_valid }
+  end
+
+  context "when shopper feedback is too long" do
+    before { @drop_in.shopper_feedback = 'a' * 501 }
+    it { should_not be_valid }
+  end
+
+  context "when retailer feedback is too long" do
+    before { @drop_in.retailer_feedback = 'a' * 501 }
+    it { should_not be_valid }
+  end
+
+  context "when sales generated is invalid format" do
+    it "should be invalid" do
+      amounts = ['One million dollars', '99.00.9999', '#$%^&!'] 
+      amounts.each do |invalid_amount|
+        @drop_in.sales_generated = invalid_amount
+        expect(@drop_in).not_to be_valid
+      end
+    end
   end
 
   context "when shopper has another drop in at the same time" do

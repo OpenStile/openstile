@@ -12,6 +12,15 @@ class DropIn < ActiveRecord::Base
   validates :shopper_id, presence: true
   validates :time, presence: true
   validates :comment, length: {maximum: 250}
+  validates :shopper_rating, numericality: { greater_than_or_equal_to: 1, 
+                                             less_than_or_equal_to: 5 }, 
+                             unless: "shopper_rating.blank?"
+  validates :retailer_rating, numericality: { greater_than_or_equal_to: 1, 
+                                             less_than_or_equal_to: 5 }, 
+                             unless: "retailer_rating.blank?"
+  validates :shopper_feedback, length: { maximum: 500 }
+  validates :retailer_feedback, length: { maximum: 500 }
+  validates :sales_generated, numericality: true, unless: "sales_generated.blank?"
 
   accepts_nested_attributes_for :drop_in_items
   default_scope { order('time ASC') }
@@ -41,6 +50,14 @@ class DropIn < ActiveRecord::Base
 
   def self.upcoming_for_retailer retailer_id
     where("retailer_id = ? and time > ?", retailer_id, DateTime.current)
+  end
+
+  def self.previous_for_shopper shopper_id
+    where("shopper_id = ? and time < ?", shopper_id, DateTime.current)
+  end
+
+  def self.previous_for_retailer retailer_id
+    where("retailer_id = ? and time < ?", retailer_id, DateTime.current.advance(minutes: 30))
   end
 
   def self.upcoming_for_shopper_at_retailer shopper_id, retailer_id
