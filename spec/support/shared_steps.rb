@@ -55,9 +55,9 @@ def when_i_set_my_style_profile_budget_to budget
   click_link 'Style Profile'
 
   within(:css, "div#budgets") do
-    select(budget[:dress], from: "A dress:")
-    select(budget[:top], from: "A top or blouse:")
-    select(budget[:bottom], from: "A pair of pants or jeans:")
+    select(budget[:dress], from: "An everyday, work, or transitional dress:")
+    select(budget[:top], from: "A shirt, blouse, or sweater:")
+    select(budget[:bottom], from: "A pair of pants, jeans, or a skirt:")
   end
 
   click_button style_profile_save

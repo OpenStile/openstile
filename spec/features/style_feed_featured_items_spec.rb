@@ -16,6 +16,9 @@ feature 'Style Feed' do
   let!(:outfit){ FactoryGirl.create(:outfit, retailer: retailer) }
   let(:shopper){ FactoryGirl.create(:shopper) }
 
+  let(:top_size){ FactoryGirl.create(:top_size) }
+  let(:bottom_size){ FactoryGirl.create(:bottom_size) }
+  let(:dress_size){ FactoryGirl.create(:dress_size) }
   let(:hourglass){ FactoryGirl.create(:body_shape, name: "Hourglass") }
   let(:boho_chic){ FactoryGirl.create(:look, name: "Bohemian Chic") }
   let(:oversized){ FactoryGirl.create(:top_fit, name: "Oversized") }
@@ -25,19 +28,31 @@ feature 'Style Feed' do
   let(:animal_print){ FactoryGirl.create(:print, name: "Animal Print") }
 
   scenario 'when viewing featured items', js: true do
-    baseline_calibration_for_shopper_and_items
-
     top.update(body_shape: hourglass)
     top.update(for_full_figured: true)
     top.update(for_tall: true)
     top.update(look: boho_chic)
     top.update(top_fit: oversized)
+    top.top_sizes << top_size
+    top.update!(price: 105.00)
+    bottom.bottom_sizes << bottom_size
+    bottom.update!(price: 105.00)
     outfit.update(bottom_fit: fitted)
     outfit.special_considerations << local_designers
     outfit.exposed_parts.create!(part: cleavage)
+    outfit.top_sizes << top_size
+    outfit.update!(average_price: 105.00)
     dress.update(print: animal_print)
+    dress.dress_sizes << dress_size
+    dress.update!(price: 105.00)
 
     given_i_am_a_logged_in_shopper shopper
+    when_i_set_my_style_profile_sizes_to({ top_size: top_size, 
+                                            bottom_size: bottom_size,
+                                            dress_size: dress_size })
+    when_i_set_my_style_profile_budget_to({ dress: 'max $150',
+                                            bottom: 'max $150',
+                                            top: 'max $150' })
     when_i_set_my_style_profile_body_shape_to hourglass
     when_i_set_my_style_profile_height_to "6 feet"
     when_i_set_my_style_profile_body_build_to "Full-figured"
@@ -59,28 +74,4 @@ feature 'Style Feed' do
     then_the_recommendation_ordering_should_be outfit, dress
     then_the_recommendation_ordering_should_be dress, bottom
   end
-
-  private
-    def baseline_calibration_for_shopper_and_items
-      shared_top_size = FactoryGirl.create(:top_size)
-      shared_bottom_size = FactoryGirl.create(:bottom_size)
-      shared_dress_size = FactoryGirl.create(:dress_size)
-
-      shopper.style_profile.top_sizes << shared_top_size
-      top.top_sizes << shared_top_size
-      shopper.style_profile.bottom_sizes << shared_bottom_size
-      bottom.bottom_sizes << shared_bottom_size
-      shopper.style_profile.dress_sizes << shared_dress_size
-      dress.dress_sizes << shared_dress_size
-      outfit.top_sizes << shared_top_size
-
-      shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00,
-                                     bottom_min_price: 50.00, bottom_max_price: 100.00,
-                                     dress_min_price: 50.00, dress_max_price: 100.00)
-
-      top.update!(price: 75.00)
-      bottom.update!(price: 75.00)
-      dress.update!(price: 75.00)
-      outfit.update!(average_price: 75.00)
-    end
 end
