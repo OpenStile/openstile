@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
 
+  before_filter :go_to_relaunch, :only => [:home]
   skip_filter :authenticate_shopper!
   
   def home
@@ -18,6 +19,9 @@ class StaticPagesController < ApplicationController
   end
 
   def experience
+  end
+
+  def relaunch
   end
 
   def decal

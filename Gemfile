@@ -36,7 +36,6 @@ gem 'jquery-turbolinks'
 
 gem 'mandrill-api'
 
-gem 'dotenv-rails', :groups => [:development, :test]
 # Use unicorn as the app server
 # gem 'unicorn'
 

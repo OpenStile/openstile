@@ -11,7 +11,7 @@
 
     <%= yield %>
 
-    <% unless(content_for?(:embeddable) && yield(:embeddable)) %>
+    <% unless(content_for?(:embeddable) && yield(:embeddable)) || ENV['OST_RELAUNCH_PREP'] %>
     <footer>
       <div class="container">
         <div class="row">
