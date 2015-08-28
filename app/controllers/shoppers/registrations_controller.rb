@@ -1,6 +1,7 @@
 class Shoppers::RegistrationsController < Devise::RegistrationsController
 
-skip_before_filter :authenticate_shopper!, :only => [:new,:create]
+  before_filter :go_to_relaunch, :only => [:new]
+  skip_before_filter :authenticate_shopper!, :only => [:new,:create]
 
   # GET /resource/sign_up
   def new

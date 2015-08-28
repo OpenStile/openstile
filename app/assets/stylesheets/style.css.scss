@@ -178,6 +178,37 @@ hr{
 	color:#69b8e5;
 }
 
+.relaunch {
+  background:#555 asset_url('relaunch_splashscreen.jpg') repeat;
+  background-size:cover;
+  background-position:center 25%;
+  position:fixed !important;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+}
+
+.relaunch h3 {
+  font-size:50px;
+  line-height:55px;
+  color:#fff;
+  font-family: 'Lobster Two', cursive;
+  margin-top:20px !important;
+  text-shadow:1px 1px 1px #777;
+}
+
+.relaunch h4 {
+  margin:10px 20px 10px 20px !important;
+  color: #ffffff;
+  font-size:25px;
+  line-height:28px;
+  font-weight:normal;
+  font-family: 'Droid Serif', serif;
+  margin-bottom:10px;
+  max-height: 999999px;
+}
 
 .top{
 	background:#555 asset_url('hipster_girl.jpg') no-repeat;

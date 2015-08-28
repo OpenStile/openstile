@@ -8,10 +8,13 @@ class ApplicationController < ActionController::Base
   devise_group :customer, contains: [:shopper, :retail_user]
   devise_group :catalog_reviewer, contains: [:retail_user, :admin]
 
-
   before_filter :update_last_shopper_sign_in_at
 
   protected
+    def go_to_relaunch
+      redirect_to relaunch_path if ENV['OST_RELAUNCH_PREP']
+    end
+
     def update_last_shopper_sign_in_at
       if shopper_signed_in? && !session[:logged_signin]
         sign_in(current_shopper, :force => true)
