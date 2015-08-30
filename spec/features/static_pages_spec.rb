@@ -6,7 +6,7 @@ describe "Static pages" do
   shared_examples "static_page" do
     it { should have_link("OpenStile", href: root_path) }
     it { should have_link("About", href: about_path) }
-    it { should have_link("Blog", href: blog_path) }
+    it { should have_link("Blog", href: blog_articles_path) }
     it { should have_link("Log in") }
 
     it { should have_xpath("//footer") }

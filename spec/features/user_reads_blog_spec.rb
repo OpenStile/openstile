@@ -53,7 +53,12 @@ feature 'User visits blog' do
   private
 
   def seed_blog_posts
-    File.open(Rails.root.join('app', 'views', 'blog', 'featured', 'sample-blog-older.md'), 'w') do |file|
+    feature_dir = Rails.root.join('app', 'views', 'blog', 'featured')
+    unless File.directory?(feature_dir)
+      FileUtils.mkdir_p(feature_dir)
+    end
+
+    File.open(File.join(feature_dir, 'sample-blog-older.md'), 'w') do |file|
       file.puts("---")
       file.puts("title:  \"An older blog post\"")
       file.puts("created_at: \"2015-08-15\"")
@@ -65,7 +70,7 @@ feature 'User visits blog' do
       file.puts("And here is more content")
     end
 
-    File.open(Rails.root.join('app', 'views', 'blog', 'featured', 'sample-blog-newer.md'), 'w') do |file|
+    File.open(File.join(feature_dir, 'sample-blog-newer.md'), 'w') do |file|
       file.puts("---")
       file.puts("title:  \"A newer blog post\"")
       file.puts("created_at: \"2015-08-30\"")
@@ -77,7 +82,7 @@ feature 'User visits blog' do
       file.puts("And here is more content")
     end
 
-    File.open(Rails.root.join('app', 'views', 'blog', 'featured', 'sample-blog-draft.md'), 'w') do |file|
+    File.open(File.join(feature_dir, 'sample-blog-draft.md'), 'w') do |file|
       file.puts("---")
       file.puts("title:  \"A draft blog post\"")
       file.puts("created_at: \"2015-09-01\"")

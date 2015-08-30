@@ -51,7 +51,7 @@ class Retailer < ActiveRecord::Base
 
     ret = []
     current_day = start_day
-    while(current_day < end_day) do
+    while(current_day <= end_day) do
       unless get_available_drop_in_times(current_day.to_s).empty?
         case format
         when :integer_array
