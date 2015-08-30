@@ -1,0 +1,13 @@
+<%= provide(:title, 'Blog') %>
+<%= render "shared/header" %>
+
+<% @articles.each do |article| %>
+    <%= cl_image_tag(article.cover_photo, :width=>300, :height=>300, :crop=>:thumb) %>
+    <h1><%= link_to(article.title, blog_article_path(article))%></h1>
+    <%= render 'article_by_line', entry: article %>
+
+    <%= markdown article.excerpt %>
+    <% if article.has_more_text? %>
+        <p><%= link_to('Continue reading ->', blog_article_path(article))%></p>
+    <% end %>
+<% end %>

@@ -8,10 +8,9 @@ Rails.application.routes.draw do
   get '/decal'          =>  'static_pages#decal'
   get '/relaunch'       =>  'static_pages#relaunch'
 
-  get '/blog' => redirect('/blog/')
-  get '/blog/welcome-to-openstile'          =>  'blog#blog_01'
-  get '/blog/retailer-spotlight-tin-lizzy'  =>  'blog#blog_02'
-  get '/blog/dressing-mommy-post-baby-phase'=>  'blog#blog_03'
+  namespace :blog do
+    resources :articles, path: '', only: [:index, :show]
+  end
 
   devise_for :shoppers, :skip => [:registrations], controllers: {
     sessions: "shoppers/sessions",

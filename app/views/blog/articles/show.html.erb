@@ -1,0 +1,11 @@
+<%= provide(:title, @article.title) %>
+<%= render "shared/header" %>
+
+<h1><%= @article.title %></h1>
+<%= render 'article_by_line', entry: @article %>
+
+<%= markdown @article.content %>
+
+<hr />
+
+

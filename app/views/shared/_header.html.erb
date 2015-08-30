@@ -12,7 +12,7 @@
       <div class="navigation pull-right">
         <% if current_shopper.nil? && current_retail_user.nil? && current_admin.nil? %>
           <%= link_to "The Experience", experience_path %>
-          <%= link_to "Blog", blog_path %>
+          <%= link_to "Blog", blog_articles_path %>
           <%= link_to "Log in", new_shopper_session_path %>
           <%= link_to "Sign up", new_shopper_registration_path, class: "sign-up" %>
         <% else %>
