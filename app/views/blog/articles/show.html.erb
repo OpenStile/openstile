@@ -1,11 +1,25 @@
 <%= provide(:title, @article.title) %>
 <%= render "shared/header" %>
 
-<h1><%= @article.title %></h1>
-<%= render 'article_by_line', entry: @article %>
+<div class="container blog-container">
+  <div class="row">
+    <div class="col-xs-6 col-sm-9 blog-main">
+      <div class="col-sm-12 blog-title">
+        <h1><%= @article.title %></h1>
+      </div>
+      <div class="col-sm-12 blog-byline text-right">
+        <%= render 'article_by_line', entry: @article %>
+      </div>
+      <div class="col-sm-12 blog-content">
+        <div class="text-justify center-block">
 
-<%= markdown @article.content %>
+          <%= markdown @article.content %>
 
-<hr />
-
-
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-3 pull-right blog-side-panel">
+      <%= render 'blog_side_panel' %>
+    </div>
+  </div>
+</div>

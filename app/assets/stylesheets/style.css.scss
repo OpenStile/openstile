@@ -210,6 +210,86 @@ hr{
   max-height: 999999px;
 }
 
+div.blog-container {
+  border: 1px solid #e5e5e5;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  padding: 15px;
+}
+
+div.blog-main {
+  border-right: 1px solid #e5e5e5;
+}
+
+div.blog-title {
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 15px;
+}
+
+div.blog-title h1 {
+  font-size: 45px;
+  color: #5e5e5e;
+}
+
+div.blog-byline {
+  border-bottom: 1px solid #e5e5e5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+div.blog-content {
+  padding-top: 15px;
+}
+
+div.blog-thumbnail {
+  padding: 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+div.blog-thumbnail.border-left {
+  border-left: 1px solid #e5e5e5;
+}
+
+div.blog-thumbnail-title {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+div.blog-thumbnail-title a {
+  color: inherit;
+  width: 380px;
+}
+
+div.blog-thumbnail-title a:hover {
+  color: #000000;
+}
+
+div.blog-thumbnail-title h4 {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: bold;
+  color: #5e5e5e;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+div.blog-thumbnail-excerpt {
+  padding-bottom: 10px;
+  height: 80px;
+}
+
+div.blog-thumbnail-byline {
+  padding-top: 5px;
+  border-top: 1px solid #e5e5e5;
+}
+
+div.blog-thumbnail-byline {
+  font-size: 10px;
+  color: #5e5e5e;
+  font-style: italic;
+}
+
 .top{
 	background:#555 asset_url('hipster_girl.jpg') no-repeat;
 	background-size:cover;

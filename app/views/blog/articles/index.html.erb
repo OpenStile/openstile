@@ -1,13 +1,29 @@
 <%= provide(:title, 'Blog') %>
 <%= render "shared/header" %>
 
-<% @articles.each do |article| %>
-    <%= cl_image_tag(article.cover_photo, :width=>300, :height=>300, :crop=>:thumb) %>
-    <h1><%= link_to(article.title, blog_article_path(article))%></h1>
-    <%= render 'article_by_line', entry: article %>
 
-    <%= markdown article.excerpt %>
-    <% if article.has_more_text? %>
-        <p><%= link_to('Continue reading ->', blog_article_path(article))%></p>
-    <% end %>
-<% end %>
+<div class="container blog-container">
+  <div class="row">
+    <div class="col-sm-9 col-xs-6 blog-main">
+      <% @articles.each_with_index do |article, idx| %>
+          <div class="col-xs-12 col-sm-6 blog-thumbnail <%= 'border-left' if idx.odd? %>">
+            <a href='<%=blog_article_path(article)%>'>
+              <%= cl_image_tag(article.cover_photo, :width=>300, :height=>300, :crop=>:thumb) %>
+            </a>
+            <div class="blog-thumbnail-title">
+              <h4><%= link_to(article.title, blog_article_path(article))%></h4>
+            </div>
+            <div class="blog-thumbnail-excerpt text-justify">
+              <%= markdown article.excerpt %>
+            </div>
+            <div class="blog-thumbnail-byline text-right">
+              <%= render 'article_by_line', entry: article %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-sm-3 col-xs-6 pull-right">
+      <%= render 'blog_side_panel' %>
+    </div>
+  </div>
+</div>
