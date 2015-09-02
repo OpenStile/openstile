@@ -284,10 +284,60 @@ div.blog-thumbnail-byline {
   border-top: 1px solid #e5e5e5;
 }
 
-div.blog-thumbnail-byline {
+div.blog-thumbnail-byline p {
   font-size: 10px;
   color: #5e5e5e;
   font-style: italic;
+}
+
+div.blog-side-panel {
+  padding-top: 65px;
+  padding-bottom: 15px;
+}
+
+div.blog-side-panel h2 {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: 5px;
+  color: #5e5e5e;
+  padding-top: 5px;
+}
+
+div.blog-side-panel h3 {
+  font-size: 20px;
+  line-height: 25px;
+  font-weight: 1px;
+  color: #5e5e5e;
+  padding-bottom: 5px;
+}
+
+div.blog-side-panel .intro {
+  padding-top: 65px;
+  padding-bottom: 65px;
+  border-top: 10px solid #e5e5e5;
+  border-bottom: 10px solid #e5e5e5;
+}
+
+div.blog-side-panel .sm-icons {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  border-bottom: 10px solid #e5e5e5;
+}
+
+div.blog-side-panel .sm-icons i.fa-circle {
+  color: #5e5e5e;
+}
+
+div.blog-side-panel .facebook-plugin {
+  padding-top: 65px;
+  padding-bottom: 65px;
+  border-bottom: 10px solid #e5e5e5;
+}
+
+div.blog-side-panel .twitter-plugin {
+  padding-top: 65px;
+  padding-bottom: 65px;
+  border-bottom: 10px solid #e5e5e5;
 }
 
 .top{

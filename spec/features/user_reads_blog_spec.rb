@@ -12,7 +12,7 @@ feature 'User visits blog' do
     end
   end
 
-  scenario 'and sees blogs' do
+  scenario 'and reads entries' do
     create_test_blog('sample', title: 'A sample blog', author: 'Julia Frank', timestamp: '2015-09-01',
                      excerpt: 'A preamble to my awesome blog', content: 'Here it comes')
 
@@ -22,10 +22,12 @@ feature 'User visits blog' do
     expect(page).to have_text('September 01, 2015')
     expect(page).to have_text('A preamble to my awesome blog')
     expect(page).to_not have_text('Here it comes')
+    expect_to_see_side_panel
 
     click_link 'A sample blog'
 
     expect(page).to have_text('Here it comes')
+    expect_to_see_side_panel
   end
 
   scenario 'and sees blog with long excerpt' do
@@ -60,6 +62,12 @@ feature 'User visits blog' do
   def given_i_navigate_to_the_blog_page
     visit '/'
     click_link 'Blog', match: :first
+  end
+
+  def expect_to_see_side_panel
+    expect(page).to have_text('Hand-picked items at your favorite boutiques')
+    expect(page).to have_text('OpenStile on Facebook')
+    expect(page).to have_text('Latest Tweets')
   end
 
   private
