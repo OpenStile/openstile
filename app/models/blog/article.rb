@@ -12,7 +12,11 @@ class Blog::Article
   end
 
   def excerpt
-    content.split('[//]: # (more)').first
+    snipped = content.split('[//]: # (more)').first[0..139]
+    if snipped.length == 140
+      snipped = "#{snipped}..."
+    end
+    snipped
   end
 
   def has_more_text?
