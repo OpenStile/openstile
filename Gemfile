@@ -56,9 +56,6 @@ gem 'redcarpet'
 
 gem 'pygments.rb'
 
-gem 'rack-reverse-proxy', require: 'rack/reverse_proxy', 
-    git: 'git://github.com/nextmat/rack-reverse-proxy', branch: 'content_length'
-
 gem 'cloudinary'
 
 group :development, :test do

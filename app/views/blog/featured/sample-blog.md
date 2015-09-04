@@ -3,7 +3,7 @@ title: "A sample OpenStile blog"
 created_at: "2015-08-30"
 author: "Tamara Austin"
 cover_photo: "dc/washington/violet_boutique/sheer_embellished_red_dress"
-live: false
+live: true
 ---
 The building blocks of your amazing fall wardrobe? Faux-fur collars, mustard yellow & moody florals—to name a few! Ask your Stylist to send you any (or all) of these 10 must-have trends to jump-start your fall 2015 capsule wardrobe.
 [//]: # (more)
