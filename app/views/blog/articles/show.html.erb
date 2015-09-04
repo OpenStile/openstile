@@ -1,0 +1,29 @@
+<%= provide(:title, @article.title) %>
+<%= render "fb_plugin_script" %>
+<%= render "shared/header" %>
+
+<div class="container blog-container">
+  <div class="row">
+    <div class="col-xs-6 col-sm-9 blog-main">
+      <div class="col-sm-12 blog-title">
+        <h1><%= @article.title %></h1>
+      </div>
+      <div class="col-sm-12 blog-byline text-right">
+        <%= render 'article_by_line', entry: @article %>
+      </div>
+      <div class="col-sm-12 blog-content">
+        <div class="text-justify center-block">
+
+          <%= markdown @article.content %>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-sm-3 pull-right">
+      <%= render 'blog_side_panel' %>
+    </div>
+  </div>
+
+  <%= render 'disqus_comments' %>
+
+</div>

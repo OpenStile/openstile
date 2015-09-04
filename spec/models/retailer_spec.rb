@@ -287,7 +287,7 @@ RSpec.describe Retailer, :type => :model do
                                                                1.day.from_now.to_date,
                                                                8.days.from_now.to_date)
         
-        expect(returned_dates.size).to eq(7)
+        expect(returned_dates.size).to eq(8)
       end
 
       context "with specific days turned off" do
@@ -303,7 +303,7 @@ RSpec.describe Retailer, :type => :model do
                                                                8.days.from_now.to_date)
         
           expect(returned_dates).to_not include(2.days.from_now.to_date.to_s)
-          expect(returned_dates.size).to eq(6)
+          expect(returned_dates.size).to eq(7)
         end
       end
     end
