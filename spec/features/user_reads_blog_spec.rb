@@ -27,6 +27,7 @@ feature 'User visits blog' do
     click_link 'A sample blog'
 
     expect(page).to have_text('Here it comes')
+    expect(page).to have_text('powered by Disqus')
     expect_to_see_side_panel
   end
 
