@@ -78,6 +78,56 @@ hr{
 	color:#69b8e5;
 }
 
+header .logo h1 {
+  font-size:100px;
+  line-height:150px;
+  color:#000;
+  font-family: 'Lobster Two', cursive;
+  margin-top:20px !important;
+  text-shadow:1px 1px 1px #777;
+}
+
+header .logo a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header .navigation a {
+  color: inherit;
+  text-decoration: none;
+  font-size: 30px;
+  line-height: 35px;
+  font-family: 'Open Sans', serif;
+}
+
+header .row {
+  padding-bottom: 25px;
+  border-bottom: 3px solid #000;
+  margin-bottom: 25px;
+}
+
+footer .row {
+  padding-top: 25px;
+  border-top: 1px solid #000;
+  margin-top: 25px;
+}
+
+footer .row .footer-section {
+  margin-bottom: 20px;
+}
+
+footer .row .sm-icons a {
+  color: inherit;
+  text-decoration: none;
+}
+
+footer .footer-section h5 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #5e5e5e;
+  padding-bottom: 10px;
+}
+
 .relaunch {
   background:#555 asset_url('relaunch_splashscreen.jpg') repeat;
   background-size:cover;
@@ -108,6 +158,74 @@ hr{
   font-family: 'Droid Serif', serif;
   margin-bottom:10px;
   max-height: 999999px;
+}
+
+.top-image {
+  min-height: 30vh;
+  margin-bottom: 50px;
+}
+
+.style-profile .top-image {
+  background: #555 asset_url('get_to_know_you.jpg') repeat;
+  background-position:center bottom;
+  background-size: cover;
+}
+
+.style-profile h3 {
+  font-size: 35px;
+  line-height: 40px;
+  padding-bottom: 20px;
+}
+
+.style-profile h4 {
+  font-size: 20px;
+  line-height: 25px;
+  color: #5e5e5e;
+  padding-bottom: 15px;
+}
+
+.style-form fieldset {
+  border: 1px solid #e5e5e5;
+  border-radius: 25px;
+  padding: 20px 20px 20px 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.style-form fieldset legend {
+  color: #5e5e5e;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+
+.style-form fieldset h5 {
+  font-size: 18px;
+  line-height: 20px;
+  color: #5e5e5e;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.style-form fieldset .dropdowns select {
+  max-width: 500px;
+  margin-bottom: 15px;
+}
+
+.style-form fieldset .img-tiles .img-selector {
+  padding: 10px;
+  margin: 5px;
+}
+
+.style-form fieldset .img-tiles .img-selector:hover {
+  border: 5px solid #428bca;
+}
+
+.style-form fieldset .img-tiles .img-selector.checked {
+  border: 5px solid #428bca;
+}
+
+.style-form fieldset .radio-images img.img-label {
+  max-height: 250px;
 }
 
 div.blog-container {
@@ -224,7 +342,7 @@ div.blog-side-panel .sm-icons {
   border-bottom: 10px solid #e5e5e5;
 }
 
-div.blog-side-panel .sm-icons i.fa-circle {
+.sm-icons i.fa-circle {
   color: #5e5e5e;
 }
 

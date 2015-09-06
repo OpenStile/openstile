@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="fieldset dropdowns">
+    <legend><span><i class="fa fa-caret-down toggle"></i></span> <%= title %></legend>
+    <div class="content">
+      <div class="col-xs-12">
+        <h5><%= instructions %></h5>
+      </div>
+      <div class="col-xs-12">
+        <% sections.each do |section| %>
+            <label for="<%= idify(section[:attribute_string])%>"><%= section[:prompt]%></label>
+            <select id="<%= idify(section[:attribute_string])%>"
+                    name="<%= section[:attribute_string]%>"
+                    class="form-control">
+              <option disabled selected> -- select an option -- </option>
+              <% section[:options].each do |option| %>
+                  <option value="<%= option[:value]%>" <%= 'selected' if section[:selected] == option[:value]%>>
+                    <%= option[:label]%>
+                  </option>
+              <% end %>
+            </select>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

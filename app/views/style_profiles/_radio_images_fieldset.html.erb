@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="fieldset radio-images">
+    <legend><span><i class="fa fa-caret-down toggle"></i></span> <%= title %></legend>
+    <div class="content">
+      <div class="col-xs-12">
+        <h5><%= prompt %></h5>
+      </div>
+      <div class="col-xs-12">
+        <% options.each do |option| %>
+            <label class="radio-inline text-justify">
+              <input type="radio"
+                     id="<%= idify(attribute_string, option[:value]) %>"
+                     name="<%= attribute_string%>"
+                     value="<%= option[:value]%>" <%= 'selected' if selected == option[:value]%>>
+              <%= image_tag(option[:image],
+                            class: 'img-responsive center-block img-label') %>
+              <%= option[:description] %>
+            </label>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

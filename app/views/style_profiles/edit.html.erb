@@ -1,80 +1,91 @@
 <% provide(:title, 'Style Profile') %>
+<%= render "shared/header" %>
 
-<div class="style-profile-top">
-  <%= render "shared/header" %>
-  <div class="hero inner-page">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="intro">
-            <h2>Style Profile</h2><br /> 
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="style-profile container">
+  <div class="top-image"></div>
+  <div class="text-center">
+    <h3>We want to get to know you <%= current_shopper.first_name %></h3>
+    <h4>Fill out the following so we can help boutique owners hand-pick items you're sure to love</h4>
   </div>
-</div>
 
-<div class="style-profile block">
-  <div class="container">
-    <div class="page-title text-center">
-      <p>
-        We'd like to get to know you!
-        Please take a few minutes to complete your personal Style Profile
-      </p>
-    </div>
-    <div class="style-profile-form">
-      <%= form_for @style_profile, url: {action: "update"} do |f| %>
-        <fieldset>  
-          <legend>Sizes (select all that apply)</legend>
-          <%= render "sizes_fieldset", form_helper: f %>
-        </fieldset>  
-
-        <fieldset>  
-          <legend>Budget</legend>
-          <%= render "budget_fieldset", form_helper: f %>
-        </fieldset>  
-
-        <fieldset>  
-          <legend>Favorite Looks</legend>
-          <%= render "looks_fieldset", form_helper: f %>
-        </fieldset>  
-
-        <fieldset>  
-          <legend>Fit & Coverage</legend>
-          <%= render "fit_fieldset", form_helper: f %>
-          <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-            <hr>
-          </div>
-          <%= render "coverage_fieldset", form_helper: f %>
-        </fieldset>  
-
-        <fieldset>  
-          <legend>Body Type</legend>
-          <%= render "body_height_build", form_helper: f %>
-          <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-            <hr>
-          </div>
-          <%= render "body_shape", form_helper: f %>
-        </fieldset>  
+  <div class="style-form">
+    <%= form_for @style_profile, url: {action: 'update'} do |f| %>
 
         <fieldset>
-          <legend>Colors & Prints</legend>
-          <%= render "color_fieldset", form_helper: f %>
-          <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-            <hr>
-          </div>
-          <%= render "print_fieldset", form_helper: f %>
+          <%= render 'check_all_fieldset', title: 'Sample check all set',
+                     sections: [{prompt: "What are your favorite fish?",
+                                 attribute_string: 'style_profile[fav_fish_ids]',
+                                 options: [
+                                         {label: 'One fish', value: '1', checked: false},
+                                         {label: 'Two fish', value: '2', checked: true},
+                                         {label: 'Red fish', value: '3', checked: true},
+                                         {label: 'Blue fish', value: '4', checked: false} ],
+                                 },
+                                {prompt: "Where would you like green eggs and ham?",
+                                 attribute_string: 'style_profile[eggs_ids]',
+                                 options: [
+                                         {label: 'On a plane', value: '1', checked: true},
+                                         {label: 'On a train', value: '2', checked: false},
+                                         {label: 'In a house', value: '3', checked: false},
+                                         {label: 'With a mouse', value: '4', checked: false} ]
+                                }] %>
         </fieldset>
 
         <fieldset>
-          <legend>Special Considerations</legend>
-          <%= render "special_considerations", form_helper: f %>
+          <%= render 'dropdowns_fieldset', title: 'Sample dropdown selects',
+                     instructions: 'Answer truthfully for each of the following',
+                     sections: [{prompt: "What's your favorite Disney movie?",
+                                 attribute_string: 'style_profile[fav_movie]',
+                                 options: [
+                                         {label: 'Little Mermaid', value: '1'},
+                                         {label: 'Aladdin', value: '2'},
+                                         {label: 'Lion King', value: '3'},
+                                         {label: 'Cinderella', value: '4'} ],
+                                 selected: '3'
+                                },
+                                {prompt: "What's your favorite Disney song?",
+                                 attribute_string: 'style_profile[fav_song]',
+                                 options: [
+                                         {label: 'Man out of you', value: '1'},
+                                         {label: 'Part of your world', value: '2'},
+                                         {label: 'Under the sea', value: '3'},
+                                         {label: 'Beauty and the Beast', value: '4'} ],
+                                 selected: nil
+                                }] %>
         </fieldset>
 
-        <%= f.submit 'Save and continue to Style Feed', 
-              class: "col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3 btn btn-lg btn-primary" %>
-      <% end %>
-    </div>
+        <fieldset>
+          <%= render 'image_tiles_fieldset', title: 'Sample image tile selector',
+                     prompt: 'Which of these pictures do you love?',
+                     attribute_string: 'style_profile[loved_image_ids]',
+                     column_width: 4,
+                     options: [
+                             {label: 'These nuts!', value: '1', image: 'looks/bohemian_chic_hipster.jpg', checked: false},
+                             {value: '2', image: 'looks/casual_relaxed.jpg', checked: false},
+                             {value: '3', image: 'looks/classic_vintage.jpg', checked: true},
+                             {value: '4', image: 'looks/edgy_rocker.jpg', checked: false} ] %>
+        </fieldset>
+
+        <fieldset>
+          <%= render 'radio_images_fieldset', title: 'Sample select one image',
+                     prompt: 'Which of these pictures describes you best?',
+                     attribute_string: 'style_profile[me_image_id]',
+                     selected: '2',
+                     options: [
+                             {value: '1', image: 'body_shapes/apple.jpg',
+                             description: 'This is an apple shape'},
+                             {value: '2', image: 'body_shapes/hourglass.jpg',
+                             description: 'This is an hourglass shape'},
+                             {value: '3', image: 'body_shapes/pear.jpg',
+                             description: 'This is a pear shape'},
+                             {value: '4', image: 'body_shapes/straight.jpg',
+                             description: 'This a straight shape'},
+                             {value: '5', image: 'body_shapes/inverted-triangle.jpg',
+                              description: 'This a straight shape'} ] %>
+        </fieldset>
+
+        <br/>
+        <%= f.submit 'Save and continue', class: 'btn btn-lg btn-primary center-block' %>
+    <% end %>
   </div>
 </div>
