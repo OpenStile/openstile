@@ -63,6 +63,7 @@ feature 'Shopper shares style preferences with retailer' do
 
   def when_i_save_my_style_profile
     click_button 'Save and continue'
+    expect(page).to have_text('My Drop-Ins')
   end
 
   def when_i_schedule_a_dropin_with_retailer

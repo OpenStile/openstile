@@ -24,5 +24,5 @@ class StyleProfile < ActiveRecord::Base
   after_create { create_budget }
 
   validates :shopper_id, presence: true
-  
+
 end

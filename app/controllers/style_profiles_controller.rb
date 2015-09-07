@@ -10,7 +10,7 @@ class StyleProfilesController < ApplicationController
   def update
     if @style_profile.update_attributes(style_profile_params)
       flash[:success] = "Your Style Profile has been updated!"
-      redirect_to root_url
+      redirect_to upcoming_drop_ins_path
     else
       flash[:danger] = "Whoops! Something went wrong. Please try again"
       render "edit"
