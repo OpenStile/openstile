@@ -1,3 +1,4 @@
+
 class StyleProfile < ActiveRecord::Base
   belongs_to :shopper
   belongs_to :body_shape

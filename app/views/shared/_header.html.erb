@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row text-center">
       <div class="logo">
-        <h1><%= link_to "OpenStile", root_path, id: "style-feed-link" %></h1>
+        <h1><%= link_to "OpenStile", (shopper_signed_in? ? upcoming_drop_ins_path : root_path), id: "style-feed-link" %></h1>
       </div>
       <div class="navigation">
         <% if current_shopper.nil? && current_retail_user.nil? && current_admin.nil? %>
@@ -13,7 +13,7 @@
         <% else %>
           <% if !current_shopper.nil? %>
             <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile), class: 'col-sm-4 btn-default btn-lg' %>
-            <%= link_to "My Drop-ins", upcoming_drop_ins_path, class: 'col-sm-4 btn-default btn-lg' %>
+            <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default btn-lg' %>
             <%= link_to "Log out", destroy_shopper_session_path, :method => :delete, class: 'col-sm-4 btn-default btn-lg' %>
           <% end %>
           <% if !current_retail_user.nil? %>

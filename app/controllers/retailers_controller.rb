@@ -1,5 +1,5 @@
 class RetailersController < ApplicationController
-  before_filter :authenticate_admin!, only: [:index, :new, :create]
+  before_filter :authenticate_admin!, only: [:new, :create]
   before_filter :store_shopper_location, only: [:scheduler]
   before_filter :authenticate_shopper!, only: [:scheduler]
   before_filter :authenticate_catalog_reviewer!, only: [:catalog]

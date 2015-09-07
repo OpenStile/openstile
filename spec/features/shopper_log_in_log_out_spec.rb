@@ -66,8 +66,8 @@ describe "Shopper log in and log out" do
         expect(page).to_not have_link('Log in')
       end
 
-      it "should take me to my Style Feed" do
-        expect(page).to have_content('My Style Feed')
+      it "should take me to my Drop ins" do
+        expect(page).to have_content('My Drop-Ins')
       end
 
       describe "and I log out after being logged in" do

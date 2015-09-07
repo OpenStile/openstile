@@ -32,7 +32,7 @@ feature 'Shopper modifies drop in' do
   end
 
   def then_my_upcoming_drop_ins_page_should_not_contain appointment
-    click_link 'Drop-ins'
+    click_link 'OpenStile'
 
     expect(page).to_not have_content(appointment.retailer.name)
   end

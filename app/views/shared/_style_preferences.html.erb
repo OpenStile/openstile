@@ -1,61 +1,9 @@
-<p><b>Body</b> - <%= profile.synopsis_body_description %></p><br />
-<% unless profile.body_shape.nil? %>
-  <div class="preference-image col-md-12 col-xs-12">
-    <%= image_tag("body_shapes/#{profile.body_shape.name.downcase.gsub(" ","-")}.jpg", 
-                   class: "img-responsive col-md-2 col-xs-2") %>
-  </div><br />
+<% unless profile.top_sizes.empty? %>
+    <p>Top sizes: <%= profile.top_sizes.map(&:name).join(', ') %></p>
 <% end %>
-
-<% unless profile.synopsis_considerations.blank? %>
-  <p><b>Values</b> - <%= profile.synopsis_considerations %></p><br />
+<% unless profile.bottom_sizes.empty? %>
+    <p>Bottom sizes: <%= profile.bottom_sizes.map(&:name).join(', ') %></p>
 <% end %>
-
-<% unless profile.synopsis_loved_looks.blank? %>
-  <p><b>Style Likes</b> - <%= profile.synopsis_loved_looks %></p>
-  <div class="preference-image col-md-12 col-xs-12">
-    <% profile.look_tolerances.where(tolerance: 10).map(&:look).each do |look| %>
-      <%= image_tag("looks/#{look.name.downcase}.jpg", 
-                     class: "img-responsive col-md-6 col-xs-6") %>
-    <% end %>
-  </div><br />
-<% end %>
-
-<% unless profile.synopsis_hated_looks.blank? %>
-  <p><b>Style Dislikes</b> - <%= profile.synopsis_hated_looks %></p>
-  <div class="preference-image col-md-12 col-xs-12">
-    <% profile.look_tolerances.where(tolerance: 1).map(&:look).each do |look| %>
-      <%= image_tag("looks/#{look.name.downcase}.jpg", 
-                     class: "img-responsive col-md-6 col-xs-6") %>
-    <% end %>
-  </div><br />
-<% end %>
-
-<p><b>Tops</b></p>
-<ul>
-  <% profile.synopsis_array_tops.each do |detail|%>
-    <li><%= detail %></li>
-  <% end %>
-</ul><br />
-
-<p><b>Bottoms</b></p>
-<ul>
-  <% profile.synopsis_array_bottoms.each do |detail|%>
-    <li><%= detail %></li>
-  <% end %>
-</ul><br />
-
-<p><b>Dresses</b></p>
-<ul>
-  <% profile.synopsis_array_dresses.each do |detail|%>
-    <li><%= detail %></li>
-  <% end %>
-</ul><br />
-
-<% unless profile.synopsis_additional_details.empty? %>
-  <p><b>Additional Details</b></p>
-  <ul>
-    <% profile.synopsis_additional_details.each do |detail|%>
-      <li><%= detail %></li>
-    <% end %>
-  </ul><br />
+<% unless profile.dress_sizes.empty? %>
+    <p>Dress sizes: <%= profile.dress_sizes.map(&:name).join(', ') %></p>
 <% end %>

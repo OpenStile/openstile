@@ -18,6 +18,6 @@ class Shoppers::SessionsController < Devise::SessionsController
   end
 
   def after_sign_in_path_for(shopper)
-    session[:previous_url] || root_path
+    session[:previous_url] || upcoming_drop_ins_path
   end
 end

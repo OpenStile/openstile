@@ -34,7 +34,7 @@ feature 'Retail user reviews drop in' do
   end
 
   def when_i_view_my_upcoming_drop_ins
-    click_link 'View your past and upcoming drop-ins'
+    click_link 'My appointments'
 
     expect(page).to have_content('My Drop-Ins')
   end

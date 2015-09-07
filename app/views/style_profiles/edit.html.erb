@@ -12,22 +12,27 @@
     <%= form_for @style_profile, url: {action: 'update'} do |f| %>
 
         <fieldset>
-          <%= render 'check_all_fieldset', title: 'Sample check all set',
-                     sections: [{prompt: "What are your favorite fish?",
-                                 attribute_string: 'style_profile[fav_fish_ids]',
-                                 options: [
-                                         {label: 'One fish', value: '1', checked: false},
-                                         {label: 'Two fish', value: '2', checked: true},
-                                         {label: 'Red fish', value: '3', checked: true},
-                                         {label: 'Blue fish', value: '4', checked: false} ],
-                                 },
-                                {prompt: "Where would you like green eggs and ham?",
-                                 attribute_string: 'style_profile[eggs_ids]',
-                                 options: [
-                                         {label: 'On a plane', value: '1', checked: true},
-                                         {label: 'On a train', value: '2', checked: false},
-                                         {label: 'In a house', value: '3', checked: false},
-                                         {label: 'With a mouse', value: '4', checked: false} ]
+          <%= render 'check_all_fieldset', title: 'Your sizes',
+                     sections: [{prompt: "Select your top size.",
+                                 class_name: 'top_sizes',
+                                 attribute_string: 'style_profile[top_size_ids]',
+                                 options: TopSize.all.map{|size|
+                                   {label: size.name, value: size.id,
+                                    checked: @style_profile.top_size_ids.include?(size.id)} }
+                                },
+                                {prompt: "Select your bottom size.",
+                                     class_name: 'bottom_sizes',
+                                     attribute_string: 'style_profile[bottom_size_ids]',
+                                     options: BottomSize.all.map{|size|
+                                       {label: size.name, value: size.id,
+                                        checked: @style_profile.bottom_size_ids.include?(size.id)} }
+                                },
+                                {prompt: "Select your dress size.",
+                                 class_name: 'dress_sizes',
+                                 attribute_string: 'style_profile[dress_size_ids]',
+                                 options: DressSize.all.map{|size|
+                                   {label: size.name, value: size.id,
+                                    checked: @style_profile.dress_size_ids.include?(size.id)} }
                                 }] %>
         </fieldset>
 

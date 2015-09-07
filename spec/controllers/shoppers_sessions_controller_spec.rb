@@ -22,14 +22,14 @@ RSpec.describe Shoppers::SessionsController, :type => :controller do
     context "GET new" do
       it "redirects to root" do
         get :new
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(upcoming_drop_ins_path)
       end
     end
 
     context "POST create" do
       it "redirects to root" do
         post :create
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(upcoming_drop_ins_path)
       end
     end
   end

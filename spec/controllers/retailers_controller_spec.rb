@@ -13,13 +13,6 @@ RSpec.describe RetailersController, :type => :controller do
       end
     end
 
-    context "GET index" do
-      it "redirects to signin" do
-        get :index
-        expect(response).to redirect_to(new_admin_session_path)
-      end
-    end
-
     context "GET new" do
       it "redirects to signin" do
         get :new
@@ -51,13 +44,6 @@ RSpec.describe RetailersController, :type => :controller do
 
   context "when retail user signed in" do
     before { sign_in retail_user }
-
-    context "GET index" do
-      it "redirects to signin" do
-        get :index
-        expect(response).to redirect_to(new_admin_session_path)
-      end
-    end
 
     context "GET new" do
       it "redirects to signin" do

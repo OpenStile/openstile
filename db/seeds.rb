@@ -6,20 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-["XS", "Small", "Medium", "Large", "XL"].each do |size|
-  TopSize.find_or_create_by(name: size, category: "alpha")
-  BottomSize.find_or_create_by(name: size, category: "alpha")
-  DressSize.find_or_create_by(name: size, category: "alpha")
-end
-
-["00", "0", "2", "4", "6", "8", "10", "12", "14", "16", "18"].each do |size|
-  TopSize.find_or_create_by(name: size, category: "numeric")
-  BottomSize.find_or_create_by(name: size, category: "numeric")
-  DressSize.find_or_create_by(name: size, category: "numeric")
-end
-
-("24".."34").each do |size|
-  BottomSize.find_or_create_by(name: size, category: "inches")
+['00 (XXS)', '0 (XS)', '2 (XS)', '4 (S)', '6 (S)', '8 (M)', '10 (M)',
+ '12 (L)', '14 (L)', '16 (XL)', '18 (XL)', '20 (XXL)'].each do |size|
+  TopSize.find_or_create_by(name: size)
+  DressSize.find_or_create_by(name: size)
+  BottomSize.find_or_create_by(name: size)
 end
 
 ["Bohemian_Chic_Hipster", "Preppy", "Casual_Relaxed", 
