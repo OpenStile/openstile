@@ -7,3 +7,6 @@
 <% unless profile.dress_sizes.empty? %>
     <p>Dress sizes: <%= profile.dress_sizes.map(&:name).join(', ') %></p>
 <% end %>
+<% unless profile.body_builds.empty? %>
+    <p>Build considerations: <%= profile.body_builds.map(&:name).join(', ') %></p>
+<% end %>

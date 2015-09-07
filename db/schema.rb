@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422005652) do
+ActiveRecord::Schema.define(version: 20150907162906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,20 @@ ActiveRecord::Schema.define(version: 20150422005652) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "body_builds", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "body_builds_style_profiles", id: false, force: true do |t|
+    t.integer "body_build_id",    null: false
+    t.integer "style_profile_id", null: false
+  end
+
+  add_index "body_builds_style_profiles", ["body_build_id", "style_profile_id"], name: "index_profiles_for_a_body_build", using: :btree
+  add_index "body_builds_style_profiles", ["style_profile_id", "body_build_id"], name: "index_builds_for_a_profile", using: :btree
 
   create_table "body_shapes", force: true do |t|
     t.string   "name"

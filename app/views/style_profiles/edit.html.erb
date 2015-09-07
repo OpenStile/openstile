@@ -33,6 +33,13 @@
                                  options: DressSize.all.map{|size|
                                    {label: size.name, value: size.id,
                                     checked: @style_profile.dress_size_ids.include?(size.id)} }
+                                },
+                                {prompt: "Which of the following (if any) describes you?",
+                                 class_name: 'build',
+                                 attribute_string: 'style_profile[body_build_ids]',
+                                 options: BodyBuild.all.map{|size|
+                                   {label: size.name, value: size.id,
+                                    checked: @style_profile.dress_size_ids.include?(size.id)} }
                                 }] %>
         </fieldset>
 

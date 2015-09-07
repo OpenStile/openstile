@@ -21,6 +21,17 @@ feature 'Shopper shares style preferences with retailer' do
     then_the_store_owner_should_know "Top sizes: 2 (XS), 4 (S)\nBottom sizes: 8 (M)\nDress sizes: 6 (S), 8 (M)"
   end
 
+  scenario 'and specifies her build' do
+    seed_style_profile_options
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_navigate_to_my_style_profile
+    when_i_set_my_build_as ['Petite', 'Curvy']
+    when_i_save_my_style_profile
+    when_i_schedule_a_dropin_with_retailer
+    then_the_store_owner_should_know "Build considerations: Petite, Curvy\n"
+  end
+
   def when_i_navigate_to_my_style_profile
     visit '/'
     click_link 'Style Profile'
@@ -41,6 +52,12 @@ feature 'Shopper shares style preferences with retailer' do
   def when_i_set_my_dress_sizes_as sizes
     within(:css, '.dress_sizes') do
       sizes.each{|size| check size}
+    end
+  end
+
+  def when_i_set_my_build_as builds
+    within(:css, '.build') do
+      builds.each{|build| check build}
     end
   end
 
@@ -74,5 +91,7 @@ feature 'Shopper shares style preferences with retailer' do
     ['2 (XS)', '4 (S)', '6 (S)'].each{|s| FactoryGirl.create(:top_size, name: s)}
     ['6 (S)', '8 (M)', '10 (M)'].each{|s| FactoryGirl.create(:dress_size, name: s)}
     ['6 (S)', '8 (M)', '10 (M)'].each{|s| FactoryGirl.create(:bottom_size, name: s)}
+
+    ['Petite', 'Curvy', 'Tall'].each{|b| FactoryGirl.create(:body_build, name: b)}
   end
 end

@@ -13,6 +13,10 @@
   BottomSize.find_or_create_by(name: size)
 end
 
+['Petite', 'Tall', 'Curvy', 'Full-figured'].each do |build|
+  BodyBuild.find_or_create_by(name: build)
+end
+
 ["Bohemian_Chic_Hipster", "Preppy", "Casual_Relaxed", 
  "Classic_Vintage", "Edgy_Rocker", "Glamorous_Diva"].each do |look|
   Look.find_or_create_by(name: look)

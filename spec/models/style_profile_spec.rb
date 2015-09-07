@@ -30,6 +30,7 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :bottom_fit }
   it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
+  it { should respond_to :body_builds }
   it { should be_valid }
 
   context "when shopper id is not present" do
