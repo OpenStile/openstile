@@ -68,6 +68,18 @@ feature 'Shopper shares style preferences with retailer' do
     then_the_store_owner_should_know "Values: Made in USA, Ethically-made\n"
   end
 
+  scenario 'and specifies how she likes her clothes to fit' do
+    seed_style_profile_options
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_navigate_to_my_style_profile
+    when_i_select_my_top_fit_preference_as 'Oversized'
+    when_i_select_my_bottom_fit_preference_as 'Tight'
+    when_i_save_my_style_profile
+    when_i_schedule_a_dropin_with_retailer
+    then_the_store_owner_should_know "Tops\nFit: Oversized\nBottoms\nFit: Tight"
+  end
+
   def when_i_navigate_to_my_style_profile
     click_link 'Style Profile'
   end
@@ -119,6 +131,14 @@ feature 'Shopper shares style preferences with retailer' do
     values.each{|value| check value}
   end
 
+  def when_i_select_my_top_fit_preference_as fit
+    select fit, from: 'Top fit'
+  end
+
+  def when_i_select_my_bottom_fit_preference_as fit
+    select fit, from: 'Bottom fit'
+  end
+
   def when_i_save_my_style_profile
     click_button 'Save and continue'
     expect(page).to have_text('My Drop-Ins')
@@ -157,5 +177,8 @@ feature 'Shopper shares style preferences with retailer' do
 
     ['Made in USA', 'Ethically-made', 'Eco-friendly'].each{|sc|
       FactoryGirl.create(:special_consideration, name: sc) }
+
+    ['Loose', 'Oversized'].each{|f| FactoryGirl.create(:top_fit, name: f)}
+    ['Tight', 'Flowing'].each{|f| FactoryGirl.create(:bottom_fit, name: f)}
   end
 end

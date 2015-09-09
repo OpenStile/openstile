@@ -95,6 +95,21 @@
         </fieldset>
 
         <fieldset>
+          <%= render 'dropdowns_fieldset', title: 'Your fit',
+                     instructions: 'How do you (generally) like your tops and bottoms to fit?',
+                     sections: [{prompt: "Top fit",
+                                 attribute_string: 'style_profile[top_fit_id]',
+                                 options: TopFit.all.map{|fit| {label: fit.name, value: fit.id}},
+                                 selected: @style_profile.top_fit_id
+                                },
+                                {prompt: "Bottom fit",
+                                 attribute_string: 'style_profile[bottom_fit_id]',
+                                 options: BottomFit.all.map{|fit| {label: fit.name, value: fit.id}},
+                                 selected: @style_profile.bottom_fit_id
+                                }] %>
+        </fieldset>
+
+        <fieldset>
           <%= render 'radio_images_fieldset', title: 'Sample select one image',
                      prompt: 'Which of these pictures describes you best?',
                      attribute_string: 'style_profile[me_image_id]',

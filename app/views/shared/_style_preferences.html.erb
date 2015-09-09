@@ -6,6 +6,9 @@
   <% unless profile.top_budget.blank? %>
       <li>Budget: <%= profile.top_budget %></li>
   <% end %>
+  <% unless profile.top_fit.blank? %>
+      <li>Fit: <%= profile.top_fit.name %></li>
+  <% end %>
 </ul>
 <h3>Bottoms</h3>
 <ul>
@@ -14,6 +17,9 @@
   <% end %>
   <% unless profile.bottom_budget.blank? %>
       <li>Budget: <%= profile.bottom_budget %></li>
+  <% end %>
+  <% unless profile.bottom_fit.blank? %>
+      <li>Fit: <%= profile.bottom_fit.name %></li>
   <% end %>
 </ul>
 <h3>Dresses</h3>
