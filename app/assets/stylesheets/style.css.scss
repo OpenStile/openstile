@@ -218,15 +218,18 @@ footer .footer-section h5 {
 
 .style-form fieldset .img-tiles .img-selector {
   padding: 10px;
-  margin: 5px;
 }
 
 .style-form fieldset .img-tiles .img-selector:hover {
-  border: 5px solid #428bca;
+  -webkit-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
+  -moz-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
+  box-shadow:inset 0px 0px 0px 10px #e5e5e5;
 }
 
 .style-form fieldset .img-tiles .img-selector.checked {
-  border: 5px solid #428bca;
+  -webkit-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
+  -moz-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
+  box-shadow:inset 0px 0px 0px 10px #e5e5e5;
 }
 
 .style-form fieldset .radio-images img.img-label {

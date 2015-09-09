@@ -17,9 +17,9 @@ end
   BodyBuild.find_or_create_by(name: build)
 end
 
-["Bohemian_Chic_Hipster", "Preppy", "Casual_Relaxed", 
- "Classic_Vintage", "Edgy_Rocker", "Glamorous_Diva"].each do |look|
-  Look.find_or_create_by(name: look)
+['boho1', 'boho2', 'casual1', 'classic1', 'classic2',
+ 'diva2', 'preppy1', 'rocker1', 'rocker2'].each do |look|
+  Look.find_or_create_by(name: look, image_path: "looks/#{look}.jpg")
 end
 
 ["Arms", "Back", "Cleavage", "Legs", "Midsection"].each do |part|

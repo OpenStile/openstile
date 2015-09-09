@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909005112) do
+ActiveRecord::Schema.define(version: 20150909022234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -310,22 +310,20 @@ ActiveRecord::Schema.define(version: 20150909005112) do
     t.string   "neighborhood"
   end
 
-  create_table "look_tolerances", force: true do |t|
-    t.integer  "style_profile_id"
-    t.integer  "look_id"
-    t.integer  "tolerance"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "look_tolerances", ["look_id"], name: "index_look_tolerances_on_look_id", using: :btree
-  add_index "look_tolerances", ["style_profile_id"], name: "index_look_tolerances_on_style_profile_id", using: :btree
-
   create_table "looks", force: true do |t|
     t.string   "name"
+    t.string   "image_path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "looks_style_profiles", id: false, force: true do |t|
+    t.integer "look_id",          null: false
+    t.integer "style_profile_id", null: false
+  end
+
+  add_index "looks_style_profiles", ["look_id", "style_profile_id"], name: "index_looks_style_profiles_on_look_id_and_style_profile_id", using: :btree
+  add_index "looks_style_profiles", ["style_profile_id", "look_id"], name: "index_looks_style_profiles_on_style_profile_id_and_look_id", using: :btree
 
   create_table "online_presences", force: true do |t|
     t.integer  "retailer_id"

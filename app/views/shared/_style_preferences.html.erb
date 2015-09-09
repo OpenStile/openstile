@@ -28,3 +28,9 @@
 <% unless profile.body_builds.empty? %>
     <p>Build considerations: <%= profile.body_builds.map(&:name).join(', ') %></p>
 <% end %>
+<% unless profile.looks.empty? %>
+    <h3>Loved looks: </h3>
+    <% profile.looks.each do |look|%>
+        <%= image_tag(look.image_path, alt: look.name, class: 'img-responsive') %>
+    <% end %>
+<% end %>

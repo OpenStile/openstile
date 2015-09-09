@@ -73,15 +73,14 @@
         </fieldset>
 
         <fieldset>
-          <%= render 'image_tiles_fieldset', title: 'Sample image tile selector',
-                     prompt: 'Which of these pictures do you love?',
-                     attribute_string: 'style_profile[loved_image_ids]',
+          <%= render 'image_tiles_fieldset', title: 'Looks you like',
+                     prompt: 'Which of the following looks (if any) do you like? Click the image to select it.',
+                     attribute_string: 'style_profile[look_ids]',
                      column_width: 4,
-                     options: [
-                             {label: 'These nuts!', value: '1', image: 'looks/bohemian_chic_hipster.jpg', checked: false},
-                             {value: '2', image: 'looks/casual_relaxed.jpg', checked: false},
-                             {value: '3', image: 'looks/classic_vintage.jpg', checked: true},
-                             {value: '4', image: 'looks/edgy_rocker.jpg', checked: false} ] %>
+                     options: Look.all.shuffle.map{|look| {value: look.id,
+                                                           image: look.image_path,
+                                                           alt: look.name,
+                                                           checked: @style_profile.look_ids.include?(look.id)} } %>
         </fieldset>
 
         <fieldset>
