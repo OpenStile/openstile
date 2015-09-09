@@ -4,13 +4,12 @@ module RecommendationsHelper
   
   def process_recommendations shopper
     retailer_size_matches, item_size_matches, outfit_size_matches = matches_for_size shopper.style_profile
-    item_coverage_matches, outfit_coverage_matches = matches_for_coverage shopper.style_profile
     item_color_matches, outfit_color_matches = matches_for_color shopper.style_profile
     item_print_matches, outfit_print_matches = matches_for_print shopper.style_profile
 
     retailer_matches = (retailer_size_matches)
-    item_matches = (item_size_matches & item_coverage_matches & item_color_matches & item_print_matches)
-    outfit_matches = (outfit_size_matches & outfit_coverage_matches & outfit_color_matches & outfit_print_matches)
+    item_matches = (item_size_matches & item_color_matches & item_print_matches)
+    outfit_matches = (outfit_size_matches & outfit_color_matches & outfit_print_matches)
 
     ranked_retailers = process_rankings(shopper.style_profile, retailer_matches.keep_if{|r| r.live?}) +
                        (Retailer.all_live - retailer_matches).map{|r| {priority: -1, justification: [], object: r}}
@@ -39,7 +38,6 @@ module RecommendationsHelper
       recommendation = evaluate_top_fit recommendation, style_profile
       recommendation = evaluate_bottom_fit recommendation, style_profile
       recommendation = evaluate_special_considerations recommendation, style_profile
-      recommendation = evaluate_parts_to_show_off recommendation, style_profile
       recommendation = evaluate_favorite_prints recommendation, style_profile
 
       results << recommendation
@@ -62,23 +60,6 @@ module RecommendationsHelper
     
     return retailers if retailer_only
     [retailers, (tops + bottoms + dresses), outfits]
-  end
-
-  def matches_for_coverage style_profile
-    tops = Top.where.not(id: Top.joins(:exposed_parts)
-                                 .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
-                                 .pluck(:id))
-    bottoms = Bottom.where.not(id: Bottom.joins(:exposed_parts)
-                                         .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
-                                         .pluck(:id))
-    dresses = Dress.where.not(id: Dress.joins(:exposed_parts)
-                                       .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
-                                       .pluck(:id))
-    outfits = Outfit.where.not(id: Outfit.joins(:exposed_parts)
-                                       .where(exposed_parts: { part_id: PartExposureTolerance.parts_to_cover_for(style_profile.id).pluck(:part_id)})
-                                       .pluck(:id))
-
-    [(tops + bottoms + dresses), outfits]
   end
 
   def matches_for_color style_profile
@@ -146,19 +127,6 @@ module RecommendationsHelper
   
     overlap.each do |id|
       recommendation[:justification] << SpecialConsideration.find(id).name
-    end
-    recommendation
-  end
-
-  def evaluate_parts_to_show_off recommendation, style_profile
-    return recommendation if recommendation[:object].is_a? Retailer
-
-    parts_to_flaunt_ids = PartExposureTolerance.parts_to_flaunt_for(style_profile).pluck(:part_id)
-    parts_exposed_ids = recommendation[:object].exposed_parts.pluck(:part_id)
-
-    unless (parts_to_flaunt_ids & parts_exposed_ids).empty?
-      recommendation[:priority] = recommendation[:priority] + 1
-      recommendation[:justification] << "your Preferred Fit"
     end
     recommendation
   end

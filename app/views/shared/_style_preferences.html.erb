@@ -43,3 +43,9 @@
 <% unless profile.special_considerations.empty? %>
     <h3>Values: <%= profile.special_considerations.map(&:name).join(', ') %></h3>
 <% end %>
+<% unless profile.flaunted_parts.empty? %>
+    <h3>Parts to flaunt: <%= profile.flaunted_parts.map(&:name).join(', ') %></h3>
+<% end %>
+<% unless profile.downplayed_parts.empty? %>
+    <h3>Parts to downplay: <%= profile.downplayed_parts.map(&:name).join(', ') %></h3>
+<% end %>

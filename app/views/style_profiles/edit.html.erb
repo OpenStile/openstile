@@ -110,6 +110,24 @@
         </fieldset>
 
         <fieldset>
+          <%= render 'check_all_fieldset', title: 'Your coverage',
+                     sections: [{prompt: "What parts (if any) do you like to flaunt?",
+                                 class_name: 'flaunt',
+                                 attribute_string: 'style_profile[flaunted_part_ids]',
+                                 options: Part.all.map{|part|
+                                   {label: part.name, value: part.id,
+                                    checked: @style_profile.flaunted_part_ids.include?(part.id)} }
+                                },
+                                {prompt: "What parts (if any) do you prefer to downplay?",
+                                 class_name: 'cover',
+                                 attribute_string: 'style_profile[downplayed_part_ids]',
+                                 options: Part.all.map{|part|
+                                   {label: part.name, value: part.id,
+                                    checked: @style_profile.downplayed_part_ids.include?(part.id)} }
+                                }] %>
+        </fieldset>
+
+        <fieldset>
           <%= render 'radio_images_fieldset', title: 'Sample select one image',
                      prompt: 'Which of these pictures describes you best?',
                      attribute_string: 'style_profile[me_image_id]',

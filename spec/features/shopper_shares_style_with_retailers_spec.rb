@@ -80,6 +80,18 @@ feature 'Shopper shares style preferences with retailer' do
     then_the_store_owner_should_know "Tops\nFit: Oversized\nBottoms\nFit: Tight"
   end
 
+  scenario 'and specifies her coverage preferences' do
+    seed_style_profile_options
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_navigate_to_my_style_profile
+    when_i_choose_to_flaunt ['Arms', 'Legs']
+    when_i_choose_to_downplay ['Midsection']
+    when_i_save_my_style_profile
+    when_i_schedule_a_dropin_with_retailer
+    then_the_store_owner_should_know "Parts to flaunt: Arms, Legs\nParts to downplay: Midsection"
+  end
+
   def when_i_navigate_to_my_style_profile
     click_link 'Style Profile'
   end
@@ -139,6 +151,18 @@ feature 'Shopper shares style preferences with retailer' do
     select fit, from: 'Bottom fit'
   end
 
+  def when_i_choose_to_flaunt parts
+    within(:css, '.flaunt') do
+      parts.each{|part| check part}
+    end
+  end
+
+  def when_i_choose_to_downplay parts
+    within(:css, '.cover') do
+      parts.each{|part| check part}
+    end
+  end
+
   def when_i_save_my_style_profile
     click_button 'Save and continue'
     expect(page).to have_text('My Drop-Ins')
@@ -180,5 +204,7 @@ feature 'Shopper shares style preferences with retailer' do
 
     ['Loose', 'Oversized'].each{|f| FactoryGirl.create(:top_fit, name: f)}
     ['Tight', 'Flowing'].each{|f| FactoryGirl.create(:bottom_fit, name: f)}
+
+    ['Arms', 'Legs', 'Midsection', 'Cleavage'].each{|p| FactoryGirl.create(:part, name: p)}
   end
 end

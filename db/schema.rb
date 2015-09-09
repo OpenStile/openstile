@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909022234) do
+ActiveRecord::Schema.define(version: 20150909193738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -385,22 +385,27 @@ ActiveRecord::Schema.define(version: 20150909022234) do
   add_index "outfits_top_sizes", ["outfit_id", "top_size_id"], name: "index_outfits_top_sizes_on_outfit_id_and_top_size_id", using: :btree
   add_index "outfits_top_sizes", ["top_size_id", "outfit_id"], name: "index_outfits_top_sizes_on_top_size_id_and_outfit_id", using: :btree
 
-  create_table "part_exposure_tolerances", force: true do |t|
-    t.integer  "part_id"
-    t.integer  "style_profile_id"
-    t.integer  "tolerance"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "part_exposure_tolerances", ["part_id"], name: "index_part_exposure_tolerances_on_part_id", using: :btree
-  add_index "part_exposure_tolerances", ["style_profile_id"], name: "index_part_exposure_tolerances_on_style_profile_id", using: :btree
-
   create_table "parts", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "parts_to_covers", force: true do |t|
+    t.integer "part_id"
+    t.integer "style_profile_id"
+  end
+
+  add_index "parts_to_covers", ["part_id"], name: "index_parts_to_covers_on_part_id", using: :btree
+  add_index "parts_to_covers", ["style_profile_id"], name: "index_parts_to_covers_on_style_profile_id", using: :btree
+
+  create_table "parts_to_flaunts", force: true do |t|
+    t.integer "part_id"
+    t.integer "style_profile_id"
+  end
+
+  add_index "parts_to_flaunts", ["part_id"], name: "index_parts_to_flaunts_on_part_id", using: :btree
+  add_index "parts_to_flaunts", ["style_profile_id"], name: "index_parts_to_flaunts_on_style_profile_id", using: :btree
 
   create_table "price_ranges", force: true do |t|
     t.integer  "retailer_id"

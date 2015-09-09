@@ -28,9 +28,8 @@ class StyleProfilesController < ApplicationController
       params.require(:style_profile).permit(:body_shape_id, :top_fit_id, :bottom_fit_id,
                                             :top_budget, :bottom_budget, :dress_budget, look_ids: [],
                                             top_size_ids: [], bottom_size_ids: [], dress_size_ids: [], body_build_ids: [],
-                                            budget_attributes: [:top_range_string, :bottom_range_string, :dress_range_string],
+                                            flaunted_part_ids: [], downplayed_part_ids: [],
                                             print_tolerances_attributes: [:id, :print_id, :tolerance],
-                                            part_exposure_tolerances_attributes: [:id, :part_id, :tolerance],
                                             avoided_color_ids: [], special_consideration_ids: [])
     end
 end
