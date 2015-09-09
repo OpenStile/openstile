@@ -13,7 +13,7 @@
   BottomSize.find_or_create_by(name: size)
 end
 
-['Petite', 'Tall', 'Curvy', 'Full-figured'].each do |build|
+['Petite', 'Tall', 'Curvy', 'Full-figured', 'Slender', 'Athletic'].each do |build|
   BodyBuild.find_or_create_by(name: build)
 end
 

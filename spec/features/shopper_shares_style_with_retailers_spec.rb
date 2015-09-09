@@ -18,7 +18,7 @@ feature 'Shopper shares style preferences with retailer' do
     when_i_set_my_dress_sizes_as ['6 (S)', '8 (M)']
     when_i_save_my_style_profile
     when_i_schedule_a_dropin_with_retailer
-    then_the_store_owner_should_know "Top sizes: 2 (XS), 4 (S)\nBottom sizes: 8 (M)\nDress sizes: 6 (S), 8 (M)"
+    then_the_store_owner_should_know "Tops\nSizes: 2 (XS), 4 (S)\nBottoms\n Sizes: 8 (M)\nDresses\nSizes: 6 (S), 8 (M)"
   end
 
   scenario 'and specifies her build' do
@@ -32,8 +32,20 @@ feature 'Shopper shares style preferences with retailer' do
     then_the_store_owner_should_know "Build considerations: Petite, Curvy\n"
   end
 
+  scenario 'and specifies her budget' do
+    seed_style_profile_options
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_navigate_to_my_style_profile
+    when_i_set_my_top_budget_as 'max $50'
+    when_i_set_my_bottom_budget_as 'max $150'
+    when_i_set_my_dress_budget_as '$200 +'
+    when_i_save_my_style_profile
+    when_i_schedule_a_dropin_with_retailer
+    then_the_store_owner_should_know "Tops\nBudget: max $50\nBottoms\nBudget: max $150\nDresses\nBudget: $200 +"
+  end
+
   def when_i_navigate_to_my_style_profile
-    visit '/'
     click_link 'Style Profile'
   end
 
@@ -59,6 +71,18 @@ feature 'Shopper shares style preferences with retailer' do
     within(:css, '.build') do
       builds.each{|build| check build}
     end
+  end
+
+  def when_i_set_my_top_budget_as amount
+    select amount, from: 'A shirt, blouse, or sweater'
+  end
+
+  def when_i_set_my_bottom_budget_as amount
+    select amount, from: 'A pair of pants, jeans, or a skirt'
+  end
+
+  def when_i_set_my_dress_budget_as amount
+    select amount, from: 'An everyday, work, or transitional dress'
   end
 
   def when_i_save_my_style_profile

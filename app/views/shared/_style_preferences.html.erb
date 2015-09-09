@@ -1,12 +1,30 @@
-<% unless profile.top_sizes.empty? %>
-    <p>Top sizes: <%= profile.top_sizes.map(&:name).join(', ') %></p>
-<% end %>
-<% unless profile.bottom_sizes.empty? %>
-    <p>Bottom sizes: <%= profile.bottom_sizes.map(&:name).join(', ') %></p>
-<% end %>
-<% unless profile.dress_sizes.empty? %>
-    <p>Dress sizes: <%= profile.dress_sizes.map(&:name).join(', ') %></p>
-<% end %>
+<h3>Tops</h3>
+<ul>
+  <% unless profile.top_sizes.empty? %>
+      <li>Sizes: <%= profile.top_sizes.map(&:name).join(', ') %></li>
+  <% end %>
+  <% unless profile.top_budget.blank? %>
+      <li>Budget: <%= profile.top_budget %></li>
+  <% end %>
+</ul>
+<h3>Bottoms</h3>
+<ul>
+  <% unless profile.bottom_sizes.empty? %>
+      <li>Sizes: <%= profile.bottom_sizes.map(&:name).join(', ') %></li>
+  <% end %>
+  <% unless profile.bottom_budget.blank? %>
+      <li>Budget: <%= profile.bottom_budget %></li>
+  <% end %>
+</ul>
+<h3>Dresses</h3>
+<ul>
+  <% unless profile.dress_sizes.empty? %>
+      <li>Sizes: <%= profile.dress_sizes.map(&:name).join(', ') %></li>
+  <% end %>
+  <% unless profile.dress_budget.blank? %>
+      <li>Budget: <%= profile.dress_budget %></li>
+  <% end %>
+</ul>
 <% unless profile.body_builds.empty? %>
     <p>Build considerations: <%= profile.body_builds.map(&:name).join(', ') %></p>
 <% end %>

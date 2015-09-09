@@ -11,7 +11,7 @@
             <select id="<%= idify(section[:attribute_string])%>"
                     name="<%= section[:attribute_string]%>"
                     class="form-control">
-              <option disabled selected> -- select an option -- </option>
+              <option value='' disabled selected> -- select an option -- </option>
               <% section[:options].each do |option| %>
                   <option value="<%= option[:value]%>" <%= 'selected' if section[:selected] == option[:value]%>>
                     <%= option[:label]%>

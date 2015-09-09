@@ -4,16 +4,15 @@ module RecommendationsHelper
   
   def process_recommendations shopper
     retailer_size_matches, item_size_matches, outfit_size_matches = matches_for_size shopper.style_profile
-    retailer_budget_matches, item_budget_matches, outfit_budget_matches = matches_for_budget shopper.style_profile
     retailer_look_matches, item_look_matches, outfit_look_matches = matches_for_look shopper.style_profile
     item_coverage_matches, outfit_coverage_matches = matches_for_coverage shopper.style_profile
     item_color_matches, outfit_color_matches = matches_for_color shopper.style_profile
     item_print_matches, outfit_print_matches = matches_for_print shopper.style_profile
 
-    retailer_matches = (retailer_size_matches & retailer_budget_matches & retailer_look_matches) 
-    item_matches = (item_size_matches & item_budget_matches & item_look_matches & 
+    retailer_matches = (retailer_size_matches & retailer_look_matches)
+    item_matches = (item_size_matches & item_look_matches &
                             item_coverage_matches & item_color_matches & item_print_matches) 
-    outfit_matches = (outfit_size_matches & outfit_budget_matches & outfit_look_matches &
+    outfit_matches = (outfit_size_matches & outfit_look_matches &
                             outfit_coverage_matches & outfit_color_matches & outfit_print_matches)
 
     ranked_retailers = process_rankings(shopper.style_profile, retailer_matches.keep_if{|r| r.live?}) +
@@ -28,7 +27,6 @@ module RecommendationsHelper
   def retailer_recommendation_for shopper
     prefs = shopper.style_profile
     retailer_matches = (matches_for_size(prefs, true) &
-                        matches_for_budget(prefs, true) &
                         matches_for_look(prefs, true))
     retailer_matches.keep_if{|r| r.live?}.sample
   end
@@ -67,23 +65,6 @@ module RecommendationsHelper
     bottoms = bottom_sizes.map(&:bottoms).flatten.uniq
     dresses = dress_sizes.map(&:dresses).flatten.uniq
     
-    return retailers if retailer_only
-    [retailers, (tops + bottoms + dresses), outfits]
-  end
-
-  def matches_for_budget style_profile, retailer_only=false
-    retailer_match_top_budget = PriceRange.overlap_with_top_budget(style_profile.budget).map(&:retailer).uniq
-    retailer_match_bottom_budget = PriceRange.overlap_with_bottom_budget(style_profile.budget).map(&:retailer).uniq
-    retailer_match_dress_budget = PriceRange.overlap_with_dress_budget(style_profile.budget).map(&:retailer).uniq
-
-    retailers = retailer_match_top_budget | retailer_match_bottom_budget | retailer_match_dress_budget
-
-    tops = Top.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
-    bottoms = Bottom.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
-    dresses = Dress.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
-    
-    outfits = Outfit.within_budget(style_profile.budget, ITEM_PRICE_RANGE_FUZZ)
-
     return retailers if retailer_only
     [retailers, (tops + bottoms + dresses), outfits]
   end

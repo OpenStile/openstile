@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907162906) do
+ActiveRecord::Schema.define(version: 20150909005112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,20 +133,6 @@ ActiveRecord::Schema.define(version: 20150907162906) do
 
   add_index "bottoms_special_considerations", ["bottom_id", "special_consideration_id"], name: "special_considerations_for_a_bottom_index", using: :btree
   add_index "bottoms_special_considerations", ["special_consideration_id", "bottom_id"], name: "bottoms_for_a_special_consideration_index", using: :btree
-
-  create_table "budgets", force: true do |t|
-    t.integer  "style_profile_id"
-    t.decimal  "top_min_price"
-    t.decimal  "top_max_price"
-    t.decimal  "bottom_min_price"
-    t.decimal  "bottom_max_price"
-    t.decimal  "dress_min_price"
-    t.decimal  "dress_max_price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "budgets", ["style_profile_id"], name: "index_budgets_on_style_profile_id", using: :btree
 
   create_table "colors", force: true do |t|
     t.string   "name"
@@ -560,6 +546,9 @@ ActiveRecord::Schema.define(version: 20150907162906) do
     t.integer  "body_shape_id"
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
+    t.string   "top_budget"
+    t.string   "bottom_budget"
+    t.string   "dress_budget"
   end
 
   add_index "style_profiles", ["body_shape_id"], name: "index_style_profiles_on_body_shape_id", using: :btree

@@ -33,36 +33,42 @@
                                  options: DressSize.all.map{|size|
                                    {label: size.name, value: size.id,
                                     checked: @style_profile.dress_size_ids.include?(size.id)} }
-                                },
-                                {prompt: "Which of the following (if any) describes you?",
-                                 class_name: 'build',
-                                 attribute_string: 'style_profile[body_build_ids]',
-                                 options: BodyBuild.all.map{|size|
-                                   {label: size.name, value: size.id,
-                                    checked: @style_profile.dress_size_ids.include?(size.id)} }
                                 }] %>
         </fieldset>
 
         <fieldset>
-          <%= render 'dropdowns_fieldset', title: 'Sample dropdown selects',
-                     instructions: 'Answer truthfully for each of the following',
-                     sections: [{prompt: "What's your favorite Disney movie?",
-                                 attribute_string: 'style_profile[fav_movie]',
-                                 options: [
-                                         {label: 'Little Mermaid', value: '1'},
-                                         {label: 'Aladdin', value: '2'},
-                                         {label: 'Lion King', value: '3'},
-                                         {label: 'Cinderella', value: '4'} ],
-                                 selected: '3'
+          <%= render 'check_all_fieldset', title: 'Your build',
+                     sections: [{prompt: "Which of the following (if any) describes you?",
+                                 class_name: 'build',
+                                 attribute_string: 'style_profile[body_build_ids]',
+                                 options: BodyBuild.all.map{|build|
+                                   {label: build.name, value: build.id,
+                                    checked: @style_profile.body_build_ids.include?(build.id)} }
+                                }] %>
+        </fieldset>
+
+        <fieldset>
+          <% budget_options = [{label: 'max $50', value: 'max $50'},
+                               {label: 'max $100', value: 'max $100'},
+                               {label: 'max $150', value: 'max $150'},
+                               {label: 'max $200', value: 'max $200'},
+                               {label: '$200 +', value: '$200 +'}]%>
+          <%= render 'dropdowns_fieldset', title: 'Your budget',
+                     instructions: 'How much would you spend on the following?',
+                     sections: [{prompt: "An everyday, work, or transitional dress",
+                                 attribute_string: 'style_profile[dress_budget]',
+                                 options: budget_options,
+                                 selected: @style_profile.dress_budget
                                 },
-                                {prompt: "What's your favorite Disney song?",
-                                 attribute_string: 'style_profile[fav_song]',
-                                 options: [
-                                         {label: 'Man out of you', value: '1'},
-                                         {label: 'Part of your world', value: '2'},
-                                         {label: 'Under the sea', value: '3'},
-                                         {label: 'Beauty and the Beast', value: '4'} ],
-                                 selected: nil
+                                {prompt: "A shirt, blouse, or sweater",
+                                 attribute_string: 'style_profile[top_budget]',
+                                 options: budget_options,
+                                 selected: @style_profile.top_budget
+                                },
+                                {prompt: "A pair of pants, jeans, or a skirt",
+                                 attribute_string: 'style_profile[bottom_budget]',
+                                 options: budget_options,
+                                 selected: @style_profile.bottom_budget
                                 }] %>
         </fieldset>
 
