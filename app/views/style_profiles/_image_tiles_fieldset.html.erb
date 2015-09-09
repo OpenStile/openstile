@@ -5,7 +5,7 @@
       <div class="col-xs-12">
         <h5><%= prompt %></h5>
         <% options.each do |option| %>
-            <div class="col-xs-12 col-sm-offset-1 col-sm-<%= column_width %> text-center img-selector <%= 'checked' if option[:checked]%>"
+            <div class="col-xs-offset-1 col-xs-<%= column_width %> text-center img-selector <%= 'checked' if option[:checked]%>"
                  data-id="<%= idify(attribute_string, option[:value])%>">
               <%= image_tag(option[:image],
                             class: "img-responsive center-block",

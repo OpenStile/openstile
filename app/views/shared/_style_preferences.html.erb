@@ -34,6 +34,12 @@
 <% unless profile.body_builds.empty? %>
     <h3>Build considerations: <%= profile.body_builds.map(&:name).join(', ') %></h3>
 <% end %>
+<% unless profile.body_shape.nil? %>
+    <h3>Body shape: <%= profile.body_shape.name%></h3>
+    <%= image_tag("body_shapes/#{profile.body_shape.name.downcase.gsub(' ','-')}",
+        alt: profile.body_shape.name, class: 'img-responsive')%>
+    <p><%= profile.body_shape.description %></p>
+<% end %>
 <% unless profile.looks.empty? %>
     <h3>Loved looks: </h3>
     <% profile.looks.each do |look|%>

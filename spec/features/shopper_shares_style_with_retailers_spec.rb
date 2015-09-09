@@ -32,6 +32,18 @@ feature 'Shopper shares style preferences with retailer' do
     then_the_store_owner_should_know "Build considerations: Petite, Curvy\n"
   end
 
+  scenario 'and specifies her body shape' do
+    seed_style_profile_options
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_navigate_to_my_style_profile
+    when_i_set_my_body_shape_as 'Hourglass'
+    when_i_save_my_style_profile
+    when_i_schedule_a_dropin_with_retailer
+    then_the_store_owner_should_know "Body shape: Hourglass"
+    expect(page).to have_xpath("//img[@alt='Hourglass']")
+  end
+
   scenario 'and specifies her budget' do
     seed_style_profile_options
 
@@ -120,6 +132,10 @@ feature 'Shopper shares style preferences with retailer' do
     end
   end
 
+  def when_i_set_my_body_shape_as shape
+    choose shape
+  end
+
   def when_i_set_my_top_budget_as amount
     select amount, from: 'A shirt, blouse, or sweater'
   end
@@ -206,5 +222,7 @@ feature 'Shopper shares style preferences with retailer' do
     ['Tight', 'Flowing'].each{|f| FactoryGirl.create(:bottom_fit, name: f)}
 
     ['Arms', 'Legs', 'Midsection', 'Cleavage'].each{|p| FactoryGirl.create(:part, name: p)}
+
+    ['Hourglass', 'Apple', 'Straight'].each{|s| FactoryGirl.create(:body_shape, name: s)}
   end
 end

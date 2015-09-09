@@ -48,6 +48,17 @@
         </fieldset>
 
         <fieldset>
+          <%= render 'radio_images_fieldset', title: 'Your shape',
+                     prompt: 'Which of these body shapes best describes you?',
+                     attribute_string: 'style_profile[body_shape_id]',
+                     selected: @style_profile.body_shape_id,
+                     options: BodyShape.all.map{|shape| {value: shape.id,
+                                                         label: shape.name,
+                                                         image: "body_shapes/#{shape.name.downcase.gsub(' ','-')}.jpg",
+                                                         description: shape.description} } %>
+        </fieldset>
+
+        <fieldset>
           <% budget_options = [{label: 'max $50', value: 'max $50'},
                                {label: 'max $100', value: 'max $100'},
                                {label: 'max $150', value: 'max $150'},
@@ -126,26 +137,6 @@
                                     checked: @style_profile.downplayed_part_ids.include?(part.id)} }
                                 }] %>
         </fieldset>
-
-        <fieldset>
-          <%= render 'radio_images_fieldset', title: 'Sample select one image',
-                     prompt: 'Which of these pictures describes you best?',
-                     attribute_string: 'style_profile[me_image_id]',
-                     selected: '2',
-                     options: [
-                             {value: '1', image: 'body_shapes/apple.jpg',
-                             description: 'This is an apple shape'},
-                             {value: '2', image: 'body_shapes/hourglass.jpg',
-                             description: 'This is an hourglass shape'},
-                             {value: '3', image: 'body_shapes/pear.jpg',
-                             description: 'This is a pear shape'},
-                             {value: '4', image: 'body_shapes/straight.jpg',
-                             description: 'This a straight shape'},
-                             {value: '5', image: 'body_shapes/inverted-triangle.jpg',
-                              description: 'This a straight shape'} ] %>
-        </fieldset>
-
-
 
         <br/>
         <%= f.submit 'Save and continue', class: 'btn btn-lg btn-primary center-block' %>
