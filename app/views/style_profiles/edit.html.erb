@@ -84,6 +84,17 @@
         </fieldset>
 
         <fieldset>
+          <%= render 'check_all_fieldset', title: 'Your special considerations',
+                     sections: [{prompt: "Which of the following (if any) are important to you?",
+                                 class_name: 'values',
+                                 attribute_string: 'style_profile[special_consideration_ids]',
+                                 options: SpecialConsideration.all.map{|value|
+                                   {label: value.name, value: value.id,
+                                    checked: @style_profile.special_consideration_ids.include?(value.id)} }
+                                }] %>
+        </fieldset>
+
+        <fieldset>
           <%= render 'radio_images_fieldset', title: 'Sample select one image',
                      prompt: 'Which of these pictures describes you best?',
                      attribute_string: 'style_profile[me_image_id]',
@@ -100,6 +111,8 @@
                              {value: '5', image: 'body_shapes/inverted-triangle.jpg',
                               description: 'This a straight shape'} ] %>
         </fieldset>
+
+
 
         <br/>
         <%= f.submit 'Save and continue', class: 'btn btn-lg btn-primary center-block' %>

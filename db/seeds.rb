@@ -50,7 +50,7 @@ end
   BodyShape.find_or_create_by(name: body_shape[:name], description: body_shape[:description])
 end
 
-['Eco-friendly', 'Local designers', 'Ethically-made', 'Second-wear'].each do |consideration|
+['Eco-friendly', 'Local designers', 'Ethically-made', 'Second-wear', 'Made in the USA'].each do |consideration|
   SpecialConsideration.find_or_create_by(name: consideration)
 end
 

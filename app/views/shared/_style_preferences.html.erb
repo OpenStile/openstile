@@ -26,11 +26,14 @@
   <% end %>
 </ul>
 <% unless profile.body_builds.empty? %>
-    <p>Build considerations: <%= profile.body_builds.map(&:name).join(', ') %></p>
+    <h3>Build considerations: <%= profile.body_builds.map(&:name).join(', ') %></h3>
 <% end %>
 <% unless profile.looks.empty? %>
     <h3>Loved looks: </h3>
     <% profile.looks.each do |look|%>
         <%= image_tag(look.image_path, alt: look.name, class: 'img-responsive') %>
     <% end %>
+<% end %>
+<% unless profile.special_considerations.empty? %>
+    <h3>Values: <%= profile.special_considerations.map(&:name).join(', ') %></h3>
 <% end %>
