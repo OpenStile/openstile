@@ -76,7 +76,7 @@
           <%= render 'image_tiles_fieldset', title: 'Looks you like',
                      prompt: 'Which of the following looks (if any) do you like? Click the image to select it.',
                      attribute_string: 'style_profile[look_ids]',
-                     column_width: 4,
+                     column_width: 3,
                      options: Look.all.shuffle.map{|look| {value: look.id,
                                                            image: look.image_path,
                                                            alt: look.name,
