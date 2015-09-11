@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909193738) do
+ActiveRecord::Schema.define(version: 20150911212027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,14 @@ ActiveRecord::Schema.define(version: 20150909193738) do
 
   add_index "colors_outfits", ["color_id", "outfit_id"], name: "index_colors_outfits_on_color_id_and_outfit_id", using: :btree
   add_index "colors_outfits", ["outfit_id", "color_id"], name: "index_colors_outfits_on_outfit_id_and_color_id", using: :btree
+
+  create_table "colors_to_avoids", force: true do |t|
+    t.integer "color_id"
+    t.integer "style_profile_id"
+  end
+
+  add_index "colors_to_avoids", ["color_id"], name: "index_colors_to_avoids_on_color_id", using: :btree
+  add_index "colors_to_avoids", ["style_profile_id"], name: "index_colors_to_avoids_on_style_profile_id", using: :btree
 
   create_table "dress_sizes", force: true do |t|
     t.string   "name"
@@ -291,16 +299,6 @@ ActiveRecord::Schema.define(version: 20150909193738) do
   add_index "favorites", ["favoriteable_id", "favoriteable_type"], name: "index_favorites_on_favoriteable_id_and_favoriteable_type", using: :btree
   add_index "favorites", ["shopper_id", "favoriteable_id", "favoriteable_type"], name: "index_unique_shopper_favorites", unique: true, using: :btree
   add_index "favorites", ["shopper_id"], name: "index_favorites_on_shopper_id", using: :btree
-
-  create_table "hated_colors", force: true do |t|
-    t.integer  "style_profile_id"
-    t.integer  "color_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
-  add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
 
   create_table "locations", force: true do |t|
     t.string   "address"

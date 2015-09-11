@@ -138,6 +138,18 @@
                                 }] %>
         </fieldset>
 
+        <fieldset>
+          <%= render 'image_tiles_fieldset', title: 'Colors you avoided',
+                     prompt: 'Which of the following color palettes (if any) do you avoid? Click the image to select it.',
+                     attribute_string: 'style_profile[avoided_color_ids]',
+                     column_width: 2,
+                     options: Color.all.map{|color| {value: color.id,
+                                                             label: color.name,
+                                                             image: "colors/#{color.name}.jpg",
+                                                             alt: color.name,
+                                                             checked: @style_profile.avoided_color_ids.include?(color.id)} } %>
+        </fieldset>
+
         <br/>
         <%= f.submit 'Save and continue', class: 'btn btn-lg btn-primary center-block' %>
     <% end %>

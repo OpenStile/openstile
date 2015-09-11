@@ -8,11 +8,10 @@ class StyleProfile < ActiveRecord::Base
   has_and_belongs_to_many :bottom_sizes
   has_and_belongs_to_many :dress_sizes
   has_and_belongs_to_many :looks
-  has_many :hated_colors, dependent: :destroy
-  has_many :avoided_colors, through: :hated_colors, source: :color
   has_many :print_tolerances, dependent: :destroy
   has_and_belongs_to_many :flaunted_parts, class_name: 'Part', join_table: 'parts_to_flaunts'
   has_and_belongs_to_many :downplayed_parts, class_name: 'Part', join_table: 'parts_to_covers'
+  has_and_belongs_to_many :avoided_colors, class_name: 'Color', join_table: 'colors_to_avoids'
   has_and_belongs_to_many :special_considerations
   has_and_belongs_to_many :body_builds
 

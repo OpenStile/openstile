@@ -26,9 +26,8 @@ end
   Part.find_or_create_by(name: part)
 end
 
-["Beige", "Black", "Blue", "Brown", "Green", 
- "Gray", "Navy", "Orange", "Pink", "Purple", 
- "Red", "Teal", "White", "Yellow", "Gold", "Silver"].each do |color|
+["Beiges", "Black", "Blues", "Browns", "Greens", "Oranges",
+ "Pinks", "Purples", "Reds", "White", "Yellows", "Metallics"].each do |color|
   Color.find_or_create_by(name: color)
 end
 

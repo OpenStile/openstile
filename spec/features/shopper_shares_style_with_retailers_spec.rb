@@ -104,6 +104,17 @@ feature 'Shopper shares style preferences with retailer' do
     then_the_store_owner_should_know "Parts to flaunt: Arms, Legs\nParts to downplay: Midsection"
   end
 
+  scenario 'and specifies colors she avoids' do
+    seed_style_profile_options
+
+    given_i_am_a_logged_in_shopper shopper
+    when_i_navigate_to_my_style_profile
+    when_i_select_palettes_i_avoid ['Beiges']
+    when_i_save_my_style_profile
+    when_i_schedule_a_dropin_with_retailer
+    then_the_store_owner_should_know "Colors to avoid: Beiges\n"
+  end
+
   def when_i_navigate_to_my_style_profile
     click_link 'Style Profile'
   end
@@ -179,6 +190,13 @@ feature 'Shopper shares style preferences with retailer' do
     end
   end
 
+  def when_i_select_palettes_i_avoid palettes
+    palettes.each{|palette|
+      id = page.find(:xpath, "//img[@alt='#{palette}']/..")['data-id']
+      check id
+    }
+  end
+
   def when_i_save_my_style_profile
     click_button 'Save and continue'
     expect(page).to have_text('My Drop-Ins')
@@ -224,5 +242,7 @@ feature 'Shopper shares style preferences with retailer' do
     ['Arms', 'Legs', 'Midsection', 'Cleavage'].each{|p| FactoryGirl.create(:part, name: p)}
 
     ['Hourglass', 'Apple', 'Straight'].each{|s| FactoryGirl.create(:body_shape, name: s)}
+
+    ['Beiges', 'Pinks', 'Blues'].each{|c| FactoryGirl.create(:color, name: c)}
   end
 end

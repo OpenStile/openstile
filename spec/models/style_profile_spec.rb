@@ -13,9 +13,6 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :top_sizes }
   it { should respond_to :bottom_sizes }
   it { should respond_to :dress_sizes }
-  it { should respond_to :hated_colors }
-  it { should respond_to :avoided_colors }
-  it { should respond_to :avoided_color_ids }
   it { should respond_to :print_tolerances }
   it { should respond_to :body_shape_id }
   it { should respond_to :body_shape }
@@ -33,32 +30,13 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :flaunted_part_ids }
   it { should respond_to :downplayed_parts }
   it { should respond_to :downplayed_part_ids }
+  it { should respond_to :avoided_colors }
+  it { should respond_to :avoided_color_ids }
   it { should be_valid }
 
   context "when shopper id is not present" do
     before { @style_profile.shopper_id = nil }
     it { should_not be_valid }
-  end
-
-  describe "hated colors association" do
-    let(:color){ FactoryGirl.create(:color) }
-    let!(:hated_color){ FactoryGirl.create(:hated_color,
-                                           style_profile: @style_profile,
-                                           color: color) }
-
-    it "should populate avoided colors for shopper" do
-      expect(@style_profile.avoided_colors).to include(color)
-      expect(@style_profile.avoided_color_ids).to include(color.id)
-    end
-
-    it "should destroy associated hated color" do
-      hated_colors = @style_profile.hated_colors.to_a
-      @style_profile.destroy
-      expect(hated_colors).to_not be_empty
-      hated_colors.each do |hc|
-        expect(HatedColor.where(id: hc.id)).to be_empty
-      end
-    end
   end
 
   describe "print tolerance association" do

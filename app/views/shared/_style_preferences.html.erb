@@ -55,3 +55,6 @@
 <% unless profile.downplayed_parts.empty? %>
     <h3>Parts to downplay: <%= profile.downplayed_parts.map(&:name).join(', ') %></h3>
 <% end %>
+<% unless profile.avoided_colors.empty? %>
+    <h3>Colors to avoid: <%= profile.avoided_colors.map(&:name).join(', ') %></h3>
+<% end %>
