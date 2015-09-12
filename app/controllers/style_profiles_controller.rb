@@ -25,11 +25,10 @@ class StyleProfilesController < ApplicationController
     end
 
     def style_profile_params
-      params.require(:style_profile).permit(:body_shape_id, :top_fit_id, :bottom_fit_id,
+      params.fetch(:style_profile, {}).permit(:body_shape_id, :top_fit_id, :bottom_fit_id,
                                             :top_budget, :bottom_budget, :dress_budget, look_ids: [],
                                             top_size_ids: [], bottom_size_ids: [], dress_size_ids: [], body_build_ids: [],
                                             flaunted_part_ids: [], downplayed_part_ids: [],
-                                            print_tolerances_attributes: [:id, :print_id, :tolerance],
                                             avoided_color_ids: [], special_consideration_ids: [])
     end
 end

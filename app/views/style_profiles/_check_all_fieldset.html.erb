@@ -15,6 +15,7 @@
                          value="<%= option[:value]%>" <%= 'checked' if option[:checked]%>> <%= option[:label] %>
                 </label>
             <% end %>
+            <input name="<%= section[:attribute_string]%>[]" type="hidden" value="">
           </div>
       <% end %>
     </div>

@@ -19,4 +19,10 @@ class StyleProfile < ActiveRecord::Base
 
   validates :shopper_id, presence: true
 
+  def empty?
+    top_sizes.empty? && bottom_sizes.empty? && dress_sizes.empty? && body_builds.empty? &&
+        body_shape.nil? && top_budget.blank? && bottom_budget.blank? && dress_budget.blank? &&
+        looks.empty? && special_considerations.empty? && top_fit.nil? && bottom_fit.nil? &&
+        flaunted_parts.empty? && downplayed_parts.empty? && avoided_colors.empty?
+  end
 end
