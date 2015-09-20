@@ -226,12 +226,12 @@ ActiveRecord::Schema.define(version: 20150422005652) do
 
   create_table "drop_in_availabilities", force: true do |t|
     t.integer  "retailer_id"
+    t.time     "start_time"
+    t.time     "end_time"
     t.integer  "bandwidth"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
-    t.time     "start_time"
-    t.time     "end_time"
     t.string   "frequency"
     t.date     "template_date"
   end
@@ -538,16 +538,6 @@ ActiveRecord::Schema.define(version: 20150422005652) do
 
   add_index "special_considerations_tops", ["special_consideration_id", "top_id"], name: "tops_for_a_special_consideration_index", using: :btree
   add_index "special_considerations_tops", ["top_id", "special_consideration_id"], name: "special_considerations_for_a_top_index", using: :btree
-
-  create_table "style_profile_top_sizes", force: true do |t|
-    t.integer  "style_profile_id"
-    t.integer  "top_size_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "style_profile_top_sizes", ["style_profile_id"], name: "index_style_profile_top_sizes_on_style_profile_id", using: :btree
-  add_index "style_profile_top_sizes", ["top_size_id"], name: "index_style_profile_top_sizes_on_top_size_id", using: :btree
 
   create_table "style_profiles", force: true do |t|
     t.integer  "shopper_id"
