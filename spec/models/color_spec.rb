@@ -8,10 +8,7 @@ RSpec.describe Color, :type => :model do
 
   it { should respond_to :name }
   it { should respond_to :hexcode }
-  it { should respond_to :tops }
-  it { should respond_to :bottoms }
-  it { should respond_to :dresses }
-  it { should respond_to :outfits }
+
   it { should be_valid }
 
 end

@@ -19,7 +19,6 @@ class DropInsController < ApplicationController
 
     @drop_in = DropIn.new(retrieved_params)
 
-    recommendation = retrieve_recommendation_object
     if @drop_in.save
       retailer = @drop_in.retailer
       RetailUserMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
@@ -27,13 +26,8 @@ class DropInsController < ApplicationController
       flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
       redirect_to upcoming_drop_ins_path
     else
-      if recommendation.is_a? Retailer
-        @retailer = recommendation
-        render 'retailers/show'
-      else
-        @item = recommendation
-        render 'shared/item'
-      end
+      @retailer = @drop_in.retailer
+      render 'retailers/show'
     end
   end
 
@@ -90,7 +84,6 @@ class DropInsController < ApplicationController
       params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
                           :shopper_rating, :shopper_feedback, :sales_generated,
                           :retailer_rating, :retailer_feedback,
-                          :selected_date, :selected_time,
-                          drop_in_items_attributes: [:reservable_id, :reservable_type])
+                          :selected_date, :selected_time)
     end
 end

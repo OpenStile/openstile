@@ -23,7 +23,8 @@ feature 'Retail user manages drop in schedule' do
 
   def given_shopper_fails_to_schedule_drop_in date, time
     given_i_am_a_logged_in_shopper shopper
-    when_i_select_a_recommendation retailer
+    click_link 'Boutiques'
+    click_link retailer.name
 
     within(:css, "div.schedule") do
       fill_in 'Date', with: date
@@ -65,7 +66,8 @@ feature 'Retail user manages drop in schedule' do
 
   def then_shopper_succeeds_to_schedule_drop_in date, time
     given_i_am_a_logged_in_shopper shopper
-    when_i_select_a_recommendation retailer
+    click_link 'Boutiques'
+    click_link retailer.name
 
     within(:css, "div.schedule") do
       fill_in 'Date', with: date

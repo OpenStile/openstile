@@ -31,11 +31,6 @@ end
   Color.find_or_create_by(name: color)
 end
 
-["Bold Patterns", "Bright Colors", "Florals", "Animal Prints",
- "Leather", "Faux Leather", "Fur", "Faux Fur"].each do |print|
-  Print.find_or_create_by(name: print)
-end
-
 [{name: 'Straight', 
   description: 'Your bust and hips are basically the same size. Your waist is slightly smaller than your bust and hips.'},
  {name: 'Pear', 
@@ -98,52 +93,7 @@ if ENV["demo_up"]
 
     retailer.top_sizes << TopSize.all                                 
     retailer.bottom_sizes << BottomSize.all                                 
-    retailer.dress_sizes << DressSize.all                                 
-
-    top = retailer.tops.create!(name: "#{Faker::Name.name} Designs Blouse",
-                                description: 'This is a blouse created for OpenStile demo purposes.',
-                                price: (30..70).to_a.sample,
-                                web_link: 'http://example.com',
-                                look_id: Look.ids.sample,
-                                print_id: Print.ids.sample,
-                                color_id: Color.ids.sample,
-                                body_shape_id: BodyShape.ids.sample,
-                                for_petite: idx.even?,
-                                top_fit_id: TopFit.ids.sample,
-                                special_consideration_ids: [SpecialConsideration.ids.sample],
-                                status: 1)
-    top.top_sizes << TopSize.all
-    top.exposed_parts.create(part_id: Part.find_by_name(['Midsection','Arms','Back','Cleavage'].sample))
-
-    bottom = retailer.bottoms.create!(name: "#{Faker::Name.name} Designs Pants",
-                                      description: 'This is a pair of pants created for OpenStile demo purposes.',
-                                      price: (50..150).to_a.sample,
-                                      web_link: 'http://example.com',
-                                      look_id: Look.ids.sample,
-                                      print_id: Print.ids.sample,
-                                      color_id: Color.ids.sample,
-                                      body_shape_id: BodyShape.ids.sample,
-                                      for_petite: idx.even?,
-                                      bottom_fit_id: BottomFit.ids.sample, 
-                                      special_consideration_ids: [SpecialConsideration.ids.sample],
-                                      status: 1)
-    bottom.bottom_sizes << BottomSize.all
-
-    dress = retailer.dresses.create!(name: "#{Faker::Name.name} Designs Dress",
-                                     description: 'This is a dress created for OpenStile demo purposes.',
-                                     price: (75..200).to_a.sample,
-                                     web_link: 'http://example.com',
-                                     look_id: Look.ids.sample,
-                                     print_id: Print.ids.sample,
-                                     color_id: Color.ids.sample,
-                                     body_shape_id: BodyShape.ids.sample,
-                                     for_petite: idx.even?,
-                                     top_fit_id: TopFit.ids.sample,
-                                     bottom_fit_id: BottomFit.ids.sample, 
-                                     special_consideration_ids: [SpecialConsideration.ids.sample],
-                                     status: 1)
-    dress.dress_sizes << DressSize.all
-
+    retailer.dress_sizes << DressSize.all
   end
 end
 

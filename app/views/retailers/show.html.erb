@@ -48,8 +48,6 @@
       </div>
     </div>
 
-    <%= render 'shared/view_more', retailer: @retailer %>
-
     <% if shopper_signed_in? %>
       <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>
     <% end %>

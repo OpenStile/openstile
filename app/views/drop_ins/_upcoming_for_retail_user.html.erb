@@ -16,25 +16,4 @@
     <%= link_to "Hide details", "#", class: "hide-preferences-link",
                                      data: {drop_in_id: drop_in.id} %>
   </div>
-  <% unless drop_in.drop_in_items.empty? && drop_in.shopper.favorites.empty? %>
-    <h4>Items she likes:</h4><br />
-    <% drop_in.drop_in_items.map(&:reservable).each do |item| %>
-      <a href=<%= item_show_path(item)%>>
-        <div class="col-md-2 col-xs-2">
-          <%= cl_image_tag(item.image_name, width: 100, 
-                           height: 125, crop: :lpad, 
-                           alt: item.image_alt_text) %>
-        </div>
-      </a>
-    <% end %>
-    <% drop_in.shopper.favorites.map(&:favoriteable).each do |item| %>
-      <a href=<%= item_show_path(item)%>>
-        <div class="col-md-2 col-xs-2">
-          <%= cl_image_tag(item.image_name, width: 100, 
-                           height: 125, crop: :lpad, 
-                           alt: item.image_alt_text) %>
-        </div>
-      </a>
-    <% end %>
-  <% end %>
 </div>

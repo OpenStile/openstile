@@ -19,14 +19,6 @@
       <%= f.hidden_field :shopper_id %>
       <%= f.hidden_field :retailer_id %>
 
-      <% unless for_retailer %>
-        <%= f.fields_for :drop_in_items, 
-                 f.object.drop_in_items.find_or_initialize_by(reservable: item) do |drop_in_item_fields|%>
-          <%= drop_in_item_fields.hidden_field :reservable_id %>
-          <%= drop_in_item_fields.hidden_field :reservable_type %>
-        <% end %>
-      <% end %>
-
       <div class="row form-group">
         <label class="sr-only" for="drop_in[selected_date]">Date</label>
         <div class="col-md-offset-3 col-xs-offset-3 col-md-6 col-xs-6">

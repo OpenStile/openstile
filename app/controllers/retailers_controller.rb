@@ -2,12 +2,9 @@ class RetailersController < ApplicationController
   before_filter :authenticate_admin!, only: [:new, :create]
   before_filter :store_shopper_location, only: [:scheduler]
   before_filter :authenticate_shopper!, only: [:scheduler]
-  before_filter :authenticate_catalog_reviewer!, only: [:catalog]
-  before_filter :correct_retail_user, only: [:catalog]
 
   def show
     @retailer = Retailer.find(params[:id])
-    store_recommendation_show_url
   end
 
   def index
@@ -30,10 +27,6 @@ class RetailersController < ApplicationController
 
   def scheduler 
     @retailer = Retailer.find(params[:id])
-    store_recommendation_show_url
-  end
-
-  def catalog
   end
 
   def scheduled_availabilities

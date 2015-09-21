@@ -1,8 +1,0 @@
-var itemFeaturedTab = $("div#<%= recommendation_string(@item, 'featured') %> .like-toggle")
-var favoriteTab = $("div#favoriteList")
-
-itemFeaturedTab.empty();
-$("<%= escape_javascript(render 'shared/like_toggle', object: @item) %>").appendTo(itemFeaturedTab);
-
-favoriteTab.empty();
-$("<%= escape_javascript(render 'shared/favorite_list') %>").appendTo(favoriteTab);
