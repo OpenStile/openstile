@@ -17,7 +17,6 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :shopper }
   it { should respond_to :shopper_id }
   it { should respond_to :time }
-  it { should respond_to :drop_in_items }
   it { should respond_to :comment }
   it { should respond_to :shopper_rating }
   it { should respond_to :retailer_rating }
@@ -104,20 +103,4 @@ RSpec.describe DropIn, :type => :model do
     end
   end
 
-  describe "drop in item association" do
-    before { @drop_in.save }
-    let(:top){ FactoryGirl.create(:top, retailer: retailer) }
-    let!(:drop_in_item){ FactoryGirl.create(:drop_in_item,
-                                            drop_in: @drop_in,
-                                            reservable: top)}
-
-    it "should destroy associated drop in items" do
-      drop_in_items = @drop_in.drop_in_items.to_a
-      @drop_in.destroy
-      expect(drop_in_items).to_not be_empty
-      drop_in_items.each do |d|
-        expect(DropInItem.where(id: d.id)).to be_empty
-      end
-    end
-  end
 end

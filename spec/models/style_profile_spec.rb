@@ -13,7 +13,6 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :top_sizes }
   it { should respond_to :bottom_sizes }
   it { should respond_to :dress_sizes }
-  it { should respond_to :print_tolerances }
   it { should respond_to :body_shape_id }
   it { should respond_to :body_shape }
   it { should respond_to :top_fit }
@@ -39,19 +38,4 @@ RSpec.describe StyleProfile, :type => :model do
     it { should_not be_valid }
   end
 
-  describe "print tolerance association" do
-    let(:print){ FactoryGirl.create(:print) }
-    let!(:print_tolerance){ FactoryGirl.create(:print_tolerance, 
-                               style_profile: @style_profile, 
-                               print: print) }
-
-    it "should destroy associated print tolerance" do
-      print_tolerances = @style_profile.print_tolerances.to_a
-      @style_profile.destroy
-      expect(print_tolerances).to_not be_empty
-      print_tolerances.each do |lt|
-        expect(PrintTolerance.where(id: lt.id)).to be_empty
-      end
-    end
-  end
 end

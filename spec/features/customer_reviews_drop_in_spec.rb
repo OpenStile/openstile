@@ -15,7 +15,7 @@ feature 'Customer reviews drop in' do
                                       shopper: shopper,
                                       time: 1.day.ago.change(hour: 12)) }
 
-  scenario 'on shopper side', js: true do
+  scenario 'on shopper side' do
     given_i_am_a_logged_in_shopper shopper
     when_i_navigate_to_my_drop_ins_as_shopper
     when_i_review_drop_in_as_shopper drop_in, '4 out of 5', 
@@ -23,7 +23,7 @@ feature 'Customer reviews drop in' do
     then_i_should_see_drop_in_successfully_reviewed drop_in, 4
   end
                                       
-  scenario 'on retailer side',js: true do
+  scenario 'on retailer side' do
     given_i_am_a_logged_in_retail_user retail_user
     when_i_navigate_to_my_drop_ins_as_retailer
     when_i_review_drop_in_as_retailer drop_in, '5 out of 5', 

@@ -4,7 +4,6 @@ class DropIn < ActiveRecord::Base
 
   belongs_to :retailer
   belongs_to :shopper
-  has_many :drop_in_items, dependent: :destroy
 
   validate :retailer_available_for_drop_in, on: :create
   validate :shopper_drop_in_at_same_time
@@ -22,7 +21,6 @@ class DropIn < ActiveRecord::Base
   validates :retailer_feedback, length: { maximum: 500 }
   validates :sales_generated, numericality: true, unless: "sales_generated.blank?"
 
-  accepts_nested_attributes_for :drop_in_items
   default_scope { order('time ASC') }
 
   def retailer_available_for_drop_in

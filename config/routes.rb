@@ -40,24 +40,9 @@ Rails.application.routes.draw do
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
-      get 'catalog'
       get 'scheduler'
     end
   end
-  
-  concern :favoriteable do
-    member do
-      get 'toggle_favorite'
-    end
-  end
-
-  resources :tops, only: [:show, :new, :create], concerns: :favoriteable
-
-  resources :bottoms, only: [:show, :new, :create], concerns: :favoriteable
-
-  resources :dresses, only: [:show, :new, :create], concerns: :favoriteable
-
-  resources :outfits, only: [:show, :new, :create], concerns: :favoriteable
 
   resources :drop_ins, only: [:create, :update, :destroy] do
     collection do
