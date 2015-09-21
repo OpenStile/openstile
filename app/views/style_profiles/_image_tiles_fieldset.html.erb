@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="fieldset img-tiles">
+    <legend><span><i class="fa fa-caret-down toggle"></i></span> <%= title %></legend>
+    <div class="content">
+      <div class="col-xs-12">
+        <h5><%= prompt %></h5>
+        <% options.each do |option| %>
+            <div class="col-xs-offset-1 col-xs-<%= column_width %> text-center img-selector <%= 'checked' if option[:checked]%>"
+                 data-id="<%= idify(attribute_string, option[:value])%>">
+              <%= image_tag(option[:image],
+                            class: "img-responsive center-block",
+                            alt: option[:alt] || 'image') %>
+              <% if option[:label] %>
+                <h5><%= option[:label] %></h5>
+              <% end%>
+              <input type="checkbox" class="hidden"
+                     id="<%= idify(attribute_string, option[:value])%>"
+                     name="<%= attribute_string%>[]"
+                     value="<%= option[:value]%>" <%= 'checked' if option[:checked]%>>
+            </div>
+        <% end %>
+        <input name="<%= attribute_string%>[]" type="hidden" value="">
+      </div>
+    </div>
+  </div>
+</div>

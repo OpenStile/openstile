@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150422005652) do
+ActiveRecord::Schema.define(version: 20150911212027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,20 @@ ActiveRecord::Schema.define(version: 20150422005652) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "body_builds", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "body_builds_style_profiles", id: false, force: true do |t|
+    t.integer "body_build_id",    null: false
+    t.integer "style_profile_id", null: false
+  end
+
+  add_index "body_builds_style_profiles", ["body_build_id", "style_profile_id"], name: "index_profiles_for_a_body_build", using: :btree
+  add_index "body_builds_style_profiles", ["style_profile_id", "body_build_id"], name: "index_builds_for_a_profile", using: :btree
 
   create_table "body_shapes", force: true do |t|
     t.string   "name"
@@ -120,20 +134,6 @@ ActiveRecord::Schema.define(version: 20150422005652) do
   add_index "bottoms_special_considerations", ["bottom_id", "special_consideration_id"], name: "special_considerations_for_a_bottom_index", using: :btree
   add_index "bottoms_special_considerations", ["special_consideration_id", "bottom_id"], name: "bottoms_for_a_special_consideration_index", using: :btree
 
-  create_table "budgets", force: true do |t|
-    t.integer  "style_profile_id"
-    t.decimal  "top_min_price"
-    t.decimal  "top_max_price"
-    t.decimal  "bottom_min_price"
-    t.decimal  "bottom_max_price"
-    t.decimal  "dress_min_price"
-    t.decimal  "dress_max_price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "budgets", ["style_profile_id"], name: "index_budgets_on_style_profile_id", using: :btree
-
   create_table "colors", force: true do |t|
     t.string   "name"
     t.string   "hexcode"
@@ -148,6 +148,14 @@ ActiveRecord::Schema.define(version: 20150422005652) do
 
   add_index "colors_outfits", ["color_id", "outfit_id"], name: "index_colors_outfits_on_color_id_and_outfit_id", using: :btree
   add_index "colors_outfits", ["outfit_id", "color_id"], name: "index_colors_outfits_on_outfit_id_and_color_id", using: :btree
+
+  create_table "colors_to_avoids", force: true do |t|
+    t.integer "color_id"
+    t.integer "style_profile_id"
+  end
+
+  add_index "colors_to_avoids", ["color_id"], name: "index_colors_to_avoids_on_color_id", using: :btree
+  add_index "colors_to_avoids", ["style_profile_id"], name: "index_colors_to_avoids_on_style_profile_id", using: :btree
 
   create_table "dress_sizes", force: true do |t|
     t.string   "name"
@@ -226,12 +234,12 @@ ActiveRecord::Schema.define(version: 20150422005652) do
 
   create_table "drop_in_availabilities", force: true do |t|
     t.integer  "retailer_id"
+    t.time     "start_time"
+    t.time     "end_time"
     t.integer  "bandwidth"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
-    t.time     "start_time"
-    t.time     "end_time"
     t.string   "frequency"
     t.date     "template_date"
   end
@@ -292,16 +300,6 @@ ActiveRecord::Schema.define(version: 20150422005652) do
   add_index "favorites", ["shopper_id", "favoriteable_id", "favoriteable_type"], name: "index_unique_shopper_favorites", unique: true, using: :btree
   add_index "favorites", ["shopper_id"], name: "index_favorites_on_shopper_id", using: :btree
 
-  create_table "hated_colors", force: true do |t|
-    t.integer  "style_profile_id"
-    t.integer  "color_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "hated_colors", ["color_id"], name: "index_hated_colors_on_color_id", using: :btree
-  add_index "hated_colors", ["style_profile_id"], name: "index_hated_colors_on_style_profile_id", using: :btree
-
   create_table "locations", force: true do |t|
     t.string   "address"
     t.string   "short_title"
@@ -310,22 +308,20 @@ ActiveRecord::Schema.define(version: 20150422005652) do
     t.string   "neighborhood"
   end
 
-  create_table "look_tolerances", force: true do |t|
-    t.integer  "style_profile_id"
-    t.integer  "look_id"
-    t.integer  "tolerance"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "look_tolerances", ["look_id"], name: "index_look_tolerances_on_look_id", using: :btree
-  add_index "look_tolerances", ["style_profile_id"], name: "index_look_tolerances_on_style_profile_id", using: :btree
-
   create_table "looks", force: true do |t|
     t.string   "name"
+    t.string   "image_path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "looks_style_profiles", id: false, force: true do |t|
+    t.integer "look_id",          null: false
+    t.integer "style_profile_id", null: false
+  end
+
+  add_index "looks_style_profiles", ["look_id", "style_profile_id"], name: "index_looks_style_profiles_on_look_id_and_style_profile_id", using: :btree
+  add_index "looks_style_profiles", ["style_profile_id", "look_id"], name: "index_looks_style_profiles_on_style_profile_id_and_look_id", using: :btree
 
   create_table "online_presences", force: true do |t|
     t.integer  "retailer_id"
@@ -387,22 +383,27 @@ ActiveRecord::Schema.define(version: 20150422005652) do
   add_index "outfits_top_sizes", ["outfit_id", "top_size_id"], name: "index_outfits_top_sizes_on_outfit_id_and_top_size_id", using: :btree
   add_index "outfits_top_sizes", ["top_size_id", "outfit_id"], name: "index_outfits_top_sizes_on_top_size_id_and_outfit_id", using: :btree
 
-  create_table "part_exposure_tolerances", force: true do |t|
-    t.integer  "part_id"
-    t.integer  "style_profile_id"
-    t.integer  "tolerance"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "part_exposure_tolerances", ["part_id"], name: "index_part_exposure_tolerances_on_part_id", using: :btree
-  add_index "part_exposure_tolerances", ["style_profile_id"], name: "index_part_exposure_tolerances_on_style_profile_id", using: :btree
-
   create_table "parts", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "parts_to_covers", force: true do |t|
+    t.integer "part_id"
+    t.integer "style_profile_id"
+  end
+
+  add_index "parts_to_covers", ["part_id"], name: "index_parts_to_covers_on_part_id", using: :btree
+  add_index "parts_to_covers", ["style_profile_id"], name: "index_parts_to_covers_on_style_profile_id", using: :btree
+
+  create_table "parts_to_flaunts", force: true do |t|
+    t.integer "part_id"
+    t.integer "style_profile_id"
+  end
+
+  add_index "parts_to_flaunts", ["part_id"], name: "index_parts_to_flaunts_on_part_id", using: :btree
+  add_index "parts_to_flaunts", ["style_profile_id"], name: "index_parts_to_flaunts_on_style_profile_id", using: :btree
 
   create_table "price_ranges", force: true do |t|
     t.integer  "retailer_id"
@@ -539,26 +540,16 @@ ActiveRecord::Schema.define(version: 20150422005652) do
   add_index "special_considerations_tops", ["special_consideration_id", "top_id"], name: "tops_for_a_special_consideration_index", using: :btree
   add_index "special_considerations_tops", ["top_id", "special_consideration_id"], name: "special_considerations_for_a_top_index", using: :btree
 
-  create_table "style_profile_top_sizes", force: true do |t|
-    t.integer  "style_profile_id"
-    t.integer  "top_size_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "style_profile_top_sizes", ["style_profile_id"], name: "index_style_profile_top_sizes_on_style_profile_id", using: :btree
-  add_index "style_profile_top_sizes", ["top_size_id"], name: "index_style_profile_top_sizes_on_top_size_id", using: :btree
-
   create_table "style_profiles", force: true do |t|
     t.integer  "shopper_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "body_shape_id"
-    t.integer  "height_feet"
-    t.integer  "height_inches"
-    t.string   "body_build"
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
+    t.string   "top_budget"
+    t.string   "bottom_budget"
+    t.string   "dress_budget"
   end
 
   add_index "style_profiles", ["body_shape_id"], name: "index_style_profiles_on_body_shape_id", using: :btree

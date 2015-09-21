@@ -6,34 +6,28 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-["XS", "Small", "Medium", "Large", "XL"].each do |size|
-  TopSize.find_or_create_by(name: size, category: "alpha")
-  BottomSize.find_or_create_by(name: size, category: "alpha")
-  DressSize.find_or_create_by(name: size, category: "alpha")
+['00 (XXS)', '0 (XS)', '2 (XS)', '4 (S)', '6 (S)', '8 (M)', '10 (M)',
+ '12 (L)', '14 (L)', '16 (XL)', '18 (XL)', '20 (XXL)'].each do |size|
+  TopSize.find_or_create_by(name: size)
+  DressSize.find_or_create_by(name: size)
+  BottomSize.find_or_create_by(name: size)
 end
 
-["00", "0", "2", "4", "6", "8", "10", "12", "14", "16", "18"].each do |size|
-  TopSize.find_or_create_by(name: size, category: "numeric")
-  BottomSize.find_or_create_by(name: size, category: "numeric")
-  DressSize.find_or_create_by(name: size, category: "numeric")
+['Petite', 'Tall', 'Curvy', 'Full-figured', 'Slender', 'Athletic'].each do |build|
+  BodyBuild.find_or_create_by(name: build)
 end
 
-("24".."34").each do |size|
-  BottomSize.find_or_create_by(name: size, category: "inches")
-end
-
-["Bohemian_Chic_Hipster", "Preppy", "Casual_Relaxed", 
- "Classic_Vintage", "Edgy_Rocker", "Glamorous_Diva"].each do |look|
-  Look.find_or_create_by(name: look)
+['boho1', 'boho2', 'casual1', 'classic1', 'classic2',
+ 'diva2', 'preppy1', 'rocker1', 'rocker2'].each do |look|
+  Look.find_or_create_by(name: look, image_path: "looks/#{look}.jpg")
 end
 
 ["Arms", "Back", "Cleavage", "Legs", "Midsection"].each do |part|
   Part.find_or_create_by(name: part)
 end
 
-["Beige", "Black", "Blue", "Brown", "Green", 
- "Gray", "Navy", "Orange", "Pink", "Purple", 
- "Red", "Teal", "White", "Yellow", "Gold", "Silver"].each do |color|
+["Beiges", "Black", "Blues", "Browns", "Greens", "Oranges",
+ "Pinks", "Purples", "Reds", "White", "Yellows", "Metallics"].each do |color|
   Color.find_or_create_by(name: color)
 end
 
@@ -55,7 +49,7 @@ end
   BodyShape.find_or_create_by(name: body_shape[:name], description: body_shape[:description])
 end
 
-['Eco-friendly', 'Local designers', 'Ethically-made', 'Second-wear'].each do |consideration|
+['Eco-friendly', 'Local designers', 'Ethically-made', 'Second-wear', 'Made in the USA'].each do |consideration|
   SpecialConsideration.find_or_create_by(name: consideration)
 end
 

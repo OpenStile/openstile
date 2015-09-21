@@ -28,7 +28,7 @@ def given_i_am_a_logged_in_retail_user retail_user
 end
 
 def given_i_have_no_drop_ins_scheduled
-  click_link 'My Drop-ins'
+  click_link 'OpenStile'
 
   expect(page)
     .to have_content("regular ole' shopping trip into a fun indulgence")
@@ -259,7 +259,7 @@ def then_the_recommendation_should_be_for recommendation_string
 end
 
 def given_my_upcoming_drop_ins_page_contains appointment
-  click_link 'My Drop-ins'
+  click_link 'OpenStile'
 
   expect(page).to have_link(appointment.retailer.name)
   expect(page).to have_content(appointment.colloquial_time)

@@ -43,21 +43,6 @@
         </div>
       </div>
       <hr>
-      <div class="row">
-        <% matching_retailer = retailer_recommendation_for(current_shopper) %>
-        <div class="page-title text-center">
-          <% if matching_retailer %>
-            <h4><%= current_shopper.first_name %>, 
-              based on your preferences we suggest booking a drop-in at:</h4><br />
-            <a href=<%= retailer_path(matching_retailer) %> >
-              <%= cl_image_tag(matching_retailer.logo_image_name, 
-                                class: "img-responsive center-block",
-                                width: 200,
-                                alt: 'retailer_logo') %>
-            </a><br />
-          <% end %>
-        </div>
-      </div>
     <% end %>
     <% unless @upcoming_drop_ins.empty? %>
       <div class="row text-center">

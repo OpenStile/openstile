@@ -29,12 +29,12 @@ feature 'Retail user reviews drop in' do
     when_i_view_my_upcoming_drop_ins
     then_i_should_see_a_scheduled_drop_in_for_shopper shopper.first_name, 'Tomorrow @ 10 AM'
     then_i_should_see_addtional_drop_in_comments drop_in
-    then_i_should_see_a_synopsis_for_shopper "hourglass shape"
+    then_i_should_see_a_synopsis_for_shopper "Hourglass"
     then_i_should_see_items_of_interest_for_shopper top
   end
 
   def when_i_view_my_upcoming_drop_ins
-    click_link 'View your past and upcoming drop-ins'
+    click_link 'My appointments'
 
     expect(page).to have_content('My Drop-Ins')
   end

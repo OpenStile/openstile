@@ -26,8 +26,7 @@ feature 'Shopper schedule drop in' do
     place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
     given_i_am_a_logged_in_shopper shopper
-    given_i_have_no_drop_ins_scheduled
-    when_i_click_on_the_suggested_retailer
+    when_i_click_on_a_retailer retailer
     when_i_attempt_to_schedule_with_invalid_options retailer
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
@@ -175,8 +174,9 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
   end
 
-  def when_i_click_on_the_suggested_retailer
-    click_link "retailer_logo"
+  def when_i_click_on_a_retailer retailer
+    click_link "Boutiques"
+    click_link retailer.name
   end
 
   def when_i_attempt_to_schedule_with_invalid_options recommendation
@@ -237,7 +237,6 @@ feature 'Shopper schedule drop in' do
       shopper.style_profile.top_sizes << shared_size
       retailer.top_sizes << shared_size
 
-      shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00)
       retailer.create_price_range!(top_min_price: 50.00, top_max_price: 100.00)
     end
 
@@ -253,10 +252,6 @@ feature 'Shopper schedule drop in' do
       shopper.style_profile.dress_sizes << shared_dress_size
       dress.dress_sizes << shared_dress_size
 
-      shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00,
-                                     bottom_min_price: 50.00, bottom_max_price: 100.00,
-                                     dress_min_price: 50.00, dress_max_price: 100.00)
-
       top.update!(price: 75.00)
       bottom.update!(price: 75.00)
       dress.update!(price: 75.00)
@@ -267,10 +262,6 @@ feature 'Shopper schedule drop in' do
 
       shopper.style_profile.top_sizes << shared_top_size
       outfit.top_sizes << shared_top_size
-
-      shopper.style_profile.budget.update!(top_min_price: 50.00, top_max_price: 100.00,
-                                     bottom_min_price: 50.00, bottom_max_price: 100.00,
-                                     dress_min_price: 50.00, dress_max_price: 100.00)
 
       outfit.update!(average_price: 75.00)
     end
