@@ -14,5 +14,7 @@ RSpec.describe RetailerInterestForm, :type => :model do
   it { should respond_to :website }
   it { should respond_to :descripton_of_boutique }
 
+  context ""
+
   context "when I apply to be an openstile boutique" do
   	
