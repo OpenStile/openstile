@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RetailerInterestForm, :type => :model do
+RSpec.describe RetailerInterest, :type => :model do
   let(:admin){ FactoryGirl.create(:admin) }
 
   it { should respond_to :boutique_name }

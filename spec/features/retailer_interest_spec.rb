@@ -1,6 +1,6 @@
 require 'rails_helper'
 
- feature 'Retailer interest form' do
+ feature 'Retailer interest' do
  let!(:admin){ FactoryGirl.create(:admin)}
 
  scenario 'form submision details' do
@@ -16,8 +16,17 @@ require 'rails_helper'
 
   def when_i_apply_to_be_an_openstile_boutique
 	click_link "Apply Here"
-	fill_in "First Name", with: "Jane"
-	fill_in "Last Name", with: "Doe"
+	fill_in "First name", with: "Jane"
+	fill_in "Last name", with: "Doe"
+	fill_in "Boutique name", with: "Bad Boutique"
+	fill_in "Website address", with: "www.badboutique.com"
+	fill_in "Street address", with: ""
+	fill_in "City", with: "Brooklyn"
+	fill_in "State", with: "NY"
+	fill_in "Zip/Postal Code", with: ""
+	fill_in "Email", with: "badboutique@boutique.com"
+	fill_in "Phone Number", with: "240-888-3239"
+	fill_in "Describe your store aesthetic", with: "500 words or less"
 	click_link "Submit"
  end
 
