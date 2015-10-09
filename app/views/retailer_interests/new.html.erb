@@ -13,6 +13,8 @@
   <%= f.text_field :last_name %>
   <%= f.label :boutique_name %>
   <%= f.text_field :boutique_name %>
+  <%= f.label :website_address %>
+  <%= f.text_field :website_address %>
   <%= f.label :street_address %>
   <%= f.text_field :street_address %>
   <%= f.label :city %>
@@ -26,7 +28,7 @@
   <%= f.label :phone_number %>
   <%= f.text_field :phone_number %>
   <%= f.label :describe_store_aesthetic %>
-  <%= f.text_field :describe_store_aesthetic %>
+  <%= f.text_area :describe_store_aesthetic %>
   <div class="actions">
   <%= f.submit "Submit", class: "col-md-2 col-xs-4 btn btn-primary"%>
   </div>

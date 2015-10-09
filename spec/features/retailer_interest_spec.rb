@@ -19,7 +19,7 @@ require 'rails_helper'
 	fill_in "First name", with: "Jane"
 	fill_in "Last name", with: "Doe"
 	fill_in "Boutique name", with: "Bad Boutique"
-	# fill_in "Website address", with: "www.badboutique.com"
+	fill_in "Website address", with: "www.badboutique.com"
 	fill_in "Street address", with: ""
 	fill_in "City", with: "Brooklyn"
 	fill_in "State", with: "NY"
@@ -27,7 +27,7 @@ require 'rails_helper'
 	fill_in "Email address", with: "badboutique@boutique.com"
 	fill_in "Phone number", with: "240-888-3239"
 	fill_in "Describe store aesthetic", with: "500 words or less"
-	click_link "Submit"
+	click_button "Submit"
  end
 
  def then_i_should_receive_confirmation_of_my_application
