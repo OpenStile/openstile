@@ -1,7 +1,7 @@
 class RetailerInterest < ActiveRecord::Base
 
 	validates :boutique_name, presence: true 
-	validates :first_name
+	validates :first_name, presence: true
 	validates :last_name, presence: true
 	validates :street_address, presence: true
 	validates :city, :state, presence: true
