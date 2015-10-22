@@ -32,7 +32,7 @@ feature 'Customer reviews drop in' do
   end
 
   def when_i_navigate_to_my_drop_ins_as_shopper
-    click_link 'OpenStile'
+    click_link 'logo-home'
   end
 
   def when_i_navigate_to_my_drop_ins_as_retailer
