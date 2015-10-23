@@ -41,10 +41,11 @@ p{
 }
 
 a{
-
+    color: #5e5e5e;
 }
 
 a:hover{
+    color: #000;
 	text-decoration:none;
 }
 
@@ -163,6 +164,21 @@ footer .footer-section h5 {
 .top-image {
   min-height: 30vh;
   margin-bottom: 50px;
+}
+
+.login-section {
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  padding: 50px 25px 50px 25px;
+  margin-top: 75px;
+  margin-bottom: 75px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.signup.container {
+  background:#555 asset_url('wallpaper_rack.jpg') no-repeat;
+  background-size:cover;
+  background-position:center 70%;
 }
 
 .style-profile .top-image {

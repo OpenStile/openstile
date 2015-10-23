@@ -5,7 +5,8 @@ describe "Shopper sign up" do
   describe "when I navigate to the sign up page" do
     before do
       visit root_path
-      click_link 'Sign up'
+      click_link 'Log in'
+      click_link 'Join now'
     end
     let(:submit) { "Sign up" }
 
