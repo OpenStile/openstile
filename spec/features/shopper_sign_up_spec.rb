@@ -5,7 +5,8 @@ describe "Shopper sign up" do
   describe "when I navigate to the sign up page" do
     before do
       visit root_path
-      click_link 'Sign up'
+      click_link 'Log in'
+      click_link 'Join now'
     end
     let(:submit) { "Sign up" }
 
@@ -46,7 +47,7 @@ describe "Shopper sign up" do
 
         it "should take me to edit my Style Profile" do
           expect(page).to have_title('Style Profile | OpenStile')
-          expect(page).to have_selector('h3', text: 'We want to get to know you')
+          expect(page).to have_text('Your sizes')
         end
       end
     end

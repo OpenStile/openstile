@@ -8,7 +8,7 @@ def capybara_sign_in shopper
 end
 
 def style_profile_save
-  'Save and continue'
+  'Save'
 end
 
 def tomorrow_morning

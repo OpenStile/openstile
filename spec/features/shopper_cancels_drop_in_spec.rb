@@ -23,7 +23,7 @@ feature 'Shopper modifies drop in' do
   end
 
   def given_my_upcoming_drop_ins_page_contains appointment
-    click_link 'OpenStile'
+    click_link 'logo-home'
 
     expect(page).to have_link(appointment.retailer.name)
     expect(page).to have_content(appointment.colloquial_time)
@@ -39,7 +39,7 @@ feature 'Shopper modifies drop in' do
   end
 
   def then_my_upcoming_drop_ins_page_should_not_contain appointment
-    click_link 'OpenStile'
+    click_link 'logo-home'
 
     expect(page).to_not have_content(appointment.retailer.name)
   end

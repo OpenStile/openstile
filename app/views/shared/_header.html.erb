@@ -2,19 +2,21 @@
   <div class="container">
     <div class="row text-center">
       <div class="logo">
-        <h1><%= link_to "OpenStile", (shopper_signed_in? ? upcoming_drop_ins_path : root_path), id: "style-feed-link" %></h1>
+        <a id='logo-home' href=<%= shopper_signed_in? ? upcoming_drop_ins_path : root_path %>>
+          <%= image_tag('openstilelogo.png', class: 'img-responsive center-block', width: '400') %>
+        </a>
       </div>
       <div class="navigation">
         <% if current_shopper.nil? && current_retail_user.nil? && current_admin.nil? %>
-          <%= link_to "The Experience", experience_path, class: 'col-sm-3 btn-default btn-lg' %>
-          <%= link_to "Blog", blog_articles_path, class: 'col-sm-3 btn-default btn-lg' %>
-          <%= link_to "Log in", new_shopper_session_path, class: 'col-sm-3 btn-default btn-lg' %>
-          <%= link_to "Sign up", new_shopper_registration_path, class: "sign-up col-sm-3 btn-default btn-lg" %>
+          <%= link_to "Experience", experience_path, class: 'col-sm-3 btn-default' %>
+          <%= link_to "Boutiques", retailers_path, class: 'col-sm-3 btn-default ' %>
+          <%= link_to "Blog", blog_articles_path, class: 'col-sm-3 btn-default' %>
+          <%= link_to "Log in", new_shopper_session_path, class: 'col-sm-3 btn-default ' %>
         <% else %>
           <% if !current_shopper.nil? %>
-            <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile), class: 'col-sm-4 btn-default btn-lg' %>
-            <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default btn-lg' %>
-            <%= link_to "Log out", destroy_shopper_session_path, :method => :delete, class: 'col-sm-4 btn-default btn-lg' %>
+            <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile), class: 'col-sm-4 btn-default ' %>
+            <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default ' %>
+            <%= link_to "Log out", destroy_shopper_session_path, :method => :delete, class: 'col-sm-4 btn-default ' %>
           <% end %>
           <% if !current_retail_user.nil? %>
             <%= link_to "Dashboard", root_path %>
