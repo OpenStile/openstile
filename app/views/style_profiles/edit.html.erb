@@ -140,7 +140,7 @@
                      column_width: 2,
                      options: Color.all.map{|color| {value: color.id,
                                                              label: color.name,
-                                                             image: "colors/#{color.name}.jpg",
+                                                             image: "colors/#{color.name.downcase}.jpg",
                                                              alt: color.name,
                                                              checked: @style_profile.avoided_color_ids.include?(color.id)} } %>
         </fieldset>
