@@ -104,7 +104,7 @@ feature 'Shopper schedule drop in' do
             .to change(ActionMailer::Base.deliveries, :count).by(2) 
     end
 
-    expect(page).to have_content('My Drop-Ins')
+    expect(page).to have_content('Your drop-in was scheduled!')
   end
 
   def then_my_scheduled_drop_ins_should_be_updated_with retailer, date, place

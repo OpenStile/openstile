@@ -1,93 +1,28 @@
 <% provide(:title, 'My Drop-Ins') %>
 
-<div class="my-drop-ins-top">
-  <%= render "shared/header" %>
-  <div class="hero inner-page">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="intro">
-            <h2>My Drop-Ins</h2><br /> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/header" %>
 
-<div class="my-drop-ins block">
-  <div class="container">
-    <% if current_shopper && never_had_drop_in?(current_shopper) %>
-      <div class="row">
-        <div class="page-title text-center">
-          <h4>You and your style are unique... 
-          your shopping experience should be too!</h4>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 text-justified">
-          <p>
-            OpenStile drop-ins allow you to turn a regular ole' shopping 
-            trip into a fun indulgence.<br /><br />
-
-            Picture this: you walk into a chic boutique and the owner is 
-            super-excited to see you! She's been anticipating your arrival 
-            and already knows your budget, size, the looks you like, and that 
-            you're getting ready for your BFF's bachelorette weekend in Vegas. 
-            She has some outfits pulled and waiting, and is eager to make sure 
-            you leave with the perfect pieces that match your personal style.<br /><br />
-
-            This is the OpenStile experience, and we want you to have it!<br /><br />
-          </p>
-        </div>
-      </div>
-      <hr>
-    <% end %>
-    <% unless @upcoming_drop_ins.empty? %>
-      <div class="row text-center">
-        <br /><br />
-        <p>
-          Here are your upcoming drop-ins. 
-        </p>
-        <% if current_shopper %>
-          <p>
-            Make sure your 
-            <%= link_to "style profile", edit_style_profile_path(current_shopper.style_profile) %>
-            is up to date before your visit.
-          </p>
-        <% end %>
-        <br /><br />
-      </div>
-    <% end %>
+<% if current_shopper && never_had_drop_in?(current_shopper) %>
+    <%= render "shared/experience" %>
+<% else %>
     <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>
-      <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
-        <% if current_shopper %>
-          <%= render 'upcoming_for_shopper', drop_in: drop_in %>
-        <% elsif current_retail_user %>
-          <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
-        <% end %>
-      </div>
-      <hr />
-    <% end %>
-    <% unless @previous_drop_ins.empty? %>
-      <div class="row text-center">
-        <br /><br />
-        <p>
-          Here are your past drop-ins. Your feedback will help us improve the service! 
-        </p>
-        <br /><br />
-      </div>
+        <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
+          <% if current_shopper %>
+              <%= render 'upcoming_for_shopper', drop_in: drop_in %>
+          <% elsif current_retail_user %>
+              <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
+          <% end %>
+        </div>
+        <hr />
     <% end %>
     <% @previous_drop_ins.each_with_index do |drop_in, idx| %>
-      <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
-        <% if current_shopper %>
-          <%= render 'previous_for_shopper', drop_in: drop_in %>
-        <% elsif current_retail_user %>
-          <%= render 'previous_for_retail_user', drop_in: drop_in %>
-        <% end %>
-      </div>
-      <hr />
+        <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
+          <% if current_shopper %>
+              <%= render 'previous_for_shopper', drop_in: drop_in %>
+          <% elsif current_retail_user %>
+              <%= render 'previous_for_retail_user', drop_in: drop_in %>
+          <% end %>
+        </div>
+        <hr />
     <% end %>
-  </div>
-</div>
+<% end %>

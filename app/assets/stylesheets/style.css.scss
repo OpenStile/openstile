@@ -5,8 +5,8 @@ Designed by : http://responsivewebinc.com
 /* Open Sans */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
-/* Lobster Two */
-@import url(http://fonts.googleapis.com/css?family=Lobster+Two);
+/* Nunito */
+@import url(http://fonts.googleapis.com/css?family=Nunito:300);
 
 /* Droid Serif */
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
@@ -179,6 +179,41 @@ footer .footer-section h5 {
   background:#555 asset_url('wallpaper_rack.jpg') no-repeat;
   background-size:cover;
   background-position:center 70%;
+}
+
+.experience img {
+  max-height: 400px;
+}
+
+.experience .description {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.experience h4 {
+  font-size: 40px;
+  line-height: 45px;
+  padding-bottom: 15px;
+  font-family: 'Nunito', sans-serif;
+  font-weight: lighter;
+}
+
+.experience h5 {
+  font-size: 18px;
+  line-height: 20px;
+  padding: 15px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.experience li {
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
+}
+
+.experience ul {
+  list-style-type: none;
 }
 
 .style-profile .top-image {

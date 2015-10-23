@@ -67,7 +67,7 @@ describe "Shopper log in and log out" do
       end
 
       it "should take me to my Drop ins" do
-        expect(page).to have_content('My Drop-Ins')
+        expect(page).to have_content('SHOP LIKE A VIP')
       end
 
       describe "and I log out after being logged in" do

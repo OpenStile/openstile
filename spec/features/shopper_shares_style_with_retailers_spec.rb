@@ -138,7 +138,7 @@ feature 'Shopper shares style preferences with retailer' do
     given_i_am_a_logged_in_shopper shopper
     when_i_navigate_to_my_style_profile
     when_i_change_my_preferences_to_random_sampling_options_2
-    when_i_save_my_style_profile
+    click_button 'Save'
     then_the_store_owner_should_know_random_sampling_options_2
   end
 
@@ -226,7 +226,7 @@ feature 'Shopper shares style preferences with retailer' do
 
   def when_i_save_my_style_profile
     click_button 'Save'
-    expect(page).to have_text('My Drop-Ins')
+    expect(page).to have_text('SHOP LIKE A VIP')
   end
 
   def when_i_schedule_a_dropin_with_retailer

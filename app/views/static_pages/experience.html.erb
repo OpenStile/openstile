@@ -1,56 +1,5 @@
 <% provide(:title, 'The Experience') %>
 
-<div class="experience-top">
-  <%= render "shared/header" %>
-  <div class="hero inner-page">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="intro">
-            <h2>The OpenStile Experience</h2><br /> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/header" %>
 
-<div class="experience features block">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-xs-6">
-        <%= image_tag("plaid_blazer.jpg", class: "img-responsive img-rounded")%>
-      </div>
-      <div class="col-md-6 col-xs-6">
-        <div class="text-center">
-          <h4>Shop like the V.I.P you are!</h4>
-        </div>
-        <hr>
-        <div class="text-center">
-          <p>When you shop with OpenStile, our stores will know:</p>
-          <br />
-          <ul>
-            <li>When you're coming in</li>
-            <li>What you do and don't like</li>
-            <li>What you're actively seeking</li>
-          </ul>
-          <br />
-          <p>
-            Powered by this knowledge they'll be able to pick out a few 
-            outfits ahead of time that you're sure to love! 
-          </p>
-        </div><br />
-        <hr>
-        <div class="text-center">
-          <p>Experience OpenStile at these local boutiques</p>
-        </div><br /><br />
-        <div class="col-md-12 col-xs-12 text-center">
-          <br />
-          <% if !shopper_signed_in? && !retail_user_signed_in? && !admin_signed_in? %>
-            <%= render 'shared/start_using_today_button' %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/experience" %>
