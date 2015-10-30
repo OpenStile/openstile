@@ -13,19 +13,11 @@ module ImageName
     "#{remove_special_characters(state)}/#{remove_special_characters(city)}/#{remove_special_characters(self.name)}"
   end
 
-  def image_name
-    return 'sample_artifact' if Rails.env.development?
-
-    leaf_name = self.respond_to?(:retailer) ? remove_special_characters(self.name) : 'storefront'
-    "#{image_path_root}/#{leaf_name}.#{IMAGE_FILE_EXTENSION}"
+  def cover_photo
+    "#{image_path_root}/cover_photo.#{IMAGE_FILE_EXTENSION}"
   end
 
-  def image_alt_text
-    image_name.gsub(".#{IMAGE_FILE_EXTENSION}", '').gsub('/','_')
-  end
-
-  def logo_image_name
-    return 'sample_logo' if Rails.env.development?
+  def logo
     "#{image_path_root}/logo.#{IMAGE_FILE_EXTENSION}"
   end
 

@@ -68,14 +68,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
     t.string   "category"
   end
 
-  create_table "bottom_sizes_retailers", id: false, force: true do |t|
-    t.integer "retailer_id",    null: false
-    t.integer "bottom_size_id", null: false
-  end
-
-  add_index "bottom_sizes_retailers", ["bottom_size_id", "retailer_id"], name: "retailers_for_a_bottom_size_index", using: :btree
-  add_index "bottom_sizes_retailers", ["retailer_id", "bottom_size_id"], name: "retailer_bottom_sizes_index", using: :btree
-
   create_table "bottom_sizes_style_profiles", id: false, force: true do |t|
     t.integer "style_profile_id", null: false
     t.integer "bottom_size_id",   null: false
@@ -105,14 +97,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
     t.datetime "updated_at"
     t.string   "category"
   end
-
-  create_table "dress_sizes_retailers", id: false, force: true do |t|
-    t.integer "retailer_id",   null: false
-    t.integer "dress_size_id", null: false
-  end
-
-  add_index "dress_sizes_retailers", ["dress_size_id", "retailer_id"], name: "retailers_for_a_dress_size_index", using: :btree
-  add_index "dress_sizes_retailers", ["retailer_id", "dress_size_id"], name: "retailer_dress_sizes_index", using: :btree
 
   create_table "dress_sizes_style_profiles", id: false, force: true do |t|
     t.integer "style_profile_id", null: false
@@ -212,20 +196,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
   add_index "parts_to_flaunts", ["part_id"], name: "index_parts_to_flaunts_on_part_id", using: :btree
   add_index "parts_to_flaunts", ["style_profile_id"], name: "index_parts_to_flaunts_on_style_profile_id", using: :btree
 
-  create_table "price_ranges", force: true do |t|
-    t.integer  "retailer_id"
-    t.decimal  "top_min_price"
-    t.decimal  "top_max_price"
-    t.decimal  "bottom_min_price"
-    t.decimal  "bottom_max_price"
-    t.decimal  "dress_min_price"
-    t.decimal  "dress_max_price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "price_ranges", ["retailer_id"], name: "index_price_ranges_on_retailer_id", using: :btree
-
   create_table "retail_users", force: true do |t|
     t.string   "email"
     t.string   "cell_phone"
@@ -250,6 +220,8 @@ ActiveRecord::Schema.define(version: 20150911212027) do
   create_table "retailers", force: true do |t|
     t.string   "name"
     t.string   "description"
+    t.string   "size_range"
+    t.integer  "price_index"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "look_id"
@@ -276,14 +248,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
 
   add_index "retailers_special_considerations", ["retailer_id", "special_consideration_id"], name: "special_considerations_for_a_retailer_index", using: :btree
   add_index "retailers_special_considerations", ["special_consideration_id", "retailer_id"], name: "retailers_for_a_special_consideration_index", using: :btree
-
-  create_table "retailers_top_sizes", id: false, force: true do |t|
-    t.integer "retailer_id", null: false
-    t.integer "top_size_id", null: false
-  end
-
-  add_index "retailers_top_sizes", ["retailer_id", "top_size_id"], name: "retailer_top_sizes_index", using: :btree
-  add_index "retailers_top_sizes", ["top_size_id", "retailer_id"], name: "retailers_for_a_top_size_index", using: :btree
 
   create_table "shoppers", force: true do |t|
     t.string   "first_name"

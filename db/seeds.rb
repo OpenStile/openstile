@@ -57,44 +57,57 @@ end
 end
 
 if ENV["demo_up"]
-  (1..5).each do |idx|
-    location = Location.create!(address: "#{Faker::Address.street_address}, Washington, DC",
-                                neighborhood: ['15th & U', 'Petworth', 'Capitol Hill', 
-                                               'Dupont Circle', 'Columbia Heights'].sample)
+  location = Location.create!(address: '2439 18th Street, Brooklyn, NY 11213',
+                              neighborhood: 'Adams Morgan')
 
-    retailer = Retailer.create!(name: "#{Faker::Address.street_name} Boutique",
-                               description: 'This is a retailer created for OpenStile demo puposes. ' +
-                                            'This retailer carries some of the best local designers in ' +
-                                            'Washington DC. Tons of new items added every week so check ' +
-                                            'back regularly!',
-                               location: location,
-                               look_id: Look.ids.sample,
-                               body_shape_id: BodyShape.ids.sample,
-                               top_fit_id: TopFit.ids.sample,
-                               bottom_fit_id: BottomFit.ids.sample, 
-                               special_consideration_ids: SpecialConsideration.ids.sample(2),
-                               status: 1)
+  retailer = Retailer.create!(name: 'Violet Boutique',
+                              description: 'This is a retailer created for OpenStile demo puposes. ' +
+                                  'This retailer carries some of the best local designers in ' +
+                                  'Washington DC. Tons of new items added every week so check ' +
+                                  'back regularly!',
+                              location: location,
+                              size_range: '00 (XS) - 20 (XXL)',
+                              price_index: 2,
+                              status: 1)
 
-    retailer.create_price_range(top_min_price: 0, top_max_price: 500, 
-                                bottom_min_price: 0, bottom_max_price: 500,
-                                dress_min_price: 0, dress_max_price: 500) 
+  retailer.create_online_presence(web_link: 'http://google.com',
+                                  facebook_link: 'http://facebook.com',
+                                  twitter_link: 'http://twitter.com',
+                                  instagram_link: 'http://instagram.com')
 
-    retailer.create_online_presence(web_link: 'http://google.com',
-                                    facebook_link: 'http://facebook.com',
-                                    twitter_link: 'http://twitter.com',
-                                    instagram_link: 'http://instagram.com')
+  retailer.drop_in_availabilities.create!(template_date: Date.current,
+                                          start_time: "09:00:00",
+                                          end_time: "17:00:00",
+                                          frequency: "Daily",
+                                          bandwidth: 2,
+                                          location: location)
 
-    retailer.drop_in_availabilities.create!(template_date: Date.current,
-                                            start_time: "09:00:00",
-                                            end_time: "17:00:00",
-                                            frequency: "Daily",
-                                            bandwidth: 2,
-                                            location: location)
 
-    retailer.top_sizes << TopSize.all                                 
-    retailer.bottom_sizes << BottomSize.all                                 
-    retailer.dress_sizes << DressSize.all
-  end
+  location = Location.create!(address: '1387 Carroll St., Brooklyn, NY 11213',
+                              neighborhood: 'Crown Heights')
+
+  retailer = Retailer.create!(name: 'Jupe NYC',
+                              description: 'This is a retailer created for OpenStile demo puposes. ' +
+                                  'This retailer carries some of the best local designers in ' +
+                                  'Washington DC. Tons of new items added every week so check ' +
+                                  'back regularly!',
+                              location: location,
+                              size_range: '00 (XS) - 14 (XL)',
+                              price_index: 1,
+                              status: 1)
+
+  retailer.create_online_presence(web_link: 'http://google.com',
+                                  facebook_link: 'http://facebook.com',
+                                  twitter_link: 'http://twitter.com',
+                                  instagram_link: 'http://instagram.com')
+
+  retailer.drop_in_availabilities.create!(template_date: Date.current,
+                                          start_time: "09:00:00",
+                                          end_time: "17:00:00",
+                                          frequency: "Daily",
+                                          bandwidth: 2,
+                                          location: location)
+
 end
 
 if ENV["demo_down"]
