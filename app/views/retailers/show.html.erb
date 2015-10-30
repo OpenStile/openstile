@@ -6,14 +6,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5 vcenter">
-        <%= cl_image_tag(@retailer.image_name, 
+        <%= cl_image_tag(@retailer.cover_photo,
                          width: 400, height: 500, crop: :lpad,
                          class: "img-responsive") %>
       </div>
       <div class="col-md-5 col-xs-5 text-center vcenter">
         <hr>
         <a href=<%= item_retailer_show_path(@retailer)%> >
-          <%= cl_image_tag(@retailer.logo_image_name, 
+          <%= cl_image_tag(@retailer.logo,
                             class: "img-responsive center-block",
                             width: 200) %>
         </a><br />

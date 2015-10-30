@@ -4,6 +4,8 @@ class CreateRetailers < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.string :neighborhood
+      t.string :size_range
+      t.integer :price_index
 
       t.timestamps
     end

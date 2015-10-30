@@ -5,16 +5,16 @@ RSpec.describe Retailer, :type => :model do
                                       neighborhood: "Shaw") }
   before { @retailer = Retailer.new(name: "ABC Boutique",
                                     description: "Premier boutique in DC!",
+                                    size_range: "00 (XS) - 14 (XL)",
+                                    price_index: 1,
                                     location: location) }
 
   subject { @retailer }
 
   it { should respond_to :name }
   it { should respond_to :description }
-  it { should respond_to :top_sizes }
-  it { should respond_to :bottom_sizes }
-  it { should respond_to :dress_sizes }
-  it { should respond_to :price_range }
+  it { should respond_to :size_range }
+  it { should respond_to :price_index }
   it { should respond_to :look }
   it { should respond_to :look_id }
   it { should respond_to :primary_look }
@@ -34,8 +34,8 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location }
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
-  it { should respond_to :image_name }
-  it { should respond_to :logo_image_name }
+  it { should respond_to :cover_photo }
+  it { should respond_to :logo }
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should respond_to :summary }
@@ -56,6 +56,16 @@ RSpec.describe Retailer, :type => :model do
     it { should_not be_valid }
   end
 
+  context "when size range is not present" do
+    before { @retailer.size_range = " " }
+    it { should_not be_valid }
+  end
+
+  context "when price index is not present" do
+    before { @retailer.price_index = nil }
+    it { should_not be_valid }
+  end
+
   context "when description is too long" do
     before { @retailer.description = "a"*251 } 
     it { should_not be_valid }
@@ -64,18 +74,6 @@ RSpec.describe Retailer, :type => :model do
   context "when location id is not present" do
     before { @retailer.location_id = nil }
     it { should_not be_valid }
-  end
-
-  describe "price range association" do
-    before { @retailer.save }
-    let!(:price_range){ FactoryGirl.create(:price_range, retailer: @retailer) }
-
-    it "should destroy associated price range" do
-      retailer_price_range = @retailer.price_range
-      @retailer.destroy
-      expect(retailer_price_range).to_not be_nil
-      expect(PriceRange.where(id: retailer_price_range.id)).to be_empty
-    end
   end
 
   describe "online presence association" do
@@ -158,12 +156,12 @@ RSpec.describe Retailer, :type => :model do
                                         address: "301 Water St. SE, Washington, DC 20003") }
     let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
 
-    it "should return the correct image name" do
-      expect(retailer.image_name).to eq("dc/washington/elena_s_boutique/storefront.jpg")
+    it "should return the correct cover photo image name" do
+      expect(retailer.cover_photo).to eq("dc/washington/elena_s_boutique/cover_photo.jpg")
     end
 
     it "should return the correct logo image name" do
-      expect(retailer.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+      expect(retailer.logo).to eq("dc/washington/elena_s_boutique/logo.jpg")
     end
   end
 

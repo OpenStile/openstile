@@ -319,6 +319,64 @@ footer .footer-section h5 {
   cursor: pointer;
 }
 
+.boutiques .boutique-title {
+  margin-top: 15px;
+  margin-bottom: 25px;
+}
+
+.boutiques .cover-photo {
+  position: relative;
+}
+
+.boutiques .boutique-details {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  top: 0; left: 0;
+  background:rgba(0,0,0,0.7);
+  opacity:0;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+.boutiques .boutique-item:hover .boutique-details {
+  opacity: 1;
+  -webkit-transition: background 1s ease;
+  -moz-transition: background 1s ease;
+  -o-transition: background 1s ease;
+  -ms-transition: background 1s ease;
+  transition: background 1s ease;
+}
+
+.boutiques .boutique-details .contents {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 45px;
+  box-sizing: border-box;
+  outline: 5px solid #ffffff;
+  outline-offset: -20px;
+}
+
+.boutiques .boutique-details .contents img {
+  max-width: 200px;
+}
+
+.boutiques .boutique-details h4 {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bolder;
+  padding: 50px 15px 0px 15px;
+}
+
+.boutiques .boutique-details i {
+  color: #ffffff;
+}
+
 div.blog-container {
   border: 1px solid #e5e5e5;
   margin-top: 50px;
@@ -456,4 +514,27 @@ div.blog-side-panel .twitter-plugin {
 
 .dn {
   display: none;
+}
+
+/* Tablets */
+
+@media (max-width: 991px) {
+  .boutiques .boutique-details .contents img {
+    max-width: 100px;
+  }
+
+  .boutiques .boutique-details h4 {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+}
+
+/* Mobile Phones */
+
+@media (max-width: 767px) {
+  .boutiques .boutique-details .contents img {
+    display: none;
+  }
+
 }
