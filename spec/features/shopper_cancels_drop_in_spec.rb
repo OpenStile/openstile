@@ -22,6 +22,13 @@ feature 'Shopper modifies drop in' do
     then_i_and_the_retail_user_should_receive_an_email shopper.email, retail_user.email
   end
 
+  def given_my_upcoming_drop_ins_page_contains appointment
+    click_link 'logo-home'
+
+    expect(page).to have_link(appointment.retailer.name)
+    expect(page).to have_content(appointment.colloquial_time)
+  end
+
   def when_i_cancel_and_confirm appointment
     within(:css, "div#drop_in_#{appointment.id}") do
       expect{click_link 'cancel'}
@@ -32,7 +39,7 @@ feature 'Shopper modifies drop in' do
   end
 
   def then_my_upcoming_drop_ins_page_should_not_contain appointment
-    click_link 'Drop-ins'
+    click_link 'logo-home'
 
     expect(page).to_not have_content(appointment.retailer.name)
   end

@@ -36,7 +36,6 @@ gem 'jquery-turbolinks'
 
 gem 'mandrill-api'
 
-gem 'dotenv-rails', :groups => [:development, :test]
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -53,14 +52,16 @@ gem "faker"
 
 gem 'StreetAddress', require: 'street_address'
 
-gem 'rack-reverse-proxy', require: 'rack/reverse_proxy', 
-    git: 'git://github.com/nextmat/rack-reverse-proxy', branch: 'content_length'
+gem 'redcarpet'
+
+gem 'pygments.rb'
 
 gem 'cloudinary'
 
 group :development, :test do
   gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'
+  gem 'byebug'
 end
 
 group :test do

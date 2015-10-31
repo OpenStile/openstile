@@ -4,15 +4,15 @@ describe "Static pages" do
   subject { page }
 
   shared_examples "static_page" do
-    it { should have_link("OpenStile", href: root_path) }
+    it { should have_link("logo-home", href: root_path) }
     it { should have_link("About", href: about_path) }
-    it { should have_link("Blog", href: blog_path) }
+    it { should have_link("Blog", href: blog_articles_path) }
     it { should have_link("Log in") }
 
     it { should have_xpath("//footer") }
-    it { should have_xpath("//a[contains(@href, 'https://twitter.com/OpenStile')]") }
-    it { should have_xpath("//a[contains(@href, 'https://www.facebook.com/openstile')]") }
-    it { should have_xpath("//a[contains(@href, 'http://instagram.com/openstile')]") }
+    it { should have_xpath("//a[contains(@href, 'https://twitter.com/openstile')]") }
+    it { should have_xpath("//a[contains(@href, 'https://facebook.com/openstile')]") }
+    it { should have_xpath("//a[contains(@href, 'https://instagram.com/openstile')]") }
   end
 
   describe "Home page" do
@@ -29,13 +29,5 @@ describe "Static pages" do
     it_should_behave_like "static_page"
     it { should have_content('Our Story') }
     it { should have_title('About | OpenStile') }
-  end
-
-  describe "Retailer page" do
-    before {visit '/retailer_info'}
-
-    it_should_behave_like "static_page"
-    it { should have_content('Homegrown Fashion Retailers') }
-    it { should have_title('Fashion Retailers Reach More Shoppers | OpenStile') }
   end
 end

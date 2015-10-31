@@ -3,14 +3,13 @@ Rails.application.routes.draw do
   root  'static_pages#home'
 
   get '/about'          =>  'static_pages#about'
-  get '/retailer_info'  =>  'static_pages#retailer_info'
   get '/experience'     =>  'static_pages#experience'
   get '/decal'          =>  'static_pages#decal'
+  get '/relaunch'       =>  'static_pages#relaunch'
 
-  get '/blog' => redirect('/blog/')
-  get '/blog/welcome-to-openstile'          =>  'blog#blog_01'
-  get '/blog/retailer-spotlight-tin-lizzy'  =>  'blog#blog_02'
-  get '/blog/dressing-mommy-post-baby-phase'=>  'blog#blog_03'
+  namespace :blog do
+    resources :articles, path: '', only: [:index, :show]
+  end
 
   devise_for :shoppers, :skip => [:registrations], controllers: {
     sessions: "shoppers/sessions",
@@ -40,24 +39,9 @@ Rails.application.routes.draw do
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
-      get 'catalog'
       get 'scheduler'
     end
   end
-  
-  concern :favoriteable do
-    member do
-      get 'toggle_favorite'
-    end
-  end
-
-  resources :tops, only: [:show, :new, :create], concerns: :favoriteable
-
-  resources :bottoms, only: [:show, :new, :create], concerns: :favoriteable
-
-  resources :dresses, only: [:show, :new, :create], concerns: :favoriteable
-
-  resources :outfits, only: [:show, :new, :create], concerns: :favoriteable
 
   resources :drop_ins, only: [:create, :update, :destroy] do
     collection do

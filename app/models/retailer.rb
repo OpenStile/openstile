@@ -5,31 +5,24 @@ class Retailer < ActiveRecord::Base
 
   has_one :retail_user, dependent: :destroy
 
-  has_and_belongs_to_many :top_sizes
-  has_and_belongs_to_many :bottom_sizes
-  has_and_belongs_to_many :dress_sizes
-  has_one :price_range, dependent: :destroy
   belongs_to :body_shape
   belongs_to :look
   belongs_to :primary_look, class_name: "Look"
   belongs_to :location
   belongs_to :top_fit
   belongs_to :bottom_fit
-  has_many :tops, dependent: :destroy
-  has_many :bottoms, dependent: :destroy
-  has_many :dresses, dependent: :destroy
-  has_many :outfits, dependent: :destroy
   has_and_belongs_to_many :special_considerations
   has_one :online_presence, dependent: :destroy
   has_many :drop_in_availabilities, dependent: :destroy
   has_many :drop_ins, dependent: :destroy
 
-  accepts_nested_attributes_for :price_range
   accepts_nested_attributes_for :online_presence
 
   validates :name, presence: true, length: { maximum: 50 } 
   validates :description, presence: true, length: { maximum: 250 }
   validates :location_id, presence: true
+  validates :size_range, presence: true
+  validates :price_index, presence: true
 
   def available_for_drop_in? datetime
     drop_in_availabilities.order('created_at DESC').each do |availability|
@@ -51,7 +44,7 @@ class Retailer < ActiveRecord::Base
 
     ret = []
     current_day = start_day
-    while(current_day < end_day) do
+    while(current_day <= end_day) do
       unless get_available_drop_in_times(current_day.to_s).empty?
         case format
         when :integer_array

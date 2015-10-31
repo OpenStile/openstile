@@ -78,7 +78,8 @@ feature 'Admin user generates OpenStile report' do
         count.times do
           email = Faker::Internet.email
           visit '/'
-          click_link 'Sign up'
+          click_link 'Log in'
+          click_link 'Join now'
           fill_in 'First name', with: Faker::Name.first_name
           fill_in 'Email address', with: email 
           fill_in 'Password', with: 'foobar' 

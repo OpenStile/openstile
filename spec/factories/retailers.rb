@@ -5,6 +5,8 @@ FactoryGirl.define do
     name "Chic Boutique"
     description "Your one stop shop for all really cool dresses"
     location
+    size_range "00 (XS) - 14 (XL)"
+    price_index 2
     status 1
   end
 end

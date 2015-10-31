@@ -5,22 +5,19 @@ RSpec.describe Retailer, :type => :model do
                                       neighborhood: "Shaw") }
   before { @retailer = Retailer.new(name: "ABC Boutique",
                                     description: "Premier boutique in DC!",
+                                    size_range: "00 (XS) - 14 (XL)",
+                                    price_index: 1,
                                     location: location) }
 
   subject { @retailer }
 
   it { should respond_to :name }
   it { should respond_to :description }
-  it { should respond_to :top_sizes }
-  it { should respond_to :bottom_sizes }
-  it { should respond_to :dress_sizes }
-  it { should respond_to :price_range }
+  it { should respond_to :size_range }
+  it { should respond_to :price_index }
   it { should respond_to :look }
   it { should respond_to :look_id }
   it { should respond_to :primary_look }
-  it { should respond_to :tops }
-  it { should respond_to :bottoms }
-  it { should respond_to :dresses }
   it { should respond_to :body_shape_id }
   it { should respond_to :body_shape }
   it { should respond_to :for_petite }
@@ -37,9 +34,8 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location }
   it { should respond_to :location_id }
   it { should respond_to :retail_user }
-  it { should respond_to :image_name }
-  it { should respond_to :logo_image_name }
-  it { should respond_to :outfits }
+  it { should respond_to :cover_photo }
+  it { should respond_to :logo }
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should respond_to :summary }
@@ -60,6 +56,16 @@ RSpec.describe Retailer, :type => :model do
     it { should_not be_valid }
   end
 
+  context "when size range is not present" do
+    before { @retailer.size_range = " " }
+    it { should_not be_valid }
+  end
+
+  context "when price index is not present" do
+    before { @retailer.price_index = nil }
+    it { should_not be_valid }
+  end
+
   context "when description is too long" do
     before { @retailer.description = "a"*251 } 
     it { should_not be_valid }
@@ -68,60 +74,6 @@ RSpec.describe Retailer, :type => :model do
   context "when location id is not present" do
     before { @retailer.location_id = nil }
     it { should_not be_valid }
-  end
-
-  describe "price range association" do
-    before { @retailer.save }
-    let!(:price_range){ FactoryGirl.create(:price_range, retailer: @retailer) }
-
-    it "should destroy associated price range" do
-      retailer_price_range = @retailer.price_range
-      @retailer.destroy
-      expect(retailer_price_range).to_not be_nil
-      expect(PriceRange.where(id: retailer_price_range.id)).to be_empty
-    end
-  end
-
-  describe "tops assocication" do
-    before { @retailer.save }
-    let!(:top) { FactoryGirl.create(:top, retailer: @retailer) }
-
-    it "should destroy associated tops" do
-      tops = @retailer.tops.to_a
-      @retailer.destroy
-      expect(tops).to_not be_empty
-      tops.each do |t|
-        expect(Top.where(id: t.id)).to be_empty
-      end
-    end
-  end
-
-  describe "bottoms assocication" do
-    before { @retailer.save }
-    let!(:bottom) { FactoryGirl.create(:bottom, retailer: @retailer) }
-
-    it "should destroy associated bottoms" do
-      bottoms = @retailer.bottoms.to_a
-      @retailer.destroy
-      expect(bottoms).to_not be_empty
-      bottoms.each do |b|
-        expect(Bottom.where(id: b.id)).to be_empty
-      end
-    end
-  end
-
-  describe "dresses assocication" do
-    before { @retailer.save }
-    let!(:dress) { FactoryGirl.create(:dress, retailer: @retailer) }
-
-    it "should destroy associated dresses" do
-      dresses = @retailer.dresses.to_a
-      @retailer.destroy
-      expect(dresses).to_not be_empty
-      dresses.each do |d|
-        expect(Dress.where(id: d.id)).to be_empty
-      end
-    end
   end
 
   describe "online presence association" do
@@ -187,20 +139,6 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
-  describe "outfits association" do
-    before { @retailer.save }
-    let!(:outfit){ FactoryGirl.create(:outfit, retailer: @retailer) }
-
-    it "should destroy associated outfit" do
-      retailer_outfits = @retailer.outfits.to_a
-      @retailer.destroy
-      expect(retailer_outfits).to_not be_empty
-      retailer_outfits.each do |o|
-        expect(Outfit.where(id: o.id)).to be_empty
-      end
-    end
-  end
-
   describe "status" do
     context "when not set" do
       before { @retailer.status = nil }
@@ -218,12 +156,12 @@ RSpec.describe Retailer, :type => :model do
                                         address: "301 Water St. SE, Washington, DC 20003") }
     let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
 
-    it "should return the correct image name" do
-      expect(retailer.image_name).to eq("dc/washington/elena_s_boutique/storefront.jpg")
+    it "should return the correct cover photo image name" do
+      expect(retailer.cover_photo).to eq("dc/washington/elena_s_boutique/cover_photo.jpg")
     end
 
     it "should return the correct logo image name" do
-      expect(retailer.logo_image_name).to eq("dc/washington/elena_s_boutique/logo.jpg")
+      expect(retailer.logo).to eq("dc/washington/elena_s_boutique/logo.jpg")
     end
   end
 
@@ -287,7 +225,7 @@ RSpec.describe Retailer, :type => :model do
                                                                1.day.from_now.to_date,
                                                                8.days.from_now.to_date)
         
-        expect(returned_dates.size).to eq(7)
+        expect(returned_dates.size).to eq(8)
       end
 
       context "with specific days turned off" do
@@ -303,7 +241,7 @@ RSpec.describe Retailer, :type => :model do
                                                                8.days.from_now.to_date)
         
           expect(returned_dates).to_not include(2.days.from_now.to_date.to_s)
-          expect(returned_dates.size).to eq(6)
+          expect(returned_dates.size).to eq(7)
         end
       end
     end
