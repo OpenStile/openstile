@@ -5,8 +5,8 @@ Designed by : http://responsivewebinc.com
 /* Open Sans */
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
-/* Nunito */
-@import url(http://fonts.googleapis.com/css?family=Nunito:300);
+/* Lato */
+@import url(https://fonts.googleapis.com/css?family=Lato:300);
 
 /* Droid Serif */
 @import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
@@ -166,6 +166,47 @@ footer .footer-section h5 {
   margin-bottom: 50px;
 }
 
+.home-page.container {
+  min-height: 80vh;
+}
+
+.home-page h1 {
+  font-size: 7vh;
+  line-height: 8vh;
+  font-family: 'Lato', sans-serif;
+}
+
+.home-page h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 3vh;
+  margin-top: 3vh;
+}
+
+.home-page.intro {
+  background:#555 asset_url('style_session.jpg') no-repeat;
+  background-size:cover;
+  background-position:center top;
+}
+
+.home-page.intro h1 {
+  padding-top: 20vh;
+}
+
+.home-page a {
+  font-family: 'Lato', sans-serif;
+  font-size: 3vh;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+.home-page.how-it-works h1 {
+  padding-top: 10vh;
+}
+
+.home-page.how-it-works .service-item img {
+  max-height: 50vh;
+}
+
 .login-section {
   border: 1px solid #ededed;
   border-radius: 10px;
@@ -179,6 +220,7 @@ footer .footer-section h5 {
   background:#555 asset_url('wallpaper_rack.jpg') no-repeat;
   background-size:cover;
   background-position:center 70%;
+  height: 68vh;
 }
 
 .experience img {
@@ -194,7 +236,7 @@ footer .footer-section h5 {
   font-size: 40px;
   line-height: 45px;
   padding-bottom: 15px;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight: lighter;
 }
 
@@ -202,14 +244,14 @@ footer .footer-section h5 {
   font-size: 18px;
   line-height: 20px;
   padding: 15px;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .experience li {
   font-size: 18px;
   line-height: 20px;
   padding: 10px;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .experience ul {
