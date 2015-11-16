@@ -76,7 +76,7 @@ describe "Retail user log in and log out" do
 
         it "should take me to the home page and notify me that I've been logged out" do
           expect(page).to have_content('Signed out successfully')
-          expect(page).to have_title('A Personalized way to Explore Local Fashion Boutiques | OpenStile')
+          expect(page).to have_title('Hand-picked items at your favorite local boutiques | OpenStile')
         end
 
         it "should log me out" do
