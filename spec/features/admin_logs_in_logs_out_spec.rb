@@ -27,7 +27,6 @@ feature 'Admin user' do
 
   def when_i_visit_admin_log_in
     visit '/admins/sign_in'
-    expect(page).to have_content('Admin log in')
   end
 
   def when_i_enter_invalid_credentials
