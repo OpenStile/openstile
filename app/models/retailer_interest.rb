@@ -14,5 +14,4 @@ class RetailerInterest < ActiveRecord::Base
 	validates :zip_code, length: { maximum: 9 }
 	validates :phone_number, format: { with: VALID_PHONE_NUMBER_REGEX, message: "must be 10 or 11 numeric digits." }, 
                          unless: "phone_number.nil? or phone_number.empty?"
-	validates :website_address
 end
