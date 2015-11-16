@@ -9,9 +9,6 @@ class StaticPagesController < ApplicationController
   def about
   end
 
-  def retailer_info
-  end
-
   def blog
   end
 

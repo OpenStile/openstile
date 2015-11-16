@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   root  'static_pages#home'
 
   get '/about'          =>  'static_pages#about'
-  get '/retailer_info'  =>  'static_pages#retailer_info'
   get '/experience'     =>  'static_pages#experience'
   get '/decal'          =>  'static_pages#decal'
   get '/relaunch'       =>  'static_pages#relaunch'
@@ -59,6 +58,8 @@ Rails.application.routes.draw do
   get 'drop_in_availabilities/apply_form' => 'drop_in_availabilities#apply_form'
 
   resources :reports, only: [:new, :create]
+
+  resources :retailer_interests, only: [:new, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

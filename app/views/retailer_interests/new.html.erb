@@ -1,0 +1,36 @@
+<div class="block">
+  <div class="container">
+    <div class="row text-center">
+      <h2>Become a Boutique Partner</h2>
+    </div>
+    <br /><br />
+    <div class="row">
+      <div class="col-md-6 col-xs-6 col-md-offset-3 col-xs-offset-3">
+<%= form_for @retailer_interest do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <%= f.label :boutique_name %>
+  <%= f.text_field :boutique_name %>
+  <%= f.label :website_address %>
+  <%= f.text_field :website_address %>
+  <%= f.label :street_address %>
+  <%= f.text_field :street_address %>
+  <%= f.label :city %>
+  <%= f.text_field :city %>
+  <%= f.label :state %>
+  <%= f.text_field :state %>
+  <%= f.label :zip_code %>
+  <%= f.text_field :zip_code %>
+  <%= f.label :email_address %>
+  <%= f.text_field :email_address %>
+  <%= f.label :phone_number %>
+  <%= f.text_field :phone_number %>
+  <%= f.label :describe_store_aesthetic %>
+  <%= f.text_area :describe_store_aesthetic %>
+  <div class="actions">
+  <%= f.submit "Submit", class: "col-md-2 col-xs-4 btn btn-primary"%>
+  </div>
+  <% end %>
