@@ -1,6 +1,6 @@
 class RetailerInterest < ActiveRecord::Base
 
-      VALID_EMAIL_ADDRESS_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+      VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
       VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
 
 	validates :boutique_name, presence: true, length: { maximum: 50 }
