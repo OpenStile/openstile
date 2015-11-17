@@ -9,24 +9,41 @@ feature 'User visits during site reconstruction' do
     ENV.delete('OST_RELAUNCH_PREP')
   end
 
-  scenario 'and goes to home page' do
-    visit root_path
+  scenario 'and attempts to sign up' do
+    visit '/'
+    click_link 'Log in'
+    click_link "Don't have an account? Join now"
     then_i_should_see_relaunch_message
   end
 
-  scenario 'and attempts to sign up' do
-    visit new_shopper_registration_path
+  scenario 'and attempts to access the boutiques page' do
+    visit '/'
+    click_link 'Boutiques'
     then_i_should_see_relaunch_message
+  end
+
+  scenario 'and attempts to access the about page' do
+    visit '/'
+    click_link 'About'
+    then_i_should_see_relaunch_message
+  end
+
+  scenario 'and goes to home page' do
+    visit '/'
+    then_i_should_see_relaunch_message false
   end
 
   scenario 'and attempts to sign in as shopper' do
-    visit new_shopper_session_path
-    then_i_should_see_relaunch_message
+    visit '/'
+    click_link 'Log in'
+    then_i_should_see_relaunch_message false
   end
 
   scenario 'and attempts to sign in as retailer' do
-    visit new_retail_user_session_path
-    then_i_should_see_relaunch_message
+    visit '/'
+    click_link 'Log in'
+    click_link 'Switch to retailer log in'
+    then_i_should_see_relaunch_message false
   end
 
   scenario 'and attempts to sign in as admin' do
@@ -34,8 +51,9 @@ feature 'User visits during site reconstruction' do
     then_i_should_see_relaunch_message false
   end
 
-  scenario 'and attempts to access the experience page' do
-    visit experience_path
+  scenario 'and attempts to access the blog page' do
+    visit '/'
+    first(:link, 'Blog').click
     then_i_should_see_relaunch_message false
   end
 
