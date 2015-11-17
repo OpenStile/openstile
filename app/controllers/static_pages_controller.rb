@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
 
-  before_filter :go_to_relaunch, :only => [:home]
+  before_filter :go_to_relaunch, :only => [:about]
   skip_filter :authenticate_shopper!
   
   def home

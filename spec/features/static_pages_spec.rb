@@ -19,8 +19,8 @@ describe "Static pages" do
     before {visit '/'}
 
     it_should_behave_like "static_page"
-    it { should have_content('Explore Local Fashion Retailers') }
-    it { should have_title('A Personalized way to Explore Local Fashion Boutiques | OpenStile') }
+    it { should have_content('How it works') }
+    it { should have_title('Hand-picked items at your favorite local boutiques | OpenStile') }
   end
 
   describe "About page" do

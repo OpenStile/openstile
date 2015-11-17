@@ -1,4 +1,5 @@
 class RetailersController < ApplicationController
+  before_filter :go_to_relaunch, :only => [:index]
   before_filter :authenticate_admin!, only: [:new, :create]
   before_filter :store_shopper_location, only: [:scheduler]
   before_filter :authenticate_shopper!, only: [:scheduler]

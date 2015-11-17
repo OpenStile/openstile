@@ -23,7 +23,7 @@
           <%= f.label :password %><br />
         </div>
         <div class="col-md-offset-1 col-md-4 col-xs-5 text-right">
-          <%= link_to 'Forgot password?', send("new_#{type}_password_path") %>
+          <%= link_to 'Forgot password?', send("new_#{type}_password_path") if type != 'admin'%>
         </div>
         <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
       </div>

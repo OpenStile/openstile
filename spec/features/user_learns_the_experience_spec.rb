@@ -12,7 +12,8 @@ feature 'Learn about OpenStile' do
   end
 
   def when_i_navigate_to_the_experience_page
-    click_link 'Experience'
+    #click_link 'Experience' - Temporarily remove in prelaunch
+    visit '/experience'
   end
 
   def then_i_should_read_about_how_OpenStile_works

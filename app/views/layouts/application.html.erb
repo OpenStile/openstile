@@ -11,23 +11,18 @@
 
     <%= yield %>
 
-    <% unless(content_for?(:embeddable) && yield(:embeddable)) || ENV['OST_RELAUNCH_PREP'] %>
+    <% unless(content_for?(:embeddable) && yield(:embeddable)) || request.env['PATH_INFO'] == '/relaunch' %>
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-xs-6 col-md-4 footer-section">
             <h5>Contact us</h5>
             <p>info@openstile.com</p><br>
-            <p>
-              1836 Independence Ave. SE, Suite 3<br>
-              Washington DC 20003
-            </p>
           </div>
           <div class="col-xs-6 col-md-4 footer-section">
             <h5>Learn more</h5>
             <%= link_to "About", about_path %><br>
             <%= link_to "Blog", blog_articles_path %><br>
-            <%= link_to "Retailer Info", retailer_info_path %><br>
           </div>
           <div class="col-xs-12 col-md-4 footer-section sm-icons">
             <%= render 'shared/social_media_icons'%>
