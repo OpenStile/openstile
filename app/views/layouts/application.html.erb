@@ -11,7 +11,7 @@
 
     <%= yield %>
 
-    <% unless(content_for?(:embeddable) && yield(:embeddable)) || request.env['PATH_INFO'] == '/relaunch' %>
+    <% unless(content_for?(:embeddable) && yield(:embeddable)) %>
     <footer>
       <div class="container">
         <div class="row">
