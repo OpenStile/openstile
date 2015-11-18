@@ -172,7 +172,7 @@ footer .footer-section h5 {
 }
 
 .home-page.how-it-works .service-item img {
-  max-height: 50vh;
+  max-height: 30vh;
 }
 
 .login-section {
@@ -540,6 +540,35 @@ div.blog-side-panel .twitter-plugin {
   .boutiques .boutique-details h4 {
     padding: 8px;
     font-size: 12px;
+  }
+
+  .home-page.intro {
+    min-height: 450px;
+  }
+
+  .home-page h1 {
+    font-size: 3vh;
+    line-height: 4vh;
+  }
+
+  .home-page h3 {
+    font-size: 2vh;
+    margin-top: 15px;
+    max-font-size: 15px;
+  }
+
+  .home-page.intro h1 {
+    padding-top: 10vh;
+  }
+
+  .home-page a {
+    font-size: 1vh;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .home-page.how-it-works h1 {
+    padding-top: 5vh;
   }
 
 }
