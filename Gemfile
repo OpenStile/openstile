@@ -58,6 +58,8 @@ gem 'pygments.rb'
 
 gem 'cloudinary'
 
+gem 'meta-tags'
+
 group :development, :test do
   gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'

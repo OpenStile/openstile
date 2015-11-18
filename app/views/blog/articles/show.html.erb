@@ -26,3 +26,17 @@
   <%= render 'disqus_comments' %>
 
 </div>
+
+<% set_meta_tags og: {
+                         title:    @article.title,
+                         type:     'website',
+                         url:      request.original_url,
+                         image:    @article.og_photo
+                 }
+%>
+
+<% set_meta_tags twitter: {
+                         card: "summary",
+                         site: "@OpenStile"
+                 }
+%>

@@ -3,6 +3,7 @@ title: "Hey Brooklyn, we're OpenStile"
 created_at: "2015-11-17"
 author: "Tamara Austin"
 cover_photo: "openstilelogo-small-square_rx8yto.png"
+og_photo: 'https://res.cloudinary.com/openstile/image/upload/v1447727115/style-session.jpg'
 live: true
 ---
 OpenStile is gearing up for a Brooklyn launch, and we couldn’t be more excited! OpenStile is a fashion-tech service that connects shoppers with awesome neighborhood boutiques for personal styling sessions. 
