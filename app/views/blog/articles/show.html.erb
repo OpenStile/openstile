@@ -29,6 +29,7 @@
 
 <% set_meta_tags og: {
                          title:    @article.title,
+                         description: @article.excerpt,
                          type:     'website',
                          url:      request.original_url,
                          image:    @article.og_photo
