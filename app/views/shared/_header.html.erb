@@ -1,12 +1,12 @@
 <header>
   <div class="container">
     <div class="row text-center">
-      <div class="logo">
+      <div class="col-xs-6 col-xs-offset-3 logo">
         <a id='logo-home' href=<%= shopper_signed_in? ? upcoming_drop_ins_path : root_path %>>
           <%= image_tag('openstilelogo.png', class: 'img-responsive center-block', width: '400') %>
         </a>
       </div>
-      <div class="navigation">
+      <div class="col-xs-12 navigation">
         <% if current_shopper.nil? && current_retail_user.nil? && current_admin.nil? %>
           <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default ' %>
           <%= link_to "Blog", blog_articles_path, class: 'col-sm-4 btn-default' %>
