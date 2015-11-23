@@ -11,12 +11,12 @@
   </div>
 
   <div class="schedule">
-    <%= form_for(@drop_in || current_shopper.drop_ins.build(retailer_id: retailer.id)) do |f| %>
+    <%= form_for(@drop_in || current_user.drop_ins.build(retailer_id: retailer.id)) do |f| %>
       <div class="col-md-4 col-xs-4 col-md-offset-4 col-xs-offset-4 text-center">
         <%= render 'shared/error_messages', object: f.object %>
       </div>
 
-      <%= f.hidden_field :shopper_id %>
+      <%= f.hidden_field :user_id %>
       <%= f.hidden_field :retailer_id %>
 
       <div class="row form-group">

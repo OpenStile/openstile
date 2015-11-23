@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe DropIn, :type => :model do
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
   let(:retailer){ FactoryGirl.create(:retailer) }
   let!(:drop_in_availability) { 
     FactoryGirl.create(:standard_availability_for_tomorrow, 
@@ -14,8 +14,8 @@ RSpec.describe DropIn, :type => :model do
 
   it { should respond_to :retailer }
   it { should respond_to :retailer_id }
-  it { should respond_to :shopper }
-  it { should respond_to :shopper_id }
+  it { should respond_to :user }
+  it { should respond_to :user_id }
   it { should respond_to :time }
   it { should respond_to :comment }
   it { should respond_to :shopper_rating }
@@ -25,13 +25,13 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :sales_generated } 
   it { should be_valid }
 
-  context "when retailer id is not present" do
-    before { @drop_in.retailer_id = nil }
+  context "when retailer is not present" do
+    before { @drop_in.retailer = nil }
     it { should_not be_valid }
   end
 
-  context "when shopper id is not present" do
-    before { @drop_in.shopper_id = nil }
+  context "when user is not present" do
+    before { @drop_in.user = nil }
     it { should_not be_valid }
   end
 
@@ -78,7 +78,7 @@ RSpec.describe DropIn, :type => :model do
   context "when shopper has another drop in at the same time" do
     let!(:other_drop_in){ FactoryGirl.create(:drop_in, 
                                              retailer: retailer,
-                                             shopper: shopper, 
+                                             user: shopper,
                                              time: tomorrow_mid_morning) }
     it { should_not be_valid } 
   end
@@ -91,11 +91,11 @@ RSpec.describe DropIn, :type => :model do
     
     context "due to max capacity for drop ins" do
       let!(:drop_in1){ FactoryGirl.create(:drop_in, 
-                                          shopper: FactoryGirl.create(:shopper),
+                                          user: FactoryGirl.create(:shopper_user),
                                           retailer: retailer,
                                           time: tomorrow_mid_morning.advance(hours: 1)) }
       let!(:drop_in2){ FactoryGirl.create(:drop_in, 
-                                          shopper: FactoryGirl.create(:shopper),
+                                          user: FactoryGirl.create(:shopper_user),
                                           retailer: retailer,
                                           time: tomorrow_mid_morning.advance(hours: 1)) }
       before { @drop_in.time = tomorrow_mid_morning.advance(hours: 1) }

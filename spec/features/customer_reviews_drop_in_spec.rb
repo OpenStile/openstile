@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Customer reviews drop in' do
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
   let(:retailer){ FactoryGirl.create(:retailer) }
-  let(:retail_user){ FactoryGirl.create(:retail_user,
+  let(:retail_user){ FactoryGirl.create(:retailer_user,
                                          retailer: retailer) }
   let!(:drop_in_availability){ FactoryGirl.create(:drop_in_availability,
                                                  template_date: 1.day.ago,
@@ -12,11 +12,11 @@ feature 'Customer reviews drop in' do
                                                  retailer: retailer) }
   let!(:drop_in){ FactoryGirl.create(:drop_in,
                                       retailer: retailer,
-                                      shopper: shopper,
+                                      user: shopper,
                                       time: 1.day.ago.change(hour: 12)) }
 
   scenario 'on shopper side' do
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_drop_ins_as_shopper
     when_i_review_drop_in_as_shopper drop_in, '4 out of 5', 
                      "It was great! Love shopping this way"
@@ -24,7 +24,7 @@ feature 'Customer reviews drop in' do
   end
                                       
   scenario 'on retailer side' do
-    given_i_am_a_logged_in_retail_user retail_user
+    given_i_am_a_logged_in_user retail_user
     when_i_navigate_to_my_drop_ins_as_retailer
     when_i_review_drop_in_as_retailer drop_in, '5 out of 5', 
                      "Awesome! Loved meeting the new customer", '56.00'

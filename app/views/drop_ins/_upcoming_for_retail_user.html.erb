@@ -1,5 +1,5 @@
 <div class="col-md-3 col-xs-3 vcenter">
-  <h4><%= drop_in.shopper.first_name %></h4> 
+  <h4><%= drop_in.user.first_name %></h4>
   <h4><%= drop_in.colloquial_time %></h4>
 </div>
 <div class="col-md-8 col-xs-8 vcenter">
@@ -12,7 +12,7 @@
                                    data: {drop_in_id: drop_in.id} %>
   <div class="preferences-details">
     <%= render 'shared/style_preferences', 
-                profile: drop_in.shopper.style_profile %>
+                profile: drop_in.user.style_profile %>
     <%= link_to "Hide details", "#", class: "hide-preferences-link",
                                      data: {drop_in_id: drop_in.id} %>
   </div>

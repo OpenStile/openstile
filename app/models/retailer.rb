@@ -3,7 +3,7 @@ class Retailer < ActiveRecord::Base
   include StatusLive
   include FeedSummary
 
-  has_one :retail_user, dependent: :destroy
+  has_one :user, dependent: :destroy
 
   belongs_to :body_shape
   belongs_to :look

@@ -7,23 +7,23 @@
         </a>
       </div>
       <div class="col-xs-12 navigation">
-        <% if current_shopper.nil? && current_retail_user.nil? && current_admin.nil? %>
+        <% if !user_signed_in? %>
           <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default ' %>
           <%= link_to "Blog", blog_articles_path, class: 'col-sm-4 btn-default' %>
-          <%= link_to "Log in", new_shopper_session_path, class: 'col-sm-4 btn-default ' %>
+          <%= link_to "Log in", new_user_session_path, class: 'col-sm-4 btn-default ' %>
         <% else %>
-          <% if !current_shopper.nil? %>
-            <%= link_to "Style Profile", edit_style_profile_path(current_shopper.style_profile), class: 'col-sm-4 btn-default ' %>
+          <% if shopper_signed_in? %>
+            <%= link_to "Style Profile", edit_style_profile_path(current_user.style_profile), class: 'col-sm-4 btn-default ' %>
             <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default ' %>
-            <%= link_to "Log out", destroy_shopper_session_path, :method => :delete, class: 'col-sm-4 btn-default ' %>
+            <%= link_to "Log out", destroy_user_session_path, :method => :delete, class: 'col-sm-4 btn-default ' %>
           <% end %>
-          <% if !current_retail_user.nil? %>
+          <% if retailer_signed_in? %>
             <%= link_to "Dashboard", root_path %>
-            <%= link_to "Reset Password", edit_retail_user_registration_path %>
-            <%= link_to "Log out", destroy_retail_user_session_path, :method => :delete %>
+            <%= link_to "Reset Password", edit_user_registration_path %>
+            <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
           <% end %>
-          <% if !current_admin.nil? %>
-            <%= link_to "Log out", destroy_admin_session_path, :method => :delete %>
+          <% if admin_signed_in? %>
+            <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
           <% end %>
         <% end %>
       </div>

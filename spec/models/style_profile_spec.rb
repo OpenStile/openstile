@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe StyleProfile, :type => :model do
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
 
   before do
     @style_profile = shopper.style_profile
   end
   subject { @style_profile }
 
-  it { should respond_to :shopper_id }
-  it { should respond_to :shopper }
+  it { should respond_to :user_id }
+  it { should respond_to :user }
   it { should respond_to :top_sizes }
   it { should respond_to :bottom_sizes }
   it { should respond_to :dress_sizes }
@@ -33,8 +33,8 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :avoided_color_ids }
   it { should be_valid }
 
-  context "when shopper id is not present" do
-    before { @style_profile.shopper_id = nil }
+  context "when user is not present" do
+    before { @style_profile.user = nil }
     it { should_not be_valid }
   end
 

@@ -1,22 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe StyleProfilesController, :type => :controller do
-  let(:shopper){ FactoryGirl.create(:shopper) }
-  let(:other_shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
+  let(:other_shopper){ FactoryGirl.create(:shopper_user) }
   before {@request.env["devise.mapping"] = Devise.mappings[:shopper]}
 
   context "when shopper is not signed in" do
     context "GET edit" do
       it "redirects to signin" do
         get :edit, {id: shopper.style_profile.id}
-        expect(response).to redirect_to(new_shopper_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     context "PATCH update" do
       it "redirects to signin" do
         patch :update, {id: shopper.style_profile.id}
-        expect(response).to redirect_to(new_shopper_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

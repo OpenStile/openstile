@@ -2,14 +2,14 @@ require "rails_helper"
 
 RSpec.describe ShopperMailer, :type => :mailer do
   let(:retailer){ FactoryGirl.create(:retailer) }
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
   let!(:drop_in_availability) {
   FactoryGirl.create(:standard_availability_for_tomorrow,
                      retailer: retailer,
                      location: retailer.location)
   }
   let!(:drop_in){ FactoryGirl.create(:drop_in,
-                                   shopper: shopper,
+                                   user: shopper,
                                    retailer: retailer,
                                    time: tomorrow_mid_morning) }
 

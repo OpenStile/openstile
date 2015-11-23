@@ -3,12 +3,12 @@ class DropIn < ActiveRecord::Base
   Time::DATE_FORMATS[:informal_time] = "%l:%M %p"
 
   belongs_to :retailer
-  belongs_to :shopper
+  belongs_to :user
 
   validate :retailer_available_for_drop_in, on: :create
   validate :shopper_drop_in_at_same_time
   validates :retailer_id, presence: true
-  validates :shopper_id, presence: true
+  validates :user_id, presence: true
   validates :time, presence: true
   validates :comment, length: {maximum: 250}
   validates :shopper_rating, numericality: { greater_than_or_equal_to: 1, 
@@ -32,8 +32,8 @@ class DropIn < ActiveRecord::Base
   end
 
   def shopper_drop_in_at_same_time
-    unless shopper_id.nil? || time.nil?
-      same_time_drop_in = DropIn.where(shopper_id: shopper_id, time: time).first
+    unless user_id.nil? || time.nil?
+      same_time_drop_in = DropIn.where(user_id: user_id, time: time).first
       unless same_time_drop_in.nil?
         if same_time_drop_in.id != self.id
           errors[:base] << "You have another drop-in scheduled at this time"
@@ -42,25 +42,25 @@ class DropIn < ActiveRecord::Base
     end
   end
 
-  def self.upcoming_for_shopper shopper_id
-    where("shopper_id = ? and time > ?", shopper_id, DateTime.current)
+  def self.upcoming_for_shopper user_id
+    where("user_id = ? and time > ?", user_id, DateTime.current)
   end
 
   def self.upcoming_for_retailer retailer_id
     where("retailer_id = ? and time > ?", retailer_id, DateTime.current)
   end
 
-  def self.previous_for_shopper shopper_id
-    where("shopper_id = ? and time < ?", shopper_id, DateTime.current)
+  def self.previous_for_shopper user_id
+    where("user_id = ? and time < ?", user_id, DateTime.current)
   end
 
   def self.previous_for_retailer retailer_id
     where("retailer_id = ? and time < ?", retailer_id, DateTime.current.advance(minutes: 30))
   end
 
-  def self.upcoming_for_shopper_at_retailer shopper_id, retailer_id
-    where("shopper_id = ? and retailer_id = ? and time > ?", 
-                          shopper_id, retailer_id, DateTime.current)
+  def self.upcoming_for_shopper_at_retailer user_id, retailer_id
+    where("user_id = ? and retailer_id = ? and time > ?",
+                          user_id, retailer_id, DateTime.current)
   end
 
   def colloquial_time

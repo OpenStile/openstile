@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Retail user reviews drop in' do
   let(:retailer){ FactoryGirl.create(:retailer) }
-  let(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
-  let(:shopper){ FactoryGirl.create(:shopper, first_name: 'Jane') }
+  let(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
+  let(:shopper){ FactoryGirl.create(:shopper_user, first_name: 'Jane') }
   let(:hourglass){ FactoryGirl.create(:body_shape, name: 'Hourglass') }
   let!(:drop_in_availability) {
     FactoryGirl.create(:standard_availability_for_tomorrow,
@@ -11,7 +11,7 @@ feature 'Retail user reviews drop in' do
   }
   let!(:drop_in) {
     FactoryGirl.create(:drop_in,
-                       shopper: shopper,
+                       user: shopper,
                        retailer: retailer,
                        comment: 'I really need stuff for my Miami vacay',
                        time: ActiveSupport::TimeZone[Time.zone.name]
@@ -21,7 +21,7 @@ feature 'Retail user reviews drop in' do
   scenario 'that has yet to occur' do
     shopper.style_profile.update(body_shape: hourglass)
 
-    given_i_am_a_logged_in_retail_user retail_user
+    given_i_am_a_logged_in_user retail_user
     when_i_view_my_upcoming_drop_ins
     then_i_should_see_a_scheduled_drop_in_for_shopper shopper.first_name, 'Tomorrow @ 10 AM'
     then_i_should_see_addtional_drop_in_comments drop_in

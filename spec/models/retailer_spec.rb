@@ -33,7 +33,7 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :drop_ins }
   it { should respond_to :location }
   it { should respond_to :location_id }
-  it { should respond_to :retail_user }
+  it { should respond_to :user }
   it { should respond_to :cover_photo }
   it { should respond_to :logo }
   it { should respond_to :status }
@@ -107,13 +107,13 @@ RSpec.describe Retailer, :type => :model do
 
   describe "drop ins assocication" do
     before { @retailer.save }
-    let(:shopper){ FactoryGirl.create(:shopper) }
+    let(:shopper){ FactoryGirl.create(:shopper_user) }
     let!(:drop_in_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                    retailer: @retailer) }
     let!(:drop_in) { FactoryGirl.create(:drop_in, 
                                         time: tomorrow_mid_morning,
                                         retailer: @retailer,
-                                        shopper: shopper) }
+                                        user: shopper) }
 
     it "should destroy associated drop ins" do
       drop_ins = @retailer.drop_ins.to_a
@@ -125,17 +125,17 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
-  describe "retail user association" do
+  describe "user association" do
     before { @retailer.save }
     let!(:retail_user){ 
-      FactoryGirl.create(:retail_user, retailer: @retailer) 
+      FactoryGirl.create(:retailer_user, retailer: @retailer)
     }
 
     it "should destroy associated retail user" do
-      retailer_user = @retailer.retail_user
+      user = @retailer.user
       @retailer.destroy
-      expect(retail_user).to_not be_nil
-      expect(RetailUser.where(id: retail_user.id)).to be_empty
+      expect(user).to_not be_nil
+      expect(User.where(id: user.id)).to be_empty
     end
   end
 
@@ -249,14 +249,14 @@ RSpec.describe Retailer, :type => :model do
 
   describe "drop in availability helpers" do
     before { @retailer.save }
-    let(:shopper){ FactoryGirl.create(:shopper) }
+    let(:shopper){ FactoryGirl.create(:shopper_user) }
     let!(:tomorrow_availability){ FactoryGirl.create(:standard_availability_for_tomorrow,
                                                       retailer: @retailer,
                                                       bandwidth: 1) }
     let!(:drop_in) { FactoryGirl.create(:drop_in,
                                         time: tomorrow_noon,
                                         retailer: @retailer,
-                                        shopper: shopper) }
+                                        user: shopper) }
     
     it "should return whether or not a retailer is available" do
       expect(@retailer.available_for_drop_in? tomorrow_morning).to eq(true) 

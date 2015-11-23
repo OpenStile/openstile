@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 feature 'Retail user manages drop in schedule' do
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
   let!(:retailer){ FactoryGirl.create(:retailer) }
-  let(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
+  let(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
   let(:next_week){ DateTime.current.advance(days: 7).to_date.to_s }
   let(:morning){ "09:00:00" }
   let(:noon){ "12:00:00" }
@@ -11,7 +11,7 @@ feature 'Retail user manages drop in schedule' do
 
   scenario 'turns on drop-ins for a day' do
     given_shopper_fails_to_schedule_drop_in next_week, noon
-    given_i_am_a_logged_in_retail_user retail_user
+    given_i_am_a_logged_in_user retail_user
     when_i_go_to_manage_my_store_drop_in_availability
     when_i_submit_with_invalid_options
     then_my_availability_should_not_be_updated
@@ -20,7 +20,7 @@ feature 'Retail user manages drop in schedule' do
   end
 
   def given_shopper_fails_to_schedule_drop_in date, time
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     click_link 'Boutiques'
     click_link retailer.name
 
@@ -63,7 +63,7 @@ feature 'Retail user manages drop in schedule' do
   end
 
   def then_shopper_succeeds_to_schedule_drop_in date, time
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     click_link 'Boutiques'
     click_link retailer.name
 

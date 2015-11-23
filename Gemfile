@@ -75,6 +75,3 @@ group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'newrelic_rpm'
 end
-group :chili do
-  gem 'sign_up_feature', path: 'lib/chili/sign_up_feature'
-end

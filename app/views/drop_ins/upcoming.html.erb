@@ -2,14 +2,14 @@
 
 <%= render "shared/header" %>
 
-<% if current_shopper && never_had_drop_in?(current_shopper) %>
+<% if shopper_signed_in? && never_had_drop_in?(current_user) %>
     <%= render "shared/experience" %>
 <% else %>
     <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>
         <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
-          <% if current_shopper %>
+          <% if shopper_signed_in? %>
               <%= render 'upcoming_for_shopper', drop_in: drop_in %>
-          <% elsif current_retail_user %>
+          <% elsif retailer_signed_in? %>
               <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
           <% end %>
         </div>
@@ -17,9 +17,9 @@
     <% end %>
     <% @previous_drop_ins.each_with_index do |drop_in, idx| %>
         <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
-          <% if current_shopper %>
+          <% if shopper_signed_in? %>
               <%= render 'previous_for_shopper', drop_in: drop_in %>
-          <% elsif current_retail_user %>
+          <% elsif retailer_signed_in? %>
               <%= render 'previous_for_retail_user', drop_in: drop_in %>
           <% end %>
         </div>

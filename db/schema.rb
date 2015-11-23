@@ -11,28 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911212027) do
+ActiveRecord::Schema.define(version: 20151123015020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "admins", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "body_builds", force: true do |t|
     t.string   "name"
@@ -123,7 +105,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
 
   create_table "drop_ins", force: true do |t|
     t.integer  "retailer_id"
-    t.integer  "shopper_id"
     t.datetime "time"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -133,11 +114,11 @@ ActiveRecord::Schema.define(version: 20150911212027) do
     t.string   "shopper_feedback"
     t.string   "retailer_feedback"
     t.decimal  "sales_generated"
+    t.integer  "user_id"
   end
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree
-  add_index "drop_ins", ["shopper_id", "time"], name: "index_drop_ins_on_shopper_id_and_time", unique: true, using: :btree
-  add_index "drop_ins", ["shopper_id"], name: "index_drop_ins_on_shopper_id", using: :btree
+  add_index "drop_ins", ["user_id"], name: "index_drop_ins_on_user_id", using: :btree
 
   create_table "locations", force: true do |t|
     t.string   "address"
@@ -196,30 +177,9 @@ ActiveRecord::Schema.define(version: 20150911212027) do
   add_index "parts_to_flaunts", ["part_id"], name: "index_parts_to_flaunts_on_part_id", using: :btree
   add_index "parts_to_flaunts", ["style_profile_id"], name: "index_parts_to_flaunts_on_style_profile_id", using: :btree
 
-  create_table "retail_users", force: true do |t|
-    t.string   "email"
-    t.string   "cell_phone"
-    t.integer  "retailer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-  end
-
   create_table "retailers", force: true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.string   "size_range"
     t.integer  "price_index"
     t.datetime "created_at"
@@ -249,29 +209,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
   add_index "retailers_special_considerations", ["retailer_id", "special_consideration_id"], name: "special_considerations_for_a_retailer_index", using: :btree
   add_index "retailers_special_considerations", ["special_consideration_id", "retailer_id"], name: "retailers_for_a_special_consideration_index", using: :btree
 
-  create_table "shoppers", force: true do |t|
-    t.string   "first_name"
-    t.string   "email"
-    t.string   "cell_phone"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.string   "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email"
-  end
-
-  add_index "shoppers", ["email"], name: "index_shoppers_on_email", unique: true, using: :btree
-
   create_table "special_considerations", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -287,7 +224,6 @@ ActiveRecord::Schema.define(version: 20150911212027) do
   add_index "special_considerations_style_profiles", ["style_profile_id", "special_consideration_id"], name: "special_consideration_for_style_profile_index", using: :btree
 
   create_table "style_profiles", force: true do |t|
-    t.integer  "shopper_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "body_shape_id"
@@ -296,12 +232,13 @@ ActiveRecord::Schema.define(version: 20150911212027) do
     t.string   "top_budget"
     t.string   "bottom_budget"
     t.string   "dress_budget"
+    t.integer  "user_id"
   end
 
   add_index "style_profiles", ["body_shape_id"], name: "index_style_profiles_on_body_shape_id", using: :btree
   add_index "style_profiles", ["bottom_fit_id"], name: "index_style_profiles_on_bottom_fit_id", using: :btree
-  add_index "style_profiles", ["shopper_id"], name: "index_style_profiles_on_shopper_id", using: :btree
   add_index "style_profiles", ["top_fit_id"], name: "index_style_profiles_on_top_fit_id", using: :btree
+  add_index "style_profiles", ["user_id"], name: "index_style_profiles_on_user_id", using: :btree
 
   create_table "style_profiles_top_sizes", id: false, force: true do |t|
     t.integer "style_profile_id", null: false
@@ -323,5 +260,40 @@ ActiveRecord::Schema.define(version: 20150911212027) do
     t.datetime "updated_at"
     t.string   "category"
   end
+
+  create_table "user_roles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "cell"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_role_id"
+    t.integer  "retailer_id"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["retailer_id"], name: "index_users_on_retailer_id", using: :btree
+  add_index "users", ["user_role_id"], name: "index_users_on_user_role_id", using: :btree
 
 end

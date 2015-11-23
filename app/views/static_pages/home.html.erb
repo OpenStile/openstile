@@ -2,7 +2,7 @@
 
 <% if admin_signed_in? %>
     <%= render partial: 'shared/signed_in_admin' %>
-<% elsif retail_user_signed_in? %>
+<% elsif retailer_signed_in? %>
     <%= render partial: 'shared/signed_in_retail_user' %>
 <% else %>
     <%= render partial: 'index_non_authenticated' %>

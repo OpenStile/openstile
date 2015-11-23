@@ -33,21 +33,9 @@ feature 'User visits during site reconstruction' do
     then_i_should_see_relaunch_message false
   end
 
-  scenario 'and attempts to sign in as shopper' do
+  scenario 'and attempts to sign in' do
     visit '/'
     click_link 'Log in'
-    then_i_should_see_relaunch_message false
-  end
-
-  scenario 'and attempts to sign in as retailer' do
-    visit '/'
-    click_link 'Log in'
-    click_link 'Switch to retailer log in'
-    then_i_should_see_relaunch_message false
-  end
-
-  scenario 'and attempts to sign in as admin' do
-    visit new_admin_session_path
     then_i_should_see_relaunch_message false
   end
 

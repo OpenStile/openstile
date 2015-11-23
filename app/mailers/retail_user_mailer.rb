@@ -7,18 +7,16 @@ class RetailUserMailer < ActionMailer::Base
   #   en.drop_in_scheduled_mailer.email.subject
   #
   def drop_in_scheduled_email(retailer, shopper, drop_in)
-    @retail_user = RetailUser.where(retailer_id: retailer.id).first
-    @greeting = "Hello #{@retail_user.email}"
+    @greeting = "Hello #{retailer.user.first_name}"
     @shopper = shopper
     @drop_in = drop_in
-    mail to: @retail_user.email, subject: 'An OpenStile shopper scheduled a drop-in visit with you!'
+    mail to: retailer.user.email, subject: 'An OpenStile shopper scheduled a drop-in visit with you!'
   end
 
   def drop_in_canceled_email(retailer, shopper, drop_in)
-    @retail_user = RetailUser.where(retailer_id: retailer.id).first
-    @greeting = "Hello #{@retail_user.email}"
+    @greeting = "Hello #{retailer.user.first_name}"
     @shopper = shopper
     @drop_in = drop_in
-    mail to: @retail_user.email, subject: 'An OpenStile shopper canceled a drop-in visit!'
+    mail to: retailer.user.email, subject: 'An OpenStile shopper canceled a drop-in visit!'
   end
 end

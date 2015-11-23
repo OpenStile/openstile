@@ -1,7 +1,7 @@
 class StyleProfilesController < ApplicationController
 
   before_filter :store_shopper_location
-  before_filter :authenticate_shopper!
+  before_filter :authenticate_user!
   before_action :correct_style_profile_shopper
 
   def edit
@@ -21,7 +21,9 @@ class StyleProfilesController < ApplicationController
     
     def correct_style_profile_shopper
       @style_profile = StyleProfile.find(params[:id])
-      redirect_to root_url unless (@style_profile.shopper == current_shopper)
+      unless current_user.user_role.name == UserRole::SHOPPER && @style_profile.user == current_user
+          redirect_to root_path
+      end
     end
 
     def style_profile_params

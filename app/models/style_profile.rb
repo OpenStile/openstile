@@ -1,6 +1,6 @@
 
 class StyleProfile < ActiveRecord::Base
-  belongs_to :shopper
+  belongs_to :user
   belongs_to :body_shape
   belongs_to :top_fit
   belongs_to :bottom_fit
@@ -14,7 +14,7 @@ class StyleProfile < ActiveRecord::Base
   has_and_belongs_to_many :special_considerations
   has_and_belongs_to_many :body_builds
 
-  validates :shopper_id, presence: true
+  validates :user_id, presence: true
 
   def empty?
     top_sizes.empty? && bottom_sizes.empty? && dress_sizes.empty? && body_builds.empty? &&

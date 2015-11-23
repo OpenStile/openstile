@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Shopper schedule drop in' do
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
   let(:retailer){ FactoryGirl.create(:retailer) }
 
   let(:pop_up_location){ FactoryGirl.create(:location,
@@ -13,13 +13,13 @@ feature 'Shopper schedule drop in' do
                        retailer: retailer,
                        location: pop_up_location)
   }
-  let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
+  let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
 
   scenario 'to browse a store' do
     date, time = parse_date_and_EST(tomorrow_afternoon)
     place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_click_on_a_retailer retailer
     when_i_attempt_to_schedule_with_invalid_options retailer
     then_i_should_not_be_taken_to_my_scheduled_drop_ins

@@ -1,8 +1,7 @@
 class DropInsController < ApplicationController
 
   before_filter :store_shopper_location
-  before_filter :authenticate_shopper!, except: [:upcoming, :update]
-  before_filter :authenticate_customer!, only: [:upcoming, :update]
+  before_filter :authenticate_user!
   before_action :correct_drop_in_customer, only: [:update]
   before_action :correct_drop_in_shopper, only: [:destroy]
 
@@ -21,8 +20,8 @@ class DropInsController < ApplicationController
 
     if @drop_in.save
       retailer = @drop_in.retailer
-      RetailUserMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
-      ShopperMailer.drop_in_scheduled_email(retailer, current_shopper, @drop_in).deliver
+      RetailUserMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
+      ShopperMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
       flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
       redirect_to upcoming_drop_ins_path
     else
@@ -43,20 +42,20 @@ class DropInsController < ApplicationController
 
   def destroy
     retailer = @drop_in.retailer
-    RetailUserMailer.drop_in_canceled_email(retailer, current_shopper, @drop_in).deliver
-    ShopperMailer.drop_in_canceled_email(retailer, current_shopper, @drop_in).deliver
+    RetailUserMailer.drop_in_canceled_email(retailer, current_user, @drop_in).deliver
+    ShopperMailer.drop_in_canceled_email(retailer, current_user, @drop_in).deliver
     @drop_in.destroy
     flash[:success] = "Drop in cancelled. Retailer will be notified"
     redirect_to upcoming_drop_ins_path
   end
 
   def upcoming
-    if shopper_signed_in?
-      @previous_drop_ins = DropIn.previous_for_shopper current_shopper.id
-      @upcoming_drop_ins = DropIn.upcoming_for_shopper current_shopper.id
-    elsif retail_user_signed_in?
-      @previous_drop_ins = DropIn.previous_for_retailer current_retail_user.retailer.id
-      @upcoming_drop_ins = DropIn.upcoming_for_retailer current_retail_user.retailer.id
+    if current_user.user_role.name == UserRole::SHOPPER
+      @previous_drop_ins = DropIn.previous_for_shopper current_user.id
+      @upcoming_drop_ins = DropIn.upcoming_for_shopper current_user.id
+    elsif current_user.user_role.name == UserRole::RETAILER
+      @previous_drop_ins = DropIn.previous_for_retailer current_user.retailer.id
+      @upcoming_drop_ins = DropIn.upcoming_for_retailer current_user.retailer.id
     else
       flash[:danger] = "Unexpected error"
       redirect_to root_path
@@ -66,22 +65,22 @@ class DropInsController < ApplicationController
   private
     def correct_drop_in_shopper
       @drop_in = DropIn.find(params[:id])
-      redirect_to root_url unless (@drop_in.shopper == current_shopper)
+      redirect_to root_url unless (@drop_in.user == current_user && current_user.user_role.name == UserRole::SHOPPER)
     end
 
     def correct_drop_in_customer
       @drop_in = DropIn.find(params[:id])
-      if current_shopper
-        redirect_to root_url unless (@drop_in.shopper == current_shopper)
-      elsif current_retail_user
-        redirect_to root_url unless (@drop_in.retailer == current_retail_user.retailer)
+      if current_user.user_role.name == UserRole::SHOPPER
+        redirect_to root_url unless (@drop_in.user == current_user)
+      elsif current_user.user_role.name == UserRole::RETAILER
+        redirect_to root_url unless (@drop_in.retailer == current_user.retailer)
       else
         redirect_to root_url
       end
     end
 
     def drop_in_params
-      params.require(:drop_in).permit(:shopper_id, :retailer_id, :comment,
+      params.require(:drop_in).permit(:user_id, :retailer_id, :comment,
                           :shopper_rating, :shopper_feedback, :sales_generated,
                           :retailer_rating, :retailer_feedback,
                           :selected_date, :selected_time)
