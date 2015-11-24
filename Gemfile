@@ -61,12 +61,12 @@ gem 'cloudinary'
 gem 'meta-tags'
 
 group :development, :test do
-  gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'
   gem 'byebug'
 end
 
 group :test do
+  gem "factory_girl_rails", require: false
   gem 'capybara', '~> 2.3.0'
   gem 'poltergeist'
 end

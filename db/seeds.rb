@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+UserRole.find_or_create_by(name: UserRole::SHOPPER)
+UserRole.find_or_create_by(name: UserRole::RETAILER)
+UserRole.find_or_create_by(name: UserRole::ADMIN)
+
 ['00 (XXS)', '0 (XS)', '2 (XS)', '4 (S)', '6 (S)', '8 (M)', '10 (M)',
  '12 (L)', '14 (L)', '16 (XL)', '18 (XL)', '20 (XXL)'].each do |size|
   TopSize.find_or_create_by(name: size)
@@ -17,8 +21,8 @@ end
   BodyBuild.find_or_create_by(name: build)
 end
 
-['boho1', 'boho2', 'casual1', 'classic1', 'classic2',
- 'diva2', 'preppy1', 'rocker1', 'rocker2'].each do |look|
+['boho1', 'boho2', 'casual1', 'classic1',
+ 'diva2', 'preppy1', 'rocker1', 'rocker2', 'classic2'].each do |look|
   Look.find_or_create_by(name: look, image_path: "looks/#{look}.jpg")
 end
 

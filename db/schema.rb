@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20151123015020) do
 
   create_table "retailers", force: true do |t|
     t.string   "name"
-    t.text     "description"
+    t.string   "description"
     t.string   "size_range"
     t.integer  "price_index"
     t.datetime "created_at"
@@ -266,6 +266,8 @@ ActiveRecord::Schema.define(version: 20151123015020) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_roles", ["name"], name: "index_user_roles_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
