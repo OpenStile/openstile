@@ -7,7 +7,8 @@ RSpec.describe Retailer, :type => :model do
                                     description: "Premier boutique in DC!",
                                     size_range: "00 (XS) - 14 (XL)",
                                     price_index: 1,
-                                    location: location) }
+                                    location: location,
+                                    quote: 'Where affordability meets style') }
 
   subject { @retailer }
 
@@ -35,10 +36,12 @@ RSpec.describe Retailer, :type => :model do
   it { should respond_to :location_id }
   it { should respond_to :user }
   it { should respond_to :cover_photo }
+  it { should respond_to :sample_photos }
   it { should respond_to :logo }
   it { should respond_to :status }
   it { should respond_to :live? }
   it { should respond_to :summary }
+  it { should respond_to :quote }
   it { should be_valid }
 
   context "when name is not present" do
@@ -67,12 +70,22 @@ RSpec.describe Retailer, :type => :model do
   end
 
   context "when description is too long" do
-    before { @retailer.description = "a"*251 } 
+    before { @retailer.description = "a"*501 }
     it { should_not be_valid }
   end
 
   context "when location id is not present" do
     before { @retailer.location_id = nil }
+    it { should_not be_valid }
+  end
+
+  context "when quote is not present" do
+    before { @retailer.quote = " " }
+    it { should_not be_valid }
+  end
+
+  context "when quote is too long" do
+    before { @retailer.quote = 'a'*101 }
     it { should_not be_valid }
   end
 

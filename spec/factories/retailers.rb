@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :retailer do
     name "Chic Boutique"
     description "Your one stop shop for all really cool dresses"
+    quote 'Where affordability meets style'
     location
     size_range "00 (XS) - 14 (XL)"
     price_index 2

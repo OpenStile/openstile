@@ -2,57 +2,45 @@
 
 <%= render "shared/header" %>
 
-<div class="recommendation-details block">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-offset-1 col-md-5 col-xs-offset-1 col-xs-5 vcenter">
-        <%= cl_image_tag(@retailer.cover_photo,
-                         width: 400, height: 500, crop: :lpad,
-                         class: "img-responsive") %>
+<div class="boutique-page container">
+  <div class="row intro">
+    <div class="col-xs-6">
+      <%= render 'retailers/sample_image_carousel' %>
+    </div>
+    <div class="col-xs-6 text-center">
+      <h2><%= @retailer.name %></h2>
+      <h3 class="neighborhood"><%= @retailer.location.neighborhood %></h3>
+      <h1 class="store-quote"><%= @retailer.quote %></h1>
+      <a href="#" class="btn btn-default" id="show-booking-form">Book FREE Styling</a>
+    </div>
+  </div>
+  <div class="row details">
+    <hr />
+    <div class="col-xs-12 col-md-6 text-justify section">
+      <div class="col-xs-4">
+        <h3>Owner: </h3>
+        <h3>Address: </h3>
+        <h3>Sizes: </h3>
+        <h3>Price range: </h3>
       </div>
-      <div class="col-md-5 col-xs-5 text-center vcenter">
-        <hr>
-        <a href=<%= item_retailer_show_path(@retailer)%> >
-          <%= cl_image_tag(@retailer.logo,
-                            class: "img-responsive center-block",
-                            width: 200) %>
-        </a><br />
-        <h3><%= @retailer.location.stringify %></h3><br />
-        <%= link_to('Book a drop-in!', "#drop-in", 
-                                        class: "btn btn-default", 
-                                        id: "btn-drop-in") if shopper_signed_in? %>
-        <h4><%= @retailer.description %></h4>
-        <% if @retailer.online_presence %>
-          <% unless @retailer.online_presence.web_link.blank? %>
-            <a href=<%=@retailer.online_presence.web_link%> target='_blank'>
-              <i class="fa fa-lg fa-link"></i>
-            </a>
+      <div class="col-xs-8">
+        <h3><%= "#{@retailer.user.first_name} #{@retailer.user.last_name}"%></h3>
+        <h3><%= StreetAddress::US.parse(@retailer.location.address) %></h3>
+        <h3><%= @retailer.size_range%></h3>
+        <h3>
+          <% 3.times do |idx| %>
+              <i class="fa fa-tag <%= 'activated' if idx + 1 <= @retailer.price_index %>"></i>
           <% end %>
-          <% unless @retailer.online_presence.facebook_link.blank? %>
-            <a href=<%=@retailer.online_presence.facebook_link%> target='_blank'>
-              <i class="fa fa-lg fa-facebook"></i>
-            </a>
-          <% end %>
-          <% unless @retailer.online_presence.twitter_link.blank? %>
-            <a href=<%=@retailer.online_presence.twitter_link%> target='_blank'>
-              <i class="fa fa-lg fa-twitter"></i>
-            </a>
-          <% end %>
-          <% unless @retailer.online_presence.instagram_link.blank? %>
-            <a href=<%=@retailer.online_presence.instagram_link%> target='_blank'>
-              <i class="fa fa-lg fa-instagram"></i>
-            </a>
-          <% end %>
-        <% end %>
-        <hr>
+        </h3>
       </div>
     </div>
-
-    <% if shopper_signed_in? %>
-      <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>
-    <% end %>
-    <% if !shopper_signed_in? && !retail_user_signed_in? && !admin_signed_in? %>
-      <%= render 'shared/start_using_today_button' %>
-    <% end %>
+    <div class="col-xs-12 col-md-6 text-justify section">
+      <h3><%= @retailer.description %></h3>
+      <%= render 'retailers/online_presence', links: @retailer.online_presence unless @retailer.online_presence.nil?%>
+    </div>
+  </div>
+  <div class="row book-styling">
+    <hr />
+    <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>
   </div>
 </div>

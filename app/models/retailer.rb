@@ -19,10 +19,11 @@ class Retailer < ActiveRecord::Base
   accepts_nested_attributes_for :online_presence
 
   validates :name, presence: true, length: { maximum: 50 } 
-  validates :description, presence: true, length: { maximum: 250 }
+  validates :description, presence: true, length: { maximum: 500 }
   validates :location_id, presence: true
   validates :size_range, presence: true
   validates :price_index, presence: true
+  validates :quote, presence: true, length: { maximum: 100 }
 
   def available_for_drop_in? datetime
     drop_in_availabilities.order('created_at DESC').each do |availability|

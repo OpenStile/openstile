@@ -18,9 +18,9 @@
             <%= link_to "Log out", destroy_user_session_path, :method => :delete, class: 'col-sm-4 btn-default ' %>
           <% end %>
           <% if retailer_signed_in? %>
-            <%= link_to "Dashboard", root_path %>
-            <%= link_to "Reset Password", edit_user_registration_path %>
-            <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
+            <%= link_to "Dashboard", root_path, class: 'col-sm-4 btn-default' %>
+            <%= link_to "Update account", edit_user_registration_path, class: 'col-sm-4 btn-default' %>
+            <%= link_to "Log out", destroy_user_session_path, :method => :delete, class: 'col-sm-4 btn-default' %>
           <% end %>
           <% if admin_signed_in? %>
             <%= link_to "Log out", destroy_user_session_path, :method => :delete %>

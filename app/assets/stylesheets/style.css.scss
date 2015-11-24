@@ -8,8 +8,8 @@ Designed by : http://responsivewebinc.com
 /* Lato */
 @import url(https://fonts.googleapis.com/css?family=Lato:300);
 
-/* Droid Serif */
-@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
+/* Playfair Display */
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display);
 
 @import 'bootstrap/glyphicons';
 
@@ -118,6 +118,16 @@ footer .footer-section h5 {
   font-weight: bold;
   color: #5e5e5e;
   padding-bottom: 10px;
+}
+
+#error_explanation {
+  font-family: Lato, sans-serif;
+  font-size: 15px;
+  color: #ff0000;
+}
+
+#error_explanation ul {
+  list-style-type: none;
 }
 
 .top-image {
@@ -378,6 +388,65 @@ footer .footer-section h5 {
   color: #ffffff;
 }
 
+.boutique-page h1, h2, h3 {
+  font-family: Lato, sans-serif;
+}
+
+.boutique-page h2.store-name {
+  font-size: 20px;
+}
+
+.boutique-page h3.neighborhood {
+  text-decoration: underline;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.boutique-page h1.store-quote {
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 60px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.boutique-page .intro {
+  min-height: 65vh;
+}
+
+.boutique-page .intro a {
+  font-family: 'Lato', sans-serif;
+  font-size: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.boutique-page .details h3 {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.boutique-page .details .section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.boutique-page .fa-tag {
+  color: #e5e5e5;
+}
+
+.boutique-page .fa-tag.activated {
+  color: #000000;
+}
+
+.boutique-page .schedule {
+  margin-top: 50px;
+}
+
+.boutique-page .schedule .full {
+  padding: 0px 15px 0px 15px;
+}
+
 div.blog-container {
   border: 1px solid #e5e5e5;
   margin-top: 50px;
@@ -531,6 +600,16 @@ div.blog-side-panel .twitter-plugin {
   .boutiques .boutique-details h4 {
     padding: 8px;
     font-size: 12px;
+  }
+
+  .boutique-page .intro {
+    min-height: 200px;
+  }
+
+  .boutique-page h1.store-quote {
+    font-size: 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .home-page.intro {

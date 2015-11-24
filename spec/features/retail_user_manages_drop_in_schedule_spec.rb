@@ -2,8 +2,8 @@ require 'rails_helper'
 
 feature 'Retail user manages drop in schedule' do
   let(:shopper){ FactoryGirl.create(:shopper_user) }
-  let!(:retailer){ FactoryGirl.create(:retailer) }
-  let(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
+  let(:retailer){ FactoryGirl.create(:retailer) }
+  let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
   let(:next_week){ DateTime.current.advance(days: 7).to_date.to_s }
   let(:morning){ "09:00:00" }
   let(:noon){ "12:00:00" }
@@ -28,7 +28,7 @@ feature 'Retail user manages drop in schedule' do
       fill_in 'Date', with: date
       fill_in 'Time', with: time
 
-      click_button 'Schedule'
+      click_button 'Book session'
     end
 
     expect(page).to have_content('not an available time slot')
@@ -71,7 +71,7 @@ feature 'Retail user manages drop in schedule' do
       fill_in 'Date', with: date
       fill_in 'Time', with: time
 
-      click_button 'Schedule'
+      click_button 'Book session'
     end
 
     expect(page).to have_content('Your drop-in was scheduled!')

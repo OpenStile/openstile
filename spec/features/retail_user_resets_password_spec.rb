@@ -15,13 +15,9 @@ describe "Retail user resets password" do
 
     let(:update) { "Update" }
 
-    it "should show me a link to reset my password" do
-      expect(page).to have_link('Reset Password')
-    end
-
     describe "and I click on the reset password link" do
       before do
-        click_link "Reset Password"
+        click_link "Update account"
       end
 
       it "should take me to the reset password page for retail users" do

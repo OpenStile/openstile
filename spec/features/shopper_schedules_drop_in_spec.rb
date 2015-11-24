@@ -55,7 +55,7 @@ feature 'Shopper schedule drop in' do
     fill_in 'Email', with: shopper.email
     fill_in 'Password', with: shopper.password
     click_button 'Log in'
-    expect(page).to have_content("Come see us at #{retailer.name} today!")
+    expect(page).to have_content("When you book a FREE styling")
 
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
@@ -71,7 +71,7 @@ feature 'Shopper schedule drop in' do
     fill_in "Password", with: "foobarbaz"
     fill_in "Confirm password", with: "foobarbaz"
     click_button 'Sign up'
-    expect(page).to have_content("Come see us at #{retailer.name} today!")
+    expect(page).to have_content("When you book a FREE styling")
 
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
@@ -84,7 +84,7 @@ feature 'Shopper schedule drop in' do
 
   def when_i_attempt_to_schedule_with_invalid_options recommendation
     within(:css, "div.schedule") do
-      click_button 'Schedule'
+      click_button 'Book session'
     end
 
     expect(page).to have_content('error')
@@ -100,7 +100,7 @@ feature 'Shopper schedule drop in' do
       fill_in 'Date', with: date
       fill_in 'Time', with: time
 
-      expect{click_button 'Schedule'}
+      expect{click_button 'Book session'}
             .to change(ActionMailer::Base.deliveries, :count).by(2) 
     end
 

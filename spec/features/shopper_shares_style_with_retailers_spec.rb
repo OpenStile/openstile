@@ -234,7 +234,7 @@ feature 'Shopper shares style preferences with retailer' do
     click_link 'ABC Boutique'
     fill_in 'Date', with: 1.day.from_now.strftime('%Y-%m-%d')
     fill_in 'Time', with: '10:00:00'
-    click_button 'Schedule'
+    click_button 'Book session'
   end
 
   def then_the_store_owner_should_know style_synopsis

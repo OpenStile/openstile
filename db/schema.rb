@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123015020) do
+ActiveRecord::Schema.define(version: 20151124165718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,7 +179,7 @@ ActiveRecord::Schema.define(version: 20151123015020) do
 
   create_table "retailers", force: true do |t|
     t.string   "name"
-    t.string   "description"
+    t.text     "description"
     t.string   "size_range"
     t.integer  "price_index"
     t.datetime "created_at"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 20151123015020) do
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
     t.integer  "status"
+    t.string   "quote"
   end
 
   add_index "retailers", ["body_shape_id"], name: "index_retailers_on_body_shape_id", using: :btree

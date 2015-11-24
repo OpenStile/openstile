@@ -1,0 +1,18 @@
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <% @retailer.sample_photos.size.times do |count| %>
+        <li data-target="#carousel-example-generic" data-slide-to="<%= count.to_s %>"
+            class="<%= 'active' if count == 0%>"></li>
+    <% end %>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <% @retailer.sample_photos.each_with_index do |image, idx| %>
+        <div class="item <%= 'active' if idx == 0%>">
+          <%= cl_image_tag(image, width: 800, height: 600, crop: :thumb, alt: 'sample image') %>
+        </div>
+    <% end %>
+  </div>
+</div>
