@@ -17,6 +17,11 @@ module ImageName
     "#{image_path_root}/cover_photo.#{IMAGE_FILE_EXTENSION}"
   end
 
+  def sample_photos
+    base = "#{image_path_root}/sample_photo"
+    (1..4).to_a.map{|n| "#{base}/#{n}.#{IMAGE_FILE_EXTENSION}" }
+  end
+
   def logo
     "#{image_path_root}/logo.#{IMAGE_FILE_EXTENSION}"
   end

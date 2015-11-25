@@ -1,17 +1,17 @@
 require 'rails_helper'
 
 feature 'Shopper shares style preferences with retailer' do
-  let(:shopper){ FactoryGirl.create(:shopper, first_name: 'Jane') }
+  let(:shopper){ FactoryGirl.create(:shopper_user, first_name: 'Jane') }
   let(:retailer){ FactoryGirl.create(:retailer, name: 'ABC Boutique') }
   let!(:availability){ FactoryGirl.create(:standard_availability_for_tomorrow, retailer: retailer)}
-  let!(:store_owner){ FactoryGirl.create(:retail_user, retailer: retailer,
+  let!(:store_owner){ FactoryGirl.create(:retailer_user, retailer: retailer,
                                         email: 'me@myboutique.com', password: 'password',
                                         password_confirmation: 'password') }
 
   scenario 'and specifies no preferences' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_save_my_style_profile
     when_i_schedule_a_dropin_with_retailer
@@ -21,7 +21,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies her size preferences' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_set_my_top_sizes_as ['2 (XS)', '4 (S)']
     when_i_set_my_bottom_sizes_as ['8 (M)']
@@ -34,7 +34,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies her build' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_set_my_build_as ['Petite', 'Curvy']
     when_i_save_my_style_profile
@@ -45,7 +45,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies her body shape' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_set_my_body_shape_as 'Hourglass'
     when_i_save_my_style_profile
@@ -57,7 +57,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies her budget' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_set_my_top_budget_as 'max $50'
     when_i_set_my_bottom_budget_as 'max $150'
@@ -70,7 +70,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies her favorite looks' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_select_as_a_loved_look ['Hipster1']
     when_i_save_my_style_profile
@@ -82,7 +82,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies what is important to her' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_select_as_important ['Ethically-made', 'Made in USA']
     when_i_save_my_style_profile
@@ -93,7 +93,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies how she likes her clothes to fit' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_select_my_top_fit_preference_as 'Oversized'
     when_i_select_my_bottom_fit_preference_as 'Tight'
@@ -105,7 +105,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies her coverage preferences' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_choose_to_flaunt ['Arms', 'Legs']
     when_i_choose_to_downplay ['Midsection']
@@ -117,7 +117,7 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and specifies colors she avoids' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_select_palettes_i_avoid ['Beiges']
     when_i_save_my_style_profile
@@ -128,14 +128,14 @@ feature 'Shopper shares style preferences with retailer' do
   scenario 'and changes her preferences' do
     seed_style_profile_options
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_select_random_sampling_options_1
     when_i_save_my_style_profile
     when_i_schedule_a_dropin_with_retailer
     then_the_store_owner_should_know_random_sampling_options_1
 
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     when_i_navigate_to_my_style_profile
     when_i_change_my_preferences_to_random_sampling_options_2
     click_button 'Save'
@@ -234,17 +234,16 @@ feature 'Shopper shares style preferences with retailer' do
     click_link 'ABC Boutique'
     fill_in 'Date', with: 1.day.from_now.strftime('%Y-%m-%d')
     fill_in 'Time', with: '10:00:00'
-    click_button 'Schedule'
+    click_button 'Book session'
   end
 
   def then_the_store_owner_should_know style_synopsis
     click_link 'Log out'
     click_link 'Log in'
-    click_link 'Switch to retailer'
     fill_in 'Email', with: 'me@myboutique.com'
     fill_in 'Password', with: 'password'
     click_button 'Log in'
-    click_link 'My appointments'
+    click_link 'View my bookings'
     expect(page).to have_text('Jane Tomorrow @ 10 AM')
     expect(page).to have_text(style_synopsis)
   end

@@ -12,7 +12,7 @@ describe "Shopper sign up" do
 
     describe "and enter invalid information" do
       it "should not create a shopper account" do
-        expect { click_button submit }.not_to change(Shopper, :count)
+        expect { click_button submit }.not_to change(User, :count)
       end
 
       describe "after submission" do
@@ -34,7 +34,7 @@ describe "Shopper sign up" do
       end
 
       it "should create a shopper account" do
-        expect { click_button submit }.to change(Shopper, :count).by(1)
+        expect { click_button submit }.to change(User, :count).by(1)
       end
 
       it "should send a confirmation email" do

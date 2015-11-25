@@ -61,12 +61,12 @@ gem 'cloudinary'
 gem 'meta-tags'
 
 group :development, :test do
-  gem "factory_girl_rails"
   gem 'rspec-rails',  '~> 3.0.0'
   gem 'byebug'
 end
 
 group :test do
+  gem "factory_girl_rails", require: false
   gem 'capybara', '~> 2.3.0'
   gem 'poltergeist'
 end
@@ -74,7 +74,4 @@ end
 group :production do
   gem 'rails_12factor', '0.0.2'
   gem 'newrelic_rpm'
-end
-group :chili do
-  gem 'sign_up_feature', path: 'lib/chili/sign_up_feature'
 end

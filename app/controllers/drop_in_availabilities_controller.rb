@@ -1,5 +1,6 @@
 class DropInAvailabilitiesController < ApplicationController
-  before_filter :authenticate_retail_user!
+  before_filter :authenticate_user!
+  before_filter :authenticate_retailer_user!
   before_action :correct_retail_user, only: [:update]
 
   def personal
@@ -8,7 +9,7 @@ class DropInAvailabilitiesController < ApplicationController
   end
 
   def create
-    @drop_in_availability = current_retail_user
+    @drop_in_availability = current_user
                              .retailer
                              .drop_in_availabilities
                              .build(drop_in_availability_params)
@@ -37,7 +38,7 @@ class DropInAvailabilitiesController < ApplicationController
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     elsif params[:update_focus] == 'single' &&
-          current_retail_user.retailer.drop_in_availabilities
+          current_user.retailer.drop_in_availabilities
                 .create(drop_in_availability_params.merge(frequency: DropInAvailability::ONE_TIME_FREQUENCY))
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
@@ -51,7 +52,7 @@ class DropInAvailabilitiesController < ApplicationController
   def apply_form
     @date = params[:date]
     @drop_in_availability = 
-      current_retail_user.retailer.get_relevant_availability(@date) || DropInAvailability.new
+      current_user.retailer.get_relevant_availability(@date) || DropInAvailability.new
     respond_to do |format|
       format.js {}
     end
@@ -69,7 +70,8 @@ class DropInAvailabilitiesController < ApplicationController
 
     def correct_retail_user
       @drop_in_availability = DropInAvailability.find(params[:id])
-      redirect_to root_url unless (@drop_in_availability.retailer.retail_user ==
-                                                          current_retail_user)
+      unless (current_user.user_role.name == UserRole::RETAILER && @drop_in_availability.retailer.user == current_user)
+        redirect_to root_path
+      end
     end
 end

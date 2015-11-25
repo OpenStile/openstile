@@ -8,8 +8,8 @@ Designed by : http://responsivewebinc.com
 /* Lato */
 @import url(https://fonts.googleapis.com/css?family=Lato:300);
 
-/* Droid Serif */
-@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
+/* Playfair Display */
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display);
 
 @import 'bootstrap/glyphicons';
 
@@ -79,15 +79,6 @@ hr{
 	color:#69b8e5;
 }
 
-header .logo h1 {
-  font-size:100px;
-  line-height:150px;
-  color:#000;
-  font-family: 'Lobster Two', cursive;
-  margin-top:20px !important;
-  text-shadow:1px 1px 1px #777;
-}
-
 header .logo a {
   color: inherit;
   text-decoration: none;
@@ -127,6 +118,16 @@ footer .footer-section h5 {
   font-weight: bold;
   color: #5e5e5e;
   padding-bottom: 10px;
+}
+
+#error_explanation {
+  font-family: Lato, sans-serif;
+  font-size: 15px;
+  color: #ff0000;
+}
+
+#error_explanation ul {
+  list-style-type: none;
 }
 
 .top-image {
@@ -387,6 +388,157 @@ footer .footer-section h5 {
   color: #ffffff;
 }
 
+.boutique-page h1, h2, h3 {
+  font-family: Lato, sans-serif;
+}
+
+.boutique-page h2.store-name {
+  font-size: 20px;
+}
+
+.boutique-page h3.neighborhood {
+  text-decoration: underline;
+  font-size: 18px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.boutique-page h1.store-quote {
+  font-family: 'Playfair Display', sans-serif;
+  font-size: 60px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+}
+
+.boutique-page .intro {
+  min-height: 65vh;
+}
+
+.boutique-page .intro a {
+  font-family: 'Lato', sans-serif;
+  font-size: 25px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.boutique-page .details h3 {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.boutique-page .details .section {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.boutique-page .fa-tag {
+  color: #e5e5e5;
+}
+
+.boutique-page .fa-tag.activated {
+  color: #000000;
+}
+
+.boutique-page .schedule {
+  margin-top: 50px;
+}
+
+.boutique-page .schedule .full {
+  padding: 0px 15px 0px 15px;
+}
+
+.drop-in-availability .intro {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.drop-in-availability .intro h3 {
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.drop-in-availability .calendar {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.bookings {
+  min-height: 50vh;
+}
+
+.bookings .single-booking {
+  min-height: 100px;
+  box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  background-color: #f1f1f1;
+  margin-top: 20px;
+}
+
+.bookings .single-booking .content {
+  padding: 15px 15px;
+}
+
+.bookings .single-booking h1, h2, h3, h4 {
+  font-family: Lato, sans-serif;
+  line-height: 25px;
+}
+
+.bookings .single-booking h1 {
+  font-size: 25px;
+}
+
+.bookings .single-booking h3 {
+  font-size: 20px;
+}
+
+.bookings .single-booking h4, ul {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.bookings .preferences-details {
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  padding: 30px 15px 30px 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.bookings .preferences-details img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 10em;
+}
+
+.dashboard .tiles {
+  margin-top: 50px;
+}
+
+.dashboard .tile {
+  height: 50vh;
+  box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  background-color: #f1f1f1;
+  margin: 0px 10px 20px 10px;
+  padding: 15vh 10px 0px 10px;
+}
+
+.dashboard .tile-1 {
+  background-color: #dbe9d8;
+}
+
+.dashboard .tile-2 {
+  background-color: #c2d4d8;
+}
+
+.dashboard .tile-3 {
+  background-color: #f2efe8;
+}
+
+.dashboard .tile-4 {
+  background-color: #b0aac2;
+}
+
 div.blog-container {
   border: 1px solid #e5e5e5;
   margin-top: 50px;
@@ -540,6 +692,16 @@ div.blog-side-panel .twitter-plugin {
   .boutiques .boutique-details h4 {
     padding: 8px;
     font-size: 12px;
+  }
+
+  .boutique-page .intro {
+    min-height: 200px;
+  }
+
+  .boutique-page h1.store-quote {
+    font-size: 35px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .home-page.intro {

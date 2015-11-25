@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Shopper modifies drop in' do
-  let(:shopper){ FactoryGirl.create(:shopper) }
+  let(:shopper){ FactoryGirl.create(:shopper_user) }
   let(:retailer){ FactoryGirl.create(:retailer) }
   let!(:drop_in_availability) {
     FactoryGirl.create(:standard_availability_for_tomorrow,
@@ -9,13 +9,13 @@ feature 'Shopper modifies drop in' do
                        location: retailer.location)
   }
   let!(:drop_in){ FactoryGirl.create(:drop_in,
-                                     shopper: shopper,
+                                     user: shopper,
                                      retailer: retailer,
                                      time: tomorrow_mid_morning) }
-  let!(:retail_user){ FactoryGirl.create(:retail_user, retailer: retailer) }
+  let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
 
   scenario 'by cancelling it' do
-    given_i_am_a_logged_in_shopper shopper
+    given_i_am_a_logged_in_user shopper
     given_my_upcoming_drop_ins_page_contains drop_in
     when_i_cancel_and_confirm drop_in
     then_my_upcoming_drop_ins_page_should_not_contain drop_in

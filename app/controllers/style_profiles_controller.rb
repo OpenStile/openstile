@@ -1,7 +1,7 @@
 class StyleProfilesController < ApplicationController
 
   before_filter :store_shopper_location
-  before_filter :authenticate_shopper!
+  before_filter :authenticate_user!
   before_action :correct_style_profile_shopper
 
   def edit
@@ -10,7 +10,12 @@ class StyleProfilesController < ApplicationController
   def update
     if @style_profile.update_attributes(style_profile_params)
       flash[:success] = "Your Style Profile has been updated!"
-      redirect_to upcoming_drop_ins_path
+      attempted_booking = retrieve_signed_out_booking true
+      if attempted_booking
+        redirect_to retailer_path Retailer.find(attempted_booking['retailer_id'])
+      else
+        redirect_to upcoming_drop_ins_path
+      end
     else
       flash[:danger] = "Whoops! Something went wrong. Please try again"
       render "edit"
@@ -21,7 +26,9 @@ class StyleProfilesController < ApplicationController
     
     def correct_style_profile_shopper
       @style_profile = StyleProfile.find(params[:id])
-      redirect_to root_url unless (@style_profile.shopper == current_shopper)
+      unless current_user.user_role.name == UserRole::SHOPPER && @style_profile.user == current_user
+          redirect_to root_path
+      end
     end
 
     def style_profile_params

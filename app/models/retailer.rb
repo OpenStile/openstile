@@ -3,7 +3,7 @@ class Retailer < ActiveRecord::Base
   include StatusLive
   include FeedSummary
 
-  has_one :retail_user, dependent: :destroy
+  has_one :user, dependent: :destroy
 
   belongs_to :body_shape
   belongs_to :look
@@ -19,15 +19,20 @@ class Retailer < ActiveRecord::Base
   accepts_nested_attributes_for :online_presence
 
   validates :name, presence: true, length: { maximum: 50 } 
-  validates :description, presence: true, length: { maximum: 250 }
+  validates :description, presence: true, length: { maximum: 500 }
   validates :location_id, presence: true
   validates :size_range, presence: true
   validates :price_index, presence: true
+  validates :quote, presence: true, length: { maximum: 100 }
+
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
 
   def available_for_drop_in? datetime
     drop_in_availabilities.order('created_at DESC').each do |availability|
       if availability.covers_datetime? datetime
-        concurrent_drop_ins = drop_ins.where(time: datetime)
+        concurrent_drop_ins = drop_ins.overlapping(datetime, datetime.advance(minutes: 30))
         if concurrent_drop_ins.count >= availability.bandwidth
           return false
         end
@@ -87,7 +92,7 @@ class Retailer < ActiveRecord::Base
     end
 
     while (first_time_slot < end_time) do
-      concurrent_drop_ins = self.drop_ins.where(time: first_time_slot)
+      concurrent_drop_ins = self.drop_ins.overlapping(first_time_slot, first_time_slot.advance(minutes: 30))
 
       unless concurrent_drop_ins.count >= availability.bandwidth
         time_string = first_time_slot.strftime("%-H:%-M")

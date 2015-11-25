@@ -12,25 +12,11 @@ Rails.application.routes.draw do
     resources :articles, path: '', only: [:index, :show]
   end
 
-  devise_for :shoppers, :skip => [:registrations], controllers: {
-    sessions: "shoppers/sessions",
-    passwords: "shoppers/passwords"
-  } 
-  devise_scope :shopper do
-    get "/shoppers/sign_up",  :to => "shoppers/registrations#new",    :as => 'new_shopper_registration'
-    post "/shoppers",         :to => "shoppers/registrations#create", :as => 'shopper_registration'
-  end
-
-  devise_for :retail_users, :skip => [:registrations], controllers: {
-    sessions: "retail_users/sessions",
-    passwords: "retail_users/passwords"
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    passwords: "users/passwords",
+    registrations: "users/registrations"
   }
-  devise_scope :retail_user do
-    get "/retail_users/registrations", :to => "retail_users/registrations#edit",   :as => 'edit_retail_user_registration'
-    put "/retail_users/registrations", :to => "retail_users/registrations#update", :as => 'retail_user_registration'
-  end
-
-  devise_for :admins, only: [:sessions], controllers: {sessions: "admins/sessions"}
 
   resources :style_profiles, only: [:edit, :update]
 
@@ -40,7 +26,6 @@ Rails.application.routes.draw do
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
-      get 'scheduler'
     end
   end
 

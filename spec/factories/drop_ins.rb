@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :drop_in do
     retailer
-    shopper
+    user
     time "2015-01-21 13:43:39"
   end
 end

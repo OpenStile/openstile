@@ -8,17 +8,15 @@ $(document).ready(function() {
   });
 
   $(".preferences-details").hide();
-  $(".show-preferences-link").click(function() {
-    event.preventDefault();
-    var dropInId = "drop_in_" + $(this).data("drop-in-id");
-    $("#" + dropInId + " .show-preferences-link").hide();
-    $("#" + dropInId + " .preferences-details").show();
-  });
-  $(".hide-preferences-link").click(function() {
-    event.preventDefault();
-    var dropInId = "drop_in_" + $(this).data("drop-in-id");
-    $("#" + dropInId + " .preferences-details").hide();
-    $("#" + dropInId + " .show-preferences-link").show();
+
+  $('.bookings .show-preferences-toggle').click(function(){
+    $(this).toggleClass('fa-caret-down')
+    $(this).toggleClass('fa-caret-right');
+    if ($(this).is('.fa-caret-down')) {
+        $(this).closest('.content').find('.preferences-details').show();
+    } else {
+        $(this).closest('.content').find('.preferences-details').hide();
+    }
   });
 });
 

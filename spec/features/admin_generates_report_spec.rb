@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 feature 'Admin user generates OpenStile report' do
-  let(:admin){ FactoryGirl.create(:admin) }
+  let(:admin){ FactoryGirl.create(:admin_user) }
 
   scenario 'with activation stats' do
     create_new_shoppers 5, 3.days.ago
     create_new_shoppers 10, 2.days.ago
     create_new_shoppers 15, 1.day.ago
 
-    given_i_am_a_logged_in_admin admin
+    given_i_am_a_logged_in_user admin
     when_i_generate_a_report 2.days.ago.strftime("%Y-%m-%d"), 
                              1.day.ago.strftime("%Y-%m-%d")
     then_it_should_have_an_activation_count_of 25
@@ -22,7 +22,7 @@ feature 'Admin user generates OpenStile report' do
     given_shopper_logs_in in_range_shoppers[0]
     given_shopper_logs_in in_range_shoppers[0]
     given_shopper_logs_in in_range_shoppers[1]
-    given_i_am_a_logged_in_admin admin
+    given_i_am_a_logged_in_user admin
     when_i_generate_a_report 7.days.ago.strftime("%Y-%m-%d"), 
                              Date.current.to_s
     then_it_should_have_a_retention_count_of 2
@@ -35,7 +35,7 @@ feature 'Admin user generates OpenStile report' do
     book_drop_ins_for_shoppers(out_of_range_shoppers + in_range_shoppers)
     in_range_shoppers[1].drop_ins.first.update(created_at: 1.day.from_now)
 
-    given_i_am_a_logged_in_admin admin
+    given_i_am_a_logged_in_user admin
     when_i_generate_a_report 7.days.ago.strftime("%Y-%m-%d"), 
                              Date.current.to_s
     then_it_should_have_a_revenue_count_of 2
@@ -73,7 +73,7 @@ feature 'Admin user generates OpenStile report' do
     def create_new_shoppers count, datetime, via_capybara=false
       ret = []
       unless via_capybara
-        count.times{ ret << FactoryGirl.create(:shopper, created_at: datetime)}
+        count.times{ ret << FactoryGirl.create(:shopper_user, created_at: datetime)}
       else
         count.times do
           email = Faker::Internet.email
@@ -88,7 +88,7 @@ feature 'Admin user generates OpenStile report' do
 
           click_link 'Log out'
 
-          last_added = Shopper.find_by_email(email)
+          last_added = User.find_by_email(email)
           last_added.update!(created_at: datetime, 
                              password: 'foobar', 
                              password_confirmation: 'foobar')
@@ -106,7 +106,7 @@ feature 'Admin user generates OpenStile report' do
 
       shoppers.each do |shopper|
         FactoryGirl.create(:drop_in, time: tomorrow_noon, 
-                            shopper: shopper, retailer: retailer)
+                            user: shopper, retailer: retailer)
       end
     end
 end

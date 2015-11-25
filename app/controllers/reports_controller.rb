@@ -1,7 +1,8 @@
 class ReportsController < ApplicationController
   include ReportsHelper
 
-  before_filter :authenticate_admin!
+  before_filter :authenticate_user!
+  before_filter :authenticate_admin_user!
 
   def new
   end
