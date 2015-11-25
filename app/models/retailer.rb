@@ -25,6 +25,10 @@ class Retailer < ActiveRecord::Base
   validates :price_index, presence: true
   validates :quote, presence: true, length: { maximum: 100 }
 
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+  
   def available_for_drop_in? datetime
     drop_in_availabilities.order('created_at DESC').each do |availability|
       if availability.covers_datetime? datetime
