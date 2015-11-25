@@ -36,7 +36,7 @@ feature 'Customer reviews drop in' do
   end
 
   def when_i_navigate_to_my_drop_ins_as_retailer
-    click_link 'My appointments'
+    click_link 'View my bookings'
   end
 
   def when_i_review_drop_in_as_shopper past_drop_in, rating, feedback

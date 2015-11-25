@@ -243,7 +243,7 @@ feature 'Shopper shares style preferences with retailer' do
     fill_in 'Email', with: 'me@myboutique.com'
     fill_in 'Password', with: 'password'
     click_button 'Log in'
-    click_link 'My appointments'
+    click_link 'View my bookings'
     expect(page).to have_text('Jane Tomorrow @ 10 AM')
     expect(page).to have_text(style_synopsis)
   end

@@ -511,6 +511,34 @@ footer .footer-section h5 {
   height: 10em;
 }
 
+.dashboard .tiles {
+  margin-top: 50px;
+}
+
+.dashboard .tile {
+  height: 50vh;
+  box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  background-color: #f1f1f1;
+  margin: 0px 10px 20px 10px;
+  padding: 15vh 10px 0px 10px;
+}
+
+.dashboard .tile-1 {
+  background-color: #dbe9d8;
+}
+
+.dashboard .tile-2 {
+  background-color: #c2d4d8;
+}
+
+.dashboard .tile-3 {
+  background-color: #f2efe8;
+}
+
+.dashboard .tile-4 {
+  background-color: #b0aac2;
+}
+
 div.blog-container {
   border: 1px solid #e5e5e5;
   margin-top: 50px;

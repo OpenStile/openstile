@@ -36,7 +36,7 @@ feature 'Retail user manages drop in schedule' do
 
   def when_i_go_to_manage_my_store_drop_in_availability
     click_link 'Dashboard'
-    click_link 'Manage your drop-in availability'
+    click_link 'Manage my availability'
     expect(page).to have_title('Drop-in Availability')
   end
 

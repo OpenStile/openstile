@@ -77,7 +77,7 @@ feature 'User log in and out' do
   end
 
   def then_i_am_directed_to_retailer_home_page
-    expect(page).to have_content('manage your availability')
+    expect(page).to have_content('View my store page')
   end
 
   def then_i_am_directed_to_shopper_home_page
