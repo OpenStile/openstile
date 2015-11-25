@@ -1,5 +1,6 @@
 class DropInAvailabilitiesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :authenticate_retailer_user!
   before_action :correct_retail_user, only: [:update]
 
   def personal
@@ -37,7 +38,7 @@ class DropInAvailabilitiesController < ApplicationController
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
     elsif params[:update_focus] == 'single' &&
-          current_retail_user.retailer.drop_in_availabilities
+          current_user.retailer.drop_in_availabilities
                 .create(drop_in_availability_params.merge(frequency: DropInAvailability::ONE_TIME_FREQUENCY))
       flash[:success] = "Your drop-in availability has been updated"
       redirect_to personal_drop_in_availabilities_path
@@ -51,7 +52,7 @@ class DropInAvailabilitiesController < ApplicationController
   def apply_form
     @date = params[:date]
     @drop_in_availability = 
-      current_retail_user.retailer.get_relevant_availability(@date) || DropInAvailability.new
+      current_user.retailer.get_relevant_availability(@date) || DropInAvailability.new
     respond_to do |format|
       format.js {}
     end

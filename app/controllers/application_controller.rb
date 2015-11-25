@@ -14,6 +14,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def authenticate_retailer_user!
+      if user_signed_in? && current_user.user_role.name != UserRole::RETAILER
+        redirect_to root_path
+      end
+    end
+
     def go_to_relaunch
       redirect_to relaunch_path if ENV['OST_RELAUNCH_PREP']
     end

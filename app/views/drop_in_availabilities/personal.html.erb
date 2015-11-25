@@ -1,37 +1,26 @@
 <% provide(:title, 'Drop-in Availability') %>
 
-<div class="drop-in-availability-top">
-  <%= render "shared/header" %>
-  <div class="hero inner-page">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="intro">
-            <h2>Drop-in Availability</h2><br /> 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "shared/header" %>
 
-<div class="drop-in-availability block">
-  <div class="container">
-    <div class="page-title text-center">
-      <p>
-        Select a day and use the form below to set your drop in availability.
-        Highlighted days are ones you have marked as available for drop-ins.
-      </p>
-    </div>
-    
-    <div class="col-md-8 col-xs-8 col-md-offset-2 col-xs-offset-2">
+<div class="drop-in-availability container">
+  <div class="row intro text-center">
+    <h3>
+      Select a day and use the form below to set your drop in availability.
+      Highlighted days are ones you have marked as available for drop-ins.
+    </h3>
+  </div>
+
+  <div class="row calendar">
+    <div class="col-xs-8 col-xs-offset-2">
       <div id="calendar" data-retailer-id=<%=current_user.retailer.id%>>
       </div>
     </div>
+  </div>
 
-    <div class="col-md-6 col-xs-6 col-md-offest-3 col-xs-offset-3">
+  <div class="row form">
+    <div class="col-xs-6 col-xs-offset-3">
       <div id="availability_form">
-        <%= render 'create_form', 
+        <%= render 'create_form',
                    drop_in_availability: @drop_in_availability,
                    date: @date %>
       </div>

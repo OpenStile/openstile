@@ -37,7 +37,7 @@ feature 'Retail user manages drop in schedule' do
   def when_i_go_to_manage_my_store_drop_in_availability
     click_link 'Dashboard'
     click_link 'Manage your drop-in availability'
-    expect(page).to have_content('Drop-in Availability')
+    expect(page).to have_title('Drop-in Availability')
   end
 
   def when_i_submit_with_invalid_options
@@ -45,7 +45,7 @@ feature 'Retail user manages drop in schedule' do
   end
 
   def then_my_availability_should_not_be_updated
-    expect(page).to have_content('Drop-in Availability')
+    expect(page).to have_title('Drop-in Availability')
     expect(page).to have_content('There was an error')
   end
 
