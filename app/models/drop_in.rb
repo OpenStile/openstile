@@ -23,6 +23,8 @@ class DropIn < ActiveRecord::Base
 
   default_scope { order('time ASC') }
 
+  scope :overlapping, ->(start_time, end_time) { where("time >= ? and time < ?", start_time, end_time) }
+
   def retailer_available_for_drop_in
     unless retailer.nil? || time.nil?
       unless retailer.available_for_drop_in?(time)

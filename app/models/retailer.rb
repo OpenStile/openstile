@@ -28,7 +28,7 @@ class Retailer < ActiveRecord::Base
   def available_for_drop_in? datetime
     drop_in_availabilities.order('created_at DESC').each do |availability|
       if availability.covers_datetime? datetime
-        concurrent_drop_ins = drop_ins.where(time: datetime)
+        concurrent_drop_ins = drop_ins.overlapping(datetime, datetime.advance(minutes: 30))
         if concurrent_drop_ins.count >= availability.bandwidth
           return false
         end
@@ -88,7 +88,7 @@ class Retailer < ActiveRecord::Base
     end
 
     while (first_time_slot < end_time) do
-      concurrent_drop_ins = self.drop_ins.where(time: first_time_slot)
+      concurrent_drop_ins = self.drop_ins.overlapping(first_time_slot, first_time_slot.advance(minutes: 30))
 
       unless concurrent_drop_ins.count >= availability.bandwidth
         time_string = first_time_slot.strftime("%-H:%-M")

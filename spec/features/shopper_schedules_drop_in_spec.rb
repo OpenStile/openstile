@@ -15,7 +15,7 @@ feature 'Shopper schedule drop in' do
   }
   let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
 
-  scenario 'to browse a store' do
+  scenario 'for a given date and time' do
     date, time = parse_date_and_EST(tomorrow_afternoon)
     place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
@@ -26,6 +26,17 @@ feature 'Shopper schedule drop in' do
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, "Tomorrow", place
     then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email 
+  end
+
+  scenario 'for a drop-by in 30 min', js: true do
+    given_i_am_a_logged_in_user shopper
+    when_i_click_on_a_retailer retailer
+    then_i_should_not_see_a_book_in_30_option
+    given_retailer_has_an_open_availability_in_30 retailer
+    when_i_click_on_a_retailer retailer
+    when_i_book_in_30
+    then_my_scheduled_drop_ins_should_be_updated_with retailer
+    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
   end
 
   scenario 'sign in from the third party scheduler widget' do
@@ -107,10 +118,15 @@ feature 'Shopper schedule drop in' do
     expect(page).to have_content('Your drop-in was scheduled!')
   end
 
-  def then_my_scheduled_drop_ins_should_be_updated_with retailer, date, place
+  def when_i_book_in_30
+    click_button "I'll be there in 30 minutes!"
+    expect(page).to have_content('Your drop-in was scheduled!')
+  end
+
+  def then_my_scheduled_drop_ins_should_be_updated_with retailer, date=nil, place=nil
     expect(page).to have_link(retailer.name)
-    expect(page).to have_content(date)
-    expect(page).to have_content(place)
+    expect(page).to have_content(date) unless date.nil?
+    expect(page).to have_content(place) unless place.nil?
   end
 
   def then_my_scheduled_should_show_item_on_hold item
@@ -126,6 +142,21 @@ feature 'Shopper schedule drop in' do
   def then_i_should_see_i_have_an_existing_drop_in_scheduled appointment
     expect(page).to have_content('We see you have a drop-in')
     expect(page).to have_content(appointment.colloquial_time)
+  end
+
+  def then_i_should_not_see_a_book_in_30_option
+    expect(page).to_not have_button("I'll be there in 30 minutes!", visible: true)
+  end
+
+  def given_retailer_has_an_open_availability_in_30 retailer
+    target_time = DateTime.now.advance(minutes: 30)
+
+    retailer.drop_in_availabilities.create!(template_date: target_time.to_date,
+                                           start_time: "00:00:00",
+                                           end_time: "23:59:59",
+                                           bandwidth: 1,
+                                           frequency: DropInAvailability::ONE_TIME_FREQUENCY,
+                                           location: retailer.location)
   end
 
   private

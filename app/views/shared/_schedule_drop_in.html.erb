@@ -1,21 +1,35 @@
 <div data-retailer-id=<%= retailer.id %> class="drop-in" id="drop-in">
   <div class="row text-center">
     <h3>
-      When you book a FREE styling, <%= retailer.user.first_name %> and her team will
+      When you book a FREE styling <%= retailer.user.first_name %> and her team will
       have hand-picked items ready and waiting for you.
     </h3>
   </div>
 
   <div class="row schedule">
-    <div class="col-xs-6 asap">
+    <% asap_time = DateTime.now.advance(minutes: 30) %>
+    <div class="col-xs-6 asap <%= 'dn' unless retailer.available_for_drop_in? asap_time %>">
       <div class="col-xs-8 col-md-6 col-md-offset-2">
-        <h3><a href="#" class="btn btn-default btn-lg">I'll be there in 30 minutes!</a></h3>
+        <%= form_for(@drop_in || current_user.drop_ins.build(retailer_id: retailer.id)) do |f| %>
+            <%= f.hidden_field :user_id %>
+            <%= f.hidden_field :retailer_id %>
+
+            <input id="drop_in[selected_date]" name="drop_in[selected_date]"
+                   type="hidden" value="<%= asap_time.strftime('%F') %>">
+
+            <input id="drop_in[selected_time]" name="drop_in[selected_time]"
+                   type="hidden" value="<%= ActiveSupport::TimeZone[Time.zone.name].parse(asap_time.to_s).strftime('%H:%M') %>">
+
+            <%= f.submit ("I'll be there in 30 minutes!"),
+                         class: "btn btn-lg btn-default #{'disabled' if retailer_signed_in?}" %>
+            <span class="help-block"><%= 'Sorry, store owners cannot book sessions' if retailer_signed_in? %></span>
+        <% end %>
       </div>
       <div class="col-xs-4 text-center">
         <h3>- or -</h3>
       </div>
     </div>
-    <div class="col-xs-6 full">
+    <div class="col-xs-6 <%= 'col-xs-offset-3' unless retailer.available_for_drop_in? asap_time %> full">
       <%= form_for(@drop_in || current_user.drop_ins.build(retailer_id: retailer.id)) do |f| %>
           <div class="text-center">
             <%= render 'shared/error_messages', object: f.object %>
@@ -27,13 +41,13 @@
           <div class="row form-group">
             <label class="sr-only" for="drop_in[selected_date]">Date</label>
               <input id="drop_in[selected_date]" name="drop_in[selected_date]"
-                     class="form-control input-lg datepicker" placeholder="Pick a Date"></input>
+                     class="form-control input-lg datepicker" placeholder="Pick a Date">
           </div>
 
           <div class="row form-group">
             <label class="sr-only" for="drop_in[selected_time]">Time</label>
               <input id="drop_in[selected_time]" name="drop_in[selected_time]"
-                     class="form-control input-lg timepicker" placeholder="Pick a Time"></input>
+                     class="form-control input-lg timepicker" placeholder="Pick a Time">
           </div>
 
           <div class="row form-group">

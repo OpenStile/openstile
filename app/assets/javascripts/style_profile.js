@@ -4,11 +4,10 @@
 
 function showFieldset(index){
     var fieldsets = $('.fieldset-' + index);
-    if(fieldsets.length == 0){
-        return showFieldset(1);
+    if(fieldsets.length != 0){
+        $('fieldset').hide();
+        fieldsets.show();
     }
-    $('fieldset').hide();
-    fieldsets.show();
 }
 
 $(document).ready(function(){
