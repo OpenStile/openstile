@@ -2,27 +2,33 @@
 
 <%= render "shared/header" %>
 
-<% if shopper_signed_in? && never_had_drop_in?(current_user) %>
-    <%= render "shared/experience" %>
-<% else %>
-    <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>
-        <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
-          <% if shopper_signed_in? %>
-              <%= render 'upcoming_for_shopper', drop_in: drop_in %>
-          <% elsif retailer_signed_in? %>
-              <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
-          <% end %>
-        </div>
-        <hr />
-    <% end %>
-    <% @previous_drop_ins.each_with_index do |drop_in, idx| %>
-        <div id="drop_in_<%= drop_in.id %>" class="single-drop-in row">
-          <% if shopper_signed_in? %>
-              <%= render 'previous_for_shopper', drop_in: drop_in %>
-          <% elsif retailer_signed_in? %>
-              <%= render 'previous_for_retail_user', drop_in: drop_in %>
-          <% end %>
-        </div>
-        <hr />
-    <% end %>
-<% end %>
+<div class="bookings container">
+  <% if shopper_signed_in? && never_had_drop_in?(current_user) %>
+      <%= render "shared/experience" %>
+  <% elsif retailer_signed_in? && current_user.retailer.drop_ins.empty? %>
+      <div class="row text-center">
+        <h3>No one has booked a styling at your store yet. Here's a random sample to prepare you for your first booking! </h3>
+      </div>
+      <%= render 'sample_booking_for_retailer' %>
+  <% else %>
+      <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>
+          <div id="drop_in_<%= drop_in.id %>" class="single-booking row">
+            <% if shopper_signed_in? %>
+                <%= render 'upcoming_for_shopper', drop_in: drop_in %>
+            <% elsif retailer_signed_in? %>
+                <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
+            <% end %>
+          </div>
+      <% end %>
+      <% @previous_drop_ins.each_with_index do |drop_in, idx| %>
+          <div id="drop_in_<%= drop_in.id %>" class="single-booking row">
+            <% if shopper_signed_in? %>
+                <%= render 'previous_for_shopper', drop_in: drop_in %>
+            <% elsif retailer_signed_in? %>
+                <%= render 'previous_for_retail_user', drop_in: drop_in %>
+            <% end %>
+          </div>
+      <% end %>
+  <% end %>
+</div>
+

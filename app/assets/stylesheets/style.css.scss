@@ -463,6 +463,54 @@ footer .footer-section h5 {
   margin-bottom: 40px;
 }
 
+.bookings {
+  min-height: 50vh;
+}
+
+.bookings .single-booking {
+  min-height: 100px;
+  box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  background-color: #f1f1f1;
+  margin-top: 20px;
+}
+
+.bookings .single-booking .content {
+  padding: 15px 15px;
+}
+
+.bookings .single-booking h1, h2, h3, h4 {
+  font-family: Lato, sans-serif;
+  line-height: 25px;
+}
+
+.bookings .single-booking h1 {
+  font-size: 25px;
+}
+
+.bookings .single-booking h3 {
+  font-size: 20px;
+}
+
+.bookings .single-booking h4, ul {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.bookings .preferences-details {
+  border: 1px solid #ededed;
+  border-radius: 10px;
+  padding: 30px 15px 30px 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(255,255,255,0.8);
+}
+
+.bookings .preferences-details img {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 10em;
+}
+
 div.blog-container {
   border: 1px solid #e5e5e5;
   margin-top: 50px;

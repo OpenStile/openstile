@@ -37,15 +37,19 @@
     <% end %>
     <% unless profile.body_shape.nil? %>
         <h3>Body shape: <%= profile.body_shape.name%></h3>
-        <%= image_tag("body_shapes/#{profile.body_shape.name.downcase.gsub(' ','-')}",
+        <%= image_tag("body_shapes/#{profile.body_shape.name.downcase.gsub(' ','-')}.jpg",
                       alt: profile.body_shape.name, class: 'img-responsive')%>
-        <p><%= profile.body_shape.description %></p>
+        <h4><%= profile.body_shape.description %></h4>
     <% end %>
     <% unless profile.looks.empty? %>
         <h3>Loved looks: </h3>
-        <% profile.looks.each do |look|%>
-            <%= image_tag(look.image_path, alt: look.name, class: 'img-responsive') %>
-        <% end %>
+        <div class="row">
+          <% profile.looks.each do |look|%>
+              <div class="col-xs-4">
+                <%= image_tag(look.image_path, alt: look.name, class: 'img-responsive') %>
+              </div>
+          <% end %>
+        </div>
     <% end %>
     <% unless profile.special_considerations.empty? %>
         <h3>Values: <%= profile.special_considerations.map(&:name).join(', ') %></h3>

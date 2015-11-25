@@ -1,19 +1,18 @@
-<div class="col-md-3 col-xs-3 vcenter">
-  <h4><%= drop_in.user.first_name %></h4>
-  <h4><%= drop_in.colloquial_time %></h4>
-</div>
-<div class="col-md-8 col-xs-8 vcenter">
-  <% unless drop_in.comment.blank? %>
-    <h4>Purpose of drop-in:</h4><br />
-    <p><%= drop_in.comment %></p><br />
-  <% end %>
-  <h4>Her preferences:</h4><br />
-  <%= link_to "Show details", "#", class: "show-preferences-link",
-                                   data: {drop_in_id: drop_in.id} %>
-  <div class="preferences-details">
-    <%= render 'shared/style_preferences', 
-                profile: drop_in.user.style_profile %>
-    <%= link_to "Hide details", "#", class: "hide-preferences-link",
-                                     data: {drop_in_id: drop_in.id} %>
+<div class="content">
+  <div class="col-xs-7 col-xs-offset-2">
+    <h3><%= drop_in.user.first_name %></h3>
+    <h3><%= drop_in.colloquial_time %></h3>
+    <% unless drop_in.comment.blank? %>
+        <h4>"<%= drop_in.comment %>"</h4>
+    <% end %>
+  </div>
+  <div class="col-xs-3">
+    <h1>
+      <i class="show-preferences-toggle fa fa-caret-right"></i>
+    </h1>
+  </div>
+  <div class="col-xs-8 col-xs-offset-2 preferences-details">
+    <%= render 'shared/style_preferences',
+               profile: drop_in.user.style_profile %>
   </div>
 </div>
