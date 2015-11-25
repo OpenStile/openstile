@@ -1,11 +1,14 @@
 class RetailersController < ApplicationController
   before_filter :go_to_relaunch, :only => [:index]
-  before_filter :store_shopper_location, only: [:scheduler]
-  before_filter :authenticate_user!, only: [:new, :create, :scheduler]
+  before_filter :authenticate_user!, only: [:new, :create]
   before_filter :authenticate_admin_user!, only: [:new, :create]
 
   def show
     @retailer = Retailer.find(params[:id])
+    attempted_booking = retrieve_signed_out_booking
+    if attempted_booking && user_signed_in?
+      @drop_in = current_user.drop_ins.build(attempted_booking)
+    end
   end
 
   def index
@@ -24,10 +27,6 @@ class RetailersController < ApplicationController
     else
       render 'new'
     end
-  end
-
-  def scheduler 
-    @retailer = Retailer.find(params[:id])
   end
 
   def scheduled_availabilities

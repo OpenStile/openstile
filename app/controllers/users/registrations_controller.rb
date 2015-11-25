@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(sign_up_params.merge(user_role: UserRole.find_by_name(UserRole::SHOPPER)))
     if @user.save
       sign_in @user
-      after_sign_up_path_for @user
+      redirect_to after_sign_up_path_for(@user)
     else
       render 'new'
     end
@@ -62,7 +62,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if current_user.user_role.name == UserRole::SHOPPER
       path = edit_style_profile_path(current_user.style_profile)
     end
-    redirect_to session[:previous_url] || path
+    path
   end
 
   # The path used after sign up for inactive accounts.

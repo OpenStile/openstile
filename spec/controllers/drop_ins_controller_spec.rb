@@ -19,16 +19,6 @@ RSpec.describe DropInsController, :type => :controller do
 
 
   context "when shopper is not signed in" do
-    context "POST create" do
-      it "redirects to signin" do
-        post :create, {shopper_id: shopper.id, 
-                       retailer_id: retailer.id, 
-                       time: "2015-01-21 13:00:00"}
-        
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
-
     context "GET upcoming" do
       it "redirects to signin" do
         get :upcoming

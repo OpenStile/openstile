@@ -8,9 +8,10 @@
 
   <div class="row schedule">
     <% asap_time = DateTime.now.advance(minutes: 30) %>
+    <% new_drop_in = @drop_in || retailer.drop_ins.build(user_id: user_signed_in? ? current_user.id : nil) %>
     <div class="col-xs-6 asap <%= 'dn' unless retailer.available_for_drop_in? asap_time %>">
       <div class="col-xs-8 col-md-6 col-md-offset-2">
-        <%= form_for(@drop_in || current_user.drop_ins.build(retailer_id: retailer.id)) do |f| %>
+        <%= form_for(new_drop_in) do |f| %>
             <%= f.hidden_field :user_id %>
             <%= f.hidden_field :retailer_id %>
 
@@ -30,7 +31,7 @@
       </div>
     </div>
     <div class="col-xs-6 <%= 'col-xs-offset-3' unless retailer.available_for_drop_in? asap_time %> full">
-      <%= form_for(@drop_in || current_user.drop_ins.build(retailer_id: retailer.id)) do |f| %>
+      <%= form_for(new_drop_in) do |f| %>
           <div class="text-center">
             <%= render 'shared/error_messages', object: f.object %>
           </div>
@@ -41,7 +42,8 @@
           <div class="row form-group">
             <label class="sr-only" for="drop_in[selected_date]">Date</label>
               <input id="drop_in[selected_date]" name="drop_in[selected_date]"
-                     class="form-control input-lg datepicker" placeholder="Pick a Date">
+                     class="form-control input-lg datepicker" placeholder="Pick a Date"
+                     value="<%= new_drop_in.time.strftime('%F') unless new_drop_in.time.blank? %>">
           </div>
 
           <div class="row form-group">

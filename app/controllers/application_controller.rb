@@ -38,4 +38,16 @@ class ApplicationController < ActionController::Base
         session[:previous_url] = request.fullpath 
       end
     end
+
+    def store_signed_out_booking params
+      session[:attempted_booking] = params
+    end
+
+    def retrieve_signed_out_booking soft=false
+      if soft
+        return session[:attempted_booking]
+      else
+        return session.delete(:attempted_booking)
+      end
+    end
 end

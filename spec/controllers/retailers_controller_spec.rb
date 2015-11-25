@@ -19,13 +19,6 @@ RSpec.describe RetailersController, :type => :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
-
-    context "GET scheduler" do
-      it "redirects to signin" do
-        get :scheduler, {id: retailer.id}
-        expect(response).to redirect_to(new_user_session_path)
-      end
-    end
   end
 
   context "when retail user signed in" do

@@ -25,6 +25,10 @@ class Users::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     path = current_user.user_role.name == UserRole::SHOPPER ? upcoming_drop_ins_path : root_path
-    session[:previous_url] || path
+    attempted_booking = retrieve_signed_out_booking true
+    if attempted_booking
+      path = retailer_path Retailer.find(attempted_booking['retailer_id'])
+    end
+    path
   end
 end

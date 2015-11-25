@@ -1,13 +1,12 @@
 class DropInsController < ApplicationController
 
   before_filter :store_shopper_location
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:create]
   before_action :correct_drop_in_customer, only: [:update]
   before_action :correct_drop_in_shopper, only: [:destroy]
 
   def create
     retrieved_params = drop_in_params
-
     selected_date = retrieved_params.delete(:selected_date)
     selected_time = retrieved_params.delete(:selected_time)
     unless (selected_date.blank? || selected_time.blank?)
@@ -16,17 +15,23 @@ class DropInsController < ApplicationController
       retrieved_params[:time] = datetime
     end
 
-    @drop_in = DropIn.new(retrieved_params)
-
-    if @drop_in.save
-      retailer = @drop_in.retailer
-      RetailUserMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
-      ShopperMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
-      flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
-      redirect_to upcoming_drop_ins_path
+    if retrieved_params[:user_id].blank?
+      store_signed_out_booking retrieved_params.compact
+      flash[:warning] = "Please log in or create an account so that we can save your booking."
+      redirect_to new_user_session_path
     else
-      @retailer = @drop_in.retailer
-      render 'retailers/show'
+      @drop_in = DropIn.new(retrieved_params)
+
+      if @drop_in.save
+        retailer = @drop_in.retailer
+        RetailUserMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
+        ShopperMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
+        flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
+        redirect_to upcoming_drop_ins_path
+      else
+        @retailer = @drop_in.retailer
+        render 'retailers/show'
+      end
     end
   end
 
