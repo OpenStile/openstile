@@ -7,7 +7,7 @@
   </div>
 
   <div class="row schedule">
-    <% asap_time = DateTime.now.advance(minutes: 30) %>
+    <% asap_time = Time.zone.now.advance(minutes: 30) %>
     <% new_drop_in = @drop_in || retailer.drop_ins.build(user_id: user_signed_in? ? current_user.id : nil) %>
     <div class="col-xs-6 asap <%= 'dn' unless retailer.available_for_drop_in? asap_time %>">
       <div class="col-xs-8 col-md-6 col-md-offset-2">
