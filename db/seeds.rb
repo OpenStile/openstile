@@ -100,3 +100,67 @@ end
 if ENV["demo_down"]
   Retailer.destroy_all
 end
+
+if ENV["brooklyn_up"]
+
+  unless Retailer.find_by_name('Myths of Creation')
+
+    location = Location.create!(address: '421 Graham Ave, Brooklyn, NY 11211', neighborhood: 'Williamsburg')
+
+    description = <<EOF
+Myths of Creation is a boutique with serious personality, known for great basics, handmade local design collaborations,
+awesome gifting, the #bunnieseatingpizza greeting card series, and an ever-evolving selection of clothes and shoes that
+don't break the bank. We love helping people discover and express who they are.
+EOF
+
+    retailer = Retailer.create!(name: 'Myths of Creation', description: description, location: location,
+                                size_range: 'XS - L', quote: "Where daring meets practical and never breaks the bank",
+                                price_index: 1, status: 1)
+
+    retailer.create_online_presence!(web_link: 'http://mythsofcreation.com',
+                                     instagram_link: 'https://www.instagram.com/mythsofcreation/')
+
+    ['2015-11-28', '2015-11-29', '2015-11-30', '2015-12-01', '2015-12-02', '2015-12-03', '2015-12-04'].each do |date|
+      retailer.drop_in_availabilities.create!(template_date: date, start_time: '12:00:00', end_time: '20:00:00',
+                                              frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    end
+
+    retailer.create_user!(first_name: 'Xenia', last_name: 'Viray', email: 'xenia@mythsofcreation.com',
+                          user_role: UserRole.find_by_name(UserRole::RETAILER), password: 'moc_openstile1128',
+                          password_confirmation: 'moc_openstile1128', confirmed_at: Time.zone.now)
+  end
+
+  unless Retailer.find_by_name('Jupe')
+
+    location = Location.create!(address: '1387 Carroll St, Brooklyn, NY 11213', neighborhood: 'Crown Heights')
+
+    description = <<EOF
+At Jupe, our goal is to handpick the latest fashions at affordable prices while also keeping it modest at the same time.
+We pride ourselves in offering a pleasant and fun shopping experience.
+EOF
+
+    retailer = Retailer.create!(name: 'Jupe', description: description, location: location,
+                                size_range: 'XS - L', quote: "Where affordability meets style",
+                                price_index: 1, status: 1)
+
+    retailer.create_online_presence!(web_link: 'http://www.jupenyc.com/',
+                                     facebook_link: 'https://www.facebook.com/JupeNYC/',
+                                     instagram_link: 'https://www.instagram.com/jupenyc/')
+
+    retailer.drop_in_availabilities.create!(template_date: '2015-11-29', start_time: '12:00:00', end_time: '16:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2015-11-30', start_time: '15:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2015-12-01', start_time: '12:00:00', end_time: '15:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2015-12-02', start_time: '19:00:00', end_time: '22:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2015-12-03', start_time: '12:00:00', end_time: '15:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+
+    retailer.create_user!(first_name: 'Shayna', last_name: 'Capland', email: 'Lejupe@gmail.com',
+                          user_role: UserRole.find_by_name(UserRole::RETAILER), password: 'jupe_openstile1128',
+                          password_confirmation: 'jupe_openstile1128', confirmed_at: Time.zone.now)
+  end
+
+end

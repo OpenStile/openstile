@@ -8,7 +8,7 @@
           <div class="col-xs-8 col-xs-offset-2 boutique-item">
             <div class="cover-photo">
               <%= cl_image_tag(retailer.cover_photo, width: 800, height: 400,
-                               crop: :thumb, class: 'img-responsive') %>
+                               crop: :thumb, :gravity=>:north, class: 'img-responsive') %>
             </div>
             <div class="boutique-details">
               <div class="col-xs-12 contents">

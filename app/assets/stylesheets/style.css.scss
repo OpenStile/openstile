@@ -709,30 +709,32 @@ div.blog-side-panel .twitter-plugin {
   }
 
   .home-page h1 {
-    font-size: 3vh;
-    line-height: 4vh;
+    font-size: 40px;
+    line-height: 45px;
   }
 
   .home-page h3 {
-    font-size: 2vh;
+    font-size: 18px;
     margin-top: 15px;
-    max-font-size: 15px;
   }
 
   .home-page.intro h1 {
-    padding-top: 10vh;
+    padding-top: 40px;
   }
 
   .home-page a {
-    font-size: 1vh;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
 
   .home-page.how-it-works h1 {
-    padding-top: 5vh;
+    padding-top: 40px;
   }
 
+  .home-page.how-it-works .service-item img {
+    height: 250px;
+  }
 }
 
 /* Mobile Phones */
