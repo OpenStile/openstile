@@ -229,7 +229,7 @@ feature 'Shopper schedule drop in' do
   end
 
   def given_retailer_has_an_open_availability_in_30 retailer
-    target_time = DateTime.now.advance(minutes: 30)
+    target_time = Time.zone.now.advance(minutes: 30)
 
     retailer.drop_in_availabilities.create!(template_date: target_time.to_date,
                                            start_time: "00:00:00",
