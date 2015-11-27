@@ -19,11 +19,13 @@
                     outfits you're sure to love!
                 </h5>
             </div>
+            <% unless Retailer.all_live.empty? %>
             <% sample_retailer = Retailer.all_live.sample %>
             <div class="text-justify">
               <%= link_to("Treat yourself to a FREE styling at #{sample_retailer.name}!",
                           retailer_path(sample_retailer), class: "btn btn-lg btn-default try-today")%>
             </div>
+            <% end %>
         </div>
     </div>
 </div>

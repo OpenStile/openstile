@@ -41,6 +41,6 @@ feature 'Shopper modifies drop in' do
   def then_my_upcoming_drop_ins_page_should_not_contain appointment
     click_link 'logo-home'
 
-    expect(page).to_not have_content(appointment.retailer.name)
+    expect(page).to_not have_content(appointment.colloquial_time)
   end
 end

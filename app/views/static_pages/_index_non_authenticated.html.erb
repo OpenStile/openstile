@@ -13,6 +13,7 @@
   </div>
 </div>
 
+<% unless Retailer.all_live.empty? %>
 <div class="container home-page boutiques">
   <div class="row text-center">
     <h1>Featured boutique</h1>
@@ -21,6 +22,7 @@
     <%= render 'retailers/retailer', retailer: Retailer.all_live.sample %>
   </div>
 </div>
+<% end %>
 
 <div class="container home-page how-it-works">
   <div class="row text-center">
