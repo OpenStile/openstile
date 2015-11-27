@@ -13,7 +13,7 @@
   </div>
 </div>
 
-<% unless Retailer.all_live.empty? %>
+<% unless Retailer.all_live.empty? || ENV['OST_RELAUNCH_PREP'] %>
 <div class="container home-page boutiques">
   <div class="row text-center">
     <h1>Featured boutique</h1>
