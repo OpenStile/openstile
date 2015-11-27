@@ -13,6 +13,15 @@
   </div>
 </div>
 
+<div class="container home-page boutiques">
+  <div class="row text-center">
+    <h1>Featured boutique</h1>
+  </div><br /><br />
+  <div class="row">
+    <%= render 'retailers/retailer', retailer: Retailer.all_live.sample %>
+  </div>
+</div>
+
 <div class="container home-page how-it-works">
   <div class="row text-center">
     <h1>How it works</h1>
@@ -44,6 +53,6 @@
     </div>
   </div>
   <div class="row text-center">
-    <%= link_to('Get started today!', retailers_path, class: 'btn btn-primary')%>
+    <%= link_to('Get started today!', retailers_path, class: 'btn btn-lg try-today')%>
   </div>
 </div>

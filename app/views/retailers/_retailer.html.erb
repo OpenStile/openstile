@@ -1,0 +1,38 @@
+<a href="<%= retailer_path retailer%>">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 boutique-item">
+      <div class="cover-photo">
+        <%= cl_image_tag(retailer.cover_photo, width: 800, height: 400,
+                         crop: :thumb, :gravity=>:north, class: 'img-responsive') %>
+      </div>
+      <div class="boutique-details">
+        <div class="col-xs-12 contents">
+          <div class="col-xs-12">
+            <%= cl_image_tag(retailer.logo, width: 150, height: 150,
+                             crop: :thumb, class: 'img-responsive center-block') %>
+          </div>
+          <div class="col-xs-12 text-center">
+            <h4><%= StreetAddress::US.parse(retailer.location.address) %></h4>
+          </div>
+          <div class="col-md-4 col-xs-12 text-center"><h4><%= retailer.size_range %></h4></div>
+          <div class="col-md-4 col-md-offset-4 col-xs-12 text-center">
+            <h4>
+              <% retailer.price_index.times do %>
+                  <i class="fa fa-tag"></i>
+              <% end %>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="boutique-title row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <h3><%= retailer.name %></h3>
+      <h4>
+        <%= StreetAddress::US.parse(retailer.location.address).city %>,
+        <%= StreetAddress::US.parse(retailer.location.address).state %>
+      </h4>
+    </div>
+  </div>
+</a>

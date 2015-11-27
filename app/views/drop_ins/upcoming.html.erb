@@ -6,9 +6,12 @@
   <% if shopper_signed_in? && never_had_drop_in?(current_user) %>
       <%= render "shared/experience" %>
   <% elsif retailer_signed_in? && current_user.retailer.drop_ins.empty? %>
+      <br />
       <div class="row text-center">
-        <h3>No one has booked a styling at your store yet. Here's a random sample to prepare you for your first booking! </h3>
+        <h3>No one has booked a styling at your store yet.</h3><br />
+        <h3>Here's a sample to prepare you for your first booking. </h3>
       </div>
+      <br />
       <%= render 'sample_booking_for_retailer' %>
   <% else %>
       <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>

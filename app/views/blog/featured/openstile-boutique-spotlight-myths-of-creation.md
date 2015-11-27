@@ -3,7 +3,7 @@ title: "OpenStile Boutique Spotlight: Myths of Creation"
 created_at: "2015-11-25"
 author: "Tamara Austin"
 cover_photo: "Myths_of_Creation__2460_1_gkq6ru.jpg"
-og_photo: 'https://res.cloudinary.com/openstile/image/upload/v1448480076/Myths_of_Creation__172_hjonx6.jpg'
+og_photo: 'https://res.cloudinary.com/openstile/image/upload/v1448659379/Myths_of_Creation__172_oeroac.jpg'
 live: true
 ---
 
@@ -13,7 +13,7 @@ See what she has to say about her unique store aesthetic, her designer selection
 
 [//]: # (more)
 <br/><br/>
-![spotlight1](https://res.cloudinary.com/openstile/image/upload/v1448480076/Myths_of_Creation__172_hjonx6.jpg)
+![spotlight1](https://res.cloudinary.com/openstile/image/upload/v1448659379/Myths_of_Creation__172_oeroac.jpg)
 <br/><br/>
 
 **Myths of Creation’s store aesthetic is very unique, like the name. How did you decide on the name?**<br/>

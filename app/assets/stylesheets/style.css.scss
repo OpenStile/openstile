@@ -155,6 +155,7 @@ footer .footer-section h5 {
   background:#555 asset_url('style_session.jpg') no-repeat;
   background-size:cover;
   background-position:center top;
+  margin-bottom: 10vh;
 }
 
 .home-page.intro h1 {
@@ -168,12 +169,18 @@ footer .footer-section h5 {
   margin-bottom: 3vh;
 }
 
-.home-page.how-it-works h1 {
-  padding-top: 10vh;
-}
-
 .home-page.how-it-works .service-item img {
   max-height: 30vh;
+}
+
+.home-page a.try-today {
+  background-color: #ff4500;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.home-page a.try-today:hover {
+  background-color: #cc3700;
 }
 
 .login-section {
@@ -190,6 +197,15 @@ footer .footer-section h5 {
   background-size:cover;
   background-position:center 70%;
   height: 68vh;
+}
+
+.experience .content {
+  min-height: 50vh;
+  box-shadow:0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+  background-color: #f1f1f1;
+  margin-top: 20px;
+  padding-top: 8vh;
+  padding-bottom: 8vh;
 }
 
 .experience img {
@@ -224,7 +240,24 @@ footer .footer-section h5 {
 }
 
 .experience ul {
-  list-style-type: none;
+  list-style-type: circle;
+}
+
+.experience a.try-today {
+  background-color: #ff4500;
+  font-weight: bold;
+  color: #ffffff;
+  white-space: normal;
+}
+
+.experience a.try-today:hover {
+  background-color: #cc3700;
+}
+
+.experience .vcenter {
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }
 
 .style-profile .top-image {
@@ -704,8 +737,16 @@ div.blog-side-panel .twitter-plugin {
     padding-bottom: 20px;
   }
 
-  .home-page.intro {
+  .home-page.intro, .home-page.how-it-works {
     min-height: 450px;
+  }
+
+  .home-page.intro {
+    margin-bottom: 75px;
+  }
+
+  .home-page.boutiques {
+    min-height: 350px;
   }
 
   .home-page h1 {
@@ -726,10 +767,6 @@ div.blog-side-panel .twitter-plugin {
     font-size: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
-  }
-
-  .home-page.how-it-works h1 {
-    padding-top: 40px;
   }
 
   .home-page.how-it-works .service-item img {

@@ -37,9 +37,9 @@
     <% end %>
     <% unless profile.body_shape.nil? %>
         <h3>Body shape: <%= profile.body_shape.name%></h3>
+        <h4><%= profile.body_shape.description %></h4>
         <%= image_tag("body_shapes/#{profile.body_shape.name.downcase.gsub(' ','-')}.jpg",
                       alt: profile.body_shape.name, class: 'img-responsive')%>
-        <h4><%= profile.body_shape.description %></h4>
     <% end %>
     <% unless profile.looks.empty? %>
         <h3>Loved looks: </h3>

@@ -1,0 +1,29 @@
+<div class="experience container">
+    <div class="content row">
+        <div class="col-sm-offset-1 col-sm-4 col-xs-2 vcenter">
+            <%= image_tag("plaid_blazer.jpg", class: "img-responsive center-block") %>
+        </div>
+        <div class="col-sm-6 col-xs-10 description vcenter">
+            <div class="text-justify">
+                <h4>SHOP LIKE A VIP</h4>
+            </div>
+            <div class="text-justify">
+                <h5>When you shop with OpenStile, our stores will know:</h5>
+                <ul>
+                    <li>When you're coming in</li>
+                    <li>What you do and don't like</li>
+                    <li>What you're actively seeking</li>
+                </ul>
+                <h5>
+                    Powered by this knowledge they'll pre-select a few
+                    outfits you're sure to love!
+                </h5>
+            </div>
+            <% sample_retailer = Retailer.all_live.sample %>
+            <div class="text-justify">
+              <%= link_to("Treat yourself to a FREE styling at #{sample_retailer.name}!",
+                          retailer_path(sample_retailer), class: "btn btn-lg btn-default try-today")%>
+            </div>
+        </div>
+    </div>
+</div>
