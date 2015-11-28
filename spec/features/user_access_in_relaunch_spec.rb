@@ -22,12 +22,6 @@ feature 'User visits during site reconstruction' do
     then_i_should_see_relaunch_message
   end
 
-  scenario 'and attempts to access the about page' do
-    visit '/'
-    click_link 'About'
-    then_i_should_see_relaunch_message
-  end
-
   scenario 'and goes to home page' do
     visit '/'
     then_i_should_see_relaunch_message false
