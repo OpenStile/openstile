@@ -57,7 +57,7 @@ class DropIn < ActiveRecord::Base
   end
 
   def self.previous_for_retailer retailer_id
-    where("retailer_id = ? and time < ?", retailer_id, DateTime.current.advance(minutes: 30))
+    where("retailer_id = ? and time < ?", retailer_id, DateTime.current)
   end
 
   def self.upcoming_for_shopper_at_retailer user_id, retailer_id

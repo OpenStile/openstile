@@ -15,12 +15,14 @@
 
 <% unless Retailer.all_live.empty? || ENV['OST_RELAUNCH_PREP'] %>
 <div class="container home-page boutiques">
+  <hr />
   <div class="row text-center">
     <h1>Featured boutique</h1>
   </div><br /><br />
   <div class="row">
     <%= render 'retailers/retailer', retailer: Retailer.all_live.sample %>
   </div>
+  <hr />
 </div>
 <% end %>
 

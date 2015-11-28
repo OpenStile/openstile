@@ -14,22 +14,26 @@
       <br />
       <%= render 'sample_booking_for_retailer' %>
   <% else %>
-      <% @upcoming_drop_ins.each_with_index do |drop_in, idx| %>
-          <div id="drop_in_<%= drop_in.id %>" class="single-booking row">
-            <% if shopper_signed_in? %>
-                <%= render 'upcoming_for_shopper', drop_in: drop_in %>
-            <% elsif retailer_signed_in? %>
-                <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
-            <% end %>
+      <% @upcoming_drop_ins.each do |drop_in| %>
+          <div id="drop_in_<%= drop_in.id %>" class="row">
+            <div class="single-booking col-xs-10 col-xs-offset-1">
+              <% if shopper_signed_in? %>
+                  <%= render 'upcoming_for_shopper', drop_in: drop_in %>
+              <% elsif retailer_signed_in? %>
+                  <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
+              <% end %>
+            </div>
           </div>
       <% end %>
-      <% @previous_drop_ins.each_with_index do |drop_in, idx| %>
-          <div id="drop_in_<%= drop_in.id %>" class="single-booking row">
-            <% if shopper_signed_in? %>
-                <%= render 'previous_for_shopper', drop_in: drop_in %>
-            <% elsif retailer_signed_in? %>
-                <%= render 'previous_for_retail_user', drop_in: drop_in %>
-            <% end %>
+      <% @previous_drop_ins.each do |drop_in| %>
+          <div id="drop_in_<%= drop_in.id %>" class="row">
+            <div class="single-booking col-xs-10 col-xs-offset-1">
+              <% if shopper_signed_in? %>
+                  <%= render 'previous_for_shopper', drop_in: drop_in %>
+              <% elsif retailer_signed_in? %>
+                  <%= render 'previous_for_retail_user', drop_in: drop_in %>
+              <% end %>
+            </div>
           </div>
       <% end %>
   <% end %>
