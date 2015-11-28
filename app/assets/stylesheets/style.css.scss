@@ -196,7 +196,7 @@ footer .footer-section h5 {
   background:#555 asset_url('wallpaper_rack.jpg') no-repeat;
   background-size:cover;
   background-position:center 70%;
-  height: 68vh;
+  min-height: 68vh;
 }
 
 .experience .content {
@@ -552,6 +552,15 @@ footer .footer-section h5 {
   margin-top: 10px;
   margin-bottom: 10px;
   height: 10em;
+}
+
+.bookings .star-rating {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.bookings .star-rating .fa-star-selected {
+  color: #ffcc00;
 }
 
 .dashboard .tiles {
