@@ -45,30 +45,30 @@ class DropIn < ActiveRecord::Base
   end
 
   def self.upcoming_for_shopper user_id
-    where("user_id = ? and time > ?", user_id, DateTime.current)
+    where("user_id = ? and time > ?", user_id, Time.zone.now)
   end
 
   def self.upcoming_for_retailer retailer_id
-    where("retailer_id = ? and time > ?", retailer_id, DateTime.current)
+    where("retailer_id = ? and time > ?", retailer_id, Time.zone.now)
   end
 
   def self.previous_for_shopper user_id
-    where("user_id = ? and time < ?", user_id, DateTime.current)
+    where("user_id = ? and time < ?", user_id, Time.zone.now)
   end
 
   def self.previous_for_retailer retailer_id
-    where("retailer_id = ? and time < ?", retailer_id, DateTime.current)
+    where("retailer_id = ? and time < ?", retailer_id, Time.zone.now)
   end
 
   def self.upcoming_for_shopper_at_retailer user_id, retailer_id
     where("user_id = ? and retailer_id = ? and time > ?",
-                          user_id, retailer_id, DateTime.current)
+                          user_id, retailer_id, Time.zone.now)
   end
 
   def colloquial_time
-    if time.to_date == DateTime.current.to_date
+    if time.to_date == Time.zone.today
       date_string = "Today"
-    elsif time.to_date == DateTime.current.advance(days: 1).to_date
+    elsif time.to_date == Time.zone.today + 1.day
       date_string = "Tomorrow"
     else
       date_string = time.to_s(:month_slash_day)

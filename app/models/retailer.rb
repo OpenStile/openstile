@@ -44,8 +44,8 @@ class Retailer < ActiveRecord::Base
   end
 
   def get_available_drop_in_dates format=:integer_array, 
-                                  start_day=DateTime.current.at_beginning_of_month.to_date, 
-                                  end_day=DateTime.current.at_end_of_month.to_date
+                                  start_day=Time.zone.today.at_beginning_of_month,
+                                  end_day=Time.zone.today.at_end_of_month
 
     ret = []
     current_day = start_day
@@ -75,16 +75,16 @@ class Retailer < ActiveRecord::Base
 
   def get_available_drop_in_times date_string
     ret = []
-    parsed_date = DateTime.parse(date_string).to_date 
+    parsed_date = Time.zone.parse(date_string).to_date
     availability = get_relevant_availability date_string 
     return ret if availability.nil?
 
     start_time, end_time = availability.applied_start_and_end_times(parsed_date)
 
     first_time_slot = start_time
-    if first_time_slot < DateTime.current
-      buffer = DateTime.current.advance(minutes: 30)
-      if buffer.minute < 30
+    if first_time_slot < Time.zone.now
+        buffer = Time.zone.now.advance(minutes: 30)
+      if buffer.min < 30
         first_time_slot = buffer.change(min: 30)
       else
         first_time_slot = buffer.change(hour: (buffer.hour + 1))
@@ -106,7 +106,7 @@ class Retailer < ActiveRecord::Base
   end
 
   def get_relevant_availability date_string
-    parsed_date = DateTime.parse(date_string).to_date 
+    parsed_date = Time.zone.parse(date_string).to_date
     drop_in_availabilities.order('created_at DESC').find{|a| a.covers_date? parsed_date }
   end
 end

@@ -32,8 +32,8 @@ class RetailersController < ApplicationController
   def scheduled_availabilities
     @available_dates = Retailer.find(params[:id])
                         .get_available_drop_in_dates(:date_string, 
-                                                     DateTime.parse(params[:start]).to_date,
-                                                     DateTime.parse(params[:end]).to_date)
+                                                     Time.zone.parse(params[:start]).to_date,
+                                                     Time.zone.parse(params[:end]).to_date)
     respond_to do |format|
       format.json {}
     end

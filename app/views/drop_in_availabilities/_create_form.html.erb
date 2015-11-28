@@ -26,7 +26,7 @@
         <%= f.label :frequency, class: "control-label" %>
         <%= f.select :frequency,
                      [[DropInAvailability::ONE_TIME_FREQUENCY, DropInAvailability::ONE_TIME_FREQUENCY],
-                      [(date.blank? ? "Weekly" : "Every #{DateTime.parse(date).strftime('%A')}"),
+                      [(date.blank? ? "Weekly" : "Every #{Time.zone.parse(date).strftime('%A')}"),
                        DropInAvailability::WEEKLY_FREQUENCY],
                       [DropInAvailability::DAILY_FREQUENCY, DropInAvailability::DAILY_FREQUENCY]],
                      {},

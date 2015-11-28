@@ -449,7 +449,7 @@ footer .footer-section h5 {
 
 .boutique-page .intro a {
   font-family: 'Lato', sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -478,6 +478,16 @@ footer .footer-section h5 {
 
 .boutique-page .schedule .full {
   padding: 0px 15px 0px 15px;
+}
+
+.boutique-page a.try-today {
+  background-color: #ff4500;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.boutique-page a.try-today:hover {
+  background-color: #cc3700;
 }
 
 .drop-in-availability .intro {
