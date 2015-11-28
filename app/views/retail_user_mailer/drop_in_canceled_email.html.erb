@@ -1,13 +1,9 @@
-<p>
+<p>Hello <%= @owner_name %>,</p>
 
-<%= @greeting %>, </br>
+<p><%= @shopper_name %> has canceled their styling with you for <%= @booking_time %>.</p><br />
 
-Your drop in with <%= @shopper.first_name %> for <%= @drop_in.colloquial_time %> has been canceled. </br>
+<p>Check out your updated stylings on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </p><br />
 
-Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </br>
+<p>Sincerely, </p><br />
 
-Sincerely, </br>
-
-Your friends at OpenStile
-
-</p>
+<p>Your friends at OpenStile</p><br />

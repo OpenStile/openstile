@@ -19,20 +19,20 @@ RSpec.describe ShopperMailer, :type => :mailer do
   describe "drop in scheduled email" do
     let(:asserted_mail_method) { ShopperMailer.drop_in_scheduled_email(retailer, shopper, drop_in) }
     let(:asserted_greeting) { "Hello #{shopper.first_name}" }
-    let(:asserted_body) { ["#{greeting}", "You have scheduled a drop in with #{retailer.name} for #{drop_in.colloquial_time}",
-                            "Check out your drop ins on OpenStile"]}
+    let(:asserted_body) { ["#{greeting}", "You have scheduled a styling with #{retailer.name} for #{drop_in.colloquial_time}",
+                            "Check out all of your upcoming stylings on OpenStile"]}
     let(:asserted_recipient) { shopper.email }
-    let(:asserted_subject) { "You have scheduled a drop-in visit with an OpenStile retailer!" }
+    let(:asserted_subject) { "You have scheduled a styling with #{retailer.name}!" }
     it_behaves_like "a_well_tested_mailer"
   end
 
   describe "drop in canceled email" do
     let(:asserted_mail_method) { ShopperMailer.drop_in_canceled_email(retailer, shopper, drop_in) }
     let(:asserted_greeting) { "Hello #{shopper.first_name}" }
-    let(:asserted_body) { ["#{greeting}", "You have canceled your drop in with #{retailer.name} for #{drop_in.colloquial_time}",
-                            "Check out your drop ins on OpenStile"]}
+    let(:asserted_body) { ["#{greeting}", "You have canceled your styling with #{retailer.name} for #{drop_in.colloquial_time}",
+                            "Check out your updated stylings on OpenStile"]}
     let(:asserted_recipient) { shopper.email }
-    let(:asserted_subject) { "You have canceled a drop-in visit with an OpenStile retailer!" }
+    let(:asserted_subject) { "You have canceled your styling with #{retailer.name}" }
     it_behaves_like "a_well_tested_mailer"
   end
 

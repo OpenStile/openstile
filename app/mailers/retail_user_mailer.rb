@@ -1,5 +1,5 @@
 class RetailUserMailer < ActionMailer::Base
-  default from: "no-reply@openstile.com"
+  default from: "info@openstile.com"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -7,16 +7,16 @@ class RetailUserMailer < ActionMailer::Base
   #   en.drop_in_scheduled_mailer.email.subject
   #
   def drop_in_scheduled_email(retailer, shopper, drop_in)
-    @greeting = "Hello #{retailer.user.first_name}"
-    @shopper = shopper
-    @drop_in = drop_in
-    mail to: retailer.user.email, subject: 'An OpenStile shopper scheduled a drop-in visit with you!'
+    @shopper_name = shopper.first_name
+    @owner_name = retailer.user.first_name
+    @booking_time = drop_in.colloquial_time
+    mail to: retailer.user.email, subject: "#{shopper.first_name} has scheduled a styling with you"
   end
 
   def drop_in_canceled_email(retailer, shopper, drop_in)
-    @greeting = "Hello #{retailer.user.first_name}"
-    @shopper = shopper
-    @drop_in = drop_in
-    mail to: retailer.user.email, subject: 'An OpenStile shopper canceled a drop-in visit!'
+    @shopper_name = shopper.first_name
+    @owner_name = retailer.user.first_name
+    @booking_time = drop_in.colloquial_time
+    mail to: retailer.user.email, subject: "#{shopper.first_name} has canceled a styling with you"
   end
 end

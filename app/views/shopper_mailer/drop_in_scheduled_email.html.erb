@@ -1,13 +1,9 @@
-<p>
+<p>Hello <%= @shopper_name %>!</p>
 
-<%= @greeting %>, </br>
+<p>You have scheduled a styling with <%= @store_name %> for <%= @booking_time %>.</p><br />
 
-You have scheduled a drop in with <%= @retailer.name %> for <%= @drop_in.colloquial_time %>. </br>
+<p>Check out all of your upcoming stylings on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </p><br />
 
-Check out your drop ins on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </br>
+<p>Sincerely, </p><br />
 
-Sincerely, </br>
-
-Your friends at OpenStile
-
-</p>
+<p>Your friends at OpenStile</p><br />

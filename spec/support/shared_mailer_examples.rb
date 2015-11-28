@@ -13,8 +13,8 @@ shared_examples "a_well_tested_mailer" do
     expect(mail_method.subject).to eq(full_subject)
   end
 
-  it "should be from 'no-reply@openstile.com'" do
-    expect(mail_method.from).to include('no-reply@openstile.com')
+  it "should be from info@openstile.com" do
+    expect(mail_method.from).to include('info@openstile.com')
   end
 
   it "should be to the correct recipient" do
