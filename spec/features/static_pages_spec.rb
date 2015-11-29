@@ -5,7 +5,7 @@ describe "Static pages" do
 
   shared_examples "static_page" do
     it { should have_link("logo-home", href: root_path) }
-    #it { should have_link("About", href: about_path) }
+    it { should have_link("About", href: about_path) }
     it { should have_link("Blog", href: blog_articles_path) }
     it { should have_link("Log in") }
 
@@ -23,15 +23,13 @@ describe "Static pages" do
     it { should have_title('Hand-picked items at your favorite local boutiques | OpenStile') }
   end
 
-=begin
   describe "About page" do
     before {visit '/about'}
 
     it_should_behave_like "static_page"
-    it { should have_content('Our Story') }
+    it { should have_content('What we believe') }
     it { should have_title('About | OpenStile') }
   end
-=end
 
   describe "Retailer page" do
     before {visit '/retailer_info'}

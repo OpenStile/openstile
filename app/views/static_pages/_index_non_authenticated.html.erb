@@ -30,33 +30,17 @@
   <div class="row text-center">
     <h1>How it works</h1>
   </div>
-  <div class="row">
-    <div class="col-xs-12 col-sm-4">
-      <div class="service-item text-center">
-        <a href=<%= retailers_path %>>
-          <%= image_tag("survey.jpg", class: "img-responsive center-block") %>
-        </a>
-        <h3>Create a personalized style profile to capture your unique style preferences.</h3>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-      <div class="service-item text-center">
-        <a href=<%= retailers_path %>>
-          <%= image_tag("boutique.jpg", class: "img-responsive center-block") %>
-        </a>
-        <h3>Discover neighborhood fashion boutiques and learn about their story, values, and owners.</h3>
-      </div>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-      <div class="service-item text-center">
-        <a href=<%= retailers_path %>>
-          <%= image_tag("dress.jpg", class: "img-responsive center-block") %>
-        </a>
-        <h3>Book FREE styling sessions. Walk in to find hand-picked items for your shape, size, budget, and more.</h3>
-      </div>
-    </div>
-  </div>
+  <%= render 'how_it_works' %>
   <div class="row text-center">
     <%= link_to('Get started today!', new_user_registration_path, class: 'btn btn-lg try-today')%>
   </div>
 </div>
+
+<% set_meta_tags og: {
+                         title:    'OpenStile',
+                         description: 'Hand-picked style at your favorite local boutiques',
+                         type:     'website',
+                         url:      'openstile.com',
+                         image:    image_url('openstilelogo.png')
+                 }
+%>

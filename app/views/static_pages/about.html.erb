@@ -1,68 +1,63 @@
 <% provide(:title, 'About') %>
 
-<div class="about-top">
-  <%= render "shared/header" %>
-  <div class="hero inner-page">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="intro">
-            <h2>About.</h2><br /> 
-          </div>
-        </div>
+<%= render 'shared/header' %>
+
+<div class="about-us container">
+  <div class="row section belief">
+    <div class="login-section">
+    <h1 class="text-center">What we believe</h1><br />
+    <h3>At OpenStile we know the following to be true:</h3>
+    <ul>
+      <li>Powerful things happen when women look and feel their best</li>
+      <li>Every woman has a style of her own that makes her stand out from the crowd</li>
+      <li>A more personal, individualized way to shop is the key women leaving stores looking and feeling their best</li>
+    </ul>
+    <h3>These truths inspired us to start OpenStile, and we look forward to continued growth for the service!</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <br /><br /><br />
+    <h1 class="text-center">How it works</h1>
+    <%= render 'how_it_works' %>
+    <br /><br /><br />
+  </div>
+
+  <div class="row section founders">
+    <h1 class="text-center">Founders</h1><br />
+    <div class="col-xs-12 col-md-6 founder">
+      <div class="text-center">
+        <h2>Tamara Austin</h2>
+        <h4>"Style is knowing who you are, what you want to say, and not giving a damn."<br /> Gore Vidal</h4>
+      </div>
+      <div class="col-xs-10 col-xs-offset-1 text-justify">
+        <h3>
+          Tamara wanted a better way to shop for clothes. She hated going store to store only to leave either
+          empty-handed or regretful. She wanted to find those one-of-a-kind pieces that allowed her to confidently
+          stand out from the crowd. This was a frustration she shared with several friends who all had different styles,
+          body types, and budgets.<br /><br />
+          Tamara comes from a background in tech. After graduating from the University of Virginia with a degree in Computer Science,
+          she worked as a software engineer and IT consultant in the Washington DC area. She started OpenStile as a way
+          to directly apply her technical expertise to her entrepreneurial passions.
+        </h3>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6 founder">
+      <div class="text-center">
+        <h2>Sparkle Johnson</h2>
+        <h4>"In order to be irreplaceable one must always be different."<br /> Coco Chanel</h4>
+      </div>
+      <div class="col-xs-10 col-xs-offset-1 text-justify">
+        <h3>
+          Sparkle's love for fashion started when she worked in retail. She loved helping clients put together stylish outfits,
+          and continued doing so for friends even after leaving retail to pursue another career. She witnessed first hand
+          how hard it was for friends and clients to style themselves, and thought to herself… if only stores would provide a
+          personal stylist to clients.<br /><br />
+          Sparkle, a lifelong native of Brooklyn, knew the value of launching the OpenStile service in such a diverse landscape
+          with so many different boutiques that cater to different styles. She brings to OpenStile her passion for fashion
+          along with a broad range of experience in different fields of work such as healthcare technology and graphic design.
+        </h3>
       </div>
     </div>
   </div>
-</div>
-<div class="about-us">
-  <div class="block">
-    <div class="container">
-
-      <div class="page-title text-center">
-        <h3>Our Story</h3>
-      </div>
-      <div class="about-two">
-        <div class="about-two-item">
-          <p>
-            Tamara Austin and her friends wanted a better way to explore local fashion in Washington D.C. 
-            In a city that's all business, they didn't want to be just another person in a working professional uniform. 
-            They wanted to escape the mass-produced items. Each having her own style, body type, and budget, they wanted 
-            a shopping experience that took all of that into account and catered to them as individuals.<br /><br />
-
-            She began meeting with boutique owners to discuss these challenges and discovered a whole community of 
-            local fashion retailers who wanted more exposure with shoppers. 
-            It stretched far beyond the handful of brick-and-mortar locations to include pop-up stores and the growing fashion truck scene. 
-            All of these homegrown retailers had a unique story and brand. 
-            Most importantly they carried the pieces Tamara and her friends craved, and shared their vision for a more personal way to shop.<br /><br />
-
-            Tamara, who studied Computer Science at the University of Virginia and worked as an IT professional, 
-            started OpenStile as a way to connect local shoppers with neighborhood fashion retailers.
-          </p>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-
-      <div class="page-title text-center">
-        <h3>What We Believe</h3>
-      </div>
-      <div class="about-one">
-        <div class="about-one-item">
-          <div class="about-one-img">
-            <%= image_tag("dancing.jpg", class: "img-responsive", style: "width:300px;")%>
-          </div>
-        </div>
-        <div class="about-one-item">
-          <div class="about-one-content">
-            <p>At OpenStile, it's more than a passion for fashion. We know three things:</p>
-            <ul>
-              <li>1) Powerful things happen when women look and feel their best.</li>
-              <li>2) Every woman has a style of her own that makes her stand out from the crowd.</li>
-              <li>3) The unique pieces that enhance our personal style can be found at local fashion retailers.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </div>
-  </div>    
 </div>
