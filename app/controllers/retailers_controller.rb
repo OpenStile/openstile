@@ -12,7 +12,7 @@ class RetailersController < ApplicationController
   end
 
   def index
-    @retailers = Retailer.all
+    @retailers = Retailer.all_live
   end
 
   def new

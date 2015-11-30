@@ -1,0 +1,7 @@
+$('.store-referral-form .form-errors').empty();
+<% if @referral.valid? %>
+    $('.store-referral-form').hide();
+    $('#show-store-referral-form').html('Thanks for your referral!');
+<% else %>
+    $('.store-referral-form .form-errors').html("<%= escape_javascript(render 'shared/error_messages', object: @referral) %>");
+<% end %>

@@ -4,4 +4,10 @@ $(document).ready(function(){
             scrollTop: $(".book-styling").offset().top
         });
     });
+
+    $('.store-referral-form').hide();
+
+    $('#show-store-referral-form').click(function () {
+        $('.store-referral-form').toggle();
+    });
 });

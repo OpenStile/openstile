@@ -2,6 +2,50 @@
 <%= render "shared/header" %>
 
 <div class="boutiques container">
+  <div class="intro">
+    <div class="text-center">
+      <h1>Check out our Partner Boutiques</h1>
+      <h2>Stay tuned as we continue to grow</h2>
+      <br /><br />
+      <h3><a href="#" id="show-store-referral-form">Know a good boutique for OpenStile?</a></h3>
+    </div>
+    <div class="col-xs-6 col-xs-offset-3 store-referral-form">
+      <div class="form-errors"></div>
+      <%= form_for(@referral || RetailerReferral.new, remote: true, html: {class: "form-horizontal"}) do |f| %>
+          <div class="form-group">
+            <%= f.label :referrer_name, 'Your name', class: "control-label" %>
+            <%= f.text_field :referrer_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :referrer_email, 'Your email', class: "control-label" %>
+            <%= f.text_field :referrer_email, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :store_name, 'Store name', class: "control-label" %>
+            <%= f.text_field :store_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :website, 'Link to store', class: "control-label" %>
+            <div class="input-group">
+              <span class="input-group-addon">http://</span>
+              <%= f.text_field :website, class: "form-control" %>
+            </div>
+          </div>
+          <div class="form-group">
+            <%= f.label :contact_name, 'Store contact name', class: "control-label" %>
+            <%= f.text_field :contact_name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :contact_email, 'Store contact email', class: "control-label" %>
+            <%= f.text_field :contact_email, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.submit 'Submit', class: "btn btn-default" %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
   <% @retailers.each do |retailer| %>
       <%= render 'retailer', retailer: retailer %>
   <% end %>

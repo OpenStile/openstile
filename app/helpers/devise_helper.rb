@@ -4,15 +4,9 @@ module DeviseHelper
 
    messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join
 
-    if resource.class == RetailUser
-      sentence = I18n.t('errors.messages.not_saved.retail_user_due_to_passwd',
-      count: resource.errors.count,
-      resource: resource.class.model_name.human.downcase)
-    else
-      sentence = I18n.t('errors.messages.not_saved',
-      count: resource.errors.count,
-      resource: resource.class.model_name.human.downcase)
-    end
+   sentence = I18n.t('errors.messages.not_saved',
+                     count: resource.errors.count,
+                     resource: resource.class.model_name.human.downcase)
 
    html = <<-HTML
    <div class="alert alert-error alert-block"> <button type="button"
