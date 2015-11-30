@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  scope :shoppers,  ->() { where(user_role_id: UserRole.find_by_name(UserRole::SHOPPER).id) }
+  scope :admins,    ->() { where(user_role_id: UserRole.find_by_name(UserRole::ADMIN).id) }
+  scope :retailers, ->() { where(user_role_id: UserRole.find_by_name(UserRole::RETAILER).id) }
+
   belongs_to :user_role
   has_one :style_profile, dependent: :destroy
   has_many :drop_ins, dependent: :destroy

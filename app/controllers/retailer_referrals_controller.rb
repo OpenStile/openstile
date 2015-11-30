@@ -4,7 +4,7 @@ class RetailerReferralsController < ApplicationController
     @referral = RetailerReferral.new(referral_retailer_params)
     if @referral.valid?
       ReferralMailer.referral_submitted(@referral).deliver
-      AdminMailer.referral_submitted(@referral).deliver
+      AdminMailer.referral_submitted(@referral).deliver unless User.admins.empty?
     end
     respond_to do |format|
       format.js {}
