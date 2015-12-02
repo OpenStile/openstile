@@ -50,6 +50,13 @@
                          type:          'website',
                          title:         'OpenStile | Hand-picked style at your favorite local boutiques',
                          description:   "Book a FREE personal styling session with #{@retailer.name} today!",
-                         url:           retailer_url(@retailer)
+                         url:           retailer_url(@retailer),
+                         image:         cloudinary_url_internal(@retailer.sample_photos.first)
+                 }
+%>
+
+<% set_meta_tags twitter: {
+                         card: "summary_large_image",
+                         site: "@OpenStile"
                  }
 %>
