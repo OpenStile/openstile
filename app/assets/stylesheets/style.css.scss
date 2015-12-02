@@ -679,6 +679,37 @@ footer .footer-section h5 {
   background-color: #b0aac2;
 }
 
+.press-kit.container {
+  min-height: 70vh;
+}
+
+.press-kit h1, h2, h3 {
+  font-family: Lato, sans-serif;
+}
+
+.press-kit h1 {
+  font-size: 35px;
+  line-height: 40px;
+  padding-top: 20px;
+}
+
+.press-kit .intro {
+  margin-bottom: 50px;
+}
+
+.press-kit .share-cards {
+  margin-top: 15vh;
+}
+
+.press-kit .share-cards .single {
+  padding: 30px;
+  border: 3px #EDEDED solid;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+}
+
 div.blog-container {
   border: 1px solid #e5e5e5;
   margin-top: 50px;

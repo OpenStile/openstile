@@ -44,3 +44,12 @@
     <%= render 'shared/schedule_drop_in', retailer: @retailer, for_retailer: true %>
   </div>
 </div>
+
+<% set_meta_tags og: {
+                         locale:        'en_US',
+                         type:          'website',
+                         title:         'OpenStile | Hand-picked style at your favorite local boutiques',
+                         description:   "Book a FREE personal styling session with #{@retailer.name} today!",
+                         url:           retailer_url(@retailer)
+                 }
+%>

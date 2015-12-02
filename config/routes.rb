@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'enable_available_dates'
       get 'enable_available_times'
       get 'show_drop_in_location'
+      get 'press_kit'
     end
   end
 

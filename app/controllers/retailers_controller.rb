@@ -1,6 +1,7 @@
 class RetailersController < ApplicationController
   before_filter :go_to_relaunch, :only => [:index]
-  before_filter :authenticate_user!, only: [:new, :create]
+  before_filter :authenticate_user!, only: [:new, :create, :press_kit]
+  before_filter :correct_retail_user, only: [:press_kit]
   before_filter :authenticate_admin_user!, only: [:new, :create]
 
   def show
@@ -67,6 +68,10 @@ class RetailersController < ApplicationController
     end
   end
 
+  def press_kit
+    @retailer = Retailer.find(params[:id])
+  end
+
   private
     def retailer_params
       params.require(:retailer).permit(:name, :location_id, :description, 
@@ -82,8 +87,8 @@ class RetailersController < ApplicationController
 
     def correct_retail_user
       @retailer = Retailer.find(params[:id])
-      if retail_user_signed_in?
-        redirect_to root_url unless @retailer == current_retail_user.retailer
+      if retailer_signed_in?
+        redirect_to root_url unless @retailer == current_user.retailer
       end
     end
 end

@@ -1,0 +1,56 @@
+<%= provide(:title, 'Press Kit') %>
+<%= render "shared/header" %>
+
+<div class="press-kit container">
+  <div class="row intro text-center">
+    <h1>Tell everyone <%= @retailer.name %> is on OpenStile!</h1>
+  </div>
+  <div class="row share-cards">
+    <div class="col-sm-6 col-md-3 text-center">
+      <div class="single">
+        <h3>Share on Twitter</h3><br />
+        <a class="twitter-share-button"
+           href="https://twitter.com/share"
+           data-size="small"
+           data-url="<%= retailer_url @retailer %>"
+           data-via="OpenStile"
+           data-hashtags="personalStyling,shopLocal"
+           data-text="We're on OpenStile. Book a free styling today!">
+          Tweet
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 text-center">
+      <div class="single">
+        <h3>Share on Facebook</h3>
+        <br />
+        <div class="fb-share-button" data-href="<%= retailer_url @retailer %>" data-layout="button"></div>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 text-center">
+      <div class="single">
+        <h3>Download share image</h3>
+        <br />
+        <h3><a href="http://res.cloudinary.com/openstile/image/upload/v1449013780/were_on_openstile.png">
+          <i class="fa fa-picture-o"></i></a></h3>
+      </div>
+    </div>
+    <div class="col-sm-6 col-md-3 text-center">
+      <div class="single">
+        <h3>Embed on site</h3>
+        <br />
+        <h3><a id="show-embed-code" href="#"><i class="fa fa-code"></i></a></h3>
+      </div>
+    </div>
+  </div>
+  <div class="row embed-code">
+    <hr />
+    <h3 class="text-center">Embed an OpenStile banner on your website</h3><br /><br />
+    <h4>This is what your banner will look like. Clicking on it will take users to your OpenStile page.</h4>
+    <iframe width="250" height="250" src="<%= decal_path retailer_id: @retailer.id %>" scrolling="auto" frameborder="0" allowtransparency="true" style="border:none;"></iframe>
+    <h4>Place the code for the banner wherever you want the banner to appear on your page.</h4>
+    <div class="col-xs-8">
+      <pre>&lt;iframe width="250" height="250" src="http://openstile.com/decal?retailer_id=<%= @retailer.id %>" scrolling="auto" frameborder="0" allowtransparency="true" style="border:none;"&gt;&lt;/iframe&gt;</pre>
+    </div>
+  </div>
+</div>
