@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Shopper schedule drop in' do
   let(:shopper){ FactoryGirl.create(:shopper_user) }
   let(:retailer){ FactoryGirl.create(:retailer) }
+  let!(:admin){ FactoryGirl.create(:admin_user) }
 
   let(:pop_up_location){ FactoryGirl.create(:location,
                                   address: "1309 5th St. NE, Washington, DC 20002",
@@ -25,7 +26,7 @@ feature 'Shopper schedule drop in' do
     then_i_should_not_be_taken_to_my_scheduled_drop_ins
     when_i_attempt_to_schedule_with_valid_options date, time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, date: "Tomorrow", place: place
-    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email 
+    then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
   scenario 'for a drop-by in 30 min', js: true do
@@ -36,7 +37,7 @@ feature 'Shopper schedule drop in' do
     when_i_click_on_a_retailer retailer
     when_i_book_in_30
     then_my_scheduled_drop_ins_should_be_updated_with retailer
-    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
   scenario 'upon logging in' do
@@ -47,7 +48,7 @@ feature 'Shopper schedule drop in' do
     when_i_submit_values_and_log_in date, time, "Looking for a holiday dress"
     when_i_am_returned_to_my_selections_and_book time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, date: "Tomorrow", comments: "Looking for a holiday dress"
-    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
   scenario 'upon signing up' do
@@ -69,7 +70,7 @@ feature 'Shopper schedule drop in' do
     when_i_submit_values_and_log_in date, time, "Looking for a holiday dress"
     when_i_am_returned_to_my_selections_and_book time
     then_my_scheduled_drop_ins_should_be_updated_with retailer, date: "Tomorrow", comments: "Looking for a holiday dress"
-    then_i_and_the_retail_user_should_receive_an_email retail_user.email, shopper.email
+    then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
   scenario 'sign up from the third party scheduler widget' do
@@ -150,7 +151,7 @@ feature 'Shopper schedule drop in' do
       fill_in 'Time', with: time
 
       expect{click_button 'Book session'}
-            .to change(ActionMailer::Base.deliveries, :count).by(2) 
+            .to change(ActionMailer::Base.deliveries, :count).by(3)
     end
 
     expect(page).to have_content('Your drop-in was scheduled!')
@@ -237,6 +238,14 @@ feature 'Shopper schedule drop in' do
                                            bandwidth: 1,
                                            frequency: DropInAvailability::ONE_TIME_FREQUENCY,
                                            location: retailer.location)
+  end
+
+  def then_all_parties_should_receive_an_email emails
+    latest = ActionMailer::Base.deliveries[-(emails.size)..-1]
+                               .map(&:to).flatten
+    emails.each do |email|
+      expect(latest).to include(email)
+    end
   end
 
   private
