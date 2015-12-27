@@ -7,6 +7,7 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
     <%= display_meta_tags site: 'OpenStile' %>
+    <%= render("shared/google_analytics") if Rails.env.production? %>
   </head>
   <body>
     <div id="fb-root"></div>
@@ -56,8 +57,5 @@
       </div>
     </footer>
     <% end %>
-
-    <%= render("shared/google_analytics") if Rails.env.production? %>
-
   </body>
 </html>
