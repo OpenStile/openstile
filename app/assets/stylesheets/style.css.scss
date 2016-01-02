@@ -326,107 +326,136 @@ footer .footer-section h5 {
   float: none;
 }
 
-.style-profile .top-image {
-  background: #555 asset_url('get_to_know_you.jpg') repeat;
-  background-position:center bottom;
-  background-size: cover;
+.style-profile h1, h2, h3, h4, h5 {
+  font-family: Lato, sans-serif;
 }
 
-.style-profile h3 {
-  font-size: 35px;
-  line-height: 40px;
-  padding-bottom: 20px;
+.style-profile form {
+  margin: 50px auto;
+  text-align: center;
+  position: relative;
 }
 
-.style-profile h4 {
-  font-size: 20px;
-  line-height: 25px;
-  color: #5e5e5e;
-  padding-bottom: 15px;
+.style-profile form > .fieldset-group ~ .fieldset-group {
+  display: none;
 }
 
-.style-form fieldset {
-  border: 1px solid #e5e5e5;
-  border-radius: 25px;
-  padding: 20px 20px 20px 20px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+.style-profile form fieldset {
+  padding: 20px 30px;
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+  margin: 25px 10%;
 }
 
-.style-form fieldset legend {
-  color: #5e5e5e;
-  padding-bottom: 10px;
-  margin-bottom: 0px;
-}
-
-.style-form fieldset h5 {
+.style-profile form fieldset h5 {
   font-size: 18px;
   line-height: 20px;
   color: #5e5e5e;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 15px;
 }
 
-.style-form fieldset .check-all label {
-  margin-top: 5px;
-  margin-bottom: 5px;
+.style-profile form fieldset legend {
+  border: 0 none;
+  color: #5e5e5e;
+  margin-bottom: 0px;
 }
 
-.style-form fieldset .dropdowns select {
-  max-width: 500px;
-  margin-bottom: 15px;
+.style-profile .dropdowns select {
+  margin: 0px 20% 15px 20%;
+  width: 60%;
 }
 
-.style-form fieldset .img-tiles img {
+.style-profile .radio-images img.img-label {
   max-height: 250px;
 }
 
-.style-form fieldset .img-tiles .img-selector {
-  padding: 10px;
-}
-
-.style-form fieldset .img-tiles .img-selector:hover {
-  -webkit-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
-  -moz-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
-  box-shadow:inset 0px 0px 0px 10px #e5e5e5;
-}
-
-.style-form fieldset .img-tiles .img-selector.checked {
-  -webkit-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
-  -moz-box-shadow:inset 0px 0px 0px 10px #e5e5e5;
-  box-shadow:inset 0px 0px 0px 10px #e5e5e5;
-}
-
-.style-form fieldset .radio-images img.img-label {
-  max-height: 250px;
-}
-
-.style-form fieldset .radio-images .option {
+.style-profile .radio-images .option {
   height: 365px;
 }
 
-.style-form a.wizard-nav {
-  font-size: 20px;
-  color: #000;
+.style-profile .img-tiles img {
+  max-height: 250px;
+}
+
+.style-profile .img-tiles .img-selector {
   padding: 10px;
 }
 
-.style-form a.wizard-nav:hover {
-  background-color: #EDEDED;
-  cursor: pointer;
+.style-profile .img-tiles .img-selector:hover {
+  -webkit-box-shadow:inset 0px 0px 0px 10px #5e5e5e;
+  -moz-box-shadow:inset 0px 0px 0px 10px #5e5e5e;
+  box-shadow:inset 0px 0px 0px 10px #5e5e5e;
 }
 
-.style-form input#wizard-save {
-  border: none;
-  background-color: transparent;
-  font-size: 20px;
-  padding: 10px;
-  line-height: 12px;
+.style-profile .img-tiles .img-selector.checked {
+  -webkit-box-shadow:inset 0px 0px 0px 10px #5e5e5e;
+  -moz-box-shadow:inset 0px 0px 0px 10px #5e5e5e;
+  box-shadow:inset 0px 0px 0px 10px #5e5e5e;
 }
 
-.style-form input#wizard-save:hover {
-  background-color: #EDEDED;
+.style-profile form .action-button {
+  width: 100px;
+  background: #5e5e5e;
+  font-weight: bold;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
   cursor: pointer;
+  padding: 10px 5px;
+  margin: 10px 5px;
+}
+.style-profile form .action-button:hover, #msform .action-button:focus {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #5e5e5e;
+}
+
+.style-profile .progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+}
+
+.style-profile .progressbar li {
+  list-style-type: none;
+  text-transform: uppercase;
+  font-size: 9px;
+  width: 20%;
+  float: left;
+  position: relative;
+}
+
+.style-profile .progressbar li:before {
+  content: counter(step);
+  counter-increment: step;
+  width: 20px;
+  line-height: 20px;
+  display: block;
+  font-size: 10px;
+  color: #333;
+  background: #EDEDED;
+  border-radius: 3px;
+  margin: 0 auto 5px auto;
+}
+
+.style-profile .progressbar li:after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #EDEDED;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+}
+
+.style-profile .progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none;
+}
+
+.style-profile .progressbar li.active:before,  .style-profile .progressbar li.active:after{
+  background: #5e5e5e;
+  color: white;
 }
 
 .boutiques .boutique-title {
