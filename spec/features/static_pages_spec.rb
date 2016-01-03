@@ -27,7 +27,7 @@ describe "Static pages" do
     before {visit '/about'}
 
     it_should_behave_like "static_page"
-    it { should have_content('What we believe') }
+    it { should have_content('Founders') }
     it { should have_title('About | OpenStile') }
   end
 
