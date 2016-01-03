@@ -134,10 +134,7 @@ RSpec.describe User, :type => :model do
 
   describe "style profile association" do
     before { @user.save }
-
-    it "should create associated style profile after create" do
-      expect(@user.style_profile).to_not be_nil
-    end
+    let!(:style_profile){ FactoryGirl.create(:style_profile, user: @user) }
 
     it "should destroy associated style profile" do
       shopper_style_profile = @user.style_profile

@@ -20,7 +20,6 @@ class User < ActiveRecord::Base
     cell.gsub!(/[^0-9]/, "") if attribute_present?("cell")
   end
   before_save { email.downcase! }
-  after_create { create_style_profile }
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: false, length: { maximum: 50 }

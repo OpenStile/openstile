@@ -11,6 +11,12 @@ FactoryGirl.define do
 
     factory :shopper_user do
       user_role FactoryGirl.create(:shopper_role)
+      after(:build) do |user|
+        user.style_profile = FactoryGirl.build(:style_profile, user: user)
+      end
+      after(:create) do |user|
+        user.style_profile.save!
+      end
     end
 
     factory :retailer_user do

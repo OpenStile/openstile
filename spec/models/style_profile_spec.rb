@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe StyleProfile, :type => :model do
-  let(:shopper){ FactoryGirl.create(:shopper_user) }
-
+  let(:shopper){ FactoryGirl.create(:user, user_role: UserRole.find_or_create_by(name: 'SHOPPER')) }
   before do
-    @style_profile = shopper.style_profile
+    @style_profile = StyleProfile.new(user: shopper)
   end
+
   subject { @style_profile }
 
   it { should respond_to :user_id }

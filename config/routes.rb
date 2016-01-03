@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
-  resources :style_profiles, only: [:edit, :update]
+  resources :style_profiles, only: [:edit, :update, :new, :create]
 
   resources :retailers, only: [:show, :index, :new, :create] do
     member do

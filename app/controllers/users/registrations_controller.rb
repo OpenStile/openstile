@@ -12,9 +12,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     @user = User.new(sign_up_params.merge(user_role: UserRole.find_by_name(UserRole::SHOPPER)))
+    stored_style_profile = retrieve_signed_out_style_profile
+    @user.build_style_profile(stored_style_profile || {})
     if @user.save
       sign_in @user
-      redirect_to after_sign_up_path_for(@user)
+      if stored_style_profile.nil?
+        flash[:success] = 'Your account has been successfully created. Please complete your style profile so we can get to know you better!'
+        redirect_to after_sign_up_path_for(@user)
+      else
+        flash[:success] = 'Your account has been successfully created!'
+        redirect_to upcoming_drop_ins_path
+      end
     else
       render 'new'
     end

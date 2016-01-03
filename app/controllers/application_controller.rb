@@ -57,4 +57,12 @@ class ApplicationController < ActionController::Base
         return session.delete(:attempted_booking)
       end
     end
+
+    def store_signed_out_style_profile params
+      session[:stashed_style_profile] = params
+    end
+
+    def retrieve_signed_out_style_profile
+      session.delete(:stashed_style_profile)
+    end
 end

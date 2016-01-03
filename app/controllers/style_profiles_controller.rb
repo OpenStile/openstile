@@ -1,8 +1,19 @@
 class StyleProfilesController < ApplicationController
 
   before_filter :store_shopper_location
-  before_filter :authenticate_user!
-  before_action :correct_style_profile_shopper
+  before_filter :authenticate_user!, only: [:edit, :update]
+  before_filter :correct_style_profile_shopper, only: [:edit, :update]
+  before_filter :not_signed_in, only: [:new, :create]
+
+  def new
+    @style_profile = StyleProfile.new(retrieve_signed_out_style_profile || {})
+    render 'new'
+  end
+
+  def create
+    store_signed_out_style_profile style_profile_params
+    redirect_to new_user_registration_path
+  end
 
   def edit
   end
@@ -24,6 +35,12 @@ class StyleProfilesController < ApplicationController
 
   private
     
+    def not_signed_in
+      if user_signed_in?
+        redirect_to root_path
+      end
+    end
+
     def correct_style_profile_shopper
       @style_profile = StyleProfile.find(params[:id])
       unless current_user.user_role.name == UserRole::SHOPPER && @style_profile.user == current_user

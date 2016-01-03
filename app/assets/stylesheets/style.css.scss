@@ -135,7 +135,7 @@ footer .footer-section h5 {
   margin-bottom: 50px;
 }
 
-.home-page.container-fluid {
+.home-page.container {
   min-height: 80vh;
 }
 
@@ -394,7 +394,7 @@ footer .footer-section h5 {
 }
 
 .style-profile form .action-button {
-  width: 100px;
+  min-width: 100px;
   background: #5e5e5e;
   font-weight: bold;
   color: white;
