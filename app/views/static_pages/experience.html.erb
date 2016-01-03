@@ -3,3 +3,9 @@
 <%= render "shared/header" %>
 
 <%= render "shared/experience" %>
+
+<div class="container home-page style-profile">
+  <br /><br />
+  <hr />
+  <%= render 'shared/style_profile_quickstart' unless user_signed_in? %>
+</div>

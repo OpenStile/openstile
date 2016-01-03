@@ -1,0 +1,56 @@
+<fieldset>
+  <%= render 'style_profiles/check_all_fieldset', title: 'Your sizes',
+             sections: [{prompt: "Select your top sizes.",
+                         class_name: 'top_sizes',
+                         attribute_string: 'style_profile[top_size_ids]',
+                         options: TopSize.all.map{|size|
+                           {label: size.name, value: size.id,
+                            checked: style_profile.top_size_ids.include?(size.id)} }
+                        },
+                        {prompt: "Select your bottom sizes.",
+                         class_name: 'bottom_sizes',
+                         attribute_string: 'style_profile[bottom_size_ids]',
+                         options: BottomSize.all.map{|size|
+                           {label: size.name, value: size.id,
+                            checked: style_profile.bottom_size_ids.include?(size.id)} }
+                        },
+                        {prompt: "Select your dress sizes.",
+                         class_name: 'dress_sizes',
+                         attribute_string: 'style_profile[dress_size_ids]',
+                         options: DressSize.all.map{|size|
+                           {label: size.name, value: size.id,
+                            checked: style_profile.dress_size_ids.include?(size.id)} }
+                        },
+                        {prompt: "Select your build.",
+                         class_name: 'build',
+                         attribute_string: 'style_profile[body_build_ids]',
+                         options: BodyBuild.all.map{|build|
+                           {label: build.name, value: build.id,
+                            checked: style_profile.body_build_ids.include?(build.id)} }
+                        }] %>
+</fieldset>
+
+<fieldset>
+  <% budget_options = [{label: 'max $50', value: 'max $50'},
+                       {label: 'max $100', value: 'max $100'},
+                       {label: 'max $150', value: 'max $150'},
+                       {label: 'max $200', value: 'max $200'},
+                       {label: '$200 +', value: '$200 +'}]%>
+  <%= render 'style_profiles/dropdowns_fieldset', title: 'Your budget',
+             instructions: 'How much would you spend on the following?',
+             sections: [{prompt: "An everyday, work, or transitional dress",
+                         attribute_string: 'style_profile[dress_budget]',
+                         options: budget_options,
+                         selected: style_profile.dress_budget
+                        },
+                        {prompt: "A shirt, blouse, or sweater",
+                         attribute_string: 'style_profile[top_budget]',
+                         options: budget_options,
+                         selected: style_profile.top_budget
+                        },
+                        {prompt: "A pair of pants, jeans, or a skirt",
+                         attribute_string: 'style_profile[bottom_budget]',
+                         options: budget_options,
+                         selected: style_profile.bottom_budget
+                        }] %>
+</fieldset>

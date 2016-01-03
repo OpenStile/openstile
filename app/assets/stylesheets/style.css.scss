@@ -135,7 +135,7 @@ footer .footer-section h5 {
   margin-bottom: 50px;
 }
 
-.home-page.container {
+.home-page.container.intro {
   min-height: 80vh;
 }
 
@@ -174,13 +174,13 @@ footer .footer-section h5 {
   max-height: 30vh;
 }
 
-.home-page a.try-today {
+.home-page .btn.try-today {
   background-color: #ff4500;
   font-weight: bold;
   color: #ffffff;
 }
 
-.home-page a.try-today:hover {
+.home-page .btn.try-today:hover {
   background-color: #cc3700;
 }
 
@@ -905,7 +905,7 @@ div.blog-side-panel .twitter-plugin {
     padding-bottom: 20px;
   }
 
-  .home-page.intro, .home-page.how-it-works {
+  .home-page.container.intro {
     min-height: 450px;
   }
 

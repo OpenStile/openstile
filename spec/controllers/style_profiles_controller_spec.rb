@@ -55,5 +55,12 @@ RSpec.describe StyleProfilesController, :type => :controller do
         expect(response).to redirect_to(root_path)
       end
     end
+
+    context "POST quickstart" do
+      it "redirects to root" do
+        post :quickstart
+        expect(response).to redirect_to(root_path)
+      end
+    end
   end
 end

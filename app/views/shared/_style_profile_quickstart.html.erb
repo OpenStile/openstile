@@ -1,0 +1,9 @@
+<div class="style-profile">
+  <% new_style_profile = StyleProfile.new %>
+  <%= form_for(new_style_profile, url: quickstart_style_profiles_path, as: :post) do |f| %>
+    <div class="fieldset-group">
+      <%= render 'style_profiles/quickstart_fieldsets', style_profile: new_style_profile %>
+    </div>
+    <input type="submit" name="submit" class="btn btn-lg try-today" value="Let's get started!" />
+  <% end %>
+</div>

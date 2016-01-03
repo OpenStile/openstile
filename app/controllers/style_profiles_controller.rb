@@ -3,7 +3,7 @@ class StyleProfilesController < ApplicationController
   before_filter :store_shopper_location
   before_filter :authenticate_user!, only: [:edit, :update]
   before_filter :correct_style_profile_shopper, only: [:edit, :update]
-  before_filter :not_signed_in, only: [:new, :create]
+  before_filter :not_signed_in, only: [:new, :create, :quickstart]
 
   def new
     @style_profile = StyleProfile.new(retrieve_signed_out_style_profile || {})
@@ -13,6 +13,11 @@ class StyleProfilesController < ApplicationController
   def create
     store_signed_out_style_profile style_profile_params
     redirect_to new_user_registration_path
+  end
+
+  def quickstart
+    store_signed_out_style_profile style_profile_params
+    redirect_to new_style_profile_path
   end
 
   def edit
