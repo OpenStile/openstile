@@ -94,7 +94,6 @@ EOF
   retailer.create_user!(first_name: 'Julie', last_name: 'Owner', email: 'julie@store.com',
                         user_role: UserRole.find_by_name(UserRole::RETAILER), password: 'foobar',
                         password_confirmation: 'foobar', confirmed_at: DateTime.now)
-
 end
 
 if ENV["demo_down"]
@@ -163,4 +162,39 @@ EOF
                           password_confirmation: 'jupe_openstile1128', confirmed_at: Time.zone.now)
   end
 
+  unless Retailer.find_by_name('Lady J +1')
+
+    location = Location.create!(address: '679 Classon Ave, Brooklyn, NY 11238', neighborhood: 'Crown Heights')
+
+    description = <<EOF
+A local favorite among the artsy and eclectic residents of Crown Heights, Brooklyn. Lady J +1 features some of Brooklyn's
+best indie designers starting with the in-house-made jewelry brand Lady J Jewelry. In addition to clothing the store also
+features an apothecary section, artisanal ceramics and other unique gifting items.
+EOF
+
+    retailer = Retailer.create!(name: 'Lady J +1', description: description, location: location,
+                                size_range: 'S - L', quote: "Brooklyn's best indie designers",
+                                price_index: 2, status: 1)
+
+    retailer.create_online_presence!(web_link: 'http://www.ladyjjewelry.com',
+                                     instagram_link: 'https://www.instagram.com/ladyjjewelry/',
+                                     facebook_link: 'https://www.facebook.com/LadyJJewelry',
+                                     twitter_link: 'https://twitter.com/LadyJJewelry')
+
+    retailer.drop_in_availabilities.create!(template_date: '2016-01-13', start_time: '12:00:00', end_time: '19:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-01-14', start_time: '12:00:00', end_time: '19:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-01-15', start_time: '12:00:00', end_time: '19:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-01-16', start_time: '12:00:00', end_time: '19:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-01-17', start_time: '12:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+
+    retailer.create_user!(first_name: 'Jessica', last_name: "D'Amico", email: 'ladyjjewelry@gmail.com',
+                          user_role: UserRole.find_by_name(UserRole::RETAILER), password: 'ljj_openstile1128',
+                          password_confirmation: 'ljj_openstile1128', confirmed_at: Time.zone.now)
+  end
 end
+
