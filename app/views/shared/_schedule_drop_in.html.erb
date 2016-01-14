@@ -6,6 +6,14 @@
     </h3>
   </div>
 
+  <% if shopper_signed_in? %>
+  <div class="row text-center text-danger">
+    <br />
+    <% incompatibilities = shopper_store_incompatibilities(current_user, retailer) %>
+    <h3><%= "***Just a head's up #{current_user.first_name.capitalize}! #{incompatibilities.join('. ')}***" unless incompatibilities.empty? %></h3>
+  </div>
+  <% end %>
+
   <div class="row schedule">
     <% asap_time = Time.zone.now.advance(minutes: 30) %>
     <% new_drop_in = @drop_in || retailer.drop_ins.build(user_id: user_signed_in? ? current_user.id : nil) %>

@@ -6,9 +6,9 @@ def given_i_am_a_logged_in_user user
 end
 
 def seed_style_profile_options
-  ['2 (XS)', '4 (S)', '6 (S)'].each{|s| FactoryGirl.create(:top_size, name: s)}
-  ['6 (S)', '8 (M)', '10 (M)'].each{|s| FactoryGirl.create(:dress_size, name: s)}
-  ['6 (S)', '8 (M)', '10 (M)'].each{|s| FactoryGirl.create(:bottom_size, name: s)}
+  ['00 (XXS)', '2 (XS)', '4 (S)', '6 (S)', '14 (L)'].each{|s| FactoryGirl.create(:top_size, name: s)}
+  ['00 (XXS)', '6 (S)', '8 (M)', '10 (M)', '14 (L)'].each{|s| FactoryGirl.create(:dress_size, name: s)}
+  ['00 (XXS)', '6 (S)', '8 (M)', '10 (M)', '14 (L)'].each{|s| FactoryGirl.create(:bottom_size, name: s)}
 
   ['Petite', 'Curvy', 'Tall'].each{|b| FactoryGirl.create(:body_build, name: b)}
 

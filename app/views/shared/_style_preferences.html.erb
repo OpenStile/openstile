@@ -4,8 +4,8 @@
       <% unless profile.top_sizes.empty? %>
           <li>Sizes: <%= profile.top_sizes.map(&:name).join(', ') %></li>
       <% end %>
-      <% unless profile.top_budget.blank? %>
-          <li>Budget: <%= profile.top_budget %></li>
+      <% unless profile.top_budget_index.blank? %>
+          <li>Budget: <%= StyleProfile::BUDGET_INDEX_MAPPING.key(profile.top_budget_index) %></li>
       <% end %>
       <% unless profile.top_fit.blank? %>
           <li>Fit: <%= profile.top_fit.name %></li>
@@ -16,8 +16,8 @@
       <% unless profile.bottom_sizes.empty? %>
           <li>Sizes: <%= profile.bottom_sizes.map(&:name).join(', ') %></li>
       <% end %>
-      <% unless profile.bottom_budget.blank? %>
-          <li>Budget: <%= profile.bottom_budget %></li>
+      <% unless profile.bottom_budget_index.blank? %>
+          <li>Budget: <%= StyleProfile::BUDGET_INDEX_MAPPING.key(profile.bottom_budget_index) %></li>
       <% end %>
       <% unless profile.bottom_fit.blank? %>
           <li>Fit: <%= profile.bottom_fit.name %></li>
@@ -28,8 +28,8 @@
       <% unless profile.dress_sizes.empty? %>
           <li>Sizes: <%= profile.dress_sizes.map(&:name).join(', ') %></li>
       <% end %>
-      <% unless profile.dress_budget.blank? %>
-          <li>Budget: <%= profile.dress_budget %></li>
+      <% unless profile.dress_budget_index.blank? %>
+          <li>Budget: <%= StyleProfile::BUDGET_INDEX_MAPPING.key(profile.dress_budget_index) %></li>
       <% end %>
     </ul>
     <% unless profile.body_builds.empty? %>

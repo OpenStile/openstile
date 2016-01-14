@@ -25,6 +25,10 @@ class Retailer < ActiveRecord::Base
   validates :price_index, presence: true
   validates :quote, presence: true, length: { maximum: 100 }
 
+  MAX_PRICE_RANGE_INDEX = 4
+  GENERIC_SIZE_REGEX = /(X*S)|M|(X*L)/
+  ORDERED_SIZES = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']
+
   def to_param
     "#{id}-#{name.parameterize}"
   end

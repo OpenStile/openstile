@@ -28,7 +28,7 @@
         <h3><%= StreetAddress::US.parse(@retailer.location.address) %></h3>
         <h3><%= @retailer.size_range%></h3>
         <h3>
-          <% 3.times do |idx| %>
+          <% Retailer::MAX_PRICE_RANGE_INDEX.times do |idx| %>
               <i class="fa fa-tag <%= 'activated' if idx + 1 <= @retailer.price_index %>"></i>
           <% end %>
         </h3>

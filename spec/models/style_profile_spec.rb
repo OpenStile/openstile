@@ -21,9 +21,9 @@ RSpec.describe StyleProfile, :type => :model do
   it { should respond_to :bottom_fit_id }
   it { should respond_to :special_considerations }
   it { should respond_to :body_builds }
-  it { should respond_to :top_budget }
-  it { should respond_to :bottom_budget }
-  it { should respond_to :dress_budget }
+  it { should respond_to :top_budget_index }
+  it { should respond_to :bottom_budget_index }
+  it { should respond_to :dress_budget_index }
   it { should respond_to :looks }
   it { should respond_to :flaunted_parts }
   it { should respond_to :flaunted_part_ids }

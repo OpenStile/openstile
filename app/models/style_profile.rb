@@ -16,9 +16,12 @@ class StyleProfile < ActiveRecord::Base
 
   validates :user_id, presence: true
 
+  BUDGET_INDEX_MAPPING = {'max $50'=>1, 'max $100'=>2, 'max $150'=>3, 'max $200'=>4, '$200 +'=>5}
+  MAX_BUDGET_INDEX = 5
+
   def empty?
     top_sizes.empty? && bottom_sizes.empty? && dress_sizes.empty? && body_builds.empty? &&
-        body_shape.nil? && top_budget.blank? && bottom_budget.blank? && dress_budget.blank? &&
+        body_shape.nil? && top_budget_index.blank? && bottom_budget_index.blank? && dress_budget_index.blank? &&
         looks.empty? && special_considerations.empty? && top_fit.nil? && bottom_fit.nil? &&
         flaunted_parts.empty? && downplayed_parts.empty? && avoided_colors.empty?
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151124165718) do
+ActiveRecord::Schema.define(version: 20160113195843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,10 +230,10 @@ ActiveRecord::Schema.define(version: 20151124165718) do
     t.integer  "body_shape_id"
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
-    t.string   "top_budget"
-    t.string   "bottom_budget"
-    t.string   "dress_budget"
     t.integer  "user_id"
+    t.integer  "top_budget_index"
+    t.integer  "bottom_budget_index"
+    t.integer  "dress_budget_index"
   end
 
   add_index "style_profiles", ["body_shape_id"], name: "index_style_profiles_on_body_shape_id", using: :btree

@@ -55,7 +55,7 @@ class StyleProfilesController < ApplicationController
 
     def style_profile_params
       params.fetch(:style_profile, {}).permit(:body_shape_id, :top_fit_id, :bottom_fit_id,
-                                            :top_budget, :bottom_budget, :dress_budget, look_ids: [],
+                                            :top_budget_index, :bottom_budget_index, :dress_budget_index, look_ids: [],
                                             top_size_ids: [], bottom_size_ids: [], dress_size_ids: [], body_build_ids: [],
                                             flaunted_part_ids: [], downplayed_part_ids: [],
                                             avoided_color_ids: [], special_consideration_ids: [])

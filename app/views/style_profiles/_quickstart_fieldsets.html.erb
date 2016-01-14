@@ -31,26 +31,22 @@
 </fieldset>
 
 <fieldset>
-  <% budget_options = [{label: 'max $50', value: 'max $50'},
-                       {label: 'max $100', value: 'max $100'},
-                       {label: 'max $150', value: 'max $150'},
-                       {label: 'max $200', value: 'max $200'},
-                       {label: '$200 +', value: '$200 +'}]%>
+  <% budget_options = StyleProfile::BUDGET_INDEX_MAPPING.map{|key,value| {label: key, value: value}} %>
   <%= render 'style_profiles/dropdowns_fieldset', title: 'Your budget',
              instructions: 'How much would you spend on the following?',
              sections: [{prompt: "An everyday, work, or transitional dress",
-                         attribute_string: 'style_profile[dress_budget]',
+                         attribute_string: 'style_profile[dress_budget_index]',
                          options: budget_options,
-                         selected: style_profile.dress_budget
+                         selected: style_profile.dress_budget_index
                         },
                         {prompt: "A shirt, blouse, or sweater",
-                         attribute_string: 'style_profile[top_budget]',
+                         attribute_string: 'style_profile[top_budget_index]',
                          options: budget_options,
-                         selected: style_profile.top_budget
+                         selected: style_profile.top_budget_index
                         },
                         {prompt: "A pair of pants, jeans, or a skirt",
-                         attribute_string: 'style_profile[bottom_budget]',
+                         attribute_string: 'style_profile[bottom_budget_index]',
                          options: budget_options,
-                         selected: style_profile.bottom_budget
+                         selected: style_profile.bottom_budget_index
                         }] %>
 </fieldset>
