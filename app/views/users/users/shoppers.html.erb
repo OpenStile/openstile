@@ -1,0 +1,26 @@
+<% provide(:title, 'All shoppers') %>
+
+<%= render "shared/header" %>
+
+<div class="bookings container">
+  <% @shoppers.each do |shopper| %>
+    <div class="content row">
+      <div class="col-xs-8">
+        <h3>Name: <%= "#{shopper.first_name.capitalize}#{' [Unconfirmed]' unless shopper.confirmed?}" %></h3>
+        <h4>Email: <%= shopper.email %></h4>
+        <h4>Account created: <%= shopper.created_at.strftime('%D') %></h4>
+        <h4>Styling count: <%= DropIn.where(user_id: shopper.id).count %></h4>
+      </div>
+      <div class="col-xs-4 text-center">
+        <h1>
+          <i class="show-preferences-toggle fa fa-caret-right"></i>
+        </h1>
+      </div>
+      <div class="col-xs-8 col-xs-offset-2 preferences-details">
+        <%= render 'shared/style_preferences',
+                   profile: shopper.style_profile %>
+      </div>
+    </div>
+    <hr />
+  <% end %>
+</div>

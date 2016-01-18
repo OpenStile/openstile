@@ -18,6 +18,14 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
 
+  scope module: 'users' do
+    resources :users, only: [] do
+      collection do
+        get :shoppers
+      end
+    end
+  end
+
   resources :style_profiles, only: [:edit, :update, :new, :create] do
     collection do
       post :quickstart

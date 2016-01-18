@@ -1,15 +1,18 @@
+<% provide(:title, 'Admin Home') %>
+
 <%= render "shared/header" %>
 
-<div class="block">
-  <div class="container">
-    <div class="row text-center">
-      <h2>Admin Home</h2>
-    </div>
-    <div class="row">
-      <h3><%= link_to 'Manage retailers', retailers_path %></h3>
-    </div>
-    <div class="row">
-      <h3><%= link_to 'Generate report', new_report_path %></h3>
-    </div>
+<div class="container">
+  <div class="row text-center">
+    <h2>Admin Home</h2>
+  </div>
+  <div class="row">
+    <h3><%= link_to 'Manage retailers', retailers_path %></h3>
+  </div>
+  <div class="row">
+    <h3><%= link_to 'Generate report', new_report_path %></h3>
+  </div>
+  <div class="row">
+    <h3><%= link_to 'View all shoppers', shoppers_users_path %></h3>
   </div>
 </div>
