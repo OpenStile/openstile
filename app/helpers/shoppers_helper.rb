@@ -11,9 +11,8 @@ module ShoppersHelper
         (shopper.style_profile.dress_budget_index || 1).to_f)/3.0
     multiplier = StyleProfile::MAX_BUDGET_INDEX.to_f/Retailer::MAX_PRICE_RANGE_INDEX.to_f
     normalized_lower_bound = ([0, retailer.price_index - 1].max).to_f * multiplier
-    normalized_upper_bound = retailer.price_index.to_f * multiplier
 
-    unless shopper_budget_average >= normalized_lower_bound && shopper_budget_average <= normalized_upper_bound
+    unless shopper_budget_average >= normalized_lower_bound
       ret << 'This store is out of your typical price range'
     end
 

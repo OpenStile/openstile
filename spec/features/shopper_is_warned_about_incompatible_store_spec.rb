@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Shopper is warned' do
   let(:shopper){ FactoryGirl.create(:shopper_user, first_name: 'Cynthia') }
-  let(:pricey_store){ FactoryGirl.create(:retailer, name: 'La Boutique', price_index: 4) }
+  let(:pricey_store){ FactoryGirl.create(:retailer, name: 'La Boutique', price_index: 3) }
   let!(:store_owner1){ FactoryGirl.create(:retailer_user, retailer: pricey_store) }
   let(:plus_size_store){ FactoryGirl.create(:retailer, name: 'Curvy Boutique', size_range: "12 (L) - 20 (XXL)") }
   let!(:store_owner2){ FactoryGirl.create(:retailer_user, retailer: plus_size_store) }
