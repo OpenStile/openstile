@@ -1,6 +1,808 @@
-<p>Welcome to OpenStile <%= @resource.first_name %>,</p>
+<html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraph.org/schema/" style="border-top: 40px solid #fff !important;"><head>
 
-<p>We're so glad you signed up for our service and hope you experience a better, more personal way to shop!</p>
-<p>Before getting started, please confirm your account email through the link below:</p>
+  <meta property="og:title" content="Confirm registration to OpenStile">
+  <meta property="fb:page_id" content="43929265776">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- NAME: BOUTIQUE -->
+  <!--[if gte mso 15]>
+  <xml>
+      <o:OfficeDocumentSettings>
+          <o:AllowPNG/>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirm OpenStile registration</title>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+  <style type="text/css">
+      p{
+          margin:10px 0;
+          padding:0;
+      }
+      table{
+          border-collapse:collapse;
+      }
+      h1,h2,h3,h4,h5,h6{
+          display:block;
+          margin:0;
+          padding:0;
+      }
+      img,a img{
+          border:0;
+          height:auto;
+          outline:none;
+          text-decoration:none;
+      }
+      body,#bodyTable,#bodyCell{
+          height:100%;
+          margin:0;
+          padding:0;
+          width:100%;
+      }
+      #outlook a{
+          padding:0;
+      }
+      img{
+          -ms-interpolation-mode:bicubic;
+      }
+      table{
+          mso-table-lspace:0pt;
+          mso-table-rspace:0pt;
+      }
+      .ReadMsgBody{
+          width:100%;
+      }
+      .ExternalClass{
+          width:100%;
+      }
+      p,a,li,td,blockquote{
+          mso-line-height-rule:exactly;
+      }
+      a[href^=tel],a[href^=sms]{
+          color:inherit;
+          cursor:default;
+          text-decoration:none;
+      }
+      p,a,li,td,body,table,blockquote{
+          -ms-text-size-adjust:100%;
+          -webkit-text-size-adjust:100%;
+      }
+      .ExternalClass,.ExternalClass p,.ExternalClass td,.ExternalClass div,.ExternalClass span,.ExternalClass font{
+          line-height:100%;
+      }
+      a[x-apple-data-detectors]{
+          color:inherit !important;
+          text-decoration:none !important;
+          font-size:inherit !important;
+          font-family:inherit !important;
+          font-weight:inherit !important;
+          line-height:inherit !important;
+      }
+      a.mcnButton{
+          display:block;
+      }
+      .mcnImage{
+          vertical-align:bottom;
+      }
+      .mcnTextContent{
+          word-break:break-word;
+      }
+      .mcnTextContent img{
+          height:auto !important;
+      }
+      .mcnDividerBlock{
+          table-layout:fixed !important;
+      }
+      body,#bodyTable,#templateFooter{
+          background-color:#FFFFFF;
+      }
+      #bodyCell{
+          border-top:0;
+      }
+      #templateContainer{
+          border:0;
+      }
+      h1{
+          color:#FFFFFF !important;
+          display:block;
+          font-family:Helvetica;
+          font-size:40px;
+          font-style:normal;
+          font-weight:bold;
+          line-height:100%;
+          letter-spacing:-1px;
+          margin:0;
+          text-align:center;
+      }
+      h2{
+          color:#000000 !important;
+          display:block;
+          font-family:Helvetica;
+          font-size:36px;
+          font-style:normal;
+          font-weight:bold;
+          line-height:125%;
+          letter-spacing:-.75px;
+          margin:0;
+          text-align:center;
+      }
+      h3{
+          color:#606060 !important;
+          display:block;
+          font-family:Helvetica;
+          font-size:18px;
+          font-style:normal;
+          font-weight:bold;
+          line-height:125%;
+          letter-spacing:-.5px;
+          margin:0;
+          text-align:left;
+      }
+      h4{
+          color:#808080 !important;
+          display:block;
+          font-family:Helvetica;
+          font-size:16px;
+          font-style:normal;
+          font-weight:bold;
+          line-height:125%;
+          letter-spacing:normal;
+          margin:0;
+          text-align:left;
+      }
+      #templatePreheader{
+          background-color:#FFFFFF;
+          border-top:0;
+          border-bottom:1px solid #000000;
+      }
+      .preheaderContainer .mcnTextContent,.preheaderContainer .mcnTextContent p{
+          color:#000000;
+          font-family:Helvetica;
+          font-size:11px;
+          line-height:125%;
+          text-align:left;
+      }
+      .preheaderContainer .mcnTextContent a{
+          color:#000000;
+          font-weight:normal;
+          text-decoration:underline;
+      }
+      #templateHeader{
+          background-color:#FFFFFF;
+          border-top:0;
+          border-bottom:0;
+      }
+      .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
+          color:#000000;
+          font-family:Helvetica;
+          font-size:16px;
+          line-height:150%;
+          text-align:center;
+      }
+      .headerContainer .mcnTextContent a{
+          color:#000000;
+          font-weight:normal;
+          text-decoration:underline;
+      }
+      #templateBody{
+          background-color:#FFFFFF;
+          border-top:0;
+          border-bottom:0;
+      }
+      .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
+          color:#000000;
+          font-family:Helvetica;
+          font-size:16px;
+          line-height:150%;
+          text-align:center;
+      }
+      .bodyContainer .mcnTextContent a{
+          color:#000000;
+          font-weight:normal;
+          text-decoration:underline;
+      }
+      #templateColumns{
+          background-color:#FFFFFF;
+          border-top:0;
+          border-bottom:0;
+      }
+      .leftColumnContainer .mcnTextContent,.leftColumnContainer .mcnTextContent p{
+          color:#000000;
+          font-family:Helvetica;
+          font-size:14px;
+          line-height:150%;
+          text-align:center;
+      }
+      .leftColumnContainer .mcnTextContent a{
+          color:#000000;
+          font-weight:normal;
+          text-decoration:underline;
+      }
+      .rightColumnContainer .mcnTextContent,.rightColumnContainer .mcnTextContent p{
+          color:#000000;
+          font-family:Helvetica;
+          font-size:14px;
+          line-height:150%;
+          text-align:center;
+      }
+      .rightColumnContainer .mcnTextContent a{
+          color:#000000;
+          font-weight:normal;
+          text-decoration:underline;
+      }
+      #templateFooter{
+          border-top:0;
+          border-bottom:0;
+      }
+      .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+          color:#000000;
+          font-family:Helvetica;
+          font-size:11px;
+          line-height:125%;
+          text-align:center;
+      }
+      .footerContainer .mcnTextContent a{
+          color:#000000;
+          font-weight:normal;
+          text-decoration:underline;
+      }
+      @media only screen and (max-width: 480px){
+          body,table,td,p,a,li,blockquote{
+              -webkit-text-size-adjust:none !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          body{
+              width:100% !important;
+              min-width:100% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          #bodyCell{
+              padding-top:10px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .templateContainer{
+              max-width:600px !important;
+              width:100% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .columnsContainer{
+              display:block!important;
+              max-width:600px !important;
+              padding-bottom:18px !important;
+              padding-left:0 !important;
+              width:100%!important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImage{
+              height:auto !important;
+              width:100% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnCaptionTopContent,.mcnCaptionBottomContent,.mcnTextContentContainer,.mcnBoxedTextContentContainer,.mcnImageGroupContentContainer,.mcnCaptionLeftTextContentContainer,.mcnCaptionRightTextContentContainer,.mcnCaptionLeftImageContentContainer,.mcnCaptionRightImageContentContainer,.mcnImageCardLeftTextContentContainer,.mcnImageCardRightTextContentContainer{
+              max-width:100% !important;
+              width:100% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnBoxedTextContentContainer{
+              min-width:100% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImageGroupContent{
+              padding:9px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnCaptionLeftContentOuter .mcnTextContent,.mcnCaptionRightContentOuter .mcnTextContent{
+              padding-top:9px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImageCardTopImageContent,.mcnCaptionBlockInner .mcnCaptionTopContent:last-child .mcnTextContent{
+              padding-top:18px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImageCardBottomImageContent{
+              padding-bottom:9px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImageGroupBlockInner{
+              padding-top:0 !important;
+              padding-bottom:0 !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImageGroupBlockOuter{
+              padding-top:9px !important;
+              padding-bottom:9px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnTextContent,.mcnBoxedTextContentColumn{
+              padding-right:18px !important;
+              padding-left:18px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnImageCardLeftImageContent,.mcnImageCardRightImageContent{
+              padding-right:18px !important;
+              padding-bottom:0 !important;
+              padding-left:18px !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcpreview-image-uploader{
+              display:none !important;
+              width:100% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          h1{
+              font-size:24px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          h2{
+              font-size:20px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          h3{
+              font-size:18px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          h4{
+              font-size:16px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .mcnBoxedTextContentContainer .mcnTextContent,.mcnBoxedTextContentContainer .mcnTextContent p{
+              font-size:18px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          #templatePreheader{
+              display:block !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .preheaderContainer .mcnTextContent,.preheaderContainer .mcnTextContent p{
+              font-size:14px !important;
+              line-height:115% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .headerContainer .mcnTextContent,.headerContainer .mcnTextContent p{
+              font-size:18px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .bodyContainer .mcnTextContent,.bodyContainer .mcnTextContent p{
+              font-size:18px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .leftColumnContainer .mcnTextContent,.leftColumnContainer .mcnTextContent p{
+              font-size:18px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .rightColumnContainer .mcnTextContent,.rightColumnContainer .mcnTextContent p{
+              font-size:18px !important;
+              line-height:125% !important;
+          }
+
+      }	@media only screen and (max-width: 480px){
+          .footerContainer .mcnTextContent,.footerContainer .mcnTextContent p{
+              font-size:14px !important;
+              line-height:115% !important;
+          }
+
+      }</style>        <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
+  <script type="text/javascript">
+      try {
+          var _gaq = _gaq || [];
+          _gaq.push(["_setAccount", "UA-329148-88"]);
+          _gaq.push(["_setDomainName", ".campaign-archive.com"]);
+          _gaq.push(["_trackPageview"]);
+          _gaq.push(["_setAllowLinker", true]);
+      } catch(err) {console.log(err);}</script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> <link rel="stylesheet" href="http://us8.campaign-archive2.com/css/archivebar-desktop.css" mc:nocompile=""> <script type="text/javascript" src="http://us8.campaign-archive2.com/js/archivebar-desktop-plugins.js" mc:nocompile=""></script> <script src="http://downloads.mailchimp.com/ZeroClipboard.min.js" mc:nocompile=""></script> <script type="text/javascript">
+    $(document).ready(function() {
+        ZeroClipboard.setDefaults({ moviePath: "//downloads.mailchimp.com/ZeroClipboard.07.13.swf", trustedDomains: ['us8.campaign-archive2.com']});
+        var clip = new ZeroClipboard( $('#copyURL') );
+        clip.setHandCursor(true);
+        clip.on('complete', function(client, args) {alert('Copied "'+args.text+'" to your clipboard.');});
+        clip.on('mouseover', function (client) { $('#copyURL').addClass('hover'); });
+        clip.on('mouseout', function (client) { $('#copyURL').removeClass('hover'); });
+
+        $('li.more > a').click(function(){
+            var toToggle = $($(this).attr('href'));
+            if(toToggle.is(':visible')){
+                toToggle.slideUp('fast');
+                $(this).removeClass('is-active');
+                if ($('#awesomebar').find('.is-active').length < 1){
+                    $('#awesomebar').removeClass('sub-active');
+                }
+            } else {
+                toToggle.slideDown('fast');
+                $(this).addClass('is-active');
+                $('#awesomebar').addClass('sub-active');
+            }
+            return false;
+        });
+
+    });
+</script> <script src="http://us8.campaign-archive2.com/js/mailchimp/fancyzoom.mc.js"></script>  <script type="text/javascript">
+    function incrementFacebookLikeCount() {
+        var current = parseInt($('#campaign-fb-like-btn span').html());
+        $('#campaign-fb-like-btn span').fadeOut().html(++current).fadeIn();
+    }
+
+    function getUrlParams(str) {
+        var vars = {}, hash;
+        if (!str) return vars;
+        var hashes = str.slice(str.indexOf('?') + 1).split('&');
+        for(var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    function setupSocialSharingStuffs() {
+        var numSocialElems = $('a[rel=socialproxy]').length;
+        var numSocialInitialized = 0;
+        var urlParams = getUrlParams(window.document.location.href);
+        var paramsToCopy = {'e':true, 'eo':true};
+        $('a[rel=socialproxy]').each(function() {
+            var href = $(this).attr('href');
+            var newHref = decodeURIComponent(href.match(/socialproxy=(.*)/)[1]);
+            // for facebook insanity to work well, it needs to all be run against just campaign-archive
+            newHref = newHref.replace(/campaign-archive(\d)/gi, 'campaign-archive');
+            var newHrefParams = getUrlParams(newHref);
+            for(var param in urlParams) {
+                if ((param in paramsToCopy) && !(param in newHrefParams)) {
+                    newHref += '&' + param + '=' + urlParams[param];
+                }
+            }
+            $(this).attr('href', newHref);
+            if (href.indexOf('facebook-comment') !== -1) {
+                $(this).fancyZoom({"zoom_id": "social-proxy", "width":620, "height":450, "iframe_height": 450});
+            } else {
+                $(this).fancyZoom({"zoom_id": "social-proxy", "width":500, "height":200, "iframe_height": 500});
+            }
+            numSocialInitialized++;
+        });
+    }
+    if (window.top!=window.self){
+        $(function() {
+            var iframeOffset = $("#archive", window.parent.document).offset();
+            $("a").each(function () {
+                var link = $(this);
+                var href = link.attr("href");
+                if (href && href[0] == "#") {
+                    var name = href.substring(1);
+                    $(this).click(function () {
+                        var nameElement = $("[name='" + name + "']");
+                        var idElement = $("#" + name);
+                        var element = null;
+                        if (nameElement.length > 0) {
+                            element = nameElement;
+                        } else if (idElement.length > 0) {
+                            element = idElement;
+                        }
+
+                        if (element) {
+                            var offset = element.offset();
+                            var height = element.height();
+                            //3 is totally arbitrary, but seems to work best.
+                            window.parent.scrollTo(offset.left, (offset.top + iframeOffset.top - (height*3)) );
+                        }
+
+                        return false;
+                    });
+                }
+            });
+        });
+    }
+</script>  <script type="text/javascript">
+    $(document).ready(function() {
+        setupSocialSharingStuffs();
+    });
+</script> </head> <body id="archivebody" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" style="height: 100%;margin: 0;padding: 0;width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;"> <div id="awesomewrap" style="color: #444;font-size: 14px;text-shadow: none;position: relative;z-index: 999;_display: none;"> <div id="awesomeshare" style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;position: fixed;top: 41px;left: 0;width: 100%;height: 40px;border-bottom: 1px solid #ccc;background: rgba(244,244,244,.95);min-width: 815px;display: none;line-height: 40px;font-size: 12px;text-align: left;*height: auto;*padding-bottom: 5px;"> <div id="zclipwrap" style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;float: right;width: 305px;position: relative;"> <label for="shortURL" style="margin: 0;padding: 0 5px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;font-weight: bold;color: #888;">Short URL</label> <span id="copyURL" data-clipboard-target="shortURL" style="margin: 0;padding: 0 0 0 10px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;display: inline-block;position: relative;border-radius: 3px;border: 1px solid transparent;line-height: 25px;width: 210px;height: 25px;border-color: #ccc;background-color: #fff;"> <input id="shortURL" name="shorturl" style="margin-top: 6px;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;border: none;width: 150px;background: none;" type="text" value="http://eepurl.com/bNrWND" class="av-text"> <span style="margin: 0;padding: 0 10px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;background-color: #eee;color: #444;font-size: 13px;background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.15));position: absolute;top: 0;right: 0;border-left: 1px solid #ccc;border-radius: 0 2px 2px 0;">Copy</span> </span> <div id="zero_clipboard" style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;position: absolute;left: 0px;top: 0px;z-index: 99;"></div> </div> <ul id="awesomesocial" style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;padding-left: 14px;float: left;background: none;"> <li class="fbk" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 8px 5px 0 5px;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline-block;border: 1px solid #ccc;line-height: 25px;border-radius: 3px;overflow: hidden;*zoom: 1;*display: inline;background-color: #eee;color: #444;font-size: 13px;background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.15));"> <a class="fbk-like" id="campaign-fb-like-btn" rel="socialproxy" href="http://us8.campaign-archive.com/social-proxy/facebook-like?u=1523c02fd1f5720ce8e15cb7e&amp;id=aef594e2d8&amp;url=http%3A%2F%2Fus8.campaign-archive.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8&amp;title=Confirm%20registration%20to%20OpenStile&amp;e=f65f24cacc" title="Like Confirm registration to OpenStile on Facebook" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: inline;color: #444 !important;">Facebook <b style="margin: 0 -10px 0 10px;padding: 0 15px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;display: inline-block;background: #fff;border-left: 1px solid #ccc;color: #444;padding-right: 36px;background-image: url(http://cdn-images.mailchimp.com/awesomebar-sprite.png);background-repeat: no-repeat;background-position: right 1px;">0 <i style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;display: none;">likes</i></b></a> </li> <li class="twt" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 8px 5px 0 5px;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline-block;border: 1px solid #ccc;line-height: 25px;border-radius: 3px;overflow: hidden;*zoom: 1;*display: inline;background-color: #eee;color: #444;font-size: 13px;background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.15));"> <a title="Share on Twitter" target="_blank" href="http://twitter.com/share?url=http%3A%2F%2Feepurl.com%2FbNrWND" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: inline;color: #444 !important;">Twitter <b style="margin: 0 -10px 0 10px;padding: 0 15px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;display: inline-block;background: #fff;border-left: 1px solid #ccc;color: #444;">0 <i style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;display: none;">tweets</i></b></a> </li> <li class="ggl" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 8px 5px 0 5px;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline-block;border: 1px solid #ccc;line-height: 25px;border-radius: 3px;overflow: hidden;*zoom: 1;*display: inline;background-color: #eee;color: #444;font-size: 13px;background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,.15));"> <a title="+1 on Google Plus" id="campaign-gpo-btn" href="http://us8.campaign-archive.com/social-proxy/google-plus-one?u=1523c02fd1f5720ce8e15cb7e&amp;id=aef594e2d8&amp;url=http%3A%2F%2Fus8.campaign-archive.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8&amp;title=Confirm%20registration%20to%20OpenStile&amp;e=f65f24cacc" class="twitter-share-button" rel="socialproxy" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: inline;color: #444 !important;">Google +1</a> </li> </ul> </div> <ul id="awesomebar" style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;position: fixed;top: 0;left: 0;width: 100%;height: 40px;border-bottom: 1px solid #ccc;background: rgba(244,244,244,.95);min-width: 815px;-webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,.2);box-shadow: 0 2px 3px 0 rgba(0,0,0,.2);"> <li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a href="http://eepurl.com/bHBJtT" title="Subscribe to List" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;font-weight: bold;float: left;line-height: 40px;border-right: 1px solid #ccc;color: #444 !important;">Subscribe</a> </li> <li id="toggleshare" class="more" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;position: relative;"><a href="#awesomeshare" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;font-weight: bold;float: left;line-height: 40px;border-right: 1px solid #ccc;color: #444 !important;">Share</a></li> <li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"><a href="http://us8.campaign-archive2.com/home/?u=1523c02fd1f5720ce8e15cb7e&amp;id=469fa02ec6" title="View Past Issues" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;font-weight: bold;float: left;line-height: 40px;border-right: 1px solid #ccc;color: #444 !important;">Past Issues</a></li> <li class="float-r" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;float: right;"><a class="rss" target="_blank" href="http://us8.campaign-archive1.com/feed?u=1523c02fd1f5720ce8e15cb7e&amp;id=469fa02ec6" title="subscribe to the email archive feed" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;font-weight: bold;float: left;line-height: 40px;border-right: none;border-left: 1px solid #ccc;background-image: url(http://cdn-images.mailchimp.com/awesomebar-sprite.png);background-repeat: no-repeat;background-position: 52px -153px;padding-right: 40px;color: #444 !important;">RSS</a></li> <li class="float-r more" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;float: right;position: relative;"><a href="#translate" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;font-weight: bold;float: left;line-height: 40px;border-right: none;border-left: 1px solid #ccc;color: #444 !important;">Translate</a> <ul id="translate" style="margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;position: absolute;top: 41px;right: 0;height: 200px;width: 198px;overflow: auto;max-height: 200px;border: 1px solid #ccc;border-top: none;background: rgba(244,244,244,.95);z-index: 100;display: none;"> <li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="English" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|en&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">English</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="العربية" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ar&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">العربية</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Afrikaans" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|af&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Afrikaans</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="беларуская мова" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|be&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">беларуская мова</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="български" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|bg&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">български</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="català" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ca&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">català</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="中文（简体）" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|zh-CN&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">中文（简体）</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="中文（繁體）" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|zh-TW&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">中文（繁體）</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Hrvatski" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|hr&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Hrvatski</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Česky" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|cs&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Česky</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Dansk" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|da&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Dansk</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="eesti&nbsp;keel" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|et&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">eesti&nbsp;keel</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Nederlands" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|nl&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Nederlands</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Suomi" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|fi&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Suomi</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Français" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|fr&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Français</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Deutsch" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|de&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Deutsch</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Ελληνική" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|el&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Ελληνική</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="हिन्दी" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|hi&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">हिन्दी</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Magyar" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|hu&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Magyar</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Gaeilge" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ga&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Gaeilge</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Indonesia" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|id&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Indonesia</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="íslenska" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|is&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">íslenska</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Italiano" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|it&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Italiano</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="日本語" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ja&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">日本語</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="ភាសាខ្មែរ" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|km&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">ភាសាខ្មែរ</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="한국어" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ko&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">한국어</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="македонски&nbsp;јазик" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|mk&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">македонски&nbsp;јазик</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="بهاس ملايو" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ms&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">بهاس ملايو</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Malti" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|mt&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Malti</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Norsk" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|no&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Norsk</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Polski" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|pl&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Polski</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Português" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|pt&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Português</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Português&nbsp;-&nbsp;Portugal" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|pt-PT&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Português&nbsp;-&nbsp;Portugal</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Română" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ro&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Română</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Русский" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ru&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Русский</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Español" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|es&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Español</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Kiswahili" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|sw&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Kiswahili</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Svenska" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|sv&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Svenska</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="עברית" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|iw&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">עברית</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Lietuvių" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|lt&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Lietuvių</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="latviešu" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|lv&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">latviešu</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="slovenčina" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|sk&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">slovenčina</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="slovenščina" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|sl&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">slovenščina</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="српски" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|sr&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">српски</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="தமிழ்" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|ta&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">தமிழ்</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="ภาษาไทย" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|th&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">ภาษาไทย</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Türkçe" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|tr&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Türkçe</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Filipino" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|tl&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Filipino</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="украї́нська" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|uk&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">украї́нська</a> </li><li style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;list-style: none;display: inline;"> <a rel="nofollow" title="Tiếng&nbsp;Việt" href="http://translate.google.com/translate?hl=auto&amp;langpair=auto|vi&amp;u=http%3A%2F%2Fus8.campaign-archive2.com%2F%3Fu%3D1523c02fd1f5720ce8e15cb7e%26id%3Daef594e2d8%26e%3Df65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;margin: 0;padding: 0 10px 0 20px;font-family: &quot;Helvetica Neue&quot;,Helvetica,Arial,Verdana,sans-serif;text-decoration: none;display: block;line-height: 30px;border-top: 1px solid #ccc;color: #444 !important;">Tiếng&nbsp;Việt</a> </li> </ul> </li> </ul> </div>
+
+<center>
+  <table align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" id="bodyTable" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;height: 100%;margin: 0;padding: 0;width: 100%;background-color: #FFFFFF;">
+    <tbody><tr>
+      <td align="center" valign="top" id="bodyCell" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;height: 100%;margin: 0;padding: 0;width: 100%;border-top: 0;">
+        <!-- BEGIN TEMPLATE // -->
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+          <tbody><tr>
+            <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+              <!-- BEGIN PREHEADER // -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templatePreheader" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 1px solid #000000;">
+                <tbody><tr>
+                  <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                      <tbody><tr>
+                        <td valign="top" class="preheaderContainer" style="padding-top: 10px;padding-bottom: 10px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <tbody class="mcnTextBlockOuter">
+                          <tr>
+                            <td valign="top" class="mcnTextBlockInner" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                              <table align="left" border="0" cellpadding="0" cellspacing="0" width="366" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <tbody><tr>
+
+                                  <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-left: 18px;padding-bottom: 9px;padding-right: 0;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #000000;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
+
+                                    Please confirm your OpenStile account
+                                  </td>
+                                </tr>
+                                </tbody></table>
+
+                              <table align="right" border="0" cellpadding="0" cellspacing="0" width="197" class="mcnTextContentContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <tbody><tr>
+
+                                  <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #000000;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: left;">
+
+                                    <a href="http://us8.campaign-archive2.com/?u=1523c02fd1f5720ce8e15cb7e&amp;id=aef594e2d8&amp;e=f65f24cacc" target="_blank" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #000000;font-weight: normal;text-decoration: underline;">View this email in your browser</a>
+                                  </td>
+                                </tr>
+                                </tbody></table>
+
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table></td>
+                      </tr>
+                      </tbody></table>
+                  </td>
+                </tr>
+                </tbody></table>
+              <!-- // END PREHEADER -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+              <!-- BEGIN HEADER // -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateHeader" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                <tbody><tr>
+                  <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                      <tbody><tr>
+                        <td valign="top" class="headerContainer" style="padding-top: 10px;padding-bottom: 10px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <tbody class="mcnImageBlockOuter">
+                          <tr>
+                            <td valign="top" style="padding: 9px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnImageBlockInner">
+                              <table align="left" width="100%" border="0" cellpadding="0" cellspacing="0" class="mcnImageContentContainer" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <tbody><tr>
+                                  <td class="mcnImageContent" valign="top" style="padding-right: 9px;padding-left: 9px;padding-top: 0;padding-bottom: 0;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+
+                                    <img align="center" alt="" src="https://gallery.mailchimp.com/1523c02fd1f5720ce8e15cb7e/images/0ef795b4-8c39-4c76-917f-81dc3fc9a649.png" width="564" style="max-width: 737px;padding-bottom: 0;display: inline !important;vertical-align: bottom;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;" class="mcnImage">
+
+
+                                  </td>
+                                </tr>
+                                </tbody></table>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table></td>
+                      </tr>
+                      </tbody></table>
+                  </td>
+                </tr>
+                </tbody></table>
+              <!-- // END HEADER -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+              <!-- BEGIN BODY // -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateBody" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                <tbody><tr>
+                  <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                      <tbody><tr>
+                        <td valign="top" class="bodyContainer" style="padding-top: 10px;padding-bottom: 10px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnImageCardBlock" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <tbody class="mcnImageCardBlockOuter">
+                          <tr>
+                            <td class="mcnImageCardBlockInner" valign="top" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                              <table align="right" border="0" cellpadding="0" cellspacing="0" class="mcnImageCardBottomContent" width="100%" style="background-color: #D83C7D;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <tbody><tr>
+                                  <td class="mcnImageCardBottomImageContent" align="center" valign="top" style="padding-top: 0px;padding-right: 0px;padding-bottom: 0;padding-left: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+
+
+                                    <img alt="" src="https://gallery.mailchimp.com/1523c02fd1f5720ce8e15cb7e/images/56dd3e40-2777-4596-81a2-947ac46c1c2d.jpg" width="564" style="max-width: 600px;border: 0;height: auto;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;vertical-align: bottom;" class="mcnImage">
+
+
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="mcnTextContent" valign="top" style="padding: 9px 18px;color: #FFFFFF;font-size: 16px;font-weight: bold;text-align: center;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;font-family: Helvetica;line-height: 150%;" width="546">
+                                    &nbsp;
+                                    <h1 style="display: block;margin: 0;padding: 0;font-family: Helvetica;font-size: 40px;font-style: normal;font-weight: bold;line-height: 100%;letter-spacing: -1px;text-align: center;color: #FFFFFF !important;">Welcome to OpenStile</h1>
+                                    HAND-PICKED STYLE AT YOUR FAVORITE LOCAL BOUTIQUES
+                                  </td>
+                                </tr>
+                                </tbody></table>
+
+
+
+
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <tbody class="mcnTextBlockOuter">
+                          <tr>
+                            <td valign="top" class="mcnTextBlockInner" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                              <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnTextContentContainer">
+                                <tbody><tr>
+
+                                  <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #000000;font-family: Helvetica;font-size: 16px;line-height: 150%;text-align: center;">
+
+                                    <br>
+                                    Before getting started, please confirm your account email through the link below:
+                                  </td>
+                                </tr>
+                                </tbody></table>
+
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnButtonBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <tbody class="mcnButtonBlockOuter">
+                          <tr>
+                            <td style="padding-top: 0;padding-right: 18px;padding-bottom: 18px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" valign="top" align="center" class="mcnButtonBlockInner">
+                              <table border="0" cellpadding="0" cellspacing="0" class="mcnButtonContentContainer" style="border-collapse: separate !important;border-top-left-radius: 3px;border-top-right-radius: 3px;border-bottom-right-radius: 3px;border-bottom-left-radius: 3px;background-color: #000000;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <tbody>
+                                <tr>
+                                  <td align="center" valign="middle" class="mcnButtonContent" style="font-family: Arial;font-size: 18px;padding: 14px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <a class="mcnButton " title="CONFIRM ACCOUNT" href="<%= confirmation_url(@resource, confirmation_token: @token) %>" target="_self" style="font-weight: bold;letter-spacing: normal;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;">CONFIRM ACCOUNT</a>
+                                  </td>
+                                </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table></td>
+                      </tr>
+                      </tbody></table>
+                  </td>
+                </tr>
+                </tbody></table>
+              <!-- // END BODY -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+              <!-- BEGIN COLUMNS // -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateColumns" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                <tbody><tr>
+                  <td align="center" valign="top" style="padding-top: 10px;padding-bottom: 10px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                      <tbody><tr>
+                        <td align="left" valign="top" class="columnsContainer" width="50%" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateColumn" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                            <tbody><tr>
+                              <td valign="top" class="leftColumnContainer" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"></td>
+                            </tr>
+                            </tbody></table>
+                        </td>
+                        <td align="left" valign="top" class="columnsContainer" width="50%" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <table align="right" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateColumn" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                            <tbody><tr>
+                              <td valign="top" class="rightColumnContainer" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"></td>
+                            </tr>
+                            </tbody></table>
+                        </td>
+                      </tr>
+                      </tbody></table>
+                  </td>
+                </tr>
+                </tbody></table>
+              <!-- // END COLUMNS -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+              <!-- BEGIN FOOTER // -->
+              <table border="0" cellpadding="0" cellspacing="0" width="100%" id="templateFooter" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: #FFFFFF;border-top: 0;border-bottom: 0;">
+                <tbody><tr>
+                  <td align="center" valign="top" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="600" class="templateContainer" style="border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                      <tbody><tr>
+                        <td valign="top" class="footerContainer" style="padding-top: 10px;padding-bottom: 10px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;"><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnDividerBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;table-layout: fixed !important;">
+                          <tbody class="mcnDividerBlockOuter">
+                          <tr>
+                            <td class="mcnDividerBlockInner" style="min-width: 100%;padding: 40px 18px 20px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                              <table class="mcnDividerContent" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-top-width: 1px;border-top-style: solid;border-top-color: #000000;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                <tbody><tr>
+                                  <td style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                                    <span></span>
+                                  </td>
+                                </tr>
+                                </tbody></table>
+                              <!--
+                                              <td class="mcnDividerBlockInner" style="padding: 18px;">
+                                              <hr class="mcnDividerContent" style="border-bottom-color:none; border-left-color:none; border-right-color:none; border-bottom-width:0; border-left-width:0; border-right-width:0; margin-top:0; margin-right:0; margin-bottom:0; margin-left:0;" />
+                              -->
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table><table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+                          <tbody class="mcnTextBlockOuter">
+                          <tr>
+                            <td valign="top" class="mcnTextBlockInner" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;">
+
+                              <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;" class="mcnTextContentContainer">
+                                <tbody><tr>
+
+                                  <td valign="top" class="mcnTextContent" style="padding-top: 9px;padding-right: 18px;padding-bottom: 9px;padding-left: 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;word-break: break-word;color: #000000;font-family: Helvetica;font-size: 11px;line-height: 125%;text-align: center;">
+
+                                    <em>Copyright © 2016 OpenStile by World Touch Technologies LLC, All rights reserved.</em>
+                                    <br>
+
+                                    <br>
+                                    <br>
+                                    Want to change how you receive these emails?<br>
+                                    You can <a href="http://openstile.us8.list-manage.com/profile?u=1523c02fd1f5720ce8e15cb7e&amp;id=469fa02ec6&amp;e=f65f24cacc" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #000000;font-weight: normal;text-decoration: underline;">update your preferences</a> or <a href="http://openstile.us8.list-manage2.com/unsubscribe?u=1523c02fd1f5720ce8e15cb7e&amp;id=469fa02ec6&amp;e=f65f24cacc&amp;c=aef594e2d8" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #000000;font-weight: normal;text-decoration: underline;">unsubscribe from this list</a>
+                                    <br>
+                                    <br>
+                                    <a href="http://www.mailchimp.com/monkey-rewards/?utm_source=freemium_newsletter&amp;utm_medium=email&amp;utm_campaign=monkey_rewards&amp;aid=1523c02fd1f5720ce8e15cb7e&amp;afl=1" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;color: #000000;font-weight: normal;text-decoration: underline;"><img src="http://cdn-images.mailchimp.com/monkey_rewards/MC_MonkeyReward_15.png" border="0" alt="Email Marketing Powered by MailChimp" title="MailChimp Email Marketing" width="139" height="54" style="border: 0;height: auto !important;outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;"></a>
+
+                                  </td>
+                                </tr>
+                                </tbody></table>
+
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table></td>
+                      </tr>
+                      </tbody></table>
+                  </td>
+                </tr>
+                </tbody></table>
+              <!-- // END FOOTER -->
+            </td>
+          </tr>
+          </tbody></table>
+        <!-- // END TEMPLATE -->
+      </td>
+    </tr>
+    </tbody></table>
+</center>
+
+<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" data-clipboard-ready="true" style="position: absolute; left: -9999px; top: -9999px; width: 15px; height: 15px; z-index: 9999;">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="//downloads.mailchimp.com/ZeroClipboard.07.13.swf?nocache=1453259704110">         </param><param name="allowScriptAccess" value="sameDomain">         </param><param name="scale" value="exactfit">         </param><param name="loop" value="false">         </param><param name="menu" value="false">         </param><param name="quality" value="best">         </param><param name="bgcolor" value="#ffffff">         </param><param name="wmode" value="transparent">         </param><param name="flashvars" value="trustedDomain=us8.campaign-archive2.com">         <embed src="//downloads.mailchimp.com/ZeroClipboard.07.13.swf?nocache=1453259704110" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="always" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedDomain=us8.campaign-archive2.com" scale="exactfit">                </embed></param></object></div><div id="social-proxy" style="display: none;background: #fff;-webkit-box-shadow: 4px 4px 8px 2px rgba(0,0,0,.2);box-shadow: 4px 4px 8px 2px rgba(0,0,0,.2);padding-bottom: 35px;z-index: 1000;">                   <div id="social-proxy_content">                   </div>                   <a href="#" title="Close" id="social-proxy_close" style="mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;position: absolute;top: 0;right: 0;height: 30px;width: 32px;background: transparent url(http://cdn-images.mailchimp.com/awesomebar-sprite.png) 0 -200px;text-indent: -9999px;outline: none;font-size: 1px;">Close</a>                 </div></body></html>
