@@ -8,14 +8,15 @@ feature 'Admin user views shoppers' do
   let(:number_of_shoppers){ 10 }
 
   scenario 'and sees all OpenStile details' do
-    older_account_time = 3.days.ago
-    newer_account_time = 1.days.ago
+    older_account_time = Time.zone.now - 3.days
+    newer_account_time = Time.zone.now - 1.day
     shoppers = []
     number_of_shoppers.times{shoppers << Faker::Name.first_name}
+    older_account_name, newer_account_name = shoppers.sample(2)
 
     given_a_bunch_of_shoppers_create_accounts shoppers
-    given_a_shopper_created_an_account_on older_account_time
-    given_a_shopper_created_an_account_on newer_account_time
+    given_a_shopper_created_an_account_on older_account_name, older_account_time
+    given_a_shopper_created_an_account_on newer_account_name, newer_account_time
     given_a_shopper_has_booked_a_styling
     given_a_shopper_is_unconfirmed
     given_i_am_a_logged_in_user admin
@@ -47,8 +48,8 @@ feature 'Admin user views shoppers' do
     end
   end
 
-  def given_a_shopper_created_an_account_on datetime
-    User.find_by_email("shopper_#{rand(0..number_of_shoppers - 1)}@email.com").update_attribute(:created_at, datetime)
+  def given_a_shopper_created_an_account_on name, datetime
+    User.find_by_first_name(name).update_attribute(:created_at, datetime)
   end
 
   def given_a_shopper_has_booked_a_styling
