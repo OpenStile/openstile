@@ -32,6 +32,7 @@ body{
 }
 
 h1,h2,h3,h4,h5,h6{
+    font-family: 'Lato', sans-serif;
 	margin:0px !important;
 }
 
@@ -96,6 +97,11 @@ header .row {
   padding-bottom: 25px;
   border-bottom: 3px solid #000;
   margin-bottom: 25px;
+}
+
+header .row.intro-message {
+  padding-top: 10px;
+  border-bottom: 1px solid #000;
 }
 
 footer .row {
@@ -244,7 +250,7 @@ footer .footer-section h5 {
 
 .login-section {
   border: 1px solid #ededed;
-  border-radius: 10px;
+  border-radius: 1px;
   padding: 50px 25px 50px 25px;
   margin-top: 75px;
   margin-bottom: 75px;
@@ -874,6 +880,28 @@ div.blog-side-panel .twitter-plugin {
 
 .dn {
   display: none;
+}
+
+a.mailer-cta {
+  min-width: 100px;
+  background: #5e5e5e;
+  font-size: 20px;
+  color: white;
+  border: 0 none;
+  border-radius: 1px;
+  cursor: pointer;
+  padding: 10px 10px;
+  margin: 10px 5px;
+}
+
+.mailer.container {
+  background:#555 asset_url('wallpaper_rack.jpg') no-repeat;
+  background-size:cover;
+  background-position:center 70%;
+}
+
+a.mailer-cta:hover {
+  box-shadow: 0 0 0 2px white, 0 0 0 3px #5e5e5e;
 }
 
 /* Tablets */

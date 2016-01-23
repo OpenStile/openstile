@@ -25,4 +25,7 @@ class StaticPagesController < ApplicationController
     response.headers.delete('X-Frame-Options')
     @retailer = Retailer.find(params[:retailer_id])
   end
+
+  def confirm_account
+  end
 end

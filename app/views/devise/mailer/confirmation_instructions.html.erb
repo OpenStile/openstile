@@ -1,6 +1,138 @@
-<p>Welcome to OpenStile <%= @resource.first_name %>,</p>
+<!-- To update this mailer, make changes to confirm_account view then use mailchimp inliner tool http://templates.mailchimp.com/resources/inline-css/ -->
 
-<p>We're so glad you signed up for our service and hope you experience a better, more personal way to shop!</p>
-<p>Before getting started, please confirm your account email through the link below:</p>
+<html><head>
+  <link href="/assets/dress.png" rel="shortcut icon" type="image/vnd.microsoft.icon">
+  <title> | OpenStile</title>
+  <link data-turbolinks-track="true" href="/assets/fullcalendar.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/bootstrap.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/bootstrap.min.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/default.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/default.date.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/default.time.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/font-awesome.min.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/prettyPhoto.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/style.css?body=1" media="all" rel="stylesheet">
+  <link data-turbolinks-track="true" href="/assets/application.css?body=1" media="all" rel="stylesheet">
+  <script id="twitter-wjs" src="https://platform.twitter.com/widgets.js"></script><script id="facebook-jssdk" src="//connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.5"></script><script data-turbolinks-track="true" src="/assets/jquery.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/jquery.turbolinks.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/jquery_ujs.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/moment.min.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/fullcalendar.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/blog.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/bootstrap.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/bootstrap.min.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/bottoms.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/custom.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/dresses.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/drop_in_availabilities.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/drop_in_ratings.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/drop_ins.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/html5shiv.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/jquery.easing.1.3.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/jquery.easing.compatibility.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/jquery.prettyPhoto.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/legacy.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/outfits.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/picker.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/picker.date.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/picker.time.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/press_kit.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/reports.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/respond.min.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/retailers.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/shoppers.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/static_pages.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/style_profile.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/tops.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/view_more.js?body=1"></script>
+  <script data-turbolinks-track="true" src="/assets/application.js?body=1"></script>
+  <meta content="authenticity_token" name="csrf-param">
+  <meta content="fGQDR4uWx5rQSKOxMDOQOJmwXNl7TxGrEoP9pugiNPo=" name="csrf-token">
+  <title>OpenStile</title>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+  </head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="row intro-message">
+      <p>Please confirm your OpenStile account</p>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-6 col-xs-offset-3 logo">
+        <a id="logo-home" href="/">
+          <img alt="Openstilelogo" class="img-responsive center-block" src="/assets/openstilelogo.png" width="400">
+        </a>
+      </div>
+      <div class="col-xs-12 navigation">
+        <a class="col-sm-6 btn-default " href="/retailers">Boutiques</a>
+        <a class="col-sm-6 btn-default" href="/blog">Blog</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mailer container">
+  <div class="row">
+    <div class="col-xs-6 col-xs-offset-3 login-section text-center">
+      <h1>Welcome to OpenStile</h1>
+      <br>
+      <h4>Get ready for better, more personal way to shop!</h4>
+      <br><br>
+      <a class="mailer-cta" href="<%= confirmation_url(@resource, confirmation_token: @token) %>">Confirm account</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-6 col-md-4 footer-section">
+        <h5>Contact us</h5>
+        <p>info@openstile.com</p><br>
+      </div>
+      <div class="col-xs-6 col-md-4 footer-section">
+        <h5>Learn more</h5>
+        <a href="/about">About</a><br>
+        <a href="/blog">Blog</a><br>
+      </div>
+      <div class="col-xs-12 col-md-4 footer-section sm-icons">
+        <div class="col-xs-3">
+          <a href="https://facebook.com/openstile">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+        </span>
+          </a>
+        </div>
+        <div class="col-xs-3">
+          <a href="https://instagram.com/openstile">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+        </span>
+          </a>
+        </div>
+        <div class="col-xs-3">
+          <a href="https://twitter.com/openstile">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+          </a>
+        </div>
+        <div class="col-xs-3">
+          <a href="https://pinterest.com/openstile">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-pinterest fa-stack-1x fa-inverse"></i>
+        </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;"></iframe></body></html>
