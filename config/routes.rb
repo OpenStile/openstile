@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get '/experience'       =>  'static_pages#experience'
   get '/decal'            =>  'static_pages#decal'
   get '/relaunch'         =>  'static_pages#relaunch'
-  get '/confirm_account'  =>  'static_pages#confirm_account'
 
   namespace :blog do
     resources :articles, path: '', only: [:index, :show]

@@ -49,4 +49,6 @@ Rails.application.configure do
   :domain =>         'heroku.com',
   :authentication => :plain
   }
+
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailer_previews"
 end
