@@ -22,7 +22,7 @@ RSpec.describe RetailUserMailer, :type => :mailer do
   end
 
   describe "drop in scheduled email" do
-    let(:asserted_mail_method) { RetailUserMailer.drop_in_scheduled_email(retailer, shopper, drop_in) }
+    let(:asserted_mail_method) { RetailUserMailer.drop_in_scheduled_email(drop_in) }
     let(:asserted_greeting) { "Hello #{@retail_user.first_name}" }
     let(:asserted_body) { ["#{greeting}", "#{shopper.first_name} has scheduled a styling with you for #{drop_in.colloquial_time}",
                             "Check out this and all upcoming stylings on OpenStile"]}
@@ -32,7 +32,7 @@ RSpec.describe RetailUserMailer, :type => :mailer do
   end
 
   describe "drop in canceled email" do
-    let(:asserted_mail_method) { RetailUserMailer.drop_in_canceled_email(retailer, shopper, drop_in) }
+    let(:asserted_mail_method) { RetailUserMailer.drop_in_canceled_email(drop_in) }
     let(:asserted_greeting) { "Hello #{@retail_user.first_name}" }
     let(:asserted_body) { ["#{greeting}", "#{shopper.first_name} has canceled their styling with you for #{drop_in.colloquial_time}.",
                             "Check out your updated stylings on OpenStile"]}

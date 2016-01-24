@@ -1,9 +1,12 @@
-<p>Hello <%= @shopper_name %></p>
+<% provide(:main_title, 'Your styling session has been canceled') %>
+<% provide(:intro_blurb, 'Your styling session has been canceled') %>
 
-<p>You have canceled your styling with <%= @store_name %> for <%= @booking_time %>.</p><br />
+<% provide(:cta_text, 'View my stylings') %>
+<% provide(:cta_link, upcoming_drop_ins_path) %>
 
-<p>Check out your updated stylings on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>. </p><br />
+<p>Hello <%= @styling.user.first_name.capitalize %>,</p>
 
-<p>Sincerely, </p><br />
+<p>Your styling session with <%= @styling.retailer.name %> for <%= @styling.colloquial_time %> has been canceled.</p>
+<br />
 
-<p>Your friends at OpenStile</p><br />
+<p>Check out all of your remaining styling sessions on OpenStile.</p><br />

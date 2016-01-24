@@ -1,9 +1,9 @@
-Hello <%= @owner_name %>,\n
+Hello <%= @styling.retailer.user.first_name.capitalize %>,
 
-<%= @shopper_name %> has canceled their styling with you for <%= @booking_time %>.\n
+<%= @styling.user.first_name %> has canceled their styling with you for <%= @styling.colloquial_time %>.
 
-Check out your updated stylings on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>.\n
+Check out your updated stylings on OpenStile.
 
-Sincerely,\n
+Sincerely,
 
 Your friends at OpenStile

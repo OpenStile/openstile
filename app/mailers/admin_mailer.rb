@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default from: "info@openstile.com"
+  default from: "OpenStile <info@openstile.com>"
 
   def referral_submitted referral
     @referral = referral

@@ -1,9 +1,9 @@
-Hello <%= @shopper_name %>,\n
+Hello <%= @styling.user.first_name %>,
 
-You have scheduled a styling with <%= @store_name %> for <%= @booking_time %>.\n
+You have scheduled a styling with <%= @styling.retailer.name %> for <%= @styling.colloquial_time %>.
 
-Check out all of your upcoming stylings on OpenStile <%= link_to "here", 'www.openstile.com/drop_ins/upcoming' %>.\n
+Check out all of your upcoming stylings on OpenStile.
 
-Sincerely,\n
+Sincerely,
 
-Your friends at OpenStile\n
+Your friends at OpenStile

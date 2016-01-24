@@ -24,8 +24,8 @@ class DropInsController < ApplicationController
 
       if @drop_in.save
         retailer = @drop_in.retailer
-        RetailUserMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
-        ShopperMailer.drop_in_scheduled_email(retailer, current_user, @drop_in).deliver
+        RetailUserMailer.drop_in_scheduled_email(@drop_in).deliver
+        ShopperMailer.drop_in_scheduled_email(@drop_in).deliver
         AdminMailer.drop_in_scheduled(@drop_in).deliver unless User.admins.empty?
         flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
         redirect_to upcoming_drop_ins_path
@@ -48,8 +48,8 @@ class DropInsController < ApplicationController
 
   def destroy
     retailer = @drop_in.retailer
-    RetailUserMailer.drop_in_canceled_email(retailer, current_user, @drop_in).deliver
-    ShopperMailer.drop_in_canceled_email(retailer, current_user, @drop_in).deliver
+    RetailUserMailer.drop_in_canceled_email(@drop_in).deliver
+    ShopperMailer.drop_in_canceled_email(@drop_in).deliver
     @drop_in.destroy
     flash[:success] = "Drop in cancelled. Retailer will be notified"
     redirect_to upcoming_drop_ins_path

@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe ShopperMailer, :type => :mailer do
   let(:retailer){ FactoryGirl.create(:retailer) }
+  let!(:owner){ FactoryGirl.create(:retailer_user, retailer: retailer) }
   let(:shopper){ FactoryGirl.create(:shopper_user) }
   let!(:drop_in_availability) {
   FactoryGirl.create(:standard_availability_for_tomorrow,
@@ -17,7 +18,7 @@ RSpec.describe ShopperMailer, :type => :mailer do
   end
 
   describe "drop in scheduled email" do
-    let(:asserted_mail_method) { ShopperMailer.drop_in_scheduled_email(retailer, shopper, drop_in) }
+    let(:asserted_mail_method) { ShopperMailer.drop_in_scheduled_email(drop_in) }
     let(:asserted_greeting) { "Hello #{shopper.first_name}" }
     let(:asserted_body) { ["#{greeting}", "You have scheduled a styling with #{retailer.name} for #{drop_in.colloquial_time}",
                             "Check out all of your upcoming stylings on OpenStile"]}
@@ -27,7 +28,7 @@ RSpec.describe ShopperMailer, :type => :mailer do
   end
 
   describe "drop in canceled email" do
-    let(:asserted_mail_method) { ShopperMailer.drop_in_canceled_email(retailer, shopper, drop_in) }
+    let(:asserted_mail_method) { ShopperMailer.drop_in_canceled_email(drop_in) }
     let(:asserted_greeting) { "Hello #{shopper.first_name}" }
     let(:asserted_body) { ["#{greeting}", "You have canceled your styling with #{retailer.name} for #{drop_in.colloquial_time}",
                             "Check out your updated stylings on OpenStile"]}
