@@ -5,10 +5,6 @@ shared_examples "a_well_tested_mailer" do
   let(:mail_method) { asserted_mail_method }
   let(:body) { asserted_body }
 
-  it "renders the headers" do
-    expect(mail_method.content_type).to start_with('multipart/alternative') #html / text support
-  end
-
   it "sets the correct subject" do
     expect(mail_method.subject).to eq(full_subject)
   end

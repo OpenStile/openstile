@@ -60,6 +60,8 @@ gem 'cloudinary'
 
 gem 'meta-tags'
 
+gem 'icalendar', '~> 2.3'
+
 group :development, :test do
   gem 'rspec-rails',  '~> 3.0.0'
   gem 'byebug'

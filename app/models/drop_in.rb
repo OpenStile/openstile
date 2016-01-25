@@ -78,4 +78,22 @@ class DropIn < ActiveRecord::Base
 
     "#{date_string} @ #{time_string}".gsub(":00",'')
   end
+
+  def ics_attachment type
+    description = 'Personal Styling Session'
+    description << " with #{retailer.name}" if type == :shopper
+    description << " for #{user.first_name}" if type == :retailer
+    cal = Icalendar::Calendar.new
+    cal.event do |e|
+      e.dtstart     = time.utc
+      e.dtend       = time.utc + 30.minutes
+      e.location    = StreetAddress::US.parse(retailer.location.address).to_s
+      e.summary     = 'OpenStile-Styling Session'
+      e.description = description
+      e.organizer = Icalendar::Values::CalAddress.new("mailto:info@openstile.com", cn: 'OpenStile')
+      e.ip_class    = "PRIVATE"
+    end
+
+    cal
+  end
 end

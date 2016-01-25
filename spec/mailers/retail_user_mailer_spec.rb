@@ -29,6 +29,9 @@ RSpec.describe RetailUserMailer, :type => :mailer do
     let(:asserted_recipient) { @retail_user.email }
     let(:asserted_subject) { "#{shopper.first_name} has scheduled a styling with you" }
     it_behaves_like "a_well_tested_mailer"
+    it 'should have ics attachment' do
+      expect(RetailUserMailer.drop_in_scheduled_email(drop_in).attachments).to_not be_empty
+    end
   end
 
   describe "drop in canceled email" do

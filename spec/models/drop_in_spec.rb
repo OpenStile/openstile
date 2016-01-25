@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe DropIn, :type => :model do
-  let(:shopper){ FactoryGirl.create(:shopper_user) }
-  let(:retailer){ FactoryGirl.create(:retailer) }
-  let!(:drop_in_availability) { 
+  let(:shopper){ FactoryGirl.create(:shopper_user, first_name: 'Jane') }
+  let(:location){ FactoryGirl.create(:location, address: '123 Some St. Brooklyn, NY 11211')}
+  let(:retailer){ FactoryGirl.create(:retailer, name: 'ABC Boutique', location: location) }
+  let!(:drop_in_availability) {
     FactoryGirl.create(:standard_availability_for_tomorrow, 
                        retailer: retailer)
   }
@@ -103,4 +104,29 @@ RSpec.describe DropIn, :type => :model do
     end
   end
 
+  describe 'ics attachment' do
+    it 'should be correctly generated for shopper' do
+      attachment_params = ['BEGIN:VCALENDAR', 'BEGIN:VEVENT', 'DESCRIPTION:Personal Styling Session with ABC Boutique',
+                           "DTSTART:#{tomorrow_mid_morning.utc.strftime('%Y%m%dT%H%M%S')}",
+                           "DTEND:#{(tomorrow_mid_morning + 30.minutes).utc.strftime('%Y%m%dT%H%M%S')}",
+                           "LOCATION:123 Some St", 'ORGANIZER;CN=OpenStile:mailto:info@openstile.com',
+                           'SUMMARY:OpenStile-Styling Session', 'END:VEVENT', 'END:VCALENDAR']
+      attachment = @drop_in.ics_attachment(:shopper).to_ical
+      attachment_params.each do |param|
+        expect(attachment).to match(param)
+      end
+    end
+
+    it 'should be correctly generated for retailer' do
+      attachment_params = ['BEGIN:VCALENDAR', 'BEGIN:VEVENT', 'DESCRIPTION:Personal Styling Session for Jane',
+                           "DTSTART:#{tomorrow_mid_morning.utc.strftime('%Y%m%dT%H%M%S')}",
+                           "DTEND:#{(tomorrow_mid_morning + 30.minutes).utc.strftime('%Y%m%dT%H%M%S')}",
+                           "LOCATION:123 Some St", 'ORGANIZER;CN=OpenStile:mailto:info@openstile.com',
+                           'SUMMARY:OpenStile-Styling Session', 'END:VEVENT', 'END:VCALENDAR']
+      attachment = @drop_in.ics_attachment(:retailer).to_ical
+      attachment_params.each do |param|
+        expect(attachment).to match(param)
+      end
+    end
+  end
 end

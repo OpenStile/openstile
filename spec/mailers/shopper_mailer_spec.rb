@@ -25,6 +25,9 @@ RSpec.describe ShopperMailer, :type => :mailer do
     let(:asserted_recipient) { shopper.email }
     let(:asserted_subject) { "You have scheduled a styling with #{retailer.name}!" }
     it_behaves_like "a_well_tested_mailer"
+    it 'should have ics attachment' do
+      expect(ShopperMailer.drop_in_scheduled_email(drop_in).attachments).to_not be_empty
+    end
   end
 
   describe "drop in canceled email" do
