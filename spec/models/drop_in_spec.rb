@@ -105,26 +105,24 @@ RSpec.describe DropIn, :type => :model do
   end
 
   describe 'ics attachment' do
+    let(:params) do
+      ['BEGIN:VTIMEZONE', 'TZID:America/New_York', 'TZOFFSETTO:-0400', 'TZOFFSETTO:-0500', 'END:VTIMEZONE',
+       'BEGIN:VCALENDAR', 'BEGIN:VEVENT',
+       "DTSTART;TZID=America/New_York:#{tomorrow_mid_morning.strftime('%Y%m%dT%H%M%S')}",
+       "DTEND;TZID=America/New_York:#{(tomorrow_mid_morning + 30.minutes).strftime('%Y%m%dT%H%M%S')}",
+       "LOCATION:123 Some St", 'ORGANIZER;CN=OpenStile:mailto:info@openstile.com',
+       'SUMMARY:OpenStile-Styling Session', 'END:VEVENT', 'END:VCALENDAR']
+    end
     it 'should be correctly generated for shopper' do
-      attachment_params = ['BEGIN:VCALENDAR', 'BEGIN:VEVENT', 'DESCRIPTION:Personal Styling Session with ABC Boutique',
-                           "DTSTART:#{tomorrow_mid_morning.utc.strftime('%Y%m%dT%H%M%S')}",
-                           "DTEND:#{(tomorrow_mid_morning + 30.minutes).utc.strftime('%Y%m%dT%H%M%S')}",
-                           "LOCATION:123 Some St", 'ORGANIZER;CN=OpenStile:mailto:info@openstile.com',
-                           'SUMMARY:OpenStile-Styling Session', 'END:VEVENT', 'END:VCALENDAR']
       attachment = @drop_in.ics_attachment(:shopper).to_ical
-      attachment_params.each do |param|
+      (params << 'DESCRIPTION:Personal Styling Session with ABC Boutique').each do |param|
         expect(attachment).to match(param)
       end
     end
 
     it 'should be correctly generated for retailer' do
-      attachment_params = ['BEGIN:VCALENDAR', 'BEGIN:VEVENT', 'DESCRIPTION:Personal Styling Session for Jane',
-                           "DTSTART:#{tomorrow_mid_morning.utc.strftime('%Y%m%dT%H%M%S')}",
-                           "DTEND:#{(tomorrow_mid_morning + 30.minutes).utc.strftime('%Y%m%dT%H%M%S')}",
-                           "LOCATION:123 Some St", 'ORGANIZER;CN=OpenStile:mailto:info@openstile.com',
-                           'SUMMARY:OpenStile-Styling Session', 'END:VEVENT', 'END:VCALENDAR']
       attachment = @drop_in.ics_attachment(:retailer).to_ical
-      attachment_params.each do |param|
+      (params << 'DESCRIPTION:Personal Styling Session for Jane').each do |param|
         expect(attachment).to match(param)
       end
     end

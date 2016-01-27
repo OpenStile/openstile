@@ -84,9 +84,28 @@ class DropIn < ActiveRecord::Base
     description << " with #{retailer.name}" if type == :shopper
     description << " for #{user.first_name}" if type == :retailer
     cal = Icalendar::Calendar.new
+    cal.timezone do |t|
+      t.tzid = "America/New_York"
+
+      t.daylight do |d|
+        d.tzoffsetfrom = "-0500"
+        d.tzoffsetto   = "-0400"
+        d.tzname       = "EDT"
+        d.dtstart      = "19700308T020000"
+        d.rrule        = "FREQ=YEARLY;BYMONTH=3;BYDAY=2SU"
+      end
+
+      t.standard do |s|
+        s.tzoffsetfrom = "-0400"
+        s.tzoffsetto   = "-0500"
+        s.tzname       = "EST"
+        s.dtstart      = "19701101T020000"
+        s.rrule        = "FREQ=YEARLY;BYMONTH=11;BYDAY=1SU"
+      end
+    end
     cal.event do |e|
-      e.dtstart     = time.utc
-      e.dtend       = time.utc + 30.minutes
+      e.dtstart     = Icalendar::Values::DateTime.new time, 'tzid' => 'America/New_York'
+      e.dtend       = Icalendar::Values::DateTime.new (time + 30.minutes), 'tzid' => 'America/New_York'
       e.location    = StreetAddress::US.parse(retailer.location.address).to_s
       e.summary     = 'OpenStile-Styling Session'
       e.description = description
