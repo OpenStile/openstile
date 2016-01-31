@@ -196,5 +196,46 @@ EOF
                           user_role: UserRole.find_by_name(UserRole::RETAILER), password: 'ljj_openstile1128',
                           password_confirmation: 'ljj_openstile1128', confirmed_at: Time.zone.now)
   end
+
+  unless Retailer.find_by_name('3NY')
+
+    location = Location.create!(address: '300 Bleecker St, New York, NY 10014', neighborhood: 'West Village')
+
+    description = <<EOF
+3NY is a multi-Personality Brand catering to New York City's fashion gurus: The Classicist, who embrace tradition;
+The Maverick, who creates her own trends; and the Eclectics, who follow their heart...Nothing is ever off limits.
+Customers will find pieces from 3NY that will keep them on-trend for the season, as well as make an excellent addition
+to their wardrobe for years to come. The uniqueness of 3NY's offerings promise to make any fashion-conscious woman
+stand out from the rest.
+EOF
+
+    retailer = Retailer.create!(name: '3NY', description: description, location: location,
+                                size_range: '0 (XS) - 12 (L)', quote: "The Maverick who creates her own trends",
+                                price_index: 3, status: 1)
+
+    retailer.create_online_presence!(web_link: 'http://www.3nyboutiques.com',
+                                     instagram_link: 'https://www.instagram.com/Shop3NY',
+                                     facebook_link: 'https://www.facebook.com/3NYBOUTIQUES')
+
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-01', start_time: '10:30:00', end_time: '19:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-02', start_time: '10:30:00', end_time: '19:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-03', start_time: '10:30:00', end_time: '19:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-04', start_time: '10:30:00', end_time: '19:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-05', start_time: '10:30:00', end_time: '19:30:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-06', start_time: '10:30:00', end_time: '20:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-02-07', start_time: '11:00:00', end_time: '19:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+
+    retailer.create_user!(first_name: 'Sam', last_name: 'Desner', email: 'tania@3nyboutiques.com',
+                          user_role: UserRole.find_by_name(UserRole::RETAILER), password: '3ny_openstile1128',
+                          password_confirmation: '3ny_openstile1128', confirmed_at: Time.zone.now)
+  end
 end
+
 
