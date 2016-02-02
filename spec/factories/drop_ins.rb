@@ -5,5 +5,6 @@ FactoryGirl.define do
     retailer
     user
     time "2015-01-21 13:43:39"
+    status 1
   end
 end

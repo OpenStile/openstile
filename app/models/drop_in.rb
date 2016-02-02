@@ -2,6 +2,9 @@ class DropIn < ActiveRecord::Base
   Time::DATE_FORMATS[:month_slash_day] = "%_m#{'/'}%d"
   Time::DATE_FORMATS[:informal_time] = "%l:%M %p"
 
+  ACTIVE_STATE = 1
+  CANCELED_STATE = 0
+
   belongs_to :retailer
   belongs_to :user
 
@@ -77,6 +80,10 @@ class DropIn < ActiveRecord::Base
     time_string = time.to_s(:informal_time)
 
     "#{date_string} @ #{time_string}".gsub(":00",'')
+  end
+
+  def canceled?
+    status == CANCELED_STATE
   end
 
   def ics_attachment type

@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   end
 
   resources :drop_ins, only: [:create, :update, :destroy] do
+    member do
+      patch :cancel
+    end
     collection do
       get :upcoming
     end

@@ -1,7 +1,15 @@
 <div class="content">
   <div class="col-xs-8">
     <h3><%= drop_in.user.first_name %></h3>
-    <h3><%= drop_in.colloquial_time %></h3>
+    <% if drop_in.canceled? %>
+        <div class="row">
+          <div class="col-sm-8 col-md-4">
+            <h3 class="alert-danger">CANCELED</h3>
+          </div>
+        </div>
+    <% else %>
+        <h3><%= drop_in.colloquial_time %></h3>
+    <% end %>
     <% unless drop_in.comment.blank? %>
         <h4>"<%= drop_in.comment %>"</h4>
     <% end %>

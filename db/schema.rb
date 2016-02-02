@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113195843) do
+ActiveRecord::Schema.define(version: 20160202162155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20160113195843) do
     t.string   "retailer_feedback"
     t.decimal  "sales_generated"
     t.integer  "user_id"
+    t.integer  "status",            default: 1
   end
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree

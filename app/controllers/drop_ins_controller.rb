@@ -3,7 +3,7 @@ class DropInsController < ApplicationController
   before_filter :store_shopper_location
   before_filter :authenticate_user!, except: [:create]
   before_action :correct_drop_in_customer, only: [:update]
-  before_action :correct_drop_in_shopper, only: [:destroy]
+  before_action :correct_drop_in_shopper, only: [:destroy, :cancel]
 
   def create
     retrieved_params = drop_in_params
@@ -53,6 +53,18 @@ class DropInsController < ApplicationController
     @drop_in.destroy
     flash[:success] = "Drop in cancelled. Retailer will be notified"
     redirect_to upcoming_drop_ins_path
+  end
+
+  def cancel
+    RetailUserMailer.drop_in_canceled_email(@drop_in).deliver
+    ShopperMailer.drop_in_canceled_email(@drop_in).deliver
+    if @drop_in.update_attribute(:status, DropIn::CANCELED_STATE)
+      flash[:success] = "Your styling session has been canceled. Retailer will be notified"
+      redirect_to upcoming_drop_ins_path
+    else
+      flash[:danger] = "There was an unexpected error cancelling your styling session."
+      redirect_to root_path
+    end
   end
 
   def upcoming

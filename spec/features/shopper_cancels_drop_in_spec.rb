@@ -17,13 +17,18 @@ feature 'Shopper modifies drop in' do
   scenario 'by cancelling it' do
     given_i_am_a_logged_in_user shopper
     given_my_upcoming_drop_ins_page_contains drop_in
+    given_my_drop_in_is_not_shown_as_canceled
     when_i_cancel_and_confirm drop_in
-    then_my_upcoming_drop_ins_page_should_not_contain drop_in
+    then_my_upcoming_drop_ins_page_should_contain drop_in
+    then_the_drop_in_should_be_shown_as_canceled
     then_i_and_the_retail_user_should_receive_an_email shopper.email, retail_user.email
+    given_i_am_a_logged_in_user retail_user
+    when_i_view_my_stylings
+    then_the_drop_in_should_be_shown_as_canceled
   end
 
   def given_my_upcoming_drop_ins_page_contains appointment
-    click_link 'logo-home'
+    click_link('logo-home')
 
     expect(page).to have_link(appointment.retailer.name)
     expect(page).to have_content(appointment.colloquial_time)
@@ -31,17 +36,17 @@ feature 'Shopper modifies drop in' do
 
   def when_i_cancel_and_confirm appointment
     within(:css, "div#drop_in_#{appointment.id}") do
-      expect{click_link 'cancel'}
-            .to change(ActionMailer::Base.deliveries, :count).by(2) 
+      expect { click_link 'cancel' }
+        .to change(ActionMailer::Base.deliveries, :count).by(2)
     end
 
-    expect(page).to have_content('Drop in cancelled')
+    expect(page).to have_content('Your styling session has been canceled')
   end
 
-  def then_my_upcoming_drop_ins_page_should_not_contain appointment
+  def then_my_upcoming_drop_ins_page_should_contain appointment
     click_link 'logo-home'
 
-    expect(page).to_not have_content(appointment.colloquial_time)
+    expect(page).to have_link(appointment.retailer.name)
   end
 
   def then_i_and_the_retail_user_should_receive_an_email shopper_email, retail_user_email
@@ -50,5 +55,17 @@ feature 'Shopper modifies drop in' do
                                .map(&:to).flatten
     expect(last_two_receipients).to include(retail_user_email)
     expect(last_two_receipients).to include(shopper_email)
+  end
+
+  def then_the_drop_in_should_be_shown_as_canceled
+    expect(page).to have_text('CANCELED')
+  end
+
+  def given_my_drop_in_is_not_shown_as_canceled
+    expect(page).to_not have_text('CANCELED')
+  end
+
+  def when_i_view_my_stylings
+    click_link 'View my bookings'
   end
 end

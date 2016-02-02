@@ -23,7 +23,8 @@ RSpec.describe DropIn, :type => :model do
   it { should respond_to :retailer_rating }
   it { should respond_to :shopper_feedback }
   it { should respond_to :retailer_feedback }
-  it { should respond_to :sales_generated } 
+  it { should respond_to :sales_generated }
+  it { should respond_to :status }
   it { should be_valid }
 
   context "when retailer is not present" do
