@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-
+ruby "2.2.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.6'
+gem 'rails', '4.2.5'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 
@@ -30,7 +30,7 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-gem 'devise', '~> 3.4.1'
+gem 'devise'
 
 gem 'jquery-turbolinks'
 
@@ -63,7 +63,7 @@ gem 'meta-tags'
 gem 'icalendar', '~> 2.3'
 
 group :development, :test do
-  gem 'rspec-rails',  '~> 3.0.0'
+  gem 'rspec-rails',  '~> 3.1'
   gem 'byebug'
 end
 
@@ -71,6 +71,10 @@ group :test do
   gem "factory_girl_rails", require: false
   gem 'capybara', '~> 2.3.0'
   gem 'poltergeist'
+end
+
+group :development do
+  gem 'web-console', '~> 2.0'
 end
 
 group :production do

@@ -24,9 +24,9 @@ class DropInsController < ApplicationController
 
       if @drop_in.save
         retailer = @drop_in.retailer
-        RetailUserMailer.drop_in_scheduled_email(@drop_in).deliver
-        ShopperMailer.drop_in_scheduled_email(@drop_in).deliver
-        AdminMailer.drop_in_scheduled(@drop_in).deliver unless User.admins.empty?
+        RetailUserMailer.drop_in_scheduled_email(@drop_in).deliver_now
+        ShopperMailer.drop_in_scheduled_email(@drop_in).deliver_now
+        AdminMailer.drop_in_scheduled(@drop_in).deliver_now unless User.admins.empty?
         flash[:success] = "Your drop-in was scheduled! The retailer will be notified."
         redirect_to upcoming_drop_ins_path
       else
@@ -48,16 +48,16 @@ class DropInsController < ApplicationController
 
   def destroy
     retailer = @drop_in.retailer
-    RetailUserMailer.drop_in_canceled_email(@drop_in).deliver
-    ShopperMailer.drop_in_canceled_email(@drop_in).deliver
+    RetailUserMailer.drop_in_canceled_email(@drop_in).deliver_now
+    ShopperMailer.drop_in_canceled_email(@drop_in).deliver_now
     @drop_in.destroy
     flash[:success] = "Drop in cancelled. Retailer will be notified"
     redirect_to upcoming_drop_ins_path
   end
 
   def cancel
-    RetailUserMailer.drop_in_canceled_email(@drop_in).deliver
-    ShopperMailer.drop_in_canceled_email(@drop_in).deliver
+    RetailUserMailer.drop_in_canceled_email(@drop_in).deliver_now
+    ShopperMailer.drop_in_canceled_email(@drop_in).deliver_now
     if @drop_in.update_attribute(:status, DropIn::CANCELED_STATE)
       flash[:success] = "Your styling session has been canceled. Retailer will be notified"
       redirect_to upcoming_drop_ins_path

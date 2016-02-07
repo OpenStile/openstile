@@ -3,8 +3,8 @@ class RetailerReferralsController < ApplicationController
     @retailers = Retailer.all_live
     @referral = RetailerReferral.new(referral_retailer_params)
     if @referral.valid?
-      ReferralMailer.referral_submitted(@referral).deliver
-      AdminMailer.referral_submitted(@referral).deliver unless User.admins.empty?
+      ReferralMailer.referral_submitted(@referral).deliver_now
+      AdminMailer.referral_submitted(@referral).deliver_now unless User.admins.empty?
     end
     respond_to do |format|
       format.js {}
