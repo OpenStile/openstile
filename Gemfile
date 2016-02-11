@@ -61,6 +61,9 @@ gem 'meta-tags'
 
 gem 'icalendar', '~> 2.3'
 
+gem 'resque'
+gem 'resque-scheduler'
+
 group :development, :test do
   gem 'rspec-rails',  '~> 3.1'
   gem 'byebug'

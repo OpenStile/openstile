@@ -11,4 +11,13 @@ class RetailerReferral
   validates :contact_name, presence: true, length: { maximum: 100 }
   validates :referrer_email, presence: true, length: { maximum: 100 }, format: { with: VALID_EMAIL_REGEX }
   validates :contact_email, presence: true, length: { maximum: 100 }, format: { with: VALID_EMAIL_REGEX }
+
+  def serialize_model
+    {referrer_name: referrer_name,
+     referrer_email: referrer_email,
+     store_name: store_name,
+     website: website,
+     contact_name: contact_name,
+     contact_email: contact_email}
+  end
 end

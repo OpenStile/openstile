@@ -55,4 +55,6 @@ Rails.application.configure do
   }
 
   config.action_mailer.preview_path = "#{Rails.root}/spec/mailer_previews"
+
+  config.active_job.queue_adapter = :resque
 end

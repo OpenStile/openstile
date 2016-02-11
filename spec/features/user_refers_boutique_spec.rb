@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User refers a boutique' do
   before { ActionMailer::Base.deliveries = [] }
 
-  scenario 'through the referral form', js: true do
+  scenario 'through the referral form', js: true, perform_enqueued: true do
     FactoryGirl.create(:admin_user, email: 'admin1@openstile.com')
     FactoryGirl.create(:admin_user, email: 'admin2@openstile.com')
 
@@ -16,7 +16,7 @@ feature 'User refers a boutique' do
     then_all_admins_should_receive_an_email_with_referral 'jane@example.com', 'Chic Boutique'
   end
 
-  scenario 'when no admin present', js: true do
+  scenario 'when no admin present', js: true, perform_enqueued: true do
     given_i_visit_the_boutique_page
     when_i_submit_an_invalid_referral
     then_i_should_be_instructed_to_resubmit

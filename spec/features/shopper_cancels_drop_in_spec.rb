@@ -14,7 +14,7 @@ feature 'Shopper modifies drop in' do
                                      time: tomorrow_mid_morning) }
   let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
 
-  scenario 'by cancelling it' do
+  scenario 'by cancelling it', perform_enqueued: true do
     given_i_am_a_logged_in_user shopper
     given_my_upcoming_drop_ins_page_contains drop_in
     given_my_drop_in_is_not_shown_as_canceled
@@ -36,8 +36,7 @@ feature 'Shopper modifies drop in' do
 
   def when_i_cancel_and_confirm appointment
     within(:css, "div#drop_in_#{appointment.id}") do
-      expect { click_link 'cancel' }
-        .to change(ActionMailer::Base.deliveries, :count).by(2)
+      click_link 'cancel'
     end
 
     expect(page).to have_content('Your styling session has been canceled')
@@ -50,11 +49,14 @@ feature 'Shopper modifies drop in' do
   end
 
   def then_i_and_the_retail_user_should_receive_an_email shopper_email, retail_user_email
-    count = ActionMailer::Base.deliveries.count
-    last_two_receipients = ActionMailer::Base.deliveries[count-2, count-1]
+    last_two_receipients = ActionMailer::Base.deliveries[-2..-1]
                                .map(&:to).flatten
+    last_two_subjects = ActionMailer::Base.deliveries[-2..-1]
+                            .map(&:subject)
     expect(last_two_receipients).to include(retail_user_email)
     expect(last_two_receipients).to include(shopper_email)
+    expect(last_two_subjects[0]).to match(/canceled (your|a) styling/)
+    expect(last_two_subjects[1]).to match(/canceled (your|a) styling/)
   end
 
   def then_the_drop_in_should_be_shown_as_canceled

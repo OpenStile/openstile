@@ -16,7 +16,7 @@ feature 'Shopper schedule drop in' do
   }
   let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
 
-  scenario 'for a given date and time' do
+  scenario 'for a given date and time', perform_enqueued: true do
     date, time = parse_date_and_EST(tomorrow_afternoon)
     place = "Crafty Bastards at Union Market (1309 5th St. NE, Washington, DC 20002)"
 
@@ -29,7 +29,7 @@ feature 'Shopper schedule drop in' do
     then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
-  scenario 'for a drop-by in 30 min', js: true do
+  scenario 'for a drop-by in 30 min', js: true, perform_enqueued: true do
     given_i_am_a_logged_in_user shopper
     when_i_click_on_a_retailer retailer
     then_i_should_not_see_a_book_in_30_option
@@ -40,7 +40,7 @@ feature 'Shopper schedule drop in' do
     then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
-  scenario 'upon logging in' do
+  scenario 'upon logging in', perform_enqueued: true do
     date, time = parse_date_and_EST(tomorrow_afternoon)
 
     given_i_am_not_logged_in
@@ -62,7 +62,7 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_drop_ins_should_be_updated_with retailer, date: "Tomorrow", comments: "Looking for a holiday dress"
   end
 
-  scenario 'sign in from the third party scheduler widget' do
+  scenario 'sign in from the third party scheduler widget', perform_enqueued: true do
     date, time = parse_date_and_EST(tomorrow_afternoon)
 
     given_i_am_viewing_the_scheduler_widget_for retailer
@@ -149,9 +149,7 @@ feature 'Shopper schedule drop in' do
     within(:css, "div.schedule") do
       fill_in 'Date', with: date
       fill_in 'Time', with: time
-
-      expect{click_button 'Book session'}
-            .to change(ActionMailer::Base.deliveries, :count).by(3)
+      click_button 'Book session'
     end
 
     expect(page).to have_content('Your drop-in was scheduled!')
@@ -241,10 +239,17 @@ feature 'Shopper schedule drop in' do
   end
 
   def then_all_parties_should_receive_an_email emails
-    latest = ActionMailer::Base.deliveries[-(emails.size)..-1]
+    latest_addresees = ActionMailer::Base.deliveries[-(emails.size)..-1]
                                .map(&:to).flatten
+    latest_subjects = ActionMailer::Base.deliveries[-(emails.size)..-1]
+                          .map(&:subject)
+
     emails.each do |email|
-      expect(latest).to include(email)
+      expect(latest_addresees).to include(email)
+    end
+
+    latest_subjects.each do |subject|
+      expect(subject).to match(/(booked an OpenStile style session|scheduled a styling)/)
     end
   end
 

@@ -1,10 +1,10 @@
 class AdminMailer < ActionMailer::Base
   default from: "OpenStile <info@openstile.com>"
 
-  def referral_submitted referral
-    @referral = referral
+  def referral_submitted referral_hash
+    @referral = RetailerReferral.new(referral_hash)
     mail to: User.admins.map(&:email),
-         subject: "OpenStile referral: #{referral.store_name}"
+         subject: "OpenStile referral: #{@referral.store_name}"
   end
 
   def drop_in_scheduled drop_in
