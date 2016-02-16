@@ -28,6 +28,11 @@ class DropIn < ActiveRecord::Base
 
   scope :overlapping, ->(start_time, end_time) { where("time >= ? and time < ?", start_time, end_time) }
 
+  after_create do
+    ShopperMailer.upcoming_styling_reminder(self).deliver_later(wait_until: time + 30.minutes)
+    RetailUserMailer.upcoming_styling_reminder(self).deliver_later(wait_until: time + 30.minutes)
+  end
+
   def retailer_available_for_drop_in
     unless retailer.nil? || time.nil?
       unless retailer.available_for_drop_in?(time)

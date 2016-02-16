@@ -1,0 +1,15 @@
+<% provide(:main_title, '30 minutes until a styling') %>
+<% provide(:intro_blurb, "#{@styling.user.first_name} is looking forward to their styling!") %>
+
+<% provide(:cta_text, 'View my stylings') %>
+<% provide(:cta_link, upcoming_drop_ins_url) %>
+
+<p>Hello,</p>
+
+<p>
+  <%= @styling.user.first_name %> will arrive in 30 minutes!
+  You can review their style info through your OpenStile dashboard. Just a reminder, we ask that you put aside 2 - 3 looks
+  in the OpenStile garment bags prior to the shopper's arrival.
+</p><br />
+
+<p>Check out this and all upcoming stylings on OpenStile. </p>

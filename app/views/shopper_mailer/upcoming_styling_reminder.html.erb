@@ -1,0 +1,16 @@
+<% provide(:main_title, '30 minutes until your styling') %>
+<% provide(:intro_blurb, "The team at #{@styling.retailer.name} is looking forward to seeing you!") %>
+
+<% provide(:cta_text, 'View my stylings') %>
+<% provide(:cta_link, upcoming_drop_ins_url) %>
+
+<p>Hi <%= @styling.user.first_name.capitalize %>,</p>
+
+<p>Your styling with <%= @styling.retailer.name %> is in 30 minutes.</p>
+<p>
+  Owner <%="#{@styling.retailer.user.first_name} #{@styling.retailer.user.last_name}"%> and
+  the <%= @styling.retailer.name%> team can't wait to work with you!
+</p>
+<br />
+
+<p>View and update this and all of your upcoming stylings on OpenStile.</p><br />

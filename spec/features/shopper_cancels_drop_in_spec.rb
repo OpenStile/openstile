@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'Shopper modifies drop in' do
   let(:shopper){ FactoryGirl.create(:shopper_user) }
   let(:retailer){ FactoryGirl.create(:retailer) }
+  let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
   let!(:drop_in_availability) {
     FactoryGirl.create(:standard_availability_for_tomorrow,
                        retailer: retailer,
@@ -12,7 +13,6 @@ feature 'Shopper modifies drop in' do
                                      user: shopper,
                                      retailer: retailer,
                                      time: tomorrow_mid_morning) }
-  let!(:retail_user){ FactoryGirl.create(:retailer_user, retailer: retailer) }
 
   scenario 'by cancelling it', perform_enqueued: true do
     given_i_am_a_logged_in_user shopper
