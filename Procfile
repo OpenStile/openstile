@@ -1,1 +1,1 @@
-resque: env QUEUE=* TERM_CHILD=1 bundle exec rake resque:work
+resque: env QUEUE=* TERM_CHILD=1 bundle exec rake resque:work resque:scheduler
