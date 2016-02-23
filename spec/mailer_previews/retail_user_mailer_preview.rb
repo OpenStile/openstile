@@ -10,4 +10,8 @@ class RetailUserMailerPreview < ActionMailer::Preview
   def upcoming_styling_reminder
     RetailUserMailer.upcoming_styling_reminder(DropIn.where(status: DropIn::ACTIVE_STATE).first)
   end
+
+  def after_styling_reminder
+    RetailUserMailer.after_styling_reminder(DropIn.where(status: DropIn::ACTIVE_STATE).first)
+  end
 end

@@ -30,7 +30,9 @@ class DropIn < ActiveRecord::Base
 
   after_create do
     ShopperMailer.upcoming_styling_reminder(self).deliver_later(wait_until: time - 30.minutes)
+    ShopperMailer.after_styling_reminder(self).deliver_later(wait_until: time + 1.hour)
     RetailUserMailer.upcoming_styling_reminder(self).deliver_later(wait_until: time - 30.minutes)
+    RetailUserMailer.after_styling_reminder(self).deliver_later(wait_until: time + 1.hour)
   end
 
   def retailer_available_for_drop_in

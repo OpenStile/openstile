@@ -24,4 +24,11 @@ class ShopperMailer < ActionMailer::Base
       mail to: drop_in.user.email, subject: "Your styling with #{drop_in.retailer.name} is in 30 minutes"
     end
   end
+
+  def after_styling_reminder(drop_in)
+    @styling = drop_in
+    unless drop_in.canceled?
+      mail to: drop_in.user.email, subject: "Review your styling with #{drop_in.retailer.name}"
+    end
+  end
 end
