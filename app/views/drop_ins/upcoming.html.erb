@@ -17,27 +17,39 @@
       <div class="row text-center">
         <h3>Here are your style session bookings.</h3><br />
       </div>
-      <% @upcoming_drop_ins.each do |drop_in| %>
-          <div id="drop_in_<%= drop_in.id %>" class="row">
-            <div class="single-booking col-xs-10 col-xs-offset-1">
-              <% if shopper_signed_in? %>
-                  <%= render 'upcoming_for_shopper', drop_in: drop_in %>
-              <% elsif retailer_signed_in? %>
-                  <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
+      <% if shopper_signed_in? %>
+          <% @drop_ins.each do |drop_in| %>
+              <% if drop_in.time < Time.zone.now && !drop_in.canceled? %>
+                  <div id="drop_in_<%= drop_in.id %>" class="row">
+                    <div class="single-booking col-xs-10 col-xs-offset-1">
+                      <%= render 'previous_for_shopper', drop_in: drop_in %>
+                    </div>
+                  </div>
+              <% elsif drop_in.time > Time.zone.now %>
+                  <div id="drop_in_<%= drop_in.id %>" class="row">
+                    <div class="single-booking col-xs-10 col-xs-offset-1">
+                      <%= render 'upcoming_for_shopper', drop_in: drop_in %>
+                    </div>
+                  </div>
               <% end %>
-            </div>
-          </div>
+          <% end %>
       <% end %>
-      <% @previous_drop_ins.each do |drop_in| %>
-          <div id="drop_in_<%= drop_in.id %>" class="row">
-            <div class="single-booking col-xs-10 col-xs-offset-1">
-              <% if shopper_signed_in? %>
-                  <%= render 'previous_for_shopper', drop_in: drop_in %>
-              <% elsif retailer_signed_in? %>
-                  <%= render 'previous_for_retail_user', drop_in: drop_in %>
+      <% if retailer_signed_in? %>
+          <% @drop_ins.each do |drop_in| %>
+              <% if drop_in.time < Time.zone.now && !drop_in.canceled? %>
+                  <div id="drop_in_<%= drop_in.id %>" class="row">
+                    <div class="single-booking col-xs-10 col-xs-offset-1">
+                      <%= render 'previous_for_retail_user', drop_in: drop_in %>
+                    </div>
+                  </div>
+              <% elsif drop_in.time > Time.zone.now %>
+                  <div id="drop_in_<%= drop_in.id %>" class="row">
+                    <div class="single-booking col-xs-10 col-xs-offset-1">
+                      <%= render 'upcoming_for_retail_user', drop_in: drop_in %>
+                    </div>
+                  </div>
               <% end %>
-            </div>
-          </div>
+          <% end %>
       <% end %>
   <% end %>
 </div>

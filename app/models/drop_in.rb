@@ -24,7 +24,7 @@ class DropIn < ActiveRecord::Base
   validates :retailer_feedback, length: { maximum: 500 }
   validates :sales_generated, numericality: true, unless: "sales_generated.blank?"
 
-  default_scope { order('time ASC') }
+  default_scope { order('time DESC') }
 
   scope :overlapping, ->(start_time, end_time) { where("time >= ? and time < ?", start_time, end_time) }
 

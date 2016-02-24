@@ -11,14 +11,13 @@
   </div>
   <div class="col-xs-10">
     <h3><%= link_to drop_in.retailer.name, retailer_path(drop_in.retailer)%></h3>
+    <h4><%= drop_in.colloquial_time %></h4>
     <% if drop_in.canceled? %>
         <div class="row">
           <div class="col-xs-6 col-sm-3">
             <h4 class="alert-danger">CANCELED</h4>
           </div>
         </div>
-    <% else %>
-        <h4><%= drop_in.colloquial_time %></h4>
     <% end %>
     <h4><%= drop_in.retailer.get_drop_in_location(drop_in.time.to_s).stringify %></h4>
     <h4><%= drop_in.comment %></h4>

@@ -67,11 +67,9 @@ class DropInsController < ApplicationController
 
   def upcoming
     if current_user.user_role.name == UserRole::SHOPPER
-      @previous_drop_ins = DropIn.previous_for_shopper current_user.id
-      @upcoming_drop_ins = DropIn.upcoming_for_shopper current_user.id
+      @drop_ins = DropIn.where(user: current_user)
     elsif current_user.user_role.name == UserRole::RETAILER
-      @previous_drop_ins = DropIn.previous_for_retailer current_user.retailer.id
-      @upcoming_drop_ins = DropIn.upcoming_for_retailer current_user.retailer.id
+      @drop_ins = DropIn.where(retailer: current_user.retailer)
     else
       flash[:danger] = "Unexpected error"
       redirect_to root_path
