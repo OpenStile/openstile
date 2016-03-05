@@ -10,7 +10,7 @@ The OpenStile platform merges tech and fashion to offer seamless styling opportu
 
 [//]: # (more)
 <br/><br/>
-![tamara austin](https://res.cloudinary.com/openstile/image/upload/v1457144878/TCC_OPENSTILE_HEADSHOTS_121315-2435-Edit_sy2w9f.jpg)
+![tamara austin](https://res.cloudinary.com/openstile/image/upload/c_scale,w_600/v1457144878/TCC_OPENSTILE_HEADSHOTS_121315-2435-Edit_sy2w9f.jpg)
 <br/><br/>
 
 **Tamara Austin-Founder**
@@ -20,7 +20,7 @@ Tamara wanted a better way to shop for clothes. She hated going store to store o
 Tamara comes from a background in tech. After graduating from the University of Virginia with a degree in Computer Science, she worked as a software engineer and IT consultant in the Washington DC area. She started OpenStile as a way to directly apply her technical expertise to her entrepreneurial passions.
 <br/><br/>
 
-![sparkle johnson](https://res.cloudinary.com/openstile/image/upload/v1457144879/TCC_OPENSTILE_HEADSHOTS_121315-2397-Edit_twuyks.jpg)
+![sparkle johnson](https://res.cloudinary.com/openstile/image/upload/c_scale,w_600/v1457144879/TCC_OPENSTILE_HEADSHOTS_121315-2397-Edit_twuyks.jpg)
 <br/><br/>
 
 **Sparkle Johnson–Founder**
@@ -37,12 +37,12 @@ Tarik Carroll is a Brooklyn based music, fashion & commercial photographer with 
 
 **Mark Anglin - Co-Founder, Vice President & COO of Tarik Carroll Creative**
 Mark Anglin is the Founder, President & CEO of Anglin Assists, And Co-Founder and Managing Director of Break Magazine. Some of his major projects include: the Whitney Houston Biennial: I’m Every Woman,  Freecandy Exhibition HowDoYouSayYamInAfrican?, Last of A Dying Breed and 2014 Participant in Whitney Biennial Brand Manager Bed Stuy Beer Works.  To name a few of Mark’s client list includes:
-o	Allan Stevo - a published author & realtor for Chicago during 2015 Alderman election. 
-o	Bapple Realty - Realty company in the Soho area of Manhattan. 
-o	C.Finley -  an artist who lives and works in both Rome and New York City. 
-o	Chad Kimball, Tony nominated American theater actor.
-o	Lolly formerly Obvious Clothing for Cortiery 2010,  Responsible for Lolly item selection and packaging for FLOTUS Michelle Obama
-o	Tarik Carroll (The Artist)
+1.	Allan Stevo - a published author & realtor for Chicago during 2015 Alderman election. 
+2.	Bapple Realty - Realty company in the Soho area of Manhattan. 
+3.	C.Finley -  an artist who lives and works in both Rome and New York City. 
+4.	Chad Kimball, Tony nominated American theater actor.
+5.	Lolly formerly Obvious Clothing for Cortiery 2010,  Responsible for Lolly item selection and packaging for FLOTUS Michelle Obama
+6.	Tarik Carroll (The Artist)
 
 *** 
 To learn more about the team, check out our website [OpenStile](http://openstile.com/about)
