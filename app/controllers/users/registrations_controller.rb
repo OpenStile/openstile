@@ -17,10 +17,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if @user.save
       sign_in @user
       if stored_style_profile.nil?
-        flash[:success] = 'Your account has been successfully created. Please complete your style profile so we can get to know you better!'
+        flash[:success] = 'Your account has been successfully created! Check you email to confirm your account.'
         redirect_to after_sign_up_path_for(@user)
       else
-        flash[:success] = 'Your account has been successfully created!'
+        flash[:success] = 'Your account has been successfully created! Check you email to confirm your account.'
         redirect_to upcoming_drop_ins_path
       end
     else
