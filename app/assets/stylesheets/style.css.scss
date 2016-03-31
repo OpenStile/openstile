@@ -80,6 +80,10 @@ hr{
 	color:#69b8e5;
 }
 
+.opn-btn{
+  border-radius: 0px;
+}
+
 header .logo a {
   color: inherit;
   text-decoration: none;
@@ -171,7 +175,7 @@ footer .footer-section h5 {
 
 .home-page a {
   font-family: 'Lato', sans-serif;
-  font-size: 3vh;
+  font-size: 4vh;
   margin-top: 3vh;
   margin-bottom: 3vh;
 }
@@ -944,7 +948,7 @@ a.mailer-cta:hover {
   }
 
   .home-page a {
-    font-size: 15px;
+    font-size: 20px;
     margin-top: 20px;
     margin-bottom: 20px;
   }
