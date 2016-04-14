@@ -1,6 +1,6 @@
 ---
 title: "OpenStile Boutique Spotlight: Lady J+1"
-created_at: "2016-04-11"
+created_at: "2016-04-14"
 author: "Sparkle Johnson"
 cover_photo: "rsz_1tcc_ladyj_12616-189-edit_pwn5cd_sy6qzv.jpg"
 og_photo: 'https://res.cloudinary.com/openstile/image/upload/v1459734775/rsz_1tcc_ladyj_12616-189-edit_pwn5cd_sy6qzv.jpg'
@@ -10,10 +10,10 @@ Lady J + 1 is a Brooklyn based jewelry and clothing boutique. In this Spotlight,
 
 [//]: # (more)
 <br/><br/>
-![Lady J](https://res.cloudinary.com/openstile/image/upload/v1459734775/rsz_1tcc_ladyj_12616-189-edit_pwn5cd_sy6qzv.jpg)
+![Lady J](https://res.cloudinary.com/openstile/image/upload/v1459451806/rsz_1tcc_ladyj_12616-189-edit_pwn5cd.jpg)
 <br/><br/>
 
-**You have a long history with the neighborhood - from studying at Pratt Art Institute to supporting community pillars such as The Co-Op School of Brooklyn....What makes Brooklyn unique and why is it special to you? **
+**You have a long history with the neighborhood - from studying at Pratt Art Institute to supporting community pillars such as The Co-Op School of Brooklyn....What makes Brooklyn unique and why is it special to you?**
 Ohhh so many things. I moved here in 1995 and never left after attending Pratt. It's an ever-changing city with lots of rich cultural stimuli. Just walking down the street you can see amazing independent art, or this local man who always wears purple velvet suits with matching fedoras, or maybe I'll stop and admire a hand-written font on the window of a corner deli, then drink some java from my favorite local coffee shop under a cherry blossom tree that is blooming with feather-like petals, gaze at a sunrise streaming down Bergen Street, reflecting on an angular architectural marvel - and thats just on my way to work!
 For me, Brooklyn never has a dull moment or dearth of interesting sights, all of which are inspiring.
 
