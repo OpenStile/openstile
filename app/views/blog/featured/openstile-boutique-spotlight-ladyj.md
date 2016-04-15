@@ -1,9 +1,9 @@
 ---
 title: "OpenStile Boutique Spotlight: Lady J+1"
-created_at: "2016-04-14"
+created_at: "2016-04-15"
 author: "Sparkle Johnson"
-cover_photo: "rsz_1tcc_ladyj_12616-189-edit_pwn5cd_sy6qzv.jpg"
-og_photo: 'https://res.cloudinary.com/openstile/image/upload/v1459734775/rsz_1tcc_ladyj_12616-189-edit_pwn5cd_sy6qzv.jpg'
+cover_photo: "rsz_1tcc_ladyj_12616-189-edit_pwn5cd.jpg"
+og_photo: 'https://res.cloudinary.com/openstile/image/upload/v1459451806/rsz_1tcc_ladyj_12616-189-edit_pwn5cd.jpg'
 live: true
 ---
 Lady J + 1 is a Brooklyn based jewelry and clothing boutique. In this Spotlight, get to know the owner Jessica D’Amico.
@@ -38,7 +38,7 @@ I especially enjoy setting one-of-a-kind stones; that certainly makes for a favo
 Because my shop is also my studio, which makes it very intimate, I find that customers and clients will spend an indefinite amount of time trying on clothing & jewelry, talking about the neighborhood, and sometimes even enjoying a cup of tea with me! We really offer a warm and relaxing environment for shopping, and with honest styling advice. Most of our customers often pop-back in just to say hi!
 
 *** 
-To learn more about the team, check out our website [OpenStile](http://openstile.com/about)
+Book a FREE styling sessions with [Lady J +1 today](http://www.openstile.com/retailers/5-lady-j-1)!
 
 
 
