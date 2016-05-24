@@ -167,14 +167,14 @@ RSpec.describe Retailer, :type => :model do
   describe "image name helper" do
     let(:location){ FactoryGirl.create(:location, 
                                         address: "301 Water St. SE, Washington, DC 20003") }
-    let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique")}
+    let(:retailer){ FactoryGirl.create(:retailer, name: "Elena's Boutique & Fancy Wear")}
 
     it "should return the correct cover photo image name" do
-      expect(retailer.cover_photo).to eq("dc/washington/elena_s_boutique/cover_photo.jpg")
+      expect(retailer.cover_photo).to eq("dc/washington/elena_s_boutique_fancy_wear/cover_photo.jpg")
     end
 
     it "should return the correct logo image name" do
-      expect(retailer.logo).to eq("dc/washington/elena_s_boutique/logo.jpg")
+      expect(retailer.logo).to eq("dc/washington/elena_s_boutique_fancy_wear/logo.jpg")
     end
   end
 

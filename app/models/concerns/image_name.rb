@@ -30,6 +30,6 @@ module ImageName
 
     def remove_special_characters dirty_string
       transliterated_string = ActiveSupport::Inflector.transliterate dirty_string
-      sanatized_string = transliterated_string.gsub(/([_@#!%()\-\'=;><,{}\~\[\]\s\.\:\/\?\"\*\^\$\+\-]+)/, '_').downcase
+      sanatized_string = transliterated_string.gsub(/([_&@#!%()\-\'=;><,{}\~\[\]\s\.\:\/\?\"\*\^\$\+\-]+)/, '_').downcase
     end
 end

@@ -236,6 +236,42 @@ EOF
                           user_role: UserRole.find_by_name(UserRole::RETAILER), password: '3ny_openstile1128',
                           password_confirmation: '3ny_openstile1128', confirmed_at: Time.zone.now)
   end
+
+  unless Retailer.find_by_name('AK Couture Boutique & Beauty Bar')
+
+    location = Location.create!(address: '4516 Church Avenue, Brooklyn, New York 11203', neighborhood: 'Flatbush')
+
+    description = <<EOF
+Our vision is to become the primary source of great finds for universally fashionable women and men.
+Here independent designers rule and our pieces are sure to set you apart from the rest! Our Beauty Bar features a range of hygiene and beauty products such as organic handmade soaps.
+AK Couture caters to fashion forward men and woman of all ages and will maintain the "Zulema N. George" trademark of great fashion without having to spend a fortune.
+EOF
+
+    retailer = Retailer.create!(name: 'AK Couture Boutique & Beauty Bar', description: description, location: location,
+                                size_range: 'S - 3XL', quote: "How Are U This Epic?",
+                                price_index: 1, status: 1)
+
+    retailer.create_online_presence!(web_link: 'http://www.iloveakcouture.com/',
+                                     instagram_link: 'https://www.instagram.com/akcouture',
+                                     facebook_link: 'https://www.facebook.com/akcouture',
+                                     twitter_link: 'https://www.twitter.com/akcouturebbb')
+
+    retailer.drop_in_availabilities.create!(template_date: '2016-05-24', start_time: '11:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-05-25', start_time: '11:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-05-26', start_time: '11:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-05-27', start_time: '10:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+    retailer.drop_in_availabilities.create!(template_date: '2016-05-28', start_time: '10:00:00', end_time: '18:00:00',
+                                            frequency: DropInAvailability::WEEKLY_FREQUENCY, bandwidth: 2, location: location)
+
+
+    retailer.create_user!(first_name: 'Zulema', last_name: 'George', email: 'imagebyak@aol.com',
+                          user_role: UserRole.find_by_name(UserRole::RETAILER), password: 'akcouture_openstile1128',
+                          password_confirmation: 'akcouture_openstile1128', confirmed_at: Time.zone.now)
+  end
 end
 
 
