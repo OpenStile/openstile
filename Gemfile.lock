@@ -56,6 +56,7 @@ GEM
     chili (4.0.1)
       deface (~> 1.0.0)
       rails (>= 4.1)
+    choice (0.2.0)
     cliver (0.3.2)
     cloudinary (1.1.2)
       aws_cf_signer
@@ -165,6 +166,11 @@ GEM
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
+    rails-erd (1.4.7)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     rails_12factor (0.0.2)
@@ -219,6 +225,7 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    ruby-graphviz (1.2.2)
     rufus-scheduler (3.2.0)
     sass (3.2.19)
     sass-rails (4.0.5)
@@ -301,6 +308,7 @@ DEPENDENCIES
   poltergeist
   pygments.rb
   rails (= 4.2.5)
+  rails-erd
   rails_12factor (= 0.0.2)
   redcarpet
   resque

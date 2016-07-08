@@ -27,3 +27,6 @@ doc/
 
 # Ignore application configuration
 .env
+
+# Ignore rails-erd generated pdf
+erd.pdf
