@@ -15,4 +15,7 @@
 //= require jquery_ujs
 //= require moment.min.js
 //= require fullcalendar.js
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .

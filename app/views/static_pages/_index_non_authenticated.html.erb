@@ -1,42 +1,31 @@
 <%= render "shared/header" %>
 
-<div class="container home-page intro">
-  <div class="row">
-    <div class="col-xs-8 col-sm-6 text-right">
-      <h1>Hand-picked Style at your favorite Fashion Boutiques</h1>
-    </div>
+<div class="container homepage">
+  <div class="section">
+    <% unless Retailer.all_live.empty? || ENV['OST_RELAUNCH_PREP'] %>
+        <h1 class="text-center">Featured Boutique</h1>
+        <% retailer = Retailer.all_live.sample %>
+        <%= react_component 'Retailer', data: {name: retailer.name,
+                                               pageLink: retailer_path(retailer),
+                                               neighborhood: retailer.location.neighborhood,
+                                               city: StreetAddress::US.parse(retailer.location.address).city} %>
+    <% end %>
   </div>
-  <div class="row">
-    <div class="col-xs-8 col-sm-6 text-right">
-      <a href="#" class="btn btn-default opn-btn" id="show-how-it-works">How it works</a>
-    </div>
-  </div>
-</div>
 
-<% unless Retailer.all_live.empty? || ENV['OST_RELAUNCH_PREP'] %>
-<div class="container home-page boutiques">
-  <hr />
-  <div class="row text-center">
-    <h1>Featured boutique</h1>
-  </div><br /><br />
-  <div class="row">
-    <%= render 'retailers/retailer', retailer: Retailer.all_live.sample %>
+  <div class="section">
+    <h1 class="text-center">How it works</h1>
+    <%= react_component 'HowItWorks' %>
   </div>
-  <hr />
-</div>
-<% end %>
 
-<div class="container home-page how-it-works">
-  <div class="row text-center">
-    <h1>How it works</h1>
+  <div class="section">
+    <% unless user_signed_in? %>
+        <h1 class="text-center">Get started today</h1>
+        <%= react_component 'StyleForm', data: {top_sizes: TopSize.all.map{|s| {value: s.id, label: s.name}},
+                                                bottom_sizes: BottomSize.all.map{|s| {value: s.id, label: s.name}},
+                                                dress_sizes: DressSize.all.map{|s| {value: s.id, label: s.name}}},
+                                         authenticity_token: form_authenticity_token %>
+    <% end %>
   </div>
-  <%= render 'how_it_works' %>
-  <br /><br />
-  <hr />
-</div>
-
-<div class="container home-page style-profile">
-  <%= render 'shared/style_profile_quickstart' unless user_signed_in? %>
 </div>
 
 <% set_meta_tags og: {

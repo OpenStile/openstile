@@ -64,6 +64,8 @@ gem 'icalendar', '~> 2.3'
 gem 'resque'
 gem 'resque-scheduler'
 
+gem 'react-rails'
+
 group :development, :test do
   gem 'rspec-rails',  '~> 3.1'
   gem 'byebug'
