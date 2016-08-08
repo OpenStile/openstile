@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.turbolinks
+//= require bootstrap-sprockets
 //= require jquery_ujs
 //= require moment.min.js
 //= require fullcalendar.js

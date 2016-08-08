@@ -1,34 +1,20 @@
-<header>
-  <div class="container">
-    <div class="row text-center">
-      <div class="col-xs-6 col-xs-offset-3 logo">
-        <a id='logo-home' href=<%= shopper_signed_in? ? upcoming_drop_ins_path : root_path %>>
-          <%= image_tag('openstilelogo.png', class: 'img-responsive center-block', width: '400') %>
-        </a>
-      </div>
-      <div class="col-xs-12 navigation">
-        <% if !user_signed_in? %>
-          <%= link_to "Boutiques", retailers_path, class: 'col-sm-4 btn-default ' %>
-          <%= link_to "Blog", blog_articles_path, class: 'col-sm-4 btn-default' %>
-          <%= link_to "Log in", new_user_session_path, class: 'col-sm-4 btn-default ' %>
-        <% else %>
-          <% if shopper_signed_in? %>
-            <%= link_to "Style Profile", edit_style_profile_path(current_user.style_profile), class: 'col-sm-3 btn-default ' %>
-            <%= link_to "Styling Sessions", upcoming_drop_ins_path, class: 'col-sm-3 btn-default'%>
-            <%= link_to "Boutiques", retailers_path, class: 'col-sm-3 btn-default ' %>
-            <%= link_to "Log out", destroy_user_session_path, :method => :delete, class: 'col-sm-3 btn-default ' %>
-          <% end %>
-          <% if retailer_signed_in? %>
-            <%= link_to "Dashboard", root_path, class: 'col-sm-4 btn-default' %>
-            <%= link_to "Update account", edit_user_registration_path, class: 'col-sm-4 btn-default' %>
-            <%= link_to "Log out", destroy_user_session_path, :method => :delete, class: 'col-sm-4 btn-default' %>
-          <% end %>
-          <% if admin_signed_in? %>
-            <%= link_to "Log out", destroy_user_session_path, :method => :delete %>
-          <% end %>
-        <% end %>
-      </div>
+<nav class="navbar navbar-default navbar-openstile">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
-    <%= bootstrap_flash %>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">about us</a></li>
+        <li><a href="#">how it works</a></li>
+        <li><a href="#">style blog</a></li>
+        <li><a href="#">sign in</a></li>
+      </ul>
+    </div>
   </div>
-</header>
+</nav>

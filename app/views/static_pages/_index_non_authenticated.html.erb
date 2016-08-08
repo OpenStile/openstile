@@ -1,32 +1,51 @@
-<%= render "shared/header" %>
-
-<div class="container homepage">
-  <div class="section">
-    <% unless Retailer.all_live.empty? || ENV['OST_RELAUNCH_PREP'] %>
-        <h1 class="text-center">Featured Boutique</h1>
-        <% retailer = Retailer.all_live.sample %>
-        <%= react_component 'Retailer', data: {name: retailer.name,
-                                               pageLink: retailer_path(retailer),
-                                               neighborhood: retailer.location.neighborhood,
-                                               city: StreetAddress::US.parse(retailer.location.address).city} %>
-    <% end %>
-  </div>
-
-  <div class="section">
-    <h1 class="text-center">How it works</h1>
-    <%= react_component 'HowItWorks' %>
-  </div>
-
-  <div class="section">
-    <% unless user_signed_in? %>
-        <h1 class="text-center">Get started today</h1>
-        <%= react_component 'StyleForm', data: {top_sizes: TopSize.all.map{|s| {value: s.id, label: s.name}},
-                                                bottom_sizes: BottomSize.all.map{|s| {value: s.id, label: s.name}},
-                                                dress_sizes: DressSize.all.map{|s| {value: s.id, label: s.name}}},
-                                         authenticity_token: form_authenticity_token %>
-    <% end %>
+<% retailer = Retailer.all_live.sample unless Retailer.all_live.empty? %>
+<div class="homepage">
+  <div class="above-fold">
+    <%= render "shared/header" %>
+    <div class="row">
+      <div class="featured-boutique col-xs-8 col-md-5">
+        <div class="col-xs-12 col-md-10 col-md-offset-2 text-right">
+          <h4>OpenStile Featured Boutique:</h4>
+          <h3><a href="#"><%= retailer.name %></a></h3>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="marquee col-md-5 col-md-offset-7 col-xs-10 col-xs-offset-1">
+          <div class="col-xs-10 col-xs-offset-1 text-center">
+            <h1 class="logo"><%= image_tag('openstilelogo.png', class: 'img-responsive center-block') %></h1>
+            <p class="tag-line">Complimentary Services. Never an obligation to buy. Be the ultimate you.</p>
+            <div class="cta-buttons col-xs-12">
+              <div class="col-xs-6 text-center">
+                <a href="#" class="btn btn-default">Learn More</a>
+              </div>
+              <div class="col-xs-6 text-center">
+                <a href="#" class="btn btn-default">Join OpenStile</a>
+              </div>
+            </div>
+            <div class="existing-member col-xs-12">
+              <div class="col-xs-10 col-xs-offset-1 text-center">
+                <span>already a member? <a href="#">sign in</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+<script>
+    <% if retailer.present? %>
+        var update_background_img = function(){
+            var height = $(window).height();
+            var width = $(window).width();
+            $(".homepage .above-fold").css('background', "url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,h_" + height + ",w_" + width + "/v1470603639/AdobeStock_73096902_WM_v7rb4p.jpg') no-repeat center center");
+        };
+        $(document).ready(update_background_img);
+        $(window).resize(update_background_img);
+    <% end %>
+</script>
 
 <% set_meta_tags og: {
                          locale: 'en_US',
