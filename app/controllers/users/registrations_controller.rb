@@ -12,19 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     @user = User.new(sign_up_params.merge(user_role: UserRole.find_by_name(UserRole::SHOPPER)))
-    stored_style_profile = retrieve_signed_out_style_profile
-    @user.build_style_profile(stored_style_profile || {})
     if @user.save
       sign_in @user
-      if stored_style_profile.nil?
-        flash[:success] = 'Your account has been successfully created! Check you email to confirm your account.'
-        redirect_to after_sign_up_path_for(@user)
-      else
-        flash[:success] = 'Your account has been successfully created! Check you email to confirm your account.'
-        redirect_to upcoming_drop_ins_path
-      end
+      flash[:success] = 'Your account has been successfully created! Check your email to confirm your account.'
+      flash.keep(:success)
+      render json: {location: upcoming_drop_ins_path}
     else
-      render 'new'
+      render json: @user.errors.full_messages.uniq, status: :unprocessable_entity
     end
   end
 

@@ -1,6 +1,6 @@
 $staple-color-slightly-transparent: rgba(127,145,147,0.9);
 $staple-color: rgba(127,145,147,1);
-$grey-transparent: rgba(89,89,89,0.9);
+$grey-transparent: rgba(89,89,89,0.8);
 
 
 .navbar.navbar-openstile {
@@ -103,7 +103,7 @@ $grey-transparent: rgba(89,89,89,0.9);
 
   .how-it-works {
     width: 100vw;
-    min-height: 80vh;
+    min-height: 100vh;
     background: url('https://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1440/v1470828431/AdobeStock_100992367_WM_x9kbsz.jpg') no-repeat center center;
 
     .banner {
@@ -134,6 +134,18 @@ $grey-transparent: rgba(89,89,89,0.9);
       }
     }
   }
+
+  .signup {
+    width: 100vw;
+    min-height: 80vh;
+    background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1440/v1471184801/AdobeStock_49372330_WM_cmghsd.jpg') no-repeat center center;
+
+    .form-errors {
+      color: #D8000C;
+      background-color: #FFBABA;
+      margin: 10px;
+    }
+  }
 }
 
 @media (max-width: 1024px) {
@@ -158,6 +170,12 @@ $grey-transparent: rgba(89,89,89,0.9);
       width: 100vw;
       min-height: 100vh;
       background: url('https://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_800/v1470828431/AdobeStock_100992367_WM_x9kbsz.jpg') no-repeat center center;
+    }
+
+    .signup {
+      width: 100vw;
+      min-height: 100vh;
+      background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_800/v1471184801/AdobeStock_49372330_WM_cmghsd.jpg') no-repeat center center;
     }
   }
 }
