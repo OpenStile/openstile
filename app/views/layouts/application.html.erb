@@ -42,22 +42,29 @@
 
     <% unless(content_for?(:embeddable) && yield(:embeddable)) %>
     <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-6 col-md-4 footer-section">
-            <h5>Contact us</h5>
-            <p>info@openstile.com</p><br>
+      <nav class="navbar navbar-default navbar-openstile">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"><%= image_tag('logo_white.png', class: 'img-responsive center-block', width: 100) %></a>
           </div>
-          <div class="col-xs-6 col-md-4 footer-section">
-            <h5>Learn more</h5>
-            <%= link_to "About", about_path %><br>
-            <%= link_to "Blog", blog_articles_path %><br>
-          </div>
-          <div class="col-xs-12 col-md-4 footer-section sm-icons">
-            <%= render 'shared/social_media_icons'%>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right footer-links">
+              <li><a href="#">about us</a></li>
+              <li><a href="#">how it works</a></li>
+              <li><a href="#">style blog</a></li>
+              <li><a href="#">faq</a></li>
+              <li><a href="#">contact us</a></li>
+              <li><a href="#">sign in</a></li>
+            </ul>
           </div>
         </div>
-      </div>
+      </nav>
     </footer>
     <% end %>
   </body>

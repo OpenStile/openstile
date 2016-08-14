@@ -148,6 +148,21 @@ $grey-transparent: rgba(89,89,89,0.8);
   }
 }
 
+footer {
+  background-color: $staple-color;
+  .navbar {
+    margin-bottom: 0px;
+  }
+  .footer-links {
+    li {
+      a {
+        color: #FFF !important;
+        font-size: 14px !important;
+      }
+    }
+  }
+}
+
 @media (max-width: 1024px) {
   .homepage {
     .how-it-works {
