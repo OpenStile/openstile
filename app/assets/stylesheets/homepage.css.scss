@@ -1,3 +1,8 @@
+$staple-color-slightly-transparent: rgba(127,145,147,0.9);
+$staple-color: rgba(127,145,147,1);
+$grey-transparent: rgba(89,89,89,0.9);
+
+
 .navbar.navbar-openstile {
   background-color: transparent;
   background: transparent;
@@ -22,9 +27,8 @@
   }
 
   .featured-boutique {
-    background: rgba(127,145,147,0.9);
+    background: $staple-color-slightly-transparent;
     padding: 1em;
-
     h4 {
       color: #FFF;
     }
@@ -41,7 +45,7 @@
     margin-top: 5em;
     margin-bottom: 2em;
     padding: 2em 0em;
-    background: rgba(89,89,89,0.9);
+    background: $grey-transparent;
     color: #FFF;
 
     .tag-line {
@@ -51,8 +55,8 @@
 
     .btn {
       margin-bottom: 2em;
-      background: rgba(127,145,147,1);
-      border-color: rgba(127,145,147,1);
+      background: $staple-color;
+      border-color: $staple-color;
       color: #FFF;
     }
   }
@@ -68,6 +72,77 @@
         line-height: 35px;
       }
     }
+    a {
+      font-size: 20px;
+      text-decoration: underline;
+      font-weight: bold;
+      color: #000;
+    }
+  }
+
+  .benefits {
+    margin: 3em 0;
+
+    .highlights {
+      margin-top: 2em;
+
+      h4 {
+        font-weight: bold;
+      }
+
+      p.text {
+        margin-top: 1em;
+      }
+
+      i {
+        margin: 10px;
+        color: $staple-color;
+      }
+    }
+  }
+
+  .how-it-works {
+    width: 100vw;
+    min-height: 80vh;
+    background: url('https://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1440/v1470828431/AdobeStock_100992367_WM_x9kbsz.jpg') no-repeat center center;
+
+    .banner {
+      background: $staple-color-slightly-transparent;
+      padding: 1em;
+      h1 {
+        color: #FFF;
+      }
+    }
+
+    .step {
+      height: 18vh;
+      background-color: #FFF;
+      margin-top: 2em;
+
+      .text {
+        padding: 6vh;
+      }
+
+      .number {
+        padding-top: 2vh;
+        .fa-circle {
+          color: $grey-transparent;
+        }
+        strong {
+          color: #FFF;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .homepage {
+    .how-it-works {
+      .number {
+        display: none;
+      }
+    }
   }
 }
 
@@ -77,6 +152,12 @@
       width: 100vw;
       height: 100vh;
       background: url('https://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_800/v1470623032/AdobeStock_89214761_WM_hamlkd.jpg') no-repeat top center;
+    }
+
+    .how-it-works {
+      width: 100vw;
+      min-height: 100vh;
+      background: url('https://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_800/v1470828431/AdobeStock_100992367_WM_x9kbsz.jpg') no-repeat center center;
     }
   }
 }
