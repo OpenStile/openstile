@@ -1,39 +1,64 @@
 <% retailer = Retailer.all_live.sample unless Retailer.all_live.empty? %>
-<div class="homepage">
-  <div class="above-fold">
-    <%= render "shared/header" %>
-    <div class="row">
-      <div class="featured-boutique col-xs-8 col-md-5">
-        <div class="col-xs-12 col-md-10 col-md-offset-2 text-right">
-          <h4>OpenStile Featured Boutique:</h4>
-          <h3><a href="#"><%= retailer.name %></a></h3>
-        </div>
+
+<%= render "shared/header" %>
+
+<header id="myCarousel" class="carousel slide">
+  <!-- Wrapper for Slides -->
+  <div class="carousel-inner">
+    <div class="item active">
+      <!-- Set the first background image using inline CSS below. -->
+      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
+      <div class="carousel-caption">
+        <h3>Boutique: ABC Boutique</h3>
+        <h4>Williamsburg</h4>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="marquee col-md-5 col-md-offset-7 col-xs-10 col-xs-offset-1">
-          <div class="col-xs-10 col-xs-offset-1 text-center">
-            <h1 class="logo"><%= image_tag('logo_white.png', class: 'img-responsive center-block') %></h1>
-            <p class="tag-line">Complimentary Services. Never an obligation to buy. Be the ultimate you.</p>
-            <div class="cta-buttons col-xs-12">
-              <div class="col-xs-6 text-center">
-                <a href="#" class="btn btn-default">Learn More</a>
-              </div>
-              <div class="col-xs-6 text-center">
-                <a href="#" class="btn btn-default">Join OpenStile</a>
-              </div>
-            </div>
-            <div class="existing-member col-xs-12">
-              <div class="col-xs-10 col-xs-offset-1 text-center">
-                <span>already a member? <a href="#">sign in</a></span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="item">
+      <!-- Set the second background image using inline CSS below. -->
+      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
+      <div class="carousel-caption">
+        <h3>Boutique: DEF Boutique</h3>
+        <h4>Williamsburg</h4>
+      </div>
+    </div>
+    <div class="item">
+      <!-- Set the third background image using inline CSS below. -->
+      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
+      <div class="carousel-caption">
+        <h3>Boutique: GHI Boutique</h3>
+        <h4>Williamsburg</h4>
       </div>
     </div>
   </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="icon-next"></span>
+  </a>
+</header>
+<div class="above-fold-banner">
+  <div class="col-xs-12 col-sm-7">
+    <%= image_tag("logo_white.png", class: "img-responsive center-block") %>
+  </div>
+  <div class="col-xs-12 col-sm-3 text-center">
+    <div class="banner-text">
+      <h4>No need to shop with the masses.</h4>
+      <h4>Find your perfect boutique and outshine the rest.</h4>
+    </div>
+    <div class="cta-buttons col-xs-12">
+      <div class="col-xs-6 text-center">
+        <a href="#" class="btn btn-default btn-lg pull-right">Learn More</a>
+      </div>
+      <div class="col-xs-6 text-center">
+        <a href="#" class="btn btn-default btn-lg pull-left">Join OpenStile</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="homepage">
   <div class="more-about-us">
     <div class="container">
       <div class="content">
@@ -143,15 +168,9 @@
   </div>
 </div>
 <script>
-    <% if retailer.present? %>
-        var update_background_img = function(){
-            var height = $(window).height();
-            var width = $(window).width();
-            $(".homepage .above-fold").css('background', "url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,h_" + height + ",w_" + width + "/v1470603639/AdobeStock_73096902_WM_v7rb4p.jpg') no-repeat center center");
-        };
-        $(document).ready(update_background_img);
-        $(window).resize(update_background_img);
-    <% end %>
+    $('.carousel').carousel({
+        interval: 5000
+    })
 </script>
 
 <% set_meta_tags og: {
