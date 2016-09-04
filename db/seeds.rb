@@ -77,7 +77,8 @@ EOF
                               size_range: '00 (XS) - 20 (XXL)',
                               quote: 'Where affordability meets style',
                               price_index: 2,
-                              status: 1)
+                              status: 1,
+                              above_fold_image: 'http://placehold.it/1900x1080&text=Violet')
 
   retailer.create_online_presence(web_link: 'http://google.com',
                                   facebook_link: 'http://facebook.com',

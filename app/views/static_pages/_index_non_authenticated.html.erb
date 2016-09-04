@@ -5,30 +5,15 @@
 <header id="myCarousel" class="carousel slide">
   <!-- Wrapper for Slides -->
   <div class="carousel-inner">
-    <div class="item active">
-      <!-- Set the first background image using inline CSS below. -->
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide One');"></div>
-      <div class="carousel-caption">
-        <h3>Boutique: ABC Boutique</h3>
-        <h4>Williamsburg</h4>
-      </div>
-    </div>
-    <div class="item">
-      <!-- Set the second background image using inline CSS below. -->
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');"></div>
-      <div class="carousel-caption">
-        <h3>Boutique: DEF Boutique</h3>
-        <h4>Williamsburg</h4>
-      </div>
-    </div>
-    <div class="item">
-      <!-- Set the third background image using inline CSS below. -->
-      <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');"></div>
-      <div class="carousel-caption">
-        <h3>Boutique: GHI Boutique</h3>
-        <h4>Williamsburg</h4>
-      </div>
-    </div>
+    <% Retailer.showcase.each_with_index do |retailer, idx| %>
+        <div class="item <%= 'active' if idx == 0%>">
+          <div class="fill" style="background-image:url('<%= retailer.above_fold_image %>');"></div>
+          <div class="carousel-caption">
+            <h3>Boutique: <%= retailer.name %></h3>
+            <h4><%= retailer.location.neighborhood %></h4>
+          </div>
+        </div>
+    <% end %>
   </div>
 
   <!-- Controls -->

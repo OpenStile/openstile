@@ -29,6 +29,10 @@ class Retailer < ActiveRecord::Base
   GENERIC_SIZE_REGEX = /(X*S)|M|(X*L)/
   ORDERED_SIZES = ['XXS', 'XS', 'S', 'M', 'L', 'XL', 'XXL']
 
+  def self.showcase
+    where(status: 1).where("above_fold_image <> ''")
+  end
+
   def to_param
     "#{id}-#{name.parameterize}"
   end

@@ -164,6 +164,19 @@ RSpec.describe Retailer, :type => :model do
     end
   end
 
+  describe "showcase" do
+    before do
+      FactoryGirl.create(:retailer, status: 1, above_fold_image: nil)
+      FactoryGirl.create(:retailer, status: 1, above_fold_image: '')
+      FactoryGirl.create(:retailer, status: 1, above_fold_image: 'image_url')
+      FactoryGirl.create(:retailer, status: 0, above_fold_image: 'image_url')
+    end
+
+    it "should return live retailers with above fold images" do
+      expect(Retailer.showcase.count).to eq(1)
+    end
+  end
+
   describe "image name helper" do
     let(:location){ FactoryGirl.create(:location, 
                                         address: "301 Water St. SE, Washington, DC 20003") }
