@@ -163,22 +163,20 @@ body {
     }
 
     .step {
-      height: 18vh;
+      min-height: 18vh;
       background-color: #FFF;
       margin-top: 2em;
-
-      .text {
-        padding: 6vh;
-      }
-
       .number {
-        padding-top: 2vh;
+        padding: 2em 0;
         .fa-circle {
           color: $grey-transparent;
         }
         strong {
           color: #FFF;
         }
+      }
+      .text {
+        padding: 4em 1em;
       }
     }
 
@@ -223,22 +221,6 @@ footer {
   }
 }
 
-@media (max-width: 1024px) {
-  .homepage {
-    .how-it-works {
-      .number {
-        display: none;
-      }
-
-      .step {
-        .text {
-          padding: 20px;
-        }
-      }
-    }
-  }
-}
-
 @media (max-width: 1024px) and (orientation: landscape) {
   .above-fold-banner {
     img {
@@ -276,12 +258,6 @@ footer {
       min-height: 100vh;
       background: url('https://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_800/v1470828431/AdobeStock_100992367_WM_x9kbsz.jpg') no-repeat center center;
       background-size: cover;
-
-      .step {
-        h4 {
-          font-size: 12px;
-        }
-      }
     }
 
     .signup {
