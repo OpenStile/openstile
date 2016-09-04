@@ -181,6 +181,16 @@ body {
         }
       }
     }
+
+    .action-link {
+      padding: 25px 0;
+      a {
+        font-size: 20px;
+        text-decoration: underline;
+        font-weight: bold;
+        color: #FFF;
+      }
+    }
   }
 
   .signup {
