@@ -21,6 +21,9 @@ class StaticPagesController < ApplicationController
   def relaunch
   end
 
+  def join_confirmation
+  end
+
   def decal
     response.headers.delete('X-Frame-Options')
     @retailer = Retailer.find(params[:retailer_id])
