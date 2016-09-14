@@ -22,7 +22,15 @@ body {
         font-weight: bold;
         font-style: normal;
         font-size: 20px;
-        color: #000;
+        color: #FFF;
+      }
+
+      a:hover {
+        color: #5e5e5e;
+      }
+
+      a:active {
+        color: #FFF;
       }
     }
   }
