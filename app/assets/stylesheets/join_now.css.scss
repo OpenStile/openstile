@@ -1,0 +1,25 @@
+.join_now {
+  width: 100vw;
+  min-height: 100vh;
+  background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1400/v1473824593/thanks_for_visiting.jpg') no-repeat top center;
+
+  .thanks {
+    padding-top: 45vh;
+
+    .text {
+      background-color: rgba(127,145,147, 0.7);
+
+      h2 {
+        font-size: 30px;
+        line-height: 40px;
+        color: #FFF;
+      }
+
+      h3 {
+        font-size: 20px;
+        line-height: 30px;
+        color: #FFF;
+      }
+    }
+  }
+}
