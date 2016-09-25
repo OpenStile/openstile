@@ -1,0 +1,94 @@
+$staple-color-slightly-transparent: rgba(127,145,147,0.9);
+$staple-color: rgb(127,145,147);
+$grey-transparent: rgba(89,89,89,0.8);
+$form-errors-color: rgb(245,166,35);
+
+.about-us {
+  .above-the-fold {
+    width: 100vw;
+    min-height: 140vh;
+    background: url('http://res.cloudinary.com/openstile/image/upload/v1474839523/above_fold_about_us_page.jpg') no-repeat center right;
+    background-size: cover;
+    .text {
+      padding-top: 30vh;
+      .why-us {
+        font-size: 16px;
+        line-height: 20px;
+      }
+      .cta {
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: bold;
+        margin-bottom: 5vh;
+      }
+      .action {
+        .btn {
+          background: $staple-color;
+          border-color: $staple-color;
+          color: #FFF;
+        }
+      }
+    }
+    .founders-banner {
+      position: absolute;
+      z-index: 10;
+      width: 100%;
+      top: 85%;
+      height: 10vh;
+      background-color: $staple-color-slightly-transparent;
+      h1 {
+        padding-top: 2vh;
+        font-size: 5vh;
+        color: #FFF;
+        font-weight: 300;
+      }
+    }
+  }
+  .profile-pics {
+    position: absolute;
+    z-index: 20;
+    width: 100%;
+    top: 90%;
+    img {
+      border-radius: 50%;
+      border: solid 5px #FFF;
+    }
+  }
+  .bios {
+    min-height: 60vh;
+    h2 {
+      padding: 10vh 0 6vh;
+      font-size: 24px;
+      color: $staple-color;
+    }
+    h4 {
+      font-size: 14px;
+      line-height: 20px;
+      color: $staple-color;
+      font-style: italic;
+    }
+    h3 {
+      padding: 3vh 0;
+      font-size: 18px;
+      line-height: 20px;
+    }
+  }
+}
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .about-us {
+    .above-the-fold {
+      background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_1440/v1474839523/above_fold_about_us_page.jpg') no-repeat center right;
+      background-size: cover;
+    }
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .about-us {
+    .above-the-fold {
+      background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_1440/v1474839523/above_fold_about_us_page.jpg') no-repeat center center;
+      background-size: cover;
+    }
+  }
+}

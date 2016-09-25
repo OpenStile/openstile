@@ -22,6 +22,7 @@ body {
         font-weight: bold;
         font-style: normal;
         font-size: 20px;
+        line-height: 80px;
         color: #FFF;
       }
 
@@ -264,6 +265,9 @@ footer {
       display: none;
     }
   }
+  #header-brand {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -271,6 +275,16 @@ footer {
     .banner-text {
       display: none;
     }
+  }
+  .navbar-nav {
+    li {
+      a {
+        line-height: 20px !important;
+      }
+    }
+  }
+  #header-brand {
+    display: none;
   }
   .homepage {
     .more-about-us {

@@ -2,52 +2,71 @@
 
 <%= render 'shared/header' %>
 
-<div class="about-us container">
-  <div class="row section tex">
-    <%= image_tag('team.jpg', class: 'img-responsive center-block') %>
-  </div>
-
-  <div class="row">
-    <br /><br /><br />
-    <h1 class="text-center">How it works</h1>
-    <%= render 'how_it_works' %>
-    <br /><br /><br />
-  </div>
-
-  <div class="row section founders">
-    <h1 class="text-center">Founders</h1><br />
-    <div class="col-xs-12 col-md-6 founder">
-      <div class="text-center">
-        <h2>Tamara Austin</h2>
-        <h4>"Style is knowing who you are, what you want to say, and not giving a damn."<br /> Gore Vidal</h4>
-      </div>
-      <div class="col-xs-10 col-xs-offset-1 text-justify">
-        <h3>
-          Tamara wanted a better way to shop for clothes. She hated going store to store only to leave either
-          empty-handed or regretful. She wanted to find those one-of-a-kind pieces that allowed her to confidently
-          stand out from the crowd. This was a frustration she shared with several friends who all had different styles,
-          body types, and budgets.<br /><br />
-          Tamara comes from a background in tech. After graduating from the University of Virginia with a degree in Computer Science,
-          she worked as a software engineer and IT consultant in the Washington DC area. She started OpenStile as a way
-          to directly apply her technical expertise to her entrepreneurial passions.
-        </h3>
+<div class="about-us">
+  <div class="above-the-fold">
+    <div class="container">
+      <div class="row text">
+        <div class="col-xs-4">
+          <div class="why-us">
+            Going through endless racks, finding the right size, and a workout in the dressing room;
+            shopping was a luxury and we should bring that back. Focusing on Individuality,
+            we found that boutiques do a better job in giving great service and focusing on individual style instead of trending fads.
+            They don't need to break your wallet either.   <br /><br />
+            Support real clothing by real designers who fill their work with heart.
+            You are not sheep in a herd, but an amazing individual. So why settle for fashion produced in the millions? Express the ultimate you.
+          </div>
+        </div>
+        <div class="col-xs-4 col-xs-offset-4">
+          <div class="cta text-right">
+            Complimentary Services. Never any obligation to buy. Just enjoy being the ultimate you.
+          </div>
+          <div class="action col-xs-6 col-xs-offset-6">
+              <a href="/#join-now" class="btn btn-default btn-lg pull-right">Sign Up</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-xs-12 col-md-6 founder">
-      <div class="text-center">
-        <h2>Sparkle Johnson</h2>
-        <h4>"In order to be irreplaceable one must always be different."<br /> Coco Chanel</h4>
+    <div class="founders-banner text-center">
+      <h1>Meet Our Founders</h1>
+    </div>
+  </div>
+  <div class="profile-pics">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <%= cl_image_tag("TCC_OPENSTILE_HEADSHOTS_121315-2397-Edit_twuyks.jpg", :gravity=>"face", :height=>400, :width=>400, :crop=>"fill", :class=>"img-responsive center-block") %>
+        </div>
+        <div class="col-xs-6">
+          <%= cl_image_tag("TCC_OPENSTILE_HEADSHOTS_121315-2435-Edit_sy2w9f.jpg", :gravity=>"face", :height=>400, :width=>400, :crop=>"fill", :class=>"img-responsive center-block") %>
+        </div>
       </div>
-      <div class="col-xs-10 col-xs-offset-1 text-justify">
-        <h3>
-          Sparkle's love for fashion started when she worked in retail. She loved helping clients put together stylish outfits,
-          and continued doing so for friends even after leaving retail to pursue another career. She witnessed first hand
-          how hard it was for friends and clients to style themselves, and thought to herself… if only stores would provide a
-          personal stylist to clients.<br /><br />
-          Sparkle, a lifelong native of Brooklyn, knew the value of launching the OpenStile service in such a diverse landscape
-          with so many different boutiques that cater to different styles. She brings to OpenStile her passion for fashion
-          along with a broad range of experience in different fields of work such as healthcare technology and graphic design.
-        </h3>
+    </div>
+  </div>
+  <div class="bios">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6 text-center">
+          <h2>Sparkle Johnson</h2>
+          <h4>"In order to be irreplaceable one must always be different."<br /> Coco Chanel</h4>
+          <div class="col-xs-12">
+            <h3>
+              Sparkle, a lifelong native of Brooklyn, knew the value of launching the OpenStile service in such a diverse landscape with so
+              many different boutiques that cater to different styles. She brings to OpenStile her passion for fashion along
+              with a broad range of experience in different fields of work such as healthcare technology and graphic design.
+            </h3>
+          </div>
+        </div>
+        <div class="col-xs-6 text-center">
+          <h2>Tamara Austin</h2>
+          <h4>"Style is knowing who you are, what you want to say, and not giving a damn."<br /> Gore Vidal</h4>
+          <div class="col-xs-12">
+            <h3>
+              Tamara comes from a background in tech. After graduating from the University of Virginia with a degree in Computer Science,
+              she worked as a software engineer and IT consultant in the Washington DC area. She started OpenStile as a way to directly
+              apply her technical expertise to her entrepreneurial passions.
+            </h3>
+          </div>
+        </div>
       </div>
     </div>
   </div>

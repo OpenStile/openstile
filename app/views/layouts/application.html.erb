@@ -45,12 +45,12 @@
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#"><%= image_tag('logo_white.png', class: 'img-responsive center-block', width: 100) %></a>
+            <a class="navbar-brand" href="/"><%= image_tag('logo_white.png', class: 'img-responsive center-block', width: 100) %></a>
           </div>
           <div>
             <ul class="nav navbar-nav navbar-right footer-links">
               <li><a href="#">how it works</a></li>
-              <li><a href="#">about us</a></li>
+              <li><%= link_to 'about us', about_path %></li>
               <li><a href="#">style blog</a></li>
               <li><a href="#">contact us</a></li>
             </ul>
