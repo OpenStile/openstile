@@ -158,9 +158,6 @@
   </div>
 </div>
 <script>
-    $('.carousel').carousel({
-        interval: 5000
-    });
     $('#move-learn-more').click(function() {
         $('html,body').animate({
             scrollTop: $("#more-about-us").offset().top
@@ -172,6 +169,11 @@
             scrollTop: $("#join-now").offset().top
         });
         return false;
+    });
+    $(document).ready(function (){
+        $('.carousel').carousel({
+            interval: 5000
+        });
     });
 </script>
 
