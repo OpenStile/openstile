@@ -1,11 +1,66 @@
-<% provide(:title, 'The Experience') %>
+<% provide(:title, 'How it Works') %>
 
-<%= render "shared/header" %>
+<%= render 'shared/header' %>
 
-<%= render "shared/experience" %>
-
-<div class="container home-page style-profile">
-  <br /><br />
-  <hr />
-  <%= render 'shared/style_profile_quickstart' unless user_signed_in? %>
+<div class="experience">
+  <div class="how-it-works">
+    <div class="row">
+      <div class="body col-xs-4 col-xs-offset-4">
+        <div class="step col-xs-12">
+          <div class="number col-xs-3">
+            <span class="fa-stack fa-3x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <strong class="fa-stack-1x">1</strong>
+            </span>
+          </div>
+          <div class="col-xs-9 text-center">
+            <h3>Create a Style Profile</h3>
+            <h4>
+              After you sign up, we will send you a questionnaire to give us a sense of your style as well as sizing preferences.
+            </h4>
+          </div>
+        </div>
+        <div class="step col-xs-12">
+          <div class="number col-xs-3">
+            <span class="fa-stack fa-3x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <strong class="fa-stack-1x">2</strong>
+            </span>
+          </div>
+          <div class="col-xs-9 text-center">
+            <h3>Set a boutique appointment</h3>
+            <h4>
+              Tell us the date and times you are available, your upcoming events, and your ideal budget,
+              and we will match you with the best boutique based off of your criteria.
+            </h4>
+          </div>
+        </div>
+        <div class="step col-xs-12">
+          <div class="number col-xs-3">
+            <span class="fa-stack fa-3x">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <strong class="fa-stack-1x">3</strong>
+            </span>
+          </div>
+          <div class="col-xs-9 text-center">
+            <h3>Arrive at your appointment</h3>
+            <h4>
+              Everything is curated and prepared before your arrival.
+              Work with the boutique to get your perfect look and learn
+              about the store, designers, neighborhood, and more.
+            </h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4 cta">
+        <div class="text-right">
+          Complimentary Services. Never any obligation to buy. <br />
+          Just enjoy being the ultimate you.
+        </div>
+        <div class="action col-xs-6 col-xs-offset-6">
+          <a href="/#join-now" class="btn btn-default pull-right">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

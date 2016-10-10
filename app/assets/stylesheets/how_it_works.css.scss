@@ -1,0 +1,57 @@
+$staple-color-slightly-transparent: rgba(127,145,147,0.9);
+$staple-color: rgb(127,145,147);
+$grey-transparent: rgba(89,89,89,0.8);
+$form-errors-color: rgb(245,166,35);
+
+
+.experience {
+  .how-it-works {
+    width: 100vw;
+    min-height: 120vh;
+    background: url("http://res.cloudinary.com/openstile/image/upload/c_scale,w_1440/v1476138920/how_it_works_page.jpg") no-repeat top center;
+    background-size: cover;
+
+    .body {
+      padding-top: 20vh;
+      .step {
+        background-color: $staple-color;
+        box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
+        padding: 20px;
+        margin-bottom: 30px;
+        .fa-circle {
+          color: white;
+        }
+        strong {
+          color: $staple-color;
+        }
+        h3 {
+          color: white;
+          font-size: 20px;
+          font-weight: bold;
+          line-height: 40px;
+        }
+        h4 {
+          color: white;
+          font-size: 15px;
+          line-height: 18px;
+        }
+      }
+    }
+
+    .cta {
+      padding-top: 35vh;
+      padding-right: 5vw;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: bold;
+      .action {
+        .btn {
+          margin-top: 10px;
+          background: $staple-color;
+          border-color: $staple-color;
+          color: #FFF;
+        }
+      }
+    }
+  }
+}
