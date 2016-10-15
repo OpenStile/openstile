@@ -163,15 +163,11 @@
 </div>
 <script>
     $('#move-learn-more').click(function() {
-        $('html,body').animate({
-            scrollTop: $("#more-about-us").offset().top
-        });
+        $('#more-about-us').get(0).scrollIntoView();
         return false;
     });
     $('#move-join-now').click(function() {
-        $('html,body').animate({
-            scrollTop: $("#join-now").offset().top
-        });
+        $('#join-now').get(0).scrollIntoView();
         return false;
     });
     $(document).ready(function (){
