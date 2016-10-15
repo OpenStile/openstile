@@ -20,8 +20,13 @@ $form-errors-color: rgb(245,166,35);
       .step {
         background-color: $staple-color;
         box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
-        padding: 20px;
         margin-bottom: 30px;
+        .vcenter {
+          display: inline-block;
+          vertical-align: middle;
+          float: none;
+          padding: 2vh;
+        }
         .fa-circle {
           color: white;
         }
