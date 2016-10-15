@@ -5,6 +5,10 @@ $form-errors-color: rgb(245,166,35);
 
 
 .experience {
+  h1, h2, h3, h4, a {
+    font-family: 'Muli', sans-serif;
+  }
+
   .how-it-works {
     width: 100vw;
     min-height: 120vh;
@@ -44,6 +48,7 @@ $form-errors-color: rgb(245,166,35);
       font-size: 14px;
       line-height: 20px;
       font-weight: bold;
+      font-family: 'Muli', sans-serif;
       .action {
         .btn {
           margin-top: 10px;

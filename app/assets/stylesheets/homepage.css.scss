@@ -3,6 +3,8 @@ $staple-color: rgb(127,145,147);
 $grey-transparent: rgba(89,89,89,0.8);
 $form-errors-color: rgb(245,166,35);
 
+@import url('https://fonts.googleapis.com/css?family=Muli');
+
 html,
 body {
   height: 100%;
@@ -19,12 +21,13 @@ body {
   border-color: transparent;
 
   .navbar-nav {
+    margin-top: 25px;
     li {
       a {
         font-weight: bold;
         font-style: normal;
         font-size: 20px;
-        line-height: 80px;
+        font-family: 'Muli', sans-serif;
         color: #FFF;
       }
 
@@ -34,6 +37,11 @@ body {
 
       a:active {
         color: #FFF;
+      }
+
+      .btn {
+        background-color: transparent;
+        border: 2px solid #FFF;
       }
     }
   }
@@ -55,6 +63,12 @@ body {
     top: 40%;
     bottom: auto;
     max-height: 999999px;
+    font-family: 'Muli', sans-serif;
+
+    h4 {
+      font-size: 20px;
+      line-height: 35px;
+    }
   }
 }
 
@@ -73,15 +87,20 @@ body {
   z-index: 10;
   width: 100%;
   top: 65%;
-  height: 25%;
   background-color: $grey-transparent;
+  .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+    padding: 2vh 0;
+  }
   img {
     max-width: 65%;
   }
   .banner-text {
-    margin-top: 8%;
     h4 {
       font-size: 14px;
+      font-family: 'Muli', sans-serif;
       line-height: 20px;
       color: #FFF;
     }
@@ -108,6 +127,7 @@ body {
   .tag-line {
     margin: 1em 0em 2em;
     font-size: 1em;
+    font-family: 'Muli', sans-serif;
   }
 
   .btn {
@@ -119,6 +139,11 @@ body {
 }
 
 .homepage {
+
+  h1, h2, h3, h4, p, a {
+    font-family: 'Muli', sans-serif;
+  }
+
   .more-about-us {
     width: 100vw;
     min-height: 70vh;
@@ -132,11 +157,12 @@ body {
           line-height: 35px;
         }
       }
-      a {
+      a.btn {
         font-size: 20px;
-        text-decoration: underline;
         font-weight: bold;
         color: #000;
+        background-color: transparent;
+        border: 1px solid #000;
       }
     }
   }
@@ -166,6 +192,7 @@ body {
     width: 100vw;
     min-height: 100vh;
     background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1440/v1473822884/how_it_works_landing_page_czokec.jpg') no-repeat center center;
+    background-size: cover;
 
     .banner {
       background: $staple-color-slightly-transparent;
@@ -176,11 +203,17 @@ body {
     }
 
     .step {
-      min-height: 18vh;
       background-color: #FFF;
+      box-shadow: 0 0 5px 2px rgba(0,0,0,.35);
       margin-top: 2em;
+      .vcenter {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+        padding: 4vh 0;
+      }
+
       .number {
-        padding: 2em 0;
         .fa-circle {
           color: $grey-transparent;
         }
@@ -188,18 +221,16 @@ body {
           color: #FFF;
         }
       }
-      .text {
-        padding: 4em 1em;
-      }
     }
 
     .action-link {
       padding: 25px 0;
-      a {
+      a.btn {
         font-size: 20px;
-        text-decoration: underline;
         font-weight: bold;
         color: #FFF;
+        background-color: transparent;
+        border: 1px solid #FFF;
       }
     }
   }
@@ -227,11 +258,33 @@ body {
     width: 100vw;
     min-height: 80vh;
     background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1440/v1473822857/join_landing_page_owf0m9.jpg') no-repeat center center;
+    position: relative;
 
-    .form-errors {
-      color: #D8000C;
-      background-color: #FFBABA;
-      margin: 10px;
+    .layer {
+      background-color: rgba(255, 255, 255, 0.4);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .form-block {
+      background-color: $grey-transparent;
+      color: #FFF;
+      margin-top: 20vh;
+      padding: 8vh;
+      .form-errors {
+        color: #D8000C;
+        background-color: #FFBABA;
+        margin: 10px;
+      }
+
+      .btn {
+        background: $staple-color;
+        border-color: $staple-color;
+        color: #FFF;
+      }
     }
   }
 }
