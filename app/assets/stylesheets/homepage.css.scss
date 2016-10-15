@@ -6,6 +6,8 @@ $form-errors-color: rgb(245,166,35);
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 .navbar.navbar-openstile {
