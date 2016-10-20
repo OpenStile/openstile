@@ -59,15 +59,18 @@ body {
 
 .carousel-inner {
   height: 100%;
-
   .carousel-caption {
     top: 40%;
     bottom: auto;
     max-height: 999999px;
     font-family: 'Muli', sans-serif;
-
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+    h3 {
+      font-size: 30px;
+      line-height: 35px;
+    }
     h4 {
-      font-size: 20px;
+      font-size: 25px;
       line-height: 35px;
     }
   }
@@ -154,6 +157,7 @@ body {
       margin: 5vh 2em;
 
       .main-text {
+        padding-top: 12vh;
         h4 {
           line-height: 35px;
         }
@@ -225,13 +229,13 @@ body {
     }
 
     .action-link {
-      padding: 25px 0;
+      padding: 10vh 0;
       a.btn {
         font-size: 20px;
         font-weight: bold;
-        color: #FFF;
+        color: #000;
         background-color: transparent;
-        border: 1px solid #FFF;
+        border: 1px solid #000;
       }
     }
   }
@@ -257,8 +261,9 @@ body {
 
   .signup {
     width: 100vw;
-    min-height: 80vh;
+    min-height: 100vh;
     background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1440/v1473822857/join_landing_page_owf0m9.jpg') no-repeat center center;
+    background-size: cover;
     position: relative;
 
     .layer {
