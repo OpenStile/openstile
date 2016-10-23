@@ -8,14 +8,31 @@ $form-errors-color: rgb(245,166,35);
   h1, h2, h3, h4, a {
     font-family: 'Muli', sans-serif;
   }
-
+  .large-screen {
+    display: block;
+  }
+  .small-screen {
+    display: none;
+  }
   .above-the-fold {
     width: 100vw;
     min-height: 140vh;
     background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_1440/v1474839523/above_fold_about_us_page.jpg') no-repeat center right;
     background-size: cover;
+    .large-screen {
+      display: block;
+    }
+    .small-screen {
+      display: none;
+    }
     .text {
       padding-top: 30vh;
+      .large-screen {
+        display: block;
+      }
+      .small-screen {
+        display: none;
+      }
       .why-us {
         font-size: 16px;
         font-family: 'Muli', sans-serif;
@@ -36,19 +53,19 @@ $form-errors-color: rgb(245,166,35);
         }
       }
     }
-    .founders-banner {
-      position: absolute;
-      z-index: 10;
-      width: 100%;
-      top: 85%;
-      height: 10vh;
-      background-color: $staple-color-slightly-transparent;
-      h1 {
-        padding-top: 2vh;
-        font-size: 5vh;
-        color: #FFF;
-        font-weight: 300;
-      }
+  }
+  .founders-banner {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    top: 85%;
+    height: 10vh;
+    background-color: $staple-color-slightly-transparent;
+    h1 {
+      padding-top: 2vh;
+      font-size: 5vh;
+      color: #FFF;
+      font-weight: 300;
     }
   }
   .profile-pics {
@@ -82,20 +99,184 @@ $form-errors-color: rgb(245,166,35);
   }
 }
 
-@media (max-width: 1024px) and (orientation: landscape) {
+@media (max-width: 1024px) {
   .about-us {
     .above-the-fold {
-      background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_1440/v1474839523/above_fold_about_us_page.jpg') no-repeat center right;
+      min-height: 120vh;
+      background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_1440/v1474839523/above_fold_about_us_page.jpg') no-repeat 70% center;
       background-size: cover;
+      .text {
+        padding-top: 20vh;
+        .why-us {
+          font-size: 1.5em;
+          line-height: 1em;
+        }
+      }
     }
   }
 }
 
-@media (max-width: 1024px) and (orientation: portrait) {
+@media (max-width: 992px) {
+  .about-us {
+    .large-screen {
+      display: none;
+    }
+    .small-screen {
+      display: block;
+    }
+    .above-the-fold {
+      min-height: 90vh;
+      background: url('http://res.cloudinary.com/openstile/image/upload/c_scale,w_1440/v1477252008/above_fold_about_us_page_mobile.jpg') no-repeat right center;
+      background-size: cover;
+      .text {
+        .large-screen {
+          display: none;
+        }
+        .small-screen {
+          display: block;
+        }
+        padding-top: 10vh;
+        .why-us {
+          margin-left: .7em;
+          font-size: 1.8em;
+          line-height: 2em;
+          ul {
+            list-style: none;
+            padding: 30px 0px 40px 0px;
+            li {
+              font-style: normal;
+              font-size: 20px;
+              line-height: 40px;
+              font-weight: bold;
+            }
+          }
+          .action {
+            margin-left: 1em;
+            .btn {
+              font-size: 1em;
+            }
+          }
+        }
+      }
+    }
+    .founders-banner {
+      position: relative;
+    }
+    .small-screen.profiles {
+      background-color: #e5e5e5;
+      .vcenter {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+      }
+      .profile-pics {
+        position: relative;
+        width: inherit;
+      }
+      .bios {
+        min-height: 0vh;
+        background-color: #FFF;
+        h2 {
+          padding: 2vh 0;
+          font-size: 2em;
+          color: $staple-color;
+        }
+        h4 {
+          font-size: 1em;
+          line-height: 1.5em;
+          color: $staple-color;
+          font-style: italic;
+        }
+        h3 {
+          padding: 1vh 0;
+          font-size: 1.6em;
+          line-height: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
   .about-us {
     .above-the-fold {
-      background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_north,w_1440/v1474839523/above_fold_about_us_page.jpg') no-repeat center center;
+      background: url('http://res.cloudinary.com/openstile/image/upload/c_scale,w_1440/v1477252008/above_fold_about_us_page_mobile.jpg') no-repeat right 20%;
       background-size: cover;
+      .text {
+        padding-bottom: 2vh;
+        .why-us {
+          font-size: 1.2em;
+          line-height: 1.2em;
+          ul {
+            padding: 6vh 0 6vh 0;
+            li {
+              font-size: .9em;
+              line-height: 1.7em;
+            }
+          }
+          .action {
+            padding: 2vh 0;
+            .btn {
+              font-size: .8em;
+            }
+          }
+        }
+      }
+    }
+    .small-screen.profiles {
+      .bios {
+        width: 52%;
+        h2 {
+          padding: 2vh 0;
+          font-size: 2em;
+          color: $staple-color;
+        }
+        h4 {
+          font-size: 1em;
+          line-height: 1.5em;
+          color: $staple-color;
+          font-style: italic;
+        }
+        h3 {
+          padding: 1vh 0;
+          font-size: 1.2em;
+          line-height: 1.2em;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) and (orientation: portrait) {
+  .about-us {
+    .above-the-fold {
+      min-height: 70vh;
+      position: relative;
+      .layer {
+        background-color: rgba(255, 255, 255, 0.6);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .text {
+        .why-us {
+          width: 80%
+        }
+      }
+    }
+    .small-screen.profiles {
+      .profile-pics {
+        position: relative;
+        width: inherit;
+        img {
+          width: 150px;
+        }
+      }
+      .bios {
+        width: 50%;
+      }
     }
   }
 }

@@ -4,67 +4,108 @@
 
 <div class="about-us">
   <div class="above-the-fold">
-    <div class="row text">
-      <div class="col-xs-4 col-xs-offset-1">
-        <div class="why-us">
-          Going through endless racks, finding the right size, and a workout in the dressing room;
+    <div class="layer">
+      <div class="row text">
+        <div class="why-us col-xs-6 col-md-4 col-md-offset-1">
+          <span class="large-screen">Going through endless racks, finding the right size, and a workout in the dressing room;
           shopping used to be a luxury and we should bring that back.
           We found that boutiques do a better job in giving great service and focusing on individual style instead of trending fads.
-          They don't need to break your wallet either.   <br /><br />
+          They don't need to break your wallet either.   <br /><br /></span>
           Support real clothing by real designers who fill their work with heart.
           You are not sheep in a herd, but an amazing individual. So why settle for fashion produced in the millions? Express the ultimate you.
+          <ul class="small-screen">
+            <li>Services always complimentary.</li>
+            <li>Never any obligation to buy.</li>
+            <li>Enjoy shopping again.</li>
+            <li>Be the ultimate you.</li>
+          </ul>
+          <div class="action small-screen">
+            <a href="/#join-now" class="btn btn-default btn-lg">Join Beta</a>
+          </div>
         </div>
-      </div>
-      <div class="col-xs-3 col-xs-offset-3">
-        <div class="cta text-right">
-          Complimentary Services. Never any obligation to buy. Just enjoy being the ultimate you.
-        </div>
-        <div class="action col-xs-6 col-xs-offset-6">
-          <a href="/#join-now" class="btn btn-default btn-lg pull-right">Join Beta</a>
-        </div>
-      </div>
-    </div>
-    <div class="founders-banner text-center">
-      <h1>Meet Our Founders</h1>
-    </div>
-  </div>
-  <div class="profile-pics">
-    <div class="row">
-      <div class="col-xs-6">
-        <div class="col-xs-8 col-xs-offset-2">
-          <%= cl_image_tag("TCC_OPENSTILE_HEADSHOTS_121315-2397-Edit_twuyks.jpg", :gravity=>"face", :height=>400, :width=>400, :crop=>"fill", :class=>"img-responsive center-block") %>
-        </div>
-      </div>
-      <div class="col-xs-6">
-        <div class="col-xs-8 col-xs-offset-2">
-          <%= cl_image_tag("TCC_OPENSTILE_HEADSHOTS_121315-2435-Edit_sy2w9f.jpg", :gravity=>"face", :height=>400, :width=>400, :crop=>"fill", :class=>"img-responsive center-block") %>
+        <div class="large-screen col-xs-3 col-xs-offset-3">
+          <div class="cta text-right">
+            Complimentary Services. Never any obligation to buy. Just enjoy being the ultimate you.
+          </div>
+          <div class="action col-xs-6 col-xs-offset-6">
+            <a href="/#join-now" class="btn btn-default btn-lg pull-right">Join Beta</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bios">
+  <div class="founders-banner text-center">
+    <h1>Meet Our Founders</h1>
+  </div>
+  <div class="large-screen">
+    <div class="profile-pics">
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="col-xs-8 col-xs-offset-2">
+            <%= cl_image_tag("sparkle_johnson_founder.jpg", :gravity=>"face", :height=>400, :width=>400, :crop=>"fill", :class=>"img-responsive center-block") %>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="col-xs-8 col-xs-offset-2">
+            <%= cl_image_tag("tamara_austin_founder.jpg", :gravity=>"face", :height=>400, :width=>400, :crop=>"fill", :class=>"img-responsive center-block") %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bios">
+      <div class="row">
+        <div class="col-xs-6 text-center">
+          <h2>Sparkle Johnson</h2>
+          <h4>"In order to be irreplaceable one must always be different."<br /> Coco Chanel</h4>
+          <div class="col-xs-12">
+            <h3>
+              Sparkle, a lifelong native of Brooklyn, knew the value of launching the OpenStile service in such a diverse landscape with so
+              many different boutiques that cater to different styles. She brings to OpenStile her passion for fashion along
+              with a broad range of experience in different fields of work such as healthcare technology and graphic design.
+            </h3>
+          </div>
+        </div>
+        <div class="col-xs-6 text-center">
+          <h2>Tamara Austin</h2>
+          <h4>"Style is knowing who you are, what you want to say, and not giving a damn."<br /> Gore Vidal</h4>
+          <div class="col-xs-12">
+            <h3>
+              Tamara comes from a background in tech. After graduating from the University of Virginia with a degree in Computer Science,
+              she worked as a software engineer and IT consultant in the Washington DC area. She started OpenStile as a way to directly
+              apply her technical expertise to her entrepreneurial passions.
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="small-screen profiles">
     <div class="row">
-      <div class="col-xs-6 text-center">
+      <div class="col-xs-4 profile-pics vcenter">
+        <%= cl_image_tag("sparkle_johnson_founder.jpg", :gravity=>"face", :height=>250, :width=>250, :crop=>"fill", :class=>"img-responsive center-block") %>
+      </div>
+      <div class="col-xs-7 bios text-center vcenter">
         <h2>Sparkle Johnson</h2>
         <h4>"In order to be irreplaceable one must always be different."<br /> Coco Chanel</h4>
-        <div class="col-xs-12">
-          <h3>
+        <h3>
             Sparkle, a lifelong native of Brooklyn, knew the value of launching the OpenStile service in such a diverse landscape with so
             many different boutiques that cater to different styles. She brings to OpenStile her passion for fashion along
             with a broad range of experience in different fields of work such as healthcare technology and graphic design.
-          </h3>
-        </div>
+        </h3>
       </div>
-      <div class="col-xs-6 text-center">
+    </div>
+    <div class="row">
+      <div class="col-xs-7 bios text-center vcenter">
         <h2>Tamara Austin</h2>
         <h4>"Style is knowing who you are, what you want to say, and not giving a damn."<br /> Gore Vidal</h4>
-        <div class="col-xs-12">
-          <h3>
+        <h3>
             Tamara comes from a background in tech. After graduating from the University of Virginia with a degree in Computer Science,
             she worked as a software engineer and IT consultant in the Washington DC area. She started OpenStile as a way to directly
             apply her technical expertise to her entrepreneurial passions.
-          </h3>
-        </div>
+        </h3>
+      </div>
+      <div class="col-xs-4 profile-pics vcenter">
+        <%= cl_image_tag("tamara_austin_founder.jpg", :gravity=>"face", :height=>250, :width=>250, :crop=>"fill", :class=>"img-responsive center-block") %>
       </div>
     </div>
   </div>

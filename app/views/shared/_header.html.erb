@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <% unless current_page?(controller: 'static_pages', action: 'home') %>
-        <a class="navbar-brand" id="header-brand" href="/"><%= image_tag('logo_white.png', class: 'img-responsive center-block', width: 300) %></a>
+        <a class="navbar-brand large-screen" id="header-brand" href="/"><%= image_tag('logo_white.png', class: 'img-responsive center-block', width: 300) %></a>
       <% end %>
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -13,11 +13,13 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to 'home', root_path %></li>
         <li><%= link_to 'how it works', experience_path %></li>
         <li><%= link_to 'about us', about_path %></li>
         <li><a href="#">style blog</a></li>
         <li><a href="#">contact us</a></li>
-        <li><a class="btn btn-default" href="/#join-now">sign up</a></li>
+        <li><a href="#/join-now" class="small-screen">sign up</a></li>
+        <li><a class="btn btn-default large-screen" href="/#join-now">sign up</a></li>
       </ul>
     </div>
   </div>
