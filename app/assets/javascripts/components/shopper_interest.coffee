@@ -55,7 +55,7 @@
             name: "FNAME"
             id: "mce-FNAME"
             placeholder: "First Name"
-            className: "form-control"
+            className: "form-control input-lg"
             ref: "first_name"
         React.DOM.div
           className: "mc-field-group form-group"
@@ -64,7 +64,7 @@
             name: "LNAME"
             id: "mce-LNAME"
             placeholder: "Last Name"
-            className: "form-control"
+            className: "form-control input-lg"
             ref: "last_name"
         React.DOM.div
           className: "mc-field-group form-group"
@@ -73,7 +73,7 @@
             name: "EMAIL"
             id: "mce-EMAIL"
             placeholder: "Email"
-            className: "form-control"
+            className: "form-control input-lg"
             ref: "email"
         React.DOM.div
           style: {position: 'absolute', left: '-5000px'}

@@ -26,20 +26,60 @@
 </header>
 <div class="above-fold-banner">
   <div class="contents">
-    <div class="col-sm-12 col-md-7 vcenter">
-      <%= image_tag("logo_white.png", class: "img-responsive center-block") %>
-    </div>
-    <div class="col-sm-12 col-md-3 text-center vcenter">
-      <div class="banner-text">
-        <h3>No need to shop with the masses.</h3>
-        <h3>Find your perfect boutique and outshine the rest.</h3>
+    <div class="large-screen">
+      <div class="col-xs-7 logo vcenter">
+        <%= image_tag("logo_white.png", class: "img-responsive center-block") %>
       </div>
-      <div class="cta-buttons col-xs-12">
-        <div class="col-xs-6 text-center">
-          <a id="move-learn-more" class="btn btn-default btn-lg pull-right">Learn More</a>
+      <div class="col-xs-3 col-md-3 tag-line text-center vcenter">
+        <div class="banner-text">
+          <h3>No need to shop with the masses.</h3>
+          <h3>Find your perfect boutique and outshine the rest.</h3>
         </div>
-        <div class="col-xs-6 text-center">
-          <a id="move-join-now" class="btn btn-default btn-lg pull-left">Join Beta</a>
+        <div class="cta-buttons col-xs-12">
+          <div class="col-xs-6 text-center">
+            <a id="move-learn-more" class="btn btn-default btn-lg pull-right">Learn More</a>
+          </div>
+          <div class="col-xs-6 text-center">
+            <a id="move-join-now" class="btn btn-default btn-lg pull-left">Join Beta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-screen landscape">
+      <div class="col-xs-7 logo vcenter">
+        <%= image_tag("logo_white.png", class: "img-responsive center-block") %>
+      </div>
+      <div class="col-xs-4 tag-line text-center vcenter">
+        <div class="banner-text">
+          <h3>No need to shop with the masses.</h3>
+          <h3>Find your perfect boutique and outshine the rest.</h3>
+        </div>
+        <div class="cta-buttons col-xs-12">
+          <div class="col-xs-6 text-center">
+            <a id="move-learn-more" class="btn btn-default btn-lg pull-right">Learn More</a>
+          </div>
+          <div class="col-xs-6 text-center">
+            <a id="move-join-now" class="btn btn-default btn-lg pull-left">Join Beta</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="small-screen portrait">
+      <div class="col-xs-12 logo vcenter">
+        <%= image_tag("logo_white.png", class: "img-responsive center-block") %>
+      </div>
+      <div class="col-xs-12 tag-line text-center vcenter">
+        <div class="banner-text">
+          <h3>No need to shop with the masses.</h3>
+          <h3>Find your perfect boutique and outshine the rest.</h3>
+        </div>
+        <div class="cta-buttons col-xs-12">
+          <div class="col-xs-6 text-center">
+            <a id="move-learn-more" class="btn btn-default btn-lg pull-right">Learn More</a>
+          </div>
+          <div class="col-xs-6 text-center">
+            <a id="move-join-now" class="btn btn-default btn-lg pull-left">Join Beta</a>
+          </div>
         </div>
       </div>
     </div>
@@ -47,45 +87,57 @@
 </div>
 <div class="homepage">
   <div class="more-about-us" id="more-about-us">
-    <div class="container">
-      <div class="content">
-        <div class="row">
-          <div class="main-text col-xs-12 col-sm-6 text-center">
-            <h4>
-              Focused on style not fads, we will match you with Brooklyn boutiques to enhance your personal style.
-              Get undivided attention from the boutique who will work with you to find the perfect pieces for your wardrobe.
-              Our services are always complementary with no obligation to buy. Enjoy shopping again and be the ultimate you.
-            </h4><br />
-            <%= link_to 'more about us', about_path, class: 'btn btn-default' %>
+    <div class="layer">
+      <div class="container">
+        <div class="content">
+          <div class="row">
+            <div class="main-text col-xs-12 col-sm-6 text-center">
+              <h4 class="large-screen">
+                Focused on style not fads, OpenStile will match you with Brooklyn boutiques to enhance your personal style.
+                Get undivided attention from the boutique who will work with you to find the perfect pieces for your wardrobe.
+                Our services are always complementary with no obligation to buy. Enjoy shopping again and be the ultimate you.
+              </h4><br />
+              <h4 class="small-screen">
+                Focused on style not fads, OpenStile will match you with Brooklyn boutiques to enhance your personal style.
+                Our boutiques work with you to find the perfect pieces for your wardrobe.
+              </h4><br />
+              <ul class="small-screen">
+                <li>Services always complimentary.</li>
+                <li>Never any obligation to buy.</li>
+                <li>Enjoy shopping again.</li>
+                <li>Be the ultimate you.</li>
+              </ul>
+              <%= link_to 'more about us', about_path, class: 'btn btn-default' %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="benefits text-center">
-    <h2>Benefits of OpenStile</h2>
+    <span class="large-screen"><h2>Benefits of OpenStile</h2></span>
     <div class="highlights container">
       <div class="row">
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-4">
           <i class="fa fa-heart-o fa-4x" aria-hidden="true"></i>
           <h4>Love Shopping Again</h4>
-          <p class="text">
+          <p class="large-screen text">
             No more crowded stores or waiting in lines.
             Enjoy personal attention as well as fashion designed for unique individuals like yourself, and not for&nbsp;the&nbsp;masses.
           </p>
         </div>
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-4">
           <i class="fa fa-clock-o fa-4x" aria-hidden="true"></i>
           <h4>Save Time and Money</h4>
-          <p class="text">
+          <p class="large-screen text">
             No more rummaging through racks or be stuck in dressing rooms.  Our services are complementary and our in-house
             boutique stylists will curate everything for you based off your style, budget, and needs before&nbsp;you&nbsp;arrive.
           </p>
         </div>
-        <div class="col-xs-12 col-sm-4">
+        <div class="col-xs-4">
           <i class="fa fa-diamond fa-4x" aria-hidden="true"></i>
-          <h4>Unique Pieces</h4>
-          <p class="text">
+          <h4>Discover Unique Pieces</h4>
+          <p class="large-screen text">
             Never get caught wearing the same thing as anyone else again.
             Love the pieces you find not just for their exclusive designs, but the designers&nbsp;behind&nbsp;them.
           </p>
@@ -93,14 +145,59 @@
       </div>
     </div>
   </div>
-  <div class="how-it-works">
+  <div class="image-break small-screen"></div>
+  <div class="how-it-works small-screen">
+    <div class="banner row text-center">
+      <h1>It's Easy!</h1>
+    </div>
+    <div class="row">
+      <div class="step col-xs-12">
+        <div class="number col-xs-2 col-xs-offset-1 vcenter">
+          <span class="fa-stack fa-5x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <strong class="fa-stack-1x">1</strong>
+          </span>
+        </div>
+        <div class="text-left col-xs-7 col-xs-offset-1 vcenter">
+          <h2>Create a Style Profile</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="step col-xs-12">
+        <div class="number col-xs-2 col-xs-offset-1 vcenter">
+          <span class="fa-stack fa-5x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <strong class="fa-stack-1x">2</strong>
+          </span>
+        </div>
+        <div class="text-left col-xs-7 col-xs-offset-1 vcenter">
+          <h2>Set free appointment at your top matched&nbsp;boutiques</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="step col-xs-12">
+        <div class="number col-xs-2 col-xs-offset-1 vcenter">
+          <span class="fa-stack fa-5x">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <strong class="fa-stack-1x">3</strong>
+          </span>
+        </div>
+        <div class="text-left col-xs-7 col-xs-offset-1 vcenter">
+          <h2>Arrive at your appointment. Enjoy shopping fashion that truly expresses the ultimate&nbsp;you</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="how-it-works large-screen">
     <div class="row">
       <div class="banner col-xs-8 col-xs-offset-4 col-md-5 col-md-offset-7">
         <h1>It's Easy!</h1>
       </div>
     </div>
     <div class="row">
-      <div class="step col-xs-6 col-xs-offset-4 col-md-4 col-md-offset-7">
+      <div class="step col-md-5 col-md-offset-7 col-lg-4 col-lg-offset-7">
         <div class="number col-xs-2 vcenter">
           <span class="fa-stack fa-3x">
             <i class="fa fa-circle fa-stack-2x"></i>
@@ -113,7 +210,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="step col-xs-6 col-xs-offset-4 col-md-4 col-md-offset-7">
+      <div class="step col-md-5 col-md-offset-7 col-lg-4 col-lg-offset-7">
         <div class="number col-xs-2 vcenter">
           <span class="fa-stack fa-3x">
             <i class="fa fa-circle fa-stack-2x"></i>
@@ -126,7 +223,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="step col-xs-6 col-xs-offset-4 col-md-4 col-md-offset-7">
+      <div class="step col-md-5 col-md-offset-7 col-lg-4 col-lg-offset-7">
         <div class="number col-xs-2 vcenter">
           <span class="fa-stack fa-3x">
             <i class="fa fa-circle fa-stack-2x"></i>
@@ -148,7 +245,7 @@
     <div class="layer">
       <div class="container">
         <div class="row">
-          <div class="form-block col-md-5 col-xs-10 col-xs-offset-1">
+          <div class="form-block col-lg-5 col-lg-offset-0 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
             <div class="text-center">
               <h3>Sign Up with OpenStile Today</h3><br/>
             </div>
