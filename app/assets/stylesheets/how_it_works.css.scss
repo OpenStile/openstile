@@ -65,3 +65,58 @@ $form-errors-color: rgb(245,166,35);
     }
   }
 }
+
+@media (max-width: 1200px) {
+  .experience {
+    .how-it-works {
+      min-height: 110vh;
+      background: url("http://res.cloudinary.com/openstile/image/upload/c_scale,w_1440/v1476138920/how_it_works_page.jpg") no-repeat 10% center;
+      background-size: cover;
+      .cta {
+        padding: 0 0 0 0;
+        .text {
+          text-align: left;
+          margin-left: 50vw;
+          font-size: 1.5em;
+          line-height: 1.5em;
+        }
+        .action {
+          padding-bottom: 7vh;
+          a {
+            float: none !important;
+            font-size: 1.5em;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) and (orientation:portrait) {
+  .experience {
+    .how-it-works {
+      background: none;
+      background-color: #e5e5e5;
+
+      .body {
+        margin-left: 4vw;
+        width: 100vw;
+
+        .step {
+          h3 {
+            font-size: 1em;
+          }
+        }
+      }
+
+      .cta {
+        .text {
+          margin-left: 20vw;
+        }
+        .action {
+          margin-left: 20vw;
+        }
+      }
+    }
+  }
+}
