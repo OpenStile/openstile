@@ -1,23 +1,44 @@
+$staple-color-slightly-transparent: rgba(127,145,147,0.9);
+$staple-color: rgb(127,145,147);
+$grey-transparent: rgba(89,89,89,0.8);
+$grey: rgb(89,89,89);
+$form-errors-color: rgb(245,166,35);
+
+
 .join_now {
+  h1, h2, h3, h4, p, a {
+    font-family: 'Muli', sans-serif;
+  }
   width: 100vw;
   min-height: 100vh;
-  background: url('http://res.cloudinary.com/openstile/image/upload/c_thumb,g_center,w_1400/v1473824593/thanks_for_visiting.jpg') no-repeat top center;
+  background-color: lighten($grey, 15%);
 
   .thanks {
-    padding-top: 45vh;
-
-    .text {
-      background-color: rgba(127,145,147, 0.7);
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+    background-color: $staple-color-slightly-transparent;
+    box-shadow: 0 0 5px 2px rgba(255,255,255,.6);
+    color: #FFF;
+    .contents {
+      padding: 5vh;
 
       h2 {
-        font-size: 30px;
-        line-height: 40px;
-        color: #FFF;
+        font-size: 2.5em;
+        line-height: 1em;
+        padding: 2em 1em 0;
+        font-weight: bold;
+      }
+      h3 {
+        font-size: 1.5em;
+        line-height: 1em;
+        padding: 1em;
       }
 
-      h3 {
-        font-size: 20px;
-        line-height: 30px;
+      a.btn {
+        margin: 1em;
+        font-size: 1.7em;
+        border: 2px solid #FFF;
+        background-color: transparent;
         color: #FFF;
       }
     }
