@@ -11,6 +11,7 @@ body {
   height: 100%;
   overflow-x: hidden;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 .navbar.navbar-openstile {
