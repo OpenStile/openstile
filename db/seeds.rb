@@ -60,6 +60,12 @@ end
   BottomFit.find_or_create_by(name: fit)
 end
 
+[["Janelle Working her Swag", "janelle"], ["Customizing Fendi's", "fendis"], ["Jamma me Beautiful", "jamma"],
+["The Nerve to Curve", "curve"], ["The Nude Boot", "nude_boot"], ["Thigh Highs", "thigh_highs"], ["Neon Living", "neon"],
+["The Last Unicorn", "unicorn"], ["Kitten Syndrome", "kitten"], ["This ain't no Granny", "granny"]].each do |swiper_styles|
+  InterestSwiperQuiz::Style.find_or_create_by(title: swiper_styles[0], image: swiper_styles[1])
+end
+
 if ENV["demo_up"]
   location = Location.create!(address: '2439 Fake Street, Brooklyn, NY 11213',
                               neighborhood: 'Williamsburg')

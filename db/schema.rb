@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160904165637) do
+ActiveRecord::Schema.define(version: 20161106143636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,31 @@ ActiveRecord::Schema.define(version: 20160904165637) do
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree
   add_index "drop_ins", ["user_id"], name: "index_drop_ins_on_user_id", using: :btree
+
+  create_table "interest_swiper_quiz_likes", force: :cascade do |t|
+    t.integer  "style_id"
+    t.integer  "session_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_swiper_quiz_likes", ["session_id"], name: "index_interest_swiper_quiz_likes_on_session_id", using: :btree
+
+  create_table "interest_swiper_quiz_sessions", force: :cascade do |t|
+    t.string   "email"
+    t.boolean  "completed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_swiper_quiz_sessions", ["email"], name: "index_interest_swiper_quiz_sessions_on_email", unique: true, using: :btree
+
+  create_table "interest_swiper_quiz_styles", force: :cascade do |t|
+    t.string   "image"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string   "address",      limit: 255

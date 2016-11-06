@@ -1,0 +1,2 @@
+class SwipeStylesController < ApplicationController
+end

@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :swipe_styles, only: :new
+
   resources :style_profiles, only: [:edit, :update, :new, :create] do
     collection do
       post :quickstart

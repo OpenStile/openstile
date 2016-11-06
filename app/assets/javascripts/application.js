@@ -18,4 +18,6 @@
 //= require react
 //= require react_ujs
 //= require components
+//= require jquery.transform2d.js
+//= require jquery.jTinder.js
 //= require_tree .

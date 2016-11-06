@@ -1,0 +1,42 @@
+<% provide(:title, 'Swipe Stile Quiz') %>
+
+<div class="swipe-stile">
+  <div class="row logo-header">
+    <div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">
+      <%= image_tag('openstilelogo.png', class: 'img-responsive center-block') %>
+    </div>
+  </div>
+  <div class="wrap">
+    <div id="tinderslide">
+      <ul>
+        <% InterestSwiperQuiz::Style.all.shuffle.each do |style| %>
+            <li>
+              <div class="img" style="background: url('/assets/swipe_styles/panes/<%= style.image %>.jpg') no-repeat scroll center center;background-size: cover;"></div>
+              <div><%= style.title %></div><div class="like"></div><div class="dislike"></div>
+            </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row actions">
+    <div class="col-xs-6 text-right">
+      <button id="hate-btn" class="btn btn-lg">Nope</button>
+    </div>
+    <div class="col-xs-6 text-left">
+      <button id="like-btn" class="btn btn-lg">Like</button>
+    </div>
+  </div>
+  <div class="row thank-you text-center">
+    <div class="col-xs-8 col-xs-offset-2">
+      <h3>Thanks for sharing your style!</h3><br /><br />
+      <h4>We are matching you with our partner boutiques based on your preferences, and will send you your pairings shortly.</h4>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+      var swiper_quiz = new InterestSwiperQuiz;
+      swiper_quiz.init();
+  });
+</script>
