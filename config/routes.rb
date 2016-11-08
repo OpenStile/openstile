@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   get '/relaunch'         =>  'static_pages#relaunch'
   get '/join_confirmation'=>  'static_pages#join_confirmation'
 
+  get 'swipe_styles/new'        => 'swipe_styles#new'
+  get 'swipe_styles/results'    => 'swipe_styles#results'
+  post 'swipe_styles/like'      => 'swipe_styles#like'
+  post 'swipe_styles/complete'  => 'swipe_styles#complete'
+
   namespace :blog do
     resources :articles, path: '', only: [:index, :show]
   end
@@ -26,8 +31,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  resources :swipe_styles, only: :new
 
   resources :style_profiles, only: [:edit, :update, :new, :create] do
     collection do

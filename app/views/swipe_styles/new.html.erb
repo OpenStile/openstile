@@ -10,7 +10,7 @@
     <div id="tinderslide">
       <ul>
         <% InterestSwiperQuiz::Style.all.shuffle.each do |style| %>
-            <li>
+            <li data-style_id="<%= style.id %>" data-session_id="<%= @session.id %>">
               <div class="img" style="background: url('/assets/swipe_styles/panes/<%= style.image %>.jpg') no-repeat scroll center center;background-size: cover;"></div>
               <div><%= style.title %></div><div class="like"></div><div class="dislike"></div>
             </li>

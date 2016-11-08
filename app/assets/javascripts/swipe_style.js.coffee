@@ -2,13 +2,12 @@ class @InterestSwiperQuiz
   init: () ->
     $(".swipe-stile .thank-you").hide()
     dislikeFunction = (item) ->
-      console.log('Dislike image '+ (item.index()))
       if(item.index() == 0)
-        InterestSwiperQuiz.finalizeQuiz()
+        InterestSwiperQuiz.finalizeQuiz($(item).data('session_id'))
     likeFunction = (item) ->
-      console.log('Like image '+ (item.index()))
+      InterestSwiperQuiz.setLike($(item).data('session_id'), $(item).data('style_id'))
       if(item.index() == 0)
-        InterestSwiperQuiz.finalizeQuiz()
+        InterestSwiperQuiz.finalizeQuiz($(item).data('session_id'))
     $('#tinderslide').jTinder(
       onDislike: dislikeFunction
       onLike: likeFunction
@@ -27,8 +26,14 @@ class @InterestSwiperQuiz
     $('#like-btn').click ->
       $("#tinderslide").jTinder('like')
 
-  @finalizeQuiz: () ->
-    console.log('called')
+  @finalizeQuiz: (session_id) ->
+    InterestSwiperQuiz.completeQuiz(session_id)
     $(".swipe-stile .wrap").hide()
     $(".swipe-stile .actions").hide()
     $(".swipe-stile .thank-you").show()
+
+  @setLike: (session_id, like_id) ->
+    $.post( "/swipe_styles/like", { session_id: session_id, style_id: like_id } )
+
+  @completeQuiz: (session_id) ->
+    $.post( "/swipe_styles/complete", { session_id: session_id } )
