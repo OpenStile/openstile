@@ -90,7 +90,7 @@
 /* Like & dislike badge images */
 #tinderslide .like,
 #tinderslide .dislike {
-    background: url("swipe_styles/liked.png") no-repeat scroll 0 0;
+    background: image-url("swipe_styles/liked.png") no-repeat scroll 0 0;
     opacity: 0;
     height: 80px;
     position: absolute;
@@ -111,7 +111,7 @@
 #tinderslide .dislike {
     right: 45px;
     left: auto;
-    background: url("swipe_styles/nope.png") no-repeat scroll 0 0;
+    background: image-url("swipe_styles/nope.png") no-repeat scroll 0 0;
 }
 
 /* Image container */
