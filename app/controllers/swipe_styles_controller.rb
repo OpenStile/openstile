@@ -1,10 +1,13 @@
 class SwipeStylesController < ApplicationController
+  http_basic_authenticate_with name: "admin", password: ENV["RESULTS_PASSWORD"], only: :results
+
   def new
     if params[:token].blank?
       redirect_to root_path
     else
       email = Base64.decode64(params[:token])
       @session = InterestSwiperQuiz::Session.find_or_create_by(email: email)
+      @session.likes.destroy_all
     end
   end
 
