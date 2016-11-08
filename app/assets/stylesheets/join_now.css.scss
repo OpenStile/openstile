@@ -11,16 +11,16 @@ $form-errors-color: rgb(245,166,35);
   }
   width: 100vw;
   min-height: 100vh;
-  background-color: lighten($grey, 15%);
+  background: image-url('brushed_alu_dark.png');
 
   .thanks {
     margin-top: 20vh;
     margin-bottom: 20vh;
-    background-color: $staple-color-slightly-transparent;
+    background-color: rgba(127,145,147,0.75);
     box-shadow: 0 0 5px 2px rgba(255,255,255,.6);
     color: #FFF;
     .contents {
-      padding: 5vh;
+      padding: 5vh 0;
 
       h2 {
         font-size: 2.5em;

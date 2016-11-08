@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/decal'            =>  'static_pages#decal'
   get '/relaunch'         =>  'static_pages#relaunch'
   get '/join_confirmation'=>  'static_pages#join_confirmation'
+  get '/confirmation_required'  => 'static_pages#confirmation_required'
 
   get 'swipe_styles/new'        => 'swipe_styles#new'
   get 'swipe_styles/results'    => 'swipe_styles#results'
