@@ -62,7 +62,12 @@ end
 
 [["Janelle Working her Swag", "janelle"], ["Customizing Fendi's", "fendis"], ["Jamma me Beautiful", "jamma"],
 ["The Nerve to Curve", "curve"], ["The Nude Boot", "nude_boot"], ["Thigh Highs", "thigh_highs"], ["Neon Living", "neon"],
-["The Last Unicorn", "unicorn"], ["Kitten Syndrome", "kitten"], ["This ain't no Granny", "granny"]].each do |swiper_styles|
+["The Last Unicorn", "unicorn"], ["Kitten Syndrome", "kitten"], ["This ain't no Granny", "granny"],
+["Haute Vintage News", "haute_vintage"], ["Rocking a Work Day", "workday"], ["Riding into Fall", "riding_fall"],
+["Rivera of Style", "rivera"], ["Bo Stays Warm", "bo_warm"], ["Style Flowing", "flowing"], ["Nature's Freedom", "freedom"],
+["Rebel Rebel", "rebel"], ["Tough act to Follow", "tough_act"], ["Dr Martin's Style Prognosis", "dr_martin"],
+["Modern Power", "modern_power"], ["Gray to brighten the day", "gray_day"], ["Monochromatic City Athlete", "city_athlete"],
+["Power of Black", "power_black"], ["The Strength of Three", "three"]].each do |swiper_styles|
   InterestSwiperQuiz::Style.find_or_create_by(title: swiper_styles[0], image: swiper_styles[1])
 end
 
