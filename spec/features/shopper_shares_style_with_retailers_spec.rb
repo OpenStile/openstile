@@ -239,7 +239,7 @@ feature 'Shopper shares style preferences with retailer' do
 
   def then_the_store_owner_should_know style_synopsis
     click_link 'Log out'
-    click_link 'Log in'
+    visit '/users/sign_in'
     fill_in 'Email', with: 'me@myboutique.com'
     fill_in 'Password', with: 'password'
     click_button 'Log in'

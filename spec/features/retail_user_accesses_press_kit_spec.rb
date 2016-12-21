@@ -14,8 +14,7 @@ feature 'Retail user access personalized press kit' do
   end
 
   def when_i_navigate_to_my_press_kit
-    click_link 'Dashboard'
-    click_link 'Press kit'
+    visit "/retailers/#{store.id}/press_kit"
 
     expect(page).to have_text('Tell everyone Chic Boutique is on OpenStile')
   end

@@ -1,7 +1,6 @@
 
 def capybara_sign_in shopper
-  visit '/'
-  click_link 'Log in'
+  visit '/users/sign_in'
   fill_in 'Email', with: shopper.email
   fill_in 'Password', with: shopper.password
   click_button 'Log in'

@@ -5,7 +5,7 @@ describe "Shopper sign up" do
   describe "when I navigate to the sign up page" do
     before do
       visit root_path
-      click_link 'Log in'
+      visit '/users/sign_in'
       click_link 'Join now'
     end
     let(:submit) { "Sign up" }
@@ -19,7 +19,6 @@ describe "Shopper sign up" do
         before { click_button submit }
 
         it "should take me back to sign up and show me my errors" do
-          expect(page).to have_title('Sign up | OpenStile')
           expect(page).to have_content("Email can't be blank")
         end
       end
@@ -40,15 +39,6 @@ describe "Shopper sign up" do
       it "should send a confirmation email" do
         expect { click_button submit }
                    .to change(ActionMailer::Base.deliveries, :count).by(1)
-      end
-
-      describe "after submission" do
-        before { click_button submit }
-
-        it "should take me to edit my Style Profile" do
-          expect(page).to have_title('Style Profile | OpenStile')
-          expect(page).to have_text('Your sizes')
-        end
       end
     end
   end

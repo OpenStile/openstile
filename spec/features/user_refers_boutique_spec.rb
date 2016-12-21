@@ -26,8 +26,7 @@ feature 'User refers a boutique' do
   end
 
   def given_i_visit_the_boutique_page
-    visit '/'
-    click_link 'Boutiques'
+    visit '/retailers'
   end
 
   def when_i_submit_an_invalid_referral

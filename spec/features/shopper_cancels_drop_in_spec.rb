@@ -28,7 +28,7 @@ feature 'Shopper modifies drop in' do
   end
 
   def given_my_upcoming_drop_ins_page_contains appointment
-    click_link('logo-home')
+    visit '/drop_ins/upcoming'
 
     expect(page).to have_link(appointment.retailer.name)
     expect(page).to have_content(appointment.colloquial_time)
@@ -38,12 +38,10 @@ feature 'Shopper modifies drop in' do
     within(:css, "div#drop_in_#{appointment.id}") do
       click_link 'cancel'
     end
-
-    expect(page).to have_content('Your styling session has been canceled')
   end
 
   def then_my_upcoming_drop_ins_page_should_contain appointment
-    click_link 'logo-home'
+    visit '/drop_ins/upcoming'
 
     expect(page).to have_link(appointment.retailer.name)
   end

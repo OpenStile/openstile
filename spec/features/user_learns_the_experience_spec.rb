@@ -17,6 +17,6 @@ feature 'Learn about OpenStile' do
   end
 
   def then_i_should_read_about_how_OpenStile_works
-    expect(page).to have_content('SHOP LIKE A VIP')
+    expect(page).to have_content('Work with the boutique to get your perfect look')
   end
 end

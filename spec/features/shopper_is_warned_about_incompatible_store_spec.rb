@@ -37,11 +37,11 @@ feature 'Shopper is warned' do
 
   def given_i_am_not_logged_in
     visit '/'
-    expect(page).to have_text('Log in')
+    expect(page).to_not have_text('Log out')
   end
 
   def when_i_navigate_to_store_page store
-    click_link 'Boutiques'
+    visit '/retailers'
     click_link store.name
     expect(page).to have_text(store.quote)
   end

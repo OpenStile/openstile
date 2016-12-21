@@ -1,6 +1,0 @@
-LOG:  database system was shut down at 2016-04-09 22:33:17 EDT
-LOG:  MultiXact member wraparound protections are now enabled
-LOG:  autovacuum launcher started
-LOG:  database system is ready to accept connections
-ERROR:  cached plan must not change result type
-STATEMENT:  SELECT "retailers".* FROM "retailers" WHERE "retailers"."status" = $1

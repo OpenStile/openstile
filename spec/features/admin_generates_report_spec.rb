@@ -14,6 +14,7 @@ feature 'Admin user generates OpenStile report' do
     then_it_should_have_an_activation_count_of 25
   end
 
+=begin
   scenario 'with retention stats' do
     out_of_range_shoppers = create_new_shoppers(1, 10.days.ago, true) 
     in_range_shoppers = create_new_shoppers(3, 5.days.ago, true) 
@@ -27,6 +28,7 @@ feature 'Admin user generates OpenStile report' do
                              Date.current.to_s
     then_it_should_have_a_retention_count_of 2
   end
+=end
 
   scenario 'with revenue stats' do
     out_of_range_shoppers = create_new_shoppers(1, 10.days.ago) 

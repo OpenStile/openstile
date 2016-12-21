@@ -32,11 +32,11 @@ feature 'Customer reviews drop in' do
   end
 
   def when_i_navigate_to_my_drop_ins_as_shopper
-    click_link 'Styling Sessions'
+    visit '/drop_ins/upcoming'
   end
 
   def when_i_navigate_to_my_drop_ins_as_retailer
-    click_link 'View my bookings'
+    visit '/drop_ins/upcoming'
   end
 
   def when_i_review_drop_in_as_shopper past_drop_in, rating, feedback

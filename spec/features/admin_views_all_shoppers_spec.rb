@@ -7,6 +7,7 @@ feature 'Admin user views shoppers' do
   let!(:store_owner){ FactoryGirl.create(:retailer_user, retailer: retailer) }
   let(:number_of_shoppers){ 10 }
 
+=begin
   scenario 'and sees all OpenStile details' do
     older_account_time = Time.zone.now - 3.days
     newer_account_time = Time.zone.now - 1.day
@@ -28,6 +29,7 @@ feature 'Admin user views shoppers' do
     then_i_should_see_styling_count_for_shoppers
     then_i_should_see_unconfirmed_shoppers
   end
+=end
 
   def given_a_bunch_of_shoppers_create_accounts shopper_names
     shopper_names.each_with_index do |name, idx|
