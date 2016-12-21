@@ -1,6 +1,7 @@
 class @InterestSwiperQuiz
   init: () ->
     $(".swipe-stile .thank-you").hide()
+    $(".swipe-stile .style-needs").hide()
     dislikeFunction = (item) ->
       if(item.index() == 0)
         InterestSwiperQuiz.finalizeQuiz($(item).data('session_id'))
@@ -30,7 +31,7 @@ class @InterestSwiperQuiz
     InterestSwiperQuiz.completeQuiz(session_id)
     $(".swipe-stile .wrap").hide()
     $(".swipe-stile .actions").hide()
-    $(".swipe-stile .thank-you").show()
+    $(".swipe-stile .style-needs").show()
 
   @setLike: (session_id, like_id) ->
     $.post( "/swipe_styles/like", { session_id: session_id, style_id: like_id } )
