@@ -7,6 +7,13 @@ class ShopperMailer < ActionMailer::Base
   #
   #   en.drop_in_scheduled_mailer.email.subject
   #
+
+  def invite_shopper_interest(first_name, email)
+    @first_name = first_name
+    @link = "http://www.openstile.com/swipe_styles/new?token=#{Base64.encode64(email)}"
+    mail to: email, subject: "Welcome to the OpenStile Beta"
+  end
+
   def drop_in_scheduled_email(drop_in)
     @styling = drop_in
     attachments['styling.ics'] = @styling.ics_attachment(:shopper).to_ical

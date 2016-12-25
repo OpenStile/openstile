@@ -14,4 +14,8 @@ class ShopperMailerPreview < ActionMailer::Preview
   def after_styling_reminder
     ShopperMailer.after_styling_reminder(DropIn.where(status: DropIn::ACTIVE_STATE).first)
   end
+
+  def invite_shopper_interest
+    ShopperMailer.invite_shopper_interest('Jane', 'jane@example.com')
+  end
 end
