@@ -70,6 +70,8 @@ gem 'react-rails'
 
 gem 'font-awesome-rails'
 
+gem 'will_paginate'
+
 group :development, :test do
   gem 'rspec-rails',  '~> 3.1'
   gem 'byebug'

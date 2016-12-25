@@ -10,7 +10,7 @@ class ShopperMailer < ActionMailer::Base
 
   def invite_shopper_interest(first_name, email)
     @first_name = first_name
-    @link = "http://www.openstile.com/swipe_styles/new?token=#{Base64.encode64(email)}"
+    @link = swipe_styles_new_url(token: Base64.encode64(email))
     mail to: email, subject: "Welcome to the OpenStile Beta"
   end
 

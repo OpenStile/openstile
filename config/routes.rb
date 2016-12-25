@@ -10,11 +10,12 @@ Rails.application.routes.draw do
   get '/join_confirmation'=>  'static_pages#join_confirmation'
   get '/confirmation_required'  => 'static_pages#confirmation_required'
 
-  post 'swipe_styles/invite'     => 'swipe_styles#invite'
+  post 'swipe_styles/invite'    => 'swipe_styles#invite'
   get 'swipe_styles/new'        => 'swipe_styles#new'
   get 'swipe_styles/results'    => 'swipe_styles#results'
   post 'swipe_styles/like'      => 'swipe_styles#like'
   post 'swipe_styles/complete'  => 'swipe_styles#complete'
+  delete 'swipe_styles/destroy' => 'swipe_styles#destroy'
 
   namespace :blog do
     resources :articles, path: '', only: [:index, :show]

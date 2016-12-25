@@ -32,4 +32,14 @@ class SwipeStylesController < ApplicationController
     session.update(completed: true)
     render json: {status: :ok}
   end
+
+  def destroy
+    session = InterestSwiperQuiz::Session.find(params[:session_id])
+    session.destroy
+    redirect_to swipe_styles_results_path
+  end
+
+  def results
+    @sessions = InterestSwiperQuiz::Session.paginate(page: params[:page], per_page: 10)
+  end
 end

@@ -21,16 +21,19 @@
           <table class="table table-bordered table-striped bs-events-table">
             <thead>
                 <tr>
+                  <th>Name</th>
                   <th>Email Address</th>
                   <th>Completed?</th>
                   <th>Total Likes</th>
                   <th>Likes</th>
                   <th>Time</th>
+                  <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                <% InterestSwiperQuiz::Session.order('updated_at desc').each do |session| %>
+                <% @sessions.order('updated_at desc').each do |session| %>
                     <tr>
+                      <td><%= "#{session.first_name} #{session.last_name}" %></td>
                       <td><%= session.email %></td>
                       <td><%= session.completed? ? 'Yes' : 'No' %></td>
                       <td><%= session.likes.count %></td>
@@ -42,6 +45,9 @@
                         </ul>
                       </td>
                       <td><%= session.updated_at %></td>
+                      <td>
+                        <a class="btn btn-danger" data-method="delete" href="/swipe_styles/destroy?session_id=<%= session.id %>">Delete</a>
+                      </td>
                     </tr>
                 <% end %>
             </tbody>
@@ -74,4 +80,5 @@
       </div>
     </div>
   </div>
+  <%= will_paginate @sessions %>
 </div>
