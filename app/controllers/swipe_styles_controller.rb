@@ -4,7 +4,7 @@ class SwipeStylesController < ApplicationController
   def invite
     new_style_quiz = InterestSwiperQuiz::Session.create(email: params[:email], first_name: params[:first_name], last_name: params[:last_name])
     if new_style_quiz.valid?
-      ShopperMailer.invite_shopper_interest.deliver
+      ShopperMailer.invite_shopper_interest(params[:first_name], params[:email]).deliver
       render json: {status: :ok}
     else
       render json: {}, status: :unprocessable_entity
