@@ -29,6 +29,7 @@ feature 'Shopper schedule drop in' do
     then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
 
+=begin
   scenario 'for a drop-by in 30 min', js: true, perform_enqueued: true do
     given_i_am_a_logged_in_user shopper
     when_i_click_on_a_retailer retailer
@@ -39,6 +40,7 @@ feature 'Shopper schedule drop in' do
     then_my_scheduled_drop_ins_should_be_updated_with retailer
     then_all_parties_should_receive_an_email [retail_user.email, shopper.email, admin.email]
   end
+=end
 
   scenario 'upon logging in', perform_enqueued: true do
     date, time = parse_date_and_EST(tomorrow_afternoon)

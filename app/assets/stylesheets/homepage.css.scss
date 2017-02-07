@@ -1,10 +1,5 @@
-$staple-color-slightly-transparent: rgba(127,145,147,0.9);
-$staple-color: rgb(127,145,147);
-$grey-transparent: rgba(89,89,89,0.8);
-$grey: rgb(89,89,89);
-$form-errors-color: rgb(245,166,35);
-
-@import url('https://fonts.googleapis.com/css?family=Muli');
+@import "mixins";
+@import "globals";
 
 html,body
 {
@@ -15,49 +10,6 @@ html,body
   overflow-x: hidden;
   position: relative;
   -webkit-overflow-scrolling: touch;
-}
-
-.navbar.navbar-openstile {
-  position: absolute;
-  z-index: 1000;
-  width: 100%;
-  margin: 0px;
-  background-color: transparent;
-  border-color: transparent;
-
-  .large-screen {
-    display: block;
-  }
-
-  .small-screen {
-    display: none;
-  }
-
-  .navbar-nav {
-    margin-top: 25px;
-    li {
-      a {
-        font-weight: bold;
-        font-style: normal;
-        font-size: 20px;
-        font-family: 'Muli', sans-serif;
-        color: #FFF;
-      }
-
-      a:hover {
-        color: #5e5e5e;
-      }
-
-      a:active {
-        color: #FFF;
-      }
-
-      .btn {
-        background-color: transparent;
-        border: 2px solid #FFF;
-      }
-    }
-  }
 }
 
 .carousel,
@@ -125,6 +77,7 @@ html,body
       font-family: 'Muli', sans-serif;
       line-height: 20px;
       color: #FFF;
+      margin: 0px;
     }
   }
   .cta-buttons {
@@ -292,80 +245,6 @@ html,body
         border-color: $staple-color;
         color: #FFF;
       }
-    }
-  }
-}
-
-footer {
-  .navbar {
-    background-color: $staple-color;
-    border-color: $staple-color;
-    margin-bottom: 0px;
-  }
-  .footer-links {
-    li {
-      a {
-        color: #FFF !important;
-        font-size: 14px !important;
-        font-style: normal;
-      }
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  .navbar.navbar-openstile {
-
-    .large-screen {
-      display: none;
-    }
-
-    .small-screen {
-      display: block;
-    }
-
-    .navbar-header {
-      float: none;
-    }
-    .navbar-left,.navbar-right {
-      float: none !important;
-    }
-    .navbar-toggle {
-      display: block;
-      border: none;
-      .icon-bar {
-        background-color: #FFF;
-        width: 3em;
-        height: .25em;
-        margin: .5em 0;
-      }
-    }
-    .navbar-collapse {
-      border-top: 1px solid transparent;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-      background-color: rgba(0,0,0,0.9);
-      height: 100vh;
-    }
-    .navbar-fixed-top {
-      top: 0;
-      border-width: 0 0 1px;
-    }
-    .navbar-collapse.collapse {
-      display: none!important;
-    }
-    .navbar-nav {
-      float: none!important;
-      margin-top: 7.5px;
-    }
-    .navbar-nav>li {
-      float: none;
-    }
-    .navbar-nav>li>a {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-    .collapse.in{
-      display:block !important;
     }
   }
 }

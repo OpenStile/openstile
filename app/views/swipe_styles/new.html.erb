@@ -1,5 +1,10 @@
 <% provide(:title, 'Swipe Stile Quiz') %>
 
+<% content_for :page_header do %>
+    <%= javascript_include_tag 'swipe_styles' %>
+    <%= stylesheet_link_tag 'swipe_styles' %>
+<% end %>
+
 <div class="swipe-stile">
   <div class="row logo-header">
     <div class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-4">

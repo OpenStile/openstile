@@ -1,3 +1,8 @@
+<% content_for :page_header do %>
+    <%= stylesheet_link_tag 'homepage' %>
+    <%= javascript_include_tag 'homepage' %>
+<% end %>
+
 <% retailer = Retailer.all_live.sample unless Retailer.all_live.empty? %>
 
 <%= render "shared/header" %>

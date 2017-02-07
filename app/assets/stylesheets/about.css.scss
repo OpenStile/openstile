@@ -1,7 +1,16 @@
-$staple-color-slightly-transparent: rgba(127,145,147,0.9);
-$staple-color: rgb(127,145,147);
-$grey-transparent: rgba(89,89,89,0.8);
-$form-errors-color: rgb(245,166,35);
+@import "mixins";
+@import "globals";
+
+html,body
+{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
+}
 
 .about-us {
 
@@ -66,6 +75,7 @@ $form-errors-color: rgb(245,166,35);
       font-size: 5vh;
       color: #FFF;
       font-weight: 300;
+      margin: 0px;
     }
   }
   .profile-pics {

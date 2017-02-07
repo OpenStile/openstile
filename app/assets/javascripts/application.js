@@ -13,11 +13,5 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//= require moment.min.js
-//= require fullcalendar.js
 //= require react
 //= require react_ujs
-//= require components
-//= require jquery.transform2d.js
-//= require jquery.jTinder.js
-//= require_tree .
