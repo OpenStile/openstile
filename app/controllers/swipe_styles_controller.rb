@@ -29,6 +29,11 @@ class SwipeStylesController < ApplicationController
 
   def complete
     session = InterestSwiperQuiz::Session.find(params[:session_id])
+    if params[:like_ids]
+      params[:like_ids].each do |id|
+        session.likes.create(style_id: id)
+      end
+    end
     session.update(completed: true)
     render json: {status: :ok}
   end

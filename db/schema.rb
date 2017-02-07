@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   enable_extension "plpgsql"
 
   create_table "body_builds", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,23 +31,23 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "body_builds_style_profiles", ["style_profile_id", "body_build_id"], name: "index_builds_for_a_profile", using: :btree
 
   create_table "body_shapes", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "bottom_fits", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "bottom_sizes", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category",   limit: 255
+    t.string   "category"
   end
 
   create_table "bottom_sizes_style_profiles", id: false, force: :cascade do |t|
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "bottom_sizes_style_profiles", ["style_profile_id", "bottom_size_id"], name: "shopper_bottom_sizes_index", using: :btree
 
   create_table "colors", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "hexcode",    limit: 255
+    t.string   "name"
+    t.string   "hexcode"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "colors_to_avoids", ["style_profile_id"], name: "index_colors_to_avoids_on_style_profile_id", using: :btree
 
   create_table "dress_sizes", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category",   limit: 255
+    t.string   "category"
   end
 
   create_table "dress_sizes_style_profiles", id: false, force: :cascade do |t|
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20161225032408) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "location_id"
-    t.string   "frequency",     limit: 255
+    t.string   "frequency"
     t.date     "template_date"
   end
 
@@ -111,11 +111,11 @@ ActiveRecord::Schema.define(version: 20161225032408) do
     t.text     "comment"
     t.integer  "shopper_rating"
     t.integer  "retailer_rating"
-    t.string   "shopper_feedback",  limit: 255
-    t.string   "retailer_feedback", limit: 255
+    t.string   "shopper_feedback"
+    t.string   "retailer_feedback"
     t.decimal  "sales_generated"
     t.integer  "user_id"
-    t.integer  "status",                        default: 1
+    t.integer  "status",            default: 1
   end
 
   add_index "drop_ins", ["retailer_id"], name: "index_drop_ins_on_retailer_id", using: :btree
@@ -149,16 +149,16 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string   "address",      limit: 255
-    t.string   "short_title",  limit: 255
+    t.string   "address"
+    t.string   "short_title"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "neighborhood", limit: 255
+    t.string   "neighborhood"
   end
 
   create_table "looks", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "image_path", limit: 255
+    t.string   "name"
+    t.string   "image_path"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -173,10 +173,10 @@ ActiveRecord::Schema.define(version: 20161225032408) do
 
   create_table "online_presences", force: :cascade do |t|
     t.integer  "retailer_id"
-    t.string   "web_link",       limit: 255
-    t.string   "facebook_link",  limit: 255
-    t.string   "twitter_link",   limit: 255
-    t.string   "instagram_link", limit: 255
+    t.string   "web_link"
+    t.string   "facebook_link"
+    t.string   "twitter_link"
+    t.string   "instagram_link"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -184,7 +184,7 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "online_presences", ["retailer_id"], name: "index_online_presences_on_retailer_id", using: :btree
 
   create_table "parts", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -206,9 +206,9 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "parts_to_flaunts", ["style_profile_id"], name: "index_parts_to_flaunts_on_style_profile_id", using: :btree
 
   create_table "retailers", force: :cascade do |t|
-    t.string   "name",             limit: 255
+    t.string   "name"
     t.text     "description"
-    t.string   "size_range",       limit: 255
+    t.string   "size_range"
     t.integer  "price_index"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20161225032408) do
     t.integer  "top_fit_id"
     t.integer  "bottom_fit_id"
     t.integer  "status"
-    t.string   "quote",            limit: 255
+    t.string   "quote"
     t.string   "above_fold_image"
   end
 
@@ -240,7 +240,7 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "retailers_special_considerations", ["special_consideration_id", "retailer_id"], name: "retailers_for_a_special_consideration_index", using: :btree
 
   create_table "special_considerations", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -279,20 +279,20 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "style_profiles_top_sizes", ["top_size_id", "style_profile_id"], name: "shoppers_for_a_top_size_index", using: :btree
 
   create_table "top_fits", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "top_sizes", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "category",   limit: 255
+    t.string   "category"
   end
 
   create_table "user_roles", force: :cascade do |t|
-    t.string   "name",       limit: 255
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -300,23 +300,23 @@ ActiveRecord::Schema.define(version: 20161225032408) do
   add_index "user_roles", ["name"], name: "index_user_roles_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                      default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "confirmation_token",     limit: 255
+    t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
-    t.string   "unconfirmed_email",      limit: 255
-    t.string   "first_name",             limit: 255
-    t.string   "last_name",              limit: 255
-    t.string   "cell",                   limit: 255
+    t.string   "unconfirmed_email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "cell"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_role_id"

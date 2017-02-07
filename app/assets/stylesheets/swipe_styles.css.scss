@@ -4,6 +4,16 @@
     margin: 0;
     position: relative;
     overflow: hidden;
+
+  .swipe-intro {
+    padding-top: 16vh;
+    h3, h4 {
+      line-height: 5vh;
+    }
+    button {
+      margin: 5vh 0;
+    }
+  }
 }
 
 /* Wrapper with padding */
@@ -85,33 +95,6 @@
     -o-transform: rotate(2deg);
     -ms-transform: rotate(2deg);
     transform: rotate(2deg);
-}
-
-/* Like & dislike badge images */
-#tinderslide .like,
-#tinderslide .dislike {
-    background: image-url("swipe_styles/liked.png") no-repeat scroll 0 0;
-    opacity: 0;
-    height: 80px;
-    position: absolute;
-    width: 170px;
-    left: 45px;
-    top:40px;
-    z-index: 1;
-    overflow: hidden;
-    -webkit-transform: translate3d(0%,0,0) scale3d(1,1,1);
-    -moz-transform: translate3d(0%,0,0) scale3d(1,1,1);
-    -ms-transform: translate3d(0%,0,0) scale3d(1,1,1);
-    -o-transform: translate3d(0%,0,0) scale3d(1,1,1);
-    transform: translate3d(0%,0,0) scale3d(1,1,1);
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-}
-
-#tinderslide .dislike {
-    right: 45px;
-    left: auto;
-    background: image-url("swipe_styles/nope.png") no-repeat scroll 0 0;
 }
 
 /* Image container */

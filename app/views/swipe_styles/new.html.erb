@@ -6,40 +6,5 @@
       <a href="/"><%= image_tag('openstilelogo.png', class: 'img-responsive center-block') %></a>
     </div>
   </div>
-  <div class="wrap">
-    <div id="tinderslide">
-      <ul>
-        <% InterestSwiperQuiz::Style.all.shuffle.each do |style| %>
-            <li data-style_id="<%= style.id %>" data-session_id="<%= @session.id %>">
-              <div class="img" style="background: url('<%= image_path("swipe_styles/panes/#{style.image}.jpg") %>') no-repeat scroll center center;background-size: cover;"></div>
-              <div><%= style.title %></div><div class="like"></div><div class="dislike"></div>
-            </li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
-  <div class="row actions">
-    <div class="col-xs-6 text-right">
-      <button id="hate-btn" class="btn btn-lg">Nope</button>
-    </div>
-    <div class="col-xs-6 text-left">
-      <button id="like-btn" class="btn btn-lg">Like</button>
-    </div>
-  </div>
-  <div class="row style-needs">
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfxY4fGn8auoOZwBR2VRiEpjOQT-pmss_WDm-k5lykRl-aJGQ/viewform?embedded=true&ttl=0" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-  </div>
-  <div class="row thank-you text-center">
-    <div class="col-xs-8 col-xs-offset-2">
-      <h3>Thanks for sharing your style!</h3><br /><br />
-      <h4>We are matching you with our partner boutiques based on your preferences, and will send you your pairings shortly.</h4>
-    </div>
-  </div>
+  <%= react_component 'StyleProfile', sessionId: @session.id, swiperStyles: InterestSwiperQuiz::Style.all.shuffle.map{|s| {id: s.id, title: s.title, image: image_path("swipe_styles/panes/#{s.image}.jpg")}} %>
 </div>
-
-<script>
-  $(function(){
-      var swiper_quiz = new InterestSwiperQuiz;
-      swiper_quiz.init();
-  });
-</script>
