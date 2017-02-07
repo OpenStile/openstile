@@ -16,8 +16,7 @@
     @setState {body: `<StyleProfile.Swiper sessionId={this.props.sessionId} swiperStyles={this.props.swiperStyles} loadStyleNeeds={this.loadStyleNeeds}/>`}
 
   loadStyleNeeds: ->
-    @setState {body: `<div className="col-xs-12 col-md-8 col-md-offset-2 text-center">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfxY4fGn8auoOZwBR2VRiEpjOQT-pmss_WDm-k5lykRl-aJGQ/viewform?embedded=true" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></div>`}
+    window.location.href = "https://goo.gl/forms/GJUMTLxBIqERVjKA2"
 
   render: ->
     `<div>
