@@ -60,10 +60,11 @@
     </div>`
 
   generateQuiz: ->
-    styleItems = for styleItem in @props.swiperStyles
+    styleItems = for styleItem,index in @props.swiperStyles
       `<li key={styleItem.id} data-id={styleItem.id}>
         <div className="img" style={this.generateImageCSS(styleItem)}></div>
         <div>{styleItem.title}</div>
+        <div style={{fontSize: 10, fontStyle: 'italic'}}>{this.props.swiperStyles.length - index} out of {this.props.swiperStyles.length}</div>
       </li>`
     return `<div>
     <div className="wrap">
