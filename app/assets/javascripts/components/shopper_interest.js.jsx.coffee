@@ -2,6 +2,7 @@
   getInitialState: ->
     missingFields: false
     invalidEmail: false
+    saveErrors: null
 
   validateElements: (emailElement, firstNameElement, lastNameElement) ->
     regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
@@ -41,18 +42,26 @@
       data: JSON.stringify {first_name: first_name, last_name: last_name, email: email}
       dataType: "json"
       contentType: "application/json"
-      success: (result) ->
-        window.location.href = "/join_confirmation"
+      success: (result) =>
+        if result.status == 'ok'
+          window.location.href = "/join_confirmation"
+        else
+          @setState saveErrors: result.message
       error: (result) =>
         @setState invalidEmail: true
 
   render: ->
     missingFieldsClass = if @state.missingFields then '' else 'hidden'
     invalidEmailClass = if @state.invalidEmail then '' else 'hidden'
+    saveErrorClass = if @state.saveErrors? then '' else 'hidden'
     `<div className="mc-interest-form">
         <div className={"validation-errors text-center " + missingFieldsClass}>
             <h3>oops!</h3>
             <h4>Please fill out all fields</h4>
+        </div>
+        <div className={"validation-errors text-center " + saveErrorClass}>
+            <h3>oops!</h3>
+            <h4>{this.state.saveErrors}</h4>
         </div>
         <form>
           <div className="mc-field-group form-group">

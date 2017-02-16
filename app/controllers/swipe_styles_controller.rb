@@ -7,7 +7,7 @@ class SwipeStylesController < ApplicationController
       ShopperMailer.invite_shopper_interest(params[:first_name], params[:email]).deliver
       render json: {status: :ok}
     else
-      render json: {}, status: :unprocessable_entity
+      render json: {status: :error, message: new_style_quiz.errors.full_messages.join('. ')}
     end
   end
 
