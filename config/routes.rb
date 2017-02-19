@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   post 'swipe_styles/like'      => 'swipe_styles#like'
   post 'swipe_styles/complete'  => 'swipe_styles#complete'
   delete 'swipe_styles/destroy' => 'swipe_styles#destroy'
+  post 'swipe_styles/update_matches' => 'swipe_styles#update_matches'
 
   namespace :webhooks do
     get 'mailchimp/subscribe'  => 'mailchimp_importer#validate'

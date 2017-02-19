@@ -1,88 +1,21 @@
 <% provide(:title, 'Swipe Stile Results') %>
 
 <% content_for :page_header do %>
+    <%= javascript_include_tag 'swipe_styles' %>
     <%= stylesheet_link_tag 'swipe_styles' %>
 <% end %>
 
-<div class="container">
+<div class="container style-page">
   <br />
   <div class="row text-center">
     <h2>'Swipe Stile' Results</h2>
   </div>
-  <br />
-  <div>
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#individual" aria-controls="individual" role="tab" data-toggle="tab">Individual</a></li>
-      <li role="presentation"><a href="#total" aria-controls="total" role="tab" data-toggle="tab">Total</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane active" id="individual">
-        <br />
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped bs-events-table">
-            <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Email Address</th>
-                  <th>Completed?</th>
-                  <th>Total Likes</th>
-                  <th>Likes</th>
-                  <th>Time</th>
-                  <th>&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% @sessions.order('updated_at desc').each do |session| %>
-                    <tr>
-                      <td><%= "#{session.first_name} #{session.last_name}" %></td>
-                      <td><%= session.email %></td>
-                      <td><%= session.completed? ? 'Yes' : 'No' %></td>
-                      <td><%= session.likes.count %></td>
-                      <td>
-                        <ul>
-                          <% session.likes.each do |like| %>
-                            <li><%= like.style.title %></li>
-                          <% end %>
-                        </ul>
-                      </td>
-                      <td><%= session.updated_at %></td>
-                      <td>
-                        <a class="btn btn-danger" data-method="delete" href="/swipe_styles/destroy?session_id=<%= session.id %>">Delete</a>
-                      </td>
-                    </tr>
-                <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div role="tabpanel" class="tab-pane" id="total">
-        <br />
-        <div class="table-responsive">
-          <table class="table table-bordered table-striped bs-events-table">
-            <thead>
-            <tr>
-              <th>Style</th>
-              <th>Name</th>
-              <th>Total Likes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% InterestSwiperQuiz::Style.all.sort_by{|style| style.likes.count}.reverse.each do |style| %>
-                <tr>
-                  <td><%= image_tag("swipe_styles/panes/#{style.image}.jpg", width: 150, class: 'image-responsive') %></td>
-                  <td><%= style.title %></td>
-                  <td><%= style.likes.count %></td>
-                </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+  <div class="row style-results">
+    <div class="col-lg-10 col-lg-offset-1">
+      <%= react_component 'StyleProfile.Results', profiles: InterestSwiperQuiz::Profile.order("created_at desc").map{|p|
+                                                  {profile: p, sessions: p.sessions,
+                                                   likes: InterestSwiperQuiz::Like.where(session_id: p.sessions.pluck(:id)).map{|l| image_path("swipe_styles/panes/#{l.style.image}.jpg")}
+                                                  }} %>
     </div>
   </div>
-  <%= will_paginate @sessions %>
 </div>

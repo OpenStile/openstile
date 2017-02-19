@@ -23,7 +23,6 @@
     @completeQuiz() if @completeCount == 25
 
   completeQuiz: () ->
-    console.log("Here")
     $.post("/swipe_styles/complete", {session_id: @props.sessionId, like_ids: @likedIds}).done(=> @props.loadStyleNeeds())
 
   itemLike: (id) ->

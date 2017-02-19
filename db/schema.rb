@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161225032408) do
+ActiveRecord::Schema.define(version: 20170216025334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,16 +130,26 @@ ActiveRecord::Schema.define(version: 20161225032408) do
 
   add_index "interest_swiper_quiz_likes", ["session_id"], name: "index_interest_swiper_quiz_likes_on_session_id", using: :btree
 
-  create_table "interest_swiper_quiz_sessions", force: :cascade do |t|
+  create_table "interest_swiper_quiz_profiles", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email"
+    t.jsonb    "needs"
+    t.string   "retailer_matches"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interest_swiper_quiz_profiles", ["email"], name: "index_interest_swiper_quiz_profiles_on_email", unique: true, using: :btree
+
+  create_table "interest_swiper_quiz_sessions", force: :cascade do |t|
     t.boolean  "completed"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.integer  "profile_id"
   end
 
-  add_index "interest_swiper_quiz_sessions", ["email"], name: "index_interest_swiper_quiz_sessions_on_email", unique: true, using: :btree
+  add_index "interest_swiper_quiz_sessions", ["profile_id"], name: "index_interest_swiper_quiz_sessions_on_profile_id", using: :btree
 
   create_table "interest_swiper_quiz_styles", force: :cascade do |t|
     t.string   "image"

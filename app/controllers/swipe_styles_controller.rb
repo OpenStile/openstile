@@ -2,12 +2,12 @@ class SwipeStylesController < ApplicationController
   http_basic_authenticate_with name: "admin", password: ENV["RESULTS_PASSWORD"], only: :results
 
   def invite
-    new_style_quiz = InterestSwiperQuiz::Session.create(email: params[:email], first_name: params[:first_name], last_name: params[:last_name])
-    if new_style_quiz.valid?
+    new_profile = InterestSwiperQuiz::Profile.create(email: params[:email], first_name: params[:first_name], last_name: params[:last_name])
+    if new_profile.valid?
       ShopperMailer.invite_shopper_interest(params[:first_name], params[:email]).deliver
       render json: {status: :ok}
     else
-      render json: {status: :error, message: new_style_quiz.errors.full_messages.join('. ')}
+      render json: {status: :error, message: new_profile.errors.full_messages.join('. ')}
     end
   end
 
@@ -16,8 +16,8 @@ class SwipeStylesController < ApplicationController
       redirect_to root_path
     else
       email = Base64.decode64(params[:token])
-      @session = InterestSwiperQuiz::Session.find_or_create_by(email: email)
-      @session.likes.destroy_all
+      profile = InterestSwiperQuiz::Profile.find_or_create_by(email: email)
+      @session = profile.sessions.create(completed: false)
     end
   end
 
@@ -44,7 +44,13 @@ class SwipeStylesController < ApplicationController
     redirect_to swipe_styles_results_path
   end
 
+  def update_matches
+    profile = InterestSwiperQuiz::Profile.find(params[:profile_id])
+    profile.update_attribute(:retailer_matches, params[:match_string])
+    render json: {status: :ok, updated_profile: profile.reload}
+  end
+
   def results
-    @sessions = InterestSwiperQuiz::Session.paginate(page: params[:page], per_page: 10)
+
   end
 end
