@@ -11,5 +11,13 @@
       <a href="/"><%= image_tag('openstilelogo.png', class: 'img-responsive center-block') %></a>
     </div>
   </div>
-  <%= react_component 'StyleProfile', sessionId: @session.id, swiperStyles: InterestSwiperQuiz::Style.all.shuffle.map{|s| {id: s.id, title: s.title, image: image_path("swipe_styles/panes/#{s.image}.jpg")}} %>
+  <%= react_component 'StyleProfile', sessionId: @session.id, profileId: @session.profile.id,
+                      swiperStyles: InterestSwiperQuiz::Style.all.shuffle.map{|s| {id: s.id, title: s.title, image: image_path("swipe_styles/panes/#{s.image}.jpg")}},
+                      bodyTypeImages: {
+                              column: image_path("column_body_type.png"),
+                              apple: image_path("apple_body_type.png"),
+                              hourglass: image_path("hourglass_body_type.png"),
+                              inverted_triangle: image_path("inverted_triangle_body_type.png"),
+                              pear: image_path("pear_body_type.png")
+                      }  %>
 </div>

@@ -55,6 +55,7 @@
 Profile = React.createClass
   getInitialState: ->
     likesModalOpen: false
+    needsModalOpen: false
 
   componentWillMount: ->
     ReactModal.setAppElement('.style-page')
@@ -68,6 +69,30 @@ Profile = React.createClass
   closeLikesModal: ->
     @setState likesModalOpen: false
 
+  openNeedsModal: ->
+    @setState needsModalOpen: true
+
+  closeNeedsModal: ->
+    @setState needsModalOpen: false
+
+  getStyleInfo: (data) ->
+    `<div>
+        <p>Height: {data.height}</p>
+        <p>Body Shape: {data.body_type}</p>
+        <p>Dress Size: {data.dress_size}</p>
+        <p>Pants Size: {data.pants_size}</p>
+        <p>Denim Size: {data.denim_size}</p>
+        <p>Shirt Size: {data.shirt_size}</p>
+        <p>Bra Size: {data.bra_size}</p>
+        <p>Shoe Size: {data.shoe_size}</p>
+        <p>Areas to accentuate: {(data.parts_to_accentuate || []).join(', ')}</p>
+        <p>Areas to deemphasize: {(data.parts_to_deemphasize || []).join(', ')}</p>
+        <p>Preferred colors: {(data.preferred_colors || []).join(', ')}</p>
+        <p>Not preferred colors: {(data.not_preferred_colors || []).join(', ')}</p>
+        <p>Zip code: {data.zipcode}</p>
+        <p>Comments: {data.comments}</p>
+    </div>`
+
   render: ->
     statusClassMap =
       "unopened": "label-default"
@@ -78,15 +103,18 @@ Profile = React.createClass
     images = (`<img key={index} className="col-xs-3 img-responsive" src={like} style={{width: 200, height: 250}}></img>` for like, index in @props.likes)
     `<div className="row profile">
       <div className="col-sm-3">
-        <p><span className={'label ' + statusClassMap[this.props.status]}>{this.props.status}</span></p>
-        <p>Name: {this.props.profile.first_name} {this.props.profile.last_name}</p>
-        <p>Email: {this.props.profile.email}</p>
+        <div className="cell-contents">
+          <p><span className={'label ' + statusClassMap[this.props.status]}>{this.props.status}</span></p>
+          <p>Name: {this.props.profile.first_name} {this.props.profile.last_name}</p>
+          <p>Email: {this.props.profile.email}</p>
+          {(new Date(Date.parse(this.props.profile.created_at))).toDateString()}
+        </div>
       </div>
       <div className="col-sm-3 text-center">
         {this.profileCompleted() &&
           <div className="cell-contents">
             <p><button type="button" className="btn btn-default" onClick={this.openLikesModal} style={{width: '140px'}}>View liked styles</button></p>
-            <p><button type="button" className="btn btn-default" style={{width: '140px'}}>View style info</button></p>
+            <p><button type="button" className="btn btn-default" onClick={this.openNeedsModal} style={{width: '140px'}}>View style info</button></p>
           </div>
         }
       </div>
@@ -111,6 +139,18 @@ Profile = React.createClass
             <h1>Favorite Styles</h1>
             <div className="row">
               {images}
+            </div>
+      </ReactModal>
+      <ReactModal
+        isOpen={this.state.needsModalOpen}
+        onRequestClose={this.closeNeedsModal}
+        style={{overlay: {backgroundColor: 'rgba(0, 0, 0, 0.75)', zIndex: 99}}}
+        contentLabel="Style info">
+            <h1>Style needs</h1>
+            <div className="row">
+              <div className="col-sm-10 col-sm-offset-1">
+                {this.props.profile.needs != null ? this.getStyleInfo(this.props.profile.needs) : ''}
+              </div>
             </div>
       </ReactModal>
     </div>`

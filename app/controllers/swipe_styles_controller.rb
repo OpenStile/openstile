@@ -50,7 +50,9 @@ class SwipeStylesController < ApplicationController
     render json: {status: :ok, updated_profile: profile.reload}
   end
 
-  def results
-
+  def update_style_needs
+    profile = InterestSwiperQuiz::Profile.find(params[:profile_id])
+    profile.update_attribute(:needs, params[:data])
+    render json: {status: :ok}
   end
 end

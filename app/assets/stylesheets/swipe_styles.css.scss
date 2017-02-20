@@ -152,6 +152,19 @@ html,body
     font-family: 'Muli', sans-serif;
 }
 
+.swipe-stile {
+  .form {
+    margin-top: 5vh;
+
+    button.btn {
+      margin: 5vh auto;
+    }
+    .radio-inline {
+      margin-left: 5vw;
+    }
+  }
+}
+
 .style-page {
   min-height: 100vh;
 

@@ -14,7 +14,7 @@
     <div class="col-lg-10 col-lg-offset-1">
       <%= react_component 'StyleProfile.Results', profiles: InterestSwiperQuiz::Profile.order("created_at desc").map{|p|
                                                   {profile: p, sessions: p.sessions,
-                                                   likes: InterestSwiperQuiz::Like.where(session_id: p.sessions.pluck(:id)).map{|l| image_path("swipe_styles/panes/#{l.style.image}.jpg")}
+                                                   likes: InterestSwiperQuiz::Like.where(session_id: p.sessions.pluck(:id)).map{|l| image_path("swipe_styles/panes/#{l.style.image}.jpg")}.uniq
                                                   }} %>
     </div>
   </div>
