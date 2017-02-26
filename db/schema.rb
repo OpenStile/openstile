@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216025334) do
+ActiveRecord::Schema.define(version: 20170225024851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -249,6 +249,27 @@ ActiveRecord::Schema.define(version: 20170216025334) do
   add_index "retailers_special_considerations", ["retailer_id", "special_consideration_id"], name: "special_considerations_for_a_retailer_index", using: :btree
   add_index "retailers_special_considerations", ["special_consideration_id", "retailer_id"], name: "retailers_for_a_special_consideration_index", using: :btree
 
+  create_table "share_quiz_categorizations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "result_url"
+    t.text     "description"
+    t.jsonb    "options"
+    t.integer  "share_quiz_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "share_quiz_categorizations", ["share_quiz_id"], name: "index_share_quiz_categorizations_on_share_quiz_id", using: :btree
+
+  create_table "share_quizzes", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "completions"
+    t.integer  "shares"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "special_considerations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -338,4 +359,5 @@ ActiveRecord::Schema.define(version: 20170216025334) do
   add_index "users", ["retailer_id"], name: "index_users_on_retailer_id", using: :btree
   add_index "users", ["user_role_id"], name: "index_users_on_user_role_id", using: :btree
 
+  add_foreign_key "share_quiz_categorizations", "share_quizzes"
 end

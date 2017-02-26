@@ -8,4 +8,4 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css.scss, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( homepage.css homepage.js how_it_works.css about.css join_now.css swipe_styles.css swipe_styles.js )
+Rails.application.config.assets.precompile += %w( homepage.css homepage.js how_it_works.css about.css join_now.css swipe_styles.css swipe_styles.js share_quiz.css share_quiz.js)

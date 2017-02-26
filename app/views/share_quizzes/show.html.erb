@@ -1,0 +1,43 @@
+<% provide(:title, 'Red Carpet Style') %>
+
+<% content_for :page_header do %>
+    <%= javascript_include_tag 'share_quiz' %>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '285532845212165',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <%= stylesheet_link_tag 'share_quiz' %>
+<% end %>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="large-navbar navbar-header">
+      <a class="large-brand" href="<%= root_path %>">
+        <%= image_tag('openstilelogo.png', width: "25%", class: "img-responsive center-block", alt: 'OpenStile') %>
+      </a>
+      <p class="custom-navbar-text text-center">No need to shop with the masses. Find your perfect boutique and outshine the rest.</p>
+      <button onclick="window.location='/#join-now';" type="button" href="/#join-now" class="btn btn-default navbar-btn center-block">Join Beta</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container share-quiz">
+  <div class="title text-center">
+    <h3><%= @quiz.description %></h3>
+  </div>
+  <hr />
+  <%= react_component 'ShareQuiz', categorizations: @categorizations, results: @results %>
+</div>

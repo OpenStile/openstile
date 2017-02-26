@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   post 'swipe_styles/update_matches' => 'swipe_styles#update_matches'
   post 'swipe_styles/update_style_needs' => 'swipe_styles#update_style_needs'
 
+  resources :share_quizzes, param: :name, only: [:show]
+
   namespace :webhooks do
     get 'mailchimp/subscribe'  => 'mailchimp_importer#validate'
     post 'mailchimp/subscribe' => 'mailchimp_importer#subscribe'
