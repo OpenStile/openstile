@@ -39,7 +39,11 @@
     </div>`
 
 Result = React.createClass
+  onComponentDidMount: ->
+    FB.AppEvents.logEvent("viewedResults");
+
   shareResults: ->
+    FB.AppEvents.logEvent("sharedResults");
     FB.ui(
       display: 'popup',
       method: 'share',
