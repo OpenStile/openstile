@@ -47,7 +47,7 @@ Result = React.createClass
       description: "What's your red carpet style? Find out now!",
       link: "http://www.openstile.com/share_quizzes/red_carpet_quiz",
       picture: @props.image,
-      href: "http://www.openstile.com"
+      href: "http://www.openstile.com/share_quizzes/red_carpet_quiz"
     )
 
   render: ->
