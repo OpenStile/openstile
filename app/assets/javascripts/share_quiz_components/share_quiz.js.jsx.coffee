@@ -107,25 +107,17 @@ Matchup = React.createClass
   handleWinner: (e) ->
     @props.updateWinner(@props.matchIndex, e.target.value)
 
-  getSizedImage: (url) ->
-    sized = url
-    if $(window).width() < 768
-      sized = sized.replace("c_thumb,h_324,w_250", "c_thumb,h_129,w_100")
-    else if $(window).width() < 992
-      sized = sized.replace("c_thumb,h_324,w_250", "c_thumb,h_259,w_200")
-    return sized
-
   render: ->
     `<div className="row">
       <div className="col-sm-10 col-sm-offset-1">
         <div className="form-group">
           <label className="radio-inline">
             <input type="radio" name={"match." + this.props.matchIndex} value={this.props.option1.name} onChange={this.handleWinner} />
-            <img className="img-responsive" src={this.getSizedImage(this.props.option1.image)}></img>
+            <img className="img-responsive" src={this.props.option1.image}></img>
           </label>
           <label className="radio-inline">
             <input type="radio" name={"match." + this.props.matchIndex} value={this.props.option2.name} onChange={this.handleWinner} />
-            <img className="img-responsive" src={this.getSizedImage(this.props.option2.image)}></img>
+            <img className="img-responsive" src={this.props.option2.image}></img>
           </label>
         </div>
       </div>
@@ -133,11 +125,11 @@ Matchup = React.createClass
         <div className="form-group">
           <label className="radio-inline">
             <input type="radio" name={"match." + this.props.matchIndex} value={this.props.option3.name} onChange={this.handleWinner} />
-            <img className="img-responsive" src={this.getSizedImage(this.props.option3.image)}></img>
+            <img className="img-responsive" src={this.props.option3.image}></img>
           </label>
           <label className="radio-inline">
             <input type="radio" name={"match." + this.props.matchIndex} value={this.props.option4.name} onChange={this.handleWinner} />
-            <img className="img-responsive" src={this.getSizedImage(this.props.option4.image)}></img>
+            <img className="img-responsive" src={this.props.option4.image}></img>
           </label>
         </div>
         <hr />

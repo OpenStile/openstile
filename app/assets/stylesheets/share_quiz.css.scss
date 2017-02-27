@@ -68,11 +68,28 @@
   }
 }
 
+@media (max-width: 991px) {
+  .share-quiz {
+    .quiz {
+      img {
+        width: 200px;
+        height: 259px;
+      }
+    }
+  }
+}
+
 @media (max-width: 767px) {
   .share-quiz {
     .title {
       h3 {
         font-size: 1em;
+      }
+    }
+    .quiz {
+      img {
+        width: 100px;
+        height: 129px;
       }
     }
   }
