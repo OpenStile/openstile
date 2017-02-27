@@ -108,7 +108,7 @@ Matchup = React.createClass
     @props.updateWinner(@props.matchIndex, e.target.value)
 
   render: ->
-    `<div className="row">
+    `<div className="row matchups">
       <div className="col-sm-10 col-sm-offset-1">
         <div className="form-group">
           <label className="radio-inline">

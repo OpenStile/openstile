@@ -71,9 +71,11 @@
 @media (max-width: 991px) {
   .share-quiz {
     .quiz {
-      img {
-        width: 200px;
-        height: 259px;
+      .matchups {
+        img {
+          width: 200px;
+          height: 259px;
+        }
       }
     }
   }
@@ -87,9 +89,11 @@
       }
     }
     .quiz {
-      img {
-        width: 100px;
-        height: 129px;
+      .matchups {
+        img {
+          width: 100px;
+          height: 129px;
+        }
       }
     }
   }
